@@ -26,9 +26,6 @@ public class UndoCommandTest extends TaskBookGuiTest {
         TestTask taskToAdd = td.CS4101;
         commandBox.runCommand(td.CS4101.getAddCommand());
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        for (TestTask t : currentList) {
-            System.out.println(t);
-        }
         assertUndoSuccess(currentList, currentList.length - 1);
         // to revert back to original
 
@@ -39,7 +36,7 @@ public class UndoCommandTest extends TaskBookGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         // first undo
-        assertUndoSuccess(currentList, currentList.length - 1);
+        commandBox.runCommand("undo");
         // second undo
         currentList = TestUtil.removeTasksFromList(currentList, currentList[currentList.length - 1]);
         assertUndoSuccess(currentList, currentList.length - 1);
@@ -55,9 +52,9 @@ public class UndoCommandTest extends TaskBookGuiTest {
     private void assertUndoSuccess(final TestTask[] currentList, int lastIndex)
             throws IllegalArgumentException, IllegalTimeException {
         TestTask taskToBeUndone = currentList[lastIndex];
-        TestTask[] expectedResult = TestUtil.removeTasksFromList(currentList, taskToBeUndone);
 
         commandBox.runCommand("undo");
+        TestTask[] expectedResult = TestUtil.removeTasksFromList(currentList, taskToBeUndone);
 
         // confirm the resultant list after undoing matches the original
         assertTrue(taskListPanel.isListMatching(expectedResult));
