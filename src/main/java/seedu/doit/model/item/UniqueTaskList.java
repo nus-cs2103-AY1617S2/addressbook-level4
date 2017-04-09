@@ -4,6 +4,7 @@ package seedu.doit.model.item;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,6 +114,21 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
+    /**
+     * Removes the equivalent tasks from the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean remove(Set<ReadOnlyTask> tasksToRemove) throws TaskNotFoundException {
+        assert tasksToRemove != null;
+        final boolean taskFoundAndDeleted = internalList.removeAll(tasksToRemove);
+        if (!taskFoundAndDeleted) {
+            throw new TaskNotFoundException();
+        }
+        internalList.sort(taskComparator);
+        return taskFoundAndDeleted;
+    }
+
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
         internalList.sort(taskComparator);
@@ -126,6 +142,10 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacement);
     }
 
+
+    /**
+     * Sets the comparator by which tasks from the list will be sorted by.
+     */
     public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
         this.taskComparator = taskComparator;
         internalList.sort(taskComparator);
