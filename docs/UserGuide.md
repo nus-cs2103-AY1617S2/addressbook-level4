@@ -124,8 +124,6 @@ Format: `add TASK_DESCRIPTION`
 > **Examples:** <br>
 > - `add buy milk` <br>
 
-> **Remarks:** <br>
-> - To use backslash `\` in your description, type `\\`
 
 **Start time and End time** <br>
 Add a task with a start time and end time for events that occur over a period of time with `\from` and `\to` parameters. <br>

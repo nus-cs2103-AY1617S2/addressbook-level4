@@ -40,10 +40,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: Logic, Model
 * Aspects/tools in charge of: JavaFX, Natty, Apache Commons
 * Features implemented:
-    * Add task with time
-    * Reschedule a task
+    * [Add task with time](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#32-adding-a-new-task--add)
+    * [Reschedule a task](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#37-editing-an-existing-task--edit)
     * Command History
-    * Power Search
+    * [Power Search](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#34-finding-a-task--find)
 
 * Code written: [functional code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/main/A0147620L.md)   [test code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/test/A0147620L.md)  
 * Other major contributions:
@@ -64,10 +64,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Git
 * Features implemented:
     * [List](https://github.com/CS2103JAN2017-W13-B4/main/blob/39280dce08c8d4baf16c65ef1673febef1f6db08/docs/UserGuide.md#33-listing-tasks--list)
-    * Command content assistant
-    * Command highlight
-    * Alias-related command (alias, remove_alias, view_alias ...)
-    * Undo & redo command and hotkeys
+    * [Command content assistant](https://github.com/CS2103JAN2017-W13-B4/main/blob/documentation-changes/docs/UserGuide.md#3-features)
+    * [Command highlight](https://github.com/CS2103JAN2017-W13-B4/main/blob/documentation-changes/docs/UserGuide.md#3-features)
+    * [Alias-related command (alias, remove_alias, view_alias ...)](https://github.com/CS2103JAN2017-W13-B4/main/blob/documentation-changes/docs/UserGuide.md#310-setting-an-alias-for-a-command-word--alias-view_alias-remove_alias-reset_alias)
+    * [Undo & redo command and hotkeys](https://github.com/CS2103JAN2017-W13-B4/main/blob/documentation-changes/docs/UserGuide.md#39-undoing-previous-commands--undo-redo)
     * quick navigation by pressing J and K
 * Code written: [functional code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/main/A0147980U.md) [test code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/test/A0147980U.md)  
 * Other major contributions:
