@@ -3,12 +3,11 @@ package seedu.task.commons.events.ui;
 import seedu.task.commons.events.BaseEvent;
 
 
-//@@author A0164466X
-/**
- * An event requesting to view themes.
- */
 //@@author A0163848R
-public class ShowThemeRequestEvent extends BaseEvent {
+/**
+ * An event indicating a request to view the Theme Window.
+ */
+public class ShowThemeWindowRequestEvent extends BaseEvent {
 
     @Override
     public String toString() {

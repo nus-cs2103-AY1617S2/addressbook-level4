@@ -1,4 +1,4 @@
-
+/*@@author A0163848R */
 .error {
     -fx-background-color: #f08080;
 }
@@ -17,6 +17,7 @@
     -fx-border-radius: 3;
     -fx-background-radius: 3;
 }
+/*@@author */
 
 .tooltip-text {
     -fx-text-fill: white;

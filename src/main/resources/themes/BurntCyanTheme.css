@@ -277,6 +277,7 @@
     -fx-padding: 8 1 8 1;
 }
 
+/*@@author A0163848R */
 #cardPane {
     -fx-border-width: 2 2 2 24;
 }
@@ -317,3 +318,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+/*@@author */

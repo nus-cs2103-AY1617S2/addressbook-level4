@@ -1,4 +1,51 @@
 # A0163848R-reused
+###### /java/seedu/task/logic/parser/UnmarkCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new UnmarkCommand object
+ */
+public class UnmarkCommandParser {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the UnmarkCommand
+     * and returns an UnmarkCommand object for execution.
+     */
+    public Command parse(String args) {
+        assert args != null;
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
+        argsTokenizer.tokenize(args);
+        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+
+        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+        }
+
+        return new UnmarkCommand(index.get());
+    }
+}
+```
+###### /java/seedu/task/logic/parser/UndoCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new DeleteCommand object
+ */
+public class UndoCommandParser {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the UndoCommand
+     * and returns an UndoCommand object for execution.
+     */
+    public Command parse(String args) {
+        try {
+            return new UndoCommand();
+        } catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+    }
+
+}
+```
 ###### /java/seedu/task/logic/commands/ThemeCommand.java
 ``` java
 /**
@@ -15,7 +62,7 @@ public class ThemeCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        EventsCenter.getInstance().post(new ShowThemeRequestEvent());
+        EventsCenter.getInstance().post(new ShowThemeWindowRequestEvent());
         return new CommandResult(SHOWING_THEME_MESSAGE);
     }
 }
@@ -116,7 +163,7 @@ public class UnmarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
 ```
-###### /java/seedu/task/commons/events/ui/LoadRequestEvent.java
+###### /java/seedu/task/commons/events/storage/LoadRequestEvent.java
 ``` java
 /**
 * Represents a request to retrieve the file at the stored path.
@@ -139,7 +186,7 @@ public class LoadRequestEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/task/commons/events/ui/LoadResultAvailableEvent.java
+###### /java/seedu/task/commons/events/storage/LoadResultAvailableEvent.java
 ``` java
 /**
  * Indicates that a new result is available.

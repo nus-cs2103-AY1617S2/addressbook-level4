@@ -56,18 +56,34 @@ public class GuiSettings implements Serializable {
     }
 
     //@@author A0163848R
+    /**
+     * Gets the stylesheet stored in GuiSettings
+     * @return String path to stylesheet
+     */
     public String getStyleSheet() {
         return styleSheet;
     }
 
+    /**
+     * Gets the last loaded Y Tomorrow task database
+     * @return Path to last loaded task database
+     */
     public String getLastLoadedYTomorrow() {
         return lastLoadedYTomorrow;
     }
 
+    /**
+     * Stores the stylesheet path
+     * @param path to store
+     */
     public void setStyleSheet(String path) {
         styleSheet = path;
     }
 
+    /**
+     * Store the YTomorrow task database path
+     * @param path to store
+     */
     public void setLastLoadedYTomorrow(String path) {
         lastLoadedYTomorrow = path;
     }

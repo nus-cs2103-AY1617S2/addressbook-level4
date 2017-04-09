@@ -67,7 +67,12 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    //@@author A0163848R
+    /**
+     * @return Whether the task end date has passed the time of calling.
+     */
     boolean hasPassed();
+    //@author
 
     java.util.Date getEndTime();
 

@@ -116,6 +116,12 @@ public class FileUtil {
         return getFileChooser(title, extensionFilters).showOpenDialog(stage);
     }
 
+    /**
+     * Returns a new file chooser prompt
+     * @param Title of prompt
+     * @param Extension filters to allow for writing/reading
+     * @return New file chooser prompt
+     */
     private static FileChooser getFileChooser(String title, ExtensionFilter ...extensionFilters) {
         FileChooser fileChooser = new FileChooser();
 

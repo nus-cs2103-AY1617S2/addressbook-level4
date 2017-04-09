@@ -1,31 +1,28 @@
-package seedu.task.commons.events.ui;
+package seedu.task.commons.events.storage;
 
-import java.io.File;
 import java.util.Optional;
 
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.ReadOnlyTaskManager;
 
-//@@author A0163848R-reused
+//@@author A0163848R
 /**
  * Indicates that a new result is available.
  */
-public class LoadResultAvailableEvent extends BaseEvent {
+public class ImportResultAvailableEvent extends BaseEvent {
 
     private final Optional<ReadOnlyTaskManager> imported;
-    private final File origin;
 
-    public LoadResultAvailableEvent(Optional<ReadOnlyTaskManager> imported, File origin) {
+    public ImportResultAvailableEvent(Optional<ReadOnlyTaskManager> imported) {
         this.imported = imported;
-        this.origin = origin;
     }
 
+    /**
+     * Get the imported YTomorrow task database
+     * @return Imported YTomorrow task database
+     */
     public Optional<ReadOnlyTaskManager> getImported() {
         return imported;
-    }
-
-    public File getFile() {
-        return origin;
     }
 
     @Override

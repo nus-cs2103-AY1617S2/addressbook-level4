@@ -1,7 +1,7 @@
 package seedu.task.logic.commands;
 
 import seedu.task.commons.core.EventsCenter;
-import seedu.task.commons.events.ui.ShowThemeRequestEvent;
+import seedu.task.commons.events.ui.ShowThemeWindowRequestEvent;
 
 //@@author A0163848R-reused
 /**
@@ -18,7 +18,7 @@ public class ThemeCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        EventsCenter.getInstance().post(new ShowThemeRequestEvent());
+        EventsCenter.getInstance().post(new ShowThemeWindowRequestEvent());
         return new CommandResult(SHOWING_THEME_MESSAGE);
     }
 }

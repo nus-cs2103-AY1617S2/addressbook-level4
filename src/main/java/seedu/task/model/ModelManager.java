@@ -51,9 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompleteListToChange();
         //@@author
 
-        //@@author A0163848R
         history.push(addressBook);
-        //@@author
     }
 
     public ModelManager() {
@@ -254,6 +252,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask person);
+        @Override
         String toString();
     }
 
@@ -278,6 +277,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask person);
+        @Override
         String toString();
     }
 

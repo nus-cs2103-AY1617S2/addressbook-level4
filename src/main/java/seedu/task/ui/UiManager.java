@@ -14,12 +14,12 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
-import seedu.task.commons.events.ui.ImportResultAvailableEvent;
+import seedu.task.commons.events.storage.ImportResultAvailableEvent;
+import seedu.task.commons.events.storage.LoadResultAvailableEvent;
+import seedu.task.commons.events.storage.TargetFileRequestEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
-import seedu.task.commons.events.ui.LoadResultAvailableEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
-import seedu.task.commons.events.ui.ShowThemeRequestEvent;
-import seedu.task.commons.events.ui.TargetFileRequestEvent;
+import seedu.task.commons.events.ui.ShowThemeWindowRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
@@ -117,7 +117,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handleShowThemeEvent(ShowThemeRequestEvent event) {
+    private void handleShowThemeEvent(ShowThemeWindowRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleTheme();
     }

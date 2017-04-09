@@ -19,11 +19,9 @@ public class DeleteCommandParser {
      */
     public Command parse(String args) {
 
-        //@@author A0163848R
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer();
         argsTokenizer.tokenize(args);
-        //@@author
 
         try {
             return new DeleteCommand(argsTokenizer.getPreamble().get());

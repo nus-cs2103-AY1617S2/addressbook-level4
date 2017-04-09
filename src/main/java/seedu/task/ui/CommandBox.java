@@ -29,6 +29,11 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author A0163848R
+    /**
+     * Sets hot-keys for this window:
+     * Up arrow - write last command to command box
+     * Down arrow - clears command box
+     */
     private void setAccelerators() {
         commandTextField.setOnKeyPressed(keyEvent -> {
             switch (keyEvent.getCode()) {
@@ -89,12 +94,18 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author A0163848R
+    /**
+     * Writes the last command string to the command box
+     */
     private void handleLast() {
         if (lastCommand != null) {
             commandTextField.setText(lastCommand);
         }
     }
 
+    /**
+     * Clears the command box
+     */
     private void handleClear() {
         commandTextField.clear();
     }

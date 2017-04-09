@@ -1,18 +1,18 @@
-package seedu.task.commons.events.ui;
+package seedu.task.commons.events.storage;
 
 import java.io.File;
 
 import seedu.task.commons.events.BaseEvent;
 
-//@@author A0163848R
+//@@author A0163848R-reused
 /**
 * Represents a request to retrieve the file at the stored path.
 */
-public class ImportRequestEvent extends BaseEvent {
+public class LoadRequestEvent extends BaseEvent {
 
     private File target;
 
-    public ImportRequestEvent(File target) {
+    public LoadRequestEvent(File target) {
         this.target = target;
     }
 

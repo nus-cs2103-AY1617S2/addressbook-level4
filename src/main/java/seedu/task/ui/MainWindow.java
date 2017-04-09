@@ -9,18 +9,18 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
+import seedu.task.commons.events.storage.ExportRequestEvent;
+import seedu.task.commons.events.storage.ImportRequestEvent;
+import seedu.task.commons.events.storage.LoadRequestEvent;
+import seedu.task.commons.events.storage.TargetFileRequestEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
-import seedu.task.commons.events.ui.ExportRequestEvent;
-import seedu.task.commons.events.ui.ImportRequestEvent;
-import seedu.task.commons.events.ui.LoadRequestEvent;
-import seedu.task.commons.events.ui.TargetFileRequestEvent;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
-import javafx.stage.Stage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -145,6 +145,10 @@ public class MainWindow extends Window {
     }
 
     //@@author A0163848R
+    /**
+     * Handle a JavaFX save button request.
+     * Initiates a saving sequence.
+     */
     @FXML
     public void handleSave() {
         File selected = FileUtil.promptSaveFileDialog("Save and Use YTomorrow File", getStage(),
@@ -157,6 +161,10 @@ public class MainWindow extends Window {
         }
     }
 
+    /**
+     * Handle a JavaFX load button request.
+     * Initiates a loading sequence.
+     */
     @FXML
     public void handleLoad() {
         File selected = FileUtil.promptOpenFileDialog("Load and Use YTomorrow File", getStage(),
@@ -167,6 +175,10 @@ public class MainWindow extends Window {
         }
     }
 
+    /**
+     * Handle a JavaFX export button request.
+     * Initiates an export sequence.
+     */
     @FXML
     public void handleExport() {
         File selected = FileUtil.promptSaveFileDialog("Export YTomorrow File", getStage(),
@@ -178,6 +190,10 @@ public class MainWindow extends Window {
         }
     }
 
+    /**
+     * Handle a JavaFX import button request.
+     * Initiates an import sequence
+     */
     @FXML
     public void handleImport() {
         File selected = FileUtil.promptOpenFileDialog("Import YTomorrow File", getStage(),
@@ -188,6 +204,10 @@ public class MainWindow extends Window {
         }
     }
 
+    /**
+     * Handle a JavaFX theme manager button request.
+     * Opens a ThemeWindow
+    */
     @FXML
     public void handleTheme() {
         ThemeWindow themeWindow = new ThemeWindow(getRoot());

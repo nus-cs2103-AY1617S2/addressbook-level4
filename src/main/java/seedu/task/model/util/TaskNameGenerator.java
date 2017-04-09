@@ -5,6 +5,9 @@ import java.util.Random;
 import seedu.task.commons.util.CollectionUtil;
 
 //@@author A0163848R
+/**
+ * Builder for randomly-generating task names
+ */
 public class TaskNameGenerator {
     private static final String[] ACTIONS = {
         "Walk",
@@ -98,35 +101,61 @@ public class TaskNameGenerator {
         return (previous != null ? previous.toString() + " " : "") + state;
     }
 
+    /**
+     * @return Set a random action
+     * @param Random object to use
+     */
     public static TaskNameGenerator doAction(Random r) {
         return doAction(r, CollectionUtil.getRandom(ACTIONS, r));
     }
 
+    /**
+     * @return Set a given action
+     * @param Random object to use
+     */
     public static TaskNameGenerator doAction(Random r, String action) {
         TaskNameGenerator.r = r;
         return new TaskNameGenerator(null, action);
     }
 
+    /**
+     * @return Set a random person to do with
+     */
     public TaskNameGenerator with() {
         return with(CollectionUtil.getRandom(NAMES, r));
     }
 
+    /**
+     * @return Set a given person to do with
+     */
     public TaskNameGenerator with(String name) {
         return new TaskNameGenerator(this, "with " + name);
     }
 
+    /**
+     * @return Set a random place to do in
+     */
     public TaskNameGenerator in() {
         return in(CollectionUtil.getRandom(PLACES, r));
     }
 
+    /**
+     * @return Set a given place to do in
+     */
     public TaskNameGenerator in(String place) {
         return new TaskNameGenerator(this, "in " + place);
     }
 
+    /**
+     * @return Randomly unset the previous call (frequency: 0.5)
+     */
     public TaskNameGenerator maybe() {
         return maybe(0.5f);
     }
 
+    /**
+     * @return Randomly unset the previous call with given frequency
+     */
     public TaskNameGenerator maybe(float chance) {
         if (r.nextFloat() > chance) {
             if (previous == null) {

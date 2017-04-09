@@ -56,6 +56,10 @@ public class History<T> {
         }
     }
 
+    /**
+     * Adds value after current state.  Deletes the previous next value.
+     * @param Value to add as next
+     */
     public void push(T next) {
         Node<T> nextNode = new Node<T>(next);
 
@@ -74,16 +78,24 @@ public class History<T> {
         return 1 + sizePrev(current) + sizeNext(current);
     }
 
-    private int sizePrev(Node source) {
+    /**
+     * @param Source node to count from
+     * @return Number of nodes before source node
+     */
+    private int sizePrev(Node<T> source) {
         return source.getPrevious() == null ? 0 : 1 + sizePrev(source.getPrevious());
     }
 
-    private int sizeNext(Node source) {
+    /**
+     * @param Source node to count from
+     * @return Number of nodes after source node
+     */
+    private int sizeNext(Node<T> source) {
         return source.getNext() == null ? 0 : 1 + sizePrev(source.getNext());
     }
 
     /**
-     * Double linked list node
+     * Doubly-linked-list node
      * @param <T> Element type to store
      */
     private class Node<T> {
@@ -97,22 +109,39 @@ public class History<T> {
             this.element = element;
         }
 
+        /**
+         * @return Stored value
+         */
         public T getElement() {
             return element;
         }
 
+        /**
+         * @return Previous node
+         */
         public Node<T> getPrevious() {
             return prev;
         }
 
+        /**
+         * @return Next node
+         */
         public Node<T> getNext() {
             return next;
         }
 
+        /**
+         * Set next node
+         * @param Node to insert
+         */
         public void setNext(Node<T> next) {
             this.next = next;
         }
 
+        /**
+         * Set previous node
+         * @param Node to insert
+         */
         public void setPrevious(Node<T> prev) {
             this.prev = prev;
         }
