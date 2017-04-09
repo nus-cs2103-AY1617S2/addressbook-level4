@@ -13,7 +13,7 @@ import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing task in the task manager.
+ * Mark existing task(s) as completed
  */
 public class CompleteCommand extends Command implements Undoable {
 
@@ -36,8 +36,7 @@ public class CompleteCommand extends Command implements Undoable {
     private List<ReadOnlyTask> completedList;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param completeTaskDescriptor details to edit the task with
+     * @param {@code indexList}, the list of indexes that will be marked as completed
      */
     public CompleteCommand(List<Integer> indexList) {
         assert indexList.size() > 0;
@@ -216,6 +215,9 @@ public class CompleteCommand extends Command implements Undoable {
         return commandSuccess;
     }
 
+    /**
+     * Undo any changes made by this command
+     */
     @Override
     public String undo() throws CommandException {
         for (int i = 0; i < completedList.size(); i++) {

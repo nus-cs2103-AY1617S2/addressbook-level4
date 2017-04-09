@@ -64,6 +64,13 @@ public class RecurState {
         this.recurCompletedList = recurCompletedList;
     }
 
+    /**
+     * Get a list of all dates that are in the {@code recurCompletedList} and meets the recurring requirements
+     * @param {@code startDateTime}, start of date range
+     * @param {@code endDateTime}, end of date range
+     * @param {@code filterEndDate}, soft cap for the date listing
+     * @return List of dates that meet the criteria
+     */
     public List<Date> getCompletedRecurDates(DateTime startDateTime, DateTime endDateTime, Date filterEndDate) {
         List<Date> completedRecurList = new ArrayList<Date>();
         if (isRecurring()) {
@@ -99,6 +106,13 @@ public class RecurState {
 
     }
 
+    /**
+     * Gets a list of all dates that are not in the {@code recurCompletedList} and meets the recurring requirements
+     * @param {@code startDateTime}, start of date range
+     * @param {@code endDateTime}, end of date range
+     * @param {@code filterEndDate}, soft cap for the date listing
+     * @return List of dates that meet the criteria
+     */
     public List<Date> getUncompletedRecurDates(DateTime startDateTime, DateTime endDateTime, Date filterEndDate) {
         List<Date> uncompletedRecurList = new ArrayList<Date>();
         if (isRecurring()) {
@@ -134,6 +148,10 @@ public class RecurState {
 
     }
 
+    /**
+     * Check if {@code recurCompleted} is in {@code recurCompletedList}
+     * @return true if {@code recurCompleted} is in {@code recurCompletedList}, otherwise false
+     */
     public boolean isRecurCompleted(Date recurCompleted) {
         DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
         for (int i = 0; i < getRecurCompletedList().size(); i++) {
