@@ -1,11 +1,11 @@
-package seedu.address.model.task;
+package seedu.task.model.task;
 
 import java.util.List;
 
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Start Date in the YTomorrow.

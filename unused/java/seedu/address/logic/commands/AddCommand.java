@@ -1,20 +1,20 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.EndDate;
-import seedu.address.model.task.Group;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.StartDate;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.StringUtil;
+import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.EndDate;
+import seedu.task.model.task.Group;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.StartDate;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniquePersonList;
 
 /**
  * Adds a person to the address book.
