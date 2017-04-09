@@ -258,11 +258,11 @@ following methods:
 **Common Commands**
 
 `Add Command` - It is able to add task.
-This function is flexible with dates by using the natty libraries. When `Add` Command is used, user's input will be checked in the 
+This function is flexible with dates by using the natty libraries. When `AddCommand` is used, user's input will be checked in the 
 `AddCommandParser`. In the `AddCommandParser`, it will check for the type of task. There are three types of task and they are floating 
-task(no date, no time), deadline task(date/time present), event task(Start and End date present). There are three `addCommand` methods 
+task(no date, no time), deadline task(date/time present), event task(start and end date present). There are three `addCommand` methods 
 with different number of parameter to handle the three type of task. After checking for the type of task, `AddCommandParser` will call 
-the corresponding `addCommand` to add the task.
+the corresponding `addCommand` to add the task. `AddCommand` calls `storeTaskManager()` and `addTask()` from `Model` when adding.
 
 Given below is the Activity Diagram when the information reached `AddCommandParser`
 
@@ -281,22 +281,22 @@ _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 
 `Edit Command` - It is able to edit a task using Index.
-This function make use of the Optional class to update the task.
+This function make use of the Optional class to update the task. It calls `storeTaskManager()` and `updateTask()` from the `Model` when editing the task. It also calls `updateFilteredTaskList()` from the `Model` to show the updated task list after editing.
 
 `Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
 
 `Find Command` - It is able to find a task with the specified name or date
 This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the 
 keywords are related to dates or not. If dates are found, the search result will show the related dates. If not, the search result will 
-show the related keywords.
+show the related keywords. This function calls `updateFilteredTaskList()` from the `Model` to display the search results.
 
-`List Command` - It is able to list all tasks excluding completed tasks.
+`List Command` - It is able to list all tasks excluding completed tasks. This function calls `updateFilteredTaskList()` from the `Model`.
 
-`ListDone Command` - It is able to list all completed tasks only.
+`ListDone Command` - It is able to list all completed tasks only. This function calls `updateFilteredTaskList()` from the `Model`.
 
-`ListPriority Command` - It is able to list all tasks that have "High" priority.
+`ListPriority Command` - It is able to list all tasks that have "High" priority. This function calls `updateFilteredTaskList()` from the `Model`.
 
-`ListToday Command` - It is able to list all tasks that are overdue today and events that include today's date.
+`ListToday Command` - It is able to list all tasks that are overdue today and events that include today's date. This function calls `updateFilteredTaskList()` from the `Model`.
 
 **Additional Commands**
 
