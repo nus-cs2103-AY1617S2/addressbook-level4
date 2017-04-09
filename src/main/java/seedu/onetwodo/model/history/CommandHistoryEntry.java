@@ -40,8 +40,18 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
     @Override
     public String getFeedbackMessage() {
         if (entry.size() == 1) {
-            assert entry.get(0).equals(ClearCommand.COMMAND_WORD);
-            return ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS;
+            switch (entry.get(0)) {
+
+            case ClearCommand.COMMAND_CLEAR_DONE:
+                return ClearCommand.MESSAGE_CLEAR_DONE_SUCCESS;
+
+            case ClearCommand.COMMAND_CLEAR_UNDONE:
+                return ClearCommand.MESSAGE_CLEAR_UNDONE_SUCCESS;
+
+            case ClearCommand.COMMAND_CLEAR_ALL:
+            default:
+                return ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS;
+            }
         } else if (entry.size() == 2) {
             return entry.get(0).concat(entry.get(1));
         } else {
@@ -76,8 +86,14 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
         case UndoneCommand.COMMAND_WORD:
             return DoneCommand.COMMAND_WORD;
 
-        case ClearCommand.COMMAND_WORD:
-            return "Restore OneTwoDo";
+        case ClearCommand.COMMAND_CLEAR_ALL:
+            return ClearCommand.MESSAGE_UNDO_CLEAR_ALL_SUCCESS;
+
+        case ClearCommand.COMMAND_CLEAR_DONE:
+            return ClearCommand.MESSAGE_UNDO_CLEAR_DONE_SUCCESS;
+
+        case ClearCommand.COMMAND_CLEAR_UNDONE:
+            return ClearCommand.MESSAGE_UNDO_CLEAR_UNDONE_SUCCESS;
 
         default:
             return new String();
