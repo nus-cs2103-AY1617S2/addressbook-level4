@@ -400,7 +400,7 @@ Things To Note:
 Examples:
 
 * `setting C:/Desktop/myOtherTask`<br>
-* `setting Data/Backup` <br>
+* `setting Data/TaskManagerData` <br>
 
 
 ### 3.13. Using Data from Another Folder : `use`
