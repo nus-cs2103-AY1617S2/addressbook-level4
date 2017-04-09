@@ -38,7 +38,7 @@ import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskTimingComparator;
 import seedu.doist.testutil.TestUtil;
 import seedu.doist.testutil.TypicalTestTasks;
-import seedu.doist.ui.util.CommandHighlightManager;
+import seedu.doist.ui.util.CommandHighlightController;
 
 /**
  * A GUI Test class for Doist
@@ -144,13 +144,13 @@ public abstract class DoistGUITest {
 
     protected void assertCorrectHighlight() {
         List<String> wordsInKeyStyle =
-                commandBox.getWordListWithStyle(CommandHighlightManager.PARAMETER_KEY_STYLE);
+                commandBox.getWordListWithStyle(CommandHighlightController.PARAMETER_KEY_STYLE);
         for (String word : wordsInKeyStyle) {
             assertTrue(word.startsWith("\\"));
         }
 
         List<String> wordsInCommandWordStyle =
-                commandBox.getWordListWithStyle(CommandHighlightManager.COMMAND_WORD_STYLE);
+                commandBox.getWordListWithStyle(CommandHighlightController.COMMAND_WORD_STYLE);
         assertTrue(wordsInCommandWordStyle.size() <= 1);
         if (wordsInCommandWordStyle.size() == 1) {
             String firstWord = commandBox.getCommandInput().split(" +")[0];

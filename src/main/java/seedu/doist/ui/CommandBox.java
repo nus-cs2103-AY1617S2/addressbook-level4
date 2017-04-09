@@ -27,8 +27,8 @@ import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
-import seedu.doist.ui.util.CommandAutoCompleteManager;
-import seedu.doist.ui.util.CommandHighlightManager;
+import seedu.doist.ui.util.CommandAutoCompleteController;
+import seedu.doist.ui.util.CommandHighlightController;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -43,8 +43,8 @@ public class CommandBox extends UiPart<Region> {
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
-    private CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
-    private CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
+    private CommandHighlightController highlightManager = CommandHighlightController.getInstance();
+    private CommandAutoCompleteController autoCompleteManager = CommandAutoCompleteController.getInstance();
 
     private boolean navigationMode = false;
     private int currentIndex = -1;
@@ -202,7 +202,7 @@ public class CommandBox extends UiPart<Region> {
     //@@author
 
     //@@author A0147980U
-    //Handle Control + z key combination
+    //Handle Control + z key combination for undo operation
     private void handleCtrlZKeyCombination() {
         try {
             CommandResult commandResult  = logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
@@ -211,7 +211,7 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
     }
 
-    //Handle Control + y key combination
+    //Handle Control + y key combination for re-do operation
     private void handleCtrlYKeyCombination() {
         try {
             CommandResult commandResult  = logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);

@@ -48,7 +48,7 @@ public class ModeTest extends DoistGUITest {
             assertTaskSelected(i + 1);
         }
 
-        // scroll to the bottom
+        // already scroll to the bottom
         typeJ();
         assertTaskSelected(count);
     }
@@ -62,7 +62,7 @@ public class ModeTest extends DoistGUITest {
             assertTaskSelected(i);
         }
 
-        // scroll to the top
+        // already scroll to the top
         typeK();
         assertTaskSelected(1);
     }
