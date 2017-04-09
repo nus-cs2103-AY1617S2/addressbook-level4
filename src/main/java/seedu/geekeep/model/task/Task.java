@@ -12,9 +12,9 @@ import seedu.geekeep.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask  {
 
     public static final String MESSAGE_DATETIME_MATCH_CONSTRAINTS =
-            "Starting date and time must be matched with a ending date and time";
+            "Starting date and time must be matched with a valid ending date and time";
     public static final String MESSAGE_ENDDATETIME_LATER_CONSTRAINTS =
-            "Starting date and time must be earlier than ending date and time";
+            "Event cannot end before it begins";
     public static final int EVENT_PRIORITY = 0;
     public static final int FLOATING_TASK_PRIORITY = 1;
     public static final int DEADLINE_PRIORITY = 2;
