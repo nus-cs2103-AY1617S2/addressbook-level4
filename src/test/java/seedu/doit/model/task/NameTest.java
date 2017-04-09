@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import seedu.doit.model.item.Name;
 
+//@@author A0146809W
+
 public class NameTest {
 
     @Test

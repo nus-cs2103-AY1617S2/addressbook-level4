@@ -55,6 +55,9 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
+    public static final String XMLTASKMANAGERSTORAGETEST_FOLDER = FileUtil
+        .getPath("./src/test/data/XmlTaskManagerStorageTest/");
+
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
@@ -76,26 +79,38 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
+            // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                new Task(new Name("Ali Muster"), new Priority("low"), new EndTime("next friday"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Priority("med"), new EndTime("05/05/17"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Priority("high"), new EndTime("friday"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Priority("high"), new EndTime("next monday"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Priority("med"), new EndTime("next monday"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Priority("high"), new EndTime("12/12/17"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("Ali Muster"), new Priority("low"), new EndTime("next friday"),
+                    new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Priority("med"), new EndTime("05/05/17"),
+                    new Description("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Priority("high"), new EndTime("friday"),
+                    new Description("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Priority("high"), new EndTime("next monday"),
+                    new Description("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Priority("med"), new EndTime("next monday"),
+                    new Description("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"),
+                    new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Priority("high"), new EndTime("12/12/17"),
+                    new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"),
+                    new Description("little tokyo"), new UniqueTagList()),
                 new Task(new Name("AAAAAFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
                 new Task(new Name("BBBBBFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
                 new Task(new Name("CCCCCFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("03/03/17"), new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("03/03/17"), new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("03/03/17"), new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Priority("med"), new EndTime("9pm"), new Description("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Priority("low"), new EndTime("tomorrow 5pm"), new Description("chicago ave"), new UniqueTagList())
-            };
-            //CHECKSTYLE.ON: LineLength
+                new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("03/03/17"),
+                    new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("03/03/17"),
+                    new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("03/03/17"),
+                    new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Priority("med"), new EndTime("9pm"),
+                    new Description("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Priority("low"), new EndTime("tomorrow 5pm"),
+                    new Description("chicago ave"), new UniqueTagList())};
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -103,17 +118,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[] {
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] {new Tag("relatives"), new Tag("friends")};
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -122,8 +133,8 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
      *
      * @param fileName
      * @return
@@ -160,8 +171,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -183,7 +194,7 @@ public class TestUtil {
 
     public static boolean isHeadlessEnvironment() {
         String headlessProperty = System.getProperty("testfx.headless");
-        return headlessProperty != null && headlessProperty.equals("true");
+        return (headlessProperty != null) && headlessProperty.equals("true");
     }
 
     public static void captureScreenShot(String fileName) {
@@ -197,18 +208,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-            + Arrays.asList(comparedObjects).stream()
-            .map(Object::toString)
-            .collect(Collectors.joining("\n"));
+            + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-        IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+        throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -224,10 +234,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      * <p>
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -250,8 +261,8 @@ public class TestUtil {
      * @return
      */
     public static Point2D getScreenMidPoint(Node node) {
-        double x = getScreenPos(node).getMinX() + node.getLayoutBounds().getWidth() / 2;
-        double y = getScreenPos(node).getMinY() + node.getLayoutBounds().getHeight() / 2;
+        double x = getScreenPos(node).getMinX() + (node.getLayoutBounds().getWidth() / 2);
+        double y = getScreenPos(node).getMinY() + (node.getLayoutBounds().getHeight() / 2);
         return new Point2D(x, y);
     }
 
@@ -262,8 +273,8 @@ public class TestUtil {
      * @return
      */
     public static Point2D getSceneMidPoint(Node node) {
-        double x = getScenePos(node).getMinX() + node.getLayoutBounds().getWidth() / 2;
-        double y = getScenePos(node).getMinY() + node.getLayoutBounds().getHeight() / 2;
+        double x = getScenePos(node).getMinX() + (node.getLayoutBounds().getWidth() / 2);
+        double y = getScenePos(node).getMinY() + (node.getLayoutBounds().getHeight() / 2);
         return new Point2D(x, y);
     }
 
@@ -305,7 +316,6 @@ public class TestUtil {
         listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
-
 
     /**
      * Returns a copy of the list with the task at specified index removed.
@@ -353,7 +363,7 @@ public class TestUtil {
 
     public static TestTask[] getTasks(TestTask[] tasks) {
         ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
-        for (TestTask task: tasks) {
+        for (TestTask task : tasks) {
             if (!task.getIsDone() && task.isTask()) {
                 filteredTasks.add(task);
             }
@@ -363,7 +373,7 @@ public class TestUtil {
 
     public static TestTask[] getEvents(TestTask[] tasks) {
         ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
-        for (TestTask task: tasks) {
+        for (TestTask task : tasks) {
             if (!task.getIsDone() && task.isEvent()) {
                 filteredTasks.add(task);
             }
@@ -373,7 +383,7 @@ public class TestUtil {
 
     public static TestTask[] getFloatingTasks(TestTask[] tasks) {
         ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
-        for (TestTask task: tasks) {
+        for (TestTask task : tasks) {
             if (!task.getIsDone() && task.isFloatingTask()) {
                 filteredTasks.add(task);
             }
@@ -404,7 +414,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

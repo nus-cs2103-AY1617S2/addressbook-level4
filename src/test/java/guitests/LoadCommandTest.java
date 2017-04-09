@@ -17,6 +17,10 @@ import seedu.doit.testutil.TypicalTestTasks;
 public class LoadCommandTest extends TaskManagerGuiTest {
     private static final String GUI_ALTERNATE_XML_FILE = "guitest1.xml";
     private static final String ALTERNATE_XML = TestUtil.SANDBOX_FOLDER + GUI_ALTERNATE_XML_FILE;
+    private static final String NOT_XML_FORMAT = TestUtil.XMLTASKMANAGERSTORAGETEST_FOLDER
+            + "NotXmlFormatTaskManager.xml";
+    private static final String NOT_XML = TestUtil.XMLTASKMANAGERSTORAGETEST_FOLDER + "NotXml.md";
+
     private static final String INVALID_XML = "guitest2.xml";
 
     @Test
@@ -48,6 +52,18 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
         // file do not exist
         this.commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + INVALID_XML);
+        assertResultMessage(LoadCommand.MESSAGE_INVALID_FILE_NAME);
+    }
+
+    @Test
+    public void load_invalidFile_format() {
+        this.commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + NOT_XML_FORMAT);
+        assertResultMessage(LoadCommand.MESSAGE_INVALID_FILE_NAME);
+    }
+
+    @Test
+    public void load_invalidFile_notXml() {
+        this.commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + NOT_XML);
         assertResultMessage(LoadCommand.MESSAGE_INVALID_FILE_NAME);
     }
 
