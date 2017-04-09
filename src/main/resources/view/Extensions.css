@@ -14,8 +14,12 @@
  */
 
 .error {
-    -fx-background-color: #ffa59d;
+    -fx-background-color: #ff877c;
     -fx-border-color: #999999;
+}
+
+.tag-pane {
+	-fx-padding: 3 0 3 0;
 }
 
 .menu {
@@ -48,6 +52,12 @@
 
 .tab {
 	-fx-effect: null;
+	-fx-pref-width: 150;
+	-fx-font-size: 16px;
+}
+
+.tab-label {
+	-fx-font-weight: bold;
 }
 
 #startDate, #endDate {
@@ -56,6 +66,7 @@
 }
 
 #description {
+	-fx-font-weight: lighter !important;
 	-fx-font-size: 10pt;
 }
 

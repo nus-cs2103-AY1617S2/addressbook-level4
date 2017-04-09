@@ -34,6 +34,10 @@
     -fx-border-radius: 3; 
 }
 
+.text-field:focused {
+	-fx-border-color: -fx-focus-color;
+}
+
 .tab-pane {
     -fx-padding: 0.0 0.0 0.0 1.0;
 }
@@ -116,7 +120,6 @@
 }
 
 .cell_big_label {
-	-fx-font-weight: bold;
     -fx-font-size: 16.0px;
     -fx-text-fill: #010504;
 }
@@ -139,6 +142,10 @@
 .status-bar {
     -fx-background-color: #e7f5f7;
     -fx-text-fill: black;
+}
+
+.result-display:focused {
+	-fx-border-color: -fx-focus-color;
 }
 
 .result-display {
@@ -300,6 +307,7 @@
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 4.0 1.0 4.0 1.0;
 }
+
 /*
  * @@author
  */
@@ -320,7 +328,7 @@
 }
 
 #filterField, #taskListPanel {
-    -fx-effect: null;
+    -fx-effect: innershadow(gaussian, black, 10.0, 0.0, 0.0, 0.0);
 }
 
 #tags {
