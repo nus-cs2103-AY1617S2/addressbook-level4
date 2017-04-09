@@ -10,7 +10,7 @@ public class TaskDateTest {
     @Test
     public void validDate() {
 
-        //valid dates
+        // valid dates
         try {
             assertEquals("4/4/17", new TaskDate("April 4th, 2017").toString());
             assertEquals("4/4/17 - 5/5/17", new TaskDate("040417 050517").toString());

@@ -12,13 +12,15 @@ public class RandomTaskGenerator {
     private static double TASK_DESCRIPTION_PERCENTAGE = 1;
     private static Random rand = new Random();
     private static final String[] TASK_NAME_LIST = { "Go to class", "Go to store", "Go to gym" };
-    private static final String[] CLASS_LIST = { "MATH", "NETWORKING", "PSYCHOLOGY", "CRYPTOGRAPHY", "PHILOSOPHY",
-        "FAT STUDIES", "CHINESE", "PHYSICAL EDUCATION", "PHYSICS", "HEAT TRANSFER" };
-    private static final String[] BUILDING_LIST = { "Love", "Woodruff", "MRDC", "CRC", "Klaus", "Knight", "Howey" };
-    private static final String[] THINGS_TO_BUY = { "peanut butter", "milk", "soy milk", "snacks", "fruit", "bananas",
-        "century eggs", "isotonic" };
-    private static final String[] WORKOUT_DAYS = { "Chest day", "Back day", "Leg day", "Secondary chest day",
-        "arm day" };
+    private static final String[] CLASS_LIST = { "MATH", "NETWORKING", "PSYCHOLOGY", "CRYPTOGRAPHY",
+            "PHILOSOPHY", "FAT STUDIES", "CHINESE", "PHYSICAL EDUCATION", "PHYSICS",
+            "HEAT TRANSFER" };
+    private static final String[] BUILDING_LIST = { "Love", "Woodruff", "MRDC", "CRC", "Klaus",
+            "Knight", "Howey" };
+    private static final String[] THINGS_TO_BUY = { "peanut butter", "milk", "soy milk", "snacks",
+            "fruit", "bananas", "century eggs", "isotonic" };
+    private static final String[] WORKOUT_DAYS = { "Chest day", "Back day", "Leg day",
+            "Secondary chest day", "arm day" };
 
     public static Task generateTask() {
         boolean generated = false;
@@ -28,9 +30,10 @@ public class RandomTaskGenerator {
                 Optional<TaskDate> taskDate = Optional.ofNullable(generateTaskDate());
                 Optional<TaskTime> taskStartTime = Optional.ofNullable(generateTaskTime());
                 Optional<TaskTime> taskEndTime = Optional.ofNullable(generateTaskTime());
-                Optional<String> taskDescription = Optional.ofNullable(generateTaskDescription(taskName.fullTaskName));
-                Task retTask = new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,
-                        new TaskStatus(TaskStatus.MESSAGE_INCOMPLETE));
+                Optional<String> taskDescription = Optional
+                        .ofNullable(generateTaskDescription(taskName.fullTaskName));
+                Task retTask = new Task(taskName, taskDate, taskStartTime, taskEndTime,
+                        taskDescription, new TaskStatus(TaskStatus.MESSAGE_INCOMPLETE));
                 return retTask;
             } catch (Exception e) {
 
@@ -97,7 +100,8 @@ public class RandomTaskGenerator {
             retString = retString + " " + (1000 + rand.nextInt(3000));
             retString = retString + " at ";
             retString = retString + BUILDING_LIST[rand.nextInt(BUILDING_LIST.length)];
-            retString = retString + (rand.nextInt(5) + 1) + "" + rand.nextInt(10) + "" + rand.nextInt(10);
+            retString = retString + (rand.nextInt(5) + 1) + "" + rand.nextInt(10) + ""
+                    + rand.nextInt(10);
             return retString;
         } else if (nameIndex == 1) {
             String retString = "Remember to pickup ";

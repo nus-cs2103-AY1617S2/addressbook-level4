@@ -19,6 +19,12 @@ public class TaskTimeTest {
             assertEquals("08:00", new TaskTime("morning").toString());
             assertEquals("20:00", new TaskTime("night").toString());
             assertEquals("12:00", new TaskTime("noon").toString());
+            assertEquals("10:45", new TaskTime(10, 45).toString());
+
+            TaskTime t1 = new TaskTime("09:00");
+            TaskTime t2 = new TaskTime("10:00");
+
+            assertEquals(60, t2.compareTo(t1));
 
         } catch (Exception e) {
             fail("Valid time can not be parsed");
