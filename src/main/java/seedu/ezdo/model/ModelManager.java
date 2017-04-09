@@ -16,8 +16,10 @@ import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.events.model.IsSortedAscendingChangedEvent;
 import seedu.ezdo.commons.events.model.SortCriteriaChangedEvent;
 import seedu.ezdo.commons.exceptions.DateException;
+import seedu.ezdo.commons.exceptions.RecurException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.DateUtil;
+import seedu.ezdo.commons.util.RecurUtil;
 import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
@@ -127,8 +129,10 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws DateException if the dates are invalid (start date after due date)
      */
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException {
+    public synchronized void addTask(Task task) 
+            throws UniqueTaskList.DuplicateTaskException, DateException, RecurException {
         checkTaskDate(task);
+        checkRecur(task);
         updateStacks();
         ezDo.addTask(task);
         ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
@@ -174,9 +178,10 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException, DateException {
+            throws UniqueTaskList.DuplicateTaskException, DateException, RecurException {
         assert editedTask != null;
         checkTaskDate(editedTask);
+        checkRecur(editedTask);
         updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
@@ -586,4 +591,17 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }
 
+    //@@author A0139177W
+    /**
+     * Throws a RecurException if a floating task is found with a recurring status.
+     * @param   readOnlyTask
+     * @throws  RecurException  A floating task is found with recurring status.
+     */
+    public void checkRecur(ReadOnlyTask readOnlyTask) throws RecurException {
+        String recurErrorMessage = "To set a recur status, both start and due dates cannot be empty.";
+        assert readOnlyTask != null;
+        if (!RecurUtil.isRecurValid(readOnlyTask)) {
+            throw new RecurException(recurErrorMessage);
+        }
+    }
 }
