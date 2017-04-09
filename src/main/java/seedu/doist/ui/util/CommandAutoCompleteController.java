@@ -17,7 +17,7 @@ public class CommandAutoCompleteController {
 
     // relative to cursor center
     private final Point2D suggestionBoxOffset = new Point2D(-8, 12);
-    private final int maxItemNu = 8;
+    private final int maxItemNum = 8;
 
     // for singleton pattern
     public static CommandAutoCompleteController getInstance() {
@@ -53,13 +53,13 @@ public class CommandAutoCompleteController {
         int count = 0;
         ArrayList<String> suggestions = new ArrayList<>();
         for (String commandWord : logic.getAllCommandWords()) {
-            if (commandWord.startsWith(lastWord) && count < maxItemNu) {
+            if (commandWord.startsWith(lastWord) && count < maxItemNum) {
                 suggestions.add(commandWord);
                 count++;
             }
         }
         for (Prefix prefix : CliSyntax.ALL_PREFICES) {
-            if (prefix.toString().startsWith(lastWord) && count < maxItemNu) {
+            if (prefix.toString().startsWith(lastWord) && count < maxItemNum) {
                 suggestions.add(prefix.toString());
                 count++;
             }
@@ -104,7 +104,7 @@ public class CommandAutoCompleteController {
             return suggestions;
         }
         for (String desc : logic.getAllNames()) {
-            if ((desc.toLowerCase().contains(s.toString().toLowerCase())) && count < maxItemNu) {
+            if ((desc.toLowerCase().contains(s.toString().toLowerCase())) && count < maxItemNum) {
                 suggestions.add(desc);
                 count++;
             }

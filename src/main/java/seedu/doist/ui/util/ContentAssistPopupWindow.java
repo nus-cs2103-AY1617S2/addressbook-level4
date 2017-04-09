@@ -25,6 +25,10 @@ public class ContentAssistPopupWindow extends ContextMenu {
         this.show(inputBox, this.getAnchorX(), this.getAnchorY());
     }
 
+    /**
+     * replace the current displayed items with the input ones
+     * @param stringItems
+     */
     public void replaceItems(ArrayList<String> stringItems) {
         getItems().clear();
 

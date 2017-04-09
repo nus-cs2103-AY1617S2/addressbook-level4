@@ -16,6 +16,7 @@ import seedu.doist.testutil.TestTask;
 //@@author A0140887W
 public class FinishCommandTest extends DoistGUITest {
 
+    //@@author A0147980U
     @Test
     public void finish() {
 
@@ -41,7 +42,6 @@ public class FinishCommandTest extends DoistGUITest {
         assertAlreadyFinished(currentList.length, currentList);
     }
 
-    //@@author A0147980U
     @Test
     public void testFinishWithEmptyParameter() {
         commandBox.runCommand("finish ");
@@ -80,6 +80,13 @@ public class FinishCommandTest extends DoistGUITest {
         assertResultMessage(String.format(MESSAGE_FINISH_TASK_SUCCESS, tasksToFinish));
     }
 
+    //@@author A0147980U
+    /**
+     * Runs the finish command to finish the task at specified index
+     * and confirms the task at the specified index has already been finished before the command.
+     * @param targetIndexOneIndexed e.g. index 1 to finish the first task in the list,
+     * @param currentList A copy of the current list of tasks (before deletion).
+     */
     private void assertAlreadyFinished(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask[] expectedTasks = currentList.clone();
         sortTasksByDefault(expectedTasks);
