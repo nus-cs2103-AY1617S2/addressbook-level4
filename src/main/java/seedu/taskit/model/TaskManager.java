@@ -119,7 +119,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void markTask(ReadOnlyTask taskToMark, String parameter)
             throws UniqueTaskList.DuplicateMarkingException {
         tasks.markTask(taskToMark, parameter);
-    }
+    }//@@author
 
 
     /**

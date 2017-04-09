@@ -101,11 +101,9 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        //@@author A0141011J
         Task newTask = new Task(updatedTask, updatedStart, updatedEnd, updatedPriority, updatedTags);
         newTask.setOverdue();
         return newTask;
-        //@@author
     }
 
     /**

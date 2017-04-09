@@ -245,34 +245,34 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (parameter){
-                case DONE:
-                    return task.isDone();
+            case DONE:
+                return task.isDone();
 
-                case UNDONE:
-                    return !task.isDone();
+            case UNDONE:
+                return !task.isDone();
 
-                case LIST_OVERDUE:
-                    return task.isOverdue() && !task.isDone();
+            case LIST_OVERDUE:
+                return task.isOverdue() && !task.isDone();
 
-                case LIST_PRIORITY_LOW:
-                case LIST_PRIORITY_MEDIUM:
-                case LIST_PRIORITY_HIGH:
-                    return task.getPriority().toString().equals(parameter);
+            case LIST_PRIORITY_LOW:
+            case LIST_PRIORITY_MEDIUM:
+            case LIST_PRIORITY_HIGH:
+                return task.getPriority().toString().equals(parameter);
 
-                case LIST_TODAY:
-                    return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
+            case LIST_TODAY:
+                return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
 
-                case LIST_FLOATING:
-                    return !task.isDone() && task.isFloating();
+            case LIST_FLOATING:
+                return !task.isDone() && task.isFloating();
 
-                case LIST_EVENT:
-                    return !task.isDone() && task.isEvent();
+            case LIST_EVENT:
+                return !task.isDone() && task.isEvent();
 
-                case LIST_DEADLINE:
-                    return !task.isDone() && task.isDeadline();
+            case LIST_DEADLINE:
+                return !task.isDone() && task.isDeadline();
 
-                default:
-                    return false;
+            default:
+                return false;
             }
         }
 
