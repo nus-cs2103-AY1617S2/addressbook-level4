@@ -42,13 +42,13 @@
 					</padding>
 					<children>
 						<AnchorPane fx:id="todayTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="239.0" VBox.vgrow="ALWAYS">
-                     <children>
+                    <children>
                         <Label text="Overdue Task" />
-                     </children></AnchorPane>
+                    </children></AnchorPane>
                   		<AnchorPane fx:id="overdueTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="249.0" VBox.vgrow="ALWAYS">
-                     <children>
+                    <children>
                         <Label text="Task Due Today" />
-                     </children></AnchorPane>
+                    </children></AnchorPane>
 					</children>
 				</VBox>
 				<!-- @@author -->
