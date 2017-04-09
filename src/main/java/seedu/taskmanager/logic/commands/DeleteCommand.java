@@ -109,13 +109,10 @@ public class DeleteCommand extends Command {
                     assert false : "The target tasks cannot be missing";
                 }
 
-                return new CommandResult(MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 + targetDate +
-                        MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 + Integer.toString(numDeletedTasks));
+                return new CommandResult(MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 + targetDate
+                        + MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 + Integer.toString(numDeletedTasks));
             } else {
-
-                final String[] keywords = { "" };
-                keywords[0] = targetTaskName.trim();
-
+                final String[] keywords = targetTaskName.split("\\s+");
                 final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
 
                 model.updateFilteredTaskList(keywordSet);
@@ -128,13 +125,13 @@ public class DeleteCommand extends Command {
                 }
 
                 try {
-                    numDeletedTasks = model.deleteTasksName(lastShownList, targetTaskName);
+                    numDeletedTasks = model.deleteTasksName(lastShownList, targetTaskName.trim());
                 } catch (TaskNotFoundException e) {
                     assert false : "The target tasks cannot be missing";
                 }
 
-                return new CommandResult(MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 + targetTaskName +
-                        MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 + Integer.toString(numDeletedTasks));
+                return new CommandResult(MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 + targetTaskName
+                        + MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 + Integer.toString(numDeletedTasks));
             }
         }
     }
