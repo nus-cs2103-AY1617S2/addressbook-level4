@@ -149,7 +149,7 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.uncompleteTodo(todoListIndex);
-        //@@author A0163720M 
+        //@@author A0163720M
         try {
             Todo todo = todoList.getTodo(todoListIndex);
             indicateTodoListChanged(todo);
