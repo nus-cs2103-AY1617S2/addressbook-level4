@@ -179,6 +179,13 @@ The **`UI`** component:
 
 #### Design Choices
 The **`UI`** component is designed in such as way that adding/removing a new part is simple, by adding/removing the `java` part with its corresponding `.fxml` file as well as updating the `MainWindow` class. Doing this will not affect the other parts of the UI component.
+
+The Model-View-Controller pattern can be observed in ezDo.
+* Model: The **` Model`** component stores and maintains all the data in ezDo.
+* View: The `.fxml` files are responsible for interacting with the user and displaying ezDo's data. The **`UI`** component recieves data updates from the **`Model`** component through events.
+* Controller: `CommandBox` act as 'Controllers' for UI. When the `CommandBox` recieves command input from the user, it requests **`Logic`** component to execute the command, which may cause changes in the **`Model`** component.
+
+An Observer pattern can be observed in the `StatusBarFooter` class, for instance retrieving the latest ezDo storage file path and the last updated time.
 <br><br>
 
 <br><br>
