@@ -38,8 +38,8 @@ TypeTask lets you organise your to-dos with ease so you can focus on your actual
 TypeTask is especially good for you if you want: <br>
 
 > To do everything through a single line of command <br>
-> An application that works offline <br>
-> You want to write tasks that have deadlines or start-dates <br>
+> To work offline <br>
+> To write tasks that have deadlines or start-dates <br>
 
 ## 2. Quick Start
 
@@ -54,16 +54,16 @@ TypeTask is especially good for you if you want: <br>
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-<img src="images/Ui.png" width="600">
+<img src="images/ss.png" width="600">
 
 Fig 1. TypeTask’s User Interface <br>
 
 TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
 
 `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
-`Yellow`: this uncompleted task was labelled as a priority. <br>
 `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
-
+`Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
+`Black`: this task has been labelled as completed.<br>
 ```
 > Note that all tasks that fall outside of these categories
   will appear normally.
@@ -90,13 +90,11 @@ Let us now explore the interesting features found in TypeTask!
 ### 3.1. Viewing Help : `help`
 Having trouble navigating the application? Simply type  help to view a summary of TypeTask’s commands. The help screen will also show if you have entered an incorrect command e.g. abcd.
 
-Format: `help`
+Format:
+`help`
 
-
-### 3.2. Adding a Floating Task: `add`
-The first thing you would do is to add your first task! Lets make it simple by first adding a floating task. <br>
-
-Format: `add <TASK NAME>`
+### 3.2. Adding a Task: `add`, `a`, `+`
+TypeTask supports 3 types of task. They are floating task, deadline task and event task.
 
 ```
 Things To Note:
@@ -105,16 +103,26 @@ Things To Note:
 > Task name does not allow symbols.
    e.g. "/", ".", ","
 ```
+
+### 3.2.1. Adding a Floating Task: `add`, `a`, `+`
+The first thing you would do is to add your first task! Lets make it simple by first adding a floating task. <br>
+
+Format:
+`add <TASK NAME>`
+
 Examples:
 
 * `add CS2103T Meeting`
 * `add Buy milk`
 
 
-### 3.3. Adding a Deadline Task: `add`
+### 3.2.2. Adding a Deadline Task:  `add`, `a`, `+`
 What if you want to submit a report by a certain date or time. You might want to add a task that has a deadline. <br>
 
-Format: `add <TASK NAME> by:<DATE>` or `add <TASK NAME> by:<DATE> <TIME>`
+Format:
+`add <TASK NAME> by:<DATE>`
+`add <TASK NAME> by:<TIME>`
+`add <TASK NAME> by:<DATE> <TIME>`
 
 ```
 Things To Note:
@@ -130,13 +138,17 @@ Things To Note:
 Examples:
 
 * `add CS2103T Meeting by: next week`
+* `add Buy eggs by: 8pm`
 * `add CS2103T Meeting by: next monday 11:10am`
 
 
-### 3.4. Adding an Event Task: `add`
+### 3.2.3. Adding an Event Task:  `add`, `a`, `+`
 Now you might be interested in adding an event, which has a start time and an end time. <br>
 
-Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> <TIME>`
+Format:
+`add <TASK NAME> from:<DATE> to:<DATE>`
+`add <TASK NAME> from:<TIME> to:<TIME>`
+`add <TASK NAME> from:<DATE> <TIME> to:<DATE> <TIME>`
 
 ```
 Things To Note:
@@ -155,32 +167,38 @@ Things To Note:
 Examples:
 
 * `add OPEN HOUSE from: 13 Oct to: 16 Oct`
-* `add Meeting from: tuesday 12:00pm to: tuesday 2:00 pm`
 * `add watch television from: 7pm to: 9pm`
+* `add Meeting from: tuesday 12:00pm to: tuesday 2:00 pm`
 
 
-### 3.5. Adding a Priority Task/Event : `add`
+### 3.2.4. Adding a Priority Task/Event :  `add`, `a`, `+`
+What if you have task that are more important than others? You can add this task with high priority.
 
-Format: `add <TASK NAME> p/<PRIORITY>`
+Format:
+`add <TASK NAME> p/<PRIORITY>`
+`add <TASK NAME> by:<DATE> <TIME> p/<PRIORITY>`
+`add <TASK NAME> from:<DATE> <TIME> to:<DATE> <TIME> p/<PRIORITY>`
 
 ```
 Things To Note:
+> Priority will be low by default if a task is added without
+  the field “p/<PRIORITY>”.
 > Priority must be high or low.
 > Priority can be applied to other type of task or event by
   adding this additional field “p/<PRIORITY>”.
-> Priority will automatic be low if a task is added without
-  the field “p/<PRIORITY>”.
 ```
 
 Examples:
 * `add CS2103T Meeting p/high`
+* `add Buy eggs by:next week 8pm p/high`
 * `add Open House from:5 Nov 11:00am to: 6 Nov 11:00pm p/low`
 
 
-### 3.6 Finding a Task: `find`
+### 3.6 Finding a Task: `find`, `f`, `search`
 You may not want to search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
 
-Format: `find <KEYWORD>`
+Format:
+`find <KEYWORD>`
 
 ```
 Things To Note:
@@ -206,7 +224,11 @@ Examples:
 ### 3.7 Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command.
 
-Format: `edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY> or edit INDEX from:<DATE> <TIME> to:<DATE> <TIME>`
+Format:
+`edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY>`
+`edit INDEX from:<DATE> <TIME> to:<DATE> <TIME>`
+`edit INDEX from:<DATE> <TIME>`
+`edit INDEX to:<DATE> <TIME>`
 
 ```
 Things To Note:
@@ -218,21 +240,27 @@ Things To Note:
 ```
 
 Examples:
-* `edit 1 by:2 Dec 11:00am`
-What it does: Edit your task deadline to 2 Dec 11am
+* `edit 1 by:2 Dec 11:00am p/low`
+What it does: Edit your task deadline to 2 Dec 11am and set the priority to low
+
 * `edit 2 CS2103T Meeting`
 What it does: Edit your task name to CS2103T Meeting
+
 * `edit 3 from: next week to: next month`
 What it does: Edit your task schedule to be from next week to next month
+
 * `edit 4 from: next week`
 What it does: Edit your task schedule start date to next week
+
 * `edit 5 to: next month`
 What it does: Edit your task schedule end date to next month
+
 
 ### 3.8 Deleting a Task : `delete`
 There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command.
 
-Format: `delete <INDEX>`
+Format:
+`delete <INDEX>`
 
 ```
 Things To Note:
@@ -247,7 +275,8 @@ Examples:
 ### 3.9 Completing a Task : `done`
 Completed a task? Good for you! You can mark the task as done by typing in the done command. This will move the task to your completed list.
 
-Format: `done <INDEX>`
+Format:
+`done <INDEX>`
 
 ```
 Things To Note:
@@ -265,7 +294,8 @@ Examples:
 ### 3.10. Listing all Tasks : `list`
 Want to view a list of all your tasks? Use the command list to view all your tasks in TypeTask. <br>
 
-Format: `list`
+Format:
+`list`
 
 ```
 Things To Note:
@@ -277,7 +307,8 @@ Things To Note:
 ### 3.11. Listing Today Tasks : `listtoday`
 By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command.
 
-Format: `listday`
+Format:
+`listtoday`
 
 ```
 Things To Note:
@@ -290,7 +321,8 @@ add a new floating task or task that is due today.
 ### 3.12. Listing Proirity Tasks : `list*`
 Want to focus on your urgent tasks only? You can use the command list* to see a list of all your important tasks.
 
-Format: `list*`
+Format:
+`list*`
 
 ```
 Things To Note:
@@ -303,13 +335,15 @@ when you add a new task or event with priority.
 ### 3.13. Listing Completed Tasks : `listdone`
 To review what you have done (and feel better about yourself!), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
-Format: `listdone`
+Format:
+`listdone`
 
 
-### 3.14. Undoing the Latest Command : `undo`
+### 3.14. Undoing the Latest Command : `undo`, `u`
 Typed in the wrong command and submitted an operation you do not want? Fret not! You can use the undo command to save the hassle of modifying your recent operation. <br>
 
-Format: `undo`
+Format:
+`undo`
 
 ```
 Things To Note:
@@ -319,10 +353,11 @@ Things To Note:
    e.g You used 10 action commands. You can undo 10 times.
 ```
 
-### 3.15. Redoing the Latest Command : `redo`
+### 3.15. Redoing the Latest Command : `redo`, `r`
 Typed in the undo command wrongly? Fret not! You can use the redo command to save the hassle of modifying your recent operation. <br>
 
-Format: `redo`
+Format:
+`redo`
 
 ```
 Things To Note:
@@ -334,7 +369,8 @@ Things To Note:
 ### 3.16. Saving the Data to Another Folder : `save`
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
-Format: `save <FILE_PATH>`
+Format:
+`save <FILE_PATH>`
 
 ```
 Things To Note:
@@ -349,7 +385,8 @@ Examples:
 ### 3.17. Changing the Default Storage Folder : `setting`
 Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
-Format: `setting <FILE_PATH>`
+Format:
+`setting <FILE_PATH>`
 
 ```
 Things To Note:
@@ -364,7 +401,8 @@ Examples:
 ### 3.18. Using Data from Another Folder : `use`
 After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
 
-Format: `use <FILE_PATH>`
+Format:
+`use <FILE_PATH>`
 
 ```
 Things To Note:
@@ -380,13 +418,15 @@ Examples:
 Want to have a fresh start? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
 `WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
-Format: `clear`
+Format:
+`clear`
 
 
 ### 3.20. Exiting the Program : `exit`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
-Format: `exit`
+Format:
+`exit`
 &nbsp;
 
 ## 4. FAQ
