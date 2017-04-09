@@ -29,7 +29,7 @@ public class SelectCommandTest extends AddressBookGuiTest {
 
     @Test
     public void selectPerson_emptyList() {
-        commandBox.runCommand("clear");
+        commandBox.runCommand("clear all");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
     }
