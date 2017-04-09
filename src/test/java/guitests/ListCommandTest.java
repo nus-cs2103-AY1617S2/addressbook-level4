@@ -1,10 +1,12 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
+import seedu.taskit.logic.commands.EditCommand;
 import seedu.taskit.logic.commands.ListCommand;
 import seedu.taskit.testutil.TestTask;
 
@@ -32,8 +34,22 @@ public class ListCommandTest extends TaskManagerGuiTest {
 		commandBox.runCommand("list undone");
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "undone"));
 		assertListResult(td.getUndoneTypicalTasks());
-    }//@@author
+    }
 
+    @Test
+    public void edit_noFieldsSpecified_failure() {
+        commandBox.runCommand("list ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void edit_invalidFieldsSpecified_failure() {
+        commandBox.runCommand("list task");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+    //@@author
+
+  //@@author A0097141H
     @Test
     public void list_todayTasks_Success() {
         //no task for today

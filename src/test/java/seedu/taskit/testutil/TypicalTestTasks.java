@@ -93,11 +93,11 @@ public class TypicalTestTasks {
     //@@author A0141872E
     public TestTask[] getUndoneTypicalTasks() {
         return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
-    }//@@author
+    }
 
     public TestTask[] getTodayTasks() {
         return new TestTask[]{};
-    }
+    }//@@author
 
     public TaskManager getTypicalAddressBook() {
         TaskManager ab = new TaskManager();
