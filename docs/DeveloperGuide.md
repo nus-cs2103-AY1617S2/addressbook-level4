@@ -9,12 +9,12 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Table of contents
 
-1. [Introduction](#introduction)
-2. [Setting Up](#setting-up)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
 - [Appendix A: User Stories](#appendix-a--user-stories)
 - [Appendix B: Use Cases](#appendix-b--use-cases)
 - [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -61,7 +61,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
-  
+
 
 ### 2.3. Troubleshooting project setup
 
@@ -132,7 +132,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 <img src="images/ActivityDiagram.png" width="800"><br>
 
-The above diagram describes the behaviour of Doist. The red boxes represent any actions taken by Doist, and the brown boxes represent activities that include user interactions. 
+The above diagram describes the behaviour of Doist. The red boxes represent any actions taken by Doist, and the brown boxes represent activities that include user interactions.
 
 After Doist is launched, it tries to read the config file. In the event that there is an unrecoverable error, the application will close. Upon successful reading of the config file, Doist attempts to load task and alias data from the saved file. Doist will then wait for the user to enter a command, and will perform the necessary steps to handle both valid and invalid commands. The `Logic` component takes of doing this, and the `UI` provides any feedback or results to the user.
 
@@ -196,9 +196,9 @@ Here are some of the key files in the `Model` component:
     ```  
 - `AliasListMapModel.java`: contains an `interface` that defines multiple operations on the aliaslistmap data.  
 - `ConfigModel.java`: contains an `interface` that defines multiple operations on the config file.   
-- `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`. 
-- `AliasListMapManager.java`: contains a `class` that implements the operations specified in `AliasListMapModel.java`. 
-- `ConfigManager.java`: contains a `class` that implements the operations specified in `ConfigModel.java`. 
+- `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
+- `AliasListMapManager.java`: contains a `class` that implements the operations specified in `AliasListMapModel.java`.
+- `ConfigManager.java`: contains a `class` that implements the operations specified in `ConfigModel.java`.
 - `TodoList.java`: contains a `class` that represents the to-do list.
 - `Task.java`: contains a `class` that represents each to-do list item (i.e. task).
 - `UserPrefs.java`: contains a class that stores user preferences such as the position and size of the app window.
@@ -227,7 +227,7 @@ Here are some of the key files in the `Storage` component:
     void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
     ```  
 - `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`. <br>
-- `TodoListStorage.java`: contains an `interface` that defines R/W operations on **to-do list**. 
+- `TodoListStorage.java`: contains an `interface` that defines R/W operations on **to-do list**.
 - `AliasListMapStorage.java`: contains an `interface` that defines R/W operations on **alias list map**. <br>
 - `XmlTodoListStorage`: contains a `class` that implements the R/W operations specified in `TodoListStorage.java`. An instance of this class is utilized in `StorageManager`.
 - `XmlAliasListMapStorage`: contains a `class` that implements the R/W operations specified in `AliasListMapStorage.java`. An instance of this class is utilized in `StorageManager`.  
