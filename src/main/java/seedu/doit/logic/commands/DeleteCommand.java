@@ -1,5 +1,7 @@
 package seedu.doit.logic.commands;
 
+import static seedu.doit.logic.commands.CommandResult.tasksToString;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,7 +28,7 @@ public class DeleteCommand extends Command {
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s): %1$s";
 
     private Set<Integer> targetIndexes;
     private HashSet<ReadOnlyTask> tasksToDeleteSet = new HashSet<>();
@@ -56,8 +58,8 @@ public class DeleteCommand extends Command {
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, this.tasksToDeleteSet.iterator().next()));
-
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
+            tasksToString(tasksToDeleteSet, targetIndexes)));
     }
     /**
      *

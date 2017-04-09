@@ -39,11 +39,13 @@ public interface ReadOnlyTask {
             && (other.getIsDone() == this.getIsDone()));
     }
 
+    // @@author A0146809W
+
     /**
      * Formats the event as text, showing all details.
      */
     default String getAsText() {
-        final StringBuilder builder = new StringBuilder();;
+        final StringBuilder builder = new StringBuilder();
 
         appendName(builder);
         appendPriority(builder);
@@ -55,13 +57,22 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    /**
+     * Returns the name of the task in String
+     */
+    default String getTaskName() {
+       return this.getTaskName();
+    }
+
     default void appendName(StringBuilder builder) {
         builder.append(getName());
     }
 
     default void appendPriority(StringBuilder builder) {
-        builder.append(" Priority: ");
-        builder.append(getPriority());
+        if (!getPriority().toString().equals("low")) {
+            builder.append(" Priority: ");
+            builder.append(getPriority());
+        }
     }
 
     default void appendStartTime(StringBuilder builder) {
@@ -79,13 +90,17 @@ public interface ReadOnlyTask {
     }
 
     default void appendDescription(StringBuilder builder) {
-        builder.append(" Description: ");
-        builder.append(getDescription());
+        if (!getDescription().toString().equals("")) {
+            builder.append(" Description: ");
+            builder.append(getDescription());
+        }
     }
 
     default void appendTags(StringBuilder builder) {
-        builder.append(" Tags: ");
-        getTags().forEach(builder::append);
+        if (!getTags().asObservableList().isEmpty()) {
+            builder.append(" Tags: ");
+            getTags().forEach(builder::append);
+        }
     }
 
     boolean hasStartTime();

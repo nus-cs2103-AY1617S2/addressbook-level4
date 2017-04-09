@@ -4,6 +4,7 @@ import static seedu.doit.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCES
 
 import org.junit.Test;
 
+import seedu.doit.commons.core.Messages;
 import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;
 
@@ -26,6 +27,18 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
+
+        // @@author A0146809W
+
+        //delete from outside list
+        commandBox.runCommand("delete " + currentList.length + 1);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //invalid format
+        commandBox.runCommand("delete " + "1" + "-");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //@@author
     }
    //@@author
 
