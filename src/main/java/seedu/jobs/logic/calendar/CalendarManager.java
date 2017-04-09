@@ -20,6 +20,7 @@ import com.google.api.services.calendar.CalendarScopes;
 
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 public class CalendarManager {
     /** Application name. */
@@ -122,11 +123,11 @@ public class CalendarManager {
         new ClearCalendar(service);
     }
 
-    public void DeleteTask(ReadOnlyTask task) {
+    public void DeleteTask(ReadOnlyTask task) throws IllegalTimeException {
         new DeleteCalendar(task, service);
     }
 
-    public void EditTask(ReadOnlyTask initialTask, Task newTask) {
+    public void EditTask(ReadOnlyTask initialTask, Task newTask) throws IllegalTimeException {
         if (!(initialTask.getEndTime().toString().equals("") && initialTask.getStartTime().toString().equals(""))) {
             new DeleteCalendar(initialTask, service);
         }

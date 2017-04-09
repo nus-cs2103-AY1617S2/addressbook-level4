@@ -19,6 +19,7 @@ import com.google.api.services.calendar.model.Events;
 
 import seedu.jobs.model.calendar.EventCalendar;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +31,7 @@ public abstract class BasicCommandCalendar {
     
     protected static com.google.api.services.calendar.Calendar service;
 
-    public abstract void execute() throws IOException;	
+    public abstract void execute() throws IOException, IllegalTimeException;	
     
     public String retrieveID (EventCalendar target) throws IOException {
     	String id = "";
