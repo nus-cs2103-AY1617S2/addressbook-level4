@@ -7,6 +7,7 @@ import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.commons.exceptions.DateException;
+import seedu.ezdo.commons.exceptions.RecurException;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.UniqueTagList;
@@ -73,6 +74,8 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (DateException de) {
             throw new CommandException(Messages.MESSAGE_TASK_DATES_INVALID);
+        } catch (RecurException re) {
+            throw new CommandException(Messages.MESSAGE_RECUR_FAILURE);
         }
         model.updateFilteredListToShowAll();
         lastShownList = model.getFilteredTaskList(); // to scroll to edited task

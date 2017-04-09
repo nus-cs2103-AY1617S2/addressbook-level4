@@ -15,5 +15,8 @@ public class Messages {
                                                   + "if you want to mark a task as done.";
   //@@author A0139248X
     public static final String MESSAGE_TASK_DATES_INVALID = "Start date is after due date!";
+    // @@author A0139177W
+    public static final String MESSAGE_RECUR_FAILURE = "Both the start and due dates cannot be empty "
+            + "with a recur status present.";
 
 }

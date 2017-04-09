@@ -32,6 +32,10 @@ public class AddCommandTest extends EzDoGuiTest {
         assertAddSuccess(true, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+        // recur status cannot have empty start and due dates
+        commandBox.runCommand("add Floating Task r/yearly");
+        assertResultMessage(Messages.MESSAGE_RECUR_FAILURE);
+
         //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand(false));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
