@@ -9,12 +9,12 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Table of contents
 
-1. [Introduction](#introduction)
-2. [Setting Up](#setting-up)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
 - [Appendix A: User Stories](#appendix-a--user-stories)
 - [Appendix B: Use Cases](#appendix-b--use-cases)
 - [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -25,8 +25,8 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 
 ## 1. Introduction
-<p>Doist is a task manager that can simplify your life with the press of a button! Designed for users who like to use the keyboard, Doist can accept natural language commands to help you keep track of all your daily tasks.</p>
-<p>This developer guide aims to give developers a nuts and bolts insight into Doist, to encourage and facilitate contribution to the development of this application.</p>
+<p>Doist is a task manager that aims to simplify the lives of busy users! It is a desktop Java application that facilitates command line input to keep track of users' everyday tasks.</p>
+<p>This developer guide aims to give developers a nuts and bolts insight into Doist, and to also encourage contribution to the development of this application.</p>
 
 
 <br>
@@ -62,18 +62,8 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 2.3. Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button  
-
-### 2.4. Troubleshooting project setup
+### 2.3. Troubleshooting project setup
 
 * **Problem**: Eclipse reports compile errors after new commits are pulled from Git
     - *Reason*: Eclipse fails to recognize new files that appeared due to the Git pull.
@@ -92,7 +82,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 ### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of Doist. Each of the components illustrated pertain to a specfic aspect of the App, and are briefly discussed below.
 
@@ -123,28 +113,40 @@ The `Commons` component is akin to the nervous system of the App. It contains a 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images/SDforDeletePerson.png" width="800"><br>
+_Figure 3.1.2a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TodoListChangedEvent` when the TodoList data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
+The `EventCenter` is a Singleton class. Its instance can be accessed using the `EventsCenter.getInstance()` method. <br>
+The diagram below shows how the `EventsCenter` reacts to the `TodoListChangedEvent` event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+
+<img src="images/SDforDeletePersonEventHandling.png" width="800"><br>
+_Figure 3.1.2b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+#### Activity Diagram
+
+<img src="images/ActivityDiagram.png" width="800"><br>
+_Figure 3.1.3 : ActivityDiagram for Doist_
+
+The above diagram describes the behaviour of Doist. The red boxes represent any actions taken by Doist, and the brown boxes represent activities that include user interactions.
+
+After Doist is launched, it tries to read the config file. In the event that there is an unrecoverable error, the application will close. Upon successful reading of the config file, Doist attempts to load todolist data, alias data and user preferences from the saved files at the location specified by the config file. If no previous saved files are found, Doist will initialize with default values. Doist will then wait for the user to enter a command, and will perform the necessary steps to handle both valid and invalid commands. The `Logic` component takes charge of doing this and updates the `Model` component accordingly. The `UI` component provides any feedback or results to the user.
+
 The sections below give more details of each component.
 
 ### 3.2. UI component
-The `UI` is the main form of interaction between Doist and the user. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist.
+The `UI` is the main form of interaction between Doist and the user. This is mainly done using the JavaFX package. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist. The [.fxml files](../src/main/resources/view) contain the descriptions of the user interface that is controlled by the corresponding java class with the same name.
 
-The following diagram represents the structure of the `UI` component  
+The following diagram represents the structure of the `UI` component:  
 <br><img src="images/UIComponentClassDiagram.PNG" width="800"><br>
+_Figure 3.2.1 : UI Component Class Diagram_
 
 Here are some of the key files in the `Ui` component:
 - [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the App.
@@ -163,6 +165,7 @@ The `Logic` component handles the execution of the commands entered by the user.
 
 The following diagram represents the structure of the `Logic` component  
 <br><img src="images/LogicClassDiagram.png" width="800"><br>
+_Figure 3.3.1 : Logic Class Diagram_
 
 Here are some of the key files in the `Logic` component:
 - [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain the results of computations.  
@@ -176,19 +179,24 @@ Here are some of the key files in the `Logic` component:
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
 
+**Design Decisions**
+- `Command.java` and its sub-classes implement the Command Pattern.
+
+<br>
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 3.4. Model component
 The `Model` component defines classes that represent the data Doist operates on. It also specifies and implements operations that work on the data.  
 
 The following diagram represents the structure of the `Model` component  
-<br><img src="images/ModelClassDiagram.png" width="800"><br>  
+<br><img src="images/ModelClassDiagram.png" width="800">  
+_Figure 3.4.1 : Model Class Diagram_
 
 Here are some of the key files in the `Model` component:
-- [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
+- [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the todolist data.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
@@ -196,22 +204,39 @@ Here are some of the key files in the `Model` component:
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;  
     ```  
+- `AliasListMapModel.java`: contains an `interface` that defines multiple operations on the aliaslistmap data.  
+Some representative methods are listed here:  
+```java  
+ReadOnlyAliasListMap getAliasListMap();
+void setAlias(String alias, String commandWord);
+List<String> getValidCommandList(String defaultCommandWord);
+void removeAlias(String alias);
+```  
+- `ConfigModel.java`: contains an `interface` that defines operations on the config file.   
 - `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
+- `AliasListMapManager.java`: contains a `class` that implements the operations specified in `AliasListMapModel.java`.
+- `ConfigManager.java`: contains a `class` that implements the operations specified in `ConfigModel.java`.
 - `TodoList.java`: contains a `class` that represents the to-do list.
 - `Task.java`: contains a `class` that represents each to-do list item (i.e. task).
 - `UserPrefs.java`: contains a class that stores user preferences such as the position and size of the app window.
 
+**Design Decisions**
+- The model component is split into Model.java, AliasListMapModel.java and ConfigModel.java because they contain operations on different types of data. This is to support the Single Responsibility Principle.
+- The date and time properties of each task were contained in a new class called TaskDate. The class encapsulated not only this information, but also defined methods used in parsing the date and time, as well as validation and comparison. This meant any changes to the parser or comparator were easy to make, and also facilitated unit testing.
+- When the absolute storage path is modified by the `save_at` command, an `AbsoluteStoragePathChangedEvent` is raised by `Model`. This event driven mechanism employs the Observer pattern.
+
 ### 3.5. Storage component
 The `Storage` component takes charge of reading and writing (R/W) data, to and from the hard drive.
-This data consists of **user preferences** and **to-do list** :
+This data consists of **user preferences**, **to-do list** and **alias list map**:
 - **user preferences** is stored in a **JSON** file.
 - **to-do list** is stored in a **XML** file.
+- **alias list map** is stored in another **XML** file
 
 The following diagram represents the structure of the `Storage` component  
 <br><img src="images/StorageClassDiagram.png" width="800"><br>  
 
 Here are some of the key files in the `Storage` component:
-- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines R/W operations on **user preferences** and **to-do list**.  
+- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines R/W operations on **user preferences**, **to-do list** and **alias list map**.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
@@ -220,9 +245,17 @@ Here are some of the key files in the `Storage` component:
     Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
     void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
     ```  
-- `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`.
-- `XmlTodoListStorage`: contains a `class` that implements the R/W operations on **to-do list**. An instance of this class is utilized in `StorageManager`.
+- `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`. <br>
+- `TodoListStorage.java`: contains an `interface` that defines R/W operations on **to-do list**.
+- `AliasListMapStorage.java`: contains an `interface` that defines R/W operations on **alias list map**. <br>
+- `XmlTodoListStorage`: contains a `class` that implements the R/W operations specified in `TodoListStorage.java`. An instance of this class is utilized in `StorageManager`.
+- `XmlAliasListMapStorage`: contains a `class` that implements the R/W operations specified in `AliasListMapStorage.java`. An instance of this class is utilized in `StorageManager`.  
 - `JsonUserPrefsStorage`: contains a `class` that implements the R/W operations on **user preferences**. An instance of this class is used in `StorageManager`.
+
+**Design Decisions**
+- StorageManager.java shields the internals of the Storage component from outsiders and is mostly redirecting methods calls to its internal components. Thus, StorageManager is a Facade class.
+- The storage component is split into `TodoListStorage`, `AliasListMapStorage` and `JsonUserPrefsStorage` because they contain R/W operations on different types of data. This is to support the Single Responsibility Principle.
+- `StorageManager` is notified when a `AbsoluteStoragePathChangedEvent` is raised. It will then set the file paths for the three different storages. This event driven mechanism employs the Observer pattern.
 
 <br>
 
@@ -542,12 +575,12 @@ Use case ends.
 >2c1. Show all possible matches
 >Use case ends
 
-### Use Case: Change file storage location
+### Use Case: Change data storage location
 
 **MSS**
 
-1. User types in the command to change file storage location
-2. Doist shows the task, and displays a success message
+1. User types in the command to change data storage location to a certain folder
+2. Doist changes the storage location and displays a success message
 
 Use case ends.
 
@@ -563,7 +596,7 @@ Use case ends.
 > 2b1. Doist shows an appropriate message
 > Use case ends
 
-2c. There already exists a file (that is not a valid storage file) with the same name at that path
+2c. There already exists a file (not a folder) with the same name at that path
 
 > 2b1. Doist shows an appropriate message
 > Use case ends
@@ -588,7 +621,6 @@ Use case ends.
 - Commands should be easy to learn.
 - The data should be stored locally in the form of a human editable text file
 - The software should work without requiring an installer
-- Send reminders by pop-ups
 - Can have tasks across days, weeks, months, years, centuries...
 
 See the rest of the NFRs at:
@@ -604,8 +636,6 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Priority`
     - `Start time` (optional)
     - `End time` (optional)
-    - `Reminder time` (optional)
-    - `Recurrence interval` (optional)
     - `isFinished` (default false)
     - `Tags` (can be empty)
 - About the properties
@@ -613,8 +643,6 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     There are three priorities: High, Medium, Low. By default, tasks are low priority.
     - `Tags`
     Tags are independent of tasks. Tags and tasks have a many-to-many relationship where zero or more tags can be added to a task and zero or more tasks can be listed under a tag
-    - `Recurrence interval`
-    Specifies the interval at which user wants to be reminded of a recurring task
 - Special Types
     - `Event`
     A task with different `start time` and `end time`. It represents tasks to be carried out over a period of time
@@ -628,8 +656,6 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     Tasks that have `ended` but not been `finished`
     - `Finished tasks`
     Tasks that have been `finished`
-    - `Recurring task`
-    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the task's `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
 **R/W**
     Reading and Writing

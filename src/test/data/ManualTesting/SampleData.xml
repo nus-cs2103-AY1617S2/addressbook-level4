@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todolist>
+    <tasks>
+        <desc>finish 3217 preliminary design documentation</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Sun Mar 19 18:44:46 SGT 2017</startDate>
+        <endDate>Sun Mar 19 18:44:46 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>try jfoenix to to the UI design</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Tue Mar 21 18:49:05 SGT 2017</startDate>
+        <endDate>Tue Mar 21 18:49:05 SGT 2017</endDate>
+        <tagged>SE</tagged>
+    </tasks>
+    <tasks>
+        <desc>add minimap to the augmented reality view</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Tue Mar 21 18:50:54 SGT 2017</startDate>
+        <endDate>Tue Mar 21 18:50:54 SGT 2017</endDate>
+        <tagged>CS3217</tagged>
+    </tasks>
+    <tasks>
+        <desc>run database migration</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Sat Mar 25 19:07:41 SGT 2017</startDate>
+        <endDate>Sat Mar 25 19:07:41 SGT 2017</endDate>
+        <tagged>CS3217</tagged>
+    </tasks>
+    <tasks>
+        <desc>CS2101 oral presentation dry run</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Mon Mar 27 10:00:00 SGT 2017</startDate>
+        <endDate>Mon Mar 27 11:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>attend exchange program consultation</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Mon Mar 27 11:00:00 SGT 2017</startDate>
+        <endDate>Mon Mar 27 12:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>CS3243 AI tetris project group discussion</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Mon Mar 27 16:00:00 SGT 2017</startDate>
+        <endDate>Mon Mar 27 16:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>write diary entry for this week</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Mar 27 18:31:31 SGT 2017</startDate>
+        <endDate>Mon Mar 27 18:31:31 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>read firebase documentation</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Mar 27 19:08:54 SGT 2017</startDate>
+        <endDate>Mon Mar 27 19:08:54 SGT 2017</endDate>
+        <tagged>CS3217</tagged>
+    </tasks>
+    <tasks>
+        <desc>do laundry</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Tue Mar 28 08:00:00 SGT 2017</startDate>
+        <endDate>Tue Mar 28 08:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>finish CS3243 tutorial and submit tomorrow</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Thu Mar 30 18:20:41 SGT 2017</startDate>
+        <endDate>Thu Mar 30 18:20:41 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>buy fruit</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Sat Apr 01 18:42:11 SGT 2017</startDate>
+        <endDate>Sat Apr 01 18:42:11 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>finish CS3217 progress report</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Sun Apr 02 11:59:00 SGT 2017</startDate>
+        <endDate>Sun Apr 02 11:59:00 SGT 2017</endDate>
+        <tagged>CS3217</tagged>
+    </tasks>
+    <tasks>
+        <desc>CS2101 oral presentation</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Apr 03 10:00:00 SGT 2017</startDate>
+        <endDate>Mon Apr 03 11:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>finish MA2213 assignment 4</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Aug 07 18:21:28 SGT 2017</startDate>
+        <endDate>Mon Aug 07 18:21:28 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>go see the new film Ghost in the Shell</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+    </tasks>
+    <tasks>
+        <desc>add test cases for index range feature</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>SE</tagged>
+    </tasks>
+    <tasks>
+        <desc>use motion sensor to add gravity to projectile</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+    </tasks>
+    <tasks>
+        <desc>update the phone number associated with DBS account</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Fri Mar 31 19:38:51 SGT 2017</startDate>
+        <endDate>Fri Mar 31 19:38:51 SGT 2017</endDate>
+    </tasks>
+     <tasks>
+        <desc>email the photos to Michael</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>friends</tagged>
+    </tasks>
+     <tasks>
+        <desc>go for piano class</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Wed Mar 29 17:00:00 SGT 2017</startDate>
+        <endDate>Wed Mar 29 18:00:00 SGT 2017</endDate>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>listen to new Maroon 5 song</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Thu Mar 30 22:26:04 SGT 2017</startDate>
+        <endDate>Thu Mar 30 22:26:04 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>CS2106 tutorial</desc>
+        <priority>Important</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Fri Mar 31 22:28:20 SGT 2017</startDate>
+        <endDate>Fri Mar 31 22:28:20 SGT 2017</endDate>
+        <tagged>tutorial</tagged>
+    </tasks>
+    <tasks>
+        <desc>go cycling at ECP</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Apr 03 22:15:00 SGT 2017</startDate>
+        <endDate>Mon Apr 03 22:15:00 SGT 2017</endDate>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>go swimming at Utown</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>health</tagged>
+        <tagged>interests</tagged>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>clean up room</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+    </tasks>
+    <tasks>
+        <desc>make a new friend</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <desc>Buy milk</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Do CS2103 tutorial</desc>
+        <priority>Important</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>tutorial</tagged>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>Exercise at home</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Have some beauty sleep</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Do more tutorials</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>tutorial</tagged>
+    </tasks>
+    <tasks>
+        <desc>Talk to people</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>do research on new Web technologies</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>buy gift for Zack</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Thu Mar 30 22:32:23 SGT 2017</startDate>
+        <endDate>Thu Mar 30 22:32:23 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>ask Professor for extra notes</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Apr 03 22:33:17 SGT 2017</startDate>
+        <endDate>Mon Apr 03 22:33:17 SGT 2017</endDate>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>work on Math Porject</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>tutorial</tagged>
+    </tasks>
+    <tasks>
+        <desc>buy chocolates to take home</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Tue Mar 28 15:00:00 SGT 2017</startDate>
+        <endDate>Tue Mar 28 16:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>call Valerie</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Mon Mar 27 22:36:22 SGT 2017</startDate>
+        <endDate>Mon Mar 27 22:36:22 SGT 2017</endDate>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <desc>read Mein Kampf</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>purchase a new phone</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Tue Apr 04 22:37:29 SGT 2017</startDate>
+        <endDate>Tue Apr 04 22:37:29 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>go play football</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Tue Apr 04 17:00:00 SGT 2017</startDate>
+        <endDate>Tue Apr 04 19:00:00 SGT 2017</endDate>
+        <tagged>health</tagged>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>watch the Chelsea game at Steves house</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Sat Mar 25 19:00:00 SGT 2017</startDate>
+        <endDate>Sat Mar 25 21:00:00 SGT 2017</endDate>
+        <tagged>interests</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <desc>have dinner with Krishna</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Tue Mar 28 20:00:00 SGT 2017</startDate>
+        <endDate>Tue Mar 28 22:00:00 SGT 2017</endDate>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <desc>finish GES tutorial</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Thu Mar 30 10:00:00 SGT 2017</startDate>
+        <endDate>Thu Mar 30 10:00:00 SGT 2017</endDate>
+        <tagged>tutorial</tagged>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>try eating octupus soup</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>read article on Deep Learning</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>take dog for walk</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Tue Mar 28 20:00:00 SGT 2017</startDate>
+        <endDate>Tue Mar 28 20:00:00 SGT 2017</endDate>
+    </tasks>
+    <tasks>
+        <desc>go pick out suit for interview</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>Tue Feb 28 22:46:36 SGT 2017</startDate>
+        <endDate>Tue Feb 28 22:46:36 SGT 2017</endDate>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>ace final exams</desc>
+        <priority>Normal</priority>
+        <finishedStatus>true</finishedStatus>
+        <startDate>null</startDate>
+        <endDate>null</endDate>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>pick up a new pair of shoes</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <startDate>Fri Mar 24 22:47:39 SGT 2017</startDate>
+        <endDate>Fri Mar 24 22:47:39 SGT 2017</endDate>
+    </tasks>
+    <tags>health</tags>
+    <tags>NUS</tags>
+    <tags>tutorial</tags>
+    <tags>interests</tags>
+    <tags>friends</tags>
+    <tags>CS3217</tags>
+    <tags>SE</tags>
+    <tags>friends</tags>
+</todolist>
