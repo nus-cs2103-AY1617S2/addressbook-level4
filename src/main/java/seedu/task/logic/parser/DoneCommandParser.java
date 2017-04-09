@@ -12,22 +12,20 @@ import seedu.task.logic.commands.IncorrectCommand;
 //@@author A0146757R
 public class DoneCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand and returns
-     * an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * DeleteCommand and returns an DeleteCommand object for execution.
      */
     public Command parse(String args) {
 
         final Matcher matcher = DONE_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
         final String[] index = matcher.group("index").split("\\s+");
         int[] targetIndex = new int[index.length];
         for (int i = 0; i < index.length; i++) {
             if (Integer.parseInt(index[i]) < 1) {
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
             }
             targetIndex[i] = Integer.parseInt(index[i]);
         }

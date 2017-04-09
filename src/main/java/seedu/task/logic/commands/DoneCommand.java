@@ -54,10 +54,6 @@ public class DoneCommand extends Command {
 
             try {
                 model.completeTask(targetIndex[i] - 1);
-                // to focus on the completed task
-                // EventsCenter.getInstance().post(new
-                // JumpToListRequestEvent(model.getFilteredTaskList().size() -
-                // 1));
 
             } catch (TaskNotFoundException pnfe) {
                 // remove this command from list for undo

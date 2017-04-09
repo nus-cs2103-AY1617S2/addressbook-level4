@@ -73,6 +73,7 @@ public class ConfigUtilTest {
         assertEquals(expected, actual);
     }
 
+    // @@author A0146757R-reused
     private Config getTypicalConfig() {
         Config config = new Config();
         config.setAppTitle("Typical App Title");
@@ -83,6 +84,7 @@ public class ConfigUtilTest {
         return config;
     }
 
+    // @@author
     private Optional<Config> read(String configFileInTestDataFolder) throws DataConversionException {
         String configFilePath = addToTestDataPathIfNotNull(configFileInTestDataFolder);
         return ConfigUtil.readConfig(configFilePath);
