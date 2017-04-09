@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Accept DSTA internship</name>
+        <priority>low</priority>
+        <description>On NUS ATAP portal</description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>17/04/17 18:25</deadline>
+        <tagged>Internship</tagged>
+    </tasks>
+    <tasks>
+        <name>Complete CS3230 Assignment 3</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>13/04/17 23:11</deadline>
+        <tagged>Assignment</tagged>
+        <tagged>CS3230</tagged>
+    </tasks>
+    <tasks>
+        <name>Complete CS3241 Lab 5</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>21/04/17 18:22</deadline>
+        <tagged>Assignment</tagged>
+        <tagged>CS3241</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103T Finals</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>25/04/17 13:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2107 Finals</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>27/04/17 13:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2107</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3230 Finals</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>26/04/17 13:00</deadline>
+        <tagged>CS3230</tagged>
+        <tagged>Test</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3241 Finals</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>27/04/17 09:00</deadline>
+        <tagged>CS3241</tagged>
+        <tagged>Test</tagged>
+    </tasks>
+    <tasks>
+        <name>Submit V05</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>17/04/17 12:00</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Update Developer Guide</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>10/04/17 23:09</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Update User Guide</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>10/04/17 23:10</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Army Reservist</name>
+        <priority>med</priority>
+        <description>:(</description>
+        <isDone>false</isDone>
+        <startTime>17/07/17 23:18</startTime>
+        <deadline>28/07/17 23:18</deadline>
+        <tagged>Army</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2101 Meeting Test</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>20/04/17 12:00</startTime>
+        <deadline>20/04/17 14:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2101</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2101 Reflection Test</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>10/04/17 12:00</startTime>
+        <deadline>10/04/17 14:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2101</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103T Software Demo</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>13/04/17 12:00</startTime>
+        <deadline>13/04/17 14:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Easter</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>16/04/17 00:00</startTime>
+        <deadline>16/04/17 23:59</deadline>
+        <tagged>Holiday</tagged>
+    </tasks>
+    <tasks>
+        <name>Good Friday</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>14/04/17 00:00</startTime>
+        <deadline>14/04/17 23:17</deadline>
+        <tagged>Holiday</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet Media Representative</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>09/04/17 23:00</startTime>
+        <deadline>15/04/17 20:53</deadline>
+    </tasks>
+    <tasks>
+        <name>NUS Recess Week</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>22/04/17 20:11</startTime>
+        <deadline>23/04/17 20:11</deadline>
+    </tasks>
+    <tasks>
+        <name>Practice for Japanese oral test</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>09/04/17 18:00</startTime>
+        <deadline>10/04/17 20:50</deadline>
+    </tasks>
+    <tasks>
+        <name>Start ATAP attachment</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>28/05/17 18:30</startTime>
+        <deadline>20/10/17 18:30</deadline>
+        <tagged>Internship</tagged>
+    </tasks>
+    <tasks>
+        <name>STEPS Event</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>12/04/17 18:00</startTime>
+        <deadline>12/04/17 22:00</deadline>
+    </tasks>
+    <tasks>
+        <name>Buy Milk</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Groceries</tagged>
+    </tasks>
+    <tasks>
+        <name>Collect Mail from Post Office</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </tasks>
+    <tasks>
+        <name>Complete notes of CS2103T</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>CS2103T</tagged>
+        <tagged>Notes</tagged>
+    </tasks>
+    <tasks>
+        <name>Complete Notes of CS2107</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>CS2107</tagged>
+        <tagged>Notes</tagged>
+    </tasks>
+    <tasks>
+        <name>Complete notes of CS3230</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>CS3230</tagged>
+        <tagged>Notes</tagged>
+    </tasks>
+    <tasks>
+        <name>Complete Notes of CS3241</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>CS3241</tagged>
+        <tagged>Notes</tagged>
+    </tasks>
+    <tasks>
+        <name>Learn Blender</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Education</tagged>
+    </tasks>
+    <tasks>
+        <name>Learn CSS</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Education</tagged>
+    </tasks>
+    <tasks>
+        <name>Learn Html</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Education</tagged>
+    </tasks>
+    <tasks>
+        <name>Learn Unity3D</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Education</tagged>
+    </tasks>
+    <tasks>
+        <name>Play Nier Automata</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </tasks>
+    <tasks>
+        <name>Top up ezlink card</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </tasks>
+    <tasks>
+        <name>Top up kopitiam card</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </tasks>
+    <tasks>
+        <name>Complete CS2107 Assignment 2</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>08/04/17 20:41</deadline>
+        <tagged>Assignment</tagged>
+        <tagged>CS2107</tagged>
+    </tasks>
+    <tasks>
+        <name>Complete CS2107 Assignment 3</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>21/04/17 20:27</deadline>
+        <tagged>Assignment</tagged>
+        <tagged>CS2107</tagged>
+    </tasks>
+    <tasks>
+        <name>Create TestScript</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>09/04/17 20:40</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Dogfood 50 Tasks</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>09/04/17 18:20</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Noc Meeting</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>08/04/17 20:36</deadline>
+    </tasks>
+    <tasks>
+        <name>Send NUS copy of SAF100</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>07/04/17 18:33</deadline>
+    </tasks>
+    <tasks>
+        <name>Submit ATAP Resume</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>05/04/17 20:43</deadline>
+    </tasks>
+    <tasks>
+        <name>Submit Peer evaluation Form</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>10/04/17 20:34</deadline>
+    </tasks>
+    <tasks>
+        <name>CS2101 OP2 Presentation</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime>06/04/17 20:26</startTime>
+        <deadline>06/04/17 20:26</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2101</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3230 Quiz 2</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime>10/04/00 12:00</startTime>
+        <deadline>10/04/00 13:00</deadline>
+    </tasks>
+    <tasks>
+        <name>Group Meeting</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime>09/04/17 20:09</startTime>
+        <deadline>09/04/17 20:09</deadline>
+    </tasks>
+    <tasks>
+        <name>Get a haircut</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </tasks>
+    <tasks>
+        <name>Learn OpenGl</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </tasks>
+    <tasks>
+        <name>Mop Floor</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Chores</tagged>
+    </tasks>
+    <tasks>
+        <name>Wash Car</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Chores</tagged>
+    </tasks>
+    <tasks>
+        <name>Wash Fans</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Chores</tagged>
+    </tasks>
+    <tasks>
+        <name>Water Plants</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Chores</tagged>
+    </tasks>
+    <tags>Groceries</tags>
+    <tags>Assignment</tags>
+    <tags>CS3230</tags>
+    <tags>CS2103T</tags>
+    <tags>Test</tags>
+    <tags>CS2101</tags>
+    <tags>Education</tags>
+    <tags>Holiday</tags>
+    <tags>Army</tags>
+    <tags>CS3241</tags>
+    <tags>Notes</tags>
+    <tags>CS2107</tags>
+    <tags>Internship</tags>
+    <tags>notes</tags>
+    <tags>Chores</tags>
+    <tags>med</tags>
+</taskmanager>
