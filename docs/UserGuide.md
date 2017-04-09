@@ -95,12 +95,20 @@ You are currently reading my user guide, which has been written to help you with
 
 #### Task Details:
 
-  > * Name
-  > * Start Date
-  > * Start Time
-  > * End Date
-  > * End Time
-  > * Tag
+  > * Name <br>
+  `Name must only contain alphanumeric characters.`
+  > * Start Date <br>
+  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  > * Start Time <br>
+  `All time formats are supported.`
+  > * End Date <br>
+  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  > * End Time <br>
+  `All time formats are supported.`
+  > * Tag <br>
+  `Tag must only contain alphanumeric characters.`
+  > * Recur Interval <br>
+  `Only 4 accepted values: None, Day, Week, Month`
 
 #### Task Filters:
 
@@ -109,6 +117,7 @@ You are currently reading my user guide, which has been written to help you with
   > * Uncompleted
   > * Floating
   > * Timed
+  > * Overdue
 
 ### 3.2. Add a task : `add`
 
