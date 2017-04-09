@@ -366,13 +366,13 @@ Format: `undo [NUMBER]`
 > * Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
 > you can still easily revert their effects:
 >   * Changing of storage path location (with `save` / `load` ) - You can change your storage path to the 
-previous location with `save`.
->   * Setting of aliases (with `alias`) - You can remove the alias with `unalias`.
->   * Removing aliases (with `unalias`) - You can set back the alias with `alias`.
->   * Re-ordering the list of tasks (with `sort`) - You can set back the previous sorting order with `sort`.
+previous location with the `save` command.
+>   * Setting of aliases (with `alias`) - You can remove the alias with the `unalias` command.
+>   * Removing aliases (with `unalias`) - You can reassign the alias with the `alias` command.
+>   * Re-ordering the list of tasks (with `sort`) - You can recover the previous sorting order with the `sort` command.
 >
-> * If a number is entered, undoes that amount of previous commands instead.
-> * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Z</kbd> to quickly undo one time.
+> * If a number is entered, undos that amount of previous commands instead.
+> * You can also use the key combination <kbd>Ctrl</kbd> + <kbd>Z</kbd> to quickly undo one time.
 
 Examples:
 
@@ -389,15 +389,13 @@ Examples:
 
 ### 3.14. Redoing a command: `redo`
 
-After undoing a command, you want to re-apply it.<br>
+After wrongly undoing a command, you want to re-apply it.<br>
 `redo` allows you to redo previously undone commands.<br>
 Format: `redo [NUMBER]`
 
-> * Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
-> * you mistakenly revoked (using `undo`).<br>
+> * Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that you mistakenly revoked (using `undo`).<br>
 > * If a number is entered, redo that amount of previous commands instead.<br>
-> * The number must be less than or equal to the number of commands undone.
-> * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Y</kbd> to quickly redo one time.
+> * You can also use the key combination <kbd>Ctrl</kbd> + <kbd>Y</kbd> to quickly redo one time.
 
 Examples:
 
@@ -409,65 +407,65 @@ Examples:
   `add Project`<br>
   `undo 2`<br>
   `redo`<br>
-  Redo `add Assignment`.
+  Undo both commands, then redo `add Assignment`.
 * `add Test`<br>
   `undo`<br>
   Press <kbd>Ctrl</kbd> + <kbd>Y</kbd> <br>
   Redo adding Test to the todo list.
 
 [comment]: # (@@author A0162011A)
-### 3.15. Viewing previous commands and accessing them: `history`
+### 3.15. Viewing previous commands: `history`
 
 You may want to check what you have previously entered.<br>
 `history` shows you your previous commands entered in the current session. <br>
 Format: `history`
 
-> * Previous commands are listed in order from latest command to earlier command.
-> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will cycle through the commands previously entered.
+> * Previous commands are listed in order from the earliest command to the latest command.
+> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will iterate through the commands previously entered.
 
 Examples:
 * `add Test` <br>
   `history` <br>
-  Shows `add Test` in the list.
+  Shows `add Test` in the result display.
 * `add Test` <br>
   Press on the <kbd>up</kbd> arrow key. <br>
-  Shows `add Test` in your input text field.
+  Shows `add Test` in the command box.
 
-### 3.16. Adding alias for any phrase: `alias`
+### 3.16. Adding an alias for any phrase: `alias`
 
 For long commands like `mark complete`, you may want to have a shortcut for it.<br>
 `alias` allows you to add an alias for a phrase. <br>
 Format: `alias ALIAS PHRASE`
 
-> * Once added, alias can be used instead of the phrase to perform operations. In subsequent commands, if 
-the first word is detected to an alias, the command will give the same result as if the command starts the 
-aliased phrase.
-> * The phrase can be multiple words long. It can be anything, not necessarily a command word.
+> * Once added, the alias can be used instead of the phrase to perform operations.<br>
+In subsequent commands, if the first word is detected to an `ALIAS`, the word will be treated as the associated `PHRASE`.
+> * `PHRASE` can be multiple words long.
+> * `PHRASE` can be anything, not necessarily a command word.
 > * Parameter suggestion is also supported for commands that uses an alias. For example, if `a` is set as 
-an alias for `add`, the parameters for adding task are also suggested when `a a task` is typed.
+an `ALIAS` for `add`, the parameters for adding task are also suggested when `a a task` is typed.
 
 Example:
 * `alias hs history` <br>
-  `hs` <br>
-  Shows `alias hs history` in the list.
+  Adds `hs` as an alias for `history`.
 * `alias addTaskNamedTest add Test` <br>
+  Adds `addTaskNamedTest` as an alias for `add Test`.<br>
   `addTaskNamedTest` <br>
-  Performs the command `add Test` which will add a new task called 'Test'.
+  Performs the command `add Test` which will add a new task called `Test`.
 
 ### 3.17. Removing an alias: `unalias`
 
-You may an alias no longer suitable, and want to remove it from ToLuist.<br>
+You may find an alias no longer suitable, and may want to remove it from ToLuist.<br>
 `unalias` allows you to remove an alias for a phrase.<br>
 Format: `unalias ALIAS`
 
 Example:
 * `alias hs history` <br>
   `unalias hs` <br>
-  Removes the alias 'hs'.
+  Removes the alias `hs`.
 
 ### 3.18. Viewing aliases: `viewalias`
 
-You may get forgetful and forget the aliases you set in ToLuist.<br>
+To remind yourself of the aliases you set in ToLuist, you can use `viewalias`.<br>
 `viewalias` shows you all the aliases currently set in the system. <br>
 Format: `viewalias`
 
@@ -476,14 +474,14 @@ Format: `viewalias`
 Example:
 * `alias hs history` <br>
   `viewalias` <br>
-  Shows `hs:history` in the list.
+  Shows `hs:history` in the result display.
 
 ### 3.19. Saving the data
 
-You would want to have your data on your computer always updated, even if you close and re-open 
+ToLuist makes sure the data on your computer is always updated, even if you close and re-open 
 the application.<br>
-ToLuist data are saved in the hard disk automatically after any command that changes the data. By default, 
-the data is saved `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
+ToLuist data is saved in the hard disk automatically.<br>
+By default, the data is saved to `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
 There is no need to save manually.
 
 ### 3.20. Specifying a new storage location to save data to: `save`
@@ -494,7 +492,7 @@ moving it to a Dropbox folder.<br>
 Warning: If a file with the requested name already exists, it will be overwritten. <br>
 Format: `save NEWFILELOCATION`
 
-> * All data will be moved to the new file location.
+> * All data will be moved to `NEWFILELOCATION`.
 > * If the file does not exist, the file will be created.
 > * The old file will be removed.
 > * This feature is similar to the `Save as...` feature in other applications.
@@ -510,14 +508,14 @@ Occasionally, you may want to load the data from a different location, such as w
 `load` changes the location for the storage file used in this system. <br>
 Format: `load NEWFILELOCATION`
 
-> * The new save location will be updated to the location.
-> * The program will replace the data in the program with data from the new file location.
-> * If the file does not exist, an error message will be displayed.
-> * Warning: The old data in the program will stay in the old save file, and will not be updated with new values.
+> * The new storage location will be updated to `NEWFILELOCATION`.
+> * ToLuist will replace the existing data with `NEWFILELOCATION`'s data.
+> * The old data in the program will stay in the old save file, and will not be updated with new values.
 
 Example:
 * `load data/savefile.txt` <br>
-  Sets the load storage location to `data/savefile.txt`.
+  Sets ToLuist to load from `data/savefile.txt`.
+  The status bar will be updated to `Storage Path: data/savefile.txt`.
 
 ### 3.22. Exiting the program: `exit`
 
@@ -529,11 +527,11 @@ Format: `exit/quit`
 
 **Command** | **Format** | **Examples**
 -------- | :-------- | :---------
-Add | `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]` | `add Assigment 1 /by Friday /tags school`
+Add | `add DESCRIPTION [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]` | `add Assigment 1 /by Friday /tags school`
 Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
 Add Alias | `alias ALIAS PHRASE` | `alias hs history`
-Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
-Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
+Change Load Storage Location | `load NEWFILELOCATION` | `load data/savefile.txt`
+Change Save Storage Location | `save NEWFILELOCATION` | `save data/savefile.txt`
 Clear | `clear`
 Delete | `delete INDEX(ES)` | `delete 3`
 Delete Alias | `unalias ALIAS` | `unalias hs`
@@ -541,11 +539,11 @@ Exit | `exit/quit`
 Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
 Help | `help [COMMAND]` | `help add`
 History | `history`
-Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
+Mark a Task as Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
 Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | `sort priority`
-Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
+Switch Display Task Tab | `switch TABIDENTIFIER` | `switch 2` <br> `switch T`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
-Update | `update INDEX [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
+Update | `update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/floating] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/stoprepeating] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
 Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
 Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
 View Aliases | `viewalias`
