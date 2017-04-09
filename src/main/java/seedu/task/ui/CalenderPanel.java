@@ -1,7 +1,6 @@
 //@@author A0163935X
 
 package seedu.task.ui;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -9,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
@@ -160,10 +161,11 @@ public class CalenderPanel extends UiPart<Region> {
     private Label day27;
     @FXML
     private Label day28;
-
+    private static final Logger logger = LogsCenter.getLogger(CalenderPanel.class);
     public CalenderPanel(AnchorPane calendertPlaceholder, ObservableList<ReadOnlyTask> taskList, int dDate, int dMonth,
             int dYear) {
         super(FXML);
+        logger.info(" Initializing Calendar ");
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         /* ObservableList<String> data = */ FXCollections.observableArrayList("hey", "you");
         // label1.setText("v0.1");
@@ -249,6 +251,7 @@ public class CalenderPanel extends UiPart<Region> {
     }
 
     private void setTasks(ObservableList<ReadOnlyTask> taskList) {
+        logger.info(" set tasks ");
         initTaskListHashMap(taskListHashMap);
         for (int i = 0; i < taskList.size(); i++) {
             if (!taskList.get(i).getEndTiming().isFloating()) {
@@ -285,7 +288,6 @@ public class CalenderPanel extends UiPart<Region> {
                         String[] taskListDateData = taskDate.toString().split("/");
                         String taskDateMonth = String.valueOf(taskDate.getMonth() + 1);
                         String taskDateDate = String.valueOf(taskDate.getDate());
-                        System.out.println(taskDateMonth + "/" + taskDateDate);
                         if ((taskDateMonth + "/" + taskDateDate).equals(labelDate)) {
                             currentTaskList.getItems().addAll(taskList.get(i).getDescription().toString());
 
@@ -330,7 +332,7 @@ public class CalenderPanel extends UiPart<Region> {
     }
 
     private void setDate(int dDate, int dMonth, int dYear) {
-
+        logger.info(" set Date ");
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         if (dDate != 0) {

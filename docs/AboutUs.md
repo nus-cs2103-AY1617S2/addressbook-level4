@@ -48,16 +48,18 @@ Responsibilities: Logic and Scheduling and Tracking
 -----
 
 #### [Yu Cheng-Liang](https://github.com/nuslarry)
-<img src="images/chengliang.jpg" width="150"><br>
-*Components in Charge of: [UI](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#model-component) <br>
-Role: Developer <br>
+<img src="images/chengliang.jpg" width="150"><br><br>
+*Components in Charge of: [UI](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#model-component) <br><br>
+Role: Developer <br><br>
 Responsibilities: UI, Testing and Integeration
 * Features implemented:
     * [Dynamic Calender](images/Ui.png)  :Show all the tasks on the calender accroding to their ending timing
-    * Changing Date
+    * Change Calender Date
     * complete tag coloring
 * Other major contributions:
-    *fix some guitests,eg: addCommandTest,deleteCommandTest,listCommandTes, to make the task manager pass travis test
+    * fix some guitests,eg: addCommandTest,deleteCommandTest,listCommandTes,
+     to make the task manager pass travis test
+    * User Interface Styling
 
 
 
