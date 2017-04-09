@@ -111,3 +111,21 @@ Dummy task should be back in the task list.
 #### Result
 
 Dummy task should be gone again.
+
+## Autocompletion
+
+`a` + Tab
+
+#### Result
+
+`add` command should autocomplete in the command box.
+
+
+## Command history
+
+`addd blah`
+
+#### Result
+
+The command box should flash due to incorrect error. Press the up arrow key. The same command should appear again.
+
