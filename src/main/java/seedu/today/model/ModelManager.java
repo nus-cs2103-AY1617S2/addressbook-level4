@@ -351,7 +351,7 @@ public class ModelManager extends ComponentManager implements Model {
             }).findAny().isPresent();
         };
     }
-    
+
     public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
         assert date != null : "no date provided for a deadline search";
         return t -> {
