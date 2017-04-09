@@ -24,6 +24,7 @@ public class ModeTest extends DoistGUITest {
         assertInNavigationMode();
 
         typeEsc();
+        assert getMessageBoxContent().equals(CommandBox.EDITING_MODE_MESSAGE);
         assertInEditingMode();
     }
 
@@ -42,16 +43,26 @@ public class ModeTest extends DoistGUITest {
     }
 
     private void assertInNavigationMode() {
+        assert getMessageBoxContent().equals(CommandBox.NAVIGATION_MODE_MESSAGE);
         commandBox.enterCommand("some random input");
         System.out.println(getInputBoxContent());
         assert getInputBoxContent().length() == 0;
-        assert getMessageBoxContent().equals(CommandBox.NAVIGATION_MODE_MESSAGE);
     }
 
     private void assertInEditingMode() {
+        assert !getMessageBoxContent().equals(CommandBox.NAVIGATION_MODE_MESSAGE);
         String input = "some randome input";
         commandBox.enterCommand(input);
         assert getInputBoxContent().equals(input);
-        assert !getMessageBoxContent().equals(CommandBox.NAVIGATION_MODE_MESSAGE);
     }
 }
+
+
+
+
+
+
+
+
+
+

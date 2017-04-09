@@ -55,7 +55,7 @@ public class CommandBox extends UiPart<Region> {
         -> removeInput();
 
     public static final String NAVIGATION_MODE_MESSAGE = "quick navigation mode\n\nj: down\nk: up";
-    private static final String EDITING_MODE_MESSAGE = "editing mode";
+    public static final String EDITING_MODE_MESSAGE = "editing mode";
 
     @FXML
     private InlineCssTextArea commandTextField;
