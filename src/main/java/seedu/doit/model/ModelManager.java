@@ -114,17 +114,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(this.taskManager));
     }
 
-    @Override
-    public synchronized void deleteTask(ReadOnlyTask target) {
-        logger.info("delete task in model manager");
-        taskManagerStack.addToUndoStack(this.getTaskManager());
-        taskManagerStack.clearRedoStack();
-        this.taskManager.removeTask(target);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
-
-    }
-
     /**
      * Removes the equivalent task from the task list.
      *

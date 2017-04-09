@@ -30,11 +30,6 @@ public interface Model {
     /**
      * Deletes the given task.
      */
-    void deleteTask(ReadOnlyTask target);
-
-    /**
-     * Deletes the given task.
-     */
     void deleteTasks(Set<ReadOnlyTask> targets);
 
     /**
