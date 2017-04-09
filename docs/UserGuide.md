@@ -98,7 +98,9 @@ Things To Note:
 ```
 
 ### 3.2.1. Adding a Floating Task: `add`, `a`, `+`
-The first thing you would do is to add your first task! Lets make it simple by first adding a floating task. <br>
+The first thing you would do is to add your first task! A floating is a task with no deadline and schedule.<br>
+Lets make it simple by first adding a floating task. <br>
+
 
 Format:<br>
 `add <TASK NAME>`
@@ -136,7 +138,7 @@ Examples:
 
 
 ### 3.2.3. Adding an Event Task:  `add`, `a`, `+`
-Now you might be interested in adding an event, which has a start time and an end time. <br>
+Now you might be interested in adding an event, which has a schedule with a start time and an end time. <br>
 
 Format:<br>
 `add <TASK NAME> from:<DATE> to:<DATE>`<br>
