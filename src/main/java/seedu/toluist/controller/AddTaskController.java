@@ -42,25 +42,25 @@ public class AddTaskController extends Controller {
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Adds a task to the todo list.";
-    private static final String HELP_FORMAT = "add NAME [from/STARTDATE to/ENDDATE] "
-                                                  + "[by/ENDDATE] [repeat/PERIOD"
+    private static final String HELP_FORMAT = "add NAME [/from STARTDATE /to ENDDATE] "
+                                                  + "[/by ENDDATE] [/repeat PERIOD"
                                                     + "(daily/weekly/monthly/yearly)] "
-                                                  + "[priority/PRIORITY(high/low)] [tags/TAGS]";
+                                                  + "[/priority PRIORITY(high/low)] [/tags TAGS]";
     private static final String[] HELP_COMMENTS = { "Related commands: `delete`, `update`",
                                                     "Only fields entered will be used.",
-                                                    "Events can be created by entering a value for `by/`",
+                                                    "Events can be created by entering a value for `/by`",
                                                     "Deadlines can be created by "
-                                                        + "entering a value for `from/` and `to/`" };
+                                                        + "entering a value for `/from` and `/to`" };
     private static final String[] HELP_EXAMPLES = { "`add new floating task`\nAdds a new floating task.",
-                                                    "`add new deadline by/friday`\n"
+                                                    "`add new deadline /by friday`\n"
                                                         + "Adds a new deadline, with deadline friday.",
-                                                    "`add new event from/tuesday to/thursday`\nAdds a new event, "
+                                                    "`add new event /from tuesday /to thursday`\nAdds a new event, "
                                                         + "with start date tuesday and end date thursday.",
-                                                    "`add new recurring task by/10pm repeat/daily`\n"
+                                                    "`add new recurring task /by 10pm /repeat daily`\n"
                                                         + "Adds a new recurring task, with deadline 10pm.",
-                                                    "`add new tagged task tags/newtag`\n"
+                                                    "`add new tagged task /tags newtag`\n"
                                                         + "Adds a new task, with the tag `newtag`.",
-                                                    "`add new priority task priority/high`\n"
+                                                    "`add new priority task /priority high`\n"
                                                         + "Adds a new task, with high priority." };
 
     //@@author A0127545A
