@@ -12,10 +12,10 @@ import typetask.storage.XmlSerializableTaskManager;
 //@@author A0140010M
 public class SaveCommand extends Command {
 
-    private static final String SYMBOL_ASTERISK = "*";
-    private static final String SYMBOL_CARET = "^";
-    private static final String SYMBOL_HASH = "#";
-    private static final String SYMBOL_PLUS = "+";
+    public static final String SYMBOL_ASTERISK = "*";
+    public static final String SYMBOL_CARET = "^";
+    public static final String SYMBOL_HASH = "#";
+    public static final String SYMBOL_PLUS = "+";
     public static final String COMMAND_WORD = "save";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
             + ": Saves/Creates a copy of the file to a specified location\n"

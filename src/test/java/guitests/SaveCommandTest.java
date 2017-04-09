@@ -6,7 +6,6 @@ import typetask.commons.core.Messages;
 import typetask.logic.commands.SaveCommand;
 
 //@@author A0144902L
-//Unused since Person incharge of save command implemented too
 public class SaveCommandTest extends TypeTaskGuiTest {
 
     @Test
