@@ -24,7 +24,7 @@ import seedu.taskmanager.model.UserPrefs;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/taskmanager.jpg";
+    private static final String ICON = "/images/taskmanager.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 800;
     private static final int MIN_WIDTH = 600;
