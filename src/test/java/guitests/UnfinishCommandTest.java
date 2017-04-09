@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.logic.commands.UnfinishCommand.MESSAGE_TASK_ALREADY_NOT_FINISHED;
 import static seedu.doist.logic.commands.UnfinishCommand.MESSAGE_UNFINISH_TASK_SUCCESS;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.doist.logic.commands.UnfinishCommand;
 import seedu.doist.model.TodoList;
 import seedu.doist.testutil.TestTask;
 import seedu.doist.testutil.TypicalTestTasks;
@@ -24,7 +26,7 @@ public class UnfinishCommandTest extends DoistGUITest {
     }
 
     @Test
-    public void finish() {
+    public void unfinish() {
 
         //Unfinish the first in the list
         TestTask[] currentList = td.getAllFinishedTypicalTasks();
@@ -45,6 +47,17 @@ public class UnfinishCommandTest extends DoistGUITest {
 
         // Unfinish a task that is already not finished
         assertAlreadyUnfinished(1, currentList);
+    }
+
+    @Test
+    public void unfinishWithEmpty() {
+        commandBox.runCommand("unfinish ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                          UnfinishCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("unfinish");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                          UnfinishCommand.MESSAGE_USAGE));
     }
 
     /**

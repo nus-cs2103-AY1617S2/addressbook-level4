@@ -101,16 +101,16 @@ The `Main` component is the heart of the App. It is responsible for
 - initializing other components (`Model`, `Logic`, `UI`) in the correct order and loading data from local storage when the app launches.  
 - terminating other components when Doist is shut down.
 
-#### [`UI`](#2-ui-component)
+#### [`UI`](#32-ui-component)
 The `UI` component serves as the eyes and ears of the App. It handles all user interactions, as well as displaying information to the user.
 
-#### [`Logic`](#3-logic-component)
+#### [`Logic`](#33-logic-component)
 The `Logic` component is the brains behind the App. It takes charge of parsing the user input and executing the commands.
 
-#### [`Model`](#4-model-component)
+#### [`Model`](#34-model-component)
 The `Model` component is the spine around which the App has been built. It represents the data that Doist operates on and also supports the operations on the same.
 
-#### [`Storage`](#5-storage-component)
+#### [`Storage`](#35-storage-component)
 The `Storage` component handles the App's memory. It takes charge of reading data from, and writing data to, the hard disk.
 
 #### `Commons`
