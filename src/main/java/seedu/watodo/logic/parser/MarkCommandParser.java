@@ -42,7 +42,6 @@ public class MarkCommandParser {
         return new MarkCommand(filteredTaskListIndices);
     }
 
-
     private void checkIndexFound(String args) throws IllegalValueException {
         if (args.isEmpty()) {
             throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
