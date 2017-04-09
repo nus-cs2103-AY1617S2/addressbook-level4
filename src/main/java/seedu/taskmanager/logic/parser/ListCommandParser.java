@@ -27,12 +27,16 @@ public class ListCommandParser {
 
         /**
          * If the command "LIST" is used without any arguments, return an empty
-         * set.
+         * keyword set.
          */
         if (args.trim().isEmpty()) {
             return new ListCommand(keyWordSet);
         }
 
+        /**
+         * Identify if user has input a DD/MM/YY format, otherwise, will convert
+         * what they input into a DD/MM/YY format
+         */
         if (args.trim().matches(StartDate.STARTDATE_VALIDATION_REGEX1)) {
             keyWordArray = new String[] { args.trim() };
             keyWordSet = new HashSet<>(Arrays.asList(keyWordArray));
