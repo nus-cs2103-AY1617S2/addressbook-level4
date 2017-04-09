@@ -1,4 +1,4 @@
-1. Load storage to the test directory, enter
+1. Load storage to the test directory, enter the directory of the provided test data tasklist.xml
 "loadstorage src/test/data/ManualTesting".
 
 2. List the tasklist, enter
@@ -181,12 +181,7 @@
 
 71. Verify that file has been moved to the new directory.
 
-71. clear all the Tasks, enter
-"clear".
-
-72. Verify the tasklist is empty.
-
-73. Exit the App, enter
+72. Exit the App, enter
 "exit".
 
-74. Verify the App is closed.
+73. Verify the App is closed.
