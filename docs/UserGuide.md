@@ -273,7 +273,7 @@ Doist will suggest descriptions of existing tasks to make finding a task easier.
 Format: `find QUERY [QUERY...]`
 > **Examples:** <br>
 > - `find buy groceries` <br>
-> - `list meeting with professor` <br>
+> - `find meeting with professor` <br>
 
 > **Remarks:** <br>
 > - Spaces are allowed in search query.<br>
@@ -282,11 +282,7 @@ Format: `find QUERY [QUERY...]`
 > - Only the task description is searched. <br>
 > - Tasks matching at least one search query will be returned.
     *e.g.* A task with a description of `Hans` will match search query `Hans Bo` <br>
-
-**Sample Commmands**
-
-* `find hiking` <br>
-* `find CS2103T group meeting project` <br>
+> - Even if the description of the task does not contain the exact word that you search, Doist will return close matches!
 
 ### 3.6 Editing an existing task : `edit`
 
