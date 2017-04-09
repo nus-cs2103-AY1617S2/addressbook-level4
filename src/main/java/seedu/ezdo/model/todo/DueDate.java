@@ -14,7 +14,7 @@ public class DueDate extends TaskDate {
 
     /**
      * Validates given due date.
-     *
+     * @param dueDate   The due date of a task.
      * @throws IllegalValueException if given due date string is invalid.
      */
     public DueDate(String dueDate) throws IllegalValueException {
