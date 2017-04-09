@@ -329,6 +329,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class NameQualifier implements Qualifier {
+
+        public static final String EMPTY_STRING = "";
         private Set<String> nameKeyWords;
         private Optional<Priority> priority;
         private Optional<TaskDate> startDate;
@@ -359,7 +361,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
 
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
-            boolean isNameEqual = nameKeyWords.contains("") || nameKeyWords.stream()
+            boolean isNameEqual = nameKeyWords.contains(EMPTY_STRING) || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
             boolean isPriorityEqual = comparePriority(task.getPriority());
             boolean isStartDateQualified = compareStart(task);
@@ -419,7 +421,8 @@ public class ModelManager extends ComponentManager implements Model {
             String taskPriorityString = taskPriority.toString();
             boolean priorityExist = (taskPriorityString.length() != 0);
 
-            boolean isEqual = (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
+            boolean isEqual = (!priority.isPresent()
+                    || (EMPTY_STRING.equals(priority.get().toString()) && priorityExist)
                     || (priorityExist && taskPriorityString.equals(priority.get().toString())));
 
             return isEqual;
@@ -433,7 +436,7 @@ public class ModelManager extends ComponentManager implements Model {
             String taskRecurString = taskRecur.toString();
             boolean recurExist = (taskRecurString.length() != 0);
 
-            boolean isEqual = (!recur.isPresent() || (recur.get().toString().equals("") && recurExist)
+            boolean isEqual = (!recur.isPresent() || (EMPTY_STRING.equals(recur.get().toString()) && recurExist)
                     || (recurExist && taskRecurString.equals(recur.get().toString())));
 
             return isEqual;
@@ -449,7 +452,7 @@ public class ModelManager extends ComponentManager implements Model {
             int dateLength = 10;
 
             boolean isStartEqual = (!startDate.isPresent()
-                    || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (EMPTY_STRING.equals(startDate.get().toString()) && taskStartDateExist)
                     || (taskStartDateExist && taskStartDateString.substring(0, dateLength)
                             .equals(startDate.get().toString().substring(0, dateLength))));
 
@@ -460,12 +463,13 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if task's {@code DueDate} equals given {@code DueDate}
          */
         private boolean compareDueDate(TaskDate taskDueDate) {
-            assert taskDueDate!= null;
+            assert taskDueDate != null;
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
             int dateLength = 10;
 
-            boolean isDueEqual = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+            boolean isDueEqual = (!dueDate.isPresent()
+                    || (EMPTY_STRING.equals(dueDate.get().toString()) && taskDueDateExist)
                     || (taskDueDateExist && taskDueDateString.substring(0, dateLength)
                             .equals(dueDate.get().toString().substring(0, dateLength))));
 
@@ -483,7 +487,8 @@ public class ModelManager extends ComponentManager implements Model {
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
-            boolean isBefore = (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+            boolean isBefore = (!startDate.isPresent()
+                    || (EMPTY_STRING.equals(startDate.get().toString()) && taskStartDateExist)
                     || (taskStartDateExist && comesBefore(startDate.get().toString(), taskStartDateString)));
 
             return isBefore;
@@ -498,7 +503,8 @@ public class ModelManager extends ComponentManager implements Model {
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
-            boolean isBefore = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+            boolean isBefore = (!dueDate.isPresent()
+                    || (EMPTY_STRING.equals(dueDate.get().toString()) && taskDueDateExist)
                     || (taskDueDateExist && comesBefore(dueDate.get().toString(), taskDueDateString)));
 
             return isBefore;
@@ -513,7 +519,8 @@ public class ModelManager extends ComponentManager implements Model {
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
-            boolean isAfter = (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+            boolean isAfter = (!startDate.isPresent()
+                    || (EMPTY_STRING.equals(startDate.get().toString()) && taskStartDateExist)
                     || (taskStartDateExist && comesBefore(taskStartDateString, startDate.get().toString())));
 
             return isAfter;
@@ -529,7 +536,8 @@ public class ModelManager extends ComponentManager implements Model {
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
-            boolean isAfter = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+            boolean isAfter = (!dueDate.isPresent()
+                    || (EMPTY_STRING.equals(dueDate.get().toString()) && taskDueDateExist)
                     || (taskDueDateExist && comesBefore(taskDueDateString, dueDate.get().toString())));
 
             return isAfter;
