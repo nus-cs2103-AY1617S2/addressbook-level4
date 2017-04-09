@@ -5,7 +5,7 @@ TestScript
 [] brackets consists of suggestions for efficiency
 
 load \src\test\data\ManualTesting\SampleData.xml
-> You should see the program loaded with 50 tasks 
+> You should see the program loaded with 50 tasks
 > Note the footer of the app showing the filepath of the loaded file
 
 add Help son with math homework p/med e/next week d/Calculus t/MA1521
@@ -21,13 +21,13 @@ add Help son with math homework p/med e/next week d/Calculus t/MA1521
 undo
 > Note that it has reverted before adding the task
 
-undo 
+undo
 > You should get an error here as there is nothing to undo
 
 redo
 > Note that the son homework task is back
 
-redo 
+redo
 > You should get an error here as there is nothing to redo
 
 add MA1521 lecture 1 s/next thursday 1pm t/MA1521
@@ -140,7 +140,7 @@ undo
 save data/testdata1.xml
 > Note that the display is the same but the filepath at the footer of the app has changed to the new one
 
-save \src\test\data\ManualTesting\SampleData.xml 
+save \src\test\data\ManualTesting\SampleData.xml
 > You should see an error message saying that the file exists
 > Note that the filepath at the footer is still the same
 
