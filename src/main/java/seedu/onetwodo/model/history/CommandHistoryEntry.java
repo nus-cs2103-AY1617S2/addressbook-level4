@@ -81,7 +81,7 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
             return "Restore Task";
 
         case DoneCommand.COMMAND_WORD:
-            return UndoneCommand.COMMAND_WORD;
+            return UndoneCommand.COMMAND_WORD_CAP;
 
         case UndoneCommand.COMMAND_WORD:
             return DoneCommand.COMMAND_WORD;

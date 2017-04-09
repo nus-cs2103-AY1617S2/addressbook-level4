@@ -12,7 +12,7 @@ import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
-
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestTask;
 
@@ -95,8 +95,8 @@ public class UndoCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, currentList));
 
-        String feedbackMessage = String.format("Undone".concat(COMMAND_FORMATTER), td.taskD);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        String feedbackMessage = String.format(UndoneCommand.COMMAND_WORD_CAP.concat(COMMAND_FORMATTER), td.taskD);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
