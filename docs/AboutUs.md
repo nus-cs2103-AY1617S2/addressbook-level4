@@ -46,7 +46,6 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Unmark task(s)](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#28-unmark-a-task--unmark)<br>
    * [View current storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#212-view-current-storage-file-location--viewfile)<br>
    * [Change storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#213-change-storage-file-location--saveas)<br>
-
 * **Code written**: [[functional code](../collated/main/A0141077L.md)][[test code](../collated/test/A0141077L.md)]<br>
 * **Other major contributions:** <br>
 

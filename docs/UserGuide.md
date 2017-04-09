@@ -212,10 +212,10 @@ Examples:
 * `edit 3 REMOVEDATES` <br>
   removes all existing start and end dateTimes in the 3rd task
 
-* `edit 4 #newTag`
+* `edit 4 #newTag` <br>
   adds the tag newTag to the 4th task in the list, given that the task does not already have that tag
 
-* `edit 1 #existingTag`
+* `edit 1 #existingTag` <br>
   removes the existingTag from the 1st task, given that the task already has that tag
 
 ### 2.6. Deleting a task : `delete`
@@ -320,8 +320,9 @@ Below is a list of shortcut keys for some of the above commands:
 ### 2.15 Customize alternative commands: `shortcut`
 
 You can add and delete your own personal shortcut keys to the various commands. <br>
-Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature) <br>
-        `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY) <br>
+Format: <br>
+`shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature) <br>
+`shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY) <br>
 
 > * SHORTCUT_KEY can be any character except whitespace.
 > * Unfortunately, special keys (e.g. F1, SHIFT, CTRL etc) are not supported. :( <br>
@@ -377,7 +378,7 @@ List | `list on/ DATETIME`<br>
 List | `list from/ START_DATETIME to/ END_DATETIME`<br>
 List | `list on/ START_DATETIME to/ END_DATETIME`<br>
 **Find** | `find KEYWORD [MORE_KEYWORDS]...` <br>
-**Edit** | `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
+**Edit** | `edit INDEX <[TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...>` <br>
 **Delete** | `delete INDEX [MORE_INDICES]...` <br>
 **Mark** | `mark INDEX [MORE_INDICES]...` <br>
 **Unmark** | `unmark INDEX [MORE_INDICES]...` <br>
