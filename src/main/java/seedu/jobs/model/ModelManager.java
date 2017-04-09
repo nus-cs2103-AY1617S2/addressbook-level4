@@ -14,6 +14,7 @@ import seedu.jobs.commons.events.model.ClearCommandEvent;
 import seedu.jobs.commons.events.model.DeleteCommandEvent;
 import seedu.jobs.commons.events.model.EditCommandEvent;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
+import seedu.jobs.commons.events.model.UndoCommandEvent;
 import seedu.jobs.commons.events.storage.LoginInfoChangeEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
@@ -89,7 +90,17 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateClear() {
         raise(new ClearCommandEvent());
     }
-
+    
+    /** Raises an event to indicate that undo command has been invoked */
+    private void indicateUndo(){
+        raise(new UndoCommandEvent(getFilteredTaskList()));
+    }
+    
+    /** Raises an event to indicate that redo command has been invoked */
+    private void indicateRedo(){
+        raise(new UndoCommandEvent(getFilteredTaskList()));
+    }
+    
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.removeTask(target);
@@ -160,12 +171,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void undoCommand() throws EmptyStackException {
         taskBook.undoTask();
+        indicateUndo();
         indicateTaskBookChanged();
     }
 
     @Override
     public synchronized void redoCommand() throws EmptyStackException {
         taskBook.redoTask();
+        indicateRedo();
         indicateTaskBookChanged();
     }
 

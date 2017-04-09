@@ -23,6 +23,9 @@ import seedu.jobs.commons.events.model.AddCommandEvent;
 import seedu.jobs.commons.events.model.ClearCommandEvent;
 import seedu.jobs.commons.events.model.DeleteCommandEvent;
 import seedu.jobs.commons.events.model.EditCommandEvent;
+import seedu.jobs.commons.events.model.RedoCommandEvent;
+import seedu.jobs.commons.events.model.UndoCommandEvent;
+import seedu.jobs.logic.commands.RedoCommand;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
@@ -129,7 +132,10 @@ public class CalendarManager {
 
     @Subscribe
     public void ClearTask(ClearCommandEvent event) {
+        clearCalendar();
+    }
 
+    private void clearCalendar() {
         new ClearCalendar(service);
     }
 
@@ -156,6 +162,18 @@ public class CalendarManager {
     public void loadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
         System.out.println("loadTask");
         new LoadCalendar(service, list);
+    }
+    
+    @Subscribe
+    public void redoTask(RedoCommandEvent event) throws IllegalTimeException{
+        clearCalendar();
+        loadTask(event.getFilteredTaskList());
+    }
+    
+    @Subscribe
+    public void undoTask(UndoCommandEvent event) throws IllegalTimeException{
+        clearCalendar();
+        loadTask(event.getFilteredTaskList());
     }
 
 }
