@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B3/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb4b6a8b7243478dbc8f6fa6b4dd1fe3)](https://www.codacy.com/app/HQching/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B3/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/TaskListScreenshot.PNG" width="600"><br>
+<img src="docs/images/Ui.png" width="600"><br>
 
 Watodo is a task management application designed to help you sort out what you have to do. Be it deadlines, events or tasks to be done ‘some day’, Watodo can help you keep track of your tasks in an organised manner and takes the clutter off your mind.
 
