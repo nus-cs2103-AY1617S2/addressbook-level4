@@ -112,15 +112,24 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+  //@@author A0163845X
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add" + this.getTaskName().fullTaskName + " ");
-        sb.append("d/" + this.getTaskDate().value + " ");
-        sb.append("s/" + this.getTaskStartTime().value + " ");
-        sb.append("e/" + this.getTaskEndTime().value + " ");
-        sb.append("m/" + this.getTaskDescription() + " ");
-        sb.append(this.getTaskStatus() + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        sb.append("add " + this.getTaskName().fullTaskName + " ");
+        if (this.getTaskDate() != null) {
+        	sb.append("d/" + this.getTaskDate().value + " ");
+        }
+        if (this.getTaskStartTime() != null) {
+        	sb.append("s/" + this.getTaskStartTime().value + " ");
+        }
+        if (this.getTaskEndTime() != null) {
+        	sb.append("e/" + this.getTaskEndTime().value + " ");
+        }
+        if (this.getTaskDescription() != null) {
+        	sb.append("m/" + this.getTaskDescription() + " ");
+        }
+        //sb.append(this.getTaskStatus() + " ");
+        //this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 

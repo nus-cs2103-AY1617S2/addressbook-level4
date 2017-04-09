@@ -8,7 +8,7 @@ import seedu.task.model.task.UniqueTaskList;
 //@@author A0146757R
 public class TypicalTestTasks {
 
-    public static TestTask apples, cereals, yam, zoo;
+    public static TestTask apples, cereals, yam, zoo, yam2, zoo2, yam3, zoo3;
 
     public TypicalTestTasks() {
         try {
@@ -26,6 +26,19 @@ public class TypicalTestTasks {
             zoo = new TaskBuilder().withTaskName("Visit zoo").withTaskDate("030217")
                     .withTaskStartTime("0800").withTaskEndTime("1700")
                     .withTaskDescription("Bring Jesse along").withTaskStatus("Ongoing").build();
+            yam2 = new TaskBuilder().withTaskName("Grow yam2").withTaskDate("100217")
+                    .withTaskStartTime("0700").withTaskEndTime("1700")
+                    .withTaskDescription("Buy fertilizers").withTaskStatus("Ongoing").build();
+            zoo2 = new TaskBuilder().withTaskName("Visit zoo2").withTaskDate("030217")
+                    .withTaskStartTime("0800").withTaskEndTime("1700")
+                    .withTaskDescription("Bring Jesse along").withTaskStatus("Ongoing").build();
+            yam3 = new TaskBuilder().withTaskName("Grow yam3").withTaskDate("100217")
+                    .withTaskStartTime("0700").withTaskEndTime("1700")
+                    .withTaskDescription("Buy fertilizers").withTaskStatus("Ongoing").build();
+            zoo3 = new TaskBuilder().withTaskName("Visit zoo3").withTaskDate("030217")
+                    .withTaskStartTime("0800").withTaskEndTime("1700")
+                    .withTaskDescription("Bring Jesse along").withTaskStatus("Ongoing").build();
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -46,7 +59,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[] { apples, cereals, yam, zoo };
+        return new TestTask[] { apples, cereals, yam, zoo, yam2, zoo2, yam3, zoo3 };
     }
 
     public TaskManager getTypicalTaskManager() {

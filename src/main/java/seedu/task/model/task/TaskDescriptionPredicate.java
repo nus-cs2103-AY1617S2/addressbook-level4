@@ -32,10 +32,10 @@ public class TaskDescriptionPredicate implements Predicate<Object> {
     @Override
     public boolean test(Object t) {
         Task task = (Task) t;
-        if (task.getTaskName().fullTaskName.length() < desc.length()) {
+        if (task.getTaskDescription().length() < desc.length()) {
             return false;
         }
-        return patternStringMatch(desc, task.getTaskName().fullTaskName);
+        return patternStringMatch(desc, task.getTaskDescription());
     }
 
 }
