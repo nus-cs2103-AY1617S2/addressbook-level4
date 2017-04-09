@@ -5,8 +5,9 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * A utility class to help with building TaskManager objects. Example usage: <br>
- * {@code TaskManager tm = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ * A utility class to help with building TaskManager objects. Example usage:
+ * <br>
+ * {@code TaskManager tm = new TaskManagerBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class TaskManagerBuilder {
 

@@ -25,7 +25,8 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     // assertPersonSelected(middleIndex); // assert previous selection remains
     //
     // /*
-    // * Testing other invalid indexes such as -1 should be done when testing the SelectCommand
+    // * Testing other invalid indexes such as -1 should be done when testing
+    // the SelectCommand
     // */
     // }
 
@@ -44,17 +45,24 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
         assertResultMessage("Selected Person: " + index);
-        assertPersonSelected(index);
+        assertTaskSelected(index);
     }
 
-    private void assertPersonSelected(int index) {
+    private void assertTaskSelected(int index) {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedPerson = taskListPanel.getSelectedTasks().get(0);
-        assertEquals(taskListPanel.getTask(index - 1), selectedPerson);
-        // TODO: confirm the correct page is loaded in the Browser Panel
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), selectedTask); // TODO:
+                                                                      // confirm
+                                                                      // the
+                                                                      // correct
+                                                                      // page is
+                                                                      // loaded
+                                                                      // in the
+                                                                      // Browser
+                                                                      // Panel
     }
 
-    private void assertNoPersonSelected() {
+    private void assertNoTaskSelected() {
         assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
 

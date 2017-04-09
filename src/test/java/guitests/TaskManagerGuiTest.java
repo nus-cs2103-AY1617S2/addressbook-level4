@@ -19,6 +19,7 @@ import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.task.TestApp;
