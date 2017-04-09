@@ -63,7 +63,7 @@ public class ListCommandTest extends ToDoListGuiTest {
     @Test
     public void list_orderDateTime_inorder() {
         TestTask[] deadlineExpected = new TestTask[]{td.taskD, td.taskJ, td.taskE, td.taskF};
-        TestTask[] eventExpected = new TestTask[]{td.taskA, td.taskC, td.taskB};
+        TestTask[] eventExpected = new TestTask[]{td.taskC, td.taskB, td.taskA};
         TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskH, td.taskI};
         assertListInOrder(" o/datetime", deadlineExpected, eventExpected, todoExpected);
     }
