@@ -1,5 +1,8 @@
 package seedu.task.logic.commands;
 
+import java.util.logging.Logger;
+
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -13,6 +16,7 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
  * Deletes a person identified using it's last displayed index from the task manager.
  */
 public class DeleteCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
 
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_WORD_REC = "deletethis";
@@ -53,6 +57,7 @@ public class DeleteCommand extends Command {
             try {
                 deleteOccurrence = Task.extractOccurrence(taskToDelete);
                 model.deleteThisTask(taskToDelete, taskToAdd);
+                logger.info("Deleting specific instance of recurring task");
                 return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deleteOccurrence));
             } catch (DuplicateTaskException e) {
                 throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
