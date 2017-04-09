@@ -57,10 +57,15 @@ Format: `add TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPT
 
 Example :
 * `add tutorial start/13/01/2017 11:00 end/13/01/2017 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
+
 <img src="images/Event_JOBS.png" width="600"><br>
+
 * `add v0.0 end/03/03/2017 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
+
 <img src="images/TaskWithDeadline_JOBS.png" width="600"><br>
+
 * `add name/swim desc/"Remember to swim"`
+
 <img src="images/FloatingTask_JOBS.png" width="600"><br>
 
 ### Delete a task: `delete`
