@@ -98,13 +98,13 @@ public class CompleteCommand extends Command implements Undoable {
             tempList.add(new Date(taskToEdit.getRecurState().getRecurDisplayDate()));
             ((Task) taskToEdit).getRecurState().setRecurDisplayDate("");
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
-                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
-                            tempList);
+                            taskToEdit.getTags(), taskToEdit.getActiveStatus(),
+                            taskToEdit.getRecurState().isRecurring(),
+                            taskToEdit.getRecurState().getRecurInterval(), tempList);
         } else {
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false,
-                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getTags(), false, taskToEdit.getRecurState().isRecurring(),
+                            taskToEdit.getRecurState().getRecurInterval(),
                             taskToEdit.getRecurState().getRecurCompletedList());
         }
     }
@@ -120,13 +120,12 @@ public class CompleteCommand extends Command implements Undoable {
             List<Date> tempList = taskToEdit.getRecurState().getRecurCompletedList();
             tempList.remove(tempList.size() - 1);
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                    taskToEdit.getTags(), taskToEdit.getTimedStatus(), true,
-                    taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
-                    tempList);
+                                taskToEdit.getTags(), true, taskToEdit.getRecurState().isRecurring(),
+                                taskToEdit.getRecurState().getRecurInterval(), tempList);
         } else {
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                                taskToEdit.getTags(), taskToEdit.getTimedStatus(), true,
-                                taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                                taskToEdit.getTags(), true, taskToEdit.getRecurState().isRecurring(),
+                                taskToEdit.getRecurState().getRecurInterval(),
                                 taskToEdit.getRecurState().getRecurCompletedList());
         }
 
@@ -140,8 +139,9 @@ public class CompleteCommand extends Command implements Undoable {
         assert taskToEdit != null;
         ((Task) taskToEdit).getRecurState().setRecurDisplayDate("");
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
-                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getTags(), taskToEdit.getActiveStatus(),
+                            taskToEdit.getRecurState().isRecurring(),
+                            taskToEdit.getRecurState().getRecurInterval(),
                             taskToEdit.getRecurState().getRecurCompletedList());
 
     }
