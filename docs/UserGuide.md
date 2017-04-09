@@ -195,9 +195,9 @@ EDIT DATETIME FORMAT
 >    * b. `on/` DATETIME
 >    * c. `from/` DATETIME `to/` DATETIME
 >    * d. `on/` DATETIME `to/` DATETIME
->    * e. `REMOVEDATES`
+>    * e. `"REMOVEDATES"`
 > * All existing DATETIME of the task to be edited will be removed.
-> * REMOVEDATES removes all existing dates of a task and changes it to a floating task.
+> * "REMOVEDATES" removes all existing dates of a task and changes it to a floating task.
 > * No other field is allowed
 
 Examples:
