@@ -22,7 +22,8 @@ By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbs
 	3.11. [Getting Help](#311-get-help--help) <br>
 	3.12. [Changing Data File Location](#312-change-data-file-location) <br>
 	3.13. [Loading Data File From Location](#313-load-data-file-from-location) <br>
-	3.14. [Exiting](#314-exit-the-program--exit)
+	3.14. [Hotkey Toggling](#314-hotkey-toggling) <br>
+	3.15. [Exiting](#315-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 
@@ -95,12 +96,20 @@ You are currently reading my user guide, which has been written to help you with
 
 #### Task Details:
 
-  > * Name
-  > * Start Date
-  > * Start Time
-  > * End Date
-  > * End Time
-  > * Tag
+  > * Name <br>
+  `Name must only contain alphanumeric characters.`
+  > * Start Date <br>
+  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  > * Start Time <br>
+  `All time formats are supported.`
+  > * End Date <br>
+  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  > * End Time <br>
+  `All time formats are supported.`
+  > * Tag <br>
+  `Tag must only contain alphanumeric characters.`
+  > * Recur Interval <br>
+  `Only 4 accepted values: None, Day, Week, Month`
 
 #### Task Filters:
 
@@ -109,6 +118,7 @@ You are currently reading my user guide, which has been written to help you with
   > * Uncompleted
   > * Floating
   > * Timed
+  > * Overdue
 
 ### 3.2. Add a task : `add`
 
@@ -183,10 +193,12 @@ For advanced users: **`l`** `<filter>` <br>
 
 ### 3.4. Find a task : `find`
 
-Finds uncompleted and overdue task(s) whose name(s) contain `<keyword>` with one margin of error. <br>
+Finds uncompleted and overdue task(s) whose details(s) contain `<keyword>` with one margin of error. <br>
 
-> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.<br>
 > Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
+
+> **`find`** can also be used to look for dates, time and tags<br>
 
 A reason why you might want to _find_ a task:
 
@@ -219,16 +231,22 @@ An example of a task you might want to _edit_: <br>
   belated birthday present the next time you meet her.
 
 Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
-This command will direct me to make the specified update to a task with `<task_index>`. <br>
+This command will direct me to make the specified update to a task with `<task_index>`. <br><br>
 Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
 You can edit more task details for your task concurrently using the following format:<br>
 E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 
+~~~
+**Special Note**
+'<task_detail>' can be used interchangeably with no special characters or initials for better convenience 
+E.g. 'start_date' can be replaced with 'startdate' or 'sd'
+'recur_interval' can be replaced with 'recurinterval' or 'ri'
+~~~
+
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
 
-For advanced users: **`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br>
-alternatively <br>
+For advanced users: **`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br><br>
 For advanced users: **`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
 
 ### 3.6. Delete a task : `delete`
@@ -302,7 +320,7 @@ _Figure 3.9.1. Undo Command_
 
 For advanced users: **`u`** <br>
 
-### 3.10. Navigate the Calendar:
+### 3.10. Navigate the calendar:
 
 Replaces navigation buttons on the calendar with user commands. <br>
 
@@ -317,7 +335,7 @@ _Figure 3.10.1. Calendar_
 
 For advanced users: **`p`**, **`n`**, **`s`** `<view>` <br>
 
-### 3.12. Get help : `help`
+### 3.11. Get help : `help`
 
 Shows a list of all commands I can execute and their usage instructions. <br>
 
@@ -332,7 +350,7 @@ _Figure 3.12.1. Help Command_
 
 For advanced users: **`h`** `<command>` <br>
 
-### 3.13. Change data file location
+### 3.12. Change data file location
 
 Modifies the file path of my data file. <br>
 Future modifications of my task list will be saved at this new location. <br>
@@ -351,7 +369,7 @@ then save all my data in that file.
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.13.1. Save Command_
 
-### 3.14. Load data file from location
+### 3.13. Load data file from location
 
 Loads the specified data file. <br>
 
@@ -366,6 +384,18 @@ This command loads the data from the specified file in the `<file_path>`.
 
 <img src="images/UiLoadCommand.png" width="600"><br>
 _Figure 3.14.1. Load Command_
+
+### 3.14. Hotkey toggling
+
+Toggles tache window into/out of view using a hotkey <br>
+
+Here is a reason why you might want to _toggle tache window_:
+
+* **You are reading you email and want to quickly add a new task lest you forget** <br>
+
+  > Instead of moving the mouse to the small icon on the taskbar, simple press the hotkey.  <br>
+
+Hotkey: **`CTRL + ALT + D`** <br>
 
 ### 3.15. Exit the program : `exit`
 
