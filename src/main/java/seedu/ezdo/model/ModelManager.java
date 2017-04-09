@@ -386,9 +386,10 @@ public class ModelManager extends ComponentManager implements Model {
          * {@code StartDate}, before and after boolean status
          */
         private boolean compareStart(ReadOnlyTask task) {
-            return (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
+            boolean isQualified = (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
                     || (startBefore && compareBeforeStart(task.getStartDate()))
                     || (startAfter && compareAfterStart(task.getStartDate())));
+            return isQualified;
         }
 
         /**
@@ -396,9 +397,10 @@ public class ModelManager extends ComponentManager implements Model {
          * {@code DueDate}, before and after boolean status
          */
         private boolean compareDue(ReadOnlyTask task) {
-            return (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
+            boolean isQualified = (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
                     || (dueBefore && compareBeforeDue(task.getDueDate()))
                     || (dueAfter && compareAfterDue(task.getDueDate())));
+            return isQualified;
         }
 
         /**
