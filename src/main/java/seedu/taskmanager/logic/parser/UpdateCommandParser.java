@@ -72,7 +72,8 @@ public class UpdateCommandParser {
             String stringEndDate = "";
 
             /*
-             * To validate and assign task details if user only wants to input numbers
+             * To validate and assign task details if user only wants to input
+             * numbers
              */
             if (isPrefixNumbersOnly(fromPrefixInput)) {
                 if (DateTimeUtil.isValidTime(fromPrefixInput.get())) {
@@ -92,7 +93,8 @@ public class UpdateCommandParser {
             }
 
             /*
-             * To parse user inputs if user wants to update current task to a same day event task
+             * To parse user inputs if user wants to update current task to a
+             * same day event task
              */
             if (onPrefixInput.isPresent()) {
                 if (isValidTimePrefixesArgLen(onPrefixInput)) {
@@ -108,7 +110,8 @@ public class UpdateCommandParser {
                             stringEndTime = DateTimeUtil.includeOneHourBuffer(stringStartTime);
                             if (Integer.parseInt(stringEndTime) < 100) {
                                 if (stringEndDate.trim().matches(ALPHABET_ONLY_STRING_REGEX)) {
-                                    stringEndDate = DateTimeUtil.getFutureDate(1, "days", DateTimeUtil.getNewDate(stringEndDate));
+                                    stringEndDate = DateTimeUtil.getFutureDate(1, "days",
+                                            DateTimeUtil.getNewDate(stringEndDate));
                                 } else {
                                     stringEndDate = DateTimeUtil.getFutureDate(1, "days", stringEndDate);
                                 }
@@ -319,8 +322,8 @@ public class UpdateCommandParser {
     }
 
     /*
-     * Checks to ensure correct combinations of arguments are added by
-     * user when updating tasks in the task manager
+     * Checks to ensure correct combinations of arguments are added by user when
+     * updating tasks in the task manager
      */
     private void updateTaskInputValidation(Optional<String> onPrefixInput, Optional<String> byPrefixInput,
             Optional<String> fromPrefixInput, Optional<String> toPrefixInput) throws NoSuchElementException {
@@ -329,14 +332,14 @@ public class UpdateCommandParser {
             if ((onPrefixInput.isPresent()) && ((byPrefixInput.isPresent()) || (fromPrefixInput.isPresent()))) {
                 throw new NoSuchElementException();
             }
-            if ((byPrefixInput.isPresent()) && ((onPrefixInput.isPresent()) || (fromPrefixInput.isPresent())
-                    || (toPrefixInput.isPresent()))) {
+            if ((byPrefixInput.isPresent())
+                    && ((onPrefixInput.isPresent()) || (fromPrefixInput.isPresent()) || (toPrefixInput.isPresent()))) {
                 throw new NoSuchElementException();
             }
             if (((fromPrefixInput.isPresent()) && ((onPrefixInput.isPresent()) || (byPrefixInput.isPresent())))) {
                 throw new NoSuchElementException();
             }
-        }        
+        }
     }
 
     /**
@@ -364,5 +367,5 @@ public class UpdateCommandParser {
         } else {
             return true;
         }
-    }    
+    }
 }
