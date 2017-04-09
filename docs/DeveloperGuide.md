@@ -19,7 +19,8 @@
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle
+5. **Checkstyle**
+6. **Google Calendar API**
 
 #### Importing the project into Eclipse
 
@@ -47,8 +48,17 @@
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-#### Troubleshooting project setup
+#### Turning on the Google Calendar API
+1. Use this [wizard](https://console.developers.google.com/start/api?id=calendar] to create or select a project in the Google Developers Console and automatically turn on the API. Click **Continue**, then Go to **credentials**.
+2. On the **Add credentials to your project** page, click the **Cancel** button.
+3. At the top of the page, select the **OAuth consent screen** tab. Select an **Email address**, enter a **Product name** if not already set, and click the **Save** button.
+4. Select the **Credentials** tab, click the **Create credentials** button and select **OAuth client ID**.
+5. Select the application type **Other**, enter the name "Google Calendar API Quickstart", and click the **Create** button.
+6. Click *OK* to dismiss the resulting dialog.
+7. Click the **Download JSON** button to the right of the client ID.
+8. Move this file to your working directory and rename it `client_secret.json`.
 
+#### Troubleshooting project setup
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 * Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
 * Solution: Refresh the project in Eclipse:<br>
@@ -82,8 +92,9 @@ The rest of the App consists four components.
 * [**`Logic`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`Calendar`**] : Manage interaction with Google Calendar display.
 
-Each of the four components
+Each of the five components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
@@ -309,94 +320,70 @@ Priority | As a ... | I want to ... | So that I can...
 
 **MSS**
 
-1. User types in the task that he/she wishes to be included in the task reminder
-2. System informs the user that the task has been included in the task reminder
-<<<<<<< HEAD
+1. User types in the task that he/she wishes to be included in the task reminder.
+2. System informs the user that the task has been included in the task reminder.
 Use case ends.
 
-=======
-Use case ends.
-
->>>>>>> refs/heads/master
 **Extensions**
-User enters the wrong task format
-<<<<<<< HEAD
-JOBS shows the expected task format
-JOBS prompts user to re-enter the task
-=======
->>>>>>> refs/heads/master
-
-JOBS shows the expected task format
-JOBS prompts user to re-enter the task
-
-> Use case ends
+1a. User enters the wrong task format.
+>1a1. JOBS shows the expected task format.
+>1a2. System prompts user to re-enter the task.
+>Use case ends.
 
 ### UC02 Task Listing
 
 **MSS**
 
-1. User types in the kind of task that he wants to list
-2. System outputs all the information with regards to the task the user queries
-<<<<<<< HEAD
-=======
+1. User types in the kind of task that he wants to list.
+2. System outputs all the information with regards to the task the user queries.
 Use case ends.
->>>>>>> refs/heads/master
 
 **Extensions**
 
 1a. User enters the wrong task format.
-    1a1. System shows the expected task format.
-    1a2. System prompts user to re-enter the task.
-Use case resumes from step 1.
+>1a1. System shows the expected task format.
+>1a2. System prompts user to re-enter the task.
+>Use case resumes from step 1.
 
 1b. The specific task name or filter cannot be found.
-    1b1. System informs the user that the specific task/filter cannot be found.
-
+>1b1. System informs the user that the specific task/filter cannot be found.
 >Use case ends.
 
-### UC03 Update a task
+### UC03 Edit a task
 
 **MSS**
 
-1. User chooses to update a task
+1. User chooses to update a task.
 2. System requests for task selection.
 3. User selects the task.
 4. System requests for details of the update.
 5. User enters the requested details.
 6. System requests for confirmation.
 7. User confirms update.
-<<<<<<< HEAD
 8. System updates the selected task and displays the updated task’s information.
 Use case ends.
-=======
-8. System updates the selected task and displays the updated taskâ€™s information.
-Use case ends.
->>>>>>> refs/heads/master
 
 **Extensions**
-3a. The input task cannot be found.
 
-    3a1. System requests for creating new task.
-    3a2. System confirms creating new task.
-    3a3. System creates a new task. (UC01)
+3a. The input task cannot be found.
+>3a1. System requests for creating new task.
+>3a2. System confirms creating new task.
+>3a3. System creates a new task.
+>Use case ends.
 
 
 5a. System detects an error in the entered data.
-
-    5a1. System requests for the correct data.
-    5a2. User enters new data.
-
-Step 5a1-5a2 are repeated until the data entered are correct.
-Use case resumes from step 6.
+>5a1. System requests for the correct data.
+>5a2. User enters new data.
+>Step 5a1-5a2 are repeated until the data entered are correct.
+>Use case resumes from step 6.
 
 * a. At  any time, user chooses to cancel the update
 
-    *a1. System requests to confirm the cancellation.
-    *a2. User confirms the cancellation.
-    *a3. System discards all the changes.
-
-
->Use case ends.s
+>a1. System requests to confirm the cancellation.
+>a2. User confirms the cancellation.
+>a3. System discards all the changes.
+>Use case ends.
 
 ### UC04 Delete a task
 
@@ -406,25 +393,18 @@ Use case resumes from step 6.
 2. System requests for confirmation.
 3. User confirms deletion
 4. System delete the selected task and displays the updated list of task.
-<<<<<<< HEAD
 Use case ends.
-=======
-Use case ends.
->>>>>>> refs/heads/master
 
 **Extensions**
 
 1a. The specified task cannot be found.
-
-    1a1. System shows an error message.
-
-
->Use case ends
+>1a1. System shows an error message.
+>Use case ends.
 
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
+1. Should work on any mainstream OS as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks.
 3. Should come with automated unit tests and open source code.
 4. Should favor natural language style commands.
