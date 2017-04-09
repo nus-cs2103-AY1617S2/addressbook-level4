@@ -147,6 +147,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    public void updateTasksStatus() {
+        tasks.updateTasksStatus();
+    }
+
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -158,7 +162,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public String toString() {
         return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";
-        // TODO: refine later
     }
 
     @Override

@@ -165,6 +165,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting Watodo " + MainApp.VERSION);
         ui.start(primaryStage);
+        model.updateTasksStatus();
     }
 
     @Override

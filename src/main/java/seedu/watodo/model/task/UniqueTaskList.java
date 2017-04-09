@@ -1,5 +1,6 @@
 package seedu.watodo.model.task;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -127,4 +128,19 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {}
 
+    //@@author A0143076J
+    /**
+     * Updates each of the tasks' status to Overdue if it is an event or deadline task that
+     * has not been marked done and the endDate has passed from current date
+     */
+    public void updateTasksStatus() {
+        Date currDate = new Date();
+        for (int i = 0; i < internalList.size(); i++) {
+            Task task = internalList.get(i);
+            if (!task.getStatus().equals(TaskStatus.DONE)
+                    && task.getEndDate() != null && !task.getEndDate().isLater(currDate)) {
+                task.setStatus(TaskStatus.OVERDUE);
+            }
+        }
+    }
 }
