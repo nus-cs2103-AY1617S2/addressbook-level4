@@ -67,7 +67,7 @@ public class DateParser {
             List<DateGroup> dateGroupList = parser.parse(taskDate);
 
             // Retrieves parsed date
-            Date parsedDate = dateGroupList.get(0).getDates().get(0);
+            Date parsedDate = retrieveParsedDate(dateGroupList);
 
             // Format parsed date to suit the UI
             return USER_OUTPUT_DATE_FORMAT.format(parsedDate);
@@ -76,6 +76,18 @@ public class DateParser {
             return taskDate;
         }
     }
-    //@@author A0139177W
 
+    /**
+     * Returns the parsed date from dateGroupList
+     * @param dateGroupList  A list of DateGroup which contains a list of Dates.
+     * @return parsedDate    The parsed date.
+     */
+    private Date retrieveParsedDate(List<DateGroup> dateGroupList) {
+        int firstElement = 0;
+        DateGroup parsedDateGroup = dateGroupList.get(firstElement);
+        List<Date> parsedDateList = parsedDateGroup.getDates();
+        Date parsedDate = parsedDateList.get(firstElement);
+        return parsedDate;
+    }
+    //@@author A0139177W
 }
