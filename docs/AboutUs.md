@@ -66,8 +66,8 @@ We are a team based in the [School of Computing, National University of Singapor
    * [List Command](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#33-list-all-tasks--list)
    * [Find Command](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#34-find-a-task--find)
    * [Complete Command](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#38-complete-a-task--complete)
-   * [Recurring tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#314-hotkey-toggling)
-   * [Toggle Hotkey](https://github.com/CS2103JAN2017-T09-B4/main/pull/94)
+   * [Recurring tasks](https://github.com/CS2103JAN2017-T09-B4/main/pull/212)
+   * [Toggle Hotkey](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#314-hotkey-toggling)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0139925U.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0139925U.md)]
 * Other major contributions:
   * Did partial initial refactoring from AddressBook to Tache [[#10](https://github.com/CS2103JAN2017-T09-B4/main/pull/10) ]
