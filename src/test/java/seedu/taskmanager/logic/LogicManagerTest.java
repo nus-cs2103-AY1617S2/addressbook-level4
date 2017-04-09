@@ -879,9 +879,7 @@ public class LogicManagerTest {
 
         assertCommandSuccess("load " + sampleFilepath, String.format(LoadCommand.MESSAGE_SUCCESS, sampleFilepath),
                 expectedTM, expectedTasks);
-        Config modifiedStorageConfig =
-                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
-        assertDirectoryChanged(sampleFilepath, modifiedStorageConfig);
+        assertDirectoryChanged(sampleFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
 
         ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
     }
@@ -902,24 +900,51 @@ public class LogicManagerTest {
         TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
         assertCommandSuccess("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath),
                 expectedTM, expectedTasks);
-        Config modifiedStorageConfig =
-                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
-        assertDirectoryChanged(newFilepath, modifiedStorageConfig);
+        assertDirectoryChanged(newFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
 
         ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
         f.delete();
     }
 
     @Test
-    public void execute_save_invalidFilePath() throws Exception {
-        assertCommandFailure("save !asdwie34$2.xml",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
-        assertCommandFailure("saveas data/taskmanager",
-                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
-    }
+    public void execute_saveas_successful() throws Exception {
+        Config originalStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
+        String saveasFilepath = "src/test/data/cd_test/saveas.xml";
+        String saveFilepath = "src/test/data/cd_test/save.xml";
+        TestDataHelper helper = new TestDataHelper();
 
+        List<Task> expectedTasks = helper.generateTaskList(5);
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+        helper.addToModel(model, expectedTasks);
+
+        assertCommandSuccess("saveas " + saveasFilepath, String.format(SaveAsCommand.MESSAGE_SUCCESS, saveasFilepath),
+                expectedTM, expectedTasks);
+        assertDirectoryChanged(saveasFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        Task tTarget6 = helper.generateTask(6);
+        Task tTarget7 = helper.generateTask(7);
+        List<Task> addedTasks = helper.generateTaskList(tTarget6, tTarget7);
+        List<Task> newExpectedTasks = helper.generateTaskList(7);
+        TaskManager newExpectedTM = helper.generateTaskManager(newExpectedTasks);
+        helper.addToModel(model, addedTasks);
+        assertCommandSuccess("save " + saveFilepath, String.format(SaveAsCommand.MESSAGE_SUCCESS, saveFilepath),
+                newExpectedTM, newExpectedTasks);
+        assertDirectoryChanged(saveFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        assertCommandSuccess("save " + saveasFilepath, String.format(SaveAsCommand.MESSAGE_SUCCESS, saveasFilepath),
+                newExpectedTM, newExpectedTasks);
+        assertDirectoryChanged(saveasFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
+        File f1 = new File(saveasFilepath);
+        File f2 = new File(saveFilepath);
+        f1.delete();
+        f2.delete();
+    }
+    
     @Test
-    public void execute_save_successful() throws Exception {
+    public void execute_saveas_invalidFilePath() throws Exception {
         assertCommandFailure("save !asdwie34$2.xml",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
         assertCommandFailure("saveas data/taskmanager",

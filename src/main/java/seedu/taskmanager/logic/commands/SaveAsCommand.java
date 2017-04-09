@@ -25,7 +25,7 @@ public class SaveAsCommand extends Command {
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
-    public static final String MESSAGE_SUCCESS = "TaskManager directory saved to : ";
+    public static final String MESSAGE_SUCCESS = "TaskManager directory saved to : %1$s";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVE = "Failed to save TaskManager : '%1$s'";
 
@@ -59,6 +59,6 @@ public class SaveAsCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_SAVE + StringUtil.getDetails(e));
         }
 
-        return new CommandResult(MESSAGE_SUCCESS + this.newPath);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.newPath));
     }
 }
