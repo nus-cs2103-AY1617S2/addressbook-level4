@@ -49,7 +49,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
+Format: `add TASK_NAME [from START TIME] [to END TIME] [in GROUP]
 
 > Persons can add a task without defining either start time or end time.
 > local time will be set as default if start time and end time parameters do not specify time .
@@ -57,9 +57,10 @@ Format: `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
 
 Examples:
 
-* **Normal task**: `add CS2103 assignment s/Feb 3 d/Apr 6 e/example@gmail.com g/study`
-* **Task with deadline**: `add CS2013 assignment d/tomorrow e/example@gmail.com g/study`
-* **Floating task**: `add CS2013 assignment e/example@gmail.com g/study`
+* **Normal task**: `add CS2103 assignment from Feb 3 to Apr 6 in study`
+* **Task with deadline**: `add CS2013 assignment to tomorrow in study`
+* **Task with deadline**: `add CS2013 assignment from Monday in study'
+* **Floating task**: `add CS2013 assignment in study`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -85,7 +86,7 @@ Examples:
 * `edit 2 g/weekend`<br>
   Edits the group of the 2nd task to "weekend".
 
-### 2.5. Marking a task as complete : `Mark`
+### 2.5. Marking a task as complete : `mark`
 
 Changes the status of one task to **complete**.
 Format: `mark INDEX` <br>
@@ -97,7 +98,7 @@ Examples:
 * `mark 1`<br>
   Marks the 1st task as completed.
   
-### 2.6. Marking a task as incomplete : `Unmark`
+### 2.6. Marking a task as incomplete : `unmark`
 
 Marks a task in current task list as incomplete.
 Format: `unmark INDEX` <br>
@@ -111,7 +112,7 @@ Examples:
 
 ### 2.7. Deleting a task : `delete`
 
-Deletes the specified task. Irreversible.<br>
+Deletes the specified task. Reversible with 'undo' <br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
