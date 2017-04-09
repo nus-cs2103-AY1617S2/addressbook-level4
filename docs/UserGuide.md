@@ -85,12 +85,15 @@ Examples:
 Shows a list of all tasks in the task list.<br>
 Format: `list`<br>
 
-> The list of tasks will be sorted accoding to priority level from 1 to 3
+> All tasks will appear in the task list, and tasks will appear in the calendar as well.
 
 Example:
-
 * `list`<br>
   Shows a list of all tasks in the task list.
+
+### 2.3.1 Natural ordering of tasks
+
+> Sorting occurs automatically in Task Manager after every action. First, completed tasks will be sent to the bottom of the list. Then, tasks are sorted by priority, with highest priority tasks at the top of the list. Afterwards, tasks are sorted by their end time, then start time, then alphabetized by description.
 
 ### 2.4. Editing a task : `edit`
 
@@ -112,8 +115,13 @@ Editing a recurring task in this way will edit all instances
 > in the edit command (see example below).
 > * You can edit the frequency of a recurring task following the same syntax. Note that all occurrences will be changed
 > according to the frequency specified.
+<<<<<<< HEAD
 > * Once a non-recurring task is created, it cannot be `edit`ed and made into a recurring task. You must create a new task using
 > * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one. 
+=======
+> * Once a non-recurring task is created, it cannot be * `edit`ed and made into a recurring task. You must create a new task using
+> * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one.
+>>>>>>> update UserGuide.md
 
 Examples:
 
@@ -123,9 +131,12 @@ Examples:
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
 
+<<<<<<< HEAD
 * `edit 4 ed/floating`<br>
    Removes the end timing for task 4.
   
+=======
+>>>>>>> update UserGuide.md
 * `edit 1 r/1y` <br>
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
@@ -136,7 +147,7 @@ Examples:
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
 
   Examples:
-  
+
   * `edithis 2 sd/01/01/2017`<br>
   Edits the start date of task 2 (which is reccuring)
 
@@ -172,7 +183,7 @@ Examples:
   > * The instance in 'list' will be updated to match the parameters after executing a valid 'find'
 
   Examples:
-  
+
   * `add feed cat sd/10/05/2017 ed/10/05/2017 r/1d`<br>
     The task is displayed in the list with the above parameters
   * `find 11/05/2017`<br>
@@ -270,7 +281,7 @@ Format: `clear`
 Exits the program.<br>
 Format: `exit`
 
-Example: 
+Example:
 
 * `exit`<br>
 The application will shut down.
@@ -279,23 +290,28 @@ The application will shut down.
 
 Saves task manager data in specified file location.
 Format: `save PATH/TO/SAVE_LOCATION`
-> * Task list data is saved in the hard disk automatically after any command that changes the data.<br>
-> * There is no need to save manually.
+
+* Task list data is saved in the hard disk automatically after any command that changes the data.<br>
+* As a result, there is no need to save manually.
+* The exception is when you want to save data to a new location.
 
 Examples:
 
-* `save`
-* `save` 
+* `save` task_manager_back_up.xml
+* `save` data/taskmanager.xml
 
 ### 2.12. Loading the data : `load`
 
 Loads task manager data from specified file location
 Format: `load PATH/TO/LOAD_LOCATION`
 
+* Loading occurs automatically when Task Manager opens.
+* As a result, the load command is only necessary when Task data should be loaded from a new location.
+
 Examples:
 
-* `load`
-* `load`
+* `load` task_manager_old.xml
+* `load` data/saved_task_manager.xml
 
 ## 3. Notes on Recurring Tasks
 
@@ -312,7 +328,7 @@ the implementation of such tasks. A few things to note about how to use this fea
   the User Interface. This will remove all occurrences of the recursive task from the Task Manager.
 * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
-* Both start and end time parameters must be specified for initiating a recurring task. 
+* Both start and end time parameters must be specified for initiating a recurring task.
 
 ## 4. FAQ
 
