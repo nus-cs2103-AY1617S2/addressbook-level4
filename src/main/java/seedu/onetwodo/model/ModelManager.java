@@ -113,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
             toDoList.doneTask(taskToComplete);
         } else {
             Task newTask = new Task(taskToComplete);
-            newTask.forwardTaskRecurDate();
+            newTask.updateTaskRecurDate(true);
             toDoList.doneTask(taskToComplete);
             toDoList.addTask(newTask);
             jumpToNewTask(newTask);
@@ -123,19 +123,57 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    //@@author A0139343E
     @Override
-    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete) throws IllegalValueException {
+    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete)
+            throws IllegalValueException, TaskNotFoundException {
+
         if (taskToUncomplete.getDoneStatus() == false) {
             throw new IllegalValueException(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
         }
-        if (taskToUncomplete.hasRecur()) {
-            throw new IllegalValueException("Recurring tasks cannot be undone");
-        }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.undoneTask(taskToUncomplete);
-        history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD, taskToUncomplete,
-                copiedCurrentToDoList);
+        Task copiedTask = new Task(taskToUncomplete);
+        copiedTask.updateTaskRecurDate(true);
+        copiedTask.setUndone();
+        ReadOnlyTask taskToCheck = copiedTask;
+
+        if (!taskToUncomplete.hasRecur()) {
+            undoneNonRecur(taskToUncomplete);
+
+        } else if (toDoList.contains(taskToCheck)) {
+            int index = toDoList.getTaskList().indexOf(taskToCheck);
+            if(toDoList.getTaskList().get(index).getDoneStatus() == false) {
+                undoneLatestRecur(taskToUncomplete, taskToCheck);
+            } else {
+                undoneNonLatestRecur(taskToUncomplete);
+            }
+
+        } else {
+            undoneNonParentRecur(taskToUncomplete);
+        }
+
+        history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD,
+                taskToUncomplete, copiedCurrentToDoList);
         indicateToDoListChanged();
+    }
+
+    private void undoneNonRecur(ReadOnlyTask taskToUncomplete) {
+        toDoList.undoneTask(taskToUncomplete);
+    }
+
+    private void undoneLatestRecur(ReadOnlyTask taskToUncomplete, ReadOnlyTask taskToRevertBackward) throws
+            TaskNotFoundException {
+        toDoList.removeTask(taskToUncomplete);
+        toDoList.backwardRecur(taskToRevertBackward);
+    }
+
+    private void undoneNonLatestRecur(ReadOnlyTask taskToUncomplete) {
+        undoneNonParentRecur(taskToUncomplete);
+    }
+
+    private void undoneNonParentRecur(ReadOnlyTask taskToUncomplete) {
+        ReadOnlyTask recurRemovedTask = toDoList.removeRecur(taskToUncomplete);
+        toDoList.undoneTask(recurRemovedTask);
     }
 
     //@@author

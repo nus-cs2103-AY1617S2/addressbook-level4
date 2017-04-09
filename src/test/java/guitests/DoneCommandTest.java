@@ -105,7 +105,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
             targetTask.setIsDone(true);
         } else {
             TestTask newTestTask = new TaskBuilder(targetTask).build();
-            newTestTask.forwardTaskRecurDate();
+            newTestTask.updateTaskRecurDate(true);
             targetTask.setIsDone(true);
             filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
         }

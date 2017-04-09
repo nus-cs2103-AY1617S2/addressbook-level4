@@ -144,6 +144,19 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.undone(taskToUncomplete);
     }
 
+    //@@author A0139343E
+    public Task removeRecur(ReadOnlyTask task) {
+        return tasks.removeRecur(task);
+    }
+
+    public boolean contains(ReadOnlyTask task) {
+        return tasks.contains(task);
+    }
+
+    public void backwardRecur(ReadOnlyTask task) {
+        tasks.updateRecur(task, false);
+    }
+
     //@@author A0135739W
     public void clearDone() {
         tasks.clearDone();

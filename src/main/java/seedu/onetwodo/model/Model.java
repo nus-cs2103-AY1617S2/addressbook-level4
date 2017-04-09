@@ -43,8 +43,9 @@ public interface Model {
      * Mark the given tasks uncompleted.
      *
      * @throws IllegalValueException
+     * @throws TaskNotFoundException
      */
-    void undoneTask(ReadOnlyTask taskToComplete) throws IllegalValueException;
+    void undoneTask(ReadOnlyTask taskToComplete) throws IllegalValueException, TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;

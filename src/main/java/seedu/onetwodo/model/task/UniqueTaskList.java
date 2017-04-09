@@ -95,6 +95,32 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, targetTask);
     }
 
+    /**
+     * Make a specified task non-recurring.
+     * @param task The chosen task to be made non-recurring.
+     */
+    public Task removeRecur(ReadOnlyTask task) {
+        int index = internalList.indexOf(task);
+        assert index >= 0;
+        Task targetTask = (Task) task;
+        Task returnTask;
+        returnTask = targetTask.removeRecur();
+        internalList.set(index,  returnTask);
+        return returnTask;
+    }
+
+    /**
+     * Increase the date time of a specified task by its recurring amount.
+     * @param task chosen to be modified.
+     */
+    public void updateRecur(ReadOnlyTask task, boolean isForward) {
+        int index = internalList.indexOf(task);
+        assert index >= 0;
+        Task targetTask = (Task) task;
+        targetTask.updateTaskRecurDate(isForward);
+        internalList.set(index, targetTask);
+    }
+
     //@@author A0135739W
     /**
      * clears completed tasks.

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
@@ -159,13 +160,18 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.endDate = endDate;
     }
 
+    public Task removeRecur() {
+        try {
+            this.recur = new Recurring("");
+        } catch (IllegalValueException e) {
+            System.err.println("Illegal value when creating Recurring");
+            e.printStackTrace();
+        }
+        return this;
+    }
+
     public void setDone() {
         assert isDone == false;
-        /*        if (!this.hasRecur()) {
-            isDone = true;
-        } else {
-            forwardTaskRecurDate();
-        }*/
         isDone = true;
     }
 
@@ -192,37 +198,38 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
 
     //@@author A0139343E
-    public void forwardTaskRecurDate() {
+    public void updateTaskRecurDate(boolean isForward) {
         assert this.getTaskType() != TaskType.TODO;
+        int valueToAdd = isForward ? 1 : -1;
         StartDate tempStartDate;
         EndDate tempEndDate = getEndDate();
         switch(this.recur.getRecur()) {
         case DAILY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(valueToAdd)));
             }
             break;
         case WEEKLY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(valueToAdd)));
             }
             break;
         case MONTHLY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(valueToAdd)));
             }
             break;
         case YEARLY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusYears(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusYears(valueToAdd)));
             }
             break;
         default:
