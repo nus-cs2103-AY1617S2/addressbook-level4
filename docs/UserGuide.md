@@ -5,9 +5,10 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 ---
 
 1. [Quick Start](#1-quick-start)
-2. [Features](#2-features)
-3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary)
+2. [User Interface] (#2-ui)
+2. [Features](#3-features)
+3. [FAQ](#4-faq)
+4. [Command Summary](#5-command-summary)
 
 ## 1. Quick Start
 
@@ -18,21 +19,42 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 
 1. Download the latest `TaskIt.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [User Interface](#2-ui) for a more detailed explanations of various UI components. 
+   > <img src="images/Ui_demo.gif" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all tasks
+   * **`list`**` all`: lists all tasks
    * **`add`**` do SWE project tag school tag CS` :
      adds a task titled `do SWE project` to the TaskIt.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+6. Refer to the [Features](#3-features) section below for details of each command.<br>
 
+<!-- @@author A0141872E -->
+## 2. User Interface
+#### Menu Bar : update the task list to display all relevant tasks based on the selection for fast search <br>
+Home will display all tasks inside, other buttons will only display incompleted tasks with the specified type.
+For example, click on deadline, only incompleted tasks with deadline will be displayed:
+<img src="images/menubar.png" width="300">
+<br>
 
-## 2. Features
+#### Task Card : display all details about a task   
+An incompleted task card is shown with a white color bar:
+<img src="images/incompleted_task.png" width="500"> 
+<br>
+A completed task card is shown with a green color bar:
+<img src="images/completed_task.png" width="500"> 
+<br>
+A overdued task card is shown with a white red bar:
+<img src="images/overdued_task.png" width="500"> 
+<br>
+There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:
+<img src="images/pri_high.png" width="100"> <img src="images/pri_medium.png" width="100"> <img src="images/pri_low.png" width="100"> 
+<br>
+
+## 3. Features
 
 > **Command Format**
 >
@@ -41,14 +63,14 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 2.1. Viewing help : `help`
+### 3.1. Viewing help : `help`
 
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 > Help is also shown for specific command if command is entered with incorrect arguments e.g.  `delete asdf`
 
-### 2.2. Adding a task: `add`
+### 3.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
 Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]`
@@ -62,28 +84,31 @@ Examples:
 
 > Tasks can have any number of tags (including 0)
 
-[//]: # "@@author A0141872E"
-### 2.3. Listing all tasks based on given parameters: `list` `l`
+<!-- @@author A0141872E -->
+### 3.3. Listing all tasks: `list`
+
+Listing all relevant tasks based on given parameters<br>
+Format: `list <all|undone|done|today|overdue|floating|event|deadline|high|medium|low>`
 
 List all the existing tasks in TaskIt.<br>
-Format: `l/list all`
+Format: `list all`
 
 List only the undone tasks in TaskIt.<br>
-Format: `l/list undone`
+Format: `list undone`
 
 List only the completed tasks in TaskIt.<br>
-Format: `l/list done`
+Format: `list done`
 
 List only the overdued tasks in TaskIt.<br>
-Format: `l/list overdue`
+Format: `list overdue`
 
 List all the tasks dued today in TaskIt.<br>
-Format: `l/list today`
+Format: `list today`
 
-### 2.4. Editing an existing task : `edit` `e`
+### 3.4. Editing an existing task : `edit` `e`
 
 Edits an existing task in TaskIt.<br>
-Format: `e/edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
+Format: `e/edit <INDEX>  <[title]|[from]|[to]|[priority]|[tag]> <NEW>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -98,16 +123,16 @@ Examples:
 * `e/edit 2 title finish SWE HW`<br>
   Edit the second task title to finish SWE HW.
 
-* `e/edit 1 start this Friday 3 pm end 4 pm`<br>
-  Edit the first task start time to this Friday 3pm and end time to this Friday 4pm.
+* `e/edit 1 from null`<br>
+  Remove the first task start time.
 
-* `e/edit 2 title attend meeting start Apr 7 at 2pm end 4pm priority high`<br>
+* `e/edit 2 title attend meeting from Apr 7 at 2pm to 4pm priority high`<br>
   Edit the second task title to attend meeting, start time to Apr 7th 2pm, end time to 4pm and prioirty to high.
 
 * `e/edit 1 tag null`<br>
   Remove all the tags of first task.
 
-### 2.5. Marks a task as done or undone: `mark` `m`
+### 3.5. Marks a task as done or undone: `mark` `m`
 
 Mark an existing task as done or undone based on a given valid index.<br>
 Format: `m/mark <INDEX> <undone|done>`
@@ -121,11 +146,12 @@ Examples:
 * `list all`<br>
   `m/mark 2 done`<br>
   Marks the 2nd task in the task manager as done.
+  
 * `find do HW` <br>
   `m/mark 1 undone`<br>
   Marks the 1st task in the results of the `find` command as undone.
 
-### 2.6. Searching all tasks based on keywords or date: `find`
+### 3.6. Searching all tasks based on keywords or date: `find`
 
 Finds tasks which matched name/deadline/tag.<br>
 Format: ` find <[NAME]|[DATE]|[TAG]>`
@@ -144,7 +170,7 @@ Examples:
   Returns tasks with dates on monday
 
 
-### 2.7. Deleting a task : `delete`
+### 3.7. Deleting a task : `delete`
 
 Deletes the specified task from the TaskIt.
 Format: `delete INDEX`
@@ -162,7 +188,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 2.8. Select a task : `select`
+### 3.8. Select a task : `select`
 
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
@@ -180,27 +206,27 @@ Examples:
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
 
-### 2.9. Clearing all entries : `clear`
+### 3.9. Clearing all entries : `clear`
 
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.10. Undo previous action: `undo`
+### 3.10. Undo previous action: `undo`
 
 Undo the prevous actions.<br>
 Format: `undo`
 
-### 2.11. Redo previous undo: `redo`
+### 3.11. Redo previous undo: `redo`
 
 Redo the prevous undone action.<br>
 Format: `redo`
 
-### 2.12. Exiting the program : `exit`
+### 3.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.13. Saving the data in specified file/folder
+### 3.13. Saving the data in specified file/folder
 
 Puts all TaskIt storage in the given path to file.
 Format: `save FILEPATH`
@@ -209,14 +235,14 @@ Example:
 
 * `save ../myFile.txt`<br>
 
-## 3. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous TaskIt folder.
 
-[//]: # "@@author A0141872E"
-## 4. Command Summary
+
+## 5. Command Summary
 
 * **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]` <br>
   e.g. `add Lunch with Bob tag friend priority low tag leisure`
@@ -227,9 +253,9 @@ Example:
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Edit**  `e/edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
+* **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
   e.g. `edit 1 title Movie`
-  e.g. `edit 2 start this Friday 3 pm`
+  e.g. `edit 2 from this Friday 3 pm`
   e.g. `edit 2 end none`
   e.g. `edit 2 end null`
   e.g. `edit 1 tag School`
@@ -238,7 +264,7 @@ Example:
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`
 
-* **List** : `l/list` <br>
+* **List** : `list` <br>
   e.g. `list all`
   e.g. `list done|undone`
   e.g. `list low|medium|high`
@@ -246,7 +272,7 @@ Example:
   e.g. `list today`
   e.g. `list floating|event|deadline`
 
-* **Mark** : `m/mark` <br>
+* **Mark** : `mark` <br>
   e.g. `mark 1 undone`
   e.g. `mark 3 done`
 

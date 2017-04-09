@@ -25,6 +25,29 @@
         <priority>high</priority>
     </tasks>
     <tasks>
+        <title>TR3002 meeting business plan</title>
+        <start>this thursday 4pm</start>
+        <end>thursday 11.59pm</end>
+        <priority>high</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <title>study for CS2103 final</title>
+        <start></start>
+        <end>Friday</end>
+        <priority>high</priority>
+    </tasks>
+    <tasks>
+        <title>pitching to VCs</title>
+        <start>15 april 11.15am</start>
+        <end>15 april 12pm</end>
+        <priority>high</priority>
+        <tagged>presentation</tagged>
+        <tagged>school</tagged>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
         <title>CS2103 TaskIt v0.5rc</title>
         <start></start>
         <end>next monday</end>
@@ -38,23 +61,6 @@
         <priority>high</priority>
         <tagged>school</tagged>
         <tagged>assignment</tagged>
-    </tasks>
-    <tasks>
-        <title>TR3002 meeting business plan</title>
-        <start>this thursday 4pm</start>
-        <end>thursday 11.59pm</end>
-        <priority>high</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
-    </tasks>
-    <tasks>
-        <title>pitching to VCs</title>
-        <start>15 april 11.15am</start>
-        <end>15 april 12pm</end>
-        <priority>high</priority>
-        <tagged>presentation</tagged>
-        <tagged>school</tagged>
-        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>new ACE grant launch</title>
@@ -97,6 +103,20 @@
         <tagged>cs2103</tagged>
     </tasks>
     <tasks>
+        <title>study for CS2103 final</title>
+        <start></start>
+        <end></end>
+        <priority>high</priority>
+    </tasks>
+    <tasks>
+        <title>CS2103 TaskIt v0.5</title>
+        <start></start>
+        <end>thursday 12pm</end>
+        <priority>medium</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
         <title>liaise with Prof Ben Leong</title>
         <start></start>
         <end>this sunday</end>
@@ -110,14 +130,6 @@
         <end>this sunday</end>
         <priority>medium</priority>
         <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>CS2103 TaskIt v0.5</title>
-        <start></start>
-        <end>thursday 12pm</end>
-        <priority>medium</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
     </tasks>
     <tasks>
         <title>ME3241 assignment due</title>
@@ -209,6 +221,21 @@
         <tagged>work</tagged>
     </tasks>
     <tasks>
+        <title>buy groceries</title>
+        <start></start>
+        <end>thursday</end>
+        <priority>low</priority>
+        <tagged>household</tagged>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <title>meet Chong Yee NUS Enterprise</title>
+        <start></start>
+        <end>14 april</end>
+        <priority>low</priority>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
         <title>change bedsheets</title>
         <start></start>
         <end>this weekend</end>
@@ -223,14 +250,6 @@
         <tagged>work</tagged>
     </tasks>
     <tasks>
-        <title>buy groceries</title>
-        <start></start>
-        <end>thursday</end>
-        <priority>low</priority>
-        <tagged>household</tagged>
-        <tagged>shopping</tagged>
-    </tasks>
-    <tasks>
         <title>CS2103 TaskIt Presentation</title>
         <start></start>
         <end>next thursday 12pm</end>
@@ -238,13 +257,6 @@
         <tagged>presentation</tagged>
         <tagged>school</tagged>
         <tagged>assignment</tagged>
-    </tasks>
-    <tasks>
-        <title>meet Chong Yee NUS Enterprise</title>
-        <start></start>
-        <end>14 april</end>
-        <priority>low</priority>
-        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>ME3241 exam</title>
@@ -461,6 +473,18 @@
     </tasks>
     <tasks>
         <title>%%%</title>
+        <start></start>
+        <end></end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
+        <title>Study for final Priority High</title>
+        <start></start>
+        <end></end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
+        <title>Study for final priotity high</title>
         <start></start>
         <end></end>
         <priority>low</priority>
