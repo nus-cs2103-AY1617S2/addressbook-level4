@@ -60,7 +60,7 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalTasks() {
         return new TestTask[] { this.alice, this.benson, this.carl, this.daniel, this.elle, this.fiona, this.george,
-                this.aE, this.bE, this.cE, this.aF, this.bF, this.cF };
+            this.aE, this.bE, this.cE, this.aF, this.bF, this.cF };
     }
 
     public static TestTask getEventTestTask() throws IllegalValueException {
