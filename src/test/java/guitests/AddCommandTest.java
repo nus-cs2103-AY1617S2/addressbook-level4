@@ -33,7 +33,7 @@ public class AddCommandTest extends EzDoGuiTest {
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         // recur status cannot have empty start and due dates
-        commandBox.runCommand("add Floating Task r/yearly");
+        commandBox.runCommand("add Floating Task f/yearly");
         assertResultMessage(Messages.MESSAGE_RECUR_FAILURE);
 
         //add duplicate task
