@@ -28,7 +28,7 @@ public interface Logic {
     // @@author A0114523U
     /** Returns the list of overdue tasks */
     ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
-    
+
     /** Returns the list of today's tasks */
     ObservableList<ReadOnlyTask> getFilteredTodayTaskList();
     // @@author

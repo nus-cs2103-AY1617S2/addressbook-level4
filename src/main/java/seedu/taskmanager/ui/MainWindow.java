@@ -37,7 +37,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    
+
     // @@author A0114523U
     private TaskListPanel todayTaskListPanel;
     private TaskListPanel overdueTaskListPanel;
@@ -196,7 +196,7 @@ public class MainWindow extends UiPart<Region> {
     }
     
     private AnchorPane getTodayTaskListPlaceholder() {
-    	return todayTaskListPanelPlaceholder;
+        return todayTaskListPanelPlaceholder;
     }
     
     public TaskListPanel getOverdueTaskListPanel() {

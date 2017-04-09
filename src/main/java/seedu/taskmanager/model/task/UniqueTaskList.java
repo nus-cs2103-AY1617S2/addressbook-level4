@@ -3,8 +3,8 @@ package seedu.taskmanager.model.task;
 import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -199,24 +199,24 @@ public class UniqueTaskList implements Iterable<Task> {
             return p -> p.getStatus().toString().equals(Status.STATUS_NOT_DONE);
         }
     }
-    
+
     // @@author A0114523U
     /**
      * Filters task list based on end date (overdue or due today).
      */
-    public ObservableList<Task> getTaskListByDate(Date endDate){
-    	if (endDate.before(EndDate.today)) {
-    		return internalList.filtered(DatePredicate.isOverdue());
+    public ObservableList<Task> getTaskListByDate(Date endDate) {
+        if (endDate.before(EndDate.today)) {
+    	    return internalList.filtered(DatePredicate.isOverdue());
     	} else if (endDate.equals(EndDate.today)) {
-    		return internalList.filtered(DatePredicate.isToday());
+    	    return internalList.filtered(DatePredicate.isToday());
     	} else {
-    		return internalList;
+    	    return internalList;
     	}
     }
     
     static class DatePredicate {
     	public static Predicate<Task> isOverdue() {
-    		return p -> p.getEndDate().equals(EndDate.today);
+    	    return p -> p.getEndDate().equals(EndDate.today);
     	}
     	
     	public static Predicate<Task> isToday() {

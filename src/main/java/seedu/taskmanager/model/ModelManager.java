@@ -163,7 +163,7 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
         return new UnmodifiableObservableList<>(filteredOverdueTasks);
     }
-    
+
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTodayTaskList() {
         return new UnmodifiableObservableList<>(filteredTodayTasks);
     }
