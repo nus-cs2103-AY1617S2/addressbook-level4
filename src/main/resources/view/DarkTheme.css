@@ -81,7 +81,7 @@
 }
 
 .split-pane-header {
-    -fx-border-radius: 1;
+    -fx-border-radius: 0;
     -fx-border-width: 0;
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -119,12 +119,15 @@
 .anchor-pane {
     -fx-background-color: black;
     -fx-padding: 0 0 0 0;
+    -fx-border-radius:0;
+    -fx-background-radius: 0;
+
 }
 
 .anchor-pane-with-border {
     -fx-background-color: derive(#e2e8e4, 20%);
-    -fx-border-color: derive(#e2e8e4, 10%);
-    -fx-border-width: 0px;
+    -fx-border-color: derive(#002c54, 10%);
+    -fx-border-width: 0 0 5 0;
 }
 
 .status-bar {
@@ -190,7 +193,7 @@
 }
 
 .command-box-text {
-    -fx-background-color: #ffccbb;
+    -fx-background-color: white;
 }
 
 /*

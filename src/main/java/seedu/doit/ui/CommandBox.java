@@ -18,6 +18,7 @@ import seedu.doit.model.InputStack;
 
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String SUCCESS_STYLE_CLASS = "success";
     private static final String FXML = "CommandBox.fxml";
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
@@ -63,20 +64,23 @@ public class CommandBox extends UiPart<Region> {
     }
 
     // @@author
+    // @@A0160076L
     /**
      * Sets the command box style to indicate a successful command.
      */
     private void setStyleToIndicateCommandSuccess() {
         this.commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        this.commandTextField.getStyleClass().add(SUCCESS_STYLE_CLASS);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
+        this.commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
         this.commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
-
+    // @@author
     // @@A0138909R
     /**
      * sets the text in the command box
@@ -84,12 +88,14 @@ public class CommandBox extends UiPart<Region> {
     public void setCommandBoxText(String text) {
         this.commandTextField.setText(text);
     }
-
+    //
     @FXML
     /**
      * Listens to keyEvents when command Box is focused
      */
     public void handleKeyPress(KeyEvent event) {
+        this.commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
+        this.commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
         switch (event.getCode()) {
         case UP:
             // up arrow

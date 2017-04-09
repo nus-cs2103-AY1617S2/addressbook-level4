@@ -34,7 +34,6 @@ import seedu.doit.model.UserPrefs;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String ICON = "/images/task_manager.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String UNDO_COMMAND = UndoCommand.COMMAND_WORD;
@@ -42,7 +41,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String LIST_COMMAND = ListCommand.COMMAND_WORD;
     private static final int MIN_HEIGHT = 650;
     private static final int MIN_WIDTH = 1100;
-
+    private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private Stage primaryStage;
     private Logic logic;
 
@@ -154,8 +153,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Sets the accelerator of a MenuItem.
      *
-     * @param keyCombination
-     *            the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -232,8 +230,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Sets the given image as the icon of the main window.
      *
-     * @param iconSource
-     *            e.g. {@code "/images/help_icon.png"}
+     * @param iconSource e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
         FxViewUtil.setStageIcon(this.primaryStage, iconSource);
@@ -261,12 +258,13 @@ public class MainWindow extends UiPart<Region> {
      */
     protected GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(this.primaryStage.getWidth(), this.primaryStage.getHeight(),
-                (int) this.primaryStage.getX(), (int) this.primaryStage.getY());
+            (int) this.primaryStage.getX(), (int) this.primaryStage.getY());
     }
 
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
+        helpWindow.configure();
         helpWindow.show();
     }
 
@@ -296,29 +294,25 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     *
      * Handle scrollTo in different lists
      */
     public void scrollTo(int index) {
-        if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                && task.hasEndTime() /* && !task.getIsDone() */).size()) {
+
+        if (index < this.logic.getFilteredTaskList().filtered(task -> task.isTask()).size()) {
             this.taskListPanel.scrollTo(index);
             this.eventListPanel.clearSelection();
             this.fListPanel.clearSelection();
-        } else if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime() && task.hasEndTime())
-                .size()
-                + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                        && task.hasEndTime() /* && !task.getIsDone() */).size()) {
-            this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                    && task.hasEndTime() /* && !task.getIsDone() */).size());
+        } else if (index < this.logic.getFilteredTaskList().filtered(task -> task.isTask()).size()
+            + this.logic.getFilteredTaskList().filtered(task -> task.isEvent()
+        ).size()) {
+            this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task ->
+                task.isTask()).size());
             this.taskListPanel.clearSelection();
             this.fListPanel.clearSelection();
         } else {
-            this.fListPanel.scrollTo(index
-                    - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime() && task.hasEndTime())
-                            .size()
-                    - this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                            && task.hasEndTime() /* && !task.getIsDone() */).size());
+            this.fListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task ->
+                task.isTask()).size() - this.logic.getFilteredTaskList().filtered(task -> task.isEvent()).size());
+
             this.eventListPanel.clearSelection();
             this.taskListPanel.clearSelection();
         }

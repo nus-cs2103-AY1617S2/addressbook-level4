@@ -82,23 +82,7 @@ public class TaskCard extends UiPart<Region> {
             this.labelBullet.setOpacity(0);
         }
     }
-    /*private void setOverdue(ReadOnlyTask task) {
 
-        this.overdueSign.setVisible(false);
-        if (task.hasStartTime()) {
-            this.deadline.setText(task.getStartTime().value + " - " + task.getDeadline().value);
-            if (isOverdue(task.getDeadline().value)) {
-                this.overdueSign.setVisible(true);
-            }
-        } else if (task.hasEndTime()) {
-            this.deadline.setText(task.getDeadline().value);
-            if (isOverdue(task.getDeadline().value)) {
-                this.overdueSign.setVisible(true);
-            }
-        } else {
-            this.deadline.setText("");
-        }
-    }*/
     private void setOverdue(ReadOnlyTask task) {
         if (task.hasEndTime() && isOverdue(task.getDeadline().value)) {
             this.startTime.setStyle("-fx-text-fill:red");
@@ -112,12 +96,17 @@ public class TaskCard extends UiPart<Region> {
 
     }
     private void setStartTimeEndTime(ReadOnlyTask task) {
-        if (task.hasStartTime()) {
+        if (task.hasStartTime() && task.hasEndTime()) {
             this.startTime.setVisible(true);
             this.startTime.setText(task.getStartTime().value);
             this.to.setVisible(true);
             this.deadline.setVisible(true);
             this.deadline.setText(task.getDeadline().value);
+        } else if (task.hasStartTime()) {
+            this.startTime.setVisible(true);
+            this.startTime.setText(task.getStartTime().value);
+            this.to.setVisible(false);
+            this.deadline.setVisible(false);
         } else if (task.hasEndTime()) {
             this.startTime.setVisible(false);
             this.to.setVisible(false);

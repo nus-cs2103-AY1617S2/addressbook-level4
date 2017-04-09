@@ -156,7 +156,7 @@ public class Task implements ReadOnlyTask {
     public boolean hasStartTime() {
         if (this.startTime == null) {
             return false;
-        } else if (this.startTime.value == null) {
+        } else if (this.startTime.value.equals("")) {
             return false;
         }
         return true;
@@ -166,7 +166,7 @@ public class Task implements ReadOnlyTask {
     public boolean hasEndTime() {
         if (this.endTime == null) {
             return false;
-        } else if (this.endTime.value == null) {
+        } else if (this.endTime.value.equals("")) {
             return false;
         }
         return true;
@@ -189,7 +189,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isEvent() {
-        return (hasStartTime() && hasEndTime());
+        return (hasStartTime());
     }
 
     /**

@@ -11,6 +11,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
@@ -20,6 +21,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " n/Task A p/high e/ 12/30/2020 23:59\n" + COMMAND_WORD + " p/low s/ 12/30/2020 23:59\n"
             + COMMAND_WORD + " t/project";
+
 
     private final Set<String> namekeywords;
     private final Set<String> startTimekeywords;
@@ -43,6 +45,7 @@ public class FindCommand extends Command {
         this.model.updateFilteredTaskList(this.namekeywords, this.prioritykeywords, this.desckeywords,
                 this.tagskeywords, this.startTimekeywords, this.endTimekeywords);
         return new CommandResult(getMessageForTaskListShownSummary(this.model.getFilteredTaskList().size()));
+
     }
 
 }

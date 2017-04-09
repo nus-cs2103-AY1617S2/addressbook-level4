@@ -7,7 +7,9 @@ import seedu.doit.logic.commands.exceptions.CommandException;
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
-
+    public static final String COMMAND_PARAMETER = "";
+    public static final String COMMAND_RESULT = "Redo previously undone command";
+    public static final String COMMAND_EXAMPLE = "redo";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n" + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Task redone.";
@@ -22,5 +24,21 @@ public class RedoCommand extends Command {
         } catch (EmptyTaskManagerStackException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
+    }
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 }

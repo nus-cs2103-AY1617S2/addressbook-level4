@@ -1,5 +1,10 @@
+/*@@author A0160076L */
 .error {
     -fx-background-color: red;
+}
+
+.success {
+    -fx-background-color: #93DB70;
 }
 
 .tag-selector {

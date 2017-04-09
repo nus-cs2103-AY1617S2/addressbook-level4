@@ -94,18 +94,18 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean hasStartTime() {
-        if (this.startTime != null) {
-            return true;
+        if (this.startTime == null || this.startTime.equals("")) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean hasEndTime() {
-        if (this.endTime != null) {
-            return true;
+        if (this.endTime == null || this.endTime.equals("")) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -122,7 +122,7 @@ public class TestTask implements ReadOnlyTask {
      */
     @Override
     public boolean isEvent() {
-        return hasStartTime() && hasEndTime();
+        return hasStartTime();
     }
 
     /**
@@ -163,17 +163,6 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + getName().fullName + " ");
-        sb.append("d/" + getDescription().value + " ");
-        sb.append("p/" + this.getPriority().value + " ");
-        sb.append((this.hasStartTime() ? "s/" + this.getStartTime().value : "") + " ");
-        sb.append((this.hasEndTime() ? "e/" + this.getDeadline().value : "") + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-        return sb.toString();
-    }
-
-    public String getNewAddCommand(String newAdd) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(newAdd + " " + getName().fullName + " ");
         sb.append("d/" + getDescription().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         sb.append((this.hasStartTime() ? "s/" + this.getStartTime().value : "") + " ");

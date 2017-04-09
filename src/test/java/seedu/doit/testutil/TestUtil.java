@@ -354,7 +354,7 @@ public class TestUtil {
     public static TestTask[] getTasks(TestTask[] tasks) {
         ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
         for (TestTask task: tasks) {
-            if (!task.getIsDone() && task.hasEndTime() && !task.hasStartTime()) {
+            if (!task.getIsDone() && task.isTask()) {
                 filteredTasks.add(task);
             }
         }
@@ -364,7 +364,7 @@ public class TestUtil {
     public static TestTask[] getEvents(TestTask[] tasks) {
         ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
         for (TestTask task: tasks) {
-            if (!task.getIsDone() && task.hasEndTime() && task.hasStartTime()) {
+            if (!task.getIsDone() && task.isEvent()) {
                 filteredTasks.add(task);
             }
         }
