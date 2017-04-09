@@ -577,7 +577,7 @@
     "endDateTime" : null,
     "completionDateTime" : null,
     "recurringEndDateTime" : null,
-    "recurringFrequency" : "WEEKLY",
+    "recurringFrequency" : null,
     "priority" : "LOW"
   }, {
     "allTags" : [ ],
