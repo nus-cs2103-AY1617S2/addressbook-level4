@@ -197,9 +197,13 @@ As shown in Figure 6,
 * The command execution can affect **`Model`** (e.g. adding a task) and/or raise events.
 
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to **`UI`**.
+
+* In some Parser classes such as FindCommandParser, due to the huge amount of search parameters supported by ezDo's power search function (see `Find` in UserGuide), a `SearchParameter` Object is created with the Builder pattern to contain all the search parameters. This allows future developers to introduce more parameters by changing the `SearchParameter` Class instead of changing methods in **`Model`**.
+ 
 <br>
 
 The Command pattern is employed, as the `Command` object is passed around and executed.
+
 <br>
 
 The _sequence diagram_ (shown in Figure 7) shows the interactions within **`Logic`** for the _`execute("kill 1")`_ API call.<br>
@@ -226,7 +230,22 @@ As shown in Figure 8, **`Model`**:
 
 * Exposes a `UnmodifiableObservableList<ReadOnlyTask>` object that can only be 'observed' i.e **`UI`** can be bound to this list so that the displayed list on the interface displays changes when the data in the list changes.
 
+* Changes are made on a FilteredList. The changes are then raised in an eventBus (see other sections) which mutates the `UnmodifiableObservableList<ReadOnlyTask>`. This causes the change within the list to be reflect in the **`UI`**.
+
 #### Design Choices
+Changes are made on a FilteredList. The changes are then raised as an event (see other sections) which mutates the `UnmodifiableObservableList<ReadOnlyTask>`. This causes the change within the list to be reflect in the **`UI`**.
+<br>
+
+ezDo stores all tasks, regardless done or undone, in one FilteredList (see `Storage` section for more information).
+ As such, commands such as `Edit`, `Done` and `Kill` can be executed easily on a single list instead of keeping track of multiple lists of tasks with different types (done and undone). 
+ <br>
+ 
+ This FilteredList is designed with the Singleton Pattern, since only one FilteredList of task is created each time ezDo is run and all mutations and searches are done on this list.
+ <br>
+ 
+ A Predicate and Qualifier interface plays a vital role in mutating the FilteredList, since they allow us to indicate a given Qualifer to expose certain tasks as viewable by a user. (e.g filter tasks which are `Done`; filter tasks which have certain `Priority`).
+ <br><br>
+
 ezDo supports undo/redo commands. We saw two ways of doing it:
 * Save history states.
 
