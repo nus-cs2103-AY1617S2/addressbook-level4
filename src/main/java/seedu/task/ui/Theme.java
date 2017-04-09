@@ -18,7 +18,8 @@ public class Theme {
     public static ObservableList<String> THEMES = FXCollections.observableArrayList(
             "BlandTheme",
             "DarkTheme",
-            "BurntCyanTheme");
+            "BurntCyanTheme",
+            "BurntCopperTheme");
     public static final String DEFAULT_STYLESHEET = THEMES.get(2); // Burnt Cyan Theme
 
     /**
