@@ -11,6 +11,7 @@ import typetask.storage.XmlFileStorage;
 
 //@@author A0140010M
 public class UseCommand extends Command {
+
     public static final String COMMAND_WORD = "use";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
             + ": Uses the taskManager from another location\n"
