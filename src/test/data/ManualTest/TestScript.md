@@ -1,7 +1,7 @@
 # Test Script for TypeTask
 
 **Command:**<br>
-(Pre-condition: src\test\data\ManualTest\taskManager.xml exists)
+(Pre-condition: src\test\data\ManualTest\taskManager.xml exists, rename given SampleData.xml to taskManager.xml)
 
     use src/test/data/ManualTest
 
