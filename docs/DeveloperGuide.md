@@ -472,57 +472,7 @@ Extensions:
 > 3c1. GeeKeep shows an error message.<br>
 > Use case resumes at step 3.
 
-**Use case: UC02 - `View summary of tasks for today`**
-
-MSS:
-
-1. User requests to list tasks for today.
-
-2. GeeKeep shows a list of all tasks for today.
-
-3. User requests to list only completed tasks for today.
-
-4. GeeKeep shows a list of all completed tasks for today.
-
-5. User requests to list only uncompleted tasks for today.
-
-6. GeeKeep shows a list of uncompleted tasks for today.
-Use case ends.
-
-Extensions:
-
-2a. There are no tasks for today.
-
-> 2a1. GeeKeep shows an error message.<br>
-> Use case ends
-
-3a. There are no completed tasks for today.
-
-> 3a1. GeeKeep shows an error message.<br>
-> Use case resumes at step 5.
-
-5a. There are no uncompleted tasks for today.
-
-> 5a1. GeeKeep shows an error message.<br>
-> Use case ends.
-
-**Use case: UC03 - `Add a floating task`**
-
-MSS:
-
-1. User add a task without starting date or ending date.
-
-2. Geekeep adds the floating task to the respective panel.
-Use case ends.
-
-Extensions:
-
-2a. There is a duplicate task.
-
-> 2a1. Geekeep shows an error message. <br>
-> Use case ends.
-
-**Use case: UC04 - `Add a deadline`**
+**Use case: UC02 - `Add a deadline`**
 
 MSS:
 
@@ -538,7 +488,7 @@ Extensions:
 > 2a1. Geekeep shows an error message. <br>
 > Use case ends.
 
-**Use case: UC05 - `Add an event`**
+**Use case: UC03 - `Add an event`**
 
 MSS:
 
@@ -559,7 +509,7 @@ Extensions:
 > 2b1. Geekeep shows an error message. <br>
 > Use case ends.
 
-**Use case: UC06 - `Mark a task as done`**
+**Use case: UC04 - `Mark a task as done`**
 
 MSS:
 
@@ -575,7 +525,7 @@ Extensions:
 > 2a1. Geekeep shows an error message. <br>
 > Use case ends.
 
-**Use case: UC07 - `Mark a task as undone`**
+**Use case: UC05 - `Mark a task as undone`**
 
 MSS:
 
@@ -591,7 +541,7 @@ Extensions:
 > 2a1. Geekeep shows an error message. <br>
 > Use case ends.
 
-**Use case: UC08 - `Display completed tasks`**
+**Use case: UC06 - `Display completed tasks`**
 
 MSS:
 
@@ -607,7 +557,7 @@ Extensions:
 > 2a1. Geekeep displays nothing in the panels. <br>
 > Use case ends.
 
-**Use case: UC09 - `Display uncompleted tasks`**
+**Use case: UC07 - `Display uncompleted tasks`**
 
 MSS:
 
@@ -623,7 +573,7 @@ Extensions:
 > 2a1. Geekeep displays nothing in the panels. <br>
 > Use case ends.
 
-**Use case UC10 - `Display tasks by tags`**
+**Use case UC08 - `Display tasks by tags`**
 
 MSS:
 
@@ -639,7 +589,7 @@ Extensions:
 > 2a1. The panels display nothing. <br>
 > Use case ends.
 
-**Use case UC11 - `Find a task with name`**
+**Use case UC09 - `Find a task with name`**
 
 MSS:
 
@@ -655,7 +605,7 @@ Extensions:
 > 2a1. The panals display nothing <br>
 > Use case ends.
 
-**Use case UC12 - `Undo the preview command`**
+**Use case UC10 - `Undo the preview command`**
 
 MSS:
 
@@ -673,7 +623,7 @@ Extensions:
 > 2a1. Geekeep ignores the undo command. <br>
 > Use case ends.
 
-**Use case UC13 - `Redo the previous command`**
+**Use case UC11 - `Redo the previous command`**
 
 MSS:
 
