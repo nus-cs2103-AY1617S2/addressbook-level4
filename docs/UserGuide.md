@@ -212,6 +212,7 @@ Examples:
 Clears all entries from the task manager.<br>
 Format: `clear`
 
+<!-- @@author A0141011J -->
 ### 3.10. Undo previous action: `undo`
 
 Undo the prevous actions.<br>
@@ -227,15 +228,25 @@ Format: `redo`
 Exits the program.<br>
 Format: `exit`
 
-### 3.13. Saving the data in specified file/folder
+### 3.13. Saving the data in specified file/folder: `save`
 
-Puts all TaskIt storage in the given path to file.
+Puts all TaskIt data to the file in the specified path.
 Format: `save FILEPATH`
 
 Example:
 
-* `save ../myFile.txt`<br>
+* `save myFolder/myFile.xml`<br>
 
+### 3.14. Change storage file path toa new location: `path`
+
+Change the storage folder to the specified folder.
+Format: `path FILEPATH`
+
+Example:
+
+* `path myFolder`<br>
+
+<!-- @@author A0141872E -->
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -285,7 +296,10 @@ Example:
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
+  
+* **Path** : `path FILEPATH` <br>
+  e.g.`path newFolder`
 
 * **Save** : `save FILEPATH` <br>
-  e.g.`save taskIt.txt`
+  e.g.`save taskIt.xml`
 
