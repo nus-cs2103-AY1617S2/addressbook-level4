@@ -215,7 +215,8 @@ public class LogicManagerTest {
         this.model.addTask(helper.generateTask(2));
         this.model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_SUCCESS,
+                new TaskManager(), Collections.emptyList());
     }
 
     // @@author A0146809W
