@@ -24,17 +24,17 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
         currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
 
         /** Read a file from the designated filepath */
-        assertReadWhatsLeftSuccess("./src/test/data/ReadCommandTest/TypicalWhatsLeft.xml", currentTaskList,
-                currentEventList);
+        readCommand_validFilePath_readSuccessful("./src/test/data/ReadCommandTest/TypicalWhatsLeft.xml",
+                currentTaskList, currentEventList);
     }
 
     @Test
     public void readWhatsLeftFailure() {
-        assertInvalidCommandFormatFailure(""); // no filename
-        assertInvalidCommandFormatFailure("./Data"); // filename without .xml
-        assertInvalidCommandFormatFailure("./Data/^%&^.xml"); // invalid
+        readCommand_invalidFilePath_invalidCommandMessageShown(""); // no filename
+        readCommand_invalidFilePath_invalidCommandMessageShown("./Data"); // filename without .xml
+        readCommand_invalidFilePath_invalidCommandMessageShown("./Data/^%&^.xml"); // invalid
                                                               // filename
-        assertWrongFormatFailure("./src/test/data/ReadCommandTest/WrongFormat.xml");
+        readCommand_invalidFormat_dataConversionFailure("./src/test/data/ReadCommandTest/WrongFormat.xml");
     }
 
     /**
@@ -42,7 +42,7 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
      *
      * @param filePathToRead
      */
-    private void assertWrongFormatFailure(String filePathToRead) {
+    private void readCommand_invalidFormat_dataConversionFailure(String filePathToRead) {
         commandBox.runCommand("read " + filePathToRead);
         String expected = Messages.MESSAGE_DATA_CONVERSION_FAILURE;
         assertEquals(expected, resultDisplay.getText());
@@ -53,7 +53,7 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
      *
      * @param filePath
      */
-    private void assertInvalidCommandFormatFailure(String filePathToRead) {
+    private void readCommand_invalidFilePath_invalidCommandMessageShown(String filePathToRead) {
         commandBox.runCommand("read " + filePathToRead);
         String expected = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReadCommand.MESSAGE_USAGE);
         assertEquals(expected, resultDisplay.getText());
@@ -67,7 +67,8 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
      * @param tasklist
      * @param eventslist
      */
-    private void assertReadWhatsLeftSuccess(String filePathToRead, TestTask[] tasklist, TestEvent[] eventslist) {
+    private void readCommand_validFilePath_readSuccessful(String filePathToRead,
+            TestTask[] tasklist, TestEvent[] eventslist) {
         TestTask[] expectedTasks = TestUtil.removeTaskFromList(tasklist, 1);
         TestEvent[] expectedEvents = eventslist;
 

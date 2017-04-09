@@ -11,7 +11,7 @@ import seedu.whatsleft.testutil.TestUtil;
 //@@author A0121668A
 public class FinishCommandTest extends WhatsLeftGuiTest {
     @Test
-    public void finishTaskSuccess() {
+    public void finishTask_validIndex_Success() {
         // finish one task
         TestEvent[] currentEventList = te.getTypicalEvents();
         currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
@@ -29,14 +29,26 @@ public class FinishCommandTest extends WhatsLeftGuiTest {
         /** finish task in the middle of the list panel */
         int middleTaskToFinish = currentTaskList.length / 2;
         assertFinishTaskSuccess(middleTaskToFinish, currentTaskList, currentEventList);
+    }
 
+    @Test
+    public void finishTask_indexOutOfRange_invalidIndexMessageShown() {
         /** invalid index */
-        commandBox.runCommand("finish " + currentTaskList.length + 1);
+        assertInvalidIndex (10);
+    }
+
+    /**
+     * Assert invalid index
+     * @param index
+     */
+
+    private void assertInvalidIndex(int index) {
+        commandBox.runCommand("finish " + index);
         assertResultMessage("The Task index provided is invalid");
     }
 
     /**
-     * Assert redo a previously finished task is successful
+     * Assert finishing a task is successful
      *
      * @param taskIndex
      *            to finish

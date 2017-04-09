@@ -13,7 +13,7 @@ import seedu.whatsleft.testutil.TestUtil;
 //@@author A0121668A
 public class RedoCommandTest extends WhatsLeftGuiTest {
     @Test
-    public void redoPreviousFinishedTaskSuccess() {
+    public void redoPreviousFinishedTask_validInput_Success() {
         // finish one task
         TestEvent[] currentEventList = te.getTypicalEvents();
         TestEvent[] filteredPastEventList = TestUtil.getPastTestEvents(currentEventList);
@@ -25,17 +25,17 @@ public class RedoCommandTest extends WhatsLeftGuiTest {
         setUpRedoTest();
 
         /** Redo a task at the end of the completed list */
-        assertRedoFinishedTaskSuccess("3", redoList, filteredPastEventList);
+        assertRedoSuccess("3", redoList, filteredPastEventList);
 
         /** Redo a task at the start of the completed list */
-        assertRedoFinishedTaskSuccess("1", redoList, filteredPastEventList);
+        assertRedoSuccess("1", redoList, filteredPastEventList);
 
         /** Redo a task at the end of the completed list */
-        assertRedoFinishedTaskSuccess("2", redoList, filteredPastEventList);
+        assertRedoSuccess("2", redoList, filteredPastEventList);
     }
 
     @Test
-    public void redoPreviousFinishedTasksFailure() {
+    public void redoFinishedTask_indexOutOfRange_invalidIndexMessageShown() {
         TestTask[] currentTaskList = tt.getTypicalTasks();
         TestTask[] filteredTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         TestTask[] redoList = TestUtil.getTasksFromListByIndex(filteredTaskList, 1, 4);
@@ -43,18 +43,40 @@ public class RedoCommandTest extends WhatsLeftGuiTest {
       //finishes 3 tasks
         setUpRedoTest();
         /** index out of range */
-        assertRedoCommandFailure("redo " + redoList.length + 1 , "The Task index provided is invalid");
-        /** empty index */
-        assertRedoCommandFailure("redo", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
-        /** string as index */
-        assertRedoCommandFailure("redo ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        assertRedoInvalidIndex(redoList.length + 1 ,
+                "The Task index provided is invalid");
     }
+
+    @Test
+    public void redoFinishedTask_invalidFormat_invalidFormatMessageShown() {
+
+      //finishes 3 tasks
+        setUpRedoTest();
+
+        /** empty index */
+        assertInvalidFormat("redo",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        /** string as index */
+        assertInvalidFormat("redo ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+    }
+
+    /**
+     * Assert Redo Command with invalid input fails
+     * @param index
+     * @param expected message
+     */
+    private void assertRedoInvalidIndex(int index, String expected) {
+        commandBox.runCommand("redo " + index);
+        assertResultMessage(expected);
+    }
+
     /**
      * Assert Redo Command with invalid input fails
      * @param command
      * @param expected
      */
-    private void assertRedoCommandFailure(String command, String expected) {
+    private void assertInvalidFormat(String command, String expected) {
         commandBox.runCommand(command);
         assertResultMessage(expected);
     }
@@ -68,7 +90,7 @@ public class RedoCommandTest extends WhatsLeftGuiTest {
      * @param tasklist
      * @param eventslist
      */
-    private void assertRedoFinishedTaskSuccess(String taskIndex, TestTask[] tasklist, TestEvent[] eventlist) {
+    private void assertRedoSuccess(String taskIndex, TestTask[] tasklist, TestEvent[] eventlist) {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(tasklist, Integer.parseInt(taskIndex));
 
         commandBox.runCommand("redo " + taskIndex);
