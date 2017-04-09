@@ -12,6 +12,7 @@ import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.ConfigUtil;
+import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.storage.XmlTaskListStorage;
 
 //@@author A0141077L
@@ -57,7 +58,7 @@ public class SaveAsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         try {
             checkFilePaths();
             copyFileData();
@@ -65,7 +66,7 @@ public class SaveAsCommand extends Command {
             logSuccess();
         } catch (IllegalValueException | IOException e) {
             e.printStackTrace();
-            return new CommandResult (e.getMessage());
+            throw new CommandException(e.getMessage());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.newFilePath));
     }
