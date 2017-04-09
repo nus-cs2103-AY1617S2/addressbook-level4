@@ -38,7 +38,7 @@ public class EditCommand extends Command {
 	public static final String MESSAGE_ILLEGAL_EDIT_RECURRING_TASK = "Date, time, periodicity of recurring task cannot be edited.";
 	public static final String MESSAGE_ILLEGAL_EDIT_RECURRENCE = "Recurrence/periodicity is not editable.";
 
-	private static final String MESSAGE_ILLEGAL_DEADLINE_AND_EVENT_OBJECT = "Object Cannot Have Both a Deadline and a Start and End Time";
+	public static final String MESSAGE_ILLEGAL_DEADLINE_AND_EVENT_OBJECT = "Object Cannot Have Both a Deadline and a Start and End Time";
 
 	protected final int filteredTaskListIndex;
 	protected final EditTaskDescriptor editTaskDescriptor;

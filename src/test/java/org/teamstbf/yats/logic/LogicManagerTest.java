@@ -317,7 +317,7 @@ public class LogicManagerTest {
 	@Test // TO BE EDITED
 	public void execute_add_invalidEventData() {
 		assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Title.MESSAGE_NAME_CONSTRAINTS);
-		assertCommandFailure("add Valid Name -s 13:00AM 05/05/2017 -e 14:00 34/08/2343", Schedule.MESSAGE_TIME_CONSTRAINTS);
+		assertCommandFailure("add Valid Name -s 5 may 2017 13:00AM -e 6 may 2017 14:00PM", Schedule.MESSAGE_TIME_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 				Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -332,7 +332,7 @@ public class LogicManagerTest {
 		expectedAB.addEvent(toBeAdded);
 
 		// execute command and verify result
-		assertCommandSuccess("add sleep -l bed -s 12:00AM 26/06/2017 -e 11:00AM 27/06/2017 -d finals finally over -t rest -t moreRest",
+		assertCommandSuccess("add sleep -l bed -s 26 june 2017 12:00AM -e 27 june 2017 11:00AM -d finals finally over -t rest -t moreRest",
 				String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB, expectedAB.getTaskList());
 
 	}
