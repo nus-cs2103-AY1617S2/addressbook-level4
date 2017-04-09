@@ -25,13 +25,11 @@ public class RecurUtil {
         final boolean isDueDateMissing = taskDueDate.isEmpty();
         final boolean isBothDatesMissing = isStartDateMissing && isDueDateMissing;
 
-        final boolean isRecurring = task.getRecur().isRecur();
+        final boolean recurStatus = task.getRecur().isRecur();
+        
+        final boolean recurValid = !(isBothDatesMissing && recurStatus);
 
-        if (isBothDatesMissing && isRecurring) {
-            return false;
-        }
-
-        return true;
+        return recurValid;
     }
 
 }
