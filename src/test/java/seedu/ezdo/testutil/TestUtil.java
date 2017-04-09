@@ -73,6 +73,7 @@ public class TestUtil {
     }
 
     //@@author A0139177W
+    /** Returns sampleTasks for testing purposes. **/
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength

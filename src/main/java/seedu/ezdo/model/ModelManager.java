@@ -162,6 +162,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0139177W
+    /**
+     * Toggles the select status of the tasks in {@code toggleSelect}
+     */
     @Override
     public boolean toggleTasksSelect(ArrayList<Task> tasksToToggle) {
         int firstElement = 0;

@@ -20,7 +20,8 @@ public class RecurTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-  //@@author A0139177W
+    //@@author A0139177W
+    /** Tests if a recur status is valid. **/
     @Test
     public void isValidRecur() {
         // invalid recur interval
@@ -38,6 +39,7 @@ public class RecurTest {
         assertTrue(Recur.isValidRecur("yearly"));
     }
 
+    /** Tests isRecur method. **/
     @Test
     public void isRecur() throws Exception {
         Recur noRecur = new Recur("");
@@ -46,12 +48,14 @@ public class RecurTest {
         assertTrue(validRecur.isRecur());
     }
 
+    /** Tests toString method. **/
     @Test
     public void printToString() throws Exception {
         Recur testRecur = new Recur("daily");
         assertEquals(testRecur.toString(), "daily");
     }
 
+    /** Tests equals method. **/
     @Test
     public void testEquals() throws Exception {
         Recur testRecur = new Recur("daily");
@@ -59,6 +63,7 @@ public class RecurTest {
         assertTrue(testRecur.equals(testRecur2));
     }
 
+    /** Tests hashCode method. **/
     @Test
     public void hashCode_equals() throws Exception {
         Recur testRecur = new Recur("daily");

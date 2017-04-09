@@ -248,7 +248,7 @@ Changes are made on a FilteredList. The changes are then raised as an event (see
 <br>
 
 ezDo stores all tasks, regardless done or undone, in one FilteredList (see [`Storage`](#35-storage) section for more information).
-As such, commands such as `Edit`, `Done` and `Kill` can be executed easily on a single list instead of keeping track of multiple lists of tasks with different types (done and undone). 
+As such, commands such as `Edit`, `Done` and `Kill` can be executed easily on a single list instead of keeping track of multiple lists of tasks with different types (done and undone).
 <br>
 
 This FilteredList is designed with the Singleton Pattern, since only one FilteredList of task is created each time ezDo is run and all mutations and searches are done on this list.

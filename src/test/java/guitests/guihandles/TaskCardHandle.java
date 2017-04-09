@@ -40,45 +40,58 @@ public class TaskCardHandle extends GuiHandle {
 
     private Node node;
 
+    /**
+     * Initialises TaskCardHandle and TEST_PRIORITY_COLOR_HASHMAP.
+     */
     public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         setTestPriorityColorHashMap();
         this.node = node;
     }
 
+    /** Returns text from label **/
     protected String getTextFromLabel(String fieldId) {
         return getTextFromLabel(fieldId, node);
     }
 
+    /** Returns task name from label **/
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
+    /** Returns start date from label **/
     public String getStartDate() {
         return getTextFromLabel(STARTDATE_FIELD_ID);
     }
 
+    /** Returns due date from label **/
     public String getDueDate() {
         return getTextFromLabel(DUEDATE_FIELD_ID);
     }
 
+    /** Returns priority from label **/
     public String getPriority() {
         return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
+    /** Returns priority color of the task **/
     public String getTaskPriorityColor() {
-        return TaskCard.PRIORITY_COLOR_HASHMAP.get(getPriority());
+        String priority = getPriority();
+        return TaskCard.PRIORITY_COLOR_HASHMAP.get(priority);
     }
+    //@@author
 
+    /** Returns tags from task **/
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
 
+    /** Return tags from tagsContainer **/
     private List<String> getTags(Region tagsContainer) {
         return tagsContainer.getChildrenUnmodifiable().stream().map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
-
+    /** Return tags from a list of tags **/
     private List<String> getTags(UniqueTagList tags) {
         return tags.asObservableList().stream().sorted((f1, f2) -> f1.tagName.compareTo(f2.tagName))
                 .map(tag -> tag.tagName).collect(Collectors.toList());
@@ -87,14 +100,17 @@ public class TaskCardHandle extends GuiHandle {
     private Region getTagsContainer() {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
-
+    //@@author A0139177W
+    /** Sets priority numbers and its corresponding colors in TEST_PRIORITY_COLOR_HASHMAP. **/
     private void setTestPriorityColorHashMap() {
         TEST_PRIORITY_COLOR_HASHMAP.put(TEST_DEFAULT_PRIORITY_NUMBER, TEST_DEFAULT_PRIORITY_COLOR);
         TEST_PRIORITY_COLOR_HASHMAP.put(TEST_LOW_PRIORITY_NUMBER, TEST_LOW_PRIORITY_COLOR);
         TEST_PRIORITY_COLOR_HASHMAP.put(TEST_MEDIUM_PRIORITY_NUMBER, TEST_MEDIUM_PRIORITY_COLOR);
         TEST_PRIORITY_COLOR_HASHMAP.put(TEST_HIGH_PRIORITY_NUMBER, TEST_HIGH_PRIORITY_COLOR);
     }
+    //@@author
 
+    /** Checks if two tasks are the same. **/
     public boolean isSameTask(ReadOnlyTask task) {
         List<String> taskTags = getTags(task.getTags());
         List<String> cardTags = getTags();
@@ -118,7 +134,8 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getStartDate();
+        String space = " ";
+        return getFullName() + space + getStartDate();
     }
 }
 //@@author

@@ -161,6 +161,10 @@ public class EditCommandTest extends EzDoGuiTest {
     }
 
     //@@author A0139177W
+    /**
+     * Checks if a edit command can be successfully executed if both dates are empty
+     * with recur status present.
+     */
     @Test
     public void edit_EmptyDatesWithRecur_failure() {
         commandBox.runCommand("edit 1 s/ d/");
