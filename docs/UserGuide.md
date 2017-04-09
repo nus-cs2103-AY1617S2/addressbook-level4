@@ -318,4 +318,3 @@ the implementation of such tasks. A few things to note about how to use this fea
 
 * **Save ** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
-   
