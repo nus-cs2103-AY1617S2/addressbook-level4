@@ -210,18 +210,18 @@ public class UniqueTaskList implements Iterable<Task> {
         } else if (endDate.equals(EndDate.today)) {
             return internalList.filtered(DatePredicate.isToday());
         } else {
-    	    return internalList;
+            return internalList;
     	}
     }
 
     static class DatePredicate {
-    	public static Predicate<Task> isOverdue() {
+        public static Predicate<Task> isOverdue() {
             return p -> p.getEndDate().equals(EndDate.today);
     	}
 
-    	public static Predicate<Task> isToday() {
+        public static Predicate<Task> isToday() {
             return p -> p.getEndDate().equals(EndDate.today);
-    	}
+        }
     }
     // @@author
 
