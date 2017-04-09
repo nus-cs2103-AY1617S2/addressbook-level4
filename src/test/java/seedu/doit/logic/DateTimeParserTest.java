@@ -32,13 +32,7 @@ public class DateTimeParserTest {
         Optional<LocalDateTime> t = DateTimeParser.parseDateTime("20/3/17");
         assertSameDate(t.get(), LocalDateTime.of(2017, 3, 20, 0, 0));
     }
-
-    @Test
-    public void parse_EmptyString() throws Exception {
-        Optional<LocalDateTime> dateParsed = DateTimeParser.parseDateTime("");
-        assertFalse(dateParsed.isPresent());
-    }
-
+    
     @Test
     public void parse_NullString() throws Exception {
         thrown.expect(NullPointerException.class);
