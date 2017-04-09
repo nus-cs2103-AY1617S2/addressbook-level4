@@ -80,7 +80,7 @@ public class MainApp extends Application {
             if (!taskManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with an empty TaskManager");
             }
-            initialData = new TaskManager();
+            initialData = taskManagerOptional.orElse(new TaskManager());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
