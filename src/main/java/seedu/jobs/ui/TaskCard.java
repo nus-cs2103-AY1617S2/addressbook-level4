@@ -47,8 +47,12 @@ public class TaskCard extends UiPart<Region> {
     private void initStatus(ReadOnlyTask task) {
         if (task.isCompleted()) {
             status.getChildren().add(new Label("Complete"));
+            status.getChildren().get(0).setStyle("-fx-background-color: derive(black, 25%); "
+                    + "-fx-text-fill: derive(white, -25%);");
+            //status.setStyle("-fx-background-color: derive(black, 30%);");
         } else {
             status.getChildren().add(new Label("In-progress"));
+            status.getChildren().get(0).setStyle("-fx-background-color: #800000; -fx-text-fill: white;");
         }
     }
 
