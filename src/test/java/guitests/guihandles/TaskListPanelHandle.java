@@ -127,7 +127,7 @@ public class TaskListPanelHandle extends GuiHandle {
             getListView().getSelectionModel().select(index);
         });
         guiRobot.sleep(100);
-        
+        //
         return getTaskCardHandle(task);
     }
 
@@ -136,7 +136,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns the position of the person given, {@code NOT_FOUND} if not found in the list.
      */
     public int getTaskIndex(ReadOnlyTask targetTask) {
-        
+        //
         List<ReadOnlyTask> tasksInList = getListView().getItems();
         for (int i = 0; i < tasksInList.size(); i++) {
             if (tasksInList.get(i).getTaskName().fullTaskName.equals(targetTask.getTaskName().fullTaskName)) {
@@ -164,7 +164,6 @@ public class TaskListPanelHandle extends GuiHandle {
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
-            
             return null;
         }
     }
