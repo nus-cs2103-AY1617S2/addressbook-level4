@@ -40,19 +40,21 @@ public class MainWindow extends Window {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //@@author A0164889E
+    private TaskListPanelComplete personListPanelComplete;
     private TaskListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
     private AnchorPane personListPanelPlaceholder;
+
+    //@@author A0164889E
+    @FXML
+    private AnchorPane personListPanelCompletePlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -107,8 +109,10 @@ public class MainWindow extends Window {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        //@@author A0164889E
+        personListPanelComplete = new TaskListPanelComplete(getPersonListCompletePlaceholder(), logic.getFilteredPersonListComplete());
+        //@@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -128,6 +132,11 @@ public class MainWindow extends Window {
 
     private AnchorPane getPersonListPlaceholder() {
         return personListPanelPlaceholder;
+    }
+
+    //@@author A0164889E
+    private AnchorPane getPersonListCompletePlaceholder() {
+        return personListPanelCompletePlaceholder;
     }
 
     /**
@@ -211,13 +220,8 @@ public class MainWindow extends Window {
     public TaskListPanel getPersonListPanel() {
         return this.personListPanel;
     }
-
-    void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadPersonPage(person);
+    //@@author A0164889E
+    public TaskListPanelComplete getPersonListPanelComplete() {
+        return this.personListPanelComplete;
     }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }

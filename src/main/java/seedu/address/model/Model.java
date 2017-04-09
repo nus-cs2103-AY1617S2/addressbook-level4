@@ -34,19 +34,27 @@ public interface Model {
     void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicatePersonException;
 
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
+
+    //@@author A0164889E
+    /** Returns the filtered task complete list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonListComplete();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords for FindCommand*/
     void updateFilteredPersonList(Set<String> keywords);
-    
+
+    //@@author A0164889E
+    /** Updates the filter of the filtered task list to filter by the given keywords for GroupCommand*/
+    void updateFilteredPersonListGroup(Set<String> keywords);
+
     //@@author A0164466X
     /** Updates the filter of the filtered person list to show all complete tasks */
     void updateFilteredListToShowComplete();
-    
+
     /** Updates the filter of the filtered person list to show all incomplete tasks */
     void updateFilteredListToShowIncomplete();
 
@@ -60,7 +68,7 @@ public interface Model {
 
     /** Adds the current AddressBook state to the undo/redo history */
     void addToHistory(ReadOnlyTaskManager state);
-    
+
     /** Adds entries from the given YTomorrow to the current YTomorrow and updates equivalent entries. */
     void mergeYTomorrow(ReadOnlyTaskManager add);
 }

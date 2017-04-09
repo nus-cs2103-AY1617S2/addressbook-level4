@@ -12,24 +12,25 @@ import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 
+//@@author A0164889E
 /**
- * Panel containing the list of tasks.
+ * Panel containing the list of complete tasks.
  */
-public class TaskListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+public class TaskListPanelComplete extends UiPart<Region> {
+    private static final String FXML = "PersonListPanelComplete.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> personListView;
+    private ListView<ReadOnlyTask> personListViewComplete;
 
-    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+    public TaskListPanelComplete(AnchorPane personListCompletePlaceholder, ObservableList<ReadOnlyTask> personList) {
         super(FXML);
         setConnections(personList);
-        addToPlaceholder(personListPlaceholder);
+        addToPlaceholder(personListCompletePlaceholder);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> personList) {
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListViewComplete.setItems(personList);
+        personListViewComplete.setCellFactory(listView -> new PersonListViewCellComplete());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -40,7 +41,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        personListViewComplete.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         LOGGER.fine("Selection in person list panel changed to : '" + newValue + "'");
@@ -51,12 +52,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            personListViewComplete.scrollTo(index);
+            personListViewComplete.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class PersonListViewCell extends ListCell<ReadOnlyTask> {
+    class PersonListViewCellComplete extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask person, boolean empty) {
@@ -66,7 +67,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCardComplete(person, getIndex() + 1).getRoot());
             }
         }
     }

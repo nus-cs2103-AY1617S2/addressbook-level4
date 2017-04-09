@@ -30,6 +30,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final YTomorrow addressBook;
     private final History<ReadOnlyTaskManager> history;
     private final FilteredList<ReadOnlyTask> filteredPersons;
+    //@@author A0164889E
+    private final FilteredList<ReadOnlyTask> filteredPersonsComplete;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,7 +45,12 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBook = new YTomorrow(addressBook);
         this.history = new History<ReadOnlyTaskManager>();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-
+        //@@author A0164889E
+        filteredPersonsComplete = new FilteredList<>(this.addressBook.getPersonList());
+  
+        indicateCompleteListToChange();
+        //@@author
+        
         //@@author A0163848R
         history.push(addressBook);
         //@@author
@@ -57,6 +64,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyTaskManager newData) {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
+        //@@author A0164889E
+        indicateCompleteListToChange();
+        //@@author
     }
 
     @Override
@@ -74,6 +84,9 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
+        //@@author A0164889E
+        indicateCompleteListToChange();
+        //@@author
     }
 
     @Override
@@ -81,6 +94,9 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.addPerson(person);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
+        //@@author A0164889E
+        indicateCompleteListToChange();
+        //@@author
     }
 
     @Override
@@ -91,6 +107,9 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
         addressBook.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
+        //@@author A0164889E
+        indicateCompleteListToChange();
+        //@@author
     }
 
     //@@author A0163848R
@@ -99,6 +118,9 @@ public class ModelManager extends ComponentManager implements Model {
         ReadOnlyTaskManager undone = history.undo();
         if (undone != null) {
             addressBook.resetData(undone);
+            //@@author A0164889E
+            indicateCompleteListToChange();
+            //@@author
             return true;
         }
         return false;
@@ -109,6 +131,9 @@ public class ModelManager extends ComponentManager implements Model {
         ReadOnlyTaskManager redone = history.redo();
         if (redone != null) {
             addressBook.resetData(redone);
+            //@@author A0164889E
+            indicateCompleteListToChange();
+            //@@author
             return true;
         }
         return false;
@@ -126,16 +151,33 @@ public class ModelManager extends ComponentManager implements Model {
                     addressBook.addPerson(task);
                 } catch (PersonNotFoundException | DuplicatePersonException el) {
                 }
-
             }
         }
         indicateAddressBookChanged();
+        //@@author A0164889E
+        indicateCompleteListToChange();
+        //@@author
     }
     //@@author
 
     @Override
     public void addToHistory(ReadOnlyTaskManager state) {
         history.push(state);
+    }
+
+    //@@author A0164889E
+    public void indicateCompleteListToChange() {
+        UniqueTagList tags;
+            try {
+                tags = new UniqueTagList("complete");
+                updateFilteredPersonListTag(tags);
+            } catch (DuplicateTagException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
     }
 
     //@@author A0164466X
@@ -169,6 +211,12 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredPersons);
     }
 
+    //@@author A0164889E
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonListComplete() {
+        return new UnmodifiableObservableList<>(filteredPersonsComplete);
+    }
+
     @Override
     public void updateFilteredListToShowAll() {
         filteredPersons.setPredicate(null);
@@ -182,6 +230,25 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredPersonList(Expression expression) {
         filteredPersons.setPredicate(expression::satisfies);
     }
+
+    //@@author A0164889E
+    @Override
+    public void updateFilteredPersonListGroup(Set<String> keywords) {
+        updateFilteredPersonListGroup(new PredicateExpression(new GroupQualifier(keywords)));
+    }
+
+    private void updateFilteredPersonListGroup(Expression expression) {
+        filteredPersons.setPredicate(expression::satisfies);
+    }
+
+    public void updateFilteredPersonListTag(UniqueTagList keywords) {
+        updateFilteredPersonListTag(new PredicateExpression(new TagQualifier(keywords)));
+    }
+
+    private void updateFilteredPersonListTag(Expression expression) {
+        filteredPersonsComplete.setPredicate(expression::satisfies);
+    }
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -234,22 +301,44 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
-  //@@author A0164466X
+
+    //@@author A0164889E
+    private class GroupQualifier implements Qualifier {
+        private Set<String> groupKeyWords;
+ 
+        GroupQualifier(Set<String> groupKeyWords) {
+            this.groupKeyWords = groupKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return groupKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getGroup().value, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", groupKeyWords);
+        }
+     }
+
+    //@@author A0164466X
     private class TagQualifier implements Qualifier {
         private UniqueTagList tags;
-        
+
         TagQualifier(UniqueTagList tags){
             this.tags = tags;
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             return task.getTags().equals(tags);
         }
-        
+
         //Default toString() method used
-        
+
     }
 
 }

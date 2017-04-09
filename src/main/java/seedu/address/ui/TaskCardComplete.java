@@ -6,10 +6,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.ReadOnlyTask;
 
-//@@author A0164032U
-public class TaskCard extends UiPart<Region> {
+//@@author A0164889E
+public class TaskCardComplete extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "PersonListCardComplete.fxml";
     
     @FXML
     private HBox cardPane;
@@ -24,7 +24,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label group;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCardComplete(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
         
         name.setText(person.getName().fullName);
