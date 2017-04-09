@@ -47,9 +47,30 @@ public class TypicalTestTasks {
         return new TestTask[]{code, study, eat, sleep, shop, play};
     }
 
+
+
     public TaskManager getTypicalTaskManager() {
         TaskManager tm = new TaskManager();
         loadTaskManagerWithSampleData(tm);
+        return tm;
+    }
+
+    public static void loadTaskManagerWithSampleDataWithoutTime(TaskManager ab) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasksWithoutTime()) {
+            try {
+                ab.addTask(new Task(task));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
+                assert false : "not possible";
+            }
+        }
+    }
+
+    public TestTask[] getTypicalTasksWithoutTime() {
+        return new TestTask[]{study, shop, play};
+    }
+    public TaskManager getTypicalTaskManagerWithoutTime() {
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleDataWithoutTime(tm);
         return tm;
     }
 }
