@@ -17,7 +17,7 @@ import seedu.ezdo.testutil.TestTask;
  * Runs test cases for Select command.
  */
 public class SelectCommandTest extends EzDoGuiTest {
-    
+
     /** Tests for invalid commands **/
     @Test
     public void select() {
@@ -66,7 +66,7 @@ public class SelectCommandTest extends EzDoGuiTest {
          * the SelectCommand
          */
     }
-    
+
     /** Tests for select commands with multiple tasks in non-empty list. **/
     @Test
     public void selectMultipleTasks_nonEmptyList() {
