@@ -20,6 +20,7 @@ Watodo is a desktop application. It has a GUI but it favours users who prefer us
 
 #### Acknowledgements
 
+* Original source of the code is the sample project created by SE-EDU initiative at https://github.com/se-edu/
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
 
