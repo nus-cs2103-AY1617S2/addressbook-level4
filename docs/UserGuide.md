@@ -157,7 +157,7 @@ Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `CATEGORY` categoryName
 
 >Categories added can be identified by the small grey box at the bottom of the task as seen in image below. 
-> <img src="images/ProcrastiNomore_Categories_Normal.PNG" width="1000">
+> <img src="images/ProcrastiNomore_Categories_Normal.png" width="1000">
 
  If user wants more than one category tagged to the task, for example two categories:<br>
  `ADD` task `FROM` date `TO` date `CATEGORY` categoryOne `CATEGORY` categoryTwo
@@ -168,7 +168,7 @@ Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
  Priority(Colour): High(Red), Medium(Yellow), Low(Blue)
 
  >Image showing tasks with different special categories and their respective colours.<br>
- > <img src="images/ProcrastiNomore_Categories_High_Med_Low.PNG" width="1000">
+ > <img src="images/ProcrastiNomore_Categories_High_Med_Low.png" width="1000">
 
 ### 3.3. Update an existing task : `UPDATE`
 
@@ -193,10 +193,10 @@ Command words used work similarly as during adding (ON, FROM, TO, BY)
 Some general formats include the following:
 
 General Format: `UPDATE` `Task Index` `New Task Name` - Changes existing task's name to new task name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time - Changes existing task to event with<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified start and end date/time<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time - Changes existing task to deadline with newly specified<br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date/time
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time - Changes existing task to event with<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified start and end date/time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time - Changes existing task to deadline with newly specified<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date/time
 
 Sample Update task name:
 > Type the following command `UPDATE 36 Buy a horse` into the command Box and press <kbd>Enter</kbd>
@@ -337,7 +337,7 @@ Examples:
   Changes the save location of the task manager back to the default save location.
 
 > Upon successfully changing the save location, the application will show the new save location at the bottom of the application
-> <img src="images/ProcrastiNomore_Change_Save_Location_After.PNG" width="1000">
+> <img src="images/ProcrastiNomore_Change_Save_Location_After.png" width="1000">
 
 ### 3.14. Recurring command: `RECUR`
 
@@ -356,9 +356,9 @@ Format: `RECUR` `Task Index` `Number of Times` `Interval`
 Sample recurring event:
 
 > Type the following command `RECUR 1 2 weeks` into the command Box and press <kbd>Enter</kbd>
-> <img src="images/ProcrastiNomore_Before_Recur_Event.PNG" width="1000">
+> <img src="images/ProcrastiNomore_Before_Recur_Event.png" width="1000">
 > The application will recur the existing task at index 1 to recur for next 2 weeks in 1 week intevals
-> <img src="images/ProcrastiNomore_After_Recur_Event.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Recur_Event.png" width="1000">
 
 Examples:
 * RECUR 2 4 years (recurs event at index 2 for every year for next 4 years)
