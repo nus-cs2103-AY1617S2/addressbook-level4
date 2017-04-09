@@ -57,9 +57,17 @@ public class TaskCard extends UiPart<Region> {
         setStyleToNormal();
         desc.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
-        priority.setText(task.getPriority().toString());
 
-        // Times
+        initTime(task);
+        initCheckbox(task);
+        initPriority(task);
+        initTags(task);
+    }
+
+    /**
+     * Initialise time appearance on task card
+     */
+    private void initTime(ReadOnlyTask task) {
         if (task.getDates().isDeadline()) {
             startTime.setText(BY_TIME_TEXT + prettyDate(task.getDates().getStartDate()));
             endTime.setText("");
@@ -74,9 +82,15 @@ public class TaskCard extends UiPart<Region> {
         if (task.getDates().isPast()) {
             setStyleToOverdue();
         }
+    }
 
-        // Finished
+    /**
+     * Initialise checkbox to be marked or unmarked
+     */
+    private void initCheckbox(ReadOnlyTask task) {
+        // Don't allow user to mark or unmark checkbox
         checkbox.setDisable(true);
+        // Disabled but opacity is force set to 1
         checkbox.setStyle("-fx-opacity: 1");
         if (task.getFinishedStatus().getIsFinished()) {
             checkbox.setSelected(true);
@@ -84,8 +98,13 @@ public class TaskCard extends UiPart<Region> {
         } else {
             checkbox.setSelected(false);
         }
+    }
 
-        //Importance
+    /**
+     * Initialise priority to show text and the stars
+     */
+    private void initPriority(ReadOnlyTask task) {
+        priority.setText(task.getPriority().toString());
         if (task.getPriority().getPriorityLevel().equals(Priority.PriorityLevel.NORMAL)) {
             // Disable both stars
             star1.setImage(null);
@@ -94,9 +113,6 @@ public class TaskCard extends UiPart<Region> {
             // Disable one star
             star2.setImage(null);
         }
-
-        // Tags
-        initTags(task);
     }
 
     private void initTags(ReadOnlyTask task) {
