@@ -90,7 +90,7 @@ Type out these command in the command box and press <kbd>Enter</kbd> to execute 
      adds a task named `Try Out Todo List` to the todo list.
    * **`delete`**` 1` : deletes the 1st task shown in the current list.
    * **`exit`** : exits the app.<br>
-3. Refer to the [Features](#features) section below for details of each command.<br>
+3. Refer to the [Features](#3-features) section below for details of each command.<br>
 
 [comment]: # (@@author A0162011A)
 ## 3. Features
