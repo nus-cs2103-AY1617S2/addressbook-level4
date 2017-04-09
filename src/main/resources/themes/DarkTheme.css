@@ -273,8 +273,7 @@
 }
 
 #cardPane {
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-width: 1 1 1 24;
 }
 
 #commandTypeLabel {
