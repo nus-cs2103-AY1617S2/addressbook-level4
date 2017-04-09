@@ -4,11 +4,11 @@
 }
 
 .incomplete {
-    -fx-border-color: #69dead;
+    -fx-border-color:  #ffcccc;
 }
 
 .complete {
-    -fx-border-color: #ffcccc;
+    -fx-border-color: #69dead;
 }
 
 .tag-selector {
