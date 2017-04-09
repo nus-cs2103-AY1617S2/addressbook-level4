@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# Watodo - User Guide
 
 By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -43,18 +43,28 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > **DATETIME Format**
 >
 > Watodo uses the external library Natty Date Parser to parse date and time options.
+> The general format is DAY/DATE and/or time
+
 > Some examples of the acceptable formats are:
 > * `2017-02-23` (yyyy-mm-dd) <br>
 > * `04/05` (mm/dd) <br>
+> * `monday` <br>
+> * `tues` <br>
 > * `today` <br>
 > * `tomorrow` or `tmr` <br>
 > * `next tues` <br>
 > * `3 weeks from now` <br>
 > * `9pm` or `21:00` <br>
 > * `noon` <br>
+For a full list of acceptable formats, please refer to http://natty.joestelmach.com/doc.jsp
 
-> * if only the date/day is provided, the time will be default set as to 11.59 pm
+> * Important notes:
+> * if only the date/day is provided, the time will be default set as 11.59 pm
 > * if only the time is provided, the date/day will be default set as the current date/day
+> * when inputing in date format, ONLY mm/dd is allowed and not dd/mm, and range for dd and mm must be valid
+(Exception is when you type dd month where month is in words, eg. `5 may`, but the dd must be valid ie. cannot be `32`
+> * if multiple dates are given, only the first date will be captured
+> * Watodo captures time to the precision of minutes
 
 ### 2.1. Viewing help : `help`
 
@@ -80,7 +90,7 @@ Format: `add DESCRIPTION [#TAG]...`
 Examples:
 
 * `add read Lord of The Rings #personal`
-* `add #noTime cut hair
+* `add #noTime #noMoney cut hair
 
 ### b) Deadline task
 
@@ -91,6 +101,8 @@ Examples:
 
 * `add prepare meeting slides by/ tomorrow 9am #impt #work`
 * `add send budget proposal on/ Thurs noon to boss #project`
+* `add #CS demo on/13 apr 4pm #shag for v0.5`
+* `add by/10pm eat dinner #yum
 
 ### c) Event task
 
@@ -101,6 +113,7 @@ Examples:
 
 * `add  from/next mon to/ 05/16 attend skills upgrading workshop`
 * `add meeting at board room 4 from/ 10am to/ 11am #project #meetings`
+* `add #mug #school reading week from/next mon to/next fri catch up with webcasts`
 
 ### 2.3. Listing tasks by type : `list LIST_TYPE`
 
@@ -296,6 +309,9 @@ Below is a list of shortcut keys for some of the above commands:
 > * mark: `m`, `check`
 > * unmark: `um`, `uncheck`
 > * find: `f`, `search`
+> * undo: `u`
+> * redo: `r`
+> * select: `s`
 
 ### 2.16 Customize alternative commands: `shortcut`
 
@@ -305,11 +321,13 @@ Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WO
 
 > SHORTCUT_KEY can be any character except whitespace.
 > Unfortunately, special keys (eg. F1, SHIFT, CTRL etc) are not supported. :(
+> You cannot delete any of the default command words.
+> Shortcut keys must be unique. Eg. `a` cannot be a shortcut for both `add` and `edit`
 
 Examples:
-* shortcut + add @@
-* shortcut + undo z
-* shortcut - undo z
+* `shortcut + add @@`
+* `shortcut + undo z`
+* `shortcut - undo z`
 
 ### 2.17 Viewing all the shortcut keys: `viewshortcuts`
 
