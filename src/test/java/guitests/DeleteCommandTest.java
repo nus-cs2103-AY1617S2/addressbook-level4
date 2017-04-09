@@ -14,6 +14,12 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
      @Test
      public void delete() {
+    	 try {
+ 			setup();
+ 		} catch (Exception e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
 
 
      // delete the first in the list
