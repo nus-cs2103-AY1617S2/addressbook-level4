@@ -55,14 +55,17 @@ public class TaskListPanelHandle extends GuiHandle {
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " tasks");
+                    "Expected " + (getListView().getItems().size() - 1) + " tasks got "
+                    + (tasks.length + startPosition));
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
+
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+            guiRobot.sleep(300);
+            if (!TestUtil.
+                    compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
         }
@@ -85,11 +88,13 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if the list in panel is too short to contain the given list
         if (startPosition + tasks.length > tasksInList.size()) {
+
             return false;
         }
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
+
             if (!tasksInList.get(startPosition + i).getDescription().fullDescription
                 .equals(tasks[i].getDescription().fullDescription)) {
                 return false;
@@ -156,6 +161,7 @@ public class TaskListPanelHandle extends GuiHandle {
         Optional<Node> taskCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
                 .findFirst();
+
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
