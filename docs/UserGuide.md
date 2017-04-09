@@ -60,7 +60,7 @@ Here are some terminologies used in this user guide:
 
 * Download the latest `DoIt.jar` from the [releases](../../../releases) tab
 * Copy `DoIt.jar` to a folder as the home folder for *DoIt*
-* To launch the *DoIt* application, double-click on `DoIt.jar` 
+* To launch the *DoIt* application, double-click on `DoIt.jar`
 * The main interface should appear as shown in figure 1 in a few seconds
 <img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/MainInterface.png" width="600">
 _Figure 1 : Main GUI_
