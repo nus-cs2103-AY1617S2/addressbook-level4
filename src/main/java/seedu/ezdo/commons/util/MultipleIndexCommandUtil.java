@@ -23,14 +23,15 @@ public class MultipleIndexCommandUtil {
     public static boolean isDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList,
             ArrayList<Integer> targetIndexes) {
         for (int i = 0; i < targetIndexes.size(); i++) {
-            Task task = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            int taskIndex = targetIndexes.get(i) - 1;
+            Task task = (Task) lastShownList.get(taskIndex);
             if (task.getDone()) {
                 return false;
             }
         }
         return true;
     }
-    //@@author A0139177W
+    //@@author
 
     /** adds read only tasks from the unmodifiable observable list to the ArrayList list */
     public static void addReadOnlyTasksToList(ArrayList<ReadOnlyTask> list,
