@@ -33,10 +33,18 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Deliverables and deadline<br>
 * Features implemented:<br>
   * Implemented a calendar in UI
+  * Allowed immediate update and feedback from user input for calendar 
+  * [Next command to change calendar view](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#213-changing-calendar-week-next)
+  * [Refresh command to reset calendar view](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#214-refreshing-the-calendar-refresh)
+  * Urgency badges for event and task
 * Code written:
+  * [functional and UI design code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0124377A.md)
+  * [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0124377A.md)
 * Other major contributions:
   * Refactored UI package
   * Implemented UI layout
+  * Writing GUI test for calendar
+
 
 -----
 
