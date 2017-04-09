@@ -206,10 +206,9 @@ Examples:
 
 Sometimes, you may need to update or fix a previously entered task.<br>
 `update` allows you to update an existing task in the list.<br>
-Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/stoprepeating] [/floating] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
-    The index refers to the index number shown in the last task listing.
 > * Only fields entered will be updated.
 > * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
 
@@ -225,19 +224,20 @@ Examples:
 ### 3.6. Filtering all tasks for a given keyword: `filter`
 
 As you list of tasks grows, you may find the need to filter your todo list to locate a particularly 
-important task.
+important task.<br>
 `filter` allows you to finds tasks whose names or tags contain any of the given keywords.<br>
 Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 
+> * Search will filter the list of tasks displayed in each of the tabs. (When you `switch` tabs, the tasks will still be filtered.)
+> * If no keywords are entered, the list of all tasks is displayed. (This can be used to go to the unfiltered view.)
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default the name and tag is searched.
-> * Adding '/tag' will search by only tag.
-> * Adding '/name' will search by only name.
-> * If no keyword is entered, the list of all tasks is displayed.
+> * Adding `/tag` will search by only tag.
+> * Adding `/name` will search by only name.
 > * Partial words will be matched. e.g. `Han` will match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+    e.g. `Hans Pa` will match `Hans Bo`
 > * Search terms that are used in the current search will pop up as suggestions in subsequent searches.
 
 Examples:
@@ -277,8 +277,7 @@ Assuming you have been using ToLuist for a long while, you may want to remove so
 `delete` allows you to delete a task or multiple tasks from the todo list.<br>
 Format: `delete INDEX(ES)`
 
-> * Deletes the task at the specified `INDEX`. <br>
-> * The index(es) refers to the index number shown in the most recent listing.<br>
+> * Deletes the task at the specified `INDEX(ES)`. <br>
 > * Supports deletion of multiple indexes in a single command.
 
 Examples:
@@ -295,11 +294,11 @@ Examples:
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 [comment]: # (@@author A0131125Y)
-### 3.9. Completing or Making Incomplete a Task: `mark`
+### 3.9. Marking a Task as Complete or Incomplete: `mark`
 
 After you completed a task, you may want to indicate this in ToLuist. Alternatively, you may want to mark 
 a completed task as incomplete if you feel that it still needs more work.<br>
-`mark` allow you to set the completion status for a task or multiple tasks.<br>
+`mark` allows you to set the completion status for a task or multiple tasks.<br>
 Format: `mark [complete/incomplete] INDEX(ES)`
 
 > * Using complete as a parameter will mark the selected task(s) as complete.
@@ -324,33 +323,27 @@ Example:
 [comment]: # (@@author A0162011A)
 ### 3.10. Adding a Tag to a Task: `tag`
 
-You may want to differentiate your tasks by categories.<br>
+You may want to group your tasks by categories.<br>
 `tag` allows you to add a tag or multiple tags to an existing task. <br>
 Format: `tag INDEX TAG...`
 
-> * If the tag already exists, the command will notify you and do nothing.
-> * If multiple tags are used in the command, you will be notified of each one.
-
 Example:
 * `tag 1 school` <br>
-  Adds the tag 'school' to task 1.
+  Adds the tag `school` to task 1.
 * `tag 2 work home` <br>
-  Adds the tags 'work' and 'home' to task 2.
+  Adds the tags `work` and `home` to task 2.
 
 ### 3.11. Removing a Tag from a Task: `untag`
 
-You may change your mind and decide to remove a category from a task.<br>
+You may decide to remove a category from a task.<br>
 `untag` allows you to remove a tag or multiple tags from an existing task. <br>
 Format: `untag INDEX TAG...`
 
-> * If the tag already does not exist, the command will notify you and do nothing.
-> * If multiple tags are used in the command, you will be notified of each one.
-
 Example:
 * `untag 1 school` <br>
-  Removes the tag 'school' from task 1.
+  Removes the tag `school` from task 1.
 * `untag 2 work home` <br>
-  Removes the tags 'work' and 'home' from task 2.
+  Removes the tags `work` and `home` from task 2.
 
 ### 3.12. Clearing all entries: `clear`
 
@@ -361,17 +354,16 @@ Format: `clear`
 [comment]: # (@@author A0131125Y)
 ### 3.13. Undoing a command: `undo`
 
-As human, we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
+In life we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
 the result of your command.<br>
 `undo` allows you to undo your previous command(s).<br>
 Format: `undo [NUMBER]`
 
 > * `undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
-`add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with
-> `undo`. If loading a different data file with `load` causes the current tasks to be changed, you can go back
-> to the previous list of tasks using `undo` too (Using `undo`, however, won't revert the change of data 
-storage path. It's not considered modifications to the task).
-> Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
+`add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with `undo`.
+> * If loading a different data file with `load` causes the current tasks to be changed, you can go back to the previous list of tasks using `undo` too.<br>
+(Using `undo`, however, won't revert the change of data storage path. It's not considered modifications to the task.)
+> * Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
 > you can still easily revert their effects:
 >   * Changing of storage path location (with `save` / `load` ) - You can change your storage path to the 
 previous location with `save`.
