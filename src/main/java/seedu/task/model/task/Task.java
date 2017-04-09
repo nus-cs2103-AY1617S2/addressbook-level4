@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
@@ -16,6 +18,7 @@ import seedu.task.model.tag.UniqueTagList;
  * null, field values are validated.
  */
 public class Task implements ReadOnlyTask, Comparable<Task> {
+    private static final Logger logger = LogsCenter.getLogger(Task.class);
 
     private Description description;
     private Priority priority;
@@ -254,9 +257,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * @throws IllegalValueException
      */
     public void setOccurrences(Timing initialStartTime, Timing initialEndTime) throws IllegalValueException {
+        logger.info("Setting initial occurrence...");
         this.occurrences.add(new RecurringTaskOccurrence(initialStartTime, initialEndTime));
         if (isRecurring()) {
             if (initialStartTime.timing == null || initialEndTime.timing == null) {
+                logger.severe("Start or End timing not specified for recurring task");
                 throw new IllegalValueException(MESSAGE_MISSING_TIMING);
             }
             String freqCharacter = frequency.getFrequencyCharacter();

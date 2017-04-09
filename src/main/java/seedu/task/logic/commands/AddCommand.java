@@ -4,7 +4,9 @@ import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -22,7 +24,7 @@ import seedu.task.model.task.UniqueTaskList;
  * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
-
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
@@ -59,6 +61,7 @@ public class AddCommand extends Command {
                 new RecurringFrequency(recurFreq)
                 );
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
+            logger.warning("Timing is not in the correct order");
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
     }

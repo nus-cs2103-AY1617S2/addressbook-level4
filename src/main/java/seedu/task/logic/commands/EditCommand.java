@@ -79,6 +79,7 @@ public class EditCommand extends Command {
                 ReadOnlyTask copyRecurTask = new Task(taskToEdit);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 model.updateThisTask(filteredTaskListIndex, copyRecurTask, editedTask);
+                logger.info("Editing a specific occurrence of a recurring task");
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
                 model.updateTask(filteredTaskListIndex, editedTask);
