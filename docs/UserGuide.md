@@ -49,7 +49,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add TASK_NAME [from START TIME] [to END TIME] [in GROUP]
+Format: `add TASK_NAME [from START TIME] [to END TIME] [in GROUP]`
 
 > Persons can add a task without defining either start time or end time.
 > local time will be set as default if start time and end time parameters do not specify time .
