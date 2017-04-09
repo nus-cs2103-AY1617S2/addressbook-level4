@@ -108,10 +108,10 @@ Two of those classes play important roles at the architecture level:
 
 The rest of ezDo consists of four components:
 
-* [**`UI`**](#ui-component) : The UI of ezDo.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : The data of ezDo in-memory.
-* [**`Storage`**](#storage-component) : The handler of read-write operations to disk.
+* [**`UI`**](#32-ui) : The ezDo's **`UI`**.
+* [**`Logic`**](#33-logic) : The command executor.
+* [**`Model`**](#34-model) : The data of ezDo in-memory.
+* [**`Storage`**](#35-storage) : The handler of read-write operations to disk.
 
 <br>
 
@@ -162,28 +162,28 @@ The sections below give more details on each component.
 **API** : [`Ui.java`](../src/main/java/seedu/ezdo/ui/Ui.java)
 <br>
 
-As shown in Figure 5, **`UI`** consists of a `MainWindow` that consists of several parts. _For example: `CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` and `TaskCardHeader`._ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+**`UI`** consists of a `MainWindow` that consists of several parts (as shown in Figure 5). _For example: `CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` and `TaskCardHeader`._ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-**`UI`** uses the `JavaFX UI` framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
+**`UI`** uses the `JavaFX UI` framework. The layout of these **`UI`** parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/ezdo/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
  <br>
 
-The **`UI`** component:
+**`UI`** component:
 
 * Executes user commands using **`Logic`**.
 
 * Binds itself to some data in **`Model`** so that the UI can auto-update when data in **`Model`** changes.
 
-* Responds to events raised from various parts of ezDo and updates the UI accordingly.
+* Responds to events raised from various parts of ezDo and updates **`UI`** accordingly.
 
 #### Design Choices
-The **`UI`** component is designed in such as way that adding/removing a new part is simple, by adding/removing the `java` part with its corresponding `.fxml` file as well as updating the `MainWindow` class. Doing this will not affect the other parts of the UI component.
+**`UI`** component is designed in such as way that adding/removing a new part is simple, by adding/removing the `java` part with its corresponding `.fxml` file as well as updating the `MainWindow` class. Doing this will not affect the other parts of the **`UI`** component.
 
 The Model-View-Controller pattern can be observed in ezDo.
-* Model: The **` Model`** component stores and maintains all the data in ezDo.
-* View: The `.fxml` files are responsible for interacting with the user and displaying ezDo's data. The **`UI`** component recieves data updates from the **`Model`** component through events.
-* Controller: `CommandBox` act as 'Controllers' for UI. When the `CommandBox` recieves command input from the user, it requests **`Logic`** component to execute the command, which may cause changes in the **`Model`** component.
+* Model: **` Model`** component stores and maintains all the data in ezDo.
+* View: The `.fxml` files are responsible for interacting with the user and displaying ezDo's data. **`UI`** component recieves data updates from **`Model`** component through events.
+* Controller: `CommandBox` act as 'Controllers' for **`UI`**. When the `CommandBox` recieves command input from the user, it requests **`Logic`** component to execute the command, which may cause changes in **`Model`** component.
 
 An Observer pattern can be observed in the `StatusBarFooter` class, for instance retrieving the latest ezDo storage file path and the last updated time.
 <br><br>
@@ -241,13 +241,13 @@ As shown in Figure 8, **`Model`**:
 
 * Exposes a `UnmodifiableObservableList<ReadOnlyTask>` object that can only be 'observed' i.e **`UI`** can be bound to this list so that the displayed list on the interface displays changes when the data in the list changes.
 
-* Changes are made on a FilteredList. The changes are then raised in an eventBus (see other sections) which mutates the `UnmodifiableObservableList<ReadOnlyTask>`. This causes the change within the list to be reflect in the **`UI`**.
+* Changes are made on a FilteredList. The changes are then raised in an eventBus (see other sections) which mutates the `UnmodifiableObservableList<ReadOnlyTask>`. This causes the change within the list to be reflect in **`UI`**.
 
 #### Design Choices
-Changes are made on a FilteredList. The changes are then raised as an event (see other sections) which mutates the `UnmodifiableObservableList<ReadOnlyTask>`. This causes the change within the list to be reflect in the **`UI`**.
+Changes are made on a FilteredList. The changes are then raised as an event (see other sections) which mutates the `UnmodifiableObservableList<ReadOnlyTask>`. This causes the change within the list to be reflect in **`UI`**.
 <br>
 
-ezDo stores all tasks, regardless done or undone, in one FilteredList (see `Storage` section for more information).
+ezDo stores all tasks, regardless done or undone, in one FilteredList (see [`Storage`](#35-storage) section for more information).
 As such, commands such as `Edit`, `Done` and `Kill` can be executed easily on a single list instead of keeping track of multiple lists of tasks with different types (done and undone). 
 <br>
 
