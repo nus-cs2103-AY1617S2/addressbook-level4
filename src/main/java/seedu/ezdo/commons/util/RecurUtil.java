@@ -26,7 +26,6 @@ public class RecurUtil {
         final boolean isBothDatesMissing = isStartDateMissing && isDueDateMissing;
 
         final boolean recurStatus = task.getRecur().isRecur();
-        
         final boolean recurValid = !(isBothDatesMissing && recurStatus);
 
         return recurValid;
