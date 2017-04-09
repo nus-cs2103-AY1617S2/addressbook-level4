@@ -61,7 +61,7 @@ public class XmlTaskListStorageTest {
     public void readAndSaveTaskList_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTaskList.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TaskManager original = td.getTypicalTaskManager();
+        TaskManager original = td.getTypicalTaskManagerWithoutTime();
         XmlTaskListStorage xmlTaskListStorage = new XmlTaskListStorage(filePath);
 
         //Save in new file and read back
@@ -69,15 +69,17 @@ public class XmlTaskListStorageTest {
         ReadOnlyTaskManager readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
+
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.study));
-        original.removeTask(new Task(td.sleep));
+        original.addTask(new Task(td.drum));
+        original.removeTask(new Task(td.play));
         xmlTaskListStorage.saveTaskList(original, filePath);
         readBack = xmlTaskListStorage.readTaskList(filePath).get();
+
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.shop));
+        original.addTask(new Task(td.play));
         xmlTaskListStorage.saveTaskList(original); //file path not specified
         readBack = xmlTaskListStorage.readTaskList().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));

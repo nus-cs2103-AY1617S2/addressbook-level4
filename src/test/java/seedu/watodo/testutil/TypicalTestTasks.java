@@ -10,7 +10,7 @@ import seedu.watodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask code, study, eat, sleep, shop, play;
+    public TestTask code, study, eat, sleep, shop, play, gym, demo, drum, dance;
 
     public TypicalTestTasks() {
         try {
@@ -21,6 +21,11 @@ public class TypicalTestTasks {
             sleep = new TaskBuilder().withDescription("sleep?").withEndDate("fri").build();
             shop = new TaskBuilder().withDescription("no money spend money").withTags("tag").build();
             play = new TaskBuilder().withDescription("what is play?").withTags("tag").build();
+            gym = new TaskBuilder().withDescription("train pokemon").withEndDate("4/11 noon").withTags("lvlUP").build();
+            demo = new TaskBuilder().withDescription("demo").withEndDate("13 apr 4pm").withTags("cs2103").build();
+            drum = new TaskBuilder().withDescription("practice drums").withTags("destress").build();
+            dance = new TaskBuilder().withDescription("learn airflares")
+                    .withStartDate("tmr 9am").withEndDate("tmr 10am").withTags("hiphop").build();
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -39,12 +44,33 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{eat, sleep, play};
+        return new TestTask[]{code, study, eat, sleep, shop, play};
     }
+
+
 
     public TaskManager getTypicalTaskManager() {
         TaskManager tm = new TaskManager();
         loadTaskManagerWithSampleData(tm);
+        return tm;
+    }
+
+    public static void loadTaskManagerWithSampleDataWithoutTime(TaskManager ab) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasksWithoutTime()) {
+            try {
+                ab.addTask(new Task(task));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
+                assert false : "not possible";
+            }
+        }
+    }
+
+    public TestTask[] getTypicalTasksWithoutTime() {
+        return new TestTask[]{study, shop, play};
+    }
+    public TaskManager getTypicalTaskManagerWithoutTime() {
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleDataWithoutTime(tm);
         return tm;
     }
 }

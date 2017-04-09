@@ -260,7 +260,7 @@ public class LogicManagerTest {
     public void execute_addflexibleArgsFormat_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithDescriptionAndStartEndDates(
-                "watch webcasts", "next tues", "4/14", "BackLog");
+                "watch webcast", "next tues", "next fri", "BackLog");
         Task testTask2 = helper.generateTaskWithDescriptionAndStartEndDates(
                 "study for finals", "today", "may 5", "letgo");
         Task testTask3 = new Task(new Description("ie2150 project"), new DateTime("11 apr 12pm"),
@@ -268,7 +268,7 @@ public class LogicManagerTest {
         TaskManager expectedTM = new TaskManager();
 
         expectedTM.addTask(testTask1);
-        String command = "add from/ next tues to/4/14 watch webcasts #BackLog";
+        String command = "add from/next tues to/next fri watch webcast #BackLog";
         assertCommandSuccess(command, String.format(AddCommand.MESSAGE_SUCCESS, testTask1),
                 expectedTM, expectedTM.getTaskList());
 
@@ -420,13 +420,19 @@ public class LogicManagerTest {
 
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
+    // Delete has a more specific
     @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("delete");
+        assertCommandFailure("delete 20",
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_UNSUCCESSFUL, 20)
+                + "\n"
+                + DeleteCommand.MESSAGE_INDEX_OUT_OF_BOUNDS
+                + "\n");
+
     }
 
     @Test
@@ -435,11 +441,10 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedTM = helper.generateTaskManager(threeTasks);
-        expectedTM.removeTask(threeTasks.get(1));
+        expectedTM.removeTask(threeTasks.get(0));
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
-
                 1, threeTasks.get(0) + "\n"), expectedTM, expectedTM.getTaskList());
     }
 

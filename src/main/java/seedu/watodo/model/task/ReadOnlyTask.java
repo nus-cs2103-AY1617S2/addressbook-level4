@@ -19,6 +19,7 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    //@@author A0143076J
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */

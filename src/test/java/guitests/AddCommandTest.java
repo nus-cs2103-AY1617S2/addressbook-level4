@@ -17,11 +17,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         /*TestTask taskToAdd = td.play;
+        TestTask taskToAdd = td.demo;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTaskToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.shop;
+        taskToAdd = td.drum;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTaskToList(currentList, taskToAdd);*/
 
@@ -32,10 +33,10 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.sleep);
+        assertAddSuccess(td.dance);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds gym Pokemon");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 

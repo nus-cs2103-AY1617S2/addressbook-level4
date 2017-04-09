@@ -19,27 +19,16 @@ public class Task implements ReadOnlyTask {
     private TaskStatus status = TaskStatus.UNDONE; //Default status of any new task created is UNDONE
     private TaskType taskType;
 
+    //@@author A0143076J
     /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
         this(description, null, null, tags);
         this.taskType = TaskType.FLOAT;
     }
 
-    /* Constructs a Floating Task object from a given description. With Status */
-    public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
-        this(description, null, null, tags, newStatus);
-        this.taskType = TaskType.FLOAT;
-    }
-
     /* Constructs a Deadline Task object from a given description. */
     public Task(Description description, DateTime deadline, UniqueTagList tags) {
         this(description, null, deadline, tags);
-        this.taskType = TaskType.DEADLINE;
-    }
-
-    /* Constructs a Deadline Task object from a given description. With status. */
-    public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
-        this(description, null, deadline, tags, newStatus);
         this.taskType = TaskType.DEADLINE;
     }
 
@@ -53,6 +42,19 @@ public class Task implements ReadOnlyTask {
         this.taskType = TaskType.EVENT;
     }
 
+    //@@author A0139845R
+    /* Constructs a Floating Task object from a given description. With Status */
+    public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, null, tags, newStatus);
+        this.taskType = TaskType.FLOAT;
+    }
+
+    /* Constructs a Deadline Task object from a given description. With status. */
+    public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, deadline, tags, newStatus);
+        this.taskType = TaskType.DEADLINE;
+    }
+
     /* Constructs an Event Task object from a given description. With status */
     public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags, TaskStatus status) {
         assert !CollectionUtil.isAnyNull(description, tags);
@@ -64,6 +66,7 @@ public class Task implements ReadOnlyTask {
         this.taskType = TaskType.EVENT;
     }
 
+    //@@author
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
@@ -152,6 +155,7 @@ public class Task implements ReadOnlyTask {
         return builder.toString();
     }
 
+    @Override
     public TaskType getTaskType() {
         return taskType;
     }
