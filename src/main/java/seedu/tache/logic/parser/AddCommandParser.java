@@ -1,7 +1,6 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX;
 
 import java.util.HashSet;
@@ -78,39 +77,6 @@ public class AddCommandParser {
                 return new AddCommand(taskName, startDateTimeStr, endDateTimeStr, tagSet, parsedRecurInterval);
             } catch (IllegalValueException ex) {
                 return new IncorrectCommand(ex.getMessage());
-            }
-        }
-    }
-
-    public Command parseStructured(String args) {
-        String[] taskFields = args.split(DELIMITER_PARAMETER);
-        Set<String> tagSet = new HashSet<String>();
-        if (taskFields.length == 0) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } else {
-            String name = taskFields[0];
-            Optional<String> startDateTime = Optional.empty();
-            Optional<String> endDateTime = Optional.empty();
-            for (int i = 1; i < taskFields.length; i++) {
-                String currentChunk = taskFields[i];
-                if (ParserUtil.hasDate(currentChunk) || ParserUtil.hasTime(currentChunk)) {
-                    if (!endDateTime.isPresent()) {
-                        endDateTime = Optional.of(taskFields[i]);
-                    } else if (!startDateTime.isPresent()) {
-                        startDateTime = endDateTime;
-                        endDateTime = Optional.of(taskFields[i]);
-                    } else {
-                        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                AddCommand.MESSAGE_USAGE));
-                    }
-                } else {
-                    tagSet.add(taskFields[i]);
-                }
-            }
-            try {
-                return new AddCommand(name, startDateTime, endDateTime, tagSet, Optional.empty());
-            } catch (IllegalValueException e) {
-                return new IncorrectCommand(e.getMessage());
             }
         }
     }
