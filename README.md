@@ -18,8 +18,8 @@ OneTwoDo also supports the following for developers:
 * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 #### Site Map
-* [User Guide](https://cs2103jan2017-f14-b1.github.io/main/UserGuide.pdf)
-* [Developer Guide](https://cs2103jan2017-f14-b1.github.io/main/DeveloperGuide.pdf)
+* [User Guide](https://cs2103jan2017-f14-b1.github.io/main/UserGuide)
+* [Developer Guide](https://cs2103jan2017-f14-b1.github.io/main/DeveloperGuide)
 * [Learning Outcomes](docs/LearningOutcomes.md)
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
