@@ -139,7 +139,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 We elaborate more about the individual components below.
 
 ### 3.2. UI
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/UiClassDiagram.jpg" width="800"><br>
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/images/UiClassDiagram.jpg?raw=true" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/today/ui/Ui.java)
