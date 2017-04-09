@@ -113,7 +113,6 @@ public class TypicalTestTasks {
             completedEatBreakfast = new TaskBuilder().withTaskName("Eat breakfast with mom").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(true)
                     .withCategories("just", "friends").build(); // event
-
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
