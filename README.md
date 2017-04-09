@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F14-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F14-B3/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/da02bd588e5449ebbb6eab25b2f1a05a)](https://www.codacy.com/app/LiHaoTan/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-F14-B3/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/ui.png" width="600"><br>
 
 * This is a desktop to-do list application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).

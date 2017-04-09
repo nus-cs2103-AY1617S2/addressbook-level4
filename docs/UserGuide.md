@@ -1,17 +1,18 @@
+<!---A0135998H-->
 # User Guide
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Features](#features)
+  * [Overview](#overview)
+  * [Task Tabs](#task-tabs)
+* [Commands](#commands)
+  * [Command Format](#command-format)
+  * [Date and Time Format](#date-and-time-format)
   * [Viewing help](#viewing-help)
-    * [Viewing all commands](#viewing-all-commands)
-    * [Viewing a specific command](#viewing-a-specific-command)
   * [Adding a task](#adding-a-task)
+    * [Adding a task with duration](#adding-a-task-with-duration)
+    * [Adding a task with deadline](#adding-a-task-with-deadline)
     * [Adding a floating task](#adding-a-floating-task)
-    * [Adding a pending task](#adding-a-pending-task)
-       * [Adding a pending task with START DATE & TIME](#adding-a-pending-task-with-start-date--time)
-       * [Adding a pending task with END DATE & TIME](#adding-a-pending-task-with-end-date--time)
-       * [Adding a pending task with both START DATE & TIME and END DATE & TIME](#adding-a-pending-task-with-both-start-date--time-and-end-date--time)
-    * [Adding a recurring task](#adding-a-recurring-task)
    * [Editing a task](#editing-a-task)
    * [Deleting a task](#deleting-a-task)
    * [Viewing tasks](#viewing-tasks)
@@ -21,429 +22,318 @@
      * [Viewing all "done" tasks](#viewing-all-done-tasks)
      * [Viewing all floating tasks](#viewing-all-floating-tasks)
      * [Viewing all overdue tasks](#viewing-all-overdue-tasks)
-     * [Viewing a specified task](#viewing-a-specified-task)
    * [Marking a task as "done"](#marking-a-task-as-done)
+   * [Selecting a task](#selecting-a-task)
    * [Finding for tasks](#finding-for-tasks)
-   * [Clearing of "done" tasks](#clearing-of-done-tasks)
-   * [Toggle Google Calendar](#toggle-google-calendar)
+   * [Clearing all tasks](#clearing-all-tasks)
    * [Undo most recent command](#undo-most-recent-command)
    * [Redo most recent undo](#redo-most-recent-undo)
    * [Save](#save)
-     * [Saving the data](#saving-the-data)
-     * [Changing the save location](#changing-the-save-location)
-     * [Reset saved data](#reset-saved-data)
    * [Exiting the application](#exiting-the-application)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
 ## Introduction
-Today's hectic world constantly bombards people with innumerable tasks at hand. As a result, people tend to lose track of their work progress and deviate from their priorities. Problems like these are far too common among working adults and students embarking on tightly scheduled projects. Thus, our team has created the solution to all your management problems! 
+Today’s hectic world constantly bombards people with innumerable tasks at hand. As a result, people tend to lose track of their work progress and deviate from their priorities. Problems like this are far too common among working adults and students embarking on tightly schedule projects. Thus, our team has created the solution to all your management problems:
 
-Presenting to you, iManager.
+Presenting to you,  iManager.
 
-iManager helps you manage all your tasks in one convenient application. With its interactive UI, managing tasks has never been easier.
-Our product incorporates niche features such as FlexiCommands and Google Integration which saves you time and energy, managing tasks that would otherwise require the use of multiple applications such as Todois and Google Calendar.
+iManager is your one-stop application that helps you manage all your tasks at one go. With its interactive UI, managing tasks has never been easier. Our product incorporate niche features such as Flexi Commands and tab reference which saves you time and energy, managing tasks that would otherwise require the use of multiple applications.
 
-Without further ado, let us get started. 
+Without further ado, let us get started.
 
 ## Quick Start
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
    > Having any Java 8 version is not enough. <br>
    This app will not work with earlier versions of Java 8.
-   
+
 1. Download the latest `iManager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your iManager application.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="800">
+   > <img src="images/empty.png" width="800">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`add SunRiseMarathon`**: adds a reminder to attend SunRise Marathon.
-   * **`view t`**:  view a list for all events happening today. 
+   * **`add Sunrise Marathon from 2pm Sat to 6pm Sat`**: Adds a task named ‘Sunrise Marathon’ that take place on Saturday from 2pm to
+   6pm.
+   * **`view t`**:  view a list for all events happening today.
+   * **`delete 1`**:  Delete the first task from the task list.
    * **`exit`**: exits the application.
-6. Refer to the [Features](#features) section below for details of each command.    
+6. Refer to the [Commands](#commands) section below for details of each command.
 
 ## Features
 
-> **Command Format**
-> * Words in `UPPER_CASE` are command arguments.
-> * Words in `lower_case` are command and connectors, e.g. add and every. 
-> * Letters with slash are command identifiers, e.g. d/ and t/.  
+#### Overview
+iManager at a Glance.
+> <img src="images/overview.png" width="800">
+
+### Task Tabs
+Tasks are categorised into 6 groups, namely, “All”, “Today”, “Pending”, “Done”, “Floating” and “Overdue”. Each group is associated with a clickable tab that allows you to navigate between a list of tasks that falls under these groups.
+
+> * <img src="images/task_tab.png" width="500">
+> * Floating tasks are tasks that has neither has a duration nor deadline.
+> * Alternatively, you can use the [view](#viewing-tasks) to perform the same navigation using your keyboard.
+
+## Commands
+### Command Format
+> * Words in `UPPER_CASE` are command arguments, e.g. NAME, INDEX and STARTDATE.
+> * Words in `lower_case` are command and connectors, e.g. add and by.
+> * Letters with slash are command identifiers, e.g. t/.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` behind can have multiple instances.
 > * `|` means "or".
 
+### Date and time Format
+Format: `[EEEEE][dd MM YYYYY][HH:mm:ss a]`
+> * Applicable to STARTDATE, ENDDATE, DEADLINE.
+> * `[EEEEE]`: Day of the week. Case insensitive. Abbreviation is allowed. (e.g. Mon, Monday, Tue, Tuesday, thur, thursday etc.)
+> * `[dd]`: Day of the Month. (e.g. 1, 11, 31 etc.)
+> * `[MM]`: Month of the year. Case insensitive. Abbreviation is allowed. (e.g. Jan, January Apr, April, dec, december.)
+> * `[YYYYY]`: Period of 12 months. (e.g. 1999, 2016, 2020.)
+> * `[HH:mm:ss aTIME]`: 12-hours-clock. Case insensitive. (e.g. 12am, 1:30am, 3:45AM.)
+> * The order of the date and time does not matter when typing a command.
+> * Missing field will be replace by CURRENT DATE AND TIME.
+
 ### Viewing help
 #### Viewing all commands
-Shows a list of commands available in iManager. <br>
+Do you have trouble using iManager? Are you unsure of what to type? Don’t worry, simply type help and our help window will pop up to your rescue. <br>
 
 Format: `help`
+> Pressing "f1" will also produce the same effect.
+> Entering the wrong command will flashed the correct usage of the command in the result display.
 
-> A list of available commands are also shown if you enter the wrong command.
-
-Examples: 
+Examples:
 * `help` <br>
-  Shows all available commands with example.
+  Shows all available commands with examples.
 
-#### Viewing a specific command
-Show details of a specific command using `[COMMAND]` flag.
-
-List of available commands for help: <br>
-- add <br>
-- edit <br>
-- del <br>
-- view <br>
-- done <br>
-- find <br>
-- clear <br>
-- toggle <br>
-- undo <br>
-- redo <br>
-- saveto <br>
-- cd <br>
-- reset <br>
-- exit <br>
-
-Format: `help [COMMAND]`
-
-Examples:
-* `help add` <br>
-  Shows "add" command with example.
-  
 ### Adding a task
+Work can be stressful and overwhelming. We are being bombarded with information at home, in school and at work. It is natural to forget things from time to time and panic whenever the submission date is near. That being said, it is important for us to learn how to organize and manage the tasks at hand. However in iManager, things are made easier for you. <br>
+
+iManager, offers you flexibility to customized your tasks such that it is easily understood in one glance. A typical task may contain either a duration, deadline or none of the previous two (i.e. floating task).  Let us now learn how to add a customize task to iManager.
+
+#### Adding a task with duration
+Adds a task with duration to the task list. <br>
+
+Format: `add NAME from STARTDATE to ENDDATE  [t/TAG...]`
+
+> * <img src="images/task_duration.png" width="500">
+> * Tasks can have any number of tags.
+
+Examples:
+* `add MA1506 from 26 Apr 2017 12pm to 26 Apr 2017 3pm t/killer t/revision` <br>
+   Adding a MA1406 task with duration to iManager.
+
+#### Adding a task with deadline
+Hey! But what if my task do not have a start date? No worries, you can always add tasks with deadlines. <br>
+
+Format: `add NAME by DEADLINE  [t/TAG...]`
+
+> * <img src="images/task_deadline.png" width="500">
+> * Task can have any number of tags.
+
+Examples:
+* `add EE2021 by 26 Apr 2017 12PM  t/homework` <br>
+   Adding a EE2021 task with deadline to iManager.
+
 #### Adding a floating task
-Adds a floating task to the task list. <br>
+Not bad! What if I do not have any information regarding a task? As mentioned previously, tasks with neither a deadline nor duration are classified as floating tasks. iManager also allows you to add  floating tasks. <br>
 
-Format: `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
+Format: `add NAME [t/TAG...]`
 
-> * Name, description and tag are case insensitive.
-> * Tasks can have any number of tags.
-> * If no priority is specified, the task will be of lowest priority.
-
-Examples: 
-* `add exam` <br>
-   Add a floating task named "exam" to the task list.
-* `add exam p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" to the task list.
-
-#### Adding a pending task
-##### Adding a pending task with START DATE & TIME 
-
-Adds a pending task with only start date & time to the task list. <br>
-
-Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
-
-> * Name, description and tag are case insensitive.
+> * <img src="images/task_floating.png" width="500">
 > * Task can have any number of tags.
-> * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
-> * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
 
 Examples:
-* `add exam on 10-22-2017` <br> 
-   Add a pending task named "exam" on 22 October 2017, current time, to the task list.
-* `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" on 22 October 2017 1500 with "SR1" and tag "CS2010" to the task list.
- 
-##### Adding a pending task with END DATE & TIME 
-
-Adds a pending task with only end date & time to the task list. <br>
-
-Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
-
-> * Name, description and tag are case insensitive.
-> * Task can have any number of tags.
-> * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
-> * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
-
-Examples: 
-* `add exam by 10-22-2017` <br>
-   Add a pending task named "exam" that starts from the current date and time to 22 October 2017 2359 to the task list.
-* `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from the current date and time to 22 October 2017 1500 with description "SR1" 
-   and tag "CS2010" to the task list.
-  
-##### Adding a pending task with both START DATE & TIME and END DATE & TIME 
-
-Adds a pending task with both start date & time and end date & time to the task list. <br>
-
-Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
-
-> * Name, description and tag are case insensitive.
-> * Tasks can have any number of tags.
-> * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
-> * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
-> * If end time (i.e. HHMM) is not specified, it will be set to **2359**.
-
-Examples:
-* `add exam from 10-22-2017 to 10-22-2016` <br>
-   Add a pending task named "exam" that starts from 22 October 2017, current time, to 22 October 2017 2359 to the task list.
-* `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with description 
-   "SR1" and tag "CS2010" to the task list.
-  
-#### Adding a recurring task 
-
-Adds a recurring task that spans over a period of time to the task list. <br>
-
-Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
-
-> * Name, description and tag are case insensitive.
-> * Task can have any number of tags.
-> * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
-> * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
-> * If end time (i.e. HHMM) is not specified, it will be set to **2359**.
-> * Any form of abbreviation can be use for `WEEK`, case insensitive, e.g. Tue, Tues, tues, and Tuesday. 
-> * **No abbreviation** is allowed for `DAY`, `MONTH` and `YEAR`.
-> * Month (i.e. MM) is ignored for every `MONTH`.
-> * It is **SUFFICE** to use time (i.e. HHMM) for every `DAY` and `WEEK`. Date (i.e. MM-DD-YYYY) will be ignored.
-> * You must include `START_DATETIME` and `END_DATETIME` for every `MONTH` and `YEAR`. 
-
-Examples:
-* `add exam every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" to the 
-   task list.
-* `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 22nd October 1300 to 22nd October 1500 every year with description "SR1" 
-   and tag "CS2010" to the task list.
+* `add CS2103 Project t/help` <br>
+   Adding a CS2103 project task that has neither a deadline nor duration to iManager.
 
 ### Editing a task
 
-Edit a task in task list by index or name. <br>
+Made a mistake by accident and wish to amend it? No problem! Simply type edit to update your task anytime, anywhere. Never fear making another mistake again! <br>
 
-Format: `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`
+Format: `edit INDEX [NAME] [from STARTDATE to ENDDATE] | [by DEADLINE] [t/TAG...]`                                           `
 
-> * Name, description and tag are case insensitive.
-> * `INDEX` refers to the index number shown in the most recent listing of tasks. 
+> * INDEX of a task correspond to the current listing of tasks shown under the current task tab.
 > * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
-> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
-> * Using `t/TAG` appends to the set of existing tags of a task.
-> * Editing the same tag name remove the tag itself - if a task contains a tag named "friends", using `edit [/t friends]` will remove       it.
-> * All tags of an existing task can be remove using `t/none`. 
-> * Operation is equivalent to deleting an old task and adding a new task, however, tags are not overwritten unless otherwise 
-    specified (refer to previous annotation).
+> * Editing a tag would ` overwites existing tags of a task.
+> * Task cannot have both deadline and duration.
 
 Examples:
-* `Edit 1 on 10-22-2017 1500 p/1 d/SR1`<br>
-   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 1500 with description 
-   "SR1".
-* `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Edit the first task in the task list such that it starts from 22nd October 1300 to 22nd October 1500 every year with description 
-   "SR1" and tag "CS2010".
+* `edit 1 from 3pm to 5pm t/postpone`<br>
+   Editing the first task in the task list.
+* `edit 1 Updated Event by 12pm  t/homework`<br>
+* `add 1 Updated Event from 12pm to 3pm t/important`<br>
+
 
 ### Deleting a task
 
-Delete a task from the task list. <br>
+Add a wrong task by accident? Simply type delete to remove it! <br>
 
-Format: `del NAME|INDEX|TAG`
+Format: `delete INDEX`
 
-> * Name and tag are case insensitive.
-> * `INDEX` refers to the index number shown in the most recent listing of tasks.
+> * INDEX of a task correspond to the current listing of tasks shown under the current task tab.
 > * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
 > * Deleted task can be restored using the [undo](#undo-most-recent-command) command.
 
-Examples: 
-* `delete exam`<br>
-   Edit all tasks named "exam" in the task list.
-* `delete 1`<br>
-   Delete the first task in the task list.
-* `delete CS2010`<br>
-   Delete all tasks containing the tag "CS2010".
+Examples:
+* `delete 2`<br>
+   Delete the second task in the task list.
 
 ### Viewing tasks
 
 #### Viewing all tasks
-View a list of all task in iManager.
+Want to get an overview of all the tasks stored in iManager? Simply type view to list all the tasks in the task list. Tasks will be listed undo task category “All”.
 
 Format: `view `<br>
 
 #### Viewing all today's tasks
-View a list of all today's task in iManager. Does not show floating, "done" and overdue tasks. 
+Start the day by viewing the tasks that needs to be completed today.
 
 Format: `view t`<br>
 
 #### Viewing all pending tasks
-View a list of all pending task in iManager. Does not show floating, "done" and overdue tasks. 
+Still unsure of what to do? Be sure head over to the “Pending” task tab to view a list of pending tasks.
 
 Format: `view p`<br>
 
 #### Viewing all "done" tasks
-View a list of all "done" task in iManager. Does not show pending, floating, overdue and today's tasks. 
+Want to feel a sense of satisfaction? Simply head over to the “Done” task tab to view a list of completed tasks.
 
 Format: `view d`<br>
 
 #### Viewing all floating tasks
-View a list of all floating tasks in iManager. Does not show pending, "done", overdue and today's tasks. 
+Finally decided on a deadline or duration for a particular task? No problem! You can assign a deadline or duration to it by navigating to the “Floating” task tab to view a list of floating tasks.
 
 Format: `view f`<br>
 
 #### Viewing all overdue tasks
-View a list of all overdue tasks in iManager. Does not show pending, "done", floating and today's tasks. 
+Worried about an old task that needs to be addressed? Simply head over to the “Overdue” task tab to view a list of overdue tasks.
 
-Format: `view`<br>
+Format: `view o`<br>
 
-#### Viewing a specified task
-View a specified task by index in iManager. 
-
-Format: `view INDEX`
-
-> * INDEX refers to the index number shown in the most recent listing of tasks. 
-
-Examples:
-* `view 1` <br>
-   Show the first task in the task list. 
-   
 ### Marking a task as "done"
-Mark an existing task as "done" in iManager. Marked tasks will be transferred to the "done" list. 
+Completed an assignment that you have spent many hours on? Give yourself a pat on the back by typing done to mark the task as completed. Completed task will be transferred to task category “Done”.
+Format: `done INDEX`
 
-Format: `done INDEX|NAME`
-
-> * Name is case insensitive.
-> * `INDEX` refers to the index number shown in the most recent listing of tasks.
+> * INDEX of a task correspond to the current listing of tasks shown under the current task tab.
 > * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
-> * Marking an unfinished task will change its status to "done" while marking a "done" task will revert to its previous status.
+> * Marking a “done” task will reverts the task back to its original status.
 > * Command can be reverted using the [undo](#undo-most-recent-command) command.
 
-Examples: 
+Examples:
 * `done 1`<br>
    Mark the first task in the task list as "done".
 * `done exam`<br>
    Mark a task named "exam" in the task list as "done".
- 
+
+### Selecting a task
+Lazy to scroll through an entire list of tasks just to look for one particular task? No problem! Simply type select and jump straight to your selection.
+
+Format: `select INDEX`
+
+> * Selected task will be bolded.
+> * INDEX of a task correspond to the current listing of tasks shown under the current task tab.
+> * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
+
+Examples:
+* `select 1`<br>
+   Select the first task in the task list.
+
 ### Finding for tasks
-Find tasks with details matching any of the `[KEYWORDS...]` flag. Details include name, priority, description, tags, start date & time and end date & time.
+Can’t seem to remember the details for a particular task? Simply use find command to search for tasks whose name or tags matches the keywords provided.
 
-| KEYWORD | Result  | Example |
-|:------------:|---------|-----------|
-| `NAME` | Find all tasks whose name matches the input. | `find exam` |
-| `\pPRIORITY` | Find a task whose priority level matches the input. | `find \p1` |
-| `\dDESCRIPTION` | Find a task whose description matches the input. | `find \dSR1` |
-| `\tTAG` | Find all tasks whose tag matches the input. | `find \tCS2010` |
-| `MM-DD-YYYY` | Find all tasks whose start date or end date matches the input. | `find 10-22-2017` |
-| `\mMM-YYYY` | Find all tasks whose start date or end date matches a particular month and year. | `find \m10-2017` |
-| `\yYYYY` | Find all tasks whose start date or end date matches a particular year. |  `find \y2017` |
-| `\hHHMM` | Find all tasks whose start time or end time matches the input. | `find \h1500` |
+Format: `find [KEYWORD...]`
 
-Format: `find [KEYWORDS...]`
+> * Keywords are case insensitive.
+> * The order of the keywords does not matter.
+> * A task is matched so long as its name or tags matches a keyword.
 
-> * Keywords are case insensitive. 
-> * The order of the keywords does not matter. 
-> * Partial keyword will also be matched, e.g. `ex` will match `exam`.
-> * Date format is MM-DD-YYYY, e.g. 10-22-2017.
-> * TIME format is HHMM (24-hour format), e.g. 1300.
-> * Mutiple keywords of various formats are allowed. 
-> * A task is matched so long as **ANY** of its details (i.e. name, priority level, description etc.) matches a keyword. 
+Examples:
+* `find exam SR1`<br>
+   Find all tasks whose name or tags matchs "exam" or "SR1".
 
-Advanced examples: 
-* `find exam \p1 \dSR1`<br>
-   Find all tasks whose 
-   * name matches "exam" or 
-   * priority matches "1" or
-   * description matches "SR1".
-* `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
-   Find all tasks whose 
-   * name matches "exam" or
-   * priority matches "1" or 
-   * description matches "SR1" or 
-   * tag matches "2010" or 
-   * start date or end date matches October 2017 or 
-   * start time or end time matches 1500.
-   
-### Clearing of "done" tasks
-Clears all "done" tasks. <br>
+### Clearing all tasks
+Wish to start afresh? Wish granted! Simply type clear and embark on a new journey with iManager.
 
 Format: `clear`
 
 > * Cleared tasks in the current session can be restored using the [undo](#undo-most-recent-command) command.
 
-### Toggle Google Calendar
-Toggle the view of Google Calendar. The tasks in iManager will be synchronised with your Google Calendar. **No modification** can be made through the calendar.
-
-Format: `toggle`
-
 ### Undo most recent command
-Undo the most recent command that was successfully executed. Only commands that modify iManager in the same session can be undone. Command history will be cleared once iManager exits. 
+Accidentally executed the wrong command? Do not fret! Simply type undo to remove your latest changes. The command can be executed as many time as you wish so you do not have fear making mistakes. Making mistakes is an essential part of learning!
 
 Format: `undo`
 
-> * `undo` **ONLY** support add, edit, delete, done, clear and redo command. 
+> * `undo` **ONLY** support add, edit, delete, done, clear and redo command.
+> * Only redo commands that modify iManager in the same session.
+> * Command history will be cleared once iManager exits.
 
 ### Redo most recent undo
-Redo the most recent undo. Only redo commands that modify iManager in the same session. Command history will be cleared once iManager exits. 
+Wish to change your mind again after performing an undo operation? Are you fickle-minded sometimes? We don’t blame you. Simply type redo to recover the changes that you have undone.
 
 Format: `redo`
 
-> * `redo` **ONLY** support add, edit, delete, done, clear and undo command. 
+> * `redo` **ONLY** support add, edit, delete, done, clear and undo command.
+> * Only redo commands that modify iManager in the same session.
+> * Command history will be cleared once iManager exits.
 
 ### Save
-#### Saving the data
-iManager automatically save data to the hard disk whenever a command modifies the data. There is no need to save manually.
+Afraid of others messing with your work? Be sure to save a copy of your data to a secure location that no one knows except for you!
 
-#### Changing the save location
-Change the save directory. The application data is save to a file named "iManager.txt" under the project root folder by default or when the file path is yet specified. You can change the location by specifying the file path as a command argument. iManager automatically creates a new save file if the file path is valid.
-
-Format: `saveto FILEPATH`
+Format: `save FILEPATH`
 
 > * FILEPATH must be valid.
-> * `cd` will tell you the current location of the saved data. 
+> * By default, data is saved to a file called iManager.xml under the folder called “data”. The data folder is automatically created in the same location where you launched iManager.jar.
+> * Changes made to iManager are automatically saved. There is NO NEED to save them manually.
 
 Examples:
 * `saveto C:\Users\Computing\Desktop\CS2103`
-* `cd`
-
-#### Reset saved data
-Reset the application data. Saved data will be completely erase - iManager will start with a "clean" state. The default save directory will be use. Erased data **CANNOT** be restored.
-
-Format: `reset`
 
 ### Exiting the application
-Exits the application.
+Finished with what you have to do? Close the application by typing exit.
 
 Format : `exit`
 
 ## FAQ
 
-Q: I can't undo my previous commands after reopening iManager. <br>
-A: Like most task managers out there, iManager does not save a list of previous commands upon exiting.
+Q: Does iManager support Windows 10. <br>
+A: Absolutely! iManager works with devices running on Windows 7 or later.
 
-Q: Is it possible to set my storage path to a portable drive and use it on a different computer? <br>
-A: Yes! Just use the [saveto](#changing-the-save-location) command and choose the specified path of the portable drive.
+Q: Can I undo my previous commands after reopening iManager? <br>
+A: Unfortunately, like most task managers out there, iManager does not save your previous commands upon exiting.
 
-Q: The iManager is not showing everything that I have added upon booting up. <br>
-A: Our iManager only shows today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks](#viewing-tasks) for more information. 
+Q: What do I do when iManager crashes? <br>
+A: There are many reasons why iManager may just stop working or “freeze.” Most of the time, the problem can be resolve by simply restarting the application.
+
+Q: Does iManager save my tasks after closing the application? <br>
+A: Yes. iManager saves your data every time a command is successfully executed, putting users at ease.
+
+Q: Can I transfer my data to another computer? <br>
+A: Absolutely! Your data are saved in a file called iManager.xml. Just copy this file to the other computer and place in under data\iManager.xml. Ensure you have iManager installed on both computers.
 
 
 ## Command Summary
 
 | Command | Format | Description |
 |:-------:|--------|-------------|
-| [help](#viewing-help) | `help` | Opens a help page. |
-|  | `help [COMMAND]` | Help with specific command. | 
-| [add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a floating task to the task list. |
-|  | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only start date & time to the task list. |
-|  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only end date & time to the task list. |
-|  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with both start date & time and end date & time to the task list. |
-|  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list. |
-| [edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task by index or name. |
-| [del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list. |
+| [help](#viewing-help) | `help` | Opens the help window.|
+| [add](#adding-a-task) | `add NAME from STARTDATE to ENDDATE [t/TAG...]` | Adds a pending task with start date and end date to the task list. |
+|  | `add NAME by DEADLINE [t/TAG...]` | Adds a pending task with a deadline to the task list. |
+|  | `add NAME [t/TAG...]` | Adds a floating task to the task list.  |
+| [edit](#editing-a-task) | `edit INDEX [NAME] [from STARTDATE to ENDDATE] | [by DEADLINE] [t/TAG...]` | Edit a task by index. |
+| [delete](#deleting-a-task) | `delete INDEX` | Delete a task by index. |
 | [view](#viewing-tasks) | `view` | View all tasks. |
 |  | `view t` | View all today's task. |
 |  | `view p` | View all pending task. |
 |  | `view d` | View all "done" task. |
 |  | `view f` | View all floating task. |
 |  | `view o` | View all overdue task. |
-|  | `view INDEX` | View a specified task by index. |
-| [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done." |
-| [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find all tasks with details containing any of the input keywords. |
-| [clear](#clearing-of-done-tasks) | `clear` | Clear all "done" tasks. |
-| [toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar. |
+| [done](#marking-a-task-as-done) | `done INDEX` | Mark a task(by index) as "done." |
+| [select](#selecting-a-task)  | `select INDEX` | Select a task (by index) from the task list. |
+| [find](#finding-for-tasks) | `find [KEYWORD..]` | Find all tasks whose name or tag contains the given keyword. |
+| [clear](#clearing-all-tasks) | `clear` | Clear all tasks. |
 | [undo](#undo-most-recent-command) | `undo` | Undo the most recent command. |
 | [redo](#redo-most-recent-undo) | `redo` | Redo the most recent undo. |
-| [saveto](#save) | `saveto PATH` | Change the save directory. |
-|  | `cd` | Show current save directory. |
-|  | `reset` | Reset saved data. |
+| [save](#save) | `save FILEPATH` | Copy and save the existing data to a designated path. |
 | [exit](#exiting-the-application) | `exit` | Exits the application. |
