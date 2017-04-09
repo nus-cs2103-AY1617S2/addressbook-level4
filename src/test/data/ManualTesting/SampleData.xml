@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ezDo>
+    <tasks>
+        <name>buy capsicums</name>
+        <priority>2</priority>
+        <startDate>07/04/2017 23:25</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy chair</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>05/04/2017 23:23</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>dontForget</tagged>
+    </tasks>
+    <tasks>
+        <name>buy charger</name>
+        <priority>1</priority>
+        <startDate>15/04/2017 23:24</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>dontForget</tagged>
+    </tasks>
+    <tasks>
+        <name>buy cheese</name>
+        <priority></priority>
+        <startDate>07/04/2017 23:23</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy chicken</name>
+        <priority></priority>
+        <startDate>10/04/2017 22:57</startDate>
+        <dueDate>16/04/2017 22:57</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>ntuc</tagged>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy display</name>
+        <priority></priority>
+        <startDate>10/04/2017 23:19</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy earphones</name>
+        <priority>1</priority>
+        <startDate>07/04/2016 23:22</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>personal</tagged>
+    </tasks>
+    <tasks>
+        <name>buy fertiliser</name>
+        <priority>1</priority>
+        <startDate>12/04/2017 23:01</startDate>
+        <dueDate>15/04/2017 23:01</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>ntuc</tagged>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy fish</name>
+        <priority></priority>
+        <startDate>12/04/2017 22:59</startDate>
+        <dueDate>16/04/2017 22:58</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>market</tagged>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy laptop</name>
+        <priority>1</priority>
+        <startDate>07/05/2017 23:18</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>buy marker</name>
+        <priority></priority>
+        <startDate></startDate>
+        <dueDate>10/04/2017 23:21</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>dontForget</tagged>
+    </tasks>
+    <tasks>
+        <name>buy milk</name>
+        <priority></priority>
+        <startDate>10/04/2017 22:56</startDate>
+        <dueDate>15/04/2017 22:56</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>ntuc</tagged>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy mouse</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>05/04/2017 23:21</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>dontForget</tagged>
+    </tasks>
+    <tasks>
+        <name>buy mozzarella</name>
+        <priority></priority>
+        <startDate>08/04/2017 23:24</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy pants</name>
+        <priority>2</priority>
+        <startDate>15/04/2017 23:00</startDate>
+        <dueDate>21/04/2017 23:00</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>orchard</tagged>
+    </tasks>
+    <tasks>
+        <name>buy pizza crust</name>
+        <priority></priority>
+        <startDate>07/04/2017 23:23</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy salami</name>
+        <priority></priority>
+        <startDate>07/04/2017 23:24</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <name>buy shoes</name>
+        <priority>3</priority>
+        <startDate>12/04/2017 22:59</startDate>
+        <dueDate>15/04/2017 22:59</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>orchard</tagged>
+    </tasks>
+    <tasks>
+        <name>buy snacks</name>
+        <priority></priority>
+        <startDate>07/04/2017 21:20</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>buy speakers</name>
+        <priority></priority>
+        <startDate>14/04/2017 23:19</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>buy table</name>
+        <priority></priority>
+        <startDate>04/04/2017 23:23</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>dontForget</tagged>
+    </tasks>
+    <tasks>
+        <name>buy water bottle</name>
+        <priority></priority>
+        <startDate>07/05/2017 23:19</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>fish 1000 lobsters</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>30/04/2017 23:27</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>runescape</tagged>
+    </tasks>
+    <tasks>
+        <name>fix computer</name>
+        <priority>1</priority>
+        <startDate>24/03/2017 23:21</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>get new mouse</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>urgent</tagged>
+    </tasks>
+    <tasks>
+        <name>level up battle mage</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>01/05/2017 23:32</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>maple</tagged>
+    </tasks>
+    <tasks>
+        <name>make notes</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>25/04/2017 23:08</dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>master AWP</name>
+        <priority>3</priority>
+        <startDate>25/04/2017 23:33</startDate>
+        <dueDate>10/05/2017 23:33</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>csGO</tagged>
+    </tasks>
+    <tasks>
+        <name>master ryu combo</name>
+        <priority>2</priority>
+        <startDate>25/04/2017 23:33</startDate>
+        <dueDate>04/05/2017 23:33</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>SF4</tagged>
+    </tasks>
+    <tasks>
+        <name>meet becca</name>
+        <priority></priority>
+        <startDate></startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>friend</tagged>
+    </tasks>
+    <tasks>
+        <name>meet bob</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>25/04/2017 23:09</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>friend</tagged>
+    </tasks>
+    <tasks>
+        <name>meet lloyd</name>
+        <priority></priority>
+        <startDate>15/04/2017 23:16</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>meetingA</name>
+        <priority>2</priority>
+        <startDate>25/04/2017 23:18</startDate>
+        <dueDate>30/04/2017 23:18</dueDate>
+        <recur>weekly</recur>
+        <done>false</done>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>meetingB</name>
+        <priority>1</priority>
+        <startDate>23/04/2017 23:19</startDate>
+        <dueDate>24/04/2017 23:19</dueDate>
+        <recur>weekly</recur>
+        <done>false</done>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>meetingC</name>
+        <priority>3</priority>
+        <startDate>26/04/2017 23:19</startDate>
+        <dueDate>27/04/2017 23:19</dueDate>
+        <recur>weekly</recur>
+        <done>false</done>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>order pizza</name>
+        <priority>2</priority>
+        <startDate>08/04/2017 00:23</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>personal</tagged>
+    </tasks>
+    <tasks>
+        <name>pass latter</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>16/04/2017 23:08</dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>plant corn</name>
+        <priority></priority>
+        <startDate>07/01/2017 23:21</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>reach level 990 in world of warcraft</name>
+        <priority></priority>
+        <startDate>08/04/2017 23:27</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>gaming</tagged>
+    </tasks>
+    <tasks>
+        <name>repair chair</name>
+        <priority></priority>
+        <startDate>17/03/2017 23:21</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>office</tagged>
+    </tasks>
+    <tasks>
+        <name>reply girlfriend</name>
+        <priority></priority>
+        <startDate>07/04/2017 23:22</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>personal</tagged>
+    </tasks>
+    <tasks>
+        <name>restock pen ink</name>
+        <priority>2</priority>
+        <startDate></startDate>
+        <dueDate>27/04/2017 23:11</dueDate>
+        <recur></recur>
+        <done>false</done>
+    </tasks>
+    <tasks>
+        <name>sell tissue</name>
+        <priority>3</priority>
+        <startDate>06/04/2017 23:20</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>MRT</tagged>
+    </tasks>
+    <tasks>
+        <name>send email</name>
+        <priority>2</priority>
+        <startDate></startDate>
+        <dueDate>25/04/2017 23:09</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>start project</name>
+        <priority>2</priority>
+        <startDate>20/04/2017 23:10</startDate>
+        <dueDate>25/04/2017 23:10</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <name>start proposal</name>
+        <priority>3</priority>
+        <startDate>20/04/2017 23:10</startDate>
+        <dueDate>26/04/2017 23:10</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>fass</tagged>
+    </tasks>
+    <tasks>
+        <name>take a bath</name>
+        <priority></priority>
+        <startDate>07/04/2017 22:25</startDate>
+        <dueDate></dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>personal</tagged>
+    </tasks>
+    <tasks>
+        <name>talk to alice</name>
+        <priority>2</priority>
+        <startDate></startDate>
+        <dueDate>17/04/2017 23:08</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>train meepo skills</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>01/05/2017 23:28</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>dota2</tagged>
+    </tasks>
+    <tasks>
+        <name>train woodcutting to 99</name>
+        <priority>1</priority>
+        <startDate></startDate>
+        <dueDate>30/04/2017 23:27</dueDate>
+        <recur></recur>
+        <done>false</done>
+        <tagged>runescape</tagged>
+    </tasks>
+    <tags>MRT</tags>
+    <tags>school</tags>
+    <tags>office</tags>
+    <tags>personal</tags>
+    <tags>shopping</tags>
+    <tags>shoppin</tags>
+    <tags>gaming</tags>
+    <tags>ntuc</tags>
+    <tags>market</tags>
+    <tags>orchard</tags>
+    <tags>maths</tags>
+    <tags>cs</tags>
+    <tags>swag</tags>
+    <tags>fass</tags>
+    <tags>work</tags>
+    <tags>friend</tags>
+    <tags>system</tags>
+    <tags>urgent</tags>
+    <tags>dontForget</tags>
+    <tags>runescape</tags>
+    <tags>dota2</tags>
+    <tags>maple</tags>
+    <tags>csGO</tags>
+    <tags>SF4</tags>
+</ezDo>
