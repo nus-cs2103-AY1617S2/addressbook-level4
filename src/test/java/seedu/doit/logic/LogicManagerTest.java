@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -221,23 +222,25 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Task s/invalid e/tomorrow ", MESSAGE_STARTTIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name e/gogo ", MESSAGE_ENDTIME_CONSTRAINTS);
     }
+    // @@author
 
     @Test
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] p/12 e/15-3-2020 d/valid t/description", Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
+
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
-        expectedAB.addTask(toBeAdded);
+        TaskManager expectedTM = new TaskManager();
+        expectedTM.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB, expectedAB.getTaskList());
+                expectedTM, expectedTM.getTaskList());
 
     }
 
@@ -259,13 +262,13 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateTaskManager(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        TaskManager expectedTM = helper.generateTaskManager(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTM.getTaskList();
 
         // prepare task manager state
         helper.addToModel(this.model, 2);
 
-        assertCommandSuccess(ListCommand.COMMAND_WORD, ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess(ListCommand.COMMAND_WORD, ListCommand.MESSAGE_SUCCESS, expectedTM, expectedList);
     }
 
     /**
@@ -329,11 +332,11 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        TaskManager expectedTM = helper.generateTaskManager(threeTasks);
         helper.addToModel(this.model, threeTasks);
 
-        /*assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
-                expectedAB.getTaskList());*/
+        /*assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedTM,
+                expectedTM.getTaskList());*/
         //assertEquals(1, this.targetedJumpIndex);
         assertEquals(this.model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
@@ -348,14 +351,14 @@ public class LogicManagerTest {
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
-
+    //@@author A0146809W
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.removeTask(threeTasks.get(1));
+        TaskManager expectedTM = helper.generateTaskManager(threeTasks);
+        expectedTM.removeTask(threeTasks.get(1));
         helper.addToModel(this.model, threeTasks);
 
         HashSet<Integer> indexToDelete = new HashSet<>();
@@ -368,7 +371,57 @@ public class LogicManagerTest {
         String resultMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete,
             indexToDelete));
 
-        assertCommandSuccess("delete 2", resultMessage, expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess("delete 2", resultMessage, expectedTM, expectedTM.getTaskList());
+    }
+
+    @Test
+    public void execute_delete_removesValidRangeOfTasks() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> fourTasks = helper.generateTaskList(4);
+
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        expectedTM.removeTask(fourTasks.get(0));
+        expectedTM.removeTask(fourTasks.get(1));
+        expectedTM.removeTask(fourTasks.get(2));
+        expectedTM.removeTask(fourTasks.get(3));
+
+        helper.addToModel(model, fourTasks);
+
+        Set<Integer> taskIndexesToDelete = helper.generateNumberSet(1, 2, 3, 4);
+        HashSet<ReadOnlyTask> deletedTasks = helper.generateTaskSet(fourTasks.get(0), fourTasks.get(1),
+            fourTasks.get(2), fourTasks.get(3));
+        String tasksAsString = CommandResult.tasksToString(deletedTasks, taskIndexesToDelete);
+
+        // Delete all tasks ranging from 1 to 4
+        // Then checks if the task manager have no tasks left
+        assertCommandBehavior(false, "delete 1-4",
+            String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, tasksAsString),
+            expectedTM,
+            expectedTM.getTaskList());
+    }
+
+    @Test
+    public void execute_delete_removesMultipleTasksNotInOrder() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> fourTasks = helper.generateTaskList(5);
+
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        expectedTM.removeTask(fourTasks.get(0));
+        expectedTM.removeTask(fourTasks.get(3));
+
+
+        helper.addToModel(model, fourTasks);
+
+        Set<Integer> taskIndexesToDelete = helper.generateNumberSet(1, 4);
+        HashSet<ReadOnlyTask> deletedTasks = helper.generateTaskSet(fourTasks.get(0), fourTasks.get(3));
+        String tasksAsString = CommandResult.tasksToString(deletedTasks, taskIndexesToDelete);
+
+        // Delete tasks 1 and 4
+        // Then checks if the task manager have no tasks left
+        assertCommandBehavior(false, "delete 1 4",
+            String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, tasksAsString),
+            expectedTM,
+            expectedTM.getTaskList());
     }
 
     @Test
@@ -387,12 +440,12 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         Collections.sort(fourTasks, new TaskNameComparator());
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         Collections.sort(expectedList, new TaskNameComparator());
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
 
@@ -406,11 +459,11 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
         Collections.sort(fourTasks, new TaskNameComparator());
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(this.model, fourTasks);
 
-        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find n/KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
 
@@ -423,13 +476,15 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget2);
         helper.addToModel(this.model, fourTasks);
 
         assertCommandSuccess("find n/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+                expectedTM, expectedList);
     }
+    // @@author
+
 
     // @@author A0138909R
     @Test
@@ -601,6 +656,14 @@ public class LogicManagerTest {
         private Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Priority(PRIORITY_LOW), new EndTime("today"),
                     new Description("House of 1"), new UniqueTagList(new Tag("tag")));
+        }
+
+        private HashSet<ReadOnlyTask> generateTaskSet(ReadOnlyTask... tasks) {
+            return new HashSet<>(Arrays.asList(tasks));
+        }
+
+        private HashSet<Integer> generateNumberSet(Integer... numbers){
+            return new HashSet<>(Arrays.asList(numbers));
         }
     }
 }
