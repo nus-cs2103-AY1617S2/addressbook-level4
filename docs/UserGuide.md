@@ -90,7 +90,7 @@ Format: `add DESCRIPTION [#TAG]...`
 Examples:
 
 * `add read Lord of The Rings #personal`
-* `add #noTime #noMoney cut hair
+* `add #noTime #noMoney cut hair`
 
 ### b) Deadline task
 
@@ -102,7 +102,7 @@ Examples:
 * `add prepare meeting slides by/ tomorrow 9am #impt #work`
 * `add send budget proposal on/ Thurs noon to boss #project`
 * `add #CS demo on/13 apr 4pm #shag for v0.5`
-* `add by/10pm eat dinner #yum
+* `add by/10pm eat dinner #yum`
 
 ### c) Event task
 
@@ -132,19 +132,30 @@ Shows a list of all tasks with deadlines.<br>
 Format: `list event`<br>
 Shows a list of all events.<br>
 
+Format: `list #TAG`<br>
+Shows a list of tasks labeled with the given TAG.<br>
+
+Format: `list undone`<br>
+Shows a list of all tasks that have been not been completed.<br>
+
+Format: `list done`<br>
+Shows a list of all tasks that have been marked as completed.<br>
+
+Format: `list by/ DATETIME` <br>
+     OR `list on/ DATETIME`
+Shows a list of tasks scheduled before the specified dates.<br>
+
+Examples:
+* `list by/ Sunday`
+* `list on/ 5/4`
+
 Format: `list from/ START_DATETIME to/ END_DATETIME` <br>
-     OR `list by/ DATETIME`
+     OR `list on/ DATETIME to/ END_DATETIME`
 Shows a list of tasks scheduled within the specified range of dates.<br>
 
 Examples:
 * `list from/ tomorrow to/ Sunday`
-* `list by/ Sunday`
-
-Format: `list #TAG`<br>
-Shows a list of tasks labeled with the given TAG.<br>
-
-Format: `list done`<br>
-Shows a list of all tasks that have been marked as completed.<br>
+* `list on/ Sunday to/ 05/16`
 
 ### 2.4. Finding all tasks containing any keyword in their description: `find`
 
@@ -365,11 +376,13 @@ There is no need to save manually.
 > * `list float`<br>
 > * `list deadline`<br>
 > * `list event`<br>
-> * `list day`<br>
-> * `list week`<br>
-> * `list month`<br>
 > * `list #TAG`<br>
+> * `list undone`<br>
 > * `list done`<br>
+> * `list by/ DATETIME`<br>
+> * `list on/ DATETIME`<br>
+> * `list from/ START_DATETIME to/ END_DATETIME`<br>
+> * `list on/ START_DATETIME to/ END_DATETIME`<br>
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]...` <br>
 
