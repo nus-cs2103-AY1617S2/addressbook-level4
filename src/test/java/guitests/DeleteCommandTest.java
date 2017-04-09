@@ -58,6 +58,42 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         assertResultMessage("The task index provided is invalid");
     }
 
+    public void deletethis() {
+        commandBox.runCommand("clear");
+        TestTask taskToDelete = td.recMonth;
+        commandBox.runCommand(taskToDelete.getAddCommand());
+        commandBox.runCommand("01/03/2017");
+        commandBox.runCommand("deletethis 1");
+
+        // Check the first occurrence
+        commandBox.runCommand("find 01/01/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the deleted occurrence
+        commandBox.runCommand("find 01/03/2017");
+        assertResultMessage("0 tasks listed!");
+
+        // Check the second occurrence
+        commandBox.runCommand("find 01/05/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the third occurrence
+        commandBox.runCommand("find 01/07/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the fourth occurrence
+        commandBox.runCommand("find 01/09/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the fifth occurrence
+        commandBox.runCommand("find 01/11/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the sixth occurrence
+        commandBox.runCommand("find 01/01/2018");
+        assertResultMessage("1 tasks listed!");
+    }
+
     /**
      * Runs the delete command to delete the person at specified index and
      confirms the result is correct.
