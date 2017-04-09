@@ -20,7 +20,7 @@ public class AddCommandParser {
     //@@author A0163848R
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AccCommand object for execution.
+     * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
