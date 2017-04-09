@@ -217,17 +217,14 @@ public class Task implements ReadOnlyTask  {
     }
 
     public void setStartDateTime(DateTime startDateTime) {
-        assert startDateTime != null;
         this.startDateTime = startDateTime;
     }
 
     public void setEndDateTime(DateTime endDateTime) {
-        assert endDateTime != null;
         this.endDateTime = endDateTime;
     }
 
     public void setDescription(Description description) {
-        assert description != null;
         this.description = description;
     }
 

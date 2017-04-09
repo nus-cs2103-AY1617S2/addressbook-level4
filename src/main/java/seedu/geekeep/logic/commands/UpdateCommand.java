@@ -72,7 +72,6 @@ public class UpdateCommand extends UndoableCommand {
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
-        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
 

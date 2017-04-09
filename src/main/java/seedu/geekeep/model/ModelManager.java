@@ -116,7 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert updatedTask != null;
 
-        updateGeekeepHistory(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
+        updateGeekeepHistory(originalGeekeepClone);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
 
