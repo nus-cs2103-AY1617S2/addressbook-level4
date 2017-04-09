@@ -14,12 +14,14 @@ public class LoadCalendar extends BasicCommandCalendar {
 			UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
 		service = inputCalendar;
 		internalList = list;
+		System.out.println("executing");
 		execute();
 	}
 	
 	public void execute() throws IllegalTimeException {
 		//to load all tasks on internal list on Google Calendar
         for (ReadOnlyTask t : internalList) {
+        	System.out.println(t.getName().toString());
         	new AddCalendar(new Task(t), service);
         }
 	}
