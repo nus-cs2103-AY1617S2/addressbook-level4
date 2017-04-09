@@ -9,10 +9,10 @@ import java.util.regex.Matcher;
 
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
+//import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.AddCommandParser;
-import seedu.taskmanager.logic.parser.EditCommandParser;
+//import seedu.taskmanager.logic.parser.EditCommandParser;
 import seedu.taskmanager.logic.parser.ParserUtil;
 //import seedu.taskmanager.logic.parser.AddCommandParser;
 //import seedu.taskmanager.logic.parser.EditCommandParser;
@@ -32,9 +32,8 @@ public class RedoCommand extends Command {
         HistoryManager historyManager = HistoryManager.getInstance();
         String commandText;
         try {
-            Model oldModel = this.model;
             commandText = historyManager.redo();
-            highlightChanges(commandText, oldModel);
+            highlightChanges(commandText);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CommandException(MESSAGE_NO_MORE_REDO);
@@ -47,7 +46,7 @@ public class RedoCommand extends Command {
      * Highlights the changes caused by redo command according to
      * {@code commandText}
      */
-    private void highlightChanges(String commandText, Model oldModel) {
+    private void highlightChanges(String commandText) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(commandText.trim());
         System.out.println(commandText);
         boolean isMatching = matcher.matches();
@@ -60,20 +59,6 @@ public class RedoCommand extends Command {
         case AddCommand.COMMAND_WORD:
             AddCommand addCommand = (AddCommand) new AddCommandParser().parse(arguments);
             addCommand.pseudoExecute(this.model);
-            break;
-        case DoneCommand.COMMAND_WORD:
-            if (model.getSelectedTab().equals(TAB_DONE)) {
-                highlightByIndex(arguments);
-            }
-            break;
-        case UndoneCommand.COMMAND_WORD:
-            if (model.getSelectedTab().equals(TAB_TO_DO)) {
-                highlightByIndex(arguments);
-            }
-            break;
-        case EditCommand.COMMAND_WORD:
-            EditCommand editCommand = (EditCommand) new EditCommandParser().parse(arguments);
-            editCommand.pseudoExecute(oldModel);
             break;
         }
     }
