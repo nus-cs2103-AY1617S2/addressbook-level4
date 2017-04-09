@@ -2,6 +2,7 @@
 package seedu.tache.ui;
 
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.SystemTray;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class NotificationManagerTest {
             assertNotSame(testNotification.getNotificationTimer().toString(), initialTimer.toString());
             testNotification.stop();
             assertNotSame(testNotification.getNotificationTimer().toString(), initialTimer.toString());
+        } else {
+            assertTrue(NotificationManager.SYSTEM_TRAY_NOT_SUPPORTED_MESSAGE, true);
         }
     }
 
