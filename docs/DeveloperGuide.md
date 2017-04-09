@@ -218,6 +218,7 @@ void removeAlias(String alias);
 
 **Design Decisions**
 - The model component is split into Model.java, AliasListMapModel.java and ConfigModel.java because they contain operations on different types of data. This is to support the Single Responsibility Principle.
+- The date and time properties of each task were abstracted to a new class called TaskDate. The class encapsulated not only this information, but also defined methods used in parsing the date and time, as well as validation and comparison. This meant any changes to the parser or comparator were easy to make, and also facilitated unit testing.
 - When the absolute storage path is modified by the `save_at` command, an `AbsoluteStoragePathChangedEvent` is raised by `Model`. This event driven mechanism employs the Observer pattern.
 
 ### 3.5. Storage component
