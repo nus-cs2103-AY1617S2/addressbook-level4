@@ -584,7 +584,7 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
         }
-        if (filteredTaskListType.equals(TASK_LIST_TYPE_COMPLETED)) {
+        if (filteredTaskListType.equals(TASK_LIST_TYPE_COMPLETED) || filteredTaskListType.equals(TASK_LIST_TYPE_ALL)) {
             for (int i = 0; i < taskManager.getTaskList().size(); i++) {
                 if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
                     if (taskManager.getTaskList().get(i).getActiveStatus()) {

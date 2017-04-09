@@ -1,5 +1,6 @@
 package guitests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -140,6 +141,43 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void edit_recurringTask_success() {
+        commandBox.runCommand("clear");
+        commandBox.runCommand("add test from 9 april to 16 april");
+
+        commandBox.runCommand("edit 1 change recurinterval to day");
+        assertTaskListHits(9);
+
+        commandBox.runCommand("edit 9 change recurinterval to week");
+        assertTaskListHits(3);
+
+        commandBox.runCommand("edit 3 change recurinterval to month");
+        assertTaskListHits(2);
+
+        commandBox.runCommand("edit 2 change recurinterval to year");
+        assertTaskListHits(2);
+    }
+
+    @Test
+    public void edit_recurringTask_failure() {
+        commandBox.runCommand("clear");
+        commandBox.runCommand("add test from 9 april to 16 april");
+        commandBox.runCommand("edit 1 change recurinterval to day");
+
+        commandBox.runCommand("edit 1 change name to something");
+        assertResultMessage(EditCommand.MESSAGE_PART_OF_RECURRING_TASK);
+
+        commandBox.runCommand("edit 2 change name to something");
+        assertResultMessage(EditCommand.MESSAGE_PART_OF_RECURRING_TASK);
+
+        commandBox.runCommand("edit 3 change name to something");
+        assertResultMessage(EditCommand.MESSAGE_PART_OF_RECURRING_TASK);
+
+        commandBox.runCommand("edit 7 change name to something");
+        assertResultMessage(EditCommand.MESSAGE_PART_OF_RECURRING_TASK);
+    }
+
     //@@author
 
     @Test
@@ -188,6 +226,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " 5; name Buy Eggs and Bread; "
             + "end_date 04-01-17; end_time 19:55:12; tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
+    }
+    //@@author
+
+    //@@author A0139925U
+    /**
+     * Checks whether the number of tasks in taskListPanel is same as {@code expectedHits}
+     */
+    private void assertTaskListHits(int expectedHits) {
+        assertEquals(taskListPanel.getNumberOfTasks(), expectedHits);
     }
     //@@author
 

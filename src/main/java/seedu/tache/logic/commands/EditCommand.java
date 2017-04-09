@@ -211,8 +211,8 @@ public class EditCommand extends Command implements Undoable {
     }
 
     /**
-     * If overdue task date's end date is changed to today and end date < now, then end time would
-     * be overwritten to 2359hrs
+     * If overdue task date's end date is changed to today and end date < now,
+     * then end time would be overwritten to 2359hrs
      * @param {@code updatedEndDateTime}, the final end date that will be in the new edited task
      * @param {@code editTaskDescriptor}, edit details
      * @throws IllegalValueException if date or time could not be parsed
