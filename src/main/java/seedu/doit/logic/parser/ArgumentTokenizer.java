@@ -18,6 +18,10 @@ import java.util.Optional;
  */
 public class ArgumentTokenizer {
 
+    private static final int FIRST_INDEX = 0;
+    private static final String EMPTY_STRING = "";
+    private static final String WHITE_SPACE_STRING = " ";
+
     /**
      * Given prefixes
      **/
@@ -79,9 +83,7 @@ public class ArgumentTokenizer {
      * Returns all values of given prefix after the prefix.
      */
     public Optional<List<String>> getAllValuesAfterPrefixAndSpaces(Prefix prefix) {
-        final int FIRST_INDEX = 0;
-        final String EMPTY_STRING = "";
-        final String WHITE_SPACE_STRING = " ";
+
         if (!this.tokenizedArguments.containsKey(prefix)) {
             return Optional.empty();
         }

@@ -21,8 +21,8 @@ import seedu.doit.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser implements CommandParser {
 
-    private final String LOW_PRIORITY = "low";
-    private final String EMPTY_STRING = "";
+    private static final String LOW_PRIORITY = "low";
+    private static final String EMPTY_STRING = "";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
