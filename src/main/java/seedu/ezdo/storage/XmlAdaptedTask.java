@@ -27,8 +27,6 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
     private String startDate;
     @XmlElement(required = true)
     private String dueDate;
@@ -36,6 +34,8 @@ public class XmlAdaptedTask {
     private String recur;
     @XmlElement(required = true)
     private boolean done;
+    @XmlElement(required = true)
+    private boolean hasStarted;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -57,6 +57,7 @@ public class XmlAdaptedTask {
         startDate = source.getStartDate().value;
         dueDate = source.getDueDate().value;
         recur = source.getRecur().value;
+        hasStarted = source.getStarted();
         done = source.getDone();
 
         tagged = new ArrayList<>();
@@ -83,6 +84,7 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
         Task toAdd = new Task(name, priority, startDate, dueDate, recur, tags);
         toAdd.setDone(this.done);
+        toAdd.setStarted(this.hasStarted);
         return toAdd;
     }
 }

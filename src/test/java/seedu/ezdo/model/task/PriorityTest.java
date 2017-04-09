@@ -24,7 +24,6 @@ public class PriorityTest {
         assertTrue(Priority.isValidPriority("3"));
     }
 
-  //@@author A0139248X
     @Test
     public void hashCode_equals() throws Exception {
         Priority one = new Priority("1");

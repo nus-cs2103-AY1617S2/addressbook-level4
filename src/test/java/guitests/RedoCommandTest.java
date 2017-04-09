@@ -11,21 +11,21 @@ import seedu.ezdo.testutil.TestUtil;
 //@@author A0139248X
 public class RedoCommandTest extends EzDoGuiTest {
     @Test
-    public void redo_invalid() {
+    public void redo_invalid_unknownCommand() {
         //invalid command
         commandBox.runCommand("redoo");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void redo_withoutUndo() {
+    public void redo_withoutUndo_noPrevCommand() {
         //redo without anything to undo
         commandBox.runCommand("redo");
         assertResultMessage(RedoCommand.MESSAGE_NO_PREV_COMMAND);
     }
 
     @Test
-    public void redo_add() {
+    public void redo_add_success() {
         //redo an add, after undoing it
         TestTask taskToAdd = td.hoon;
         TestTask[] currentList = td.getTypicalTasks();
@@ -36,15 +36,13 @@ public class RedoCommandTest extends EzDoGuiTest {
     }
 
     @Test
-    public void redo_kill() {
+    public void redo_kill_success() {
         //redo a kill, after undoing it
         commandBox.runCommand("kill 1");
         TestTask[] currentList = td.getTypicalTasks();
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         commandBox.runCommand("undo");
         assertRedoSuccess(currentList);
-        int targetIndex = 1;
-        commandBox.runCommand("kill " + targetIndex);
     }
 
     private void assertRedoSuccess(TestTask[] expectedList) {

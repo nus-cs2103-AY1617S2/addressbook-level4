@@ -20,6 +20,8 @@ public interface ReadOnlyTask {
 
     boolean getDone();
 
+    boolean getStarted();
+
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -61,7 +63,7 @@ public interface ReadOnlyTask {
             builder.append(" | DueDate: ").append(getDueDate());
         }
         if (!getRecur().toString().isEmpty()) {
-            builder.append(" Recur: ").append(getRecur());
+            builder.append(" | Recur: ").append(getRecur());
         }
         if (!getTags().toSet().isEmpty()) {
             builder.append(" | Tags: ");

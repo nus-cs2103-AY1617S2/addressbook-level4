@@ -22,6 +22,7 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private Recur recur;
     private boolean done;
+    private boolean hasStarted;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -47,6 +48,10 @@ public class TestTask implements ReadOnlyTask {
 
     public boolean getDone() {
         return this.done;
+    }
+
+    public boolean getStarted() {
+        return this.hasStarted;
     }
 
     public void setStartDate(TaskDate startDate) {

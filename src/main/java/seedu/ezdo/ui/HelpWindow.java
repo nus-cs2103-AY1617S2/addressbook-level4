@@ -15,6 +15,7 @@ import seedu.ezdo.commons.util.FxViewUtil;
  */
 public class HelpWindow extends UiPart<Region> {
 
+    private static final String MESSAGE_SHOWING_HELP_PAGE = "Showing help page about the application.";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
@@ -40,7 +41,7 @@ public class HelpWindow extends UiPart<Region> {
     }
 
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine(MESSAGE_SHOWING_HELP_PAGE);
         dialogStage.showAndWait();
     }
 }

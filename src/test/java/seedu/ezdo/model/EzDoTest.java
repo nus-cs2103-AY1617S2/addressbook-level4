@@ -87,14 +87,14 @@ public class EzDoTest {
         thrown.expect(AssertionError.class);
         ezDo.resetData(newData);
     }
-  //@@author A0139248X
+
     @Test
     public void hashCode_works() {
         EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();
         EzDo typicalEzDo2 = new TypicalTestTasks().getTypicalEzDo();
         assertEquals(typicalEzDo.hashCode(), typicalEzDo2.hashCode());
     }
-//@@author
+
     @Test
     public void moveCurrentTaskToDone_ive() throws IllegalValueException {
         EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();

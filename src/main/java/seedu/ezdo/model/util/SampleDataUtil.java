@@ -14,6 +14,10 @@ import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0139177W
 public class SampleDataUtil {
+
+    private static final String MESSAGE_DUPLICATE_TASKS = "Sample data cannot contain duplicate tasks";
+    private static final String MESSAGE_INVALID_SAMPLE_DATA = "Sample data cannot be invalid";
+
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
@@ -54,20 +58,24 @@ public class SampleDataUtil {
                     new UniqueTagList("school", "exams"))
             };
         } catch (IllegalValueException e) {
-            throw new AssertionError("Sample data cannot be invalid", e);
+            throw new AssertionError(MESSAGE_INVALID_SAMPLE_DATA, e);
         }
     }
 
     public static ReadOnlyEzDo getSampleEzDo() {
         try {
             EzDo sampleEzDo = new EzDo();
-            for (Task sampleTask : getSampleTasks()) {
-                sampleEzDo.addTask(sampleTask);
-            }
+            addTasksInSampleEzDo(sampleEzDo);
             return sampleEzDo;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("Sample data cannot contain duplicate tasks", e);
+            throw new AssertionError(MESSAGE_DUPLICATE_TASKS, e);
         }
     }
-    //@@author
+
+    private static void addTasksInSampleEzDo(EzDo sampleEzDo) throws DuplicateTaskException {
+        for (Task sampleTask : getSampleTasks()) {
+            sampleEzDo.addTask(sampleTask);
+        }
+    }
 }
+//@@author

@@ -20,13 +20,17 @@ public class SortCommandTest extends EzDoGuiTest {
         EzDo ez = new EzDo();
         TypicalTestTasks.loadEzDoWithSampleData(ez);
         try {
-            ez.addTask(new Task(td.kappa));
-            ez.addTask(new Task(td.leroy));
-            ez.addTask(new Task(td.megan));
+            addMultipleTestTasks(ez, td.kappa, td.leroy, td.megan);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "not possible";
         }
         return ez;
+    }
+
+    private void addMultipleTestTasks(EzDo ez, TestTask... testTasks) throws UniqueTaskList.DuplicateTaskException {
+        for (TestTask testTask : testTasks) {
+            ez.addTask(new Task(testTask));
+        }
     }
 
     @Test
@@ -100,7 +104,6 @@ public class SortCommandTest extends EzDoGuiTest {
     @Test
     public void sort_invalidOrder() {
         commandBox.runCommand("sort p s");
-        assertResultMessage(String.format(SortCommand.MESSAGE_INVALID_ORDER, SortCommand.MESSAGE_USAGE))
-        ;
+        assertResultMessage(String.format(SortCommand.MESSAGE_INVALID_ORDER, SortCommand.MESSAGE_USAGE));
     }
 }

@@ -25,8 +25,8 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/ezDo_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 820;
-    private static final int MIN_WIDTH = 1400;
+    private static final int MIN_HEIGHT = 720;
+    private static final int MIN_WIDTH = 1280;
 
     private Stage primaryStage;
     private Logic logic;

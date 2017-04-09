@@ -20,6 +20,8 @@ import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
  */
 public class AddCommandParser implements CommandParser {
 
+    private static final String EMPTY_STRING = "";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -52,10 +54,9 @@ public class AddCommandParser implements CommandParser {
      */
     private static String getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
         if (!tokenizer.getValue(prefix).isPresent()) {
-            return "";
-        } else {
-            return tokenizer.getValue(prefix).get();
+            return EMPTY_STRING;
         }
+        return tokenizer.getValue(prefix).get();
     }
 
 }

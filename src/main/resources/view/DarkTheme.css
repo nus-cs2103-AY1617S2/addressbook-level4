@@ -14,7 +14,7 @@
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 28pt;
     -fx-font-family: "Arial Monotype";
     -fx-opacity: 1;
 }
@@ -23,7 +23,7 @@
     -fx-border-color: derive(black, 50%);
     -fx-border-width: 3px;
     -fx-font-weight: bold;
-    -fx-font-size: 28pt;
+    -fx-font-size: 24pt;
     -fx-font-family: "Arial Monotype";
 }
 
@@ -43,12 +43,12 @@
 }
 
 .task {
-    -fx-font-size: 20px;
+    -fx-font-size: 18px;
     -fx-text-fill: #010504;
 }
 
 .task-header {
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
@@ -75,7 +75,7 @@
     -fx-text-fill: blue;
     -fx-background-color: green;
     -fx-font-weight: bold;
-    -fx-font-size: 20px;
+    -fx-font-size: 18px;
 }
 
 .context-menu {
@@ -154,7 +154,7 @@
 }
 
 .dialog-pane > *.label.content {
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
@@ -164,7 +164,7 @@
 }
 
 .dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
@@ -213,5 +213,5 @@
     -fx-padding: 3 6 3 6;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
 }

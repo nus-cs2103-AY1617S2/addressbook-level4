@@ -26,7 +26,7 @@ public class UndoCommandTest extends EzDoGuiTest {
     }
 
     @Test
-    public void undo_add() {
+    public void undo_add_success() {
         //undo an add
         TestTask taskToAdd = td.hoon;
         TestTask[] currentList = td.getTypicalTasks();
@@ -35,7 +35,7 @@ public class UndoCommandTest extends EzDoGuiTest {
     }
 
     @Test
-    public void undo_clear() {
+    public void undo_clear_success() {
         //undo a clear
         TestTask[]currentList = td.getTypicalTasks();
         commandBox.runCommand("clear");
@@ -43,7 +43,7 @@ public class UndoCommandTest extends EzDoGuiTest {
     }
 
     @Test
-    public void undo_twoThings() {
+    public void undo_twoThings_success() {
         //undo two things
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;

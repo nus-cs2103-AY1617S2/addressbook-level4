@@ -46,6 +46,11 @@ public class SortCommandParser implements CommandParser {
         return new SortCommand(sortCriteria, isSortedAscending);
     }
 
+    /**
+     * Returns the {@code SortCriteria} that corresponds to given {@code sortCriteriaArgument}.
+     * @param sortCriteriaArgument A string which represents a sort criteria.
+     * @return The matching {@code SortCriteria}. If no match is found, returns {@code null}.
+     */
     private SortCriteria getSortCriteria(String sortCriteriaArgument) {
         SortCriteria sortCriteria;
         switch (sortCriteriaArgument) {
@@ -68,13 +73,19 @@ public class SortCommandParser implements CommandParser {
         return sortCriteria;
     }
 
-    private Boolean checkIfSortedAscending(String sortOrderArgument) {
+    /**
+     * Checks if the {@code sortOrder} represents ascending order.
+     * @param sortOrder A string representing a sort order keyword ("a" or "d").
+     * @return true if the sort order is ascending, false if it is descending.
+     * If the given sortOrder does not match any keyword, returns null.
+     */
+    private Boolean checkIfSortedAscending(String sortOrder) {
         Boolean isSortedAscending;
-        if (sortOrderArgument == null) {
+        if (sortOrder == null) {
             // If no sort order was specified, then default to ascending sort order.
             isSortedAscending = true;
         } else {
-            switch(sortOrderArgument) {
+            switch(sortOrder) {
             case KEYWORD_ASCENDING:
                 isSortedAscending = true;
                 break;

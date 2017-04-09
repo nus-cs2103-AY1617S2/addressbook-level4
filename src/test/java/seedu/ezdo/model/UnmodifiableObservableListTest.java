@@ -125,7 +125,7 @@ public class UnmodifiableObservableListTest {
     public void indexOf_correct() {
         assertTrue(0 == list.indexOf(10));
     }
-
+//@@author
     @Test
     public void hashCode_equals() {
         List<Integer> backing;
@@ -144,7 +144,7 @@ public class UnmodifiableObservableListTest {
             assertTrue(arr1[i].equals(arr2[i]));
         }
     }
-    //@@author
+
     @Test
     public void add_remove_listeners() {
         list.removeListener((ListChangeListener<Integer>) (c -> { /* ... */ }));

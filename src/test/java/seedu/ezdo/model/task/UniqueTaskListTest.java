@@ -33,14 +33,14 @@ public class UniqueTaskListTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void remove_notFoundAndKilled() throws Exception {
+    public void remove_notFoundAndKilled_taskNotFoundException() throws Exception {
         thrown.expect(TaskNotFoundException.class);
         Task task = new Task(new Name("lol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
                 new Recur(""), new UniqueTagList("jesus"));
         when(mock.remove(task)).thenReturn(false);
         utl.remove(task);
     }
-
+//@@author
     @Test
     public void hashCode_equals() {
         assertTrue(utl.hashCode() == utl.hashCode());

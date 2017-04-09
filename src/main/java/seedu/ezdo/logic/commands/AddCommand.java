@@ -9,6 +9,7 @@ import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
+import seedu.ezdo.commons.exceptions.RecurException;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.tag.UniqueTagList;
@@ -30,9 +31,9 @@ public class AddCommand extends Command {
     public static final String SHORT_COMMAND_WORD = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to ezDo. "
-            + "Parameters: NAME [p/PRIORITY] [s/START_DATE] [d/DUE_DATE] [t/TAG]...\n"
+            + "Parameters: NAME [p/PRIORITY] [s/START_DATE] [d/DUE_DATE] [f/FREQUENCY] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe p/1 s/12/12/2017 d/01/01/2018 t/friends t/owesMoney";
+            + " Buy fruits p/2 s/monday d/friday f/weekly t/personal t/shopping";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in ezDo";
@@ -60,6 +61,11 @@ public class AddCommand extends Command {
         );
     }
   //@@author A0139248X
+    /**
+     * Executes the add command.
+     *
+     * @throws CommandException if the task already exists or dates are invalid (start date after due date)
+     */
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
@@ -73,8 +79,9 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (DateException de) {
             throw new CommandException(Messages.MESSAGE_TASK_DATES_INVALID);
+        } catch (RecurException re) {
+            throw new CommandException(Messages.MESSAGE_RECUR_FAILURE);
         }
-
     }
 
 }

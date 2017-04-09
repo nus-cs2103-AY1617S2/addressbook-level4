@@ -30,7 +30,7 @@ public class NameTest {
         assertTrue(Name.isValidName("#!@#%!$^!@&#^!*@&#^!&*#^!&^#*!@^#1")); // a lot of symbols and one number
 
     }
-  //@@author A0139248X
+
     @Test
     public void hashCode_equals() throws Exception {
         Name one = new Name("omg");

@@ -25,7 +25,7 @@ public class UniqueTaskListEnumTest {
 
     @Test(expected = AssertionError.class)
     @PrepareForTest(SortCriteria.class)
-    public void unknownValueShouldThrowException() throws Exception {
+    public void sortCriteria_unknownEnum_exception() throws Exception {
         utl.add(new Task(new Name("lol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),
                 new Recur(""), new UniqueTagList("jesus")));
         utl.add(new Task(new Name("lasdfol"), new Priority("1"), new StartDate("today"), new DueDate("tomorrow"),

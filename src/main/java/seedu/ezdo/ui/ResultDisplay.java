@@ -16,7 +16,7 @@ import seedu.ezdo.commons.events.ui.NewResultAvailableEvent;
 import seedu.ezdo.commons.util.FxViewUtil;
 
 /**
- * A ui for the status bar that is displayed at the header of the application.
+ * Display the command result after a command is executed.
  */
 public class ResultDisplay extends UiPart<Region> {
 

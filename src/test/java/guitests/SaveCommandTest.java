@@ -40,7 +40,7 @@ public class SaveCommandTest extends EzDoGuiTest {
     }
 
     @Test
-    public void save_validDirectory_noAdminPermissions_failure() throws Exception {
+    public void save_validDirectoryNoAdminPermissions_failure() throws Exception {
         new MockUp<FileUtil>() {
             @Mock
             public void createIfMissing(File file) throws IOException {

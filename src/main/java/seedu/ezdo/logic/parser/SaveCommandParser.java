@@ -1,3 +1,4 @@
+//@@author A0139248X
 package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -8,9 +9,14 @@ import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.commands.SaveCommand;
-//@@author A0139248X
+
 public class SaveCommandParser implements CommandParser {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the SaveCommand
+     * and returns a SaveCommand object for execution.
+     * Returns an IncorrectCommand if there is an IllegalValueException or NoSuchElementException
+     */
     @Override
     public Command parse(String args) {
         assert args != null;

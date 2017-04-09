@@ -44,7 +44,7 @@ public class UniqueTagListTest {
         PowerMockito.doReturn(false).when(CollectionUtil.class, "elementsAreUnique", Mockito.any(List.class));
         new UniqueTagList(new Tag("omgwtfbbq"));
     }
-
+//@@author
     @Test
     public void equals_same_true() {
         UniqueTagList utl = new UniqueTagList();
