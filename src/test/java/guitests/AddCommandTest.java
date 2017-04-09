@@ -69,6 +69,9 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // invalid start time
         this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid2 s/kjsdf e/today p/high d/sss");
         assertResultMessage(MESSAGE_STARTTIME_CONSTRAINTS);
+        // start time later than end time
+        this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid2 s/tomorrow e/today p/high d/sss");
+        assertResultMessage(AddCommand.MESSAGE_INVALID_START_TIME);
         // invalid end time
         this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid3 e/kjdgf p/high d/sss");
         assertResultMessage(MESSAGE_ENDTIME_CONSTRAINTS);
