@@ -1,17 +1,24 @@
 package seedu.taskmanager.logic.commands;
 
-//import static seedu.taskmanager.logic.parser.Parser.BASIC_COMMAND_FORMAT;
-//
-//import java.util.Optional;
-//import java.util.regex.Matcher;
-//
-//import seedu.taskmanager.commons.core.EventsCenter;
-//import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
+import static seedu.taskmanager.logic.parser.Parser.BASIC_COMMAND_FORMAT;
+import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
+import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
+
+import java.util.Optional;
+import java.util.regex.Matcher;
+
+import seedu.taskmanager.commons.core.EventsCenter;
+import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.logic.parser.AddCommandParser;
+import seedu.taskmanager.logic.parser.EditCommandParser;
+import seedu.taskmanager.logic.parser.ParserUtil;
 //import seedu.taskmanager.logic.parser.AddCommandParser;
 //import seedu.taskmanager.logic.parser.EditCommandParser;
 //import seedu.taskmanager.logic.parser.ParserUtil;
 import seedu.taskmanager.model.HistoryManager;
+import seedu.taskmanager.model.Model;
 
 // @@author A0140032E
 public class RedoCommand extends Command {
@@ -25,8 +32,9 @@ public class RedoCommand extends Command {
         HistoryManager historyManager = HistoryManager.getInstance();
         String commandText;
         try {
+            Model oldModel = this.model;
             commandText = historyManager.redo();
-            //highlightChanges(commandText);
+            highlightChanges(commandText, oldModel);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CommandException(MESSAGE_NO_MORE_REDO);
@@ -39,9 +47,11 @@ public class RedoCommand extends Command {
      * Highlights the changes caused by redo command according to
      * {@code commandText}
      */
-    /*private void highlightChanges(String commandText) {
+    private void highlightChanges(String commandText, Model oldModel) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(commandText.trim());
-        assert matcher.matches();
+        System.out.println(commandText);
+        boolean isMatching = matcher.matches();
+        assert isMatching;
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
@@ -49,17 +59,21 @@ public class RedoCommand extends Command {
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
             AddCommand addCommand = (AddCommand) new AddCommandParser().parse(arguments);
-            addCommand.pseudoExecute();
+            addCommand.pseudoExecute(this.model);
             break;
         case DoneCommand.COMMAND_WORD:
-            highlightByIndex(arguments);
+            if (model.getSelectedTab().equals(TAB_DONE)) {
+                highlightByIndex(arguments);
+            }
             break;
         case UndoneCommand.COMMAND_WORD:
-            highlightByIndex(arguments);
+            if (model.getSelectedTab().equals(TAB_TO_DO)) {
+                highlightByIndex(arguments);
+            }
             break;
         case EditCommand.COMMAND_WORD:
             EditCommand editCommand = (EditCommand) new EditCommandParser().parse(arguments);
-            editCommand.pseudoExecute();
+            editCommand.pseudoExecute(oldModel);
             break;
         }
     }
@@ -67,10 +81,10 @@ public class RedoCommand extends Command {
     /**
      * Highlights the task by index according to {@code indexString} parsed in
      */
-    /*private void highlightByIndex(String indexString) {
+    private void highlightByIndex(String indexString) {
         Optional<Integer> index = ParserUtil.parseIndex(indexString);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index.get() - 1));
-    }*/
+    }
     // @@author
 }
 // @@author

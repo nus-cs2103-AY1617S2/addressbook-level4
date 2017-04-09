@@ -28,7 +28,6 @@ public class UndoCommand extends Command {
             commandText = historyManager.undo();
             highlightChanges(commandText);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new CommandException(MESSAGE_NO_MORE_UNDO);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, commandText));
@@ -41,7 +40,8 @@ public class UndoCommand extends Command {
      */
     private void highlightChanges(String commandText) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(commandText.trim());
-        matcher.matches();
+        boolean isMatching = matcher.matches();
+        assert isMatching;
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
@@ -140,11 +141,12 @@ public class EditCommand extends Command {
         return this.filteredSelectedTaskListIndex;
     }
 
-    public void pseudoExecute() {
+    public void pseudoExecute(Model model) {
         List<ReadOnlyTask> lastShownList = model.getSelectedTaskList();
         assert filteredSelectedTaskListIndex < lastShownList.size();
         ReadOnlyTask taskToEdit = lastShownList.get(filteredSelectedTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        System.out.print(editedTask);
         model.highlightTask(editedTask);
     }
 
