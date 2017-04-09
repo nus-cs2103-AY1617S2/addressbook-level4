@@ -107,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
         GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
         geeKeep.addTask(task);
         updateGeekeepHistory(originalGeekeepClone);
-        updateFilteredListToShowAll();
+        updateFilteredTaskListToShowUndone();
         indicateGeeKeepChanged();
     }
 

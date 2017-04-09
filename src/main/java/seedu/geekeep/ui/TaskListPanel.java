@@ -108,13 +108,16 @@ public class TaskListPanel extends UiPart<Region> {
             break;
         case ALL:
             selectTab(ALL_TAB);
+            currentListView = allListView;
             break;
         case FINISHED:
             selectTab(FINISHED_TAB);
+            currentListView = finishedListView;
             break;
         default:
             assert category == TaskCategory.UPCOMING;
             selectTab(UPCOMING_TAB);
+            currentListView = upcomingListView;
             break;
         }
         if (category != TaskCategory.NOCHANGE) {
