@@ -55,7 +55,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 	//// list overwrite operations
 
-	public void setTasks(List<? extends ReadOnlyEvent> tasks) {
+	public void setPersons(List<? extends ReadOnlyEvent> tasks) {
 		this.events.setEvents(tasks);
 	}
 
@@ -66,7 +66,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	public void resetData(ReadOnlyTaskManager newData) {
 		assert newData != null;
 
-		setTasks(newData.getTaskList());
+		setPersons(newData.getTaskList());
 		try {
 			setTags(newData.getTagList());
 		} catch (UniqueTagList.DuplicateTagException e) {
@@ -169,7 +169,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 	@Override
 	public String toString() {
-		return events.asObservableList().size() + " tasks, " + tags.asObservableList().size() + " tags";
+		return events.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
 		// TODO: refine later
 	}
 

@@ -240,7 +240,6 @@ public class ModelManager extends ComponentManager implements Model {
 		Set<String> undoneTaskIdentifier = new HashSet<String>();
 		undoneTaskIdentifier.add(TASK_UNDONE_IDENTIFIER);
 		updateFilteredListToShowDone(undoneTaskIdentifier);
-		// filteredEvents.setPredicate(null);
 	}
 
 	// @@author A0138952W
@@ -253,6 +252,9 @@ public class ModelManager extends ComponentManager implements Model {
 		taskList.setPredicate(expression::satisfies);
 	}
 
+	// ============== Methods used for filtering in Calendar list
+	// ===================
+
 	@Override
 	public void updateCalendarFilteredListToShowStartTime(LocalDate day) {
 		calendarList.setPredicate(null);
@@ -263,11 +265,23 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
+	public void updateCalendarFilteredListToShowDone() {
+		Set<String> doneTaskIdentifier = new HashSet<String>();
+		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
+		updateCalendarFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
+	}
+
+	// ============== Methods used for filtering in Done task list
+	// ====================
+	@Override
 	public void updateDoneTaskList() {
 		Set<String> doneTaskIdentifier = new HashSet<String>();
 		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
 		updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
 	}
+
+	// ============== Methods used for filtering in Primary list
+	// ======================
 
 	@Override
 	public void updateFilteredListToShowLocation(Set<String> keywords) {
@@ -309,50 +323,44 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void updateFilteredListToShowSortedStart() {
 		FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByStart();
-		taskManager.setTasks(tempEvents);
+		taskManager.setPersons(tempEvents);
 	}
 
 	@Override
 	public void updateFilteredListToShowSortedEnd() {
 		FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByEnd();
-		taskManager.setTasks(tempEvents);
+		taskManager.setPersons(tempEvents);
 	}
 
 	@Override
 	public void updateFilteredListToShowDeadline() {
 		FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByDeadline();
-		taskManager.setTasks(tempEvents);
+		taskManager.setPersons(tempEvents);
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByEnd() {
 		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByEndDate());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
-		taskManager.setTasks(tempEvents);
+		taskManager.setPersons(tempEvents);
 		return tempEvents;
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByStart() {
 		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartDate());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
-		taskManager.setTasks(tempEvents);
+		taskManager.setPersons(tempEvents);
 		return tempEvents;
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByDeadline() {
 		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByDeadline());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
-		taskManager.setTasks(tempEvents);
+		taskManager.setPersons(tempEvents);
 		return tempEvents;
 	}
 
-	@Override
-	public void updateFilteredListToShowDone() {
-		Set<String> doneTaskIdentifier = new HashSet<String>();
-		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
-		updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
-	}
+	// ================ Inner classes for FilteredList ==================
 
-	// Inner class used for Searching //
 	interface Qualifier {
 		boolean run(ReadOnlyEvent event);
 
