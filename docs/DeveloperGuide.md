@@ -240,6 +240,9 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Task List data in xml format and read it back.
 
+The storage component is an example of the singleton design principle because there is only one instance of Storage, accessible through the MainApp class.
+The storage component interacts with the model during the load and save command. Here, the load or save command attempts to update the save location for internal storage. In the case of a load command,
+
 ### 2.6. Common classes
 
 Classes used by multiple components are in the `seedu.task.commons` package.
@@ -267,9 +270,19 @@ and logging destinations.
 
 ### 3.2. Configuration
 
+Author: Tyler Rocha
+
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+The config.json file contains several attributes:
+> `appTitle` is the name of the application
+> `logLevel` is the default level for the logger
+> `userPrefsFilePath` is the file path to the user preferences file
+> `taskManagerFilePath` is the file path to the task manager save data
+> `taskManagerName` is the name of the task manager application
+
+`taskManagerFilePath` is manipulated automatically when a successful `save` or `load` command is executed. When this occurs, `taskManagerFilePath` is updated to the user-specified file location, and this location becomes the default for future Task Manager sessions.
 
 ## 4. Testing
 
@@ -425,7 +438,7 @@ Use case ends.
 
 **Extensions**
 
-2a. The taske with the name given by the user already exist
+2a. The task with the name given by the user already exists
 > Use case ends
 
 #### Use case: Delete task
