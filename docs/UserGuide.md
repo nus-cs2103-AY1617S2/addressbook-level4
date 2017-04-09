@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# FunTaskTic - User Guide
 
 By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
