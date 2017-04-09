@@ -98,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.shrinkTagList(target);
         toDoList.removeTask(target);
         history.saveUndoInformationAndClearRedoHistory(DeleteCommand.COMMAND_WORD, target, copiedCurrentToDoList);
         indicateToDoListChanged();

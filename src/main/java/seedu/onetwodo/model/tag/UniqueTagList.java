@@ -175,6 +175,18 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.hashCode();
     }
 
+    //@@author A0135739W
+    /**
+     * Removes the equivalent tag from the list.
+     *
+     */
+    public void remove(Tag toRemove) {
+        assert toRemove != null;
+        assert internalList.contains(toRemove);
+        internalList.remove(toRemove);
+    }
+
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
