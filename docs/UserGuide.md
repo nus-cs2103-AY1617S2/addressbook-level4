@@ -28,7 +28,8 @@ This guide will help you get started with the commands and features of GeeKeep.
     * [Undo](#311-undo-most-recent-command-undo)
     * [Redo](#312-redo-most-recent-undo)
     * [Save](#313-saving-the-data)
-    * [Exit](#314-exiting-the-program-exit)
+    * [Store](#314-storing-the-data)
+    * [Exit](#315-exiting-the-program-exit)
 1. [FAQ](#4-faq)
 1. [Command Summary](#5-command-summary)
 1. [Parameter Summary](#6-parameter-summary)
@@ -113,7 +114,7 @@ Format: `help`
 
 Adds a task with the specified details.
 
-Format: `add TASKTITLE [start/START_DATETIME] [end/END_DATETIME]  [d/DESCRIPTION] [tag/TAGS...]`
+Format: `add TASKTITLE [s/START_DATETIME] [e/END_DATETIME]  [d/DESCRIPTION] [t/TAGS...]`
 
 > * Each parameter has its own prefix. See the [Parameter Summary](#6-parameter-summary) for a complete list.
 
@@ -133,7 +134,7 @@ You should see the following after the above commands are entered.
 
 Updates any details of existing task's to the new specified .
 
-Format: `update TASKID [TASKTITLE] [start/START_DATETIME] [end/END_DATETIME]  [d/DESCRIPTOIN] [tag/TAGS...]`
+Format: `update TASKID [TASKTITLE] [s/START_DATETIME] [e/END_DATETIME]  [d/DESCRIPTOIN] [t/TAGS...]`
 
 > * Updates the task at the specified *TaskID*.
 > * *TaskID* refers to the number shown beside the title of the task.
@@ -201,23 +202,22 @@ Format: `listundone`
 
 > Sorted in chronological order. You will see tasks closest to their starting date or due date at the top.
 
-### 3.10. Finding all tasks containing any keyword in their title, tag, or on a specific date: `find`
+### 3.10. Finding all tasks containing any keyword in their title, specified tags, or in a specified time period: `find`
 
-Find and displays only tasks whose title or tag contain any of the given keywords, and/or on the specified date, in the *Event, Task, and Deadline List Panels*.
+Find and displays only tasks whose title contain any of the given keywords, and/or contains the specified tag, and/or in the specified time period, in the *Event, Task, and Deadline List Panels* respectively.
 
-Format: `find KEYWORD [MORE_KEYWORDS] [DATE]`
+Format: `find KEYWORD [MORE_KEYWORDS] [a/AFTER_DATETIME] [b/BEFORE_DATETIME] [t/TAGS...]`
 
 > * The search is case insensitive.
 > * The order of the keywords does not matter. e.g. `progress report` will match `report progress`
-> * Substrings will be matched e.g. meet will match meeting
 > * Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `meeting` will match `team meeting`
-> * Specifying the date will narrow the search space to ongoing tasks on the date.
+> * You can specify the time period using either the after and before prefixes, `a/` and `b/` respectively. If you specify both parameters, take note the time for `a/` must be before `b/`. 
 
 Examples:
 
 * You can find any tasks with the word `report` in their title: <br> `find report`
-* You can find any tasks with the partial word `meet` in their title, even if their title is `team meeting`: <br>`find meet`
-* You can find any tasks with the partial word `meet` in their title, on a specific date: <br>`find meet 17-3-17`
+* You can find any tasks with the word `meeting` in their title, and containing the tag `work`: <br>`find meet t/work`
+* You can find any tasks with the word `meet` in their title, happening after `17-3-17`: <br>`find meet a/17-3-17`
 
 
 ### 3.11. Undo most recent command: `undo`
@@ -238,7 +238,21 @@ Task manager data are saved in the hard disk automatically (in XML format) after
 
 > There is no need to save manually.
 
-### 3.14. Exiting the program: `exit`
+### 3.14. Storing the data
+
+Stores the data at the specified filepath.
+
+Format: `store [RELATIVE_FILEPATH]`
+
+> * The default store location in the `data` folder, which is created when you first execute `Geekeep.jar`.
+> * The filepath is relative to where `Geekeep.jar` is stored
+> * You have to specify the `.xml` extension for the file name
+
+Examples:
+
+* You can store the data in the same folder as `Geekeep.jar`: `store Geekeep.xml`
+
+### 3.15. Exiting the program: `exit`
 
 Exits the program.
 
@@ -303,7 +317,8 @@ Format: `exit`
 | [Find](#310-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find) | `find KEYWORD [MORE_KEYWORDS] [DATE]` | `find report 15-3-17` |
 | [Undo](#311-undo-most-recent-command-undo) | `undo` | `undo` |
 | [Redo](#312-redo-most-recent-undo-redo) | `redo` | `redo` |
-| [Exit](#314-exiting-the-program-exit) | `exit` | `exit` |
+| [Store](#314-storing-the-data) | `store` | `store geekeep.xml` |
+| [Exit](#315-exiting-the-program-exit) | `exit` | `exit` |
 
 ## 6. Parameter Summary
 
