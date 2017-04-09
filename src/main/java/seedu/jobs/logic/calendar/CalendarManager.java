@@ -160,7 +160,6 @@ public class CalendarManager {
     }
 
     public void loadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
-        System.out.println("loadTask");
         new LoadCalendar(service, list);
     }
     

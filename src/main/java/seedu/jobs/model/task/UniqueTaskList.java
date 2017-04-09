@@ -47,15 +47,19 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         //@@author A0164440M
+        pushUndoStack();
+        //@@author
+        //@@author A0140055W
+        internalList.add(0, toAdd);
+        //@@author
+    }
+
+    private void pushUndoStack() {
         ObservableList<Task> stackList = FXCollections.observableArrayList();
         for (Task t : internalList) {
             stackList.add(0, t);
         }
         undoStack.push(stackList);
-        //@@author
-        //@@author A0140055W
-        internalList.add(0, toAdd);
-        //@@author
     }
 
     /**
@@ -72,10 +76,7 @@ public class UniqueTaskList implements Iterable<Task> {
         //@@author A0164440M
         ObservableList<Task> stackList = FXCollections.observableArrayList();
         Task temp;
-        for (Task t : internalList) {
-            temp = new Task(t);
-            stackList.add(temp);
-        }
+        pushUndoStack();
         undoStack.push(stackList);
         //@@author
 
@@ -100,11 +101,7 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toRemove != null;
 
       //@@author A0164440M
-        ObservableList<Task> stackList = FXCollections.observableArrayList();
-        for (Task t : internalList) {
-            stackList.add(t);
-        }
-        undoStack.push(stackList);
+        pushUndoStack();
       //@@author
 
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
@@ -123,11 +120,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean complete(int index, ReadOnlyTask toComplete) {
         assert toComplete != null;
 
-        ObservableList<Task> stackList = FXCollections.observableArrayList();
-        for (Task t : internalList) {
-            stackList.add(t);
-        }
-        undoStack.push(stackList);
+        pushUndoStack();
         Task taskToComplete = internalList.get(index);
         taskToComplete.markComplete();
         taskToComplete.resetData(taskToComplete);
@@ -143,21 +136,21 @@ public class UniqueTaskList implements Iterable<Task> {
   //@@author A0164440M
     public void undo() throws EmptyStackException {
         ObservableList<Task> replacement = undoStack.pop();
+        pushRedoStack();
+        this.internalList.setAll(replacement);
+    }
+
+    private void pushRedoStack() {
         ObservableList<Task> redoTemp = FXCollections.observableArrayList();
         for (Task t : internalList) {
             redoTemp.add(t);
         }
         redoStack.push(redoTemp);
-        this.internalList.setAll(replacement);
-    }
+}
 
     public void redo() throws EmptyStackException {
         ObservableList<Task> replacement = redoStack.pop();
-        ObservableList<Task> undoTemp = FXCollections.observableArrayList();
-        for (Task t : internalList) {
-            undoTemp.add(t);
-        }
-        undoStack.push(undoTemp);
+        pushUndoStack();
         this.internalList.setAll(replacement);
     }
   //@@author
@@ -165,14 +158,9 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(UniqueTaskList replacement) {
 
       //@@author A0164440M
-        ObservableList<Task> stackList = FXCollections.observableArrayList();
-
         //To prevent empty list been pushed into undoStack during initialization
         if (!isInitialized) {
-            for (Task t : internalList) {
-                stackList.add(t);
-            }
-            undoStack.push(stackList);
+            pushUndoStack();
         } else {
             isInitialized = !isInitialized;
         }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,7 +55,9 @@ public class Time implements Comparable<Time> {
 
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm");
-            LocalDateTime testDate = LocalDateTime.parse(test, formatter);
+            LocalDateTime.parse(test, formatter);
+            LocalDate.parse(extractDate(test), DateTimeFormatter.ofPattern("dd/MM/uuuu").
+                   withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException dtpe) {
             return false;
         }
