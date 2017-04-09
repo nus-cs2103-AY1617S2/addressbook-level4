@@ -404,11 +404,11 @@ _Figure 3.14.1. Load Command_
 
 ### 3.14. Hotkey toggling
 
-Toggles tache window into/out of view using a hotkey. <br>
+Toggles my window into / out of view using a hotkey. <br>
 
-Here is a reason why you might want to _toggle tache window_:
+Here is a reason why you might want to _toggle my window_:
 
-* **You are reading you email and want to quickly add a new task lest you forget** <br>
+* **You are reading your email and want to quickly add a new task lest you forget** <br>
 
   > Instead of moving the mouse to the small icon on the taskbar, simple press the hotkey.  <br>
 
@@ -416,13 +416,13 @@ Hotkey: **`CTRL + ALT + D`** <br>
 
 ### 3.15. System tray notification
 
-An inbuilt function that automatically triggers a system tray notification should you have a task starting or due in 2 hours time. <br>
+Automatically triggers a system tray notification should you have a task starting or due in 2 hours time. <br>
 
-Here is a reason why you might need _system tray notification_:
+Here is a reason why you might need a  _system tray notification_:
 
-* **While focusing on your current task on hand, you forgotten that a meeting is scheduled to begin in 2 hours time** <br>
+* **While focusing on your current task on hand, you have forgotten that a meeting is scheduled to begin in 2 hours time** <br>
 
-  > Luckily, Tache triggers the system tray notification, informing you of the meeting, so that you won't be late for it. <br>
+  > Luckily, I will trigger the system tray notification and inform you of the meeting so that you won't be late for it! <br>
 
 ### 3.16. Exit the program : `exit`
 
@@ -476,5 +476,5 @@ Here are some questions that you might want to ask me:
 **A**: Yes, I _autocomplete_ all commands. Every command can also be replaced with the first letter of
 its name. For example, you can replace "add" with just "a".
 
-**Q**: How do I get reminded of my tasks? <br>
-**A**: Tache automatically triggers a system tray notification when a task is starting or due in 2 hours.
+**Q**: How do I get reminded of the tasks I have to do? <br>
+**A**: I will automatically trigger a system tray notification whenever one of your tasks is starting or due in 2 hours, as mentioned [here](#315-system-tray-notification).
