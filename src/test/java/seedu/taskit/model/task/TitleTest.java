@@ -1,4 +1,4 @@
-// @@author A0141011J
+// @@author A0141011J-unused
 package seedu.taskit.model.task;
 
 import static org.junit.Assert.assertFalse;
