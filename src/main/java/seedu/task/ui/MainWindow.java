@@ -94,7 +94,7 @@ public class MainWindow extends Window {
 
     private void setAccelerators() {
         setAccelerator(saveMenuItem,   KeyCombination.valueOf("ctrl+s"));
-        setAccelerator(loadMenuItem,   KeyCombination.valueOf("ctrl+l"));
+        setAccelerator(loadMenuItem,   KeyCombination.valueOf("ctrl+o"));
         setAccelerator(exportMenuItem, KeyCombination.valueOf("ctrl+e"));
         setAccelerator(importMenuItem, KeyCombination.valueOf("ctrl+i"));
         setAccelerator(helpMenuItem,   KeyCombination.valueOf("ctrl+h"));

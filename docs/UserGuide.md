@@ -207,7 +207,7 @@ Hotkey: `CTRL+S`
 ### 2.16. Opening data
 
 Prompts a new window to select a file to load from, and all further changes are saved to this file.
-Hotkey: `CTRL+L`
+Hotkey: `CTRL+O`
 
 ### 2.16. Exporting data
 
@@ -223,7 +223,7 @@ Hotkey: `CTRL+I`
 ### 2.17 Hotkeys
 
 * `CTRL+S` - Save As
-* `CTRL+L` - Open
+* `CTRL+O` - Open
 * `CTRL+E` - Export
 * `CTRL+I` - Import
 * `CTRL+Q` - Exit
