@@ -50,14 +50,14 @@ Add is the command word to add a task to the task handler application.
 Format: `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
 1. User inputs are typed in after / as shown by the uppercase variables.
 2. The commands inside square brackets are optional.
-3. The time format follows `DD-MM-YY HH:mm`
+3. The time format follows `DD/MM/YY HH:mm`
 4. If there is no input for start and end, the task will be considered a **floating task**.
 5. If there is input for end, the task will be considered a **task with deadline**.
 6. The recur specifies the recurrence period **in days**.
 
 Example :
-* `add name/tutorial start/13-01-17 11:00 end/13-01-17 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
-* `add name/v0.0 end/03-03-17 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
+* `add name/tutorial start/13/01/17 11:00 end/13/01/17 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
+* `add name/v0.0 end/03/03/17 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
 * `add name/swim desc/"Remember to swim"`
 
 ### Delete a task: `delete`
