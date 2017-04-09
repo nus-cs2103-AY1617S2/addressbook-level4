@@ -14,8 +14,6 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command implements Undoable {
 
-    public enum TaskType { TypeTask, TypeDetailedTask }
-
     public static final String COMMAND_WORD = "delete";
     public static final String SHORT_COMMAND_WORD = "d";
 
@@ -32,24 +30,20 @@ public class DeleteCommand extends Command implements Undoable {
     //@@author
 
     public final int targetIndex;
-    public final TaskType type;
     //@@author A0150120H
     private ReadOnlyTask taskToDelete;
     private int originalIndex;
     private boolean commandSuccess;
     //@@author
 
+    /**
+     * @param {@code targetIndex}, the index of the task that will be deleted
+     */
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
-        this.type = TaskType.TypeTask;
         commandSuccess = false;
     }
 
-    public DeleteCommand(int targetIndex, TaskType type) {
-        this.targetIndex = targetIndex;
-        this.type = type;
-        commandSuccess = false;
-    }
 
 
     @Override
@@ -78,6 +72,11 @@ public class DeleteCommand extends Command implements Undoable {
 
     }
     //@@author A0139925U
+    /**
+     * Checks that the given tasks is not a recurring 'Ghost' task
+     * @throws IllegalValueException if task given is a 'Ghost' task
+     * @param {@code taskToEdit}, the task that needs checking
+     */
     private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
         if (taskToEdit.getRecurState().isGhostRecurring()) {
             throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
