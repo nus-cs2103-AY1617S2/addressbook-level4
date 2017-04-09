@@ -42,7 +42,6 @@ public class ListCommand extends Command {
 
               case LIST_TODAY:
                   taskListSize = model.updateFilteredTaskList(parameter);
-                  assert(taskListSize>=0);
                   if(taskListSize == 0){
                       return new CommandResult(MESSAGE_NO_TASK_TODAY);
                   }
@@ -54,10 +53,7 @@ public class ListCommand extends Command {
         }
     }
 
-    @Override
-    public String toString() {
-        return null;
-    }
+
 
 
     //@@author A0141011J

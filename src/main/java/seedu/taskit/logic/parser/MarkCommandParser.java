@@ -31,7 +31,7 @@ public class MarkCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_NOT_MARKED));
         }
 
-        if(parameter.get().equals(DONE)||parameter.get().equals(UNDONE)){
+        if(parameter.get().toLowerCase().equals(DONE)||parameter.get().toLowerCase().equals(UNDONE)){
             return new MarkCommand (index.get(), parameter.get());
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));

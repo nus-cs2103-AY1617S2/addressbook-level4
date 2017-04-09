@@ -9,7 +9,8 @@ import seedu.taskit.model.task.UniqueTaskList;
 import seedu.taskit.model.task.Date;
 
 public class TypicalTestTasks {
-    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning, gymming, golfing, today;
+    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning,
+    gymming, golfing, today, to, from, date,deadline, internship;
 
     public TypicalTestTasks() {
         try {
@@ -50,6 +51,21 @@ public class TypicalTestTasks {
             today = new TaskBuilder().withTitle("today movie night")
                     .withPriority("low")
                     .withTags("leisure").build();
+            to = new TaskBuilder().withTitle("to")
+                    .withPriority("low")
+                    .withTags("testing").build();
+            from = new TaskBuilder().withTitle("from")
+                    .withPriority("low").withEnd("3pm")
+                    .withTags("testing").build();
+            date = new TaskBuilder().withTitle("date")
+                    .withPriority("low").withStart("3pm")
+                    .withEnd("6pm").build();
+            deadline = new TaskBuilder().withTitle("project deadline")
+                    .withPriority("low")
+                    .withEnd("11pm").build();
+            internship = new TaskBuilder().withTitle("internship")
+                    .withPriority("low")
+                    .withEnd("May 30").build();
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
