@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 public class EditCalendar extends BasicCommandCalendar {
 	private final ReadOnlyTask initialTask;
@@ -11,7 +12,7 @@ public class EditCalendar extends BasicCommandCalendar {
 	protected CalendarManager calendar;
 //	private final com.google.api.services.calendar.Calendar service;
 
-    public EditCalendar(ReadOnlyTask initialTarget, Task newTarget, CalendarManager calendar) {
+    public EditCalendar(ReadOnlyTask initialTarget, Task newTarget, CalendarManager calendar) throws IllegalTimeException {
     	System.out.println("editcalendar");
     	this.initialTask = initialTarget;
         this.newTask = newTarget;
@@ -23,7 +24,7 @@ public class EditCalendar extends BasicCommandCalendar {
 		}
     }
 
-	public void execute() throws IOException {
+	public void execute() throws IOException, IllegalTimeException {
 		System.out.println("execute");
 		if(!(initialTask.getEndTime().toString()=="" && initialTask.getStartTime().toString()=="")) {
 			System.out.println("test");

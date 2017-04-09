@@ -62,10 +62,7 @@ allprojects {
         }
     }
 
-    dependencies {
-        compile "org.controlsfx:controlsfx:$controlsFxVersion"
-        compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-        compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
+    dependencies {     
         compile "com.google.guava:guava:$guavaVersion"
         compile 'com.google.api-client:google-api-client:1.22.0'
 		compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
