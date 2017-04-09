@@ -18,8 +18,9 @@ public class AddCalendar extends BasicCommandCalendar {
         toAdd = new EventCalendar(inputTask);
         service = inputCalendar;
         try {
-            if (!isExist(toAdd))
-            	this.execute();
+            if (!isExist(toAdd)) {
+                this.execute();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +44,7 @@ public class AddCalendar extends BasicCommandCalendar {
         event.setEnd(end);
 
         if (!(toAdd.getPeriod().equals("0"))) {
-        	String[] recurrence = new String[] {"RRULE:FREQ=WEEKLY;COUNT=" + toAdd.getPeriod()};
+            String[] recurrence = new String[] {"RRULE:FREQ=WEEKLY;COUNT=" + toAdd.getPeriod()};
             event.setRecurrence(Arrays.asList(recurrence));
         }
 
@@ -52,8 +53,9 @@ public class AddCalendar extends BasicCommandCalendar {
     }
 
     public boolean isExist (EventCalendar toAdd) throws IOException {
-    	if (retrieveID(toAdd).equals(""))
-    		return false;
-    	return true;
+        if (retrieveID(toAdd).equals("")) {
+            return false;
+        }
+        return true;
     }
 }

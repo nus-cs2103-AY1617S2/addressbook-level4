@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
-            calendar.DeleteTask(taskToDelete);
+            calendar.deleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

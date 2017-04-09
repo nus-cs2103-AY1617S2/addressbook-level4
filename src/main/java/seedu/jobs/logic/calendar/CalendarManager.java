@@ -116,24 +116,24 @@ public class CalendarManager {
         return service;
     }
 
-    public void AddTask(Task task) {
+    public void addTask(Task task) {
         new AddCalendar(task, service);
     }
 
-    public void ClearTask() {
+    public void clearTask() {
         new ClearCalendar(service);
     }
 
-    public void DeleteTask(ReadOnlyTask task) throws IllegalTimeException {
+    public void deleteTask(ReadOnlyTask task) throws IllegalTimeException {
         new DeleteCalendar(task, service);
     }
 
-    public void LoadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
-    	System.out.println("loadTask");
-    	new LoadCalendar(service, list);
+    public void loadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
+        System.out.println("loadTask");
+        new LoadCalendar(service, list);
     }
 
-    public void EditTask(ReadOnlyTask initialTask, Task newTask) throws IllegalTimeException {
+    public void editTask(ReadOnlyTask initialTask, Task newTask) throws IllegalTimeException {
         if (!(initialTask.getEndTime().toString().equals("") && initialTask.getStartTime().toString().equals(""))) {
             new DeleteCalendar(initialTask, service);
         }

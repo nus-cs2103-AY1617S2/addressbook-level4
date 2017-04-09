@@ -2,10 +2,7 @@ package seedu.jobs.logic.commands;
 
 import java.util.EmptyStackException;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.task.Task;
 
 //@@author A0164440M
 /**
@@ -23,8 +20,8 @@ public class UndoCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             model.undoCommand();
-            calendar.ClearTask();
-            calendar.LoadTask(model.getFilteredTaskList());
+            calendar.clearTask();
+            calendar.loadTask(model.getFilteredTaskList());
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyStackException e) {
             throw new CommandException(MESSAGE_FAILUIRE);
