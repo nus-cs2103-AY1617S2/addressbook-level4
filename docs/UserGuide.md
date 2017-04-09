@@ -100,8 +100,8 @@ Format: `[EEEEE][dd MM YYYYY][HH:mm:ss a]`
 Do you have trouble using iManager? Are you unsure of what to type? Don’t worry, simply type help and our help window will pop up to your rescue. <br>
 
 Format: `help`
-> Pressing "f1" will also produce the same effect.
-> Entering the wrong command will flashed the correct usage of the command in the result display.
+> * Pressing "f1" will also produce the same effect.
+> * Entering the wrong command will flashed the correct usage of the command in the result display.
 
 Examples:
 * `help` <br>
@@ -284,7 +284,7 @@ Afraid of others messing with your work? Be sure to save a copy of your data to 
 Format: `save FILEPATH`
 
 > * FILEPATH must be valid.
-> * By default, data is saved to a file called iManager.xml under the folder called “data”. The data folder is automatically created in the same location where you launched iManager.jar.
+> * By default, data is saved to a file called tasklist.xml under the folder called “data”. The data folder is automatically created in the same location where you launched iManager.jar.
 > * Changes made to iManager are automatically saved. There is NO NEED to save them manually.
 
 Examples:
@@ -310,7 +310,7 @@ Q: Does iManager save my tasks after closing the application? <br>
 A: Yes. iManager saves your data every time a command is successfully executed, putting users at ease.
 
 Q: Can I transfer my data to another computer? <br>
-A: Absolutely! Your data are saved in a file called iManager.xml. Just copy this file to the other computer and place in under data\iManager.xml. Ensure you have iManager installed on both computers.
+A: Absolutely! Your data are saved in a file called tasklist.xml. Just copy this file to the other computer and place it under the data folder that was created upon launching the application. Ensure you have iManager installed on both computers.
 
 
 ## Command Summary
