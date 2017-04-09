@@ -173,6 +173,9 @@ public class MultiViewPanel extends UiPart<Region> {
 				data[TASK_END] = event.getEndTime().toString();
 				data[TASK_LOCATION] = event.getLocation().toString();
 				timeData.add(data);
+				String[] data1 = timeData.get(i);
+					System.out.println(data1[j]);
+				}
 			}
 		}
 	}
