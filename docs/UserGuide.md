@@ -8,7 +8,7 @@
     * [Typing commands](#typing-commands)
 3. [Features](#3-features)
     * [Viewing help](#311-viewing-help--help)
-    * [Adding a task](#321-adding-a-task-add)
+    * [Adding a task](#32-adding-a-task-add)
     * [Listing tasks](#331-listing-of-task-list)
     * [Marking a task as done](#34-marking-a-task-as-done-done)
     * [Marking a task as undone](#35-marking-a-task-as-undone-undone)
@@ -50,7 +50,6 @@ Now, let's get you started!
 
 ### Starting KIT
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui_Empty.png" width="600">
 
 5. (Optional) You can choose to login to your Google Calendar.
 
@@ -65,8 +64,8 @@ Now, let's get you started!
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 7. Some example commands you can try:
    * **`list`** : lists all task
-       *  > <img src="images/listEmptyBefore.png" width="600">
-       *  > <img src="images/listEmptyAfter.png" width="600">
+       *  > <img src="images/listBefore.png" width="600">
+       *  > <img src="images/listAfter.png" width="600">
    * **`add`**`  do 2103 project r/waiting for john's reply s/03-03-2017 l/nus soc t/school` : adds a task named `do 2103 project` to KIT.
        * > <img src="images/addTaskBefore.png" width="600">
        * > <img src="images/addTaskAfter.png" width="600">
@@ -112,7 +111,7 @@ Format: `helpformat`, `helpf`, `summary`, `hf`
 > * Helpf shows a quick summary of command formats.
 > * Tips: You can also bring up the help window by pressing <kbd>F3</kbd>.
 
-### 3.2.1 Adding a task: `add`
+### 3.2 Adding a task: `add`
 
 #### Now you are ready to start exploring KIT. Try adding a task!
 
@@ -152,47 +151,6 @@ Here is a table of interpretation for your convenience.
 > * Times without am/pm are assumed to be in 24 hour format.
 > * You may include both date and time, date only, time only or even none at all.
 
-### 3.2.2 Adding a task with smart add: `smartadd`
-
-##### Typing prefixes is too troublesome ? Try `smartadd`.
-
-`smartadd` is similiar to add in the sense that they both add a new task. However, `smartadd` is more flexible and allows you to add a task's location and date details without using the prefixes. <strong>Note: This command requires the internet to work.</strong>
-
-Description: Flexibly adds a task without specifying prefixes for date and location.
-
-Format: sa DESCRIPTION [r/REMARK] [t/TAG]...
-
-> * DESCRIPTION is where you can specify the task name, location and date details.
-
-Example:
-
-* `sa meet friends for dinner in clementi at 6pm t/friends`
-
-> <img src="images/smartAddCommand1.png" width="600">
-
-* `sa project meeting at 2pm`
-* `sa design poster with team in meeting room r/share my new ideas with team`
-
-> <img src="images/smartAddCommandAll.png" width="600">
-
-Some tips for using the Smart Add command:
-
-* If you enter a time with no date, the closest date in the future will be used.
-    * If the time is later today, the date will be today.
-    * If the time has passed for today, the date will be tomorrow.
-* If no start or end time is entered, an all day event will be created.
-* If no end time is entered, the event is assumed to be one hour long.
-* You can specify start and end time using time ranges or time intervals. These two commands are equivalent:
-    * `sa watch movie 3pm for 2 hours`
-    * `sa watch movie 3pm-5pm`
-
-<strong>Note: KIT will give the best interpretation for the given description, however this may not always be accurate, especially for ambiguous descriptions.</strong>
-
-For example, `sa Meeting at Wednesday Cafe`.
-
-In this case, either _'Wednesday Cafe'_ is the actual location and the date is not specified. Or, it could also be interpreted as meeting on Wednesday at _'Cafe'_.
-
-If the input is ambiguous, we recommend you to use the add command to clearly specify the location, date and etc.
 
 ### 3.3.1 Listing of task: `list`
 
@@ -339,7 +297,7 @@ Examples:
 #### Finding a task in a stack of tasks can be troublesome.
 KIT has an efficient `find` command that can help. Use it along with any keyword or date you can recall that is related to that task.
 
-Description: Finds task whose names or remark contain **every one** of the given keywords. **Note** : If **both** keywords and date are given, KIT will find tasks that match **both** the keywords **and** the date. <br>
+Description: Finds task whose names or remark contains the given keywords.<br>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`, `f KEYWORD [MORE_KEYWORDS]`
 
@@ -353,10 +311,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`, `f KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `find homework`<br>
-  Finds `do homework`
 
 * `find poster Apr 6`<br>
-  Finds any task that contains `poster` **and** the date of `Apr 6 2017`(the current year).
+
  >  <img src="images/findAfter.png" width="600">
 
 ### 3.9.2 Finding with exact keyword(s):`findexact`
@@ -378,7 +335,7 @@ e.g `do project` will match `do School project` but not `do School projects` (_`
 
 KIT provides support for Google Calendar users.
 
-To use Google Calendar with KIT, we first require your permission for access to your Google Calendar. <strong>Note: Google Calendar related commands requires the internet to work.</strong>
+To use Google Calendar with KIT, we first require your permission for access to your Google Calendar. <strong>Note: Google Calendar related commands requires the internet and a Google Calendar account to work.</strong>
 
 > * The request will automatically open in your default browser.
 > * Log in to your Google account and approve our request to access your calendar.
@@ -413,6 +370,47 @@ Format: `postgoogle [INDEX]`, `pg [INDEX]`
 > * This will not add any duplicate tasks to your google calendar.
 > * **Note**: Any events in a calendar will have both start and end dates. Similarly only tasks with start and end dates can be added to your google calendar.
 
+### 3.10.3 Adding a task with smart add: `smartadd`
+
+##### Typing prefixes is too troublesome? Try `smartadd`.
+
+You can add a new event to *both* your calendar and KIT using`smartadd`. This command is flexible and allows you to add a task's location and date details without using the prefixes.
+
+Description: Flexibly adds a task without specifying prefixes for date and location to both KIT and your calendar.
+
+Format: sa DESCRIPTION [r/REMARK] [t/TAG]...
+
+> * DESCRIPTION is where you can specify the task name, location and date details.
+
+Example:
+
+* `sa meet friends for dinner in clementi at 6pm t/friends`
+
+> <img src="images/smartAddCommand1.png" width="600">
+
+* `sa project meeting at 2pm`
+* `sa design poster with team in meeting room r/share my new ideas with team`
+
+> <img src="images/smartAddCommandAll.png" width="600">
+
+Some tips for using the Smart Add command:
+
+* If you enter a time with no date, the closest date in the future will be used.
+    * If the time is later today, the date will be today.
+    * If the time has passed for today, the date will be tomorrow.
+* If no start or end time is entered, an all day event will be created.
+* If no end time is entered, the event is assumed to be one hour long.
+* You can specify start and end time using time ranges or time intervals. These two commands are equivalent:
+    * `sa watch movie 3pm for 2 hours`
+    * `sa watch movie 3pm-5pm`
+
+<strong>Note: KIT will give the best interpretation for the given description, however this may not always be accurate, especially for ambiguous descriptions.</strong>
+
+For example, `sa Meeting at Wednesday Cafe`.
+
+In this case, either _'Wednesday Cafe'_ is the actual location and the date is not specified. Or, it could also be interpreted as meeting on Wednesday at _'Cafe'_.
+
+If the input is ambiguous, we recommend you to use the add command to clearly specify the location, date and etc.
 
 ### 3.11 Clearing all task: `clear`
 

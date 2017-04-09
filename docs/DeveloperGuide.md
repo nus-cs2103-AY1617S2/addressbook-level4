@@ -59,7 +59,7 @@
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
+* Reason: Eclipse fails to recognise new files that appeared due to the Git pull.
 * Solution: Refresh the project in Eclipse:<br>
   Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
 
@@ -105,8 +105,8 @@ Two of those classes play important roles at the architecture level.
 The rest of the App consists of four components.
 
 [**`UI`**](#22-ui-component) : The UI component handles interaction with the user i.e. taking in input and displaying results.
-[**`Logic`**](#23-logic-component) : The Logic component does the procesing and executing of all the commands.
-[**`Model`**](#24-model-component) : The Model component holds, modifies and updates the data of tha App in-memory.
+[**`Logic`**](#23-logic-component) : The Logic component does the processing and executing of all the commands.
+[**`Model`**](#24-model-component) : The Model component holds, modifies and updates the data of the App in-memory.
 [**`Storage`**](#25-storage-component) : The Storage component reads data from, and writes data to, the hard disk.
 
 #### Each of the four components
@@ -171,7 +171,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 **API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 * `LogicManager` implements `Logic Interface`, and manages the interaction with classes outside `Logic component`.
-*  `Parser` will in turn check the `Command Library` to  create the correct `Command` object.
+*  `Parser` will in turn check the `Command Library` to create the correct `Command` object.
 *  The `Command` object is executed by the `LogicManager`.
 * The command execution can affect the `Model` (e.g. updating the data by adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `UI`.
@@ -195,7 +195,7 @@ This class stores the information of all the commands, including their `keyword`
 
 This approach applies the **Single Responsibility Principle** in that it restricts the `Parser` to account for only parsing arguments, and not creating the respective commands and their corresponding command parsers.
 
-The `CommandLibrary` class is implemented using the **Singleton pattern** as one instance is sufficient and such practice prevents the program from creating too many unnucessary instances.
+The `CommandLibrary` class is implemented using the **Singleton pattern** as one instance is sufficient and such practice prevents the program from creating too many unnecessary instances.
 
 <img src="images/CommandLibraryClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : CommandLibrary Class Diagram_
@@ -204,7 +204,7 @@ _Figure 2.3.1 : CommandLibrary Class Diagram_
 
 Both `Command` and `CommandParser` classes are designed with the **Command pattern**. Because each command has a specific behaviour and might take in particular arguments, these two classes are implemented as _abstract class_ and the individual `Command`(e.g. AddCommand) and `CommandParser`(e.g. AddCommandParser) classes inherit from them.
 
-**Liskov substitution principle** applies in this case in that the `CommandLibrary` can store and look up different subclasses, e.g. `AddCommand` and `AddCommandParser` using the superclasses, and still be able to utilize the different behaviours of the respective subclasses.
+**Liskov substitution principle** applies in this case in that the `CommandLibrary` can store and look up different subclasses, e.g. `AddCommand` and `AddCommandParser` using the superclasses, and still be able to utilise the different behaviours of the respective subclasses.
 
 
 ### 2.4. Model component
@@ -213,22 +213,22 @@ Author: Chan Lup Seng
 
 The Model component is where the 'memory' or actual data of KIT is stored and managed.
 
-Any updates to the data will require a change in the UI to reflect the changes. To allow UI to know when data is changed, the _Observer Pattern_ is used. This is done by exposing an `UnmodifiableObservableList<ReadOnlyTask>`, which is 'observed' by the UI. To do this, the UI is bound to this list and thus will automatically update when there is changes to any data in the list.
+Any updates to the data will require a change in the UI to reflect the changes. To allow UI to know when data is changed, the _Observer Pattern_ is used. This is done by exposing an `UnmodifiableObservableList<ReadOnlyTask>`, which is 'observed' by the UI. To do this, the UI is bound to this list and thus will automatically update when there are changes to any data in the list.
 
 When data is modified, we will also save it into a file for persistent memory. This is handled by the Storage component. Instead of Model directly interacting with Storage, we use the event-driven approach as mentioned [before](#211-events-driven-nature-of-the-design) and raises an event instead.
 
 With the help of the two above mentioned designs, **Model does not depend on any other component.** This keeps the design of Model simple and greatly reduces the coupling between components.
 
-A high level class diagram to show the structure of the Model Component is illustrated in the following diagram.
+A high-level class diagram to show the structure of the Model Component is illustrated in the following diagram.
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 The main class is the `ModelManager`. It implements [`Model.java`](../src/main/java/seedu/task/model/Model.java), the interface of the Model component. It maintains all the tasks in a `TaskManager` object and user's preferences in a `UserPref` object.
 
-The `TaskManager` contains the current state of all task and their details. A TaskManager contains an `UniqueTaskList` and a `UniqueTagList`. As their name suggests, these lists gaurantees that their list is unique.
+The `TaskManager` contains the current state of all task and their details. A TaskManager contains an `UniqueTaskList` and a `UniqueTagList`. As their name suggests, these lists guarantee  that their list is unique.
 
-The model component also protects it's data. Interfaces such as`ReadOnlyTaskManager` and `ReadOnlyTask` are measures to prevent other classes from modifying the data. Other components such as UI, are given the least amount of privilege they need to function, they can only read but not to write.
+The model component also protects its data. Interfaces such as`ReadOnlyTaskManager` and `ReadOnlyTask` are measures to prevent other classes from modifying the data. Other components such as UI, are given the least amount of privilege they need to function, they can only read but not to write.
 
 More details of the `Task` class can be found in the next [section](#241-task).
 
@@ -237,9 +237,9 @@ The Model class also uses the _facade pattern_. The complicated steps of modifyi
 <img src="images/ModelAddTaskSeqDiagram.png" width="800"><br>
 _Figure 2.4.2 : Sequence Diagram of addTask method_
 
-In the above _figure 2.4.2_, the various steps requried to add a new task to Model is shown. Note that steps in `updateFilteredListToShowAll()` and `indicateTaskManagerChanged()` are hidden to keep the diagram concise.
+In the above _figure 2.4.2_, the various steps required to add a new task to Model is shown. Note that steps in `updateFilteredListToShowAll()` and `indicateTaskManagerChanged()` are hidden to keep the diagram concise.
 
-The steps required to just add a task is indeed complicated, but the caller do not need to know or care about these details. They just have to provide a valid Task object and call the `addTask()` method.
+The steps required to just add a task is indeed complicated, but the caller does not need to know or care about these details. They just have to provide a valid Task object and call the `addTask()` method.
 
 ### 2.4.1 Task
 ##### This section briefly describes the design of the task class.
@@ -252,7 +252,7 @@ The `Task` class represents a task in KIT. Each of its detail such as `Name` and
 The clean design allows us to perform the verification of each field and specify the desired regex for each field easily.
 
 * Constructor of `Task` only stipulates that startDate is before endDate and lets each individual class perform their respective verification.
-* The boolean `isDone` indicates if a task is completed. Due to its simplicity, no additional class was created to avoid unnessary objects.
+* The boolean `isDone` indicates if a task is completed. Due to its simplicity, no additional class was created to avoid unnecessary  objects.
 * Except for Name, the other details are optional.
 
 **Pretty Time**
@@ -278,7 +278,7 @@ The `Storage` component,
 * Can save `UserPref` objects in json format and read it back.
 * Can save the Task Manager data in xml format and read it back.
 
-This class is called by other components such as `Model` to assist it in saving and loading the tasks from .xml files. The `StorageManager` class manages any changes in the storage through its implementation of `TaskManagerStorage` and `UserPrefsStorage` for when the `Model` class requires a change in the task manager's model. For example, when saving the file to a new directory, `ModelManager` would raise a new save file event which will be handled by `StorageManager` which relies on methods from sub-components  in `Storage` like `JsonUserPrefsStorage` and `XmlTaskManagerStorage`.
+This class is called by other components such as `Model` to assist it in saving and loading the tasks from .xml files. The `StorageManager` class manages any changes in the storage through its implementation of `TaskManagerStorage` and `UserPrefsStorage` for when the `Model` class requires a change in the task manager's model. For example, when saving the file to a new directory, `ModelManager` would raise a new save file event which will be handled by `StorageManager` which relies on methods from sub-components in `Storage` like `JsonUserPrefsStorage` and `XmlTaskManagerStorage`.
 
 ### 2.6. Common classes
 
@@ -289,7 +289,7 @@ Common classes used by multiple components are in the `seedu.task.commons` packa
 They are further divided into sub-groups like `core`, `events`, `exceptions` and `util`.
 
 * `Core` contains core classes that are used by multiple components. They include `ComponentManager`, `Config`, `EventsCenter`, `GuiSettings`, `LogsCentre`, `Messages`, `UnmodifiableObservableList` and `Version`. For example, in the save and handle command, the storage component would need to call the `Config` class to edit information in the `config.json` file.
-* `Events` contains event classes that are raised whenever required. The subsequent classes would subscribe and catch these events whenever neccessary and carry out the changes.
+* `Events` contains event classes that are raised whenever required. The subsequent classes would subscribe and catch these events whenever necessary and carry out the changes.
 * `Exceptions` contains exception classes which are thrown in various other components in the program
 * `Util` contains utilities that other components might require when carrying out certain tasks. For example, in the `JsonUtil`, it simplifies the job of reading json files as we can simply call the functions inside of it.
 
@@ -331,13 +331,13 @@ This section describes the design process and implementation of undo/redo featur
 
 One of the designs we considered for undo involves the Command pattern. The idea is to have a History class that stores a stack of previous Commands executed. Each Command will have a specified undo method for itself. For example, delete will remember the deleted task and the undo method will add it back.
 
-When undo command is called, it can obtain the latest command from History and invoke its undo method. An undo call is simple with this design, however each current Command and every new Command needs it's own individual implementation of undo method.
+When undo command is called, it can obtain the latest command from History and invoke its undo method. An undo call is simple with this design, however, each current Command and every new Command needs its own individual implementation of undo method.
 
 The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save. Before the data is updated, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implement any new methods.
 
-The downside is the extra storage space used. To reduce the extra storage incurred, the backup files are deleted everytime the program closes. The backup files thus functions as temporary files.
+The downside is the extra storage space used. To reduce the extra storage incurred, the backup files are deleted everytime the program closes. The backup files thus function as temporary files.
 
-After much consideration and research into other products, we decided that `Undo` should be limited to the last 10 commands. We find that for a task manager app, we do not need to provide too many undos. Yes, for a text editing program like Microsoft Word, a high number of undo is needed. However, the same cannot be said for a task manager app. Other popular applications suchs as Evernote, Google Keep and Google Calendar have limited undo capabilities.
+After much consideration and research into other products, we decided that `Undo` should be limited to the last 10 commands. We find that for a task manager app, we do not need to provide too many undos. Yes, for a text editing program like Microsoft Word, a high number of undo is needed. However, the same cannot be said for a task manager app. Other popular applications such as Evernote, Google Keep and Google Calendar have limited undo capabilities.
 
 **Implementation Details**
 
@@ -345,7 +345,7 @@ A `History` class is used to support and maintain backup, undo and redo operatio
 * It is located in the common package along with other common classes.
 * It's main responsibility is to decide and provide the file path that commands should backup to and also the file path for undo and redo to load from.
 * 11 files are used to support 10 undos. A currentFileIndex is used to decide which file should be used. The index is modular 11 when it reaches the last file.
-* It also maintains the undo and redo count so user won't exceed the maximum number.
+* It also maintains the undo and redo count so it won't exceed the maximum number.
 * History class uses the singleton pattern since there must only be one instance of it. This is because it's important that the data is saved and loaded from the right file.
 
 #### Every command:
@@ -356,7 +356,7 @@ A `History` class is used to support and maintain backup, undo and redo operatio
 
 <img src="images/UndoSeqDiagram.png" width="800">
 
-_Figure 3.3.1 : Sequence Diagram of Undo command_
+_Figure 3.3.1: Sequence Diagram of Undo command_
 
 When an undo command is issued, its steps are as followed:
 1. Check undoCount is valid. (undoCount > 0)
@@ -368,21 +368,13 @@ When an undo command is issued, its steps are as followed:
 7. `Storage` saves data into actual data file.
 8. `UndoCommand` tells History to update counts and index.
 
-#### Redo command is similiar and is simply the reverse of undo.
+#### Redo command is similar and is simply the reverse of undo.
 
 **Future Improvements**
 
 Max number of Undo/Redo is currently set at 10. It can be easily increased to higher count if necessary. It is easy to increase this limit since a constant in `History` is used to store the value.
 
-### 3.4 Done/Undone task command implementation
-
-This sections describes the done/undone implementation.
-
-All added tasks will be set to undone as a default setting. The done command updates the selected task to done.
-
-Rather than making a new class under Model/task, we used a boolean method inside the task class. _True_ indicates the task is done and false indicates undone. This allows us avoid implmenting unnecessary classes thereby improving the efficency of our code. Done and undone command works in similar ways. It also allows the listing of tasks by done/undone.
-
-### 3.5 Save/Load file command implementation
+### 3.4 Save/Load file command implementation
 
 This section describes the save/load feature implementation.
 
@@ -403,16 +395,16 @@ The initial save location would be in `data/kit.xml` file. To manually change th
 **Function of load**
 
 * Loads the .xml file from a specified file
-* Any changes made would be done to the current loaded file
+* Any changes made would be done to the currently loaded file
 * File status would be updated in the status bar footer
 
 **Implementation details**
 
 The load location by default would be `data/kit.xml` unless specified by the user previously. If the user had loaded a file in a different directory and closed the program, when they restart the program, it will still load from the file where they last loaded the data. The load command implementation is identical to save.
 
-### 3.6 Find command implementation
+### 3.5 Find command implementation
 
-This section desrcibes the find feature implementation.
+This section describes the find feature implementation.
 
 **Function of Find**
 
@@ -432,19 +424,19 @@ This section desrcibes the find feature implementation.
 
 Because the extraction of strings to form possible dates depends on the implementation of _Natural Language Processing_ ([Natty Date Parser](http://natty.joestelmach.com/), an external API), which is not perfect and often susceptible different interpretations, it means `FindCommand` may give inaccurate search results to complicated arguments. Improvements to achieve better _Natural Language Processing_ are planned. Meanwhile, we welcome any feedback on incorrect behaviour of `FindCommand`.([Conntact us](docs/ContactUs.md))
 
-### 3.7 Implementation of UI - TitlePane and Colored done task
+### 3.6 Implementation of UI - TitlePane and Colored done task
 
-Using list plane to list all tasks restrcts the number of tasks displayed at once as the UI has a limited space on the screen.
-* Implementing a tile plane allows more tasks to be listed and viewed by the user. Epanding the tile plane of a selected task reveals detailed information on the task.
+Using list plane to list all tasks restricts the number of tasks displayed at once as the UI has a limited space on the screen.
+* Implementing a tile plane allows more tasks to be listed and viewed by the user. Expanding the tile plane of a selected task reveals detailed information on the task.
 * The implementation of the scrolling of the task list reduces the usage of the mouse.
 
-To allow the user to easily differentiate done and undone task, done tasks' titles are green in color with a tick icon beside the titles.
+To allow the user to easily differentiate done and undone task, done tasks' titles are green in colour with a tick icon beside the titles.
 
-### 3.8 Google Calendar support
+### 3.7 Google Calendar support
 
 ##### Google Calendar is popular, to appeal to this large group of users we also provide some Google Calendar support.
 * Google Calendar users are able to log in and view their calendar directly from KIT.
-* However, if the user do not wish to use Google Calendar they can simply hide the calendar by draging the task list sidebar to the right and cover Google Calendar.
+* However, if the user does not wish to use Google Calendar they can simply hide the calendar by dragging the task list sidebar to the right and cover Google Calendar.
 
 ### Implementation
 
@@ -458,7 +450,7 @@ To allow the user to easily differentiate done and undone task, done tasks' titl
 
 * `GoogleCalendar` class follows the _Single Responsibility Principle_ (SRP) well.
     * It only has a single responsibility, to provide Calendar Service.
-    * It does not depend on any other classes, it's responsiblity is entirely encapsulated by itself.
+    * It does not depend on any other classes, it's responsibility is entirely encapsulated by itself.
     * It is highly cohesive.
 
 **Importing Google Calendar**
@@ -473,24 +465,22 @@ To allow the user to easily differentiate done and undone task, done tasks' titl
 
 _Figure 3.8.1 : Activity Diagram of PostGoogle command_
 
-* Users are able to post one or multiple task to their calendar.
-    * Specifing one task posts the specified task.
-    * Without specifing, all tasks in the current listing are posted.
+* Users are able to post one or multiple tasks to their calendar.
+    * Specifying one task posts the specified task.
+    * Without specifying, all tasks in the current listing are posted.
     * This command will not post any duplicate commands.
 * If a task has been posted to Google Calendar before, this command updates it instead of creating a new event.
-    * To support this every task stores it's own eventId when they recieve one.
+    * To support this every task stores it's own eventId when they receive one.
 
 **Utilizing Google Calendar's Quick Add for Smart Add**
 
-* The `SmartAdd` command utilizes Google's _quick add_ feature to support some form of natural language processing when adding tasks. The user's query will be used to make a call to Google's quick add API to optain an Event object. This object will consist of the event's name, start, end and location details and is used to create a new `Task`.
+* The `SmartAdd` command utilises Google's _quick add_ feature to support some form of natural language processing when adding tasks. The user's query will be used to make a call to Google's quick add API to obtain an Event object. This object will consist of the event's name, start, end and location details and is used to create a new `Task`.
 
 * User is still able to add remark and tag using the prefix like in the normal add command.
 
-The limitations of this command is that all tasks created require both start and end time due to the fact that all events in Google Calendar have start and end time. It also requires the internet to work.
+This command although it only works for Google Calendar users, it adds a great amount of flexibility and does not interfere with the already functional `AddCommand`.
 
-After considering both the benefits and the limitations we still decided to provide `SmartAdd` as we felt that the benefit outweights the limitations. This adds a great amount of flexibility to KIT users and does not interfere with the already functional `AddCommand`.
-
-If the user does not have internet or wants to add a task without dates, he can simply use the `AddCommand`.
+If the user does not have internet connection or wants to add a task without dates, he can simply use the `AddCommand`.
 
 ## 4. Testing
 
@@ -599,7 +589,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 | `* * *` | delete a task | remove task that I no longer need
 | `* * *` | edit a task | make changes or edit mistakes
 | `* * *` | undo a command | undo a mistake
-| `* * *` | search for a task | find a task with only few keywords
+| `* * *` | search for a task | find a task with only a few keywords
 | `* * *` | mark a task as done | keep track of tasks that are done
 | `* * *` | see task by done and not done | keep track of task that are not done
 | `* * *` | list task by specific tag | only see task that under a certain tag
@@ -673,8 +663,8 @@ Use case resumes from step 2.
 #### Use case: UC4 - Delete task
 **Main success scenario**
 
-	1.  User enters list.
-	2.  KIT displays all the entered tasks with a index.
+    1.  User enters list.
+	2.  KIT displays all the entered tasks with an index.
 	3.  User chooses one of the tasks to delete by entering delete INDEX.
 	4.  KIT removes the task from the list and displays status.
 	         Use case ends.
@@ -706,7 +696,7 @@ Use case resumes from step 2.
     1a2. User enters the correct command.
 
   2a. KIT find no task with queried keyword
-> 2a1. KIT show an message that says no tasks listed
+> 2a1. KIT show a message that says no tasks listed
 	2a2. KIT waits for another valid command..
 
 #### Use case: UC6 - List tasks by Tag
@@ -740,7 +730,7 @@ Use case resumes from step 2.
 >  1a1. KIT waits for another valid command..
     1a2. User enters the correct command.
 
-2a. KIT does not recognize the queried command keyword..
+2a. KIT does not recognise the queried command keyword..
 >  2a1. KIT displays the command summary in a new window
 
 #### Use case: UC8 - ThemeChange Command
@@ -754,19 +744,19 @@ Use case resumes from step 2.
 
 **Extensions**
 1a. KIT detects an error in command.
->  1a1. KIT waits for another valid command..
+>  1a1. KIT waits for another valid command.
     1a2. User enters the correct command.
 
-2a. KIT does not recognize the given theme.
->   2a1.KIT informs user that the required theme is not recognized.
-    2a2. KIT waits for another valid command..
+2a. KIT does not recognise the given theme.
+>   2a1.KIT informs user that the required theme is not recognised.
+    2a2. KIT waits for another valid command.
 
 #### Use case: UC9 - import Google Calander command
 
-** Main success scernario
+** Main success scenario
 
     1.User enters gg to import events from google.
-    2.KIT informs user that the google calander events has been successfully imported to local file.
+    2.KIT informs user that the google calendar events has been successfully imported to local file.
     3.list of all tasks is shown.
     use case ends.
 
@@ -780,16 +770,16 @@ Use case resumes from step 2.
 > 1b1. Return error message to User.
 
 1c. KIT does not have user's Google credential.
-> 1c1. KIT waits for user to login to Google and authorize KIT for access to his Calander.
-> 1c2. User successfuly grant KIT access.
+> 1c1. KIT waits for user to login to Google and authorizes  KIT for access to his Calander.
+> 1c2. User successfully grants KIT access.
 
 
-## Appendix C : Non Functional Requirements
+## Appendix C : Non-Functional Requirements
 1. Core functions work without internet.
 2. Can run without installation
 3. Must be command line interface
 4. Desktop application, not mobile or web
-5. Stand-alone application. Not a plug in to another software
+5. Stand-alone application. Not a plug into another software
 6. No relational database. Use text file for data storage. Text file must be human editable
 7. Software design must follow object-oriented paradigm
 8. Work on macintosh OS and windows 7 or later
@@ -806,7 +796,7 @@ Use case resumes from step 2.
 
 ##### Floating Task
 
-> A floating task is a task with no start date or end date. Either user have not decided when to do said task or prefer to leave it without dates.
+> A floating task is a task with no start date or end date. Either user has not decided when to do said task or prefer to leave it without dates.
 
 ## Appendix E : Product Survey
 
@@ -832,7 +822,7 @@ Author: Walter
 
 Pros:
 * Search for task by tag, keyword or notebook
-* Available on multiple platform
+* Available on multiple platforms
 * Able to tag task as well
 * Able to take a list of task and turn them into checklist instantly
 * Able to link similar task together
@@ -846,7 +836,7 @@ Cons:
 Author: Chan Lup Seng
 
 Pros:
-* Available on multiple platform on both web and mobile with synchronization
+* Available on multiple platforms on both web and mobile with synchronisation
 * Able to store pictures, able to grab text from image
 * Time and location based reminders
 * Able to draw on notes
@@ -862,7 +852,7 @@ Cons:
 Author: Xu Xinyi
 
 Pros:
-* Available on multiple platforms on both web and mobile with synchronization, and performs well with windows products
+* Available on multiple platforms on both web and mobile with synchronisation, and performs well with windows products
 * Provides different calendars for different purposes, such as Chinese lunar holiday calendar, Singapore holiday to cater to different individuals’ needs
 * Have different display forms, in weekdays, months or years
 
