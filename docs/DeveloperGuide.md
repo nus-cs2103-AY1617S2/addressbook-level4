@@ -251,6 +251,8 @@ The undo and redo commands are implemented as commands in the Logic component. T
 The undo/redo implementation is based off the [Memento Design Pattern](https://en.wikipedia.org/wiki/Memento_pattern). It makes use of `TaskMemento`s to store the state of the system before a command is made. The `TaskMementos` class takes on the role of the originator and allows for saving and retrieving mementos needed to record the state of the system. The role of caretaker is taken on by the undo and redo commands themselves. The caretaker's job is to record the state of the system in the originator before the system is altered so that previous states may be restored.
 
 #### 3.3.2 Memento Implementation
+<img src="images/TaskMementosUML.png" width="800"><br>
+_Figure 3.3.2.1 : Structure of the memento implementation_
 
 Whenever a command alters the state of a task in the task list, a `TaskMemento` containing the original task's data is created. This memento is added to the `TaskMementos` class. `TaskMementos` internally uses two stacks, one for undoing and one for redoing. Adding a memento in this manner pushes it onto the undo stack.
 
