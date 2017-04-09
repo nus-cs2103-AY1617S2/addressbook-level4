@@ -299,11 +299,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         /**
-         * returns true if a task agress with a given {@code Qualifier}
+         * returns true if a task agrees with a given {@code Qualifier}
          */
         boolean run(ReadOnlyTask task);
     }
 
+    /*
+     * Qualifier to check if a task is done
+     */
     private class DoneQualifier implements Qualifier {
 
         DoneQualifier() {
@@ -316,6 +319,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /*
+     * Qualifier to check if a task is not done
+     */
     private class NotDoneQualifier implements Qualifier {
 
         NotDoneQualifier() {
