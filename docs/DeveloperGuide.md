@@ -25,8 +25,8 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 
 ## 1. Introduction
-<p>Doist is a task manager that can simplify your life with the press of a button! Designed for users who like to use the keyboard, Doist can accept natural language commands to help you keep track of all your daily tasks.</p>
-<p>This developer guide aims to give developers a nuts and bolts insight into Doist, to encourage and facilitate contribution to the development of this application.</p>
+<p>Doist is a task manager that aims to simplify the lives of busy users! It is a desktop Java application that facilitates command line input to keep track of users' everyday tasks.</p>
+<p>This developer guide aims to give developers a nuts and bolts insight into Doist, and to also encourage contribution to the development of this application.</p>
 
 
 <br>
@@ -61,19 +61,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  
 
-### 2.3. Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
-
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button  
-
-### 2.4. Troubleshooting project setup
+### 2.3. Troubleshooting project setup
 
 * **Problem**: Eclipse reports compile errors after new commits are pulled from Git
     - *Reason*: Eclipse fails to recognize new files that appeared due to the Git pull.
@@ -137,6 +127,14 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
+
+#### Activity Diagram
+
+<img src="images\ActivityDiagram.png" width="800"><br>
+
+The above diagram describes the behaviour of Doist. The red boxes represent any actions taken by Doist, and the brown boxes represent activities that include user interactions. 
+
+After Doist is launched, it tries to read the config file. In the event that there is an unrecoverable error, the application will close. Upon successful reading of the config file, Doist attempts to load task and alias data from the saved file. Doist will then wait for the user to enter a command, and will perform the necessary steps to handle both valid and invalid commands. The `Logic` component takes of doing this, and the `UI` provides any feedback or results to the user.
 
 The sections below give more details of each component.
 
