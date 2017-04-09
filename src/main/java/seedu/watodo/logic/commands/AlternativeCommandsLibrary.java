@@ -51,7 +51,7 @@ public class AlternativeCommandsLibrary {
             put("m", MarkCommand.COMMAND_WORD);
             put("check", MarkCommand.COMMAND_WORD);
             put("um", UnmarkCommand.COMMAND_WORD);
-            put("uncheck", MarkCommand.COMMAND_WORD);
+            put("uncheck", UnmarkCommand.COMMAND_WORD);
             put("f", FindCommand.COMMAND_WORD);
             put("search", FindCommand.COMMAND_WORD);
             put("r", RedoCommand.COMMAND_WORD);
