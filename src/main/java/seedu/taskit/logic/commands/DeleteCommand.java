@@ -1,4 +1,4 @@
-//@@author A0141011J
+
 
 package seedu.taskit.logic.commands;
 
@@ -8,7 +8,7 @@ import seedu.taskit.logic.commands.exceptions.CommandException;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.UniqueTaskList.TaskNotFoundException;
 
-
+//@@author A0141011J
 /**
  * Deletes a task identified using it's last displayed index from TaskIt.
  */

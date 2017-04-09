@@ -1,12 +1,13 @@
-//@@author A0141011J
+
 package seedu.taskit.logic.commands;
 
 import java.io.IOException;
 
 import seedu.taskit.storage.XmlAddressBookStorage;
 
+//@@author A0141011J
 /**
- * Specify a specific folder and a file for data storage
+ * Specify a specific folder and a file to output data file
  */
 public class SaveCommand extends Command{
 

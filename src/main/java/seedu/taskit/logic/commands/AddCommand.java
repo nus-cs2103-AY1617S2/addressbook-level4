@@ -57,7 +57,6 @@ public class AddCommand extends Command {
         );
     }
 
-    //@@author A0141011J
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

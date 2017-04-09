@@ -1,4 +1,4 @@
-//@@author A0141011J
+
 package seedu.taskit.logic.parser;
 
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -9,8 +9,9 @@ import seedu.taskit.logic.commands.ChangePathCommand;
 import seedu.taskit.logic.commands.Command;
 import seedu.taskit.logic.commands.IncorrectCommand;
 
+//@@author A0141011J
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new ChangePathCommand object
  */
 public class ChangePathCommandParser {
 

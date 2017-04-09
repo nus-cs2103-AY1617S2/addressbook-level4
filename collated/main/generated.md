@@ -30,68 +30,47 @@
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        this.taskManager = new TaskManager(addressBook);
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+    public void resetData(ReadOnlyTaskManager newData) {
+        taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskManager getAddressBook() {
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new TaskManagerChangedEvent(addressBook));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException {
-        addressBook.removeTask(target);
+        taskManager.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
-    }
-
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
-        assert editedTask != null;
-
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
-        indicateAddressBookChanged();
-    }
-
-//=========== Filtered Task List Accessors =============================================================
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
-    }
-
-    @Override
-    public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
     }
 
 ```

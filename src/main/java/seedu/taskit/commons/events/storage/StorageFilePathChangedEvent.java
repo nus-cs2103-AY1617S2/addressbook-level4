@@ -1,9 +1,10 @@
-//@@author A0141011J
+
 
 package seedu.taskit.commons.events.storage;
 
 import seedu.taskit.commons.events.BaseEvent;
 
+//@@author A0141011J
 /** Indicates the TaskManager in the model has changed*/
 public class StorageFilePathChangedEvent extends BaseEvent {
 

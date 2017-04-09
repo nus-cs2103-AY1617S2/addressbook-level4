@@ -1,4 +1,4 @@
-//@@author A0141011J
+
 
 package seedu.taskit.logic.commands;
 
@@ -13,6 +13,10 @@ import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.taskit.logic.commands.CommandResult;
 
+//@@author A0141011J
+/**
+ * Specify a specific folder to change storage file path to
+ */
 public class ChangePathCommand extends Command {
     private Logger logger = LogsCenter.getLogger(ChangePathCommand.class.getName());
 

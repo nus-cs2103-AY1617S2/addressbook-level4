@@ -1,9 +1,13 @@
-//@@author A0141011J
+
 
 package seedu.taskit.logic.commands;
 
 import seedu.taskit.commons.exceptions.NoValidStateException;
 
+//@@author A0141011J
+/**
+ * Redo the previously undone command
+ */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";

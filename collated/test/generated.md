@@ -14,7 +14,7 @@
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.interview();
-        AddressBook expectedAB = new AddressBook();
+        TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -44,7 +44,7 @@
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        AddressBook expectedAB = helper.generateAddressBook(2);
+        TaskManager expectedAB = helper.generateAddressBook(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
@@ -84,7 +84,7 @@
         List<Task> taskList = helper.generateTaskList(2);
 
         // set AB state to 2 tasks
-        model.resetData(new AddressBook());
+        model.resetData(new TaskManager());
         for (Task p : taskList) {
             model.addTask(p);
         }
@@ -108,11 +108,11 @@
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        AddressBook expectedAB = helper.generateAddressBook(threeTasks);
+        TaskManager expectedAB = helper.generateAddressBook(threeTasks);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, threeTasks.get(2 - 1).getTitle()),
                 expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
@@ -136,7 +136,7 @@
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        AddressBook expectedAB = helper.generateAddressBook(threeTasks);
+        TaskManager expectedAB = helper.generateAddressBook(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
@@ -161,7 +161,7 @@
         Task p1 = helper.generateTaskWithName("KE Y");
 
         List<Task> threeTasks = helper.generateTaskList(p1, pTarget1, pTarget2);
-        AddressBook expectedAB = helper.generateAddressBook(threeTasks);
+        TaskManager expectedAB = helper.generateAddressBook(threeTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, threeTasks);
 
@@ -180,7 +180,7 @@
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        AddressBook expectedAB = helper.generateAddressBook(fourTasks);
+        TaskManager expectedAB = helper.generateAddressBook(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
@@ -199,7 +199,7 @@
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        AddressBook expectedAB = helper.generateAddressBook(fourTasks);
+        TaskManager expectedAB = helper.generateAddressBook(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
@@ -259,8 +259,8 @@
         /**
          * Generates an AddressBook with auto-generated tasks.
          */
-        AddressBook generateAddressBook(int numGenerated) throws Exception {
-            AddressBook addressBook = new AddressBook();
+        TaskManager generateAddressBook(int numGenerated) throws Exception {
+            TaskManager addressBook = new TaskManager();
             addToAddressBook(addressBook, numGenerated);
             return addressBook;
         }
@@ -268,8 +268,8 @@
         /**
          * Generates an AddressBook based on the list of Tasks given.
          */
-        AddressBook generateAddressBook(List<Task> tasks) throws Exception {
-            AddressBook addressBook = new AddressBook();
+        TaskManager generateAddressBook(List<Task> tasks) throws Exception {
+            TaskManager addressBook = new TaskManager();
             addToAddressBook(addressBook, tasks);
             return addressBook;
         }
@@ -278,14 +278,14 @@
          * Adds auto-generated Task objects to the given AddressBook
          * @param addressBook The AddressBook to which the Tasks will be added
          */
-        void addToAddressBook(AddressBook addressBook, int numGenerated) throws Exception {
+        void addToAddressBook(TaskManager addressBook, int numGenerated) throws Exception {
             addToAddressBook(addressBook, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given AddressBook
          */
-        void addToAddressBook(AddressBook addressBook, List<Task> tasksToAdd) throws Exception {
+        void addToAddressBook(TaskManager addressBook, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 addressBook.addTask(p);
             }
