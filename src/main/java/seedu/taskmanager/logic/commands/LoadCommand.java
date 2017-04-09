@@ -1,14 +1,11 @@
 package seedu.taskmanager.logic.commands;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Config;
-import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.commons.util.ConfigUtil;
-import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.TaskManager;
