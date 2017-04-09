@@ -191,7 +191,10 @@ public class Task implements ReadOnlyTask {
             System.out.println("end times arent equal");
             return false;
         }
-        if (!(otherTask.getTaskDescription().trim().equals(this.getTaskDescription().trim()))) {
+        if ((otherTask.getTaskDescription() == null && this.getTaskDescription() == null)
+                || (otherTask.getTaskDescription() == null && this.getTaskDescription() != null)
+                || (otherTask.getTaskDescription() == null && this.getTaskDescription() == null)
+                    && !(otherTask.getTaskDescription().trim().equals(this.getTaskDescription().trim()))) {
             System.out.println("descriptions arent equal");
             return false;
         }
