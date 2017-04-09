@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ClearCommand;
+import seedu.task.logic.commands.ClearCommand;
 
 public class ClearCommandTest extends AddressBookGuiTest {
 
