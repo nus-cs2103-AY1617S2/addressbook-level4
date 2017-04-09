@@ -61,7 +61,7 @@ public class ByDate {
      * Checks if given ByDate string is valid
      *
      * @param a by date string to be checked
-     * @returns a boolean variable, true if it is valid, false otherwise
+     * @return a boolean variable, true if it is valid, false otherwise
      */
     public static boolean isValidByDate(String args) {
         try {
