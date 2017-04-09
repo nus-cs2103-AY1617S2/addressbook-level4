@@ -89,5 +89,5 @@ public class DateParser {
         Date parsedDate = parsedDateList.get(firstElement);
         return parsedDate;
     }
-    //@@author A0139177W
+    //@@author
 }
