@@ -77,7 +77,7 @@ By : `[F12-B3]`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&
 
 ### 2.1. Architecture
 
-<img src="images/Architecture.png" width="600"><br>
+<img src="images/ArchitectureDiagram.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
@@ -141,7 +141,7 @@ The sections below give more details of each component.
 
 Author: Shen Qi
 
-<img src="images/UiComponentClassDiagram.png" width="800"><br>
+<img src="images/UiComponentClassDiagram.png" width="600"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/taskmanager/ui/Ui.java)
