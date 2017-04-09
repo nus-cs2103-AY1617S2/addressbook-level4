@@ -15,7 +15,6 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
-import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the ToDoList level Duplicates are not allowed (by .equals
@@ -96,32 +95,6 @@ public class ToDoList implements ReadOnlyToDoList {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedReadOnlyTask}. {@code ToDoList}'s tag list will be updated
-     * with the tags of {@code editedReadOnlyTask}.
-     *
-     * @see #syncMasterTagListWith(Task)
-     *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
-        assert editedReadOnlyTask != null;
-
-        Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line
-        // fails.
-        // This can cause the tags master list to have additional tags that are
-        // not tagged to any task
-        // in the task list.
-        tasks.updateTask(index, editedTask);
-    }
-
-    /**
      * Ensures that every tag in this task: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list
      */
@@ -189,6 +162,7 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.clearUndone();
     }
 
+    //@@author
     public void todayTask(ReadOnlyTask taskForToday) {
         tasks.today(taskForToday);
     }

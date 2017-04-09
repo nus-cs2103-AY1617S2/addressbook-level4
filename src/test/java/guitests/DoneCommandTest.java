@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
@@ -49,10 +50,38 @@ public class DoneCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void done_success() {
+    public void done_task_success() {
         assertDoneSuccess(TaskType.DEADLINE, "d3", currentList);
     }
 
+    //@@author A0139343E
+    @Test
+    public void done_dailyDeadlineTask_success() {
+        assertDoneSuccess(TaskType.DEADLINE, "d4", currentList);
+    }
+
+    @Test
+    public void done_eventMonthlyTask_success() {
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+    }
+
+    @Test
+    public void done_eventYearlyTask_success() {
+        assertDoneSuccess(TaskType.EVENT, "e3", currentList);
+    }
+
+    @Test
+    public void undone_task_success() {
+        // try to undone an incompleted task
+        commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
+        assertResultMessage(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
+
+        // done the same task, and try to undone it
+        assertDoneSuccess(TaskType.TODO, "t1", currentList);
+        assertUndoneSuccess(TaskType.TODO, "t1", currentList);
+    }
+
+    //@@author A0135739W
     @Test
     public void done_doneTask_failure() {
         commandBox.runCommand(DoneCommand.COMMAND_WORD + " d1");
@@ -63,7 +92,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
 
     /**
      * Runs the done command to complete the task at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to complete the first task in the list,
+     * @param filteredTaskListIndex e.g. index e1 to complete the first task in the event list,
      * @param currentList A copy of the current list of tasks (before marking done).
      */
     private void assertDoneSuccess(TaskType taskType, String filteredTaskListIndex, TestTask[] currentList) {
@@ -92,5 +121,33 @@ public class DoneCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(ListCommand.COMMAND_WORD + " done");
         TestTask[] filteredDoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, true);
         assertTrue(taskListPanel.isListMatching(taskType, filteredDoneList));
+    }
+
+    //@@author A0139343E
+    /**
+     * Runs the undone command to complete the task at specified index and confirms the result is correct.
+     * @param filteredTaskListIndex e.g. index e1 to complete the first task in the event list,
+     * @param currentList A copy of the current list of tasks (before marking undone).
+     */
+    private void assertUndoneSuccess(TaskType taskType, String filteredTaskListIndex, TestTask[] currentList) {
+        commandBox.runCommand(ListCommand.COMMAND_WORD + " done");
+        commandBox.runCommand(UndoneCommand.COMMAND_WORD + " " + filteredTaskListIndex);
+
+        TestTask[] filteredTaskList = TestUtil.getTasksByTaskType(currentList, taskType);
+        int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
+        TestTask targetTask = filteredTaskList[testTaskIndex];
+        targetTask.setIsDone(false);
+
+        //Assert taskListPanel correctly shows tasks left undone
+        TestTask[] filteredDoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, true);
+        assertTrue(taskListPanel.isListMatching(taskType, filteredDoneList));
+
+        //confirm the result message is correct
+        assertResultMessage(String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, targetTask));
+
+        //Assert taskListPanel correctly shows tasks that are undone
+        commandBox.runCommand(ListCommand.COMMAND_WORD);
+        TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, false);
+        assertTrue(taskListPanel.isListMatching(taskType, filteredUndoneList));
     }
 }

@@ -126,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void undoneTask(ReadOnlyTask taskToUncomplete) throws IllegalValueException {
         if (taskToUncomplete.getDoneStatus() == false) {
-            throw new IllegalValueException("This task has not been done");
+            throw new IllegalValueException(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
         }
         if (taskToUncomplete.hasRecur()) {
             throw new IllegalValueException("Recurring tasks cannot be undone");
@@ -236,6 +236,7 @@ public class ModelManager extends ComponentManager implements Model {
         EventsCenter.getInstance().post(new ShowTagsRequestEvent(tagsListToDisplay));
     }
 
+    //@@author
     // =========== Filtered Task List Accessors
     // =============================================================
 
@@ -249,12 +250,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
     }
 
+    //@@author A0139343E
     @Override
     public void updateByNameDescriptionTag(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MainKeywordsQualifier(keywords)));
         searchStrings = keywords;
     }
 
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }

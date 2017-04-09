@@ -11,7 +11,7 @@ import seedu.onetwodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI,
+    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI, taskJ,
             task1, task2, task3;
 
     public TypicalTestTasks() {
@@ -35,7 +35,7 @@ public class TypicalTestTasks {
             // Event with many missing info
             taskC = new TaskBuilder().withName("meet boss")
                     .withStartDate("10 Mar 2018 08:00").withEndDate("10 mar 2018 12:00")
-                    .withRecurring("")
+                    .withRecurring("yearly")
                     .withDescription("")
                     .withPriority('h')
                     .build();
@@ -57,10 +57,18 @@ public class TypicalTestTasks {
                     .build();
             // Deadline with many missing info
             taskF = new TaskBuilder().withName("finish assignments")
-                    .withStartDate("").withEndDate("11pm")
+                    .withStartDate("").withEndDate("next week 11pm")
                     .withRecurring("monthly")
                     .withDescription("")
                     .withPriority('l')
+                    .build();
+            // Deadline with daily recurring
+            taskJ = new TaskBuilder().withName("Do pushup everyday")
+                    .withStartDate("").withEndDate("today 1159")
+                    .withRecurring("daily")
+                    .withDescription("Do 20")
+                    .withTags("favourite")
+                    .withPriority('m')
                     .build();
             // To-do with all info
             taskG = new TaskBuilder().withName("buy new bag")
@@ -128,7 +136,7 @@ public class TypicalTestTasks {
      * @return TestTask[] containing default tasks A to I
      */
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI};
+        return new TestTask[]{taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI, taskJ};
     }
 
     public ToDoList getTypicalToDoList() {

@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<toDoList>
+    <tasks>
+        <name>do cs2105 assignment</name>
+        <startDate>2017-03-03 20:21</startDate>
+        <endDate>2017-03-03 23:59</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>discuss with friends</description>
+        <isDone>true</isDone>
+        <tagged>cs2105</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>catch up webcast to midterm</name>
+        <startDate>2017-04-02 18:00</startDate>
+        <endDate>2017-04-02 21:00</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>watch in x2 speed</description>
+        <isDone>true</isDone>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>guard house</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <tagged>housework</tagged>
+    </tasks>
+    <tasks>
+        <name>buy boss present</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>true</isDone>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>print lecture notes</name>
+        <startDate></startDate>
+        <endDate>2017-03-31 23:59</endDate>
+        <recur>monthly</recur>
+        <priority>MEDIUM</priority>
+        <description>use up all quota!</description>
+        <isDone>true</isDone>
+        <tagged>habit</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>finish user guide</name>
+        <startDate></startDate>
+        <endDate>2017-04-10 10:00</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>use arial font</description>
+        <isDone>false</isDone>
+        <tagged>cs2101</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>make storage for cs2103 tutorial 5</name>
+        <startDate></startDate>
+        <endDate>2017-04-07 23:59</endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>close all issue for tutorial 5</name>
+        <startDate></startDate>
+        <endDate>2017-04-06 23:59</endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>use the collate tool</name>
+        <startDate></startDate>
+        <endDate>2017-03-31 14:00</endDate>
+        <recur>weekly</recur>
+        <priority>HIGH</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>create sample tasks for op2</name>
+        <startDate></startDate>
+        <endDate>2017-03-31 14:00</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>cs2101</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>finish up FindCommand</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>find tags, description, date</description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>update HelpCommand</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>change add command parameters</description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>cs2103 tutorial preparation</name>
+        <startDate>2017-03-30 02:41</startDate>
+        <endDate>2017-03-31 14:00</endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>prepare demo, collate, dogfooding</description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>Chiong cs2105 assignment</name>
+        <startDate>2017-04-01 17:00</startDate>
+        <endDate>2017-04-01 23:59</endDate>
+        <recur>weekly</recur>
+        <priority>MEDIUM</priority>
+        <description>can copy answer</description>
+        <isDone>false</isDone>
+        <tagged>cs2105</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>compose music for trailer</name>
+        <startDate>2017-04-01 09:00</startDate>
+        <endDate>2017-04-01 11:00</endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>look for main game, menu and waiting screen music</description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+        <tagged>habit</tagged>
+    </tasks>
+    <tasks>
+        <name>learn widget programming</name>
+        <startDate>2017-04-02 02:47</startDate>
+        <endDate>2017-04-02 23:59</endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>for video trailer</description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>watch webcast</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>cs2105, get1018</description>
+        <isDone>false</isDone>
+        <tagged>habit</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>photocopy bank page</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>for SIP</description>
+        <isDone>false</isDone>
+        <tagged>holiday</tagged>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>find game music</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>habit</tagged>
+    </tasks>
+    <tasks>
+        <name>make git tag for tutorial</name>
+        <startDate></startDate>
+        <endDate>2017-04-07 14:00</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>this friday 2pm</description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>email UG office for approval</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>holiday</tagged>
+    </tasks>
+    <tasks>
+        <name>catch up with cs2105 tutorial</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>study lecture note first</description>
+        <isDone>false</isDone>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>complete SIP form</name>
+        <startDate></startDate>
+        <endDate>2017-03-31 23:59</endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>read instruction carefully</description>
+        <isDone>false</isDone>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>do play test for 3247</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>try out different lighting colour</description>
+        <isDone>false</isDone>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>make priority command</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>daily weekly monthly</description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>exercise</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>running</description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+    </tasks>
+    <tasks>
+        <name>improve user feedback</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>check for grammer</description>
+        <isDone>false</isDone>
+        <tagged>cs2103</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>rehearse for OP2</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>practice for skit also</description>
+        <isDone>false</isDone>
+        <tagged>cs2101</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>intern SIP</name>
+        <startDate>2017-05-08 19:46</startDate>
+        <endDate>2107-08-11 23:59</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>watch soccer</name>
+        <startDate>2017-04-14 20:00</startDate>
+        <endDate>2017-04-14 23:00</endDate>
+        <recur>monthly</recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+        <tagged>habit</tagged>
+    </tasks>
+    <tasks>
+        <name>brush teeth</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>anytime :)</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>change pants</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority></priority>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>buy sister present</name>
+        <startDate></startDate>
+        <endDate>2017-12-12 01:00</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>find for watch</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>reply email</name>
+        <startDate></startDate>
+        <endDate>2017-04-07 23:00</endDate>
+        <recur>daily</recur>
+        <priority></priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>make resume</name>
+        <startDate></startDate>
+        <endDate>2018-04-07 20:00</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>write for relevant job, remember to add java, c++, framework, video skills, lalala a very longgg description here</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>learn hacking</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>hack private server</description>
+        <isDone>false</isDone>
+        <tagged>habit</tagged>
+    </tasks>
+    <tasks>
+        <name>study for final</name>
+        <startDate></startDate>
+        <endDate>2017-04-26 23:59</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>study for SIP</name>
+        <startDate></startDate>
+        <endDate>2017-05-09 23:59</endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>watch tutorial from youtube</description>
+        <isDone>false</isDone>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>read up next sem module</name>
+        <startDate></startDate>
+        <endDate>2017-08-03 01:00</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>see which module i taking first hahaha spoil bell curve</description>
+        <isDone>false</isDone>
+        <tagged>habit</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>reply bob</name>
+        <startDate></startDate>
+        <endDate>2017-04-14 23:59</endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>wok</tagged>
+    </tasks>
+    <tasks>
+        <name>clean up pc cooling system</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>clean room and house</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>housework</tagged>
+    </tasks>
+    <tasks>
+        <name>sell my toy</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority></priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+        <tagged>habit</tagged>
+    </tasks>
+    <tasks>
+        <name>boss lunch meeting</name>
+        <startDate>2017-04-08 12:00</startDate>
+        <endDate>2017-04-08 14:00</endDate>
+        <recur>weekly</recur>
+        <priority>HIGH</priority>
+        <description>impress him with your appetite!</description>
+        <isDone>false</isDone>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>buy online legendary sword</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description>check market price first</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>buy 4d</name>
+        <startDate></startDate>
+        <endDate>2017-04-08 21:00</endDate>
+        <recur>daily</recur>
+        <priority>MEDIUM</priority>
+        <description>ask pet bird for number</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>buy toto</name>
+        <startDate></startDate>
+        <endDate>2017-04-08 22:00</endDate>
+        <recur>weekly</recur>
+        <priority>MEDIUM</priority>
+        <description>ask my grandma for number</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>buy new water bottle</name>
+        <startDate></startDate>
+        <endDate>2017-04-08 17:00</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>if not no water to drink!</description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>bring pet dog to walk</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>LOW</priority>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>bring pet dog for body checkup</name>
+        <startDate></startDate>
+        <endDate>2017-04-11 17:00</endDate>
+        <recur>monthly</recur>
+        <priority>HIGH</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <tagged>housework</tagged>
+    </tasks>
+    <tasks>
+        <name>bring pet dog to zoo</name>
+        <startDate></startDate>
+        <endDate>2017-04-07 23:59</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>watch photoshop tutorial for protfolio</name>
+        <startDate></startDate>
+        <endDate>2018-02-02 23:59</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>check bluestudio's channel</description>
+        <isDone>true</isDone>
+        <tagged>favourite</tagged>
+    </tasks>
+    <tasks>
+        <name>complete ma1101r assignment</name>
+        <startDate></startDate>
+        <endDate>2017-03-12 23:59</endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>google for answer or ask stackoverflow</description>
+        <isDone>true</isDone>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>sign up for noc</name>
+        <startDate></startDate>
+        <endDate>2017-04-14 11:59</endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>prepare some question for interview</description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <name>add screenshots for steps and post video and plan for lucky draw and invite friend and a very long name</name>
+        <startDate></startDate>
+        <endDate>2017-04-07 21:00</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>some long name</description>
+        <isDone>false</isDone>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>give suggestion for friend poster design</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>MEDIUM</priority>
+        <description>he wants to attract girls</description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <name>fix father computer charger</name>
+        <startDate></startDate>
+        <endDate>2017-04-09 23:59</endDate>
+        <recur></recur>
+        <priority></priority>
+        <description>find cheap price</description>
+        <isDone>false</isDone>
+        <tagged>housework</tagged>
+    </tasks>
+    <tasks>
+        <name>bring back earphone from school</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <recur></recur>
+        <priority>HIGH</priority>
+        <description>located at lost and found</description>
+        <isDone>true</isDone>
+    </tasks>
+    <tasks>
+        <name>print lecture notes</name>
+        <startDate></startDate>
+        <endDate>2017-04-30 23:59</endDate>
+        <recur>monthly</recur>
+        <priority>MEDIUM</priority>
+        <description>use up all quota!</description>
+        <isDone>false</isDone>
+        <tagged>habit</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tags>SIP</tags>
+    <tags>cs2101</tags>
+    <tags>cs2103</tags>
+    <tags>cs2105</tags>
+    <tags>cs3247</tags>
+    <tags>favourite</tags>
+    <tags>get1018</tags>
+    <tags>habit</tags>
+    <tags>hobby</tags>
+    <tags>holiday</tags>
+    <tags>housework</tags>
+    <tags>life</tags>
+    <tags>school</tags>
+    <tags>special</tags>
+    <tags>wok</tags>
+    <tags>work</tags>
+</toDoList>

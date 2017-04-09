@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.DuplicateDataException;
-import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.model.SortOrder;
 
 /**
@@ -17,7 +16,6 @@ import seedu.onetwodo.model.SortOrder;
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
 
@@ -55,33 +53,6 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(idx, toAdd);
     }
 
-    /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedTask}.
-     *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
-        assert editedTask != null;
-
-        Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
-        }
-
-        taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the
-        // updated task.
-        // The right way is to implement observable properties in the Task
-        // class.
-        // Then, TaskCard should then bind its text labels to those observable
-        // properties.
-        internalList.set(index, taskToUpdate);
-    }
 
     /**
      * Removes the equivalent task from the list.
@@ -154,6 +125,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
+    //@@author
     /**
      * Marks the equivalent task as task for today.
      *
