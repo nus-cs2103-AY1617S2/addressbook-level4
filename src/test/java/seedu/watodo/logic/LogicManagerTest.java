@@ -7,6 +7,7 @@ import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.watodo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,15 +17,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.watodo.commons.core.Config;
 import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.watodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.commons.util.ConfigUtil;
 import seedu.watodo.logic.commands.AddCommand;
 import seedu.watodo.logic.commands.ClearCommand;
 import seedu.watodo.logic.commands.Command;
@@ -35,7 +40,11 @@ import seedu.watodo.logic.commands.ExitCommand;
 import seedu.watodo.logic.commands.FindCommand;
 import seedu.watodo.logic.commands.HelpCommand;
 import seedu.watodo.logic.commands.ListCommand;
+import seedu.watodo.logic.commands.MarkCommand;
+import seedu.watodo.logic.commands.SaveAsCommand;
 import seedu.watodo.logic.commands.SelectCommand;
+import seedu.watodo.logic.commands.UnmarkCommand;
+import seedu.watodo.logic.commands.ViewFileCommand;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.logic.parser.DateTimeParser;
 import seedu.watodo.model.Model;
@@ -48,9 +57,14 @@ import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.storage.StorageManager;
+import seedu.watodo.testutil.EventsCollector;
 
 public class LogicManagerTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     /**
      * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
@@ -419,23 +433,6 @@ public class LogicManagerTest {
     // ================ For Delete Command ==============================
 
     @Test
-    public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
-    }
-
-    // Delete has a more specific
-    @Test
-    public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertCommandFailure("delete 20",
-                String.format(DeleteCommand.MESSAGE_DELETE_TASK_UNSUCCESSFUL, 20)
-                + "\n"
-                + DeleteCommand.MESSAGE_INDEX_OUT_OF_BOUNDS
-                + "\n");
-
-    }
-
-    @Test
     public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
@@ -447,6 +444,258 @@ public class LogicManagerTest {
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
                 1, threeTasks.get(0) + "\n"), expectedTM, expectedTM.getTaskList());
     }
+
+    //@@author A0141077L-reused
+    @Test
+    public void execute_deleteIndexMissing_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE);
+        assertCommandFailure("delete", expectedMessage);
+    }
+
+    @Test
+    public void execute_deleteIndexNotUnsignedPositiveInteger_errorMessageShown() throws Exception {
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
+                DeleteCommand.MESSAGE_USAGE;
+        assertCommandFailure("delete +1", expectedMessage); // index should be unsigned
+        assertCommandFailure("delete -1", expectedMessage);
+        assertCommandFailure("delete hello", expectedMessage);
+    }
+
+    @Test
+    public void execute_deleteIndexOutOfBounds_errorMessageShown() throws Exception {
+        final StringBuilder expectedMessage = new StringBuilder();
+        expectedMessage.append(String.format(DeleteCommand.MESSAGE_DELETE_TASK_UNSUCCESSFUL, 4) + '\n'
+                + DeleteCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
+        assertCommandFailure("delete 4", expectedMessage.toString());
+    }
+
+    @Test
+    public void execute_deleteDuplicateIndices_errorMessageShown() {
+        String expectedMessage = DeleteCommand.MESSAGE_DUPLICATE_INDICES;
+        assertCommandFailure("delete 1 2 1", expectedMessage);
+    }
+
+    @Test
+    public void execute_deleteMultipleIndicesInDescendingOrder_success() throws IllegalValueException {
+        String messageForNonDescendingIndices = "";
+        String messageForDescendingIndices = "";
+
+        try {
+            logic.execute("delete 1 4 2");
+        } catch (CommandException e1) {
+            //expect all indices to be unsuccessful, and error message to be printed for each index in descending order
+            messageForNonDescendingIndices = new String (e1.getMessage());
+        }
+
+        try {
+            logic.execute("delete 4 2 1");
+        } catch (CommandException e2) {
+            //expect all indices to be unsuccessful, and error message to be printed for each index
+            messageForDescendingIndices = new String (e2.getMessage());
+        }
+
+        assertEquals(messageForDescendingIndices, messageForNonDescendingIndices);
+    }
+
+    @Test
+    public void execute_deleteValidIndicesAmongstInvalidOnes_success() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithDescription("Task1");
+        List<Task> twoTasks = helper.generateTaskList(p1);
+        helper.addToModel(model, twoTasks);
+
+        final StringBuilder expectedMessage = new StringBuilder();
+        expectedMessage.append(DeleteCommand.MESSAGE_INCOMPLETE_EXECUTION + '\n');
+        expectedMessage.append(String.format(DeleteCommand.MESSAGE_DELETE_TASK_UNSUCCESSFUL, 2) + '\n'
+                + DeleteCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
+        expectedMessage.append(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL, 1, p1) + '\n');
+
+        String actualMessage = "";
+        try {
+            //indices 2 is invalid (OOB) and will be executed before index 1.
+            logic.execute("delete 1 2");
+        } catch (CommandException e1) {
+            actualMessage = new String (e1.getMessage());
+        }
+
+        assertEquals(expectedMessage.toString(), actualMessage);
+    }
+
+    //@@author
+
+
+    // ================ For Mark Command ==============================
+
+    //@@author A0141077L
+    @Test
+    public void execute_markIndexMissing_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MarkCommand.MESSAGE_USAGE);
+        assertCommandFailure("mark", expectedMessage);
+    }
+
+    @Test
+    public void execute_markIndexNotUnsignedPositiveInteger_errorMessageShown() throws Exception {
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
+                MarkCommand.MESSAGE_USAGE;
+        assertCommandFailure("mark +1", expectedMessage); // index should be unsigned
+        assertCommandFailure("mark -1", expectedMessage);
+        assertCommandFailure("mark hello", expectedMessage);
+    }
+
+    @Test
+    public void execute_markIndexOutOfBounds_errorMessageShown() throws Exception {
+        final StringBuilder expectedMessage = new StringBuilder();
+        expectedMessage.append(String.format(MarkCommand.MESSAGE_MARK_TASK_UNSUCCESSFUL, 4) + '\n'
+                + MarkCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
+        assertCommandFailure("mark 4", expectedMessage.toString());
+    }
+
+    @Test
+    public void execute_markDuplicateIndices_errorMessageShown() {
+        String expectedMessage = MarkCommand.MESSAGE_DUPLICATE_INDICES;
+        assertCommandFailure("mark 1 2 1", expectedMessage);
+    }
+
+    @Test
+    public void execute_markMultipleIndicesInDescendingOrder_success() throws IllegalValueException {
+        String messageForNonDescendingIndices = "";
+        String messageForDescendingIndices = "";
+
+        try {
+            logic.execute("mark 1 4 2");
+        } catch (CommandException e1) {
+            //expect all indices to be unsuccessful, and error message to be printed for each index in descending order
+            messageForNonDescendingIndices = new String (e1.getMessage());
+        }
+
+        try {
+            logic.execute("mark 4 2 1");
+        } catch (CommandException e2) {
+            //expect all indices to be unsuccessful, and error message to be printed for each index
+            messageForDescendingIndices = new String (e2.getMessage());
+        }
+
+        assertEquals(messageForDescendingIndices, messageForNonDescendingIndices);
+    }
+
+    @Test
+    public void execute_markValidIndicesAmongstInvalidOnes_success() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithDescription("undoneTask1");
+        Task p2 = helper.generateTaskWithDescription("doneTask2");
+        List<Task> twoTasks = helper.generateTaskList(p1, p2);
+        helper.addToModel(model, twoTasks);
+        p2.setStatus(TaskStatus.DONE);
+
+        final StringBuilder expectedMessage = new StringBuilder();
+        expectedMessage.append(MarkCommand.MESSAGE_INCOMPLETE_EXECUTION + '\n');
+        expectedMessage.append(String.format(MarkCommand.MESSAGE_MARK_TASK_UNSUCCESSFUL, 3) + '\n'
+                + MarkCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
+        expectedMessage.append(String.format(MarkCommand.MESSAGE_MARK_TASK_UNSUCCESSFUL, 2) + '\n'
+                + MarkCommand.MESSAGE_STATUS_ALREADY_DONE + '\n');
+        expectedMessage.append(String.format(MarkCommand.MESSAGE_MARK_TASK_SUCCESSFUL, 1, p1) + '\n');
+
+        String actualMessage = "";
+        try {
+            //indices 2 and 3 are invalid (one already marked, one OOB) and will be executed before index 1.
+            logic.execute("mark 1 3 2");
+        } catch (CommandException e1) {
+            actualMessage = new String (e1.getMessage());
+        }
+
+        assertEquals(expectedMessage.toString(), actualMessage);
+    }
+
+    //@@author
+
+
+
+    // ================ For Unmark Command ==============================
+
+    //@@author A0141077L-reused
+    @Test
+    public void execute_unmarkIndexMissing_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UnmarkCommand.MESSAGE_USAGE);
+        assertCommandFailure("unmark", expectedMessage);
+    }
+
+    @Test
+    public void execute_unmarkIndexNotUnsignedPositiveInteger_errorMessageShown() throws Exception {
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
+                UnmarkCommand.MESSAGE_USAGE;
+        assertCommandFailure("unmark +1", expectedMessage); // index should be unsigned
+        assertCommandFailure("unmark -1", expectedMessage);
+        assertCommandFailure("unmark hello", expectedMessage);
+    }
+
+    @Test
+    public void execute_unmarkIndexOutOfBounds_errorMessageShown() throws Exception {
+        final StringBuilder expectedMessage = new StringBuilder();
+        expectedMessage.append(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_UNSUCCESSFUL, 4) + '\n'
+                + UnmarkCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
+        assertCommandFailure("unmark 4", expectedMessage.toString());
+    }
+
+    @Test
+    public void execute_unmarkDuplicateIndices_errorMessageShown() {
+        String expectedMessage = UnmarkCommand.MESSAGE_DUPLICATE_INDICES;
+        assertCommandFailure("unmark 1 2 1", expectedMessage);
+    }
+
+    @Test
+    public void execute_unmarkMultipleIndicesInDescendingOrder_success() throws IllegalValueException {
+        String messageForNonDescendingIndices = "";
+        String messageForDescendingIndices = "";
+
+        try {
+            logic.execute("unmark 1 4 2");
+        } catch (CommandException e1) {
+            //expect all indices to be unsuccessful, and error message to be printed for each index in descending order
+            messageForNonDescendingIndices = new String (e1.getMessage());
+        }
+
+        try {
+            logic.execute("unmark 4 2 1");
+        } catch (CommandException e2) {
+            //expect all indices to be unsuccessful, and error message to be printed for each index
+            messageForDescendingIndices = new String (e2.getMessage());
+        }
+
+        assertEquals(messageForDescendingIndices, messageForNonDescendingIndices);
+    }
+
+    @Test
+    public void execute_unmarkValidIndicesAmongstInvalidOnes_success() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithDescription("doneTask1");
+        Task p2 = helper.generateTaskWithDescription("undoneTask2");
+        List<Task> twoTasks = helper.generateTaskList(p1, p2);
+        helper.addToModel(model, twoTasks);
+        p1.setStatus(TaskStatus.DONE);
+
+        final StringBuilder expectedMessage = new StringBuilder();
+        expectedMessage.append(UnmarkCommand.MESSAGE_INCOMPLETE_EXECUTION + '\n');
+        expectedMessage.append(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_UNSUCCESSFUL, 3) + '\n'
+                + UnmarkCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
+        expectedMessage.append(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_UNSUCCESSFUL, 2) + '\n'
+                + UnmarkCommand.MESSAGE_STATUS_ALREADY_UNDONE + '\n');
+        expectedMessage.append(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_SUCCESSFUL, 1, p1) + '\n');
+
+        String actualMessage = "";
+        try {
+            //indices 2 and 3 are invalid (one already unmarked, one OOB) and will be executed before index 1.
+            logic.execute("unmark 1 3 2");
+        } catch (CommandException e1) {
+            actualMessage = new String (e1.getMessage());
+        }
+
+        assertEquals(expectedMessage.toString(), actualMessage);
+    }
+
+    //@@author
 
     // ================ For Find Command ==============================
 
@@ -507,6 +756,90 @@ public class LogicManagerTest {
         assertCommandSuccess("find key random", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
+
+    //@@ author
+
+    // ================ For SaveAs Command ==============================
+    //@@author A0141077L
+
+    @Test
+    public void execute_saveasFilePathNotFound_errorMessageShown() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE);
+        assertCommandFailure("saveas", expectedMessage);
+    }
+
+    @Test
+    public void execute_saveas_nullFilePath_assertionFailure() {
+        thrown.expect(AssertionError.class);
+        new SaveAsCommand(null);
+    }
+
+    @Test
+    public void execute_saveas_notXmlFormat_invalidCommand() {
+        assertCommandFailure("saveas filePathWithoutXmlExtension", SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
+        assertCommandFailure("saveas filePath.WithOtherExtension", SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
+    }
+
+    @Test
+    public void execute_saveToSameFilePath_exceptionThrown() throws CommandException {
+        thrown.expect(CommandException.class);
+        Config config = new Config();
+        String oldFilePath = config.getWatodoFilePath();
+        new SaveAsCommand(oldFilePath).execute();
+    }
+
+    @Test
+    public void execute_saveToSameFilePath_errorMessageShown() throws CommandException {
+        Config config = new Config();
+        String oldFilePath = config.getWatodoFilePath();
+        assertCommandFailure("saveas " + oldFilePath, SaveAsCommand.MESSAGE_DUPLICATE_FILE_PATH);
+    }
+
+    @Test
+    public void execute_saveas_handleStorageFilePathChangedEvent_eventRaised()
+            throws CommandException, IllegalValueException, IOException {
+        Config config = new Config();
+        String originalFilePath = config.getWatodoFilePath();
+
+        EventsCollector eventCollector = new EventsCollector();
+        logic.execute("saveas newFilePath.xml");
+        assertTrue(eventCollector.get(0) instanceof StorageFilePathChangedEvent);
+
+        config.setWatodoFilePath(originalFilePath); //reset config to original file path
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
+
+    @Test
+    public void execute_saveas_success() throws IOException {
+        Config config = new Config();
+        String originalFilePath = config.getWatodoFilePath();
+
+        String newFilePath = "newFilePath.xml";
+        String expectedMessage = String.format(SaveAsCommand.MESSAGE_SUCCESS, newFilePath);
+
+        assertCommandSuccess("saveas " + newFilePath, expectedMessage, new TaskManager(), Collections.emptyList());
+
+        config.setWatodoFilePath(originalFilePath); //reset config to original file path
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
+
+    //@@author
+
+    // ================ For ViewFile Command ==============================
+
+    //@@author A0141077L
+    @Test
+    public void execute_viewfile_succes() {
+        Config config = new Config();
+        String oldFilePath = config.getWatodoFilePath();
+        String expectedMessage = String.format(ViewFileCommand.VIEW_FILE_MESSAGE, oldFilePath);
+
+        String actualMessage = new ViewFileCommand().execute().feedbackToUser;
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    //@@author
 
     // ================ To generate test data ==============================
 

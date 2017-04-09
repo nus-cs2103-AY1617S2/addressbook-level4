@@ -27,7 +27,7 @@ public class UnmarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
-    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully marked.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks successfully marked.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_UNMARK_TASK_SUCCESSFUL = "Task #%1$d marked undone: %2$s";
     public static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
@@ -79,7 +79,7 @@ public class UnmarkCommand extends Command {
         }
 
         if (executionIncomplete) {
-            if (multipleExectutions(filteredTaskListIndices)) {
+            if (multipleExecutions(filteredTaskListIndices)) {
                 compiledExecutionMessage.insert(0, MESSAGE_INCOMPLETE_EXECUTION + '\n');
             }
             throw new CommandException(compiledExecutionMessage.toString());
@@ -93,7 +93,7 @@ public class UnmarkCommand extends Command {
         this.unmarkedTask = null;
     }
 
-    private boolean multipleExectutions(int[] filteredTaskListIndices) {
+    private boolean multipleExecutions(int[] filteredTaskListIndices) {
         return (filteredTaskListIndices.length > 1) ? true : false;
     }
 
@@ -108,8 +108,8 @@ public class UnmarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
-        updateTaskListAtIndex(currIndex, unmarkedTask);
-        storeTasksForUndo(taskToUnmark, unmarkedTask);
+        updateTaskListAtIndex(currIndex, this.unmarkedTask);
+        storeTasksForUndo(this.taskToUnmark, this.unmarkedTask);
     }
 
     private ReadOnlyTask getTaskToUnmark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {

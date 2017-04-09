@@ -91,6 +91,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Storage File Path changed, saving to file"));
         taskListStorage = new XmlTaskListStorage(event.newFilePath);
     }
     //@@author
