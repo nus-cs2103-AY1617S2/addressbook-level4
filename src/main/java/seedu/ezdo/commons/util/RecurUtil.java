@@ -24,7 +24,7 @@ public class RecurUtil {
         final boolean isStartDateMissing = taskStartDate.isEmpty();
         final boolean isDueDateMissing = taskDueDate.isEmpty();
         final boolean isBothDatesMissing = isStartDateMissing && isDueDateMissing;
-        
+
         final boolean isRecurring = task.getRecur().isRecur();
 
         if (isBothDatesMissing && isRecurring) {
