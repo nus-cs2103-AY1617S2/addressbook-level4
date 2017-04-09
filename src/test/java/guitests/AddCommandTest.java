@@ -13,10 +13,10 @@ import seedu.doit.testutil.TypicalTestTasks;
 
 public class AddCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be low med high";
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be in "
-            + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
-    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Item End Time should be in "
-            + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start Date/Time should be in "
+            + "DD/MM/YY HH:MM Format or relative date today, tomorrow, next wednesday";
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "End Date/Time should be in "
+            + "DD/MM/YY HH:MM Format or relative date today, tomorrow, next wednesday";
 
     // @@author A0160076L
     @Test
