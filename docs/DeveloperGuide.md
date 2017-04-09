@@ -239,9 +239,14 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Task List data in xml format and read it back.
-
+* can save Task List data from any properly formatted file.
+* can load Task List data from any properly formatted file.
+<br>
 The storage component is an example of the singleton design principle because there is only one instance of Storage, accessible through the MainApp class.
-The storage component interacts with the model during the load and save command. Here, the load or save command attempts to update the save location for internal storage. In the case of a load command,
+
+The storage component interacts with the logic component during the load and save command. Here, the load or save command attempts to update the save location for internal storage. In the case of a load command, the logic component makes a save requeset to the storage component. The storage component replies with a notice of either success or failure, since sometimes file operations will fail.
+
+Adding functionality which allows for saving task data in a new location exemplifies the Open Close principle, because its implementation only added new functions to meet this need, instead of changing existing ones. The Open Close principle states that software should be open to extensions but closed to modifications.
 
 ### 2.6. Common classes
 
