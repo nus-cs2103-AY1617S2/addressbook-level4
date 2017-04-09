@@ -86,6 +86,7 @@ Format: `list`<br>
 > The list of tasks will be sorted accoding to priority level from 1 to 3
 
 Example:
+
 * `list`<br>
   Shows a list of all tasks in the task list.
 
@@ -102,6 +103,10 @@ Editing a recurring task in this way will edit all instances
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> * You can edit the frequency of a recurring task following the same syntax. Note that all occurrences will be changed
+> according to the frequency specified.
+> * Once a non-recurring task is created, it cannot be * `edit`ed and made into a recurring task. You must create a new task using
+> * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one. 
 
 Examples:
 
@@ -110,6 +115,9 @@ Examples:
 
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
+  
+* `edit 1 r/1y` <br>
+  Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
   ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
   Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
@@ -117,9 +125,8 @@ Examples:
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
 
-
   Examples:
-
+  
   * `edithis 2 sd/01/01/2017`<br>
   Edits the start date of task 2 (which is reccuring)
 
@@ -147,7 +154,8 @@ Examples:
   > * However, only one instance will show up in the list after executing 'list'
   > * The instance in 'list' will be updated to match the parameters after executing a valid 'find'
 
-  Example:
+  Examples:
+  
   * `add feed cat sd/10/05/2017 ed/10/05/2017 r/1d`<br>
     The task is displayed in the list with the above parameters
   * `find 11/05/2017`<br>
@@ -225,6 +233,7 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 priority.
 
 Examples:
+
 * `list`<br>
   `prioritize 2 3`<br>
   Puts a priority level of 3 to the 2nd task in the task list. If the 2nd task is recurring, then all occurrences will have priority 3.
@@ -243,17 +252,32 @@ Format: `clear`
 Exits the program.<br>
 Format: `exit`
 
+Example: 
+
+* `exit`<br>
+The application will shut down.
+
 ### 2.11. Saving the data : `save`
 
 Saves task manager data in specified file location.
 Format: `save PATH/TO/SAVE_LOCATION`
-Task list data is saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+> * Task list data is saved in the hard disk automatically after any command that changes the data.<br>
+> * There is no need to save manually.
 
-###2.12. Loading the data : `load`
+Examples:
+
+* `save`
+* `save` 
+
+### 2.12. Loading the data : `load`
 
 Loads task manager data from specified file location
 Format: `load PATH/TO/LOAD_LOCATION`
+
+Examples:
+
+* `load`
+* `load`
 
 ## 3. Notes on Recurring Tasks
 
