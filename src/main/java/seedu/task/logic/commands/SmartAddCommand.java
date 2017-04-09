@@ -21,7 +21,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Adds a task to KIT without prefixes for date and location.
+ * Adds a task to KIT and Google Calendar without using prefixes for date and location.
  */
 public class SmartAddCommand extends Command {
 

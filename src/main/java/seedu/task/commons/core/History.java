@@ -1,6 +1,9 @@
 package seedu.task.commons.core;
 
-// @@author A0140063X
+//@@author A0140063X
+/**
+ * Maintains undo/redo status and provide filepaths to support undo/redo.
+ */
 public class History {
 
     public static final int MAX_NUM_UNDO = 10;

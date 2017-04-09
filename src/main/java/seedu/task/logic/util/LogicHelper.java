@@ -18,6 +18,11 @@ import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
 
 // @@author A0140063X
+/**
+ * This is a helper class that mainly converts task to/from events.
+ * Can be extended to have more helper methods.
+ *
+ */
 public class LogicHelper {
 
     /**

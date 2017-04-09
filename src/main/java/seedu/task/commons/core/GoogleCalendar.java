@@ -19,7 +19,11 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 
-// @@author A0140063X-reused
+//@@author A0140063X-reused
+/**
+ * Checks and obtains credentials to connects to Google Calendar service.
+ * Provides communication to Google Calendar.
+ */
 public class GoogleCalendar {
     public static final String CALENDAR_ID = "primary";
     public static final String CONNECTION_FAIL_MESSAGE = "Unable to connect to Google.";
