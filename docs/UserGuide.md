@@ -111,17 +111,12 @@ Editing a recurring task in this way will edit all instances
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it.
-> * If you want to clear the START_TIMEDATE or END_TIMEDATE of a task, use `sd/floating` and `ed/floating` respectively 
+> * If you want to clear the START_TIMEDATE or END_TIMEDATE of a task, use `sd/floating` and `ed/floating` respectively
 > in the edit command (see example below).
 > * You can edit the frequency of a recurring task following the same syntax. Note that all occurrences will be changed
 > according to the frequency specified.
-<<<<<<< HEAD
 > * Once a non-recurring task is created, it cannot be `edit`ed and made into a recurring task. You must create a new task using
-> * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one. 
-=======
-> * Once a non-recurring task is created, it cannot be * `edit`ed and made into a recurring task. You must create a new task using
 > * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one.
->>>>>>> update UserGuide.md
 
 Examples:
 
@@ -131,12 +126,9 @@ Examples:
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
 
-<<<<<<< HEAD
 * `edit 4 ed/floating`<br>
    Removes the end timing for task 4.
-  
-=======
->>>>>>> update UserGuide.md
+
 * `edit 1 r/1y` <br>
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
@@ -172,7 +164,7 @@ Examples:
   Returns `Study for midterm`
 
   * `find 11/01/2017`<br>
-  Returns all tasks with start or end timings on January 11, 2017. 
+  Returns all tasks with start or end timings on January 11, 2017.
 
   * `find 1`<br>
   Returns tasks with a priority of 1 (i.e. a HIGH priority).
@@ -205,7 +197,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task list.
-  
+
 * `find tutorial`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
@@ -379,7 +371,7 @@ the implementation of such tasks. A few things to note about how to use this fea
 
 * **Save** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
-   
+
 * **Redo** : `redo` <br>
    e.g. `redo`
 
