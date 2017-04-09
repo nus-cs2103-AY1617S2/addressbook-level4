@@ -100,6 +100,7 @@ You are currently reading my user guide, which has been written to help you with
   > * Start Time
   > * End Date
   > * End Time
+  > * Tag
 
 #### Task Filters:
 
