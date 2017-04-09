@@ -27,7 +27,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("clear");
         for(int i = 0; i<currentList.length; i++)
         commandBox.runCommand(currentList[i].getAddCommand());
-        
+
         assertDeleteSuccess(targetIndex, currentList);
 
         // delete the last in the list

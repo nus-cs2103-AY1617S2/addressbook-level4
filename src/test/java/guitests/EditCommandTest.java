@@ -82,19 +82,19 @@ public class EditCommandTest extends TaskManagerGuiTest {
      assertResultMessage(
      String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
      }
-    
+
      @Test
      public void edit_invalidTaskIndex_failure() {
      commandBox.runCommand("edit 8 Bobby");
      assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
      }
-    
+
      @Test
      public void edit_noFieldsSpecified_failure() {
      commandBox.runCommand("edit 1");
      assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
      }
- 
+
      @Test
      public void edit_invalidValues_failure() {
      commandBox.runCommand("edit 1 *&");
@@ -105,7 +105,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     /**
      * Checks whether the edited task has the correct updated details.
-     * 
+     *
      * @param filteredTaskListIndex
      *            index of task to edit in filtered list
      * @param taskManagerIndex
