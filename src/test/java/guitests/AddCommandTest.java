@@ -2,30 +2,32 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
 import guitests.guihandles.TaskCardHandle;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
-    // @Test
-    // public void add() {
-    //
-    // // add one task
-    // TestTask[] currentList = td.getTypicalTasks();
-    // TestTask taskToAdd = td.zoo;
-    // assertAddSuccess(taskToAdd, currentList);
-    // currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-    //
-    // // add another person
-    // taskToAdd = td.yam;
-    // assertAddSuccess(taskToAdd, currentList);
-    // currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-    //
-    // // invalid command
-    // commandBox.runCommand("adds Johnny");
-    // assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-    // }
+     @Test
+     public void add() {
+    
+//     // add one task
+//     TestTask[] currentList = td.getTypicalTasks();
+//     TestTask taskToAdd = td.zoo;
+//     assertAddSuccess(taskToAdd, currentList);
+//     currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+//    
+//     // add another task
+//     taskToAdd = td.yam;
+//     assertAddSuccess(taskToAdd, currentList);
+//     currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+//    
+//     // invalid command
+//     commandBox.runCommand("adds Johnny");
+//     assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
