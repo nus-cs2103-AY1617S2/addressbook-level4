@@ -26,10 +26,11 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
     3. [Commit Messages](#63-commit-messages)
 
 ---
-
-* [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
-* [Appendix B: Glossary](#appendix-b--glossary)
-* [Appendix C : Product Survey](#appendix-c--product-survey)
+* [Appendix A: User Stories](./UserStories.md)
+* [Appendix B: Use Cases](./UseCases.md)
+* [Appendix C: Non Functional Requirements](#appendix-a--non-functional-requirements)
+* [Appendix D: Glossary](#appendix-b--glossary)
+* [Appendix E : Product Survey](#appendix-c--product-survey)
 
 ---
 
