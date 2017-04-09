@@ -8,37 +8,44 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.whatsleft.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+//@@author A0124377A
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+public class CommandBoxTest extends WhatsLeftGuiTest {
+
+    private static final String COMMAND_THAT_SUCCEEDS = "select ev 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
+    private ArrayList<String> successStyleOfCommandBox;
 
     @Before
     public void setUp() {
         defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
-        assertFalse("CommandBox default style classes should not contain error style class.",
+        assertFalse("CommandBox default style classes should not contain error/success style class.",
                     defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
 
         // build style class for error
         errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
         errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+
+        // build style class for success
+        successStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
+        successStyleOfCommandBox.add(CommandBox.SUCCESS_STYLE_CLASS);
     }
 
     @Test
-    public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
+    public void commandBoxCommandSucceedsTextClearedAndStyleClassChanges() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(successStyleOfCommandBox, commandBox.getStyleClass());
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBoxCommandFailsTextStaysAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
@@ -46,14 +53,14 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
+    public void commandBoxCommandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
         commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
-
+        // change to success style to simulate a success after failed command
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(successStyleOfCommandBox, commandBox.getStyleClass());
     }
 
 }

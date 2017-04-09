@@ -4,14 +4,15 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.whatsleft.model.WhatsLeft;
+import seedu.whatsleft.model.activity.Event;
+import seedu.whatsleft.model.activity.ReadOnlyEvent;
+import seedu.whatsleft.model.util.SampleDataUtil;
+import seedu.whatsleft.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends WhatsLeftGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected WhatsLeft getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -21,10 +22,11 @@ public class SampleDataTest extends AddressBookGuiTest {
         // return a non-existent file location to force test app to load sample data
         return TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
     }
-
+    //@@author A0121668A
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+    public void loadWhatsLeftData_dataFileMissing_sampleEventsLoaded() throws Exception {
+        Event[] events = SampleDataUtil.getSampleEvents();
+        ReadOnlyEvent[] expected = TestUtil.filterExpectedEventList(events);
+        assertTrue(eventListPanel.isListMatching(expected));
     }
 }

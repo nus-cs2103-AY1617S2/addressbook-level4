@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# WhatsLeft - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-W10-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -9,6 +9,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 3. [Implementation](#implementation)
 4. [Testing](#testing)
 5. [Dev Ops](#dev-ops)
+
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -51,7 +52,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. whatsleft
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -118,40 +119,53 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `delete ev 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images\SDforDeleteActivity.png" width="800"><br>
+_Figure 2.1.3a : Component interactions for `delete ev 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `WhatsLeftChangedEvent` when the WhatsLeft data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+<img src="images\SDforDeleteActivityEventHandling.png" width="800"><br>
+_Figure 2.1.3b : Component interactions for `delete ev 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+Similarly, the diagram where the user issues the command `show com` is shown below.
+<img src="images\SDforShowStatusChangedToCompletedEventHandling.png" width="800"><br>
+_Figure 2.1.3c : Component interactions for `show com` command_
+
+#### Activity Diagrams for some workflow
+
+The Activity Diagram below shows the workflow of a user saving/reading the xml data file at/from another location
+<img src="images\SaveFileActivityDiagram.png" width="200"><br>
+_Figure 2.1.4a : Activity Diagram for Saving File_
+
+<img src="images\ReadFileActivityDiagram.png" width="200"><br>
+_Figure 2.1.4b : Activity Diagram for Reading File_
+
 The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Goh Yue Quan
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/whatsleft/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CalendarPanel`, `EventListPanel`, `TaskListPanel`. The `CalendarPanel` has a `CalendarAdder` that helps to add events and tasks to the calendar using JFxtras objects Agenda and Appointments. 
+`StatusBarFooter`, `CalendarPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/whatsleft/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -162,57 +176,58 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Shannon Yong
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/whatsleft/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete ev 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+<img src="images/DeleteActivitySdForLogic.png" width="800"><br>
+_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete ev 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Li Zihan
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/whatsleft/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the WhatsLeft data.
+* exposes `UnmodifiableObservableList<ReadOnlyEvent>` and `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to the two lists
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Li Chengcheng
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/whatsleft/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save `Config` objects in json format and read it back.
+* can save the WhatsLeft data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.whatsleft.commons` package.
 
 ## 3. Implementation
 
@@ -258,18 +273,18 @@ Tests can be found in the `./src/test/java` folder.
 
 We have two types of tests:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the [GUI](#GUI).
    These are in the `guitests` package.
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.whatsleft.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.whatsleft.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.whatsleft.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -332,7 +347,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, WhatsLeft depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -341,32 +356,77 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ## Appendix A : User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
+Priorities:
+* High (must have) - `* * *`
+* Medium (nice to have)  - `* *`
+* Low (unlikely to have) - `*`
 
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | new user | view all available commands | refer to them when I do not know how to use the App
+`* * *` | user | add a new [event](#Event)/[task](#Task) | keep track of it
+`* * *` | user | edit chosen event/task | update relevant details
+`* * *` | user | delete chosen event/task | mark it as cancelled
+`* * *` | user | delete all events/tasks | reset my WhatsLeft
+`* * *` | user | view a sorted all list of events/tasks | know all activities saved in WhatsLeft
+`* * *` | user | view all finished events/tasks | keep track of my progress in event/task completion
+`* * *` | user | view all pending events/tasks | keep track of all incoming activities
+`* * *` | user | mark a task as completed | archive the completed task
+`* * *` | user | undo my last [mutating operation](#mutating-operation) | reverse any mistake made
+`* * *` | user | let passed events automatically archive themselves | save time checking them off
+`* * *` | user | save the storage file to designated folder, e.g. dropbox sync folder | access WhatsLeft from multiple devices
+`* * *` | user | load WhatsLeft content from designated folder, e.g. dropbox sync folder | access my WhatsLeft from multiple devices
+`* * *` | user | search for event/task by keywords in description | find out details on specific event/task
+`* *` | user | set up recurring event | save time setting them up every day/week/month
+`* *` | user | get a warning message when adding a clashing event | get aware of all possible clashes
+`* *` | user | add tags to my event/task | put in details that I might want to remember
+`*` | user | see the overview of events and deadlines in calendar format | see how busy the month will be for me
+`*` | user | schedule events/tasks based on day ("this wed, next tue") without knowing the date | add events quickly
+`*` | user | change the status of a task from completed back to pending | redo the task
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WhatsLeft` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add an event/task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add an event/task
+2. WhatsLeft adds specified event/task <br>
+Use case ends.
+
+**Extensions**
+
+1a. The command entered is not in the correct format
+
+> WhatsLeft shows error message and suggests correct format <br>
+  Use case ends
+
+1b. There is a same [activity](#Activity) in WhatsLeft already.
+
+> WhatsLeft shows an error message of duplicate activities <br>
+    Use case ends
+
+1c. The end date/time of the event is earlier than the start date/time
+
+> WhatsLeft shows an error message of invalid end date/time <br>
+    Use case ends
+
+1d. This event has clash against an existing event in WhatsLeft
+
+> WhatsLeft shows a warning message of possible clash<br>
+    Use case resumes at step 2
+
+#### Use case: Edit an existing event/deadline/task
+
+**MSS**
+
+1. User requests to list all events/tasks
+2. WhatsLeft shows user the list of all events/tasks
+3. User requests to edit a specific event/task
+4. WhatsLeft updates the specified event/task
 Use case ends.
 
 **Extensions**
@@ -377,17 +437,96 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Delete an event/task
+**MSS**
+
+1. User requests to list all events/tasks
+2. WhatsLeft shows user the list of all events/tasks
+3. User requests to delete a specific event/task
+4. WhatsLeft deletes the specified event/task
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Finish a task
+
+**MSS**
+
+1. User requests to list all tasks
+2. WhatsLeft shows user the list of all tasks
+3. User requests to finish a specific task
+4. WhatsLeft archives the specified task
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given task index is invalid
+
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Select an event/task
+
+**MSS**
+
+1. User requests to list all events and tasks
+2. WhatsLeft shows user the list of all events/tasks
+3. User requests to select a specific event/task
+4. WhatsLeft shows all Information of the specific event/task
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given type is invalid
+
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+3b. The give index is invalide
+
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Undo last [mutating operation](#mutating-operation)
+
+**MSS**
+
+1. User requests to undo last operation
+2. WhatsLeft undoes last operation
+Use case ends.
+
+**Extensions**
+
+2a. There was no previous [mutating operation](#mutating-operation)
+
+> Use case ends
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 events/deadlines/tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Response time of 1s for each operation.
 
 {More to be added}
 
@@ -397,23 +536,95 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### GUI
 
-> A contact detail that is not meant to be shared with others
+> Graphical User Interface
+
+##### Activity
+
+> An event, a deadline or a floating task.
+
+##### Event
+
+> An activity that has a start date/time and end date/time.
+
+##### Task
+
+> A floating task with no specified date or time or a deadline with specifies due date and time.
+
+##### Mutating Operation
+
+> Refers to the following operations: `add`, `edit`, `delete`, `finish`, `redo` and `clear`. These commands mutate the event/task list.
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Trello**
 
 Pros:
 
-* ...
-* ...
+* Each user can have multiple boards, each board contain multiple lists and each list contains multiple cards (tasks)
+* Allows copying
+* Allows dragging
+* Can "star" boards
 
 Cons:
 
-* ...
-* ...
+* Does not allow deleting unfinished tasks
+* Cannot sort automatically
 
+
+**Wunderlist**
+
+Pros:
+
+* Archives completed tasks automatically
+* Allows adding subtask
+* Allows creating multiple lists
+* Allows sharing with friends
+* Allows sort alphabetically/by due date/by creation date/by priority
+
+Cons:
+
+* Does not show the due date in the task list
+
+**Microsoft Outlook**
+
+Pros:
+
+* Syncs events from all connected accounts to calendar automatically, including birthdays, Facebook events
+* Color coded
+* See tasks/events in a weekly/monthly/daily view
+
+Cons:
+
+* Past events are lost forever/inaccessible
+* No integrated free-floating task list
+
+**HiTask**
+
+Pros:
+
+* Allows shared calendar with collaborators
+* Allows individual tasks and to assign shared tasks
+* Integrated communication client
+* Integrated platforms for mobile and desktop
+* Create tasks by email
+
+Cons:
+
+* Steep learning curve due to many features
+
+**Remember the milk**
+
+Pros:
+
+* Can share with others
+* Sync on multiple devices
+* Smart add
+* Can break tasks down into subtasks
+* Smart search
+
+Cons:
+
+* Only paying users get access to full features
