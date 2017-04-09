@@ -10,16 +10,37 @@ import seedu.jobs.testutil.TestTask;
 
 public class FindCommandTest extends TaskBookGuiTest {
 
+    //@@author A0164440M
     //TODO add success cases such as find by name, desc, tag
-/*    @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Final exam"); // no results
-        assertFindResult("find Lab", td.CS3102, td.CS3104); // multiple results
+    @Test
+    public void find_nonEmptyList() throws IllegalArgumentException, IllegalTimeException {
+        // no results
+        assertFindResult("find Final exam");
+
+        // single result found by name
+        assertFindResult("find 7", td.CS3107);
+        // multiple results found by names
+        assertFindResult("find CS31", td.CS3101, td.CS3102,
+                td.CS3103, td.CS3104, td.CS3105, td.CS3106, td.CS3107);
+
+        // single result found by tag
+        assertFindResult("find lecture", td.CS3102);
+        // mutiple results found by tag
+        assertFindResult("find 206", td.CS3101, td.CS3102);
+
+        // single result found by descriptions
+        assertFindResult("find chapter", td.CS3101);
+        // multiple results found by descriptions
+        assertFindResult("find deadline", td.CS3104, td.CS3105);
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Lab", td.CS3104);
-    }*/
+        assertFindResult("find deadline", td.CS3105);
+
+        // multiple results found by name, tag, descriptions
+        assertFindResult("find 06", td.CS3101, td.CS3102, td.CS3103, td.CS3106);
+    }
+  //@@author
 
     @Test
     public void find_emptyList() throws IllegalArgumentException, IllegalTimeException {
