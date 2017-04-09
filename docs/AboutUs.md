@@ -26,8 +26,9 @@ We are a team based in the [School of Computing, National University of Singapor
 * **Features implemented:** <br>
    * [Add task](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#22-adding-a-task--add)<br>
    * [Edit task](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)<br>
-   * [Alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#215-alternative-commands)<br>
-   * [Customize alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#216-customize-alternative-commands-shortcut)<br>
+   * [Alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#214-alternative-commands)<br>
+   * [Customize alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#215-customize-alternative-commands-shortcut)<br>
+   * [View shortcuts](CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#216-viewing-all-the-shortcut-keys-viewshortcuts)<br>
 * **Code written**: [[functional code](../collated/main/A0143076J.md)][[test code](../collated/test/A0143076J.md)]<br>
 * **Other major contributions:** <br>
 
@@ -43,9 +44,9 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Delete task(s)](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#26-deleting-a-task--delete)<br>
    * [Mark task(s)](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#27-mark-a-task--mark)<br>
    * [Unmark task(s)](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#28-unmark-a-task--unmark)<br>
-   * [Import storage file](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#212-load-data-from-a-specified-file--import)<br>
+   * [View current storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#212-view-current-storage-file-location--viewfile)<br>
    * [Change storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#213-change-storage-file-location--saveas)<br>
-   * [View current storage file location](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#214-view-current-storage-file-location--viewfile)<br>
+
 * **Code written**: [[functional code](../collated/main/A0141077L.md)][[test code](../collated/test/A0141077L.md)]<br>
 * **Other major contributions:** <br>
 
