@@ -14,6 +14,7 @@ public class Recur {
 
     public static final String MESSAGE_RECUR_CONSTRAINTS =
             "Recurring time interval should be 'daily', 'weekly', 'monthly' or 'yearly'.";
+
     public static final String INTERVAL_NONE = "";
 
     public static final HashMap<String, Integer> RECUR_INTERVALS = new HashMap<>();
@@ -21,21 +22,34 @@ public class Recur {
     public final String value;
 
     /**
-     * Validates given recurring time interval.
-     *
+     * Adds a recurring time interval.
+     * @param recur  The recur interval.
      * @throws IllegalValueException
      *             if given recurring time interval string is invalid.
      */
     public Recur(String recur) throws IllegalValueException {
-        initialiseRecurIntervals();
         assert recur != null;
+        initialiseRecurIntervals();  // initialises HashMap with respective intervals
         String trimmedRecur = recur.trim();
-        if (!isValidRecur(trimmedRecur)) {
-            throw new IllegalValueException(MESSAGE_RECUR_CONSTRAINTS);
-        }
+        checkIsValidRecur(trimmedRecur);
         this.value = trimmedRecur;
     }
 
+    /**
+     * Validates given recurring time interval.
+     * @param recur     The recur interval.
+     * @throws IllegalValueException
+     *             if given recurring time interval string is invalid.
+     */
+    private void checkIsValidRecur(String recur) throws IllegalValueException {
+        if (!isValidRecur(recur)) {
+            throw new IllegalValueException(MESSAGE_RECUR_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Initialises recur intervals in RECUR_INTERVALS HashMap.
+     */
     private void initialiseRecurIntervals() {
 
         String intervalDaily = "daily";
@@ -57,6 +71,9 @@ public class Recur {
         return RECUR_INTERVALS.containsKey(test);
     }
 
+    /**
+     * Checks if a recurring interval is attached in a task.
+     */
     public boolean isRecur() {
         return !value.equals(INTERVAL_NONE);
     }
