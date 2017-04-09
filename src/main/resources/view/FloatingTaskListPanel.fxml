@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!-- @@author A0160076L -->
+
+<!-- @@author A0160076L -->
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@DarkTheme.css"/>
-        <URL value="@Extensions.css"/>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <ListView fx:id="floatingTaskListView" VBox.vgrow="ALWAYS" Style="-fx-background-color:#ff9966"/>
+       <HBox prefHeight="20.0" prefWidth="200.0">
+         <children>
+            <TextField alignment="CENTER" editable="false" prefHeight="36.0" prefWidth="340.0" styleClass="text-header" text="ANYTIME" HBox.hgrow="ALWAYS">
+            </TextField>
+         </children>
+      </HBox>
+        <ListView fx:id="floatingTaskListView" Style="-fx-background-color:#ff9966" prefWidth="340.0" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!-- @@author A0160076L -->
+
+<!-- @@author A0160076L -->
+
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -32,37 +34,6 @@
             </Menu>
          </menus>
       </MenuBar>
-       <SplitPane id="splitPane" fx:id="header" dividerPositions="0.4, 0.5" maxHeight="30.0" VBox.vgrow="ALWAYS">
-         <padding>
-            <Insets bottom="0.0" left="10.0" right="10.0" top="0.0" />
-         </padding>
-         <items>
-             <VBox minWidth="340" prefWidth="340">
-                <padding>
-                    <Insets bottom="0.0" left="0.0" right="0.0" top="10.0" />
-                </padding>
-               <children>
-                  <Label alignment="CENTER" minWidth="340" prefHeight="20.0" prefWidth="340" styleClass="label-header" text="DEADLINE" />
-               </children>
-            </VBox>
-             <VBox minWidth="340" prefWidth="340">
-                <padding>
-                    <Insets bottom="0.0" left="0.0" right="0.0" top="10.0" />
-                </padding>
-               <children>
-                   <Label alignment="CENTER" minWidth="340" prefHeight="20.0" prefWidth="340" styleClass="label-header" text="EVENT" />
-               </children>
-            </VBox>
-             <VBox minWidth="340" prefWidth="340">
-                <padding>
-                    <Insets bottom="0.0" left="0.0" right="0.0" top="10.0" />
-                </padding>
-               <children>
-                  <Label alignment="CENTER" minWidth="340" prefHeight="20.0" prefWidth="340" styleClass="label-header" text="ANYTIME" />
-               </children>
-            </VBox>
-         </items>
-      </SplitPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4, 0.5" VBox.vgrow="ALWAYS">
        <padding>
              <Insets bottom="0.0" left="10.0" right="10.0" top="0.0" />
