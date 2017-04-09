@@ -29,6 +29,7 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
     }
 
+    // @@author A0146757R
     @Test
     public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
@@ -45,15 +46,14 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    //@@author A0146757R
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
         commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
-
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("help", commandBox.getCommandInput());
-        // assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
 }

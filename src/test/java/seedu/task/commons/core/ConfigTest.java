@@ -13,6 +13,7 @@ public class ConfigTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    // @@author A0146757R
     @Test
     public void toString_defaultObject_stringReturned() {
         String defaultConfigAsString = "App title : Fast Task\n" + "Current log level : INFO\n"
@@ -22,6 +23,7 @@ public class ConfigTest {
         assertEquals(defaultConfigAsString, new Config().toString());
     }
 
+    // @@author
     @Test
     public void equalsMethod() {
         Config defaultConfig = new Config();

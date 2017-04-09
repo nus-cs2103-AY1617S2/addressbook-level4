@@ -67,17 +67,15 @@ public class TestUtil {
                     actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
-        throw new AssertionFailedError(String
-                .format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
+        throw new AssertionFailedError(
+                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {
-
         try {
             // CHECKSTYLE.OFF: LineLength
-            return new Task[] { new Task(new TaskName("Buy cookies"), new TaskDate("200217"),
-                    new TaskTime("0800"), new TaskTime("1000"),
-                    new String("Look out for grand lucky draws."), new TaskStatus("Ongoing"),
+            return new Task[] { new Task(new TaskName("Buy cookies"), new TaskDate("200217"), new TaskTime("0800"),
+                    new TaskTime("1000"), new String("Look out for grand lucky draws."), new TaskStatus("Ongoing"),
                     new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -103,8 +101,8 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path. Creates the sandbox folder if it doesn't
-     * exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
      *
      * @param fileName
      * @return
@@ -141,8 +139,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -177,8 +175,8 @@ public class TestUtil {
     }
 
     public static String descOnFail(Object... comparedObjects) {
-        return "Comparison failed \n" + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString).collect(Collectors.joining("\n"));
+        return "Comparison failed \n"
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
     public static void setFinalStatic(Field field, Object newValue)
@@ -204,12 +202,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class Invoke the method using method.invoke(objectInstance,
-     * params...) Caveat: only find method declared in the current Class, not inherited from
-     * supertypes
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...) Caveat: only find method
+     * declared in the current Class, not inherited from supertypes
      */
-    public static Method getPrivateMethod(Class<?> objectClass, String methodName)
-            throws NoSuchMethodException {
+    public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
@@ -282,8 +279,7 @@ public class TestUtil {
      *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removetasksFromList(final TestTask[] tasks,
-            TestTask... tasksToRemove) {
+    public static TestTask[] removetasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOftasks = asList(tasks);
         listOftasks.removeAll(asList(tasksToRemove));
         return listOftasks.toArray(new TestTask[listOftasks.size()]);
@@ -297,8 +293,7 @@ public class TestUtil {
      * @param targetIndexInOneIndexedFormat
      *            e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removeTaskFromList(final TestTask[] list,
-            int targetIndexInOneIndexedFormat) {
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removetasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 

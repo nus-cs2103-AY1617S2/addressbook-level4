@@ -46,8 +46,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
     }
 
     /**
-     * Runs the delete command to delete the task at specified index and confirms the result is
-     * correct.
+     * Runs the delete command to delete the task at specified index and
+     * confirms the result is correct.
      *
      * @param targetIndexOneIndexed
      *            e.g. index 1 to delete the first task in the list,
@@ -56,17 +56,12 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1];
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList,
-                targetIndexOneIndexed);
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
-        // confirm the list now contains all previous persons except the deleted task
-        // assertTrue(taskListPanel.isListMatching(expectedRemainder));
-
         // confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS,
-                taskToDelete.getTaskName().fullTaskName + '\n'));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.getTaskName().fullTaskName + '\n'));
     }
 
 }

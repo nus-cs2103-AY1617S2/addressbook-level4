@@ -1,11 +1,11 @@
 package guitests;
 
 import org.junit.Test;
-//import static org.junit.Assert.assertTrue;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.task.logic.commands.AddCommand;
+
 import seedu.task.commons.core.Messages;
+import seedu.task.logic.commands.AddCommand;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
@@ -48,10 +48,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd);
         assertMatching(taskToAdd, addedCard);
-
-        // confirm the list now contains all previous persons plus the new person
-        // TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        // assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

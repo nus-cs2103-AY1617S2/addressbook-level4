@@ -173,13 +173,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    //// tag-level operations
+    // tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-    //// util methods
+    // util methods
 
     @Override
     public String toString() {
