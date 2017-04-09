@@ -151,6 +151,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 
 > - Add as many tags as you want to a task, if required.<br><br>
 > - Add a **`FREQUENCY`** if required. The acceptable words are daily, weekly, monthly and yearly (case sensitive).<br><br>
+> - The **`FREQUENCY`** cannot be added when both the **`STARTDATE`** and **`DUEDATE`** are not available.<br><br>
 > - Add a **`STARTDATE`** or **`DUEDATE`** if required. Refer to Table 2 for examples of **`STARTDATE`** and **`DUEDATE`**.<br><br>
 > - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the highest priority and 3 the lowest, if required.<br>
 
@@ -200,6 +201,7 @@ _**Edits a particular task by <u>specifying its index</u> and <u> new informatio
 <br>
 
 > - Clear a task's field (except task name) by inputting the right prefix only.<br>
+> - The **`FREQUENCY`** cannot be in the task when both the **`STARTDATE`** and **`DUEDATE`** are not available.<br><br>
 
 <br>
 
