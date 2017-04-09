@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Buy Eggs and Bread</name>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Workout at Gym</name>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>MediumPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy Panadol Medicine</name>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Pray no bugs</name>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Pay David 20 for cab</name>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>HighPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy gift for Angela</name>
+        <endDateTime>02/14/2017 20:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>Angela</tagged>
+    </tasks>
+    <tasks>
+        <name>Propose to Angela</name>
+        <endDateTime>02/14/2017 23:59:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>HighPriority</tagged>
+        <tagged>Angela</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Quiz 6</name>
+        <endDateTime>03/13/2017 23:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>CS2103 Prj Meeting</name>
+        <startDateTime>03/14/2017 10:00:00</startDateTime>
+        <endDateTime>03/14/2017 12:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Project Report</name>
+        <endDateTime>03/16/2017 09:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>MediumPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>Replenish Milk in Fridge</name>
+        <endDateTime>03/16/2017 14:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Meetup Dinner and Watch Movie with Cousins</name>
+        <startDateTime>03/16/2017 19:00:00</startDateTime>
+        <endDateTime>03/16/2017 22:30:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>ST2334 Quiz 7</name>
+        <endDateTime>03/20/2017 23:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>CS2103 Prj Online Meeting</name>
+        <startDateTime>03/21/2017 10:00:00</startDateTime>
+        <endDateTime>03/21/2017 13:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Renew Passport</name>
+        <endDateTime>03/23/2017 17:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Meetup Dinner with Poly Friends</name>
+        <startDateTime>03/24/2017 19:00:00</startDateTime>
+        <endDateTime>03/24/2017 23:59:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>ST2334 Quiz 8</name>
+        <endDateTime>03/27/2017 23:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Birthday Celebration</name>
+        <startDateTime>03/25/2017 00:00:00</startDateTime>
+        <endDateTime>03/27/2017 23:59:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>CS2103 Prj Meeting</name>
+        <startDateTime>03/28/2017 10:00:00</startDateTime>
+        <endDateTime>03/28/2017 17:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>CS2101 Consultation</name>
+        <startDateTime>03/30/2017 13:00:00</startDateTime>
+        <endDateTime>03/30/2017 14:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Attend MA1101R in lecture quiz</name>
+        <startDateTime>03/30/2017 16:00:00</startDateTime>
+        <endDateTime>03/30/2017 17:35:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Walk the Dog</name>
+        <startDateTime>03/30/2017 19:30:00</startDateTime>
+        <endDateTime>03/30/2017 20:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Read Book about Software Engineering</name>
+        <endDateTime>03/31/2017 09:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>LowPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>Do ST2334 Tutorial 5</name>
+        <endDateTime>03/31/2017 10:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Visit Grandma</name>
+        <startDateTime>03/31/2017 12:00:00</startDateTime>
+        <endDateTime>03/31/2017 14:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Do MA1101R Tutorial</name>
+        <endDateTime>03/31/2017 15:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Do CS3243 Tutorial 7</name>
+        <endDateTime>03/31/2017 15:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Meetup Dinner and Watch Movie with Angela</name>
+        <startDateTime>03/31/2017 19:00:00</startDateTime>
+        <endDateTime>03/31/2017 22:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>Angela</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Assignment</name>
+        <endDateTime>03/31/2017 23:59:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Prank Angela</name>
+        <startDateTime>04/01/2017 14:00:00</startDateTime>
+        <endDateTime>04/01/2017 15:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>HighPriority</tagged>
+        <tagged>Angela</tagged>
+    </tasks>
+    <tasks>
+        <name>Karaoke with Relatives</name>
+        <startDateTime>04/01/2017 17:00:00</startDateTime>
+        <endDateTime>04/01/2017 20:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>LowPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>Meetup with Secondary School Clique</name>
+        <startDateTime>04/02/2017 17:00:00</startDateTime>
+        <endDateTime>04/02/2017 23:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>MA1101R HW4</name>
+        <endDateTime>04/03/2017 16:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>ST2334 Quiz 9</name>
+        <endDateTime>04/03/2017 23:00:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Project Meeting cum Rehearsal</name>
+        <startDateTime>04/04/2017 10:00:00</startDateTime>
+        <endDateTime>04/04/2017 17:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>HighPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>Software Demo</name>
+        <startDateTime>04/06/2017 12:00:00</startDateTime>
+        <endDateTime>04/06/2017 13:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Meetup with Bobby</name>
+        <startDateTime>04/07/2017 18:30:00</startDateTime>
+        <endDateTime>04/07/2017 23:30:00</endDateTime>
+        <isActive>false</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>MacRitchie Reservoir with Dad</name>
+        <startDateTime>03/05/2017 09:00:00</startDateTime>
+        <endDateTime>04/09/2017 11:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurCompletedList>2017-03-05T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-12T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-04-02T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-19T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-26T00:00:00+08:00</recurCompletedList>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>WEEK</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Intensive Revision</name>
+        <startDateTime>04/08/2017 00:00:00</startDateTime>
+        <endDateTime>04/09/2017 23:59:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Dinner with Angela</name>
+        <startDateTime>04/15/2017 18:00:00</startDateTime>
+        <endDateTime>04/15/2017 21:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>Angela</tagged>
+    </tasks>
+    <tasks>
+        <name>Study with Bernard</name>
+        <startDateTime>04/17/2017 10:00:00</startDateTime>
+        <endDateTime>04/17/2017 18:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Study with Joel</name>
+        <startDateTime>04/18/2017 10:00:00</startDateTime>
+        <endDateTime>04/18/2017 18:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Study with David</name>
+        <startDateTime>04/19/2017 10:00:00</startDateTime>
+        <endDateTime>04/19/2017 18:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Study till you drop</name>
+        <startDateTime>04/17/2017 00:00:00</startDateTime>
+        <endDateTime>04/21/2017 23:59:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Joyce Wedding</name>
+        <startDateTime>04/22/2017 19:00:00</startDateTime>
+        <endDateTime>04/22/2017 22:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Cycling with Dad</name>
+        <startDateTime>04/23/2017 09:00:00</startDateTime>
+        <endDateTime>04/23/2017 11:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>CS2103 Final Exam</name>
+        <startDateTime>04/25/2017 13:00:00</startDateTime>
+        <endDateTime>04/25/2017 15:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>Exam</tagged>
+    </tasks>
+    <tasks>
+        <name>Watch Documentary</name>
+        <startDateTime>04/27/2017 14:00:00</startDateTime>
+        <endDateTime>04/27/2017 16:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>LowPriority</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Final Exam</name>
+        <startDateTime>04/28/2017 09:00:00</startDateTime>
+        <endDateTime>04/28/2017 11:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+        <tagged>HighPriority</tagged>
+        <tagged>Exam</tagged>
+    </tasks>
+    <tasks>
+        <name>Clear out old clothes</name>
+        <endDateTime>04/29/2017 17:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Watch Concert with Dad</name>
+        <startDateTime>04/29/2017 19:00:00</startDateTime>
+        <endDateTime>04/29/2017 22:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>Watch TV</name>
+        <startDateTime>03/01/2017 21:00:00</startDateTime>
+        <endDateTime>05/07/2017 22:00:00</endDateTime>
+        <isActive>true</isActive>
+        <recurState>
+            <recurCompletedList>2017-04-05T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-29T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-22T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-15T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-08T00:00:00+08:00</recurCompletedList>
+            <recurCompletedList>2017-03-01T00:00:00+08:00</recurCompletedList>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>WEEK</recurInterval>
+        </recurState>
+    </tasks>
+    <tags>HighPriority</tags>
+    <tags>MediumPriority</tags>
+    <tags>LowPriority</tags>
+    <tags>Angela</tags>
+    <tags>Exam</tags>
+</taskmanager>
