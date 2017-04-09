@@ -70,7 +70,6 @@ public class EditCommand extends Command {
         try {
             if (isSpecific) {
                 newTask = Task.extractOccurrence(taskToEdit);
-                model.addTask(newTask);
                 ReadOnlyTask copyRecurTask = new Task(taskToEdit);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 model.updateThisTask(filteredTaskListIndex, copyRecurTask, editedTask);
