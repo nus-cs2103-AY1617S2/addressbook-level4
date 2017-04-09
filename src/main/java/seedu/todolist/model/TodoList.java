@@ -17,6 +17,7 @@ import seedu.todolist.model.todo.ReadOnlyTodo;
 import seedu.todolist.model.todo.Todo;
 import seedu.todolist.model.todo.UniqueTodoList;
 import seedu.todolist.model.todo.UniqueTodoList.DuplicateTodoException;
+import seedu.todolist.model.todo.UniqueTodoList.TodoNotFoundException;
 
 /**
  * Wraps all data at the todolist level
@@ -47,6 +48,10 @@ public class TodoList implements ReadOnlyTodoList {
     public TodoList(ReadOnlyTodoList toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    public Todo getTodo(int index) throws TodoNotFoundException {
+        return this.todos.getTodo(index);
     }
 
 //// list overwrite operations

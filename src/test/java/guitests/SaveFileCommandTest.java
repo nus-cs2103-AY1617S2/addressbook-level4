@@ -17,7 +17,7 @@ import seedu.todolist.testutil.TestUtil;
 
 public class SaveFileCommandTest extends TodoListGuiTest {
     public static final String EXISTING_SAVE_FILE = "src/test/data/SaveFileTest/saveFileTest.xml";
-    public static final String NON_EXISTING_SAVE_FILE = "src/test/data/SaveFileTest/doesnotexist.xml";
+    public static final String NON_EXISTING_SAVE_FILE_PATH = "src/test/data/SaveFileTest/doesnotexist/doesnotexist.xml";
 
     /*
      * Change save file location given that the new file exists
@@ -37,20 +37,21 @@ public class SaveFileCommandTest extends TodoListGuiTest {
     }
 
     /*
-     * Change save file location given that the new file does not exist
-     * Save File command should create the new file and update the location
+     * Change save file location given that the new file and directory do not exist
+     * Save File command should create the new file and the directories
+     * and update the location
      */
     @Test
-    public void saveFile_nonExistingPath_success() {
+    public void saveFile_nonExistingFile_success() {
         try {
             // If the file already exists, delete it
-            Path path = FileSystems.getDefault().getPath(NON_EXISTING_SAVE_FILE);
+            Path path = FileSystems.getDefault().getPath(NON_EXISTING_SAVE_FILE_PATH);
             Files.deleteIfExists(path);
 
-            commandBox.runCommand(TestUtil.getSaveFileCommand(NON_EXISTING_SAVE_FILE));
+            commandBox.runCommand(TestUtil.getSaveFileCommand(NON_EXISTING_SAVE_FILE_PATH));
             Config config = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
 
-            assertTrue(config.getTodoListFilePath().equals(NON_EXISTING_SAVE_FILE));
+            assertTrue(config.getTodoListFilePath().equals(NON_EXISTING_SAVE_FILE_PATH));
         } catch (DataConversionException | IOException e) {
             e.printStackTrace();
         }
