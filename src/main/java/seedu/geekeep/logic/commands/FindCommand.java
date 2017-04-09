@@ -71,7 +71,7 @@ public class FindCommand extends Command {
             Optional<String> latestTime,
             Set<String> tags) {
         if (!keywords.isEmpty()) {
-            datailedSuccessMsg  += "Contains any of keywords in " + keywords + " in title\n";
+            datailedSuccessMsg  += "Contains the keyword(s) " + keywords + " in title\n";
         }
 
         if (earliestTime.isPresent()) {
