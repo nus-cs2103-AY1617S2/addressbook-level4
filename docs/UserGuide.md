@@ -119,11 +119,13 @@ Format : `undo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
-<img src="images/Undo1_JOBS.png" width="400"><br>
+<img src="images/Undo1_JOBS.png" width="450"><br>
 _after_ `delete 1`
-<img src="images/Undo2_JOBS.png" width="400"><br>    
+
+<img src="images/Undo2_JOBS.png" width="450"><br>    
 _after_ `undo`
-<img src="images/Undo3_JOBS.png" width="400"><br>
+
+<img src="images/Undo3_JOBS.png" width="450"><br>
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
