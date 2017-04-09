@@ -133,19 +133,19 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public boolean getDoneStatus() {
         return isDone;
     }
-     
+
     //@@author A0141138N
     @Override
     public boolean getTodayStatus() {
         return isToday;
     }
-    
+
     //@@author A01411138N
     @Override
     public TaskType getTaskType() {
         return type;
     }
-    
+
     //@@author
     @Override
     public UniqueTagList getTags() {
@@ -175,13 +175,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         assert isDone == true;
         isDone = false;
     }
-    
+
     //@@author A0141138N
     public void setToday() {
         assert isToday == false;
         isToday = true;
     }
-    
+
     //@@author A0141138N
     public void setTaskType(TaskType type) {
         this.type = type;
