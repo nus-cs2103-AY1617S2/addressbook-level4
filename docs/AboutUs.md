@@ -10,13 +10,14 @@ Role: Team lead <br>
 - Components in charge of: [Model](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#2.4-model-component)
 - Aspects/tools in charge of: Integration, Deliverables and deadlines
 - Features implemented:
-  - Undo and Redo Command
-  - Google Calendar Integration
+  - [Undo and Redo Command](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/UserGuide.md#371-undoing-a-command-undo)
+  - [Google Calendar Integration](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/UserGuide.md#310-google-calendar)
+  - [Smart Add Command](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/UserGuide.md#3103-adding-a-task-with-smart-add-smartadd)
 - Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0140063X.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0140063X.md)]
 - Other major contributions:
   - Set up Travis, Coveralls and Codacy
   - Set up PrettyTime for date parsing
-  - Ensure quality user experience
+  - Did most of the initial refractoring from addressbook level 4
   - Maintain issues and milestones
 
 -----
@@ -31,11 +32,12 @@ Role: Developer <br>
 	- ListDone/ListUndone Command
 	- UI TilePlane view
 	- Colour coding done tasked
-- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0139975J.md)]
+- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0139975J.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0139975J.md)]
 - Other major contributions:
 	- Implementation of UI
 	- Ensure Travis passes for each milestone
 	- Documentation
+	- Wrote most of the manual test script
 
 -----
 

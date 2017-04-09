@@ -137,6 +137,7 @@ Here are some examples:
 KIT has an intelligent processer that interprets your phrases and sentences about time, date and deadline.
 
 Here is a table of interpretation for your convenience.
+
 | Date Format | Example |KIT's interpretation  |
 |-------------------|----------|------------------|
 |Month/day           | 10/19         | Oct 19 of the curent year |
