@@ -12,6 +12,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
+//@@author A0116219L
 public class Recurrence {
 
 	public static final String RECURRENCE_NONE = "none";

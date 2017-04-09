@@ -11,15 +11,16 @@ import org.teamstbf.yats.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
 	/* Prefix definitions */
-	public static final Prefix PREFIX_LOCATION = new Prefix("-l");
-	public static final Prefix PREFIX_START_TIME = new Prefix("-s");
-	public static final Prefix PREFIX_END_TIME = new Prefix("-e");
-	public static final Prefix PREFIX_TAG = new Prefix("-t");
-	public static final Prefix PREFIX_DESCRIPTION = new Prefix("-d");
-	public static final Prefix PREFIX_DEADLINE = new Prefix("-by");
-	public static final Prefix PREFIX_RECURRENCE = new Prefix("-r");
-	public static final Prefix PREFIX_HOURS = new Prefix("-h");
-	public static final Prefix PREFIX_MINUTES = new Prefix("-m");
+	public static final Prefix PREFIX_LOCATION = new Prefix("-l ");
+	public static final Prefix PREFIX_START_TIME = new Prefix("-s ");
+	public static final Prefix PREFIX_END_TIME = new Prefix("-e ");
+	public static final Prefix PREFIX_TAG = new Prefix("-t ");
+	public static final Prefix PREFIX_DESCRIPTION = new Prefix("-d ");
+	public static final Prefix PREFIX_DEADLINE = new Prefix("-by ");
+	public static final Prefix PREFIX_RECURRENCE = new Prefix("-r ");
+	public static final Prefix PREFIX_HOURS = new Prefix("-h ");
+	public static final Prefix PREFIX_MINUTES = new Prefix("-m ");
+	public static final Prefix PREFIX_TIME_MULTIPLE = new Prefix("-time ");
 
 	/* NLP Prefix definitions */
 	public static final Prefix PREFIX_NLP_TIME = new Prefix(",");
