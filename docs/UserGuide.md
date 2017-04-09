@@ -155,6 +155,7 @@ Example:
 
 <img src="images/Path1_JOBS.png" width="800"><br>
 
+_will update the directory display, as shown below_
 <img src="images/Path2_JOBS.png" width="800"><br>
 
 ### Exit the program: `exit`
