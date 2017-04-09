@@ -14,7 +14,7 @@ import seedu.doit.logic.parser.DateTimeParser;
 public class EndTime  implements Comparable<EndTime> {
 
     public static final String NO_END_TIME = "";
-    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Item End Time should be in "
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "End Date/Time should be in "
         + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
     public static final String ENDTIME_VALIDATION_REGEX = "^$|^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1]$)"
         + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";

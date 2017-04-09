@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
+
+import seedu.doit.commons.exceptions.IllegalValueException;
 //@@author A0146809W
 
 /**
@@ -15,6 +17,8 @@ import com.joestelmach.natty.Parser;
  */
 
 public class DateTimeParser {
+    private static final String MESSAGE_TIME_CONSTRAINTS = "Date/Time should be in "
+        + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
 
     /**
      * Parses string input into LocalDateTime object using natty
@@ -25,7 +29,7 @@ public class DateTimeParser {
 
     private static final String EMPTY_STRING = "";
 
-    public static Optional<LocalDateTime> parseDateTime(String input) {
+    public static Optional<LocalDateTime> parseDateTime(String input) throws IllegalValueException{
         Date date = new Date(); //get current date
         Parser dateTimeParser = new Parser();
 
@@ -44,6 +48,13 @@ public class DateTimeParser {
         if (dateGroup.getDates().isEmpty()) {
             return Optional.empty();
         }
+
+        //check if natty parses all the input, if it does not, it means there is invalid input after the valid time
+        //or another date
+        if (!dateGroup.getFullText().equals(dateGroup.getText())) {
+            throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
+        }
+
 
         Date parsedDate = dateGroup.getDates().get(0);
         LocalDateTime localDateTime = LocalDateTime.ofInstant(parsedDate.toInstant(), ZoneId.systemDefault());

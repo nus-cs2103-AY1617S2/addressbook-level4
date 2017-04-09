@@ -103,14 +103,8 @@ public class LogicManagerTest {
         this.logic = new LogicManager(this.model, this.storage);
         EventsCenter.getInstance().registerHandler(this);
 
-        this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last
-                                                                                    // saved
-                                                                                    // assumed
-                                                                                    // to
-                                                                                    // be
-                                                                                    // up
-                                                                                    // to
-                                                                                    // date
+        this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager());
+        // last saved assumed to be up to date
         this.helpShown = false;
         this.targetedJumpIndex = -1; // non yet
     }
