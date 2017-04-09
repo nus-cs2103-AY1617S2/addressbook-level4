@@ -29,7 +29,7 @@ import seedu.toluist.ui.commons.CommandResult;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
-    private static final int SUGGESTION_LIMIT = 7;
+    private static final int SUGGESTION_LIMIT = 10;
     private static final int KEYWORD_CHECK_SIZE = 2;
 
     //@@author A0162011A
