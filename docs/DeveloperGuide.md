@@ -226,11 +226,11 @@ Here are some of the key files in the `Storage` component:
     Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
     void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
     ```  
-- `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`.
+- `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`. <br>
 - `TodoListStorage.java`: contains an `interface` that defines R/W operations on **to-do list**. 
-- `XmlTodoListStorage`: contains a `class` that implements the R/W operations specified in `TodoListStorage.java`. An instance of this class is utilized in `StorageManager`.  
-- `AliasListMapStorage.java`: contains an `interface` that defines R/W operations on **alias list map**. 
-- `XmlAliasListMapStorage`: contains a `class` that implements the R/W operations specified in `. An instance of this class is utilized in `StorageManager`.
+- `AliasListMapStorage.java`: contains an `interface` that defines R/W operations on **alias list map**. <br>
+- `XmlTodoListStorage`: contains a `class` that implements the R/W operations specified in `TodoListStorage.java`. An instance of this class is utilized in `StorageManager`.
+- `XmlAliasListMapStorage`: contains a `class` that implements the R/W operations specified in `AliasListMapStorage.java`. An instance of this class is utilized in `StorageManager`.  
 - `JsonUserPrefsStorage`: contains a `class` that implements the R/W operations on **user preferences**. An instance of this class is used in `StorageManager`.
 
 **Design Decisions**
