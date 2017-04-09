@@ -99,11 +99,13 @@ You are currently reading my user guide, which has been written to help you with
   > * Name <br>
   `Name must only contain alphanumeric characters.`
   > * Start Date <br>
-  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  `MM/DD/YYYY, MM-DD-YYY format`<br>
+  `or english natural language e.g. 6 april 2017`
   > * Start Time <br>
   `All time formats are supported.`
   > * End Date <br>
-  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  `MM/DD/YYYY, MM-DD-YYY format`<br>
+  `or english natural language e.g. 6 april 2017`
   > * End Time <br>
   `All time formats are supported.`
   > * Tag <br>
