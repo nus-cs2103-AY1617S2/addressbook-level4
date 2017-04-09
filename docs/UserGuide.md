@@ -39,44 +39,42 @@ latest version should be v0.5.
 
 ### 2.2. Launch
 
-1. To launch the app, double-click on the file `toluist.jar` you downloaded in [Installing](#21-installing). 
+1. To launch the app, double-click on the file `toluist.jar` you downloaded in [Install](#21-install). 
 2. The GUI should appear in a few seconds. Refer to the figure below to see how ToLuist should initially look like on your first launch.
    
-   <img src="images/Ui.png" width="600"><br>
-   **Figure 2.2**: Initial launch screen of ToLuist
+   <img src="images/Ui-empty.png" width="600"><br>
+   **Figure 2.2**: Initial launch screen of ToLuist.
 
 ### 2.3. Get used to the interface
 
 With some tasks added in, the interface of ToLuist may look as follows.
 
    <img src="images/Ui-parts.png" width="600"/><br>
-    **Figure 2.3**: Different components in ToLuist's Ui
+    **Figure 2.3**: Different components in ToLuist's Ui.
     
-At the very top of the app, the **App Title**, which include a cute app icon, will highlight that you are 
+At the very top of the app, the **App Title** - which includes an app icon - will highlight that you are 
 using ToLuist.
     
 Occupying the main bulk of the app, the **Task List** lies in the center of ToLuist. Depending on the 
 commands that were entered, as well as the tab selected, the **Task List** may display different sets of 
 tasks here. Notice each task is prefixed with an index number. For example, the task `update the user 
-guide` has the index number 3. ToLuist use the index number to uniquely identify a displayed tasks in 
+guide` has the index number 3. ToLuist uses the index number to uniquely identify a displayed task in 
 various commands.
 
-The **Tab Bar** lies just above the **Task List**. It indicates which tab is currently selected by the user
-. Depending on the tab selected, the **Task List** will change to only show a subset of the current tasks 
-(which can be all the tasks in the app, or found tasks that match some search keyword(s)) that satisfy 
-the condition described in the highlighted tab. There are 5 different tabs that can be selected:
-   * INCOMPLETE: Displays only the subset of current tasks that are not yet completed.
-   * TODAY: Displays only the subset of current tasks that are due by / are happening on the current day.
-   * NEXT 7 DAYS: Displays only the subset of current tasks that are due by / are happening during the 
+The **Tab Bar** lies just above the **Task List**. It indicates which tab is currently selected by the user. The **Task List** will only show the tasks that satisfy the condition described in the highlighted tab. 
+There are 5 different tabs that can be selected:
+   * INCOMPLETE: Displays tasks that are not yet completed.
+   * TODAY: Displays tasks that are due by / are happening on the current day.
+   * NEXT 7 DAYS: Displays tasks that are due by / are happening during the 
     next 7 days, not including the current day.
-   * COMPLETED: Displays only the subset of current tasks that are completed.
-   * ALL: Displays all current tasks.
+   * COMPLETED: Displays tasks that are completed.
+   * ALL: Displays all tasks.
     
-Note that in the label for each tab, there are some statistics describing the amount of current tasks, and 
-how many of these tasks satisfy that the's condition. For example, in the figure above, `INCOMPLETE` tab's 
-label is `INCOMPLETE (5/6)`, indicating that there are 5 incomplete tasks out of all 6 current tasks.
+Note that in the label for each tab, there are statistics describing the amount of tasks, and 
+how many of these tasks satisfy the tab's description. For example, in the figure above (Figure 2.3), `INCOMPLETE`'s tab 
+label is `INCOMPLETE (5/6)`, indicating that there are 5 incomplete tasks out of 6 tasks in total.
 
-The **Command Box** is where you type in your commands. Feedback to your command is displayed in the 
+The **Command Box** is where you type in your commands. Feedback for your command is displayed in the 
 **Result Display**.
 
 Finally, the **Status Bar** is at the bottom of the app. It indicates where your app data is currently 
@@ -91,77 +89,77 @@ Type out these command in the command box and press <kbd>Enter</kbd> to execute 
    * **`add`**` Try Out Todo List` :
      adds a task named `Try Out Todo List` to the todo list.
    * **`delete`**` 1` : deletes the 1st task shown in the current list.
-   * **`exit`** : exits the app.
-3 Refer to the [Features](#features) section below for details of each command.<br>
+   * **`exit`** : exits the app.<br>
+3. Refer to the [Features](#3-features) section below for details of each command.<br>
 
 [comment]: # (@@author A0162011A)
 ## 3. Features
 
-ToLuist is focused towards users who like to type.<br>
+ToLuist is geared towards users who like to type.<br>
 All the features of the application can be accessed through the use of a keyboard, by entering commands into the on-screen text field.<br>
 
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
+> * Items in `[SQUARE_BRACKETS]` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
-> * Options with '/' allow either word to be used.
+> * Options with `/` allow either word to be used. (E.g. high/low for task priority)
 
-### 3.1. Viewing help : `help`
+### 3.1. Viewing help: `help`
 
 If you are a new user of ToLuist, you may need assistance for inputting commands.<br>
 `help` shows you all the commands which are available in the system.<br>
 Format: `help [COMMAND]`
 
 
-> * The system will also prompt you to enter 'help' if you enter an incorrect command.
-> * If `help` followed by a command word is entered, detailed help for that command will be shown instead.
+> * The system will also prompt you to enter `help` if you enter an incorrect command.
+> * If `help` is entered, followed by a command word, detailed help for that command will be shown instead.
 
 Examples:
 
 * `help` <br>
   Shows general help information.
 * `help add` <br>
-  Shows detailed help information for 'add' command.
+  Shows detailed help information for `add` command.
   
-### 3.2. Getting keyword suggestions smartly :
+### 3.2. Getting keyword suggestions smartly
 
-We understand that it may take time for you to remember all the different command formats. Our smart command 
-suggestion feature automatically suggests to you how you can complete your command, based on what 
-you already put in the command box.
+You might find it hard to remember all the commands and their format.<br>
+ToLuist will automatically suggest to you how you can complete your command.<br>
+As you type, a list of suggestions (up to 10) will appear.
   
 For example, ToLuist suggest to you the command words `add` and `alias` when you type `a`.
 
    <img src="images/smart-command-word.png" width="600"><br>
-   **Figure 3.2a**: `add` and `alias` are suggested as `a` is typed
+   **Figure 3.2a**: `add` and `alias` are suggested as `a` is typed.
 
 ToLuist also shows you the parameters available for a command type.
 
    <img src="images/smart-command-parameter.png" width="600"><br>
-   **Figure 3.2b**: Parameters are suggested as ToLuist is aware that you are adding a task
+   **Figure 3.2b**: Parameters are suggested as ToLuist is aware that you are adding a task.
 
-If a command can have multiple options that follow one particular parameter, ToLuist shows you these too.
+ToLuist will also show you suggestions for parameters with specific options.
 
    <img src="images/smart-command-different-options.png" width="600"><br>
-   **Figure 3.2c**: `high` and `low` are suggested as options for task priority
+   **Figure 3.2c**: `high` and `low` are suggested as options for task priority.
 
 If only one suggestion is shown, you can press <kbd>Tab</kbd> to automatically replace the last word of your 
 command with the suggestion. If there are multiple suggestions available, you can press <kbd>Tab</kbd> to 
 cycle through the list of suggestions, and press <kbd>Enter</kbd> to select one of them.
  
    <img src="images/smart-command-multiple-suggestions.png" width="600"><br>
-   **Figure 3.2d**: Suggestions can be cycled through, with highlighting
+   **Figure 3.2d**: Suggestions can be cycled through. The currently selected suggestion will be highlighted.
   
 
-### 3.3. Switching to a different window : `switch`
+### 3.3. Switching to a different tab: `switch`
 
-When using ToLuist, you may want to switch between different tabs / windows to zoom in on the tasks most important to
+When using ToLuist, you may want to switch between different tabs to zoom in on the tasks most important to
  you.<br>
 `switch` allows you to view a different subset of the currently displayed tasks.<br>
-Format: `switch WINDOWIDENTIFIER`
+Format: `switch TABIDENTIFIER`
 
-> * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
+> * If a number is given for tab identifier, that will be the number of the tab from the left which is selected.
 > * If a letter is given, it will be the underlined letter in the window list name.
 > * If a word is given, it will be the word with the underlined letter in the window list name.
 > * You can also use key combination <kbd>Ctrl</kbd> with a number to switch between different tabs.
@@ -178,13 +176,12 @@ Example:
 [comment]: # (@@author A0127545A)
 ### 3.4. Adding a task: `add`
 
-You can start keeping track of your task by adding to ToLuist.<br>
+You can start keeping track of your tasks by adding them to ToLuist.<br>
 `add` allows you to add a task to the system.<br>
-Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `add DESCRIPTION [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
-> * Both `startdate` and `enddate` use the same datetime format.
-> * `startdate` requires a valid `enddate` to be used in the same command.
-> * The values entered for `startdate` and `enddate` are very flexible:<br>
+> * `/from` and `/to` must be used together.
+> * The values entered for `STARTDATE` and `ENDDATE` are very flexible:<br>
     Standard dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
     Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
     Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
@@ -192,6 +189,8 @@ Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(da
     Similar to dates, relative times are also allowed. i.e. `5 minutes from now`, `in 10 minutes`, `5 hours ago`<br>
     For more details, please visit http://natty.joestelmach.com/doc.jsp.
 > * ToLuist will auto scroll to the newly added task.
+
+#### 3.4.1. Adding a 
 
 Examples:
 
@@ -203,14 +202,13 @@ Examples:
   Adds a task called `Check Email`, and sets the deadline to be today's date.
 
 [comment]: # (@@author A0127545A)
-### 3.5. Updating a task : `update`
+### 3.5. Updating a task: `update`
 
 Sometimes, you may need to update or fix a previously entered task.<br>
 `update` allows you to update an existing task in the list.<br>
-Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/stoprepeating] [/floating] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
-    The index refers to the index number shown in the last task listing.
 > * Only fields entered will be updated.
 > * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
 
@@ -226,19 +224,20 @@ Examples:
 ### 3.6. Filtering all tasks for a given keyword: `filter`
 
 As you list of tasks grows, you may find the need to filter your todo list to locate a particularly 
-important task.
+important task.<br>
 `filter` allows you to finds tasks whose names or tags contain any of the given keywords.<br>
 Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 
+> * Search will filter the list of tasks displayed in each of the tabs. (When you `switch` tabs, the tasks will still be filtered.)
+> * If no keywords are entered, the list of all tasks is displayed. (This can be used to go to the unfiltered view.)
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default the name and tag is searched.
-> * Adding '/tag' will search by only tag.
-> * Adding '/name' will search by only name.
-> * If no keyword is entered, the list of all tasks is displayed.
+> * Adding `/tag` will search by only tag.
+> * Adding `/name` will search by only name.
 > * Partial words will be matched. e.g. `Han` will match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+    e.g. `Hans Pa` will match `Hans Bo`
 > * Search terms that are used in the current search will pop up as suggestions in subsequent searches.
 
 Examples:
@@ -272,14 +271,13 @@ Examples:
   Changes the sorting order to the default sort.
 
 [comment]: # (@@author A0127545A)
-### 3.8. Deleting a task : `delete`
+### 3.8. Deleting a task: `delete`
 
 Assuming you have been using ToLuist for a long while, you may want to remove some of your older tasks.<br>
 `delete` allows you to delete a task or multiple tasks from the todo list.<br>
 Format: `delete INDEX(ES)`
 
-> * Deletes the task at the specified `INDEX`. <br>
-> * The index(es) refers to the index number shown in the most recent listing.<br>
+> * Deletes the task at the specified `INDEX(ES)`. <br>
 > * Supports deletion of multiple indexes in a single command.
 
 Examples:
@@ -296,11 +294,11 @@ Examples:
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 [comment]: # (@@author A0131125Y)
-### 3.9. Completing or Making Incomplete a Task : `mark`
+### 3.9. Marking a Task as Complete or Incomplete: `mark`
 
 After you completed a task, you may want to indicate this in ToLuist. Alternatively, you may want to mark 
 a completed task as incomplete if you feel that it still needs more work.<br>
-`mark` allow you to set the completion status for a task or multiple tasks.<br>
+`mark` allows you to set the completion status for a task or multiple tasks.<br>
 Format: `mark [complete/incomplete] INDEX(ES)`
 
 > * Using complete as a parameter will mark the selected task(s) as complete.
@@ -323,65 +321,58 @@ Example:
   Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
 
 [comment]: # (@@author A0162011A)
-### 3.10. Adding a Tag to a Task : `tag`
+### 3.10. Adding a Tag to a Task: `tag`
 
-You may want to differentiate your tasks by categories.<br>
+You may want to group your tasks by categories.<br>
 `tag` allows you to add a tag or multiple tags to an existing task. <br>
 Format: `tag INDEX TAG...`
 
-> * If the tag already exists, the command will notify you and do nothing.
-> * If multiple tags are used in the command, you will be notified of each one.
-
 Example:
 * `tag 1 school` <br>
-  Adds the tag 'school' to task 1.
+  Adds the tag `school` to task 1.
 * `tag 2 work home` <br>
-  Adds the tags 'work' and 'home' to task 2.
+  Adds the tags `work` and `home` to task 2.
 
-### 3.11. Removing a Tag from a Task : `untag`
+### 3.11. Removing a Tag from a Task: `untag`
 
-You may change your mind and decide to remove a category from a task.<br>
+You may decide to remove a category from a task.<br>
 `untag` allows you to remove a tag or multiple tags from an existing task. <br>
 Format: `untag INDEX TAG...`
 
-> * If the tag already does not exist, the command will notify you and do nothing.
-> * If multiple tags are used in the command, you will be notified of each one.
-
 Example:
 * `untag 1 school` <br>
-  Removes the tag 'school' from task 1.
+  Removes the tag `school` from task 1.
 * `untag 2 work home` <br>
-  Removes the tags 'work' and 'home' from task 2.
+  Removes the tags `work` and `home` from task 2.
 
-### 3.12. Clearing all entries : `clear`
+### 3.12. Clearing all entries: `clear`
 
 Occasionally, the stress may get to you, and you want to start from a clean slate.<br>
 `clear` allows you to clear all entries from the todo list.<br>
 Format: `clear`
 
 [comment]: # (@@author A0131125Y)
-### 3.13. Undoing a command : `undo`
+### 3.13. Undoing a command: `undo`
 
-As human, we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
+In life we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
 the result of your command.<br>
 `undo` allows you to undo your previous command(s).<br>
 Format: `undo [NUMBER]`
 
 > * `undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
-`add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with
-> `undo`. If loading a different data file with `load` causes the current tasks to be changed, you can go back
-> to the previous list of tasks using `undo` too (Using `undo`, however, won't revert the change of data 
-storage path. It's not considered modifications to the task).
-> Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
+`add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with `undo`.
+> * If loading a different data file with `load` causes the current tasks to be changed, you can go back to the previous list of tasks using `undo` too.<br>
+(Using `undo`, however, won't revert the change of data storage path. It's not considered modifications to the task.)
+> * Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
 > you can still easily revert their effects:
 >   * Changing of storage path location (with `save` / `load` ) - You can change your storage path to the 
-previous location with `save`.
->   * Setting of aliases (with `alias`) - You can remove the alias with `unalias`.
->   * Removing aliases (with `unalias`) - You can set back the alias with `alias`.
->   * Re-ordering the list of tasks (with `sort`) - You can set back the previous sorting order with `sort`.
+previous location with the `save` command.
+>   * Setting of aliases (with `alias`) - You can remove the alias with the `unalias` command.
+>   * Removing aliases (with `unalias`) - You can reassign the alias with the `alias` command.
+>   * Re-ordering the list of tasks (with `sort`) - You can recover the previous sorting order with the `sort` command.
 >
-> * If a number is entered, undoes that amount of previous commands instead.
-> * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Z</kbd> to quickly undo one time.
+> * If a number is entered, undos that amount of previous commands instead.
+> * You can also use the key combination <kbd>Ctrl</kbd> + <kbd>Z</kbd> to quickly undo one time.
 
 Examples:
 
@@ -396,17 +387,15 @@ Examples:
   Press <kbd>Ctrl</kbd> + <kbd>Z</kbd> <br>
   Undo adding Test to the todo list.
 
-### 3.14. Redoing a command : `redo`
+### 3.14. Redoing a command: `redo`
 
-After undoing a command, you want to re-apply it.<br>
+After wrongly undoing a command, you want to re-apply it.<br>
 `redo` allows you to redo previously undone commands.<br>
 Format: `redo [NUMBER]`
 
-> * Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
-> * you mistakenly revoked (using `undo`).<br>
+> * Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that you mistakenly revoked (using `undo`).<br>
 > * If a number is entered, redo that amount of previous commands instead.<br>
-> * The number must be less than or equal to the number of commands undone.
-> * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Y</kbd> to quickly redo one time.
+> * You can also use the key combination <kbd>Ctrl</kbd> + <kbd>Y</kbd> to quickly redo one time.
 
 Examples:
 
@@ -418,65 +407,65 @@ Examples:
   `add Project`<br>
   `undo 2`<br>
   `redo`<br>
-  Redo `add Assignment`.
+  Undo both commands, then redo `add Assignment`.
 * `add Test`<br>
   `undo`<br>
   Press <kbd>Ctrl</kbd> + <kbd>Y</kbd> <br>
   Redo adding Test to the todo list.
 
 [comment]: # (@@author A0162011A)
-### 3.15. Viewing previous commands and accessing them : `history`
+### 3.15. Viewing previous commands: `history`
 
 You may want to check what you have previously entered.<br>
 `history` shows you your previous commands entered in the current session. <br>
 Format: `history`
 
-> * Previous commands are listed in order from latest command to earlier command.
-> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will cycle through the commands previously entered.
+> * Previous commands are listed in order from the earliest command to the latest command.
+> * Alternatively, pressing on the <kbd>up</kbd> and <kbd>down</kbd> arrow keys on the keyboard will iterate through the commands previously entered.
 
 Examples:
 * `add Test` <br>
   `history` <br>
-  Shows `add Test` in the list.
+  Shows `add Test` in the result display.
 * `add Test` <br>
   Press on the <kbd>up</kbd> arrow key. <br>
-  Shows `add Test` in your input text field.
+  Shows `add Test` in the command box.
 
-### 3.16. Adding alias for any phrase: `alias`
+### 3.16. Adding an alias for any phrase: `alias`
 
 For long commands like `mark complete`, you may want to have a shortcut for it.<br>
 `alias` allows you to add an alias for a phrase. <br>
 Format: `alias ALIAS PHRASE`
 
-> * Once added, alias can be used instead of the phrase to perform operations. In subsequent commands, if 
-the first word is detected to an alias, the command will give the same result as if the command starts the 
-aliased phrase.
-> * The phrase can be multiple words long. It can be anything, not necessarily a command word.
+> * Once added, the alias can be used instead of the phrase to perform operations.<br>
+In subsequent commands, if the first word is detected to an `ALIAS`, the word will be treated as the associated `PHRASE`.
+> * `PHRASE` can be multiple words long.
+> * `PHRASE` can be anything, not necessarily a command word.
 > * Parameter suggestion is also supported for commands that uses an alias. For example, if `a` is set as 
-an alias for `add`, the parameters for adding task are also suggested when `a a task` is typed.
+an `ALIAS` for `add`, the parameters for adding task are also suggested when `a a task` is typed.
 
 Example:
 * `alias hs history` <br>
-  `hs` <br>
-  Shows `alias hs history` in the list.
+  Adds `hs` as an alias for `history`.
 * `alias addTaskNamedTest add Test` <br>
+  Adds `addTaskNamedTest` as an alias for `add Test`.<br>
   `addTaskNamedTest` <br>
-  Performs the command `add Test` which will add a new task called 'Test'.
+  Performs the command `add Test` which will add a new task called `Test`.
 
 ### 3.17. Removing an alias: `unalias`
 
-You may an alias no longer suitable, and want to remove it from ToLuist.<br>
+You may find an alias no longer suitable, and may want to remove it from ToLuist.<br>
 `unalias` allows you to remove an alias for a phrase.<br>
 Format: `unalias ALIAS`
 
 Example:
 * `alias hs history` <br>
   `unalias hs` <br>
-  Removes the alias 'hs'.
+  Removes the alias `hs`.
 
 ### 3.18. Viewing aliases: `viewalias`
 
-You may get forgetful and forget the aliases you set in ToLuist.<br>
+To remind yourself of the aliases you set in ToLuist, you can use `viewalias`.<br>
 `viewalias` shows you all the aliases currently set in the system. <br>
 Format: `viewalias`
 
@@ -485,14 +474,14 @@ Format: `viewalias`
 Example:
 * `alias hs history` <br>
   `viewalias` <br>
-  Shows `hs:history` in the list.
+  Shows `hs:history` in the result display.
 
 ### 3.19. Saving the data
 
-You would want to have your data on your computer always updated, even if you close and re-open 
+ToLuist makes sure the data on your computer is always updated, even if you close and re-open 
 the application.<br>
-ToLuist data are saved in the hard disk automatically after any command that changes the data. By default, 
-the data is saved `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
+ToLuist data is saved in the hard disk automatically.<br>
+By default, the data is saved to `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
 There is no need to save manually.
 
 ### 3.20. Specifying a new storage location to save data to: `save`
@@ -503,7 +492,7 @@ moving it to a Dropbox folder.<br>
 Warning: If a file with the requested name already exists, it will be overwritten. <br>
 Format: `save NEWFILELOCATION`
 
-> * All data will be moved to the new file location.
+> * All data will be moved to `NEWFILELOCATION`.
 > * If the file does not exist, the file will be created.
 > * The old file will be removed.
 > * This feature is similar to the `Save as...` feature in other applications.
@@ -519,16 +508,16 @@ Occasionally, you may want to load the data from a different location, such as w
 `load` changes the location for the storage file used in this system. <br>
 Format: `load NEWFILELOCATION`
 
-> * The new save location will be updated to the location.
-> * The program will replace the data in the program with data from the new file location.
-> * If the file does not exist, an error message will be displayed.
-> * Warning: The old data in the program will stay in the old save file, and will not be updated with new values.
+> * The new storage location will be updated to `NEWFILELOCATION`.
+> * ToLuist will replace the existing data with `NEWFILELOCATION`'s data.
+> * The old data in the program will stay in the old save file, and will not be updated with new values.
 
 Example:
 * `load data/savefile.txt` <br>
-  Sets the load storage location to `data/savefile.txt`.
+  Sets ToLuist to load from `data/savefile.txt`.
+  The status bar will be updated to `Storage Path: data/savefile.txt`.
 
-### 3.22. Exiting the program : `exit`
+### 3.22. Exiting the program: `exit`
 
 After you are done organizing your todo list, you may want to close the application.<br>
 `exit` allows you to exit the program.<br>
@@ -538,11 +527,11 @@ Format: `exit/quit`
 
 **Command** | **Format** | **Examples**
 -------- | :-------- | :---------
-Add | `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]` | `add Assigment 1 /by Friday /tags school`
+Add | `add DESCRIPTION [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]` | `add Assigment 1 /by Friday /tags school`
 Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
 Add Alias | `alias ALIAS PHRASE` | `alias hs history`
-Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
-Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
+Change Load Storage Location | `load NEWFILELOCATION` | `load data/savefile.txt`
+Change Save Storage Location | `save NEWFILELOCATION` | `save data/savefile.txt`
 Clear | `clear`
 Delete | `delete INDEX(ES)` | `delete 3`
 Delete Alias | `unalias ALIAS` | `unalias hs`
@@ -550,11 +539,11 @@ Exit | `exit/quit`
 Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
 Help | `help [COMMAND]` | `help add`
 History | `history`
-Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
+Mark a Task as Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
 Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | `sort priority`
-Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
+Switch Display Task Tab | `switch TABIDENTIFIER` | `switch 2` <br> `switch T`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
-Update | `update INDEX [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
+Update | `update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/floating] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/stoprepeating] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
 Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
 Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
 View Aliases | `viewalias`
