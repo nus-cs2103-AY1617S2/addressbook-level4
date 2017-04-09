@@ -34,7 +34,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlAddressBookStorage(filePath).readTaskManager(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -68,14 +68,14 @@ public class XmlAddressBookStorageTest {
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyTaskManager readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        ReadOnlyTaskManager readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
         assertEquals(original, new YTomorrow(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(new Task(td.hoon));
         original.removePerson(new Task(td.alice));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
         assertEquals(original, new YTomorrow(readBack));
 
         //Save and read without specifying file path

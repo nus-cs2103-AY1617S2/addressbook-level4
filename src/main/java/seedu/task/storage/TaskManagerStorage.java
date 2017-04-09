@@ -27,7 +27,7 @@ public interface TaskManagerStorage {
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTaskManager} to the storage.

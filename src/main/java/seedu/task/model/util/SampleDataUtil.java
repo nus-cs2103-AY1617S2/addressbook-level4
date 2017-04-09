@@ -56,7 +56,7 @@ public class SampleDataUtil {
     }
     //@@author
 
-    public static ReadOnlyTaskManager getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleTaskManager() {
         YTomorrow sampleAB = new YTomorrow();
         for (int i = 0; i < SAMPLE_SIZE; i++) {
             try {

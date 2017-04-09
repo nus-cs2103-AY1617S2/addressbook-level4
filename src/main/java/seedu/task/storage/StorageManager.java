@@ -62,13 +62,13 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+        return readTaskManager(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return addressBookStorage.readTaskManager(filePath);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class StorageManager extends ComponentManager implements Storage {
         Optional<ReadOnlyTaskManager> loaded = null;
 
         try {
-            loaded = readAddressBook(ire.getTargetFile().getPath());
+            loaded = readTaskManager(ire.getTargetFile().getPath());
         } catch (DataConversionException | IOException e) {
         }
 
@@ -124,7 +124,7 @@ public class StorageManager extends ComponentManager implements Storage {
         Optional<ReadOnlyTaskManager> loaded = null;
 
         try {
-            loaded = readAddressBook(ire.getTargetFile().getPath());
+            loaded = readTaskManager(ire.getTargetFile().getPath());
         } catch (DataConversionException | IOException e) {
         }
 
