@@ -45,13 +45,13 @@ public class CliSyntax {
     public static final String VIEW_DAY = "day";
     public static final String VIEW_WEEK = "week";
     public static final String VIEW_MONTH = "month";
-    //@@author
-  //@@author A0150120H
-    public static final String[] START_DATE_IDENTIFIER = {"from"};
-    public static final String[] END_DATE_IDENTIFIER = {"to", "on", "by", "before"};
-    public static final String[] RECURRENCE_PREFIX_IDENTIFIER = {"every"};
-    public static final String[] DAILY_REURRENCE_IDENTIFIER = {"daily"};
-    public static final
+    //@@author A0150120H
+    public static final String[] DATE_IDENTIFIER_START = {"from"};
+    public static final String[] DATE_IDENTIFIER_END = {"to", "on", "by", "before"};
+    public static final String[] RECURRENCE_IDENTIFIER_DAILY = {"daily", "every day", "everyday"};
+    public static final String[] RECURRENCE_IDENTIFIER_WEEKLY = {"weekly", "every week"};
+    public static final String[] RECURRENCE_IDENTIFIER_MONTHLY = {"monthly", "every month"};
+    public static final String[] RECURRENCE_IDENTIFIER_YEARLY = {"yearly", "every year", "annually"};
     //@@author
 
     /* Patterns definitions */

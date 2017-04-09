@@ -27,9 +27,9 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 
 
-import static seedu.tache.logic.parser.CliSyntax.START_DATE_IDENTIFIER;
-import static seedu.tache.logic.parser.CliSyntax.END_DATE_IDENTIFIER;
-import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_PREFIX_IDENTIFIER;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_START;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_END;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
 
 
 /**
@@ -178,7 +178,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isStartDateIdentifier(String s) {
-        return isFoundIn(s, START_DATE_IDENTIFIER);
+        return isFoundIn(s, DATE_IDENTIFIER_START);
     }
 
     /**
@@ -187,7 +187,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isEndDateIdentifier(String s) {
-        return isFoundIn(s, END_DATE_IDENTIFIER);
+        return isFoundIn(s, DATE_IDENTIFIER_END);
     }
 
     /**
