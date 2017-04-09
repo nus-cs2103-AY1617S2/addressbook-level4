@@ -48,9 +48,15 @@ public class ShowCommand extends Command {
         }
         model.setDisplayStatus(preference);
         model.updateFilteredListToShowAll();
+        postToEventCenter();
+        return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
+    }
+    /**
+     * Post change to EventsCenter to update UI
+     */
+    private void postToEventCenter() {
         EventsCenter.getInstance().post(new JumpToEventListRequestEvent(0));
         EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(0));
         EventsCenter.getInstance().post(new ShowStatusChangedEvent(model.getDisplayStatus()));
-        return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
     }
 }
