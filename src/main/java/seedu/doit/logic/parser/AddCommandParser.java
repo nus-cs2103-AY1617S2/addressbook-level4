@@ -21,6 +21,9 @@ import seedu.doit.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser implements CommandParser {
 
+    private final String LOW_PRIORITY = "low";
+    private final String EMPTY_STRING = "";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -34,10 +37,10 @@ public class AddCommandParser implements CommandParser {
         try {
             return new AddCommand(
                 argsTokenizer.getPreamble().get(),
-                argsTokenizer.getValue(PREFIX_PRIORITY).orElse("low"),
-                argsTokenizer.getValue(PREFIX_START).orElse(""),
-                argsTokenizer.getValue(PREFIX_END).orElse(""),
-                argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
+                argsTokenizer.getValue(PREFIX_PRIORITY).orElse(LOW_PRIORITY),
+                argsTokenizer.getValue(PREFIX_START).orElse(EMPTY_STRING),
+                argsTokenizer.getValue(PREFIX_END).orElse(EMPTY_STRING),
+                argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(EMPTY_STRING),
                 ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
