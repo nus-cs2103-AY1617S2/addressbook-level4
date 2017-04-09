@@ -24,9 +24,8 @@ Use case ends
 
 1a. The input format is invalid
 
-> 1a1. Opus shows an error message
-
-> Use case ends
+> 1a1. Opus shows an error message<br>
+> 1a2. Use case ends
 
 #### Use case: Delete task
 
@@ -41,9 +40,8 @@ Use case ends
 
 1a. The given index is invalid
 
-> 1a1. Opus shows an error message
-
-> Use case ends
+> 1a1. Opus shows an error message<br>
+> 1a2. Use case ends
 
 #### Use case: Edit task
 
@@ -58,21 +56,18 @@ Use case ends
 
 1a. The given index is invalid
 
-> 1a1. Opus shows an error message
-
-> Use case ends
+> 1a1. Opus shows an error message<br>
+> 1a2. Use case ends
 
 1b. The attribute given is invalid
 
-> 1b1. Opus shows an error message
-
-> Use case ends
+> 1b1. Opus shows an error message<br>
+> 1b2. Use case ends
 
 1c. The value of the attribute is invalid
 
-> 1c1. Opus shows an error message
-
-> Use case ends
+> 1c1. Opus shows an error message<br>
+> 1c2. Use case ends
 
 #### Use case: Mark task as complete
 
@@ -87,9 +82,8 @@ Use case ends
 
 1a. The given index is invalid
 
-> 1a1. Opus shows an error message
-
-> Use case ends
+> 1a1. Opus shows an error message<br>
+> 1a2. Use case ends
 
 #### Use case: Undo the previous action
 
@@ -104,8 +98,8 @@ Use case ends
 
 1a. There is no more actions that can be undone
 
-> System shows an error that an undo command is not possible
-> Use case ends
+> 1a1. System shows an error that an undo command is not possible<br>
+> 1a2. Use case ends
 
 #### Use case: Redo the previous undo action
 
@@ -129,11 +123,13 @@ Use case ends
 
 1a. The list is empty
 
+> 1a1. Opus shows an error message<br>
+> 1a2. Use case ends
+
 1b. The input attribute is invalid
 
-> 1b1. Opus shows an error message
-
-> Use case ends
+> 1b1. Opus shows an error message<br>
+> 1b2. Use case ends
 
 #### Use case: Sync tasks to Google Tasks
 
