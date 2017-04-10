@@ -1,4 +1,4 @@
-// @@author A0141011J-unused
+// @@author A0141011J
 package seedu.taskit.model.task;
 
 import static org.junit.Assert.assertFalse;
@@ -26,3 +26,4 @@ public class TitleTest {
         assertTrue(Title.isValidTitle("Interview for summer internship at NUS")); // long title
     }
 }
+

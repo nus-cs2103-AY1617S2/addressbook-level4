@@ -27,14 +27,12 @@ public class LogicManager extends ComponentManager implements Logic {
         this.parser = new Parser();
     }
 
-    //@@author A0141011J-unused
+    //@@author A0141011J
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        //commandList.addCommand(command);
-        //command.setCommandHistory(commandList);
         if (command.isUndoable()) {
             model.save();
         }
