@@ -108,8 +108,8 @@ public class MarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToMark = getTaskToMark(currIndex, lastShownList);
         this.markedTask = createMarkedCopyOfTask(this.taskToMark);
-        updateTaskListAtIndex(currIndex, markedTask);
         storeTasksForUndo(taskToMark, markedTask);
+        updateTaskListAtIndex(currIndex, markedTask);
     }
 
     private ReadOnlyTask getTaskToMark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
@@ -140,13 +140,13 @@ public class MarkCommand extends Command {
         return markedTask;
     }
 
-    private void updateTaskListAtIndex(int currIndex, Task markedTask) throws UniqueTaskList.DuplicateTaskException {
-        model.updateTask(currIndex, markedTask);
-    }
-
     private void storeTasksForUndo(ReadOnlyTask taskToMark, Task markedTask) {
         this.taskToMarkList.push(new Task(taskToMark));
         this.markedTaskList.push(markedTask);
+    }
+
+    private void updateTaskListAtIndex(int currIndex, Task markedTask) throws UniqueTaskList.DuplicateTaskException {
+        model.updateTask(currIndex, markedTask);
     }
 
     //@@author A0139845R

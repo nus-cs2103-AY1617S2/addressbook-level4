@@ -102,20 +102,20 @@ public class DeleteCommand extends Command {
     private void deleteTaskAtIndex(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
             throws UniqueTaskList.TaskNotFoundException {
         this.taskToDelete = getTaskToDelete(currIndex, lastShownList);
-        deleteTask(taskToDelete);
         storeTasksForUndo(taskToDelete);
+        deleteTask(taskToDelete);
     }
 
     private ReadOnlyTask getTaskToDelete(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return lastShownList.get(currIndex);
     }
 
-    private void deleteTask(ReadOnlyTask taskToDelete) throws UniqueTaskList.TaskNotFoundException {
-        model.deleteTask(taskToDelete);
-    }
-
     private void storeTasksForUndo(ReadOnlyTask taskToDelete) {
         this.deletedTaskList.push(new Task(taskToDelete));
+    }
+
+    private void deleteTask(ReadOnlyTask taskToDelete) throws UniqueTaskList.TaskNotFoundException {
+        model.deleteTask(taskToDelete);
     }
 
     //@@author A0139845R-reused
