@@ -21,14 +21,14 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> personListView;
 
-    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(taskList);
         addToPlaceholder(personListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> personList) {
-        personListView.setItems(personList);
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+        personListView.setItems(taskList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
