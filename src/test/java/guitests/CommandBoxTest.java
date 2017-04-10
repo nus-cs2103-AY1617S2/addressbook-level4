@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.geekeep.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends GeeKeepGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    private static final String COMMAND_THAT_SUCCEEDS = "find NOSUCHTASKEXIST";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
@@ -47,8 +47,8 @@ public class CommandBoxTest extends AddressBookGuiTest {
 
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
-        // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
+        //One failed command
+        commandBox.runCommand(COMMAND_THAT_FAILS);
 
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
@@ -56,4 +56,16 @@ public class CommandBoxTest extends AddressBookGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    //@@author A0148037E
+    @Test
+    public void commandBox_commandSucceedsAfterMultipleFailedCommands_textClearedAndErrorStyleClassRemoved() {
+        //Multiple failed commands
+        commandBox.runCommand(COMMAND_THAT_FAILS);
+        commandBox.runCommand(COMMAND_THAT_FAILS);
+
+        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        assertEquals("", commandBox.getCommandInput());
+        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+    }
+    //@@author
 }
