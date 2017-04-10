@@ -15,7 +15,7 @@
     * [Deleting a task](#36-deleting-a-task-delete)
     * [Undoing/Redoing a command](#371-undoing-a-command-undo)
     * [Editing a task](#38-editing-a-task-edit)
-    * [Finding a task](#391-finding-a-taskfind)
+    * [Finding a task](#391-finding-a-task-find)
     * [Using Google Calendar](#310-google-calendar)
     * [Clearing KIT](#311-clearing-all-task-clear)
     * [Exiting KIT](#312-exiting-the-program-exit)
