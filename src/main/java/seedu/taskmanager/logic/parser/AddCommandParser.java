@@ -51,7 +51,6 @@ public class AddCommandParser {
                     String[] splitedFromPrefixInput = fromPrefixInput.split("\\s+");
                     try {
                         startDate = processInputToDateForm(splitedFromPrefixInput);
-
                         startTime = splitedFromPrefixInput[1];
 
                     } catch (ArrayIndexOutOfBoundsException aioobe) {

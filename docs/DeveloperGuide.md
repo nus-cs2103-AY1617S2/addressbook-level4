@@ -232,7 +232,7 @@ Classes used by multiple components are in the `seedu.taskmanager.commons` packa
 These classes keeps commonly used methods by the various methods together to facilitate code maintenance and promote code
 reuse. One such class is the [DateTimeUtil](../src/main/java/seedu/taskmanager/commons/util/DateTimeUtil.java) class.
 
-<img src="images/DateTimeUtil_TaskManager.png" width="800"><br>
+<img src="images/DateTimeUtil_TaskManager.png" width="400"><br>
 _Figure 2.6.1 : Dependency of the DateTimeUtil Class_
 
 This design structure allows for easy maintenance of codes that are related to Date and Time and reduces duplicate codes in the

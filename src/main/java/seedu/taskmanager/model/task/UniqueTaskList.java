@@ -72,14 +72,6 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the
-        // updated task.
-        // The right way is to implement observable properties in the Task
-        // class.
-        // Then, PersonCard should then bind its text labels to those observable
-        // properties.
-
-        // internalList.set(index, taskToUpdate);
 
         internalList.remove(index);
 
@@ -131,6 +123,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
+    // @@author
     /**
      * Removes the equivalent task from the list.
      *
@@ -311,42 +304,85 @@ public class UniqueTaskList implements Iterable<Task> {
      *         of tasks.
      */
     private int findSortedPositionToAdd(Task toAdd) {
+        int numMarkedTasks = findNumMarkedTasks();
         int addIndex = 0;
+
         if (!internalList.isEmpty()) {
             if (toAdd.isEventTask()) {
-                while (internalList.get(addIndex).isEventTask()) {
-                    if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
-                        break;
-                    }
-                    addIndex++;
-                    if (addIndex == internalList.size()) {
-                        break;
-                    }
-                }
+                addIndex = findSortedPositionToAddEvents(toAdd);
             }
 
             if (toAdd.isDeadlineTask()) {
-                while (internalList.get(addIndex).isEventTask()) {
-                    addIndex++;
-                    if (addIndex == internalList.size()) {
-                        break;
-                    }
-                }
-                while ((addIndex != internalList.size()) && internalList.get(addIndex).isDeadlineTask()) {
-                    if (isAddDeadlineEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
-                        break;
-                    }
-                    addIndex++;
-                    if (addIndex == internalList.size()) {
-                        break;
-                    }
-                }
+                addIndex = findSortedPositionToAddDeadlines(toAdd);
             }
 
             if (toAdd.isFloatingTask()) {
                 addIndex = internalList.size();
             }
         }
+        return addIndex - numMarkedTasks;
+    }
+
+    /**
+     * @param toAdd
+     * @param addIndex
+     * @return index deadline should be added in internalList according to
+     *         chronological order
+     */
+    private int findSortedPositionToAddDeadlines(Task toAdd) {
+        int addIndex = 0;
+
+        while (internalList.get(addIndex).isEventTask()) {
+            addIndex++;
+            if (addIndex == internalList.size()) {
+                break;
+            }
+        }
+        while ((addIndex != internalList.size()) && internalList.get(addIndex).isDeadlineTask()) {
+            if (isAddDeadlineEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                break;
+            }
+            addIndex++;
+            if (addIndex == internalList.size()) {
+                break;
+            }
+        }
         return addIndex;
+    }
+
+    /**
+     * @param toAdd
+     * @param addIndex
+     * @return index event should be added in internalList according to
+     *         chronological order
+     */
+    private int findSortedPositionToAddEvents(Task toAdd) {
+        int addIndex = 0;
+
+        while (internalList.get(addIndex).isEventTask()) {
+            if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                break;
+            }
+            addIndex++;
+            if (addIndex == internalList.size()) {
+                break;
+            }
+        }
+        return addIndex;
+    }
+
+    /**
+     * Finds the number of tasks marked as completed within internalList.
+     *
+     * @return The number of tasks marked as completed
+     */
+    private int findNumMarkedTasks() {
+        int numMarkedTasks = 0;
+        for (Task task : internalList) {
+            if (task.getIsMarkedAsComplete()) {
+                numMarkedTasks++;
+            }
+        }
+        return numMarkedTasks;
     }
 }

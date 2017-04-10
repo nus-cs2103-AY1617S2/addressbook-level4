@@ -26,8 +26,6 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "ADD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager.\n"
-    // + "Example: " + COMMAND_WORD
-    // + " eat lunch ON thursday\n"
             + "Type HELP for user guide with detailed explanations of all commands";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
