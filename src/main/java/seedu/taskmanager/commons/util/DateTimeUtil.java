@@ -260,11 +260,7 @@ public class DateTimeUtil {
 
         YearMonth yearMonthObject = YearMonth.of(2000 + year, month);
 
-        if (day > yearMonthObject.lengthOfMonth() || month > 12) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(day > yearMonthObject.lengthOfMonth() || month > 12);
     }
 
     public static String getFutureDate(int loops, String typeOfRecurrence, String existingDate) {
@@ -414,8 +410,7 @@ public class DateTimeUtil {
      * @return true if input matches "Today" regex.
      */
     private static boolean isToday(String day) {
-        return day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY1)
-                || day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY2);
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY2);
     }
 
     /**
@@ -434,8 +429,7 @@ public class DateTimeUtil {
      * @return true if input matches "Friday" regex.
      */
     private static boolean isFriday(String day) {
-        return day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY1)
-                || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY2)
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY2)
                 || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY3)
                 || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY4);
     }
@@ -467,8 +461,7 @@ public class DateTimeUtil {
      * @return true if input matches "Tuesday" regex.
      */
     private static boolean isTuesday(String day) {
-        return day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY1)
-                || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY2)
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY2)
                 || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY3)
                 || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY4);
     }

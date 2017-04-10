@@ -1,5 +1,6 @@
 package seedu.taskmanager.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -231,11 +232,7 @@ public class UniqueTaskList implements Iterable<Task> {
                             if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getStartDate().value.substring(0,
                                             readOnlyTask.getStartDate().value.length() - 6)) == 0) {
-                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0);
                             } else {
                                 return false;
                             }
@@ -285,11 +282,7 @@ public class UniqueTaskList implements Iterable<Task> {
                             if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getEndDate().value.substring(0,
                                             readOnlyTask.getEndDate().value.length() - 6)) == 0) {
-                                if (toAdd.getEndTime().value.compareTo(readOnlyTask.getEndTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getEndTime().value.compareTo(readOnlyTask.getEndTime().value) < 0);
                             } else {
                                 return false;
                             }
@@ -306,11 +299,12 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Finds the sorted position to add new task to the existing list of task.
-     * List of tasks is sorted firstly based on type of task and then by chronological order of the task
+     * List of tasks is sorted firstly based on type of task and then by
+     * chronological order of the task
      *
-     * Event tasks sorted by startDate startTime.
-     * Deadline tasks sorted by endDate endTime.
-     * Floating tasks are just added to the bottom of the list as there is no time element within a floating task.
+     * Event tasks sorted by startDate startTime. Deadline tasks sorted by
+     * endDate endTime. Floating tasks are just added to the bottom of the list
+     * as there is no time element within a floating task.
      *
      * @return The sorted position index to add the new task in the sorted list
      *         of tasks.

@@ -163,15 +163,11 @@ public class UpdateCommand extends Command {
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTaskNameUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getTaskName().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getTaskName().isPresent());
     }
 
     /**
@@ -185,14 +181,10 @@ public class UpdateCommand extends Command {
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -203,15 +195,11 @@ public class UpdateCommand extends Command {
      * @return true if only categories are identified by user to be updated
      */
     private boolean isOnlyCategoriesUpdate() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getCategories().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getCategories().isPresent());
     }
 
     /**
@@ -223,14 +211,10 @@ public class UpdateCommand extends Command {
      *         be updated
      */
     private boolean isOnlyStartTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -242,14 +226,10 @@ public class UpdateCommand extends Command {
      *         be updated
      */
     private boolean isOnlyEndTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -261,14 +241,10 @@ public class UpdateCommand extends Command {
      *         identified by user to be updated
      */
     private boolean isOnlyStartUpdated() {
-        if (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -280,14 +256,10 @@ public class UpdateCommand extends Command {
      *         by user to be updated
      */
     private boolean isOnlyEndUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**

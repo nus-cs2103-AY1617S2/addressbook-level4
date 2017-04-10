@@ -458,11 +458,7 @@ public class ModelManager extends ComponentManager implements Model {
                             if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getStartDate().value.substring(0,
                                             readOnlyTask.getStartDate().value.length() - 6)) == 0) {
-                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0);
                             } else {
                                 return false;
                             }

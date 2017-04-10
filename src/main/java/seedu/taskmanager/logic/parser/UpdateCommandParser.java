@@ -75,21 +75,15 @@ public class UpdateCommandParser {
              * To validate and assign task details if user only wants to input
              * numbers
              */
-            if (isPrefixNumbersOnly(fromPrefixInput)) {
-                if (DateTimeUtil.isValidTime(fromPrefixInput.get())) {
-                    stringStartTime = fromPrefixInput.get();
-                }
+            if (isPrefixNumbersOnly(fromPrefixInput) && (DateTimeUtil.isValidTime(fromPrefixInput.get()))) {
+                stringStartTime = fromPrefixInput.get();
             } else {
-                if (isPrefixNumbersOnly(onPrefixInput)) {
-                    if (DateTimeUtil.isValidTime(onPrefixInput.get())) {
-                        stringStartTime = onPrefixInput.get();
-                    }
+                if (isPrefixNumbersOnly(onPrefixInput) && (DateTimeUtil.isValidTime(onPrefixInput.get()))) {
+                    stringStartTime = onPrefixInput.get();
                 }
             }
-            if (isPrefixNumbersOnly(toPrefixInput)) {
-                if (DateTimeUtil.isValidTime(toPrefixInput.get())) {
-                    stringEndTime = toPrefixInput.get();
-                }
+            if (isPrefixNumbersOnly(toPrefixInput) && (DateTimeUtil.isValidTime(toPrefixInput.get()))) {
+                stringEndTime = toPrefixInput.get();
             }
 
             /*
@@ -274,15 +268,11 @@ public class UpdateCommandParser {
                 endDate = Optional.of(EMPTY_FIELD);
             }
 
-            if (startDate.isPresent()) {
-                if (startDate.get().matches(STARTDATE_VALIDATION_REGEX2)) {
-                    startDate = Optional.of(DateTimeUtil.getNewDate(startDate.get()));
-                }
+            if (startDate.isPresent() && startDate.get().matches(STARTDATE_VALIDATION_REGEX2)) {
+                startDate = Optional.of(DateTimeUtil.getNewDate(startDate.get()));
             }
-            if (endDate.isPresent()) {
-                if (endDate.get().matches(STARTDATE_VALIDATION_REGEX2)) {
-                    endDate = Optional.of(DateTimeUtil.getNewDate(endDate.get()));
-                }
+            if (endDate.isPresent() && endDate.get().matches(STARTDATE_VALIDATION_REGEX2)) {
+                endDate = Optional.of(DateTimeUtil.getNewDate(endDate.get()));
             }
 
             updateTaskDescriptor.setTaskName(ParserUtil.parseTaskName(taskName));
@@ -362,10 +352,6 @@ public class UpdateCommandParser {
 
     private boolean isValidTimePrefixesArgLen(Optional<String> prefixInput) {
         String[] splited = prefixInput.get().trim().split("\\s+");
-        if (splited.length > 2) {
-            return false;
-        } else {
-            return true;
-        }
+        return (splited.length <= 2);
     }
 }

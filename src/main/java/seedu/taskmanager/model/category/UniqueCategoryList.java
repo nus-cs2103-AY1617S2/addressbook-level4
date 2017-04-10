@@ -16,7 +16,8 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 
 /**
- * A list of categories that enforces no nulls and uniqueness between its elements.
+ * A list of categories that enforces no nulls and uniqueness between its
+ * elements.
  *
  * Supports minimal set of list operations for the app's features.
  *
@@ -30,11 +31,12 @@ public class UniqueCategoryList implements Iterable<Category> {
     /**
      * Constructs empty CategoryList.
      */
-    public UniqueCategoryList() {}
+    public UniqueCategoryList() {
+    }
 
     /**
-     * Creates a UniqueCategoryList using given String categories.
-     * Enforces no nulls or duplicates.
+     * Creates a UniqueCategoryList using given String categories. Enforces no
+     * nulls or duplicates.
      */
     public UniqueCategoryList(String... categories) throws DuplicateCategoryException, IllegalValueException {
         final List<Category> categoryList = new ArrayList<Category>();
@@ -45,8 +47,8 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Creates a UniqueCategoryList using given categories.
-     * Enforces no nulls or duplicates.
+     * Creates a UniqueCategoryList using given categories. Enforces no nulls or
+     * duplicates.
      */
     public UniqueCategoryList(Category... categories) throws DuplicateCategoryException {
         assert !CollectionUtil.isAnyNull((Object[]) categories);
@@ -58,8 +60,8 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Creates a UniqueCategoryList using given categories.
-     * Enforces no null or duplicate elements.
+     * Creates a UniqueCategoryList using given categories. Enforces no null or
+     * duplicate elements.
      */
     public UniqueCategoryList(Collection<Category> categories) throws DuplicateCategoryException {
         this();
@@ -67,8 +69,7 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Creates a UniqueCategoryList using given Categories.
-     * Enforces no nulls.
+     * Creates a UniqueCategoryList using given Categories. Enforces no nulls.
      */
     public UniqueCategoryList(Set<Category> categories) {
         assert !CollectionUtil.isAnyNull(categories);
@@ -76,23 +77,24 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Creates a copy of the given list.
-     * Insulates from changes in source.
+     * Creates a copy of the given list. Insulates from changes in source.
      */
     public UniqueCategoryList(UniqueCategoryList source) {
-        internalList.addAll(source.internalList); // insulate internal list from changes in argument
+        internalList.addAll(source.internalList); // insulate internal list from
+                                                  // changes in argument
     }
 
     /**
-     * Returns all categories in this list as a Set.
-     * This set is mutable and change-insulated against the internal list.
+     * Returns all categories in this list as a Set. This set is mutable and
+     * change-insulated against the internal list.
      */
     public Set<Category> toSet() {
         return new HashSet<>(internalList);
     }
 
     /**
-     * Replaces the Categories in this list with those in the argument category list.
+     * Replaces the Categories in this list with those in the argument category
+     * list.
      */
     public void setCategories(UniqueCategoryList replacement) {
         this.internalList.setAll(replacement.internalList);
@@ -111,13 +113,12 @@ public class UniqueCategoryList implements Iterable<Category> {
      */
     public void mergeFrom(UniqueCategoryList from) {
         final Set<Category> alreadyInside = this.toSet();
-        from.internalList.stream()
-                .filter(category -> !alreadyInside.contains(category))
-                .forEach(internalList::add);
+        from.internalList.stream().filter(category -> !alreadyInside.contains(category)).forEach(internalList::add);
     }
 
     /**
-     * Returns true if the list contains an equivalent Category as the given argument.
+     * Returns true if the list contains an equivalent Category as the given
+     * argument.
      */
     public boolean contains(Category toCheck) {
         assert toCheck != null;
@@ -127,7 +128,9 @@ public class UniqueCategoryList implements Iterable<Category> {
     /**
      * Adds a Category to the list.
      *
-     * @throws DuplicateCategoryException if the Category to add is a duplicate of an existing Category in the list.
+     * @throws DuplicateCategoryException
+     *             if the Category to add is a duplicate of an existing Category
+     *             in the list.
      */
     public void add(Category toAdd) throws DuplicateCategoryException {
         assert toAdd != null;
@@ -149,9 +152,9 @@ public class UniqueCategoryList implements Iterable<Category> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueCategoryList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueCategoryList) other).internalList));
+                || (other instanceof UniqueCategoryList // instanceof handles
+                                                        // nulls
+                        && this.internalList.equals(((UniqueCategoryList) other).internalList));
     }
 
     public boolean equalsOrderInsensitive(UniqueCategoryList other) {
@@ -164,7 +167,8 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     * Signals that an operation would have violated the 'no duplicates'
+     * property of the list.
      */
     public static class DuplicateCategoryException extends DuplicateDataException {
         protected DuplicateCategoryException() {
@@ -172,17 +176,14 @@ public class UniqueCategoryList implements Iterable<Category> {
         }
     }
 
-    //@@author A0142418L
+    // @@author A0142418L
     /**
      * Checks if task is assigned any category
+     * 
      * @return true if category list is empty.
      */
     public boolean isEmptyCategoryList() {
-        if (internalList.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (internalList.isEmpty());
     }
 
 }
