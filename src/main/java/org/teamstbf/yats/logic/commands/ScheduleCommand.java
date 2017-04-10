@@ -124,7 +124,7 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_TIME_TOO_LONG);
         }
     }
-    
+
     /*
      * This is the main method that controls the scheduling input and output.
      * First it saves a copy of the current task manager for the undo function .
@@ -159,8 +159,8 @@ public class ScheduleCommand extends Command {
 
     /*
      * This method calculates the time needed for the scheduled task based on
-     * the number of hours and minutes provided by the user. It returns the total
-     * time in milliseconds.
+     * the number of hours and minutes provided by the user. It returns the
+     * total time in milliseconds.
      */
     private long getTotalScheduleTime() {
         long checkedHours = (long) (Double.parseDouble(this.hours) * MILLISECONDS_PER_HOUR);
@@ -238,7 +238,7 @@ public class ScheduleCommand extends Command {
         ArrayList<Long> startAndPositionLongs = generateReturnLong(start, position);
         return startAndPositionLongs;
     }
-    
+
     /*
      * Once a valid start time has been found, the start time checks guarantee
      * that a slot exists for this schedule, and so the end time can just be
@@ -248,7 +248,7 @@ public class ScheduleCommand extends Command {
         long end = start + checkedHours;
         return end;
     }
-    
+
     /*
      * Wrapper method to generate an Arraylist of longs to return
      */
@@ -313,7 +313,7 @@ public class ScheduleCommand extends Command {
         } else if (endDateMils - startDateMils >= CONSTANT_FOR_UPPERBOUND_CASE) {
             returnMils = checkMoreThan34HoursCase(startBound, endBound, hoursMin, startTime, timeToCheck);
         } else {
-            returnMils = checkBetween14Hours34HoursCase(startDateMils, endDateMils, startBound, endBound, hoursMin,
+            returnMils = checkBetween10Hours34HoursCase(startDateMils, endDateMils, startBound, endBound, hoursMin,
                     startTime, endTime, timeToCheck, returnMils);
         }
         return returnMils;
@@ -362,7 +362,7 @@ public class ScheduleCommand extends Command {
      * end and start timings, which all have to be checked. Next we have to
      * check the second day to see if there is a valid timing
      */
-    private long checkBetween14Hours34HoursCase(long startDateMils, long endDateMils, int startBound, int endBound,
+    private long checkBetween10Hours34HoursCase(long startDateMils, long endDateMils, int startBound, int endBound,
             int hoursMin, int startTime, int endTime, Calendar timeToCheck, long returnMils) {
         if (startTime < endBound) {
             if (((int) (endDateMils - startDateMils / MILLISECONDS_PER_MINUTE)) > (endBound - startTime)) {
