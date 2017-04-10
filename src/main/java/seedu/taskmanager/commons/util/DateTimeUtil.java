@@ -128,7 +128,7 @@ public class DateTimeUtil {
                                     if (isToday(day)) {
                                         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
                                         return calendar.get(Calendar.DAY_OF_WEEK);
-                                        } else {
+                                    } else {
                                         return getTomorrowDay();
                                     }
                                 }
