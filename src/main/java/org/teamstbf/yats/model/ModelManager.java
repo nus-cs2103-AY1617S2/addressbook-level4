@@ -299,6 +299,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredListToShowDeadline() {
+        FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByDeadline();
+        taskManager.setPersons(tempEvents);
+        updateFilteredListToShowAll();
+    }
+
+    @Override
     public void updateFilteredListToShowDone(Set<String> keywords) {
         updateFilteredEventList(new PredicateExpression(new DoneQualifier(keywords)));
     }
@@ -325,13 +332,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowSortedEnd() {
         FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByEnd();
-        taskManager.setPersons(tempEvents);
-        updateFilteredListToShowAll();
-    }
-
-    @Override
-    public void updateFilteredListToShowDeadline() {
-        FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByDeadline();
         taskManager.setPersons(tempEvents);
         updateFilteredListToShowAll();
     }

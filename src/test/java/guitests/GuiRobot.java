@@ -11,8 +11,9 @@ import javafx.scene.input.KeyCodeCombination;
  */
 public class GuiRobot extends FxRobot {
 
-	public GuiRobot push(KeyCodeCombination keyCodeCombination) {
-		return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
-	}
+    @Override
+    public GuiRobot push(KeyCodeCombination keyCodeCombination) {
+        return (GuiRobot) super.push(TestUtil.scrub(keyCodeCombination));
+    }
 
 }

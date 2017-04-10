@@ -126,8 +126,13 @@ Format: `list`
 Shows the tasks that are linked to a specific string or a specific date.<br>
 Format: `list by ATTRIBUTE KEYWORD [MORE_KEYWORDS]...`
 
-Where ATTRIBUTE can be location, date, timing, done, tag
-Where KEYWORD can be any string that the user wants to list
+Where ATTRIBUTE can be location, start, end, deadline, tag
+Where KEYWORD can be the following:
+1. LOCATION and TAG can be any string
+2. START, END and DEADLINE can only be of the following format: 
+> 2.1 TIME: hh:MM in the 12 hour format, for example, 09:00PM, 10:00AM <br>
+> 2.2 DATE: dd/MM/yyyy <br>
+
 > * When typing an invalid attribute after `list by`, the application defaults to `list`
 > * The list search is not case sensitive. e.g `School` will match `school`
 > * The order of the keywords does not matter. e.g. `singapore Work` will match `Work singapore`
@@ -189,11 +194,12 @@ Examples:
 Deletes the specified task from the task scheduler.<br>
 Format: `delete INDEX`
 
+> When deleting tasks of the same name, the task that ends earlier regardless of date will be deleted first
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 > The index must be within the specified list of indexes available
-> Can be performed in batches by specifing more than one valid integer separated by spaces
+> Can be performed in batches by specifying more than one valid integer separated by spaces
 
 Examples:
 
@@ -216,7 +222,7 @@ Format: `mark INDEX`
 > The index refers to the index number shown in the undone tasks listing.<br>
 > The index **must be a positive interger** 1, 2, 3, ...
 > The index must be within the specified list of indexes available
-> Can be performed in batches by specifing more than one valid integer separated by spaces
+> Can be performed in batches by specifying more than one valid integer separated by spaces
 > Marking a recurring task as done will display the next undone occurence of the task
 
 Examples:
@@ -314,6 +320,19 @@ Example:
 Clears all tasks from TaskManager <br>
 Format: `reset`
 
+### GUI
+
+## 2.20 Done List View
+
+The Done List View displays all the done tasks the user has marked done
+
+## 2.21 Calendar View
+
+The Calendar List View displays all undone tasks on the selected day and does not display
+deadline tasks. 
+The selected day is scrollable using the the 2 arrow buttons, and can be reset to current day
+by pressing on the `Today` button.
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer? <br>
@@ -321,7 +340,10 @@ Format: `reset`
        the file that contains the data of your previous Task Scheduler folder.
 <a name="timeInput"/></a>
 **Q**: What date time format is allowed? <br>
-**A**: The input of date time can be done using natural language. Input such as "9am next monday" or "25 of next month" can be recognized. However, when you want to specify 2 dates in TIME for a event, you must use "to" to separate 2 dates. Besides, formatted input with ambiguity of month and day can cause an error in time stored, so input such as "02/06/2017" or "08.06.1997"  should not be used. It will be safe to always use name of the month, e.g. "january" instead of "01".
+**A**: The input of date time can be done using natural language. Input such as "9am next monday" or "25 of next month" 
+can be recognized. However, when you want to specify 2 dates in TIME for a event, you must use "to" to separate 2 dates.
+Besides, formatted input with ambiguity of month and day can cause an error in time stored, so input such as "02/06/2017" or "08.06.1997"
+should not be used. It will be safe to always use name of the month, e.g. "January" instead of "01".
 
 
 ## 4. Command Summary
