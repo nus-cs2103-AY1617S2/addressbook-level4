@@ -219,7 +219,7 @@ The `Model` component:
 * Does not depend on any of the other three components.
 
 <h3 id="user-content-storage">Storage Component</h3>
-Author: How Siwei<br><br>
+Author: How Si Wei<br><br>
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.8 : Class Diagram of the Storage Component_
 
