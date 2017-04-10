@@ -177,7 +177,7 @@ Implementation of redo command
 Other approaches considered
  > Except for this approach, two other different approaches were considered. One of them is to save details of all commands user made.      If we use this approach, when the user uses redo or undo command, iManager would edit task list accordingly. For example, if user's      last command is to add a task named update developer guide, iManager can edit the task list and undo the add command by calling the      delete command. After that, iManager can save the undo information in `Model` for the convenience of redo operation. Similar to undo    command, following the previous example, redo operation would add the update developer guide task back.
 
-Reason for current approach
+Reason of choosing current approach
  > This approach was chosen because of three reasons. Firstly, the tasks users would save in the task list would not be too much.         Therefore, the task list statuses saved would not consume much memory. Secondly, this approach allows divergence in history. Even       though the user changes task list after undo operation, the redo command is still operational. However, one of the approaches that was   considered depends on the previous status. If user did further changes after undo command and before redo command, redo operation       might crash since the previous status has been changed. Finally, due to time limitation, our team was forced to choose a method that     is relatively easier and less time-consuming to code. This approach might seem naïve, but it is the best approach for our team.
 
 The sections below give more details of each component.
