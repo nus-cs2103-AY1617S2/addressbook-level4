@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0142487Y-reused -->
+<?import java.net.URL?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." styleClass="darktext-field">
+      <stylesheets>
+         <URL value="@DarkTheme.css" />
+         <URL value="@Extensions.css" />
+      </stylesheets></TextField>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
+</AnchorPane>

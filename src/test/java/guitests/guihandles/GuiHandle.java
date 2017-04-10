@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.task.TestApp;
+import seedu.task.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -66,7 +66,8 @@ public class GuiHandle {
         guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
     }
 
-    public void pressEnter() {
+    public void pressEnter(String textFieldId) {
+        guiRobot.clickOn(textFieldId);
         guiRobot.type(KeyCode.ENTER).sleep(500);
     }
 

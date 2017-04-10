@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>data-table-format</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      body {
+	background: #fafafa url(http://jackrugile.com/images/misc/noise-diagonal.png);
+	color: #444;
+	font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
+	text-shadow: 0 1px 0 #fff;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+table {
+	background: #f5f5f5;
+	border-collapse: separate;
+	box-shadow: inset 0 1px 0 #fff;
+	font-size: 12px;
+	line-height: 24px;
+	margin: 30px auto;
+	text-align: left;
+	width: 800px;
+}
+
+th {
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
+	border-left: 1px solid #555;
+	border-right: 1px solid #777;
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #333;
+	box-shadow: inset 0 1px 0 #999;
+	color: #fff;
+  font-weight: bold;
+	padding: 10px 15px;
+	position: relative;
+	text-shadow: 0 1px 0 #000;
+}
+
+th:after {
+	background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+	content: '';
+	display: block;
+	height: 25%;
+	left: 0;
+	margin: 1px 0 0 0;
+	position: absolute;
+	top: 25%;
+	width: 100%;
+}
+
+th:first-child {
+	border-left: 1px solid #777;
+	box-shadow: inset 1px 1px 0 #999;
+}
+
+th:last-child {
+	box-shadow: inset -1px 1px 0 #999;
+}
+
+td {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #e8e8e8;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #e8e8e8;
+	padding: 10px 15px;
+	position: relative;
+	transition: all 300ms;
+}
+
+td:first-child {
+	box-shadow: inset 1px 0 0 #fff;
+}
+
+td:last-child {
+	border-right: 1px solid #e8e8e8;
+	box-shadow: inset -1px 0 0 #fff;
+}
+
+tr {
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);
+}
+
+tr:nth-child(odd) td {
+	background: #f1f1f1 url(http://jackrugile.com/images/misc/noise-diagonal.png);
+}
+
+tr:last-of-type td {
+	box-shadow: inset 0 -1px 0 #fff;
+}
+
+tr:last-of-type td:first-child {
+	box-shadow: inset 1px -1px 0 #fff;
+}
+
+tr:last-of-type td:last-child {
+	box-shadow: inset -1px -1px 0 #fff;
+}
+
+
+    </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+  <table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Format (with some examples)</th>
+      <th>Alternate Formats</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+	<tr>
+      <td><strong>Add</strong></td>
+      <td>add NAME [r/REMARKS] [s/STARTDATE] [s/ENDDATE] [l/LOCATION] [t/TAG]...
+			<br>
+			<br><strong>Example:</strong>
+			<br>add Meet John s/tomorrow 3pm e/tomorrow 5pm r/regarding project l/canteen t/work </td>
+      <td>-</td>
+      <td>Adds a task to KIT with specifications from the user.</td>
+    </tr>
+     <tr>
+      <td><strong>Clear</strong></td>
+      <td>clear</td>
+      <td></td>
+      <td>Clears all tasks.</td>
+    </tr>
+    <tr>
+      <td><strong>Delete</strong></td>
+      <td>delete INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>delete 1</td>
+      <td></td>
+      <td>Deletes the specified task.</td>
+    </tr>
+    <tr>
+      <td><strong>Done</strong></td>
+      <td>done INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>done 1</td>
+      <td>d INDEX</td>
+      <td>Marks the specified task as done.</td>
+    </tr>
+     <tr>
+      <td><strong>Edit</strong></td>
+      <td>edit INDEX [NAME] [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...
+			<br>
+			<br><strong>Example:</strong>
+			<br>edit 1 s/Friday morning e/friday afternoon</td>
+      <td></td>
+      <td>Edits an existing task.</td>
+    </tr>
+     <tr>
+      <td><strong>Exit</strong></td>
+      <td>exit</td>
+      <td></td>
+      <td>Exits the program.</td>
+    </tr>
+    <tr>
+      <td><strong>Find</strong></td>
+      <td>find KEYWORD...and/or DATE
+			<br>
+			<br><strong>Example:</strong>
+			<br>find meeting</td>
+      <td>f KEYWORD...and/or DATE</td>
+      <td>Finds tasks that contains all of the keywords.<br> Finds tasks with the queried dates along with  <strong> all the keywords </strong> if dates are given.</td>
+    </tr>
+	<tr>
+      <td><strong>Find Exact</strong></td>
+      <td>findexact KEYWORD...
+			<br>
+			<br><strong>Example:</strong>
+			<br>findexact meet john</td>
+      <td>fexact KEYWORD..., finde KEYWORD..., <br> fe KEYWORD...</td>
+      <td>Finds tasks that contains <b>all<b/> keywords.</td>
+    </tr>
+	<tr>
+      <td><strong>Import Events from Google Calendar</strong></td>
+      <td>getgoogle</td>
+      <td>gg</td>
+      <td>Get upcoming events from your Google Calendar and add them as tasks.</td>
+    </tr>
+    <tr>
+      <td><strong>Help</strong></td>
+      <td>help [COMMANDNAME]
+			<br>
+			<br><strong>Example:</strong>
+			<br>help add <br>man edit</td>
+      <td>h, man, manual</td>
+      <td>If COMMANDNAME not entered, brings up user guide in another window.
+			<br>If COMMANDNAME entered, shows help message for that command only.</td>
+    </tr>
+    <tr>
+      <td><strong>Help Format</strong></td>
+      <td>helpformat</td>
+      <td>helpf, summary, hf, man, manual</td>
+      <td>Shows a quick summary of the command formats</td>
+    </tr>
+
+    <tr>
+      <td><strong>List</strong></td>
+      <td>list</td>
+      <td>ls, l</td>
+      <td>Lists all tasks in KIT.</td>
+    </tr>
+    <tr>
+      <td><strong>List Done</strong></td>
+      <td>list done</td>
+      <td>ls done, l done</td>
+      <td>Lists all completed tasks.</td>
+    </tr>
+    <tr>
+      <td><strong>List Not Done</strong></td>
+      <td>list notdone</td>
+      <td>list undone, ls notdone, ls undone, l notdone, l undone</td>
+      <td>Lists all ongoing tasks.</td>
+    </tr>
+    <tr>
+      <td><strong>List Tag</strong></td>
+      <td>list tag TAGNAME
+			<br>
+			<br><strong>Example:</strong>
+			<br>list tag work</td>
+      <td>ls tag TAGNAME, l tag TAGNAME</td>
+      <td>Lists all tasks of a certain tag.</td>
+    </tr>
+    <tr>
+      <td><strong>Load</strong></td>
+      <td>load PATHNAME
+			<br>
+			<br><strong>Example:</strong>
+			<br>load C:/Users/User/Documents/kit.xml</td>
+      <td></td>
+      <td>Loads data from the specified file.</td>
+    </tr>
+    <tr>
+      <td><strong>Post Event to Google Calendar</strong></td>
+      <td>postgoogle [INDEX]
+			<br>
+			<br><strong>Example:</strong>
+			<br>pg 1</td>
+      <td>pg [INDEX]</td>
+      <td>Posts the specified task to your Google Calendar.
+			<br>Posts all task if INDEX no specified.</td>
+    </tr>
+    <tr>
+      <td><strong>Redo</strong></td>
+      <td>Redo</td>
+      <td></td>
+      <td>Reverts the last undo.</td>
+    </tr>
+    <tr>
+      <td><strong>Save</strong></td>
+      <td>save PATHNAME
+			<br>
+			<br><strong>Example:</strong>
+			<br>save C:/Users/User/Documents/kit.xml</td>
+      <td></td>
+      <td>Saves the file to a specified location.</td>
+    </tr>
+     <tr>
+      <td><strong>Undo</strong></td>
+      <td>undo</td>
+      <td>uhoh</td>
+      <td>Undo the previous command.</td>
+    </tr>
+    <tr>
+      <td><strong>Undone</strong></td>
+      <td>undone INDEX
+			<br>
+			<br><strong>Example:</strong>
+			<br>undone 1</td>
+      <td>notdone INDEX, ud INDEX, nd INDEX</td>
+      <td>Marks the specified task as not done.</td>
+    </tr>
+
+  </tbody>
+</table>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>

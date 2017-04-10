@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0142487Y-reused -->
+<?import java.net.URL?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="placeHolder" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane fx:id="mainPane" styleClass="darktext-area">
+        <TextArea fx:id="resultDisplay" editable="false" styleClass="darktext-area">
+         <stylesheets>
+            <URL value="@DarkTheme.css" />
+            <URL value="@Extensions.css" />
+         </stylesheets>
+      </TextArea>
+      <stylesheets>
+         <URL value="@Extensions.css" />
+         <URL value="@DarkTheme.css" />
+      </stylesheets>
+    </AnchorPane>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
+</AnchorPane>

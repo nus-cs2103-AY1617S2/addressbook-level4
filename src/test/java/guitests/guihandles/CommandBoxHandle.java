@@ -30,19 +30,29 @@ public class CommandBoxHandle extends GuiHandle {
         return getTextFieldText(COMMAND_INPUT_FIELD_ID);
     }
 
+    public void clear() {
+        setTextField(COMMAND_INPUT_FIELD_ID, "");
+    }
+
     /**
      * Enters the given command in the Command Box and presses enter.
      */
     public void runCommand(String command) {
         enterCommand(command);
-        pressEnter();
+        pressEnter(COMMAND_INPUT_FIELD_ID);
         guiRobot.sleep(200); //Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {
         enterCommand("help");
-        pressEnter();
+        pressEnter(COMMAND_INPUT_FIELD_ID);
         return new HelpWindowHandle(guiRobot, primaryStage);
+    }
+
+    public HelpFormatWindowHandle runHelpFormatCommand() {
+        enterCommand("helpf");
+        pressEnter(COMMAND_INPUT_FIELD_ID);
+        return new HelpFormatWindowHandle(guiRobot, primaryStage);
     }
 
     public ObservableList<String> getStyleClass() {

@@ -2,16 +2,19 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.junit.Test;
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.task.model.TaskManager;
+import seedu.task.model.task.Task;
+import seedu.task.model.util.SampleDataUtil;
+import seedu.task.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskManagerGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -23,8 +26,14 @@ public class SampleDataTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+    public void taskManager_dataFileDoesNotExist_loadSampleData() throws Exception {
+        Task[] expectedList = SampleDataUtil.getSampleTasks();
+        Arrays.sort(expectedList);
+        assertTrue(taskListPanel.isListMatching(expectedList));
+
+        //clean up
+        File toDelete = new File(TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml"));
+        assert toDelete.exists();
+        toDelete.delete();
     }
 }

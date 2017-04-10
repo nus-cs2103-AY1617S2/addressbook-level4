@@ -4,23 +4,90 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+//@@author A0142487Y
+public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+    public void find_nonEmptyList_success() {
 
-        //find after deleting one result
+        // find full name
+        assertFindResult("find dinner", td.eat, td.decide); // multiple results
+
+        // find substring
+        assertFindResult("find din", td.eat, td.decide); // multiple results
+
+        // find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find dinner", td.decide);
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_nonEmptyList_byName_success() {
+        assertFindResult("find dinner", td.eat, td.decide); // 2 results
+        assertFindResult("find Mark"); // no results
+
+    }
+
+    @Test
+    public void find_nonEmptyList_byTag_success() {
+        assertFindResult("find personal", td.apply);
+    }
+
+    @Test
+    public void find_nonEmptyList_byLocation_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.jump).getAddCommand());
+        assertFindResult("find ERC field", td.jump);
+
+    }
+
+    @Test
+    public void find_nonEmptyList_byRemark_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.neglect).getAddCommand());
+        assertFindResult("find remark", td.neglect);
+    }
+
+    @Test
+    public void find_nonEmptyList_byDate_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.look).getAddCommand());
+        assertFindResult("find Feb 27 2112", td.look);
+    }
+
+    @Test
+    public void find_nonEmptyList_byDate_fail() {
+        assertFindResult("find tomorrow");
+        assertFindResult("find last tuesday");
+        assertFindResult("find next christmas");
+    }
+
+    @Test
+    public void find_nonEmptyList_ConfusingNameAndDate_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.open).getAddCommand());
+        commandBox.runCommand(new TestTask(td.practice).getAddCommand());
+        commandBox.runCommand(new TestTask(td.queue).getAddCommand());
+        assertFindResult("find June 4 2018", td.open);
+        assertFindResult("find new year", td.practice);
+        assertFindResult("find 1/2/2018", td.practice);
+        assertFindResult("find christmas", td.queue);
+    }
+
+    @Test
+    public void find_nonEmptyList_ConfusingNameAndDate_fail() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.open).getAddCommand());
+        commandBox.runCommand(new TestTask(td.practice).getAddCommand());
+        commandBox.runCommand(new TestTask(td.queue).getAddCommand());
+        assertFindResult("find June 4 2017");
+        // Jan 2 forms an object with the current year:2017,so this test case will succeed next year
+        assertFindResult("find Jan 2");
+        assertFindResult("find 12/25/2017");
+
+    }
+
+    @Test
+    public void find_emptyList_success() {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }
@@ -31,10 +98,10 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }
