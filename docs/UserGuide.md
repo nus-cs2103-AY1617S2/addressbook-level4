@@ -56,8 +56,8 @@ Format: `add TASK_NAME`
 
 Examples:
 
-* `add task math homework`
-* `add task pay bill`
+* `add math homework -d integration and differentiation`
+* `add pay bill -l CPF`
 
 ### 2.3 Adding a event task : `add`
 
@@ -319,6 +319,26 @@ Example:
 
 Clears all tasks from TaskManager <br>
 Format: `reset`
+
+### 2.20. Schedule a task : `schedule`
+
+
+Schedule a task with a specific time requirement in hours or minutes. Scheduler automatically finds an available slot in your schedule to slot it. <br>
+
+Format: `schedule  EVENT_NAME [-l LOCATION -d  DESCRIPTION -T TAGS -h HOURS -m MINUTES]`
+
+> - If no time is given, the default scheduled time is 1 hour 
+> - To mimic a typical workday, scheduling will only take place between 8am and 6pm, and on working days (Monday to Friday)
+> - Scheduled events cannot be more than 10 hours long or negative - if a long event is required, please add it using the add command
+> - Float are accepted for the hours and minutes command
+> - All parameters must not contain any of the prefixes(-l, -r, -s, -e, -by, -d, -T)
+> - Events can have any number of tags (including 0)
+> - Any time parameter(DEADLINE/TIME/START/END) is automatically ignored in the schedule command
+
+Examples:
+
+* `schedule buy milk -l FairPrice -by 7pm tomorrow  -h 2 -m 30'
+
 
 ### GUI
 

@@ -5,14 +5,9 @@ import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_LOCATION;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_DESCRIPTION;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_HOURS;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_MINUTES;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_LOCATION;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_TAG;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_TIME;
-import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_RECURRENCE;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -20,7 +15,6 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
-import org.teamstbf.yats.logic.commands.AddCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.logic.commands.ScheduleCommand;
@@ -45,7 +39,7 @@ public class ScheduleCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_LOCATION, PREFIX_TAG, PREFIX_DESCRIPTION,
-                PREFIX_HOURS, PREFIX_MINUTES);
+                PREFIX_HOURS, PREFIX_MINUTES, PREFIX_DEADLINE, PREFIX_START_TIME, PREFIX_END_TIME);
         argsTokenizer.tokenize(args);
         try {
             HashMap<String, Object> addParam = new HashMap<>();
