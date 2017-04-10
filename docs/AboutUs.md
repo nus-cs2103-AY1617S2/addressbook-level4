@@ -65,9 +65,13 @@ Code Written: [[functional code](./collated/main/A0139438W.md)][[test code](./co
 #### [Zhang Hanming](https://github.com/ZhangHanming)
 <img src="images/zhanghanming.png" width="150"><br>
  Role: Developer <br>
- Responsibilities: Model,
-                   Team Leader,
-                   Coordination of Team
+ Responsibilities: Model
+ 
+ Contributions:
+ 
+ * Rewrite Model
+ * List Filters
+ * Code Review
 
 Code Written: [[functional code](./collated/main/A0121658E.md)][[test code](./collated/test/A0121658E.md)]
 

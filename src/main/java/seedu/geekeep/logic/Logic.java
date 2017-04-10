@@ -32,8 +32,10 @@ public interface Logic {
     /** Returns the filtered list of floating tasks */
     ObservableList<ReadOnlyTask> getFilteredDeadlineList();
 
+    /** Sets the filtered list of tasks to only show undone tasks**/
+    void setFilteredTaskListToShowUndone();
+
     //@@author A0147622H
     /** Returns command history */
     List<String> getCommandHistory();
-
 }

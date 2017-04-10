@@ -60,6 +60,11 @@ public class LogicManager extends ComponentManager implements Logic {
 
     //@@author A0147622H
     @Override
+    public void setFilteredTaskListToShowUndone() {
+        model.updateFilteredTaskListToShowUndone();
+    }
+
+    @Override
     public List<String> getCommandHistory() {
         return model.getCommandHistory();
     }

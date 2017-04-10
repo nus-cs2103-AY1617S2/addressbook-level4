@@ -116,6 +116,9 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        mainWindow.clearSelectionInAllPanels();
+
         if (event.targetTask.isFloatingTask()) {
             mainWindow.getFloatingTaskListPanel().scrollTo(event.targetIndex);
         } else if (event.targetTask.isDeadline()) {

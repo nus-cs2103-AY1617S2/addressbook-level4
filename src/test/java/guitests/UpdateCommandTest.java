@@ -81,17 +81,16 @@ public class UpdateCommandTest extends GeeKeepGuiTest {
     }
 
     @Test
-    public void update_findThenEdit_success() throws Exception {
+    public void update_findThenUpdate_success() throws Exception {
         commandBox.runCommand("find Hackathon");
 
-        String detailsToEdit = "New Event";
+        String detailsToUpdate = "Hackathon New";
         int filteredTaskListIndex = 1;
         int geeKeepIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[geeKeepIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("New Event").build();
-
-        assertUpdateSuccess(filteredTaskListIndex, geeKeepIndex, detailsToEdit, editedTask);
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Hackathon New").build();
+        assertUpdateSuccess(filteredTaskListIndex, geeKeepIndex, detailsToUpdate, editedTask);
     }
 
     @Test
