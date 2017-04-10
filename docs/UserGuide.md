@@ -63,9 +63,9 @@ Examples:
 
 Adds an task with start and/or end time to the task scheduler. <br>
 
-Format: `add  EVENT_NAME -s START_TIME -e END_TIME [-l LOCATION  -d DESCRIPTION -T TAGS]`
-or
-Format: `add  EVENT_NAME -t TIME [-l LOCATION -d DESCRIPTION -T TAGS]`
+Format: `add  EVENT_NAME -s START_TIME -e END_TIME [-l LOCATION  -d DESCRIPTION -T TAGS]`<br>
+or<br>
+Format: `add  EVENT_NAME -t TIME [-l LOCATION -d DESCRIPTION -T TAGS]`<br>
 > - All paramters must not contain any of the prefixes(-l, -r, -s, -e, -by, -d, -T)
 > - TIME will be automatically resolved to start/end time or deadline
 > - START_TIME/END_TIME cannot exist together with TIME
@@ -169,7 +169,7 @@ Examples:
   Returns `My Task` but not `task`
 * `find date1 tag2 Task3`<br>
   Returns any task having any of the keywords `date1` , `tag2`  or `Task3`
-
+  
 ### 2.9. Editing a task : `edit`
 
 Edits an existing task in the task scheduler.<br>
@@ -211,7 +211,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the undone list of the task scheduler.
-* `list Task2`<br>
+* `list by tag Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
 * `list`<br>
@@ -347,11 +347,11 @@ Examples:
 
 ### GUI
 
-## 2.20 Done List View
+#### 2.20 Done List View
 
 The Done List View displays all the done tasks the user has marked done
 
-## 2.21 Calendar View
+#### 2.21 Calendar View
 
 The Calendar List View displays all undone tasks on the selected day and does not display
 deadline tasks. 
@@ -396,29 +396,29 @@ should not be used. It will be safe to always use name of the month, e.g. "Janua
    e.g. `schedule buy milk -l FairPrice -d hilow  -h 2 -m 30`
 
 * **Mark as Done** : `mark INDEX` <br>
-   e.g. `mark 1`
+   e.g. `mark 1`<br>
    e.g. `mark 1 4 6`
 
 * **Mark as Not Done** : `unmark INDEX` <br>
-   e.g. `unmark 1`
+   e.g. `unmark 1`<br>
    e.g. `unmark 2 3 4`
 
 * **Clear Done Task** : `clear` <br>
    e.g. `clear`
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+   e.g. `delete 3`<br>
    e.g. `delete 2 4 6`
 
 * **Find** : `list ATTRIBUTE KEYWORD [MORE_KEYWORDS]` <br>
-   e.g. `list by tag homework`
+   e.g. `list by tag homework`<br>
    e.g. `list by timing 9:00pm`
 
 * **List** : `list` <br>
    e.g. `list`
 
 * **Change Save Location** : `save` <br>
-   e.g. `save default`
+   e.g. `save default`<br>
    e.g. `save /Users/main/Desktop/data`
 
 * **Help** : `help` <br>
