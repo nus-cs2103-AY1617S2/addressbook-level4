@@ -41,11 +41,6 @@
 									</Label>
 									<Label fx:id="name" styleClass="cell_big_label" text="\$first" />
 								</HBox>
-                        <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/task_search.png" />
-                           </image>
-                        </ImageView>
 							</children>
 						</HBox>
 						<FlowPane fx:id="tags" />

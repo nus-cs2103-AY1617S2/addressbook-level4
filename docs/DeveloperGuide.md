@@ -147,7 +147,8 @@ _Figure 2.2.1 : Structure of the UI Component_
 **API** : [`Ui.java`](../src/main/java/org/teamstbf/yats/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+`StatusBarFooter`, `MultiViewPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The `MultiViewPanel` is made up of two tabs, which includes `Done Task View` and `Calendar View`. 
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -159,6 +160,12 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+* Elaborating on the `MultiViewPanel`: 
+* 1. `MultiViewPanel` shows a list of done tasks by allowing the internal `filteredEvents` list to be duplicated into two additional
+list: `calendarList` and `doneList`. Both of these list synchronize to `filteredEvents` list whenever there are changes to the primary
+list.
+* 2. However, a known issue that arises is when there are more than one tasks with the same name in the primary list and secondary list. When
+executing a `delete` command, the command deletes the task with the earliest end time regardless of status.
 
 ### 2.3. Logic component
 
@@ -237,13 +244,24 @@ Certain properties of the application can be controlled (e.g App name, logging l
 ### 3.3 Undo/Redo Command
 
 The Undo and Redo commands were implemented by saving immutable states of the TaskManager dataset into two stacks, an undo stack
-and a redo stack. Every time a action is taken that will mutate the data stored inside the TaskManager, a state of the previous data is saved by through
-copying the TaskManager object and pushing this into an Undo stack. When the undo command is taken, the ModelManager class pops the
-last TaskManager state from the undo stack and replaces the current data with this state. Before it replaces the data, the ModelManager \
-class also saves the current data as a state and pushes this onto the redo stack. This way, the undo can be reversed by popping from the redo stack.
-Two implementation decisions made. The first is that everytime a new action is taken (not undo or redo), the redo stack will be cleared or else there might be
-logical errors in state transformation (the redo stack will contain old states). The second is that there should be no more than 50 saved states of the
-task manager, and if there are 50 saved states, 25 of the earliest saved states will be deleted.
+and a redo stack. Every time a action is taken that will mutate the data stored inside the TaskManager, a state of the previous data is saved by through copying the TaskManager object and pushing this into an Undo stack. When the undo command is taken, the ModelManager class pops the last TaskManager state from the undo stack and replaces the current data with this state. Before it replaces the data, the ModelManager class also saves the current data as a state and pushes this onto the redo stack. This way, the undo can be reversed by popping from the redo stack.
+Two implementation decisions were made - the first is that everytime a new action is taken (not undo or redo), the redo stack will be cleared or else there might be logical errors in state transformation (the redo stack will contain old states). The second is that there should be no more than 20 saved states of the task manager, and if there are 20 saved states, 10 of the earliest saved states will be deleted.
+
+### 3.4 Scheduling Command
+In YATS, we implement a schedule command to automatically schedule tasks based on available timeslots. Scheduling is made based on the following constraints - i) the scheduled time must not overlap with any other event in the list, ii) it must be between 8am and 6pm and iii) it must not be on a saturday or sunday. These constraints were implemented as we wanted to ensure a very specific use case for schedule - we wanted to allow the user to schedule tasks automatically into their workday. This allows them to quickly slot their ad-hoc events into their own timetable, without worrying about when to put each event when they are busy. To accomplish scheduling, we first search for open intervals in the list of events. Open intervals are intervals not taken up by any event, and thus can be used for scheduling. We then have to check if the open interval is appropriate for scheduling the event based on the constraints of it being in the region of 8am to 6pm, and that it is on a weekday.<br>
+First, we describe the method of finding open intervals. The list is sorted by start time and then we iterate through this sorted list of events, keeping track of the maximum of each event's accompanying end time. We do this so that we can check if the maximum end time of all earlier events is smaller than the next event's start time. If this current maximum end time is smaller than the start time of the next event, it is then provable that this is an open interval where no event exists. This is because there is no event with an end time that is both after this interval (since we took the max of all preceding end times) and before the next start time (because end time must be after start time). There is no event with a start time before this interval (since the array is sorted by start time, so every later event must have a start time later than the current start time) that has an end time after this interval. Thus, this must be an open interval where no event exists. We can then check whether it is appropriately sized and the correct day for scheduling. However, this checking is not trivial as because the boundaries of an open interval could span across multiple days and there are multiple conditions to consider.<br>
+To solve this problem, we first break down the possible times of boundaries into 3 cases,<br>
+i) Case 1 - Less than 10 Hours,<br>
+ii) Case 2 - More than 34 Hours, <br>
+iii) Case 3 - In between 10 Hours and 34 Hours. <br>
+In case i), because of the time period from 6pm to 8am is 10 Hours, any timing less than 10 hours must only have one valid day 
+for scheduling. The theoretical upper bound for a single day timeslot is actually 14 hours, but in this case we do not what to deal with wrapped start-end timings and thus we pick a boundary of 10 hours. Thus, we can check just that day alone to see if there is a valid time slot there. In Case ii) of above 34 hours, if the difference between the start and end time is more than 34 hours, there must be a valid 10 hour block where no event exists. This is because 34 hours encompasses at least one complete time block, and because we know this is an open interval, then by pigeonhole principle there must be an empty 10 hour block in a 34 hour range. Finally, the most complex case iii) is between 10 Hours and 34 Hours. Here, we must first check if there are one or two valid days to analyse. Then, we find the appropriate boundaries for one or two days, and check if either of these are valid times for scheduling. Lastly, our final check is that the scheduled day is not a saturday or a sunday. Thus, from these set of rules, we can find an appropriately sized open interval with the constraints of being within 8am to 6pm, not be on a saturday and sunday and not overlap with any other timeslot.
+
+### 3.5 Change Save Location Command
+
+In YATS, We implement a change save location command to get the configurations of the current YATS and put it into a new config object. The filepath of the save location is updated here and the new config object is saved.<br>
+Following which, the filepath in storage (XmlTaskManagerStorage) is updated to the new filepath as well.<br>
+Once this is done, a force save is done to create the data file in the new specified file location.<br>
 
 ## 4. Testing
 
@@ -352,9 +370,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | Add a task with a name and deadline and then schedule it myself | Know when I need to do this task
-`* * *` | user | Add a task with just a title | Add tasks in quick succession and edit the deadlines at a later time
-`* * *` | user | Search for the task that I would want to schedule | Find out whether the task has already been scheduled
+`* * *` | user | Add a task with a name and description and then schedule it myself | Know when I need to do this task
+`* * *` | user | Add a task with a title | Add tasks in quick succession and edit the deadlines at a later time
+`* * *` | user | Add a task with a deadline | Remember my deadlines easily
+`* * *` | user | Add a task with a start and end time | Remember the periods when I am busy with an event
 `* * *` | user | Search for information (using any string) about a current task which will display all the relevant info about the task | Find the task without looking through the whole list
 `* * *` | user | Edit the deadline, name and schedule of any task | Update any task as required, as well as marking it as done and deleting it
 `* * *` | user | Undo my actions | revert any changes done accidentally.
@@ -362,25 +381,17 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Mark task as done based on index | Clear done tasks if needed
 `* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
 `* * *` | user | Change my save location | I can choose where my data file is saved
-`* * ` | user | Mark task as done based name, or any unique identifying string for that task | Clear done tasks if needed
-`* * ` | user | List all tasks based on importance | View which tasks have higher priorities
-`* * ` | user | Schedule a recurring (daily/weekly/monthly..) | Not add the recurring tasks manually
 `* * ` | user | Get a calendar view list of my current blocked out times and what I have to do | Know what else I can add
-`* * ` | user | Set alarms for certain schedules | Be reminded of deadlines of my tasks
-`* * ` | user | Schedule my tasks with constraints | Avoid scheduling tasks during my works time and leave break time in between tasks
-`* *` | user | Add subtasks into my main task | Have a more structured view of the main task
-`* *` | user | Star my tasks | Mark out the more urgent tasks to be done
+`* * ` | user | Batch Delete my tasks | To easily clear a few days worth of tasks
+`* * ` | user | Batch mark my tasks as done | When I am too busy to clear it during the day and only do it at one shot at night
+`* * ` | user | Schedule my tasks within the constrains of a workday | Avoid scheduling tasks during my works time and leave break time in between tasks
 `* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
 `* *` | user | Add descriptions to my task | have additional details of my tasks
-`* *` | user | Mark the task as done/require follow-up | Have an up-to-date record of the my tasks
 `* *` | user | Group my tasks together with a common tag | Organized my tasks according to their groups in the scheduler
-`* *` | user | Have pop-up notifications of near deadlines | Be reminded of tasks with deadlines approaching
-`* *` | user | Have heads-up display of tasks that are about to due | Be reminded of tasks to be done
-`* *` | advanced user| Sort my tasks according to deadlines, dates or title | Have a better overviews of tasks scheduled
-`* *` | advanced user | Use shorter versions of commands/Flexi-command | Type commands easier and faster
+`* *` | user | List all tasks with specific titles, descriptions, tags, start dates or end dates| Identify specific tasks with certain identifiers
+`* *` | advanced user| Sort my tasks according to deadlines, start dates or end dates | Have a better overviews of tasks scheduled
 `* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
-`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
-`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
+`* *` | advance user | Clear all my done tasks in one shot | Clear done tasks from scheduler
 `* ` | user | Get suggestions when a task should be scheduled | Automatically click on which date and time I would like it scheduled
 `* ` | user | Specify locations that are linked to Google Maps | Know the best way to get there from my current location (Workplace)
 `* ` | user | Automatically reschedule a task I am supposed to do now | No worry about when to schedule the task
@@ -395,6 +406,14 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `TaskScheduler` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Use case: Add Non-Recurring Floating Task
+
+**MSS**
+
+1. User requests to add a task with a title, optional description, optional description, optional tags with no timings
+2. TaskManager creates a task
+3. TaskManager shows the added task's details and that the task was successfully added <br>
+Use case ends.
 
 #### Use case: Add Non-Recurring Task With Deadline
 
@@ -453,45 +472,36 @@ Use case ends.
 > 2a1. TaskManager assumes that the recurrence starts now<br>
 > Use case resumes at step 2
 
-
-#### Use case: Mark Task As Done (by finding)
+#### Use case: Schedule Task
 
 **MSS**
 
-1. User requests to mark task as done by providing specified title/tag/date
-2. TaskManager finds a unique task that is identified by that string using the Search method and marks it as done, and prints the task that was marked as done <br>
+1. User requests to schedule a task with a title and an optional description, optional location, optional tags, optional hours and optional minutes
+2. TaskManager allocates a task with a start and end time that is a free slot in the user calendar, and is within a normal work day.
+3. TaskManager shows the added task's details and that the event was successfully added <br>
 Use case ends.
 
 **Extensions**
 
-1a. User inputs a number
-> 1a1. Task Manager marks that as done, and prints the task out again <br>
-  Use case ends
-
-2a. A list of unique tasks was found
-> 2a1. TaskManager shows a lists of those tasks, and asks the user which task they would like to mark as done <br>
-> Use case ends
-
-2b. No list of unique tasks was found
-> 2b1. TaskManager tells user that no tasks was found, and they can enter another string or use the list function to mark task as done. <br>
-> Use case resumes at step 1 <br>
-
+1a. User does not specify any hours or minutes to schedule
+> 2a1. TaskManager assumes that the default scheduling time will be 1 hour <br>
+> Use case resumes at step 2
 
 #### Use case: Mark Task As Done (by index)
 
 **MSS**
 
-1. User request to list task by providing specified title/tag/date
-2. TaskManager shows a list of all tasks added within specified title/tag/date in order of date & time from first to last
-3. User enters Mark Task as Done with index
-4. TaskManager finds the task that is identified by that index and marks it as done <br>
+
+1. User enters Mark Task as Done with index
+2. TaskManager finds the task that is identified by that index and marks it as done <br>
+3. TaskManager prints details of task to show to user<br>
 Use case ends.
 
 **Extensions**
 
-4a. Index is not found in the TaskManager List
-> 4a1. TaskManager reports that no task was found with that index.  <br>
-> Use case resumes at step 3 <br>
+1a. Index is not found in the TaskManager List
+> 1a1. TaskManager reports that no task was found with that index.  <br>
+> Use case ends
 
 
 #### Use case: Delete task
@@ -514,7 +524,7 @@ Use case ends.
 > Use case resumes at step 2 <br>
 
 
-#### Use case: List Task (by finding)
+#### Use case: Find Task
 
 **MSS**
 
@@ -527,8 +537,8 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows List is empty message <br>
-> Use case ends <br>
+> 2a1. TaskManager shows '0 tasks listed' message <br>
+Use case ends <br>
 
 
 #### Use case: List Task (Everything)
@@ -536,16 +546,14 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks/events
-2. TaskManager shows a list of all tasks/events added in order of date from first to last
-3. TaskManager provides options for User to perform commands from there
-4. User chooses exit option <br>
+2. TaskManager shows a list of all tasks/events
 Use case ends.
 
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows List is empty message <br>
-> Use case ends <br>
+> 2a1. TaskManager shows empty list <br>
+Use case ends <br>
 
 
 #### Use case: Edit Task
@@ -555,26 +563,26 @@ Use case ends.
 1. User request to list tasks
 2. TaskManager shows list of existing tasks
 3. User requests to edit a task with a specified index in the list. With optional new title, either a start time or an end time or both, and optional description, optional location and optional tags
-12. TaskManager updates variables of the task <br>
+4. TaskManager updates variables of the task and prints it out for user to see <br>
 Use case ends.
 
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows 'List is empty' message <br>
-> Use case ends
+> 2a1. TaskManager shows empty list <br>
+Use case ends
 
 3a. The given index is invalid
 > 3a1. TaskManager shows an error message <br>
-> Use case resumes at step 3
+Use case resumes at step 2
 
 3b. The given parameters are invalid
 > 3a1. TaskManager shows an error message telling user the legal format<br>
-> Use case resumes at step 3
+Use case resumes at step 2
 
 3b. The given tag flag is present and empty
 > 3a1. TaskManager deletes all tags of that task<br>
-> Use case resumes at step 3
+Use case resumes at step 4
 
 
 #### Use case: Clear Done Tasks
@@ -584,14 +592,14 @@ Use case ends.
 1. User requests to clear done tasks
 2. TaskManager goes through list to find done tasks
 3. TaskManager deletes all done tasks
-4. TaskManager shows User the list of deleted done tasks <br>
+4. TaskManager shows User the number of deleted done tasks <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The done task list is empty
 > 2a1. TaskManager shows 'No done tasks' message <br>
-> Use case ends. <br>
+Use case ends. <br>
 
 
 #### Use case: Undo Last Command
@@ -605,7 +613,8 @@ Use case ends.
 **Extensions**
 
 2a. No last saved state
-> Use case ends. <br>
+> 2a1. TaskManager shows there is no undo to do message<br>
+Use case ends. <br>
 
 
 #### Use case: Redo Last Command
@@ -619,7 +628,8 @@ Use case ends.
 **Extensions**
 
 2a. No next saved state
-> Use case ends. <br>
+> 2a1. TaskManager shows there is no redo to do message<br>
+Use case ends. <br>
 
 
 #### Use case: Get Help
@@ -644,7 +654,10 @@ Use case ends.
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. All classes should follow the single responsibility guideline
+5. Codes should be properly commented on to maintain readability
+6. Should come with automated unit tests and open source code
 
 
 ## Appendix D : Glossary

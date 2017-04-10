@@ -106,6 +106,12 @@ public interface Model {
      */
     void updateFilteredListToShowDeadline(Set<String> keywords);
 
+    /**
+     * This method sorts the filtered list by deadline, and then shows it on the
+     * GUI
+     */
+    void updateFilteredListToShowDeadline();
+
     /** Updates the filter of the filtered event list to show done tasks */
     void updateFilteredListToShowDone(Set<String> keywords);
 
@@ -153,13 +159,18 @@ public interface Model {
      * check - if there are currently too many task manager states, it will
      * remove half of the earlier saved states and only keep the later half.
      */
-
     void saveImageOfCurrentTaskManager();
 
+    /**
+     * This method sorts the filtered list by start time, and then shows it on
+     * the GUI
+     */
     void updateFilteredListToShowSortedStart();
 
+    /**
+     * This method sorts the filtered list by end time, and then shows it on the
+     * GUI
+     */
     void updateFilteredListToShowSortedEnd();
-
-    void updateFilteredListToShowDeadline();
 
 }

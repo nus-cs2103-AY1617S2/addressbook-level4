@@ -56,22 +56,23 @@ Format: `add TASK_NAME`
 
 Examples:
 
-* `add task math homework`
-* `add task pay bill`
+* `add math homework -d integration and differentiation`
+* `add pay bill -l CPF`
 
 ### 2.3 Adding a event task : `add`
 
 Adds an task with start and/or end time to the task scheduler. <br>
 
-Format: `add  EVENT_NAME -s START_TIME -e END_TIME [-l LOCATION  -d DESCRIPTION -T TAGS]`
-or
-Format: `add  EVENT_NAME -t TIME [-l LOCATION -d DESCRIPTION -T TAGS]`
+Format: `add  EVENT_NAME -s START_TIME -e END_TIME [-l LOCATION  -d DESCRIPTION -T TAGS]`<br>
+or<br>
+Format: `add  EVENT_NAME -t TIME [-l LOCATION -d DESCRIPTION -T TAGS]`<br>
 > - All paramters must not contain any of the prefixes(-l, -r, -s, -e, -by, -d, -T)
 > - TIME will be automatically resolved to start/end time or deadline
 > - START_TIME/END_TIME cannot exist together with TIME
 > - Events can have any number of tags (including 0)
 > - If only start or end time is specified, the other will be automatically filled with a duration of 2 hours
 > - Any time parameter(START_TIME/END_TIME/TIME) allows input of natural language, but it has certain limitations regarding format of input, ssee [Q&A](#timeInput) for more information.
+> - Note that add does not check if the end time is earlier than the start time, and it will be an allowed input. You can edit the start time later using the edit function.
 
 Examples:
 
@@ -126,8 +127,16 @@ Format: `list`
 Shows the tasks that are linked to a specific string or a specific date.<br>
 Format: `list by ATTRIBUTE KEYWORD [MORE_KEYWORDS]...`
 
-Where ATTRIBUTE can be location, date, timing, done, tag
-Where KEYWORD can be any string that the user wants to list
+Where ATTRIBUTE can be location, start, end, deadline, tag<br>
+Only can specify one attribute time to list by<br>
+For each attribute, only can specify one to list by<br>
+Done tasks will be listed too, but in a different format(Without Description)<br>
+Where KEYWORD can be the following:
+1. LOCATION and TAG can be any string
+2. START, END and DEADLINE can only be of the following format: 
+> 2.1 TIME: hh:MM in the 12 hour format, for example, 09:00PM, 10:00AM <br>
+> 2.2 DATE: dd/MM/yyyy <br>
+
 > * When typing an invalid attribute after `list by`, the application defaults to `list`
 > * The list search is not case sensitive. e.g `School` will match `school`
 > * The order of the keywords does not matter. e.g. `singapore Work` will match `Work singapore`
@@ -160,7 +169,7 @@ Examples:
   Returns `My Task` but not `task`
 * `find date1 tag2 Task3`<br>
   Returns any task having any of the keywords `date1` , `tag2`  or `Task3`
-
+  
 ### 2.9. Editing a task : `edit`
 
 Edits an existing task in the task scheduler.<br>
@@ -190,18 +199,19 @@ Examples:
 Deletes the specified task from the task scheduler.<br>
 Format: `delete INDEX`
 
+> * When deleting tasks of the same name, the task that ends earlier regardless of date will be deleted first
 > * Deletes the task at the specified `INDEX`. <br>
 > * The index refers to the index number shown in the most recent listing.<br>
 > * The index **must be a positive integer** 1, 2, 3, ...
 > * The index must be within the specified list of indexes available
-> * Can be performed in batches by specifing more than one valid integer separated by spaces
+> * Can be performed in batches by specifying more than one valid integer separated by spaces
 
 Examples:
 
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the undone list of the task scheduler.
-* `list Task2`<br>
+* `list by tag Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
 * `list`<br>
@@ -315,6 +325,39 @@ Example:
 Clears all tasks from TaskManager <br>
 Format: `reset`
 
+### 2.20. Schedule a task : `schedule`
+
+
+Schedule a task with a specific time requirement in hours or minutes. Scheduler automatically finds an available slot in your schedule to slot it. <br>
+
+Format: `schedule  EVENT_NAME [-l LOCATION -d  DESCRIPTION -T TAGS -h HOURS -m MINUTES]`
+
+> - If no time is given, the default scheduled time is 1 hour 
+> - To mimic a typical workday, scheduling will only take place between 8am and 6pm, and on working days (Monday to Friday)
+> - Scheduled events cannot be more than 10 hours long or negative - if a long event is required, please add it using the add command
+> - Float are accepted for the hours and minutes command
+> - All parameters must not contain any of the prefixes(-l, -r, -s, -e, -by, -d, -T)
+> - Events can have any number of tags (including 0)
+> - Any time parameter(DEADLINE/TIME/START/END) is automatically ignored in the schedule command
+
+Examples:
+
+* `schedule buy milk -l FairPrice -d hilow  -h 2 -m 30'
+
+
+### GUI
+
+#### 2.20 Done List View
+
+The Done List View displays all the done tasks the user has marked done
+
+#### 2.21 Calendar View
+
+The Calendar List View displays all undone tasks on the selected day and does not display
+deadline tasks. 
+The selected day is scrollable using the the 2 arrow buttons, and can be reset to current day
+by pressing on the `Today` button.
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer? <br>
@@ -323,10 +366,19 @@ Format: `reset`
 
 <a name="timeInput"/></a>
 **Q**: What date time format is allowed? <br>
-**A**: The input of date time can be done using natural language. Input such as "9am next monday" or "25 of next month" can be recognized. However, when you want to specify 2 dates in TIME for a event, you must use "to" to separate 2 dates. Besides, formatted input with ambiguity of month and day can cause an error in time stored, so input such as "02/06/2017" or "08.06.1997"  should not be used. It will be safe to always use name of the month, e.g. "january" instead of "01".
+**A**: The input of date time can be done using natural language. Input such as "9am next monday" or "25 of next month" 
+can be recognized. However, when you want to specify 2 dates in TIME for a event, you must use "to" to separate 2 dates.
+Besides, formatted input with ambiguity of month and day can cause an error in time stored, so input such as "02/06/2017" or "08.06.1997"
+should not be used. It will be safe to always use name of the month, e.g. "January" instead of "01".
 
+## 4. Known Bugs in Application
 
-## 4. Command Summary
+### Adding tasks with same title 
+> When marking one of the tasks as done then deleting the undone one, <br>
+> the done task gets deleted instead<br>
+> Tasks of the same title will have indexing problems
+
+## 5. Command Summary
 
 * **Add Floating Task** : `add task NAME ` <br>
    e.g. `add task math homework`
@@ -339,31 +391,34 @@ Format: `reset`
    
 * **Add Recurring Task** : `add  EVENT_NAME -r PERIODICITY [-l LOCATION -t TIME-d DESCRIPTION -T TAGS]` <br>
    e.g. `add meeting with boss -l office -r daily -s 7:00pm  -e 9:00pm  -d prepare progress report -T work`
+   
+* **Schedule Task** : `schedule  EVENT_NAME [-l LOCATION -d  DESCRIPTION -T TAGS -h HOURS -m MINUTES]` <br>
+   e.g. `schedule buy milk -l FairPrice -d hilow  -h 2 -m 30`
 
 * **Mark as Done** : `mark INDEX` <br>
-   e.g. `mark 1`
+   e.g. `mark 1`<br>
    e.g. `mark 1 4 6`
 
 * **Mark as Not Done** : `unmark INDEX` <br>
-   e.g. `unmark 1`
+   e.g. `unmark 1`<br>
    e.g. `unmark 2 3 4`
 
 * **Clear Done Task** : `clear` <br>
    e.g. `clear`
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+   e.g. `delete 3`<br>
    e.g. `delete 2 4 6`
 
 * **Find** : `list ATTRIBUTE KEYWORD [MORE_KEYWORDS]` <br>
-   e.g. `list by tag homework`
+   e.g. `list by tag homework`<br>
    e.g. `list by timing 9:00pm`
 
 * **List** : `list` <br>
    e.g. `list`
 
 * **Change Save Location** : `save` <br>
-   e.g. `save default`
+   e.g. `save default`<br>
    e.g. `save /Users/main/Desktop/data`
 
 * **Help** : `help` <br>

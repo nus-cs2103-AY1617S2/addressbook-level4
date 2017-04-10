@@ -60,7 +60,7 @@ Code written:
 #### [Mengci Wu](http://github.com/wmc0098)
 <img src="images/MengciWu.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Code Quality and Documentation
+Responsibilities: Code Quality and Documentation<br>
 Components in charge of: Logic, Commons, Model
 
 Features implemented:

@@ -67,7 +67,8 @@ public class SampleDataUtil {
                     new Event(new Title("Machine Vision Algorithm on Raspberry Pi"), new Location("Home"),
                             new Schedule(""), new Schedule(""), new Schedule("6:00PM 30/8/2017"),
                             new Description("Because placing black masking tape on the ground is too old school, "
-                                    + "vision processing via camera controls would make a better and more efficient choice."),
+                                    + "vision processing via camera controls "
+                                    + "would make a better and more efficient choice."),
                             new UniqueTagList("Machine", "vision", "raspberry", "pi", "tasty"), new IsDone(), false,
                             new Recurrence()),
                     new Event(new Title("Learning Python"), new Location("Home"), new Schedule(""), new Schedule(""),
@@ -76,13 +77,13 @@ public class SampleDataUtil {
                             new UniqueTagList("raspberry", "pi"), new IsDone(), false, new Recurrence()),
                     new Event(new Title("Dont starve together"), new Location("KleiEntertainment"),
                             new Schedule("3:00PM 15/6/2018"), new Schedule("5:00PM 17/6/2018"), new Schedule(""),
-                            new Description(
-                                    "Obtaining food for one person is hard already, why do you have to make things harder than usual?"),
+                            new Description("Obtaining food for one person is hard already, "
+                                    + "why do you have to make things harder than usual?"),
                             new UniqueTagList("dont", "starve", "DST"), new IsDone(), false, new Recurrence()),
                     new Event(new Title("Uninstall DOTA2"), new Location("Steam"), new Schedule("3:33PM 28/2/2019"),
                             new Schedule("5:55PM 29/2/2019"), new Schedule(""),
-                            new Description(
-                                    "DOTA2 is getting too hard and too toxic, it's time to uninstall, see you at the next game."),
+                            new Description("DOTA2 is getting too hard and too toxic,"
+                                    + " it's time to uninstall, see you at the next game."),
                             new UniqueTagList("DOTA2"), new IsDone(), false, new Recurrence()),
                     new Event(new Title("Steel beams cannot melt dank memes"), new Location("4chan"), new Schedule(""),
                             new Schedule(""), new Schedule(""), new Description("4chan amirite"), new UniqueTagList(),
@@ -101,8 +102,8 @@ public class SampleDataUtil {
                             new UniqueTagList("gone", "wild"), new IsDone(), false, new Recurrence()),
                     new Event(new Title("Secrets of the hidden temple"), new Location("MadMoon"), new Schedule(""),
                             new Schedule(""), new Schedule("9:52PM 23/9/2019"),
-                            new Description(
-                                    "The mad moon seems to be a legend or a myth, something that should not be uncovered.."),
+                            new Description("The mad moon seems to be a legend or a myth, "
+                                    + "something that should not be uncovered.."),
                             new UniqueTagList("mad", "moon"), new IsDone(), false, new Recurrence()),
                     new Event(new Title("The spirit moves me"), new Location(""), new Schedule("1:00AM 15/5/2017"),
                             new Schedule("5:30AM 15/5/2017"), new Schedule(""), new Description("I am a storm chaser."),
@@ -144,8 +145,10 @@ public class SampleDataUtil {
                     new Event(new Title("Document on the reversing polarity of Magnus"), new Location("Magnus"),
                             new Schedule(""), new Schedule(""), new Schedule("4:00PM 5/5/2017"),
                             new Description("The master-smiths of Mt. Joerlak agree on only a single point: "
-                                    + "that the horn of a magnoceros is more precious than any alloy. And of all such horns, "
-                                    + "the largest and sharpest belongs to the beast they call Magnus. For half a generation, Magnus took "
+                                    + "that the horn of a magnoceros is more "
+                                    + "precious than any alloy. And of all such horns, "
+                                    + "the largest and sharpest belongs to the beast they call Magnus. "
+                                    + "For half a generation, Magnus took "
                                     + "easy sport goring hunters come to claim the treasures of his kin."),
                             new UniqueTagList("bradwarden", "enchantress"), new IsDone(), false, new Recurrence()),
                     new Event(new Title("Submit a report on the Nothl Realm"), new Location("Huskar"), new Schedule(""),

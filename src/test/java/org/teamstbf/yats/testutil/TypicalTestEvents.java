@@ -52,7 +52,7 @@ public class TypicalTestEvents {
             // Events for Scheduling
 
             fish = new EventBuilder().withTitle("fishing").withDescription("well").withStartTime("").withEndTime("")
-                    .withDeadline("").withLocation("here").withHours("3").withMinutes("3").withIsDone("No")
+                    .withDeadline("").withLocation("here").withHours("0.2").withMinutes("0.2").withIsDone("No")
                     .withRecurrence(new Recurrence()).build();
             goon = new EventBuilder().withTitle("du").withDescription("").withStartTime("").withEndTime("")
                     .withDeadline("").withLocation("home").withHours("9").withMinutes("9").withIsDone("No")
