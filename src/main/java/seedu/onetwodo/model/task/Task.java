@@ -141,7 +141,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return isToday;
     }
 
-    //@@author A01411138N
+    //@@author A0141138N
     @Override
     public TaskType getTaskType() {
         return type;

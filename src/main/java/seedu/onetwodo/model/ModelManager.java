@@ -182,6 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void undoneLatestRecur(ReadOnlyTask taskToUncomplete, ReadOnlyTask taskToRevertBackward)
             throws TaskNotFoundException {
+
         toDoList.removeTask(taskToUncomplete);
         toDoList.backwardRecur(taskToRevertBackward);
     }
