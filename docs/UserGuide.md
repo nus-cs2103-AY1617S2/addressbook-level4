@@ -42,7 +42,6 @@ By : `Team CS2103JAN2017-F11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
 ### 2.1. Viewing help : `help`
 
 Shows information about how to use Yesterday's Tomorrow.
-The page is a real-time html version of this file.
 Format: `help`
 Hotkey: `CTRL+H`
 

@@ -56,7 +56,6 @@ Roles and Responsibilities: Team Co-Lead, Code Quality, Deliverables and feature
   * [Natural language task parsing](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#23-adding-a-task--add)
   * [Natural-language date parsing](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#23-adding-a-task--add)
   * [Theme Manager and themes](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#219-themes)
-  * [Help page that mirrors UserGuide.md in realtime](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#22-viewing-help--help)
   * [Task complete/incomplete indication](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#221-completion-indication)
   * [Task past deadline indication](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#222-past-deadline-indication)
 * Other major contributions:
