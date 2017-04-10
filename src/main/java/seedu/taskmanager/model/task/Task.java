@@ -160,11 +160,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isEventTask() {
-        if (!startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD);
     }
 
     /**
@@ -174,11 +170,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isDeadlineTask() {
-        if (startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+        return startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD);
     }
 
     /**
@@ -188,11 +180,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isFloatingTask() {
-        if (startDate.value.equals(EMPTY_FIELD) && endDate.value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+        return startDate.value.equals(EMPTY_FIELD) && endDate.value.equals(EMPTY_FIELD);
     }
 
     // @@author A0139520L
@@ -234,9 +222,7 @@ public class Task implements ReadOnlyTask {
             } else {
                 return true;
             }
-        }
-
-        else if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+        } else if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
                 t.getEndDate().value) == 1)
                 || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
                         t.getEndDate().value) == 1)

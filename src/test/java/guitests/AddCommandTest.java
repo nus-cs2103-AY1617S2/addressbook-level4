@@ -160,6 +160,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
     }
 
+    // @@author A0142418L
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
@@ -189,6 +190,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertTrue(floatingTaskListPanel.isListMatching(expectedList));
     }
 
+    // @@author A0139520L
     private void assertAddOneDayEventSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getOneDayEventAddCommand());
 

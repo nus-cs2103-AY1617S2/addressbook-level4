@@ -227,10 +227,8 @@ public class LogicManagerTest {
         int addIndex = expectedAB.addTask(toBeAdded) + 1;
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded)
-                , String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded) + "\n"
-                + "Task added at index: " + Integer.toString(addIndex),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded)
+                + "\n" + "Task added at index: " + Integer.toString(addIndex), expectedAB, expectedAB.getTaskList());
     }
 
     @Test
@@ -437,11 +435,12 @@ public class LogicManagerTest {
          *            used to generate the person data field values
          */
         Task generateTask(int seed) throws Exception {
-            seed = seed % 10;
-            return new Task(new TaskName("Task " + seed), new StartDate("0" + seed + "/02/17"),
-                    new StartTime("140" + seed), new EndDate("0" + seed + "/03/17"), new EndTime("160" + seed),
-                    new Boolean(false), new UniqueCategoryList(new Category("category" + Math.abs(seed)),
-                            new Category("category" + Math.abs(seed + 1))));
+            int randomNumber = seed % 10;
+            return new Task(new TaskName("Task " + randomNumber), new StartDate("0" + randomNumber + "/02/17"),
+                    new StartTime("140" + seed), new EndDate("0" + randomNumber + "/03/17"),
+                    new EndTime("160" + randomNumber), Boolean.FALSE,
+                    new UniqueCategoryList(new Category("category" + Math.abs(randomNumber)),
+                            new Category("category" + Math.abs(randomNumber + 1))));
         }
 
         /** Generates the correct add command based on the task given */
@@ -546,7 +545,7 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String taskname) throws Exception {
             return new Task(new TaskName(taskname), new StartDate("03/03/17"), new StartTime("1400"),
-                    new EndDate("03/03/17"), new EndTime("1600"), new Boolean(false),
+                    new EndDate("03/03/17"), new EndTime("1600"), Boolean.FALSE,
                     new UniqueCategoryList(new Category("category")));
         }
     }

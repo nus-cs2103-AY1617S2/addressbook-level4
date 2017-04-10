@@ -14,7 +14,8 @@ import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0141102H
 /**
- * Recurs a task
+ * Recurs an existing task in the task manager. Application is only able to
+ * recur events and deadlines, floating task cannot be recurred.
  */
 public class RecurringCommand extends Command {
 
@@ -61,13 +62,6 @@ public class RecurringCommand extends Command {
 
         if (taskToRecur.isDeadlineTask()) {
 
-            // try {
-            // model.addRecurringDeadlineTask(taskToRecur, numberOfRecurrence,
-            // typeOfRecurrence);
-            // } catch (DuplicateTaskException dte) {
-            // throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            // }
-            //
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
 
                 try {

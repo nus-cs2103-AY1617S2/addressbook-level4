@@ -137,7 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (int index = 0; targets.size() != index; index++) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(index);
-                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
+                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName.trim())) {
                     taskManager.removeTask(taskToDelete);
                     index--;
                     numDeletedTasks++;
@@ -165,7 +165,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Checks if added task clashes with another existing task in the task
      * manager and returns an integer.
-     * 
+     *
      * @return index of clashing task in filteredTaskList if clashing task
      *         exisits
      * @return -1 if otherwise
@@ -189,7 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Checks if updated task clashes with another existing task in the task
      * manager and returns an integer.
-     * 
+     *
      * @return index of clashing task in filteredTaskList if clashing task
      *         exisits
      * @return -1 if otherwise
@@ -334,6 +334,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    // @@author A0141102H
     private class TaskQualifier implements Qualifier {
         private Set<String> taskKeyWords;
 
@@ -397,13 +398,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            return (task.getIsMarkedAsComplete().equals(isComplete))
-                    && (taskKeyWords.stream()
-                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
-                            .findAny().isPresent())
-                    || (taskKeyWords.stream()
+            return (task.getIsMarkedAsComplete().equals(isComplete) && (taskKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword)).findAny()
+                    .isPresent()))
+                    || (task.getIsMarkedAsComplete().equals(isComplete) && (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
-                            .findAny().isPresent());
+                            .findAny().isPresent()));
         }
 
         @Override
@@ -449,11 +449,7 @@ public class ModelManager extends ComponentManager implements Model {
                             if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getStartDate().value.substring(0,
                                             readOnlyTask.getStartDate().value.length() - 6)) == 0) {
-                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0);
                             } else {
                                 return false;
                             }

@@ -39,7 +39,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to"
+    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, event start time has to"
             + " be earlier than end time.";
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
@@ -69,8 +69,6 @@ public class UpdateCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        // UpdateTaskDescriptor newUpdateTaskDescriptor = new
-        // UpdateTaskDescriptor();
 
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
@@ -165,15 +163,11 @@ public class UpdateCommand extends Command {
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTaskNameUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getTaskName().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getTaskName().isPresent());
     }
 
     /**
@@ -187,14 +181,10 @@ public class UpdateCommand extends Command {
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -205,15 +195,11 @@ public class UpdateCommand extends Command {
      * @return true if only categories are identified by user to be updated
      */
     private boolean isOnlyCategoriesUpdate() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getCategories().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getCategories().isPresent());
     }
 
     /**
@@ -225,14 +211,10 @@ public class UpdateCommand extends Command {
      *         be updated
      */
     private boolean isOnlyStartTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -244,14 +226,10 @@ public class UpdateCommand extends Command {
      *         be updated
      */
     private boolean isOnlyEndTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -263,14 +241,10 @@ public class UpdateCommand extends Command {
      *         identified by user to be updated
      */
     private boolean isOnlyStartUpdated() {
-        if (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -282,14 +256,10 @@ public class UpdateCommand extends Command {
      *         by user to be updated
      */
     private boolean isOnlyEndUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**

@@ -48,6 +48,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         assertTaskSelected(index);
     }
 
+    // @@author A0142418L
     private void assertTaskSelected(int index) {
         if (eventTaskListPanel.getNumberOfTask() > index) {
             assertEquals(eventTaskListPanel.getSelectedTasks().size(), 1);
@@ -76,6 +77,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         }
     }
 
+    // @@author A0142418L
     private void assertNoTaskSelected() {
         assertNoEventTaskSelected();
         assertNoDeadlineTaskSelected();

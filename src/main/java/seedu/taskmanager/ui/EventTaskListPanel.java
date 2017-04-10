@@ -19,7 +19,7 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 /**
  * Panel containing the list of event tasks.
  */
-public class EventTaskListPanel extends UiPart<Region> implements TaskListPanel  {
+public class EventTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(EventTaskListPanel.class);
     private static final String FXML = "EventTaskListPanel.fxml";
 
@@ -32,15 +32,9 @@ public class EventTaskListPanel extends UiPart<Region> implements TaskListPanel 
         addToPlaceholder(eventTaskListPlaceholder);
     }
 
+    //@@author A0142418L
     public void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        ObservableList<ReadOnlyTask> eventTaskList = FXCollections.<ReadOnlyTask>observableArrayList(taskList);
-        for (int index = 0; eventTaskList.size() != index; index++) {
-            ReadOnlyTask taskToDelete = eventTaskList.get(index);
-            if (!taskToDelete.isEventTask()) {
-                eventTaskList.remove(index, index + 1);
-                index--;
-            }
-        }
+        ObservableList<ReadOnlyTask> eventTaskList = extractEventTasks(taskList);
         eventTaskListView.setItems(eventTaskList);
         eventTaskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -85,5 +79,22 @@ public class EventTaskListPanel extends UiPart<Region> implements TaskListPanel 
                 setGraphic(new EventTaskCard(task, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    //@@author A0142418L
+    /**
+     * @param taskList
+     * @return ObserableList containing only event tasks
+     */
+    private ObservableList<ReadOnlyTask> extractEventTasks(ObservableList<ReadOnlyTask> taskList) {
+        ObservableList<ReadOnlyTask> eventTaskList = FXCollections.<ReadOnlyTask>observableArrayList(taskList);
+        for (int index = 0; eventTaskList.size() != index; index++) {
+            ReadOnlyTask taskToDelete = eventTaskList.get(index);
+            if (!taskToDelete.isEventTask()) {
+                eventTaskList.remove(index, index + 1);
+                index--;
+            }
+        }
+        return eventTaskList;
     }
 }

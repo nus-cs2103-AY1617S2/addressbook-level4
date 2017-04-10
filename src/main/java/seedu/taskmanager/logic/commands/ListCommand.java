@@ -4,7 +4,8 @@ import java.util.Set;
 
 //@@author A0141102H
 /**
- * Lists all persons in the address book to the user.
+ * Lists all uncompleted tasks in the task manager to the user. It is able to
+ * list uncompleted tasks on a specific date as well.
  */
 public class ListCommand extends Command {
 

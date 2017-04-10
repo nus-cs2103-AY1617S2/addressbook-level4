@@ -26,8 +26,6 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "ADD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager.\n"
-    // + "Example: " + COMMAND_WORD
-    // + " eat lunch ON thursday\n"
             + "Type HELP for user guide with detailed explanations of all commands";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -50,8 +48,7 @@ public class AddCommand extends Command {
             categorySet.add(new Category(categoryName));
         }
         this.toAdd = new Task(new TaskName(taskName), new StartDate(startDate), new StartTime(startTime),
-                new EndDate(endDate), new EndTime(endTime), new Boolean(false),
-                new UniqueCategoryList(categorySet));
+                new EndDate(endDate), new EndTime(endTime), Boolean.FALSE, new UniqueCategoryList(categorySet));
     }
 
     // @@author A0142418L
