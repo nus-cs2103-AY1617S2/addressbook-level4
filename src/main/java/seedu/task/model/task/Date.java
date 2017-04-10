@@ -37,13 +37,15 @@ public abstract class Date {
         return inputValue;
     }
 
+    //@@author A0164466X
     public java.util.Date getValue() {
         return value;
     }
+    //@@author
 
     @Override
     public String toString() {
-        return getInputValue();
+        return getValue().toString();
     }
 
     @Override

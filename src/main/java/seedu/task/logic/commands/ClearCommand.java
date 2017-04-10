@@ -21,7 +21,7 @@ public class ClearCommand extends Command {
     //@@author A0164466X
     public static final String KEYWORD_ALL = "all";
     public static final String KEYWORD_COMPLETE = Tag.TAG_COMPLETE;
-    public static final String KEYWORD_INCOMPLETE = Tag.TAG_INCOMPLETE;
+    public static final String KEYWORD_PASSED = "passed";
     //@@author
 
     //@@author A0163848R
@@ -33,14 +33,14 @@ public class ClearCommand extends Command {
             + ", "
             + KEYWORD_COMPLETE
             + ", "
-            + KEYWORD_INCOMPLETE
+            + KEYWORD_PASSED
             + "\n"
             + "Example: " + COMMAND_WORD + " completed";
 
     public static final String MESSAGE_SUCCESS_ALL = "All tasks have been cleared!";
     //@@author A0164466X
     public static final String MESSAGE_SUCCESS_COMPLETE = "All completed tasks have been cleared!";
-    public static final String MESSAGE_SUCCESS_PASSED = "All incompleted tasks have been cleared!";
+    public static final String MESSAGE_SUCCESS_PASSED = "All passed tasks have been cleared!";
     //@@author
     //@@author A0163848R
     public static final String MESSAGE_FAILURE = "Clear command not given any keywords!\n" + MESSAGE_USAGE;
@@ -85,7 +85,7 @@ public class ClearCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS_COMPLETE);
         }
 
-        if (keywords.contains(KEYWORD_INCOMPLETE)) {
+        if (keywords.contains(KEYWORD_PASSED)) {
 
             List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
             for (ReadOnlyTask task : model.getTaskManager().getTaskList()) {
