@@ -43,13 +43,13 @@ For example, click on deadline, only incompleted tasks with deadline will be dis
 
 #### Task Card : display all details about a task   
 An incompleted task card is shown with a white color bar:
-<img src="images/incompleted_task.png" width="500"> 
+<img src="images/incompleted_task.png" height="200" width="500"> 
 <br>
 A completed task card is shown with a green color bar:
-<img src="images/completed_task.png" width="500"> 
+<img src="images/completed_task.png" height="200" width="500"> 
 <br>
 A overdued task card is shown with a red red bar:<br>
-<img src="images/overdued_task.png" width="500"> 
+<img src="images/overdued_task.png" height="200" width="500"> 
 <br>
 There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:<br>
 <img src="images/pri_high.png" height="50" width="100"> <img src="images/pri_medium.png" height="50" width="100"><img src="images/pri_low.png" height="50" width="100"> 
@@ -112,7 +112,7 @@ Format: `list overdue`
 List all the tasks dued today in TaskIt.<br>
 Format: `list today`
 
-### 3.4. Editing an existing task : `edit` `e`
+### 3.4. Editing an existing task : `edit` 
 
 Edits an existing task in TaskIt.<br>
 Format: `e/edit <INDEX>  <[title]|[from]|[to]|[priority]|[tag]> <NEW>`
