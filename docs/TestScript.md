@@ -2,7 +2,8 @@
 
 This is the script for Manual Scripted Testing and a short review of the results.
 
-###Test Case 01
+### Test Case 01
+Command | Format
 -------- | :--------
 Test Case Summary | Add task without any details
 Test Data | `add TEST1`
@@ -10,7 +11,7 @@ Expected Result | Floating task added
 Actual Result | Floating task added
 Status | **PASSED**
 
-###Test Case 02
+### Test Case 02
 -------- | :--------
 Test Case Summary | Add task with only end/ 
 Test Data | `add TEST2 end/01/04/2017 12:00`
@@ -18,7 +19,7 @@ Expected Result | Task with deadline added
 Actual Result | Task with deadline added
 Status | **PASSED**
 
-###Test Case 03
+### Test Case 03
 -------- | :--------
 Test Case Summary | Add task with invalid time
 Test Data | `add TEST3 start/010/04/2017 10:00`
@@ -27,7 +28,7 @@ Actual Result | Prompt: _Time should always follow the dd/mm/yyyy hh:mm format_
 Status | **PASSED**
 Remarks | Time parameter follows a rigid requirements
 
-###Test Case 04
+### Test Case 04
 -------- | :--------
 Test Case Summary | Add task with desc/
 Test Data | `add TEST4 start/02/04/2017 10:00 end/02/04/2017 12:00 desc/adding with start and end`
@@ -35,7 +36,7 @@ Expected Result | Task with description added
 Actual Result | Task with description added
 Status | **PASSED**
 
-###Test Case 05
+### Test Case 05
 -------- | :--------
 Test Case Summary | Add task with multiple tags
 Test Data | `add TEST5 start/04/04/2017 12:00 end/04/04/2017 16:00 desc/adding with multiple tags tag/start tag/end tag/desc`
@@ -44,7 +45,7 @@ Actual Result | Task with multiple tags added
 Status | **PASSED**
 Remarks | Allow single and multiple tagging
 
-###Test Case 06
+### Test Case 06
 -------- | :--------
 Test Case Summary | Add task with multiple tags
 Test Data | `add TEST6 start/04/04/2017 12:00 end/04/04/2017 16:00 desc/adding with multiple tags tag/start tag/end, desc`
@@ -53,7 +54,7 @@ Actual Result | Prompt: _Tags names should be alphanumeric_
 Status | **PASSED**
 Remarks | Multiple tagging follows format **tag/tag1 tag/tag2**
 
-###Test Case 07
+### Test Case 07
 -------- | :--------
 Test Case Summary | Add task with time before current local time
 Test Data | `add TEST7 start/02/02/2017 16:00 end/03/02/2017 18:00 desc/this is for passed time period tag/add`
@@ -62,7 +63,7 @@ Actual Result | Task successfully added
 Status | **PASSED**
 Remarks | No restriction related to current local time
 
-###Test Case 08
+### Test Case 08
 -------- | :--------
 Test Case Summary | Add task with flexible input 
 Test Data | `add TEST8 end/02/02/2017 16:00 desc/ Flexible sequence start/01/02/2017 16:00`
@@ -71,7 +72,7 @@ Actual Result | Task successfully added
 Status | **PASSED**
 Remarks | Input recognition follows keyword instead of sequence
 
-###Test Case 09
+### Test Case 09
 -------- | :--------
 Test Case Summary | Add task with end time preceding start time 
 Test Data | `add TEST9 start/02/04/2017 10:00 end/02/04/2017 08:00`
@@ -79,7 +80,7 @@ Expected Result | Prompt: _Start time must precede end time_
 Actual Result | Prompt: _Start time must precede end time_
 Status | **PASSED**
 
-###Test Case 10
+### Test Case 10
 -------- | :--------
 Test Case Summary | Add exact task duplicate 
 Test Data | `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
@@ -88,7 +89,7 @@ Expected Result | Prompt: _This task already exists in JOBS_
 Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
 
-###Test Case 11
+### Test Case 11
 -------- | :--------
 Test Case Summary | Add task only differing in description
 Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00`
@@ -98,7 +99,7 @@ Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
 Remarks | Duplicate strictly follows name, startTime and endTime comparison
 
-###Test Case 12
+### Test Case 12
 -------- | :--------
 Test Case Summary | Add task only differing in tags
 Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 tag/duplicate`
@@ -107,7 +108,7 @@ Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
 Remarks | Duplicate strictly follows name, startTime and endTime comparison
 
-###Test Case 13
+### Test Case 13
 -------- | :--------
 Test Case Summary | Add task only differing in recur
 Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 recur/2`
@@ -116,7 +117,7 @@ Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
 Remarks | Duplicate strictly follows name, startTime and endTime comparison
 
-###Test Case 14
+### Test Case 14
 -------- | :--------
 Test Case Summary | Add task with exactly the same name and start time
 Test Data | `add TEST11 start/06/04/2017 13:00`
@@ -124,7 +125,7 @@ Expected Result | Task successfully added
 Actual Result | Task successfully added
 Status | **PASSED**
 
-###Test Case 15
+### Test Case 15
 -------- | :--------
 Test Case Summary | Add task with exactly the same name and start time
 Test Data | `add TEST11 end/06/04/2017 14:00`
