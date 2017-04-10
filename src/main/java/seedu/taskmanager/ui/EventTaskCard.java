@@ -38,24 +38,45 @@ public class EventTaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         if (isMultipleDateEvent(task)) {
-            startDateTime.setText(
-                    "Start Date: " + task.getStartDate().value + "   " + "Start Time: " + task.getStartTime().value);
-            endDateTime.setText("End Date: " + "  " + task.getEndDate().value + "   " + "End Time: " + "  "
-                    + task.getEndTime().value);
+            setMultipleDateEventTaskDetails(task);
         }
 
         if (isSameDateEvent(task)) {
-            startDateTime.setText("Date: " + task.getStartDate().value);
-            endDateTime.setText(
-                    "Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
+            setSameDateEventTaskDetails(task);
         }
 
+        setMarkedCompletedLabel(task);
+        initCategory(task);
+    }
+
+    /**
+     * @param task
+     */
+    private void setMarkedCompletedLabel(ReadOnlyTask task) {
         if (task.getIsMarkedAsComplete()) {
             markedCompleted.textProperty().bind(completed);
         } else {
             markedCompleted.textProperty().bind(empty);
         }
-        initCategory(task);
+    }
+
+    /**
+     * @param task
+     */
+    private void setSameDateEventTaskDetails(ReadOnlyTask task) {
+        startDateTime.setText("Date: " + task.getStartDate().value);
+        endDateTime.setText(
+                "Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
+    }
+
+    /**
+     * @param task
+     */
+    private void setMultipleDateEventTaskDetails(ReadOnlyTask task) {
+        startDateTime.setText(
+                "Start Date: " + task.getStartDate().value + "   " + "Start Time: " + task.getStartTime().value);
+        endDateTime.setText("End Date: " + "  " + task.getEndDate().value + "   " + "End Time: " + "  "
+                + task.getEndTime().value);
     }
 
     private boolean isMultipleDateEvent(ReadOnlyTask task) {
@@ -79,20 +100,30 @@ public class EventTaskCard extends UiPart<Region> {
     private void initCategory(ReadOnlyTask task) {
         if (!task.getCategories().asObservableList().isEmpty()) {
             for (int index = 0; task.getCategories().asObservableList().size() != index; index++) {
-                String category = task.getCategories().asObservableList().get(index).categoryName;
-                Label label = new Label(category);
-                if (category.equalsIgnoreCase("High")) {
-                    label.setStyle("-fx-background-color: red");
-                }
-                if (category.equalsIgnoreCase("Medium")) {
-                    label.setStyle("-fx-background-color: orange");
-                }
-                if (category.equalsIgnoreCase("Low")) {
-                    label.setStyle("-fx-background-color: lightblue");
-                }
+                Label label = stylePriorityCategories(task, index);
 
                 categories.getChildren().add(label);
             }
         }
+    }
+
+    /**
+     * @param task
+     * @param index
+     * @return
+     */
+    private Label stylePriorityCategories(ReadOnlyTask task, int index) {
+        String category = task.getCategories().asObservableList().get(index).categoryName;
+        Label label = new Label(category);
+        if (category.equalsIgnoreCase("High")) {
+            label.setStyle("-fx-background-color: red");
+        }
+        if (category.equalsIgnoreCase("Medium")) {
+            label.setStyle("-fx-background-color: orange");
+        }
+        if (category.equalsIgnoreCase("Low")) {
+            label.setStyle("-fx-background-color: lightblue");
+        }
+        return label;
     }
 }
