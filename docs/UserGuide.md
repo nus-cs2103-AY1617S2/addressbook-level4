@@ -178,7 +178,8 @@ Format: `edit INDEX [-l LOCATION -s START_TIME -e END_TIME -by DEADLINE -d DESCR
 > * Existing values will be updated to the input values.
 > * You can remove all the task's tags by typing `-T` without specifying any tags after it.
 > * You can add on the the tags by specifying new tags.
-> * PERIODICITY is not editable
+> * You can remove current tags by specifying it again.
+> * PERIODICITY is not editable.
 > * The date time information of a recurring task cannot be edited.
 
 Examples:
@@ -194,12 +195,12 @@ Examples:
 Deletes the specified task from the task scheduler.<br>
 Format: `delete INDEX`
 
-> When deleting tasks of the same name, the task that ends earlier regardless of date will be deleted first
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-> The index must be within the specified list of indexes available
-> Can be performed in batches by specifying more than one valid integer separated by spaces
+> * When deleting tasks of the same name, the task that ends earlier regardless of date will be deleted first
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * The index must be within the specified list of indexes available
+> * Can be performed in batches by specifying more than one valid integer separated by spaces
 
 Examples:
 
@@ -218,12 +219,12 @@ Examples:
 Marks the specified task from the task scheduler as done.
 Format: `mark INDEX`
 
-> Marks the task at the specified `INDEX` as done. <br>
-> The index refers to the index number shown in the undone tasks listing.<br>
-> The index **must be a positive interger** 1, 2, 3, ...
-> The index must be within the specified list of indexes available
-> Can be performed in batches by specifying more than one valid integer separated by spaces
-> Marking a recurring task as done will display the next undone occurence of the task
+> * Marks the task at the specified `INDEX` as done. <br>
+> * The index refers to the index number shown in the undone tasks listing.<br>
+> * The index **must be a positive interger** 1, 2, 3, ...
+> * The index must be within the specified list of indexes available
+> * Can be performed in batches by specifing more than one valid integer separated by spaces
+> * Marking a recurring task as done will display the next undone occurence of the task
 
 Examples:
 
@@ -238,12 +239,12 @@ Examples:
 Marks the specified task from the task scheduler as done.
 Format: `unmark INDEX`
 
-> Marks the task at the specified `INDEX` as not done. <br>
-> The index refers to the index number shown in the most done tasks listing.<br>
-> The index **must be a positive interger** 1, 2, 3, ...
-> The index must be within the specified list of indexes available
-> Can be performed in batches by specifing more than one valid integer separated by spaces
-> Marking a recurring task as undone will display the next undone occurence of the task
+> * Marks the task at the specified `INDEX` as not done. <br>
+> * The index refers to the index number shown in the most done tasks listing.<br>
+> * The index **must be a positive interger** 1, 2, 3, ...
+> * The index must be within the specified list of indexes available
+> * Can be performed in batches by specifing more than one valid integer separated by spaces
+> * Marking a recurring task as undone will display the previous undone occurence of the task
 
 Examples:
 
@@ -274,8 +275,8 @@ There is no need to save manually.
 Changes the file directory of the save location to a file directory specified by the user.<br>
 Format: `save`
 
-> File directory specified must be exisiting file directory in disk
-> File directory specified cannot be same as current save location file directory
+> * File directory specified must be exisiting file directory in disk
+> * File directory specified cannot be same as current save location file directory
 
 Example:
 
@@ -290,7 +291,7 @@ Example:
 Undo the last command that was performed in the task scheduler
 Format: `undo`
 
-> Maximum of 5 `undo` can be performed after last save
+> * Maximum of 5 `undo` can be performed after last save
 
 Example:
 
@@ -304,7 +305,7 @@ Example:
 Redo an undone command in the task scheduler
 Format: `redo`
 
-> Maximum of 5 `redo` can be performed after 5 `undo`
+> * Maximum of 5 `redo` can be performed after 5 `undo`
 
 Example:
 
@@ -338,6 +339,7 @@ by pressing on the `Today` button.
 **Q**: How do I transfer my data to another Computer? <br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Scheduler folder.
+
 <a name="timeInput"/></a>
 **Q**: What date time format is allowed? <br>
 **A**: The input of date time can be done using natural language. Input such as "9am next monday" or "25 of next month" 
