@@ -35,6 +35,8 @@ import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.ListCompleteCommand;
+import seedu.task.logic.commands.ListIncompleteCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
@@ -118,6 +120,15 @@ public class LogicManagerTest {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
+    //@@author A0164466X
+    /**
+     * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
+     */
+    private void assertCommandMessageSuccess(String inputCommand, String expectedMessage) {
+        assertCommandBehavior(false, inputCommand, expectedMessage);
+    }
+    //@@author
+
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'address book' and the 'last shown list' are verified to be unchanged.
@@ -157,6 +168,23 @@ public class LogicManagerTest {
         assertEquals(expectedAddressBook, model.getTaskManager());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
+    //@@author A0164466X
+    /**
+     * Executes the command, confirms that the result message is correct
+     * and that a CommandException is thrown if expected
+     */
+    private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage) {
+
+        try {
+            CommandResult result = logic.execute(inputCommand);
+            assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
+            assertEquals(expectedMessage, result.feedbackToUser);
+        } catch (CommandException e) {
+            assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+    //@@author
 
     @Test
     public void execute_unknownCommandWord() {
@@ -254,6 +282,18 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
+
+    //@@author A0164466X
+    @Test
+    public void executeListIncompletePersonMessageTest() throws Exception {
+        assertCommandMessageSuccess("li", ListIncompleteCommand.MESSAGE_SUCCESS);
+    }
+
+    @Test
+    public void executeListCompletePersonMessageTest() throws Exception {
+        assertCommandMessageSuccess("lc", ListCompleteCommand.MESSAGE_SUCCESS);
+    }
+    //@@author
 
 
     /**
@@ -460,12 +500,14 @@ public class LogicManagerTest {
 
         //@@author A0164466X
         /** Generates the complete list */
-        String generateListCompleteCommand() {
-            return "lc ";
+        String generateListCompleteCommand(Model model) {
+            model.updateFilteredListToShowComplete();
+            return "lc";
         }
 
         /** Generates the incomplete list */
-        String generateListIncompleteCommand(ReadOnlyTask p) {
+        String generateListIncompleteCommand(Model model) {
+            model.updateFilteredListToShowIncomplete();
             return "li";
         }
 
