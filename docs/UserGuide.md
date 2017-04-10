@@ -69,8 +69,7 @@ Displays a message detailing the results of the most recent command and the chan
 The Result Display also shows a feedback message to the user if a wrong command or parameter was entered, along with an explanation of the error if relevant.
 
 3. **Task List Panel**<br>
-Displays a list of tasks under a particular list, if specified. Otherwise, it displays all tasks that exist in TypeTask.<br>
-TypeTask automatically assigns your tasks with certain colours to help you differentiate them easily. <br>
+Displays a list of tasks under a particular list, if specified. Otherwise, it displays all tasks. TypeTask automatically assigns your tasks with certain colours to help you differentiate them easily. <br>
    
    `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
    `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
@@ -164,7 +163,8 @@ Format:<br>
 
 ```
 Things To Note:
-> Start Date/Time (Date/Time entered after "from:" and End Date/Time (Date/Time entered after "to:") are compulsory.
+> Start Date/Time (Date/Time entered after "from:" 
+  and End Date/Time (Date/Time entered after "to:") are compulsory.
 > Start Date must be before End Date.
 > TypeTask supports a wide range of formats for dates.
 > TypeTask follows the USA date format (MM/DD/YYYY)
@@ -226,9 +226,12 @@ Things To Note:
    e.g. Meeting Tutor will match meeting tutor
 > If no date is specified, this function take the current day as reference.
 > This function prioritises dates/time.
-   e.g. "find tmr" will give a list of tasks with tomorrow's date but will not return tasks with "tmr" in their names
-      > Therefore, avoid using digits to search for task names since TypeTask will return results based on time
-        e.g. "find 4" will give a list of tasks due today at 0400h instead of a list of tasks with "4" in their names
+   e.g. "find tmr" will give a list of tasks with tomorrow's date 
+         but will not return tasks with "tmr" in their names.
+      > Therefore, avoid using digits to search for task names, 
+        since TypeTask will return results based on time
+        e.g. "find 4" will give a list of tasks due today at 0400h 
+        instead of a list of tasks with "4" in their names
 > This function does not support searching by months.
 > This function will return the closest day from your current time.
    e.g. "find monday" will give you a list of tasks that have this coming monday date
