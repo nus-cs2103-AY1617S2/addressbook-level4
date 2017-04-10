@@ -229,7 +229,7 @@ Format: `undo`
 
 ### 3.11. Redo previous undo: `redo`
 
-Redo the prevous undone action.
+Redo the prevous undone action.<br>
 Redo can only work after a successful undo command<br>
 Format: `redo`
 
@@ -312,7 +312,7 @@ Format: `exit`
 * **Save** : `save FILEPATH` <br>
   e.g.`save taskIt.xml`
   
-  * **Path** : `path FILEPATH` <br>
+* **Path** : `path FILEPATH` <br>
   e.g.`path newFolder`
 
 
