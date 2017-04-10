@@ -105,7 +105,7 @@ public class MainWindow extends Window {
     void fillInnerParts() {
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath(), prefs);
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
