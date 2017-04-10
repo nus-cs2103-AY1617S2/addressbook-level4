@@ -116,7 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert updatedTask != null;
 
-        updateGeekeepHistory(geeKeep);
+        GeeKeep originalGeekeepClone = new GeeKeep(geeKeep);
+        updateGeekeepHistory(originalGeekeepClone);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
 
@@ -187,13 +188,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowDone() {
         filteredTasks.setPredicate(t -> t.isDone());
-        raise(new SwitchTaskCategoryEvent(TaskCategory.DONE));
+        raise(new SwitchTaskCategoryEvent(TaskCategory.FINISHED));
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
         filteredTasks.setPredicate(t -> !t.isDone());
-        raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
+        raise(new SwitchTaskCategoryEvent(TaskCategory.UPCOMING));
     }
 
     //@@author A0139438W
