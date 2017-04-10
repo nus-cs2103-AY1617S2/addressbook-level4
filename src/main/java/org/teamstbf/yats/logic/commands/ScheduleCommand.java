@@ -1,5 +1,9 @@
 package org.teamstbf.yats.logic.commands;
 
+import static org.teamstbf.yats.logic.parser.ScheduleCommandParser.PARAMETER_HOURS;
+import static org.teamstbf.yats.logic.parser.ScheduleCommandParser.PARAMETER_MINUTES;
+import static org.teamstbf.yats.logic.parser.ScheduleCommandParser.PARAMETER_TAG;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -19,10 +23,6 @@ import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByStartTime;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-
-import static org.teamstbf.yats.logic.parser.ScheduleCommandParser.PARAMETER_TAG;
-import static org.teamstbf.yats.logic.parser.ScheduleCommandParser.PARAMETER_HOURS;
-import static org.teamstbf.yats.logic.parser.ScheduleCommandParser.PARAMETER_MINUTES;
 
 //@@author A0102778B
 
@@ -341,7 +341,7 @@ public class ScheduleCommand extends Command {
      * First we must check if there is a appropriate boundary on the first day
      * (there must exist 2 days in a 34 hour block. Then if we can't find an
      * appropriate time slot, there must be a time slot open on the second day
-     * (guaranteed by pigeonhole principle)
+     * (guaranteed by pigeonhole principle).
      */
     private long checkMoreThan34HoursCase(int startBound, int endBound, int hoursMin, int startTime,
             Calendar timeToCheck) {

@@ -48,8 +48,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
     private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
-    // @@author 
-    
+    // @@author
+
     private final FilteredList<ReadOnlyEvent> filteredEvents;
     private final FilteredList<ReadOnlyEvent> calendarList;
     private final FilteredList<ReadOnlyEvent> taskList;
@@ -81,16 +81,16 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEvents.size() - 1));
-    }    
-    
+    }
+
     @Override
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
         taskManager.removeEvent(target);
         indicateTaskManagerChanged();
     }
-    
+
     // @@author A0102778B
-    
+
     @Override
     public void saveImageOfCurrentTaskManager() {
         removeUndoEntriesIfUndoStackSizeTooLarge();
@@ -119,7 +119,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * This method removes half of a stack of TaskManagers given to it (20 task managers save states to 10)
+     * This method removes half of a stack of TaskManagers given to it (20 task
+     * managers save states to 10)
      */
     private void removeHalfOfUndoStack(Stack<TaskManager> currStack) {
         Stack<TaskManager> tempUndoTaskManager = new Stack<TaskManager>();

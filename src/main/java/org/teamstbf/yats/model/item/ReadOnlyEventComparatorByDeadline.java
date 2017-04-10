@@ -10,7 +10,8 @@ public class ReadOnlyEventComparatorByDeadline implements Comparator<ReadOnlyEve
 
     @Override
     public int compare(ReadOnlyEvent o1, ReadOnlyEvent o2) {
-        if (o1.getDeadline().toString().equals(NO_DEADLINE_STRING) && o1.getDeadline().toString().equals(NO_DEADLINE_STRING)) {
+        if (o1.getDeadline().toString().equals(NO_DEADLINE_STRING)
+                && o1.getDeadline().toString().equals(NO_DEADLINE_STRING)) {
             return 0;
         }
         if (o1.getDeadline().toString().equals(NO_DEADLINE_STRING)) {

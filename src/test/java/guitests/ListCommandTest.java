@@ -42,7 +42,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
         /** lists all tasks in the primary list and sorts it by start date */
         commandBox.runCommand("list");
-        assertListResult("list by start", td.scheduleChecker, td.abdicate, td.oxygen, td.cower, td.duck ,td.boop);
+        assertListResult("list by start", td.scheduleChecker, td.abdicate, td.oxygen, td.cower, td.duck, td.boop);
 
         /** lists all tasks in the primary list and sorts it by end date */
         commandBox.runCommand("list");
@@ -50,7 +50,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
         /** lists all tasks in the primary list and sorts it by deadline */
         commandBox.runCommand("list");
-        assertListResult("list by deadline", td.boop, td.duck,td.scheduleChecker, td.cower, td.oxygen, td.abdicate);
+        assertListResult("list by deadline", td.boop, td.duck, td.scheduleChecker, td.cower, td.oxygen, td.abdicate);
     }
 
     @Test

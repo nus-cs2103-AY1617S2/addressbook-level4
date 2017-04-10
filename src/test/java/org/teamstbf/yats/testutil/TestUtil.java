@@ -77,10 +77,10 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Event[] {
-                new Event(new Title("Ali Muster"), new Location("School"), new Schedule("11:59PM 08/04/2017"),
+                    new Event(new Title("Ali Muster"), new Location("School"), new Schedule("11:59PM 08/04/2017"),
                             new Schedule("11:59PM 08/04/2017"), new Schedule(""), new Description("lame"),
                             new UniqueTagList(), new IsDone(), false, new Recurrence()),
-                new Event(new Title("Best"), new Location("Home"), new Schedule(""), new Schedule(""),
+                    new Event(new Title("Best"), new Location("Home"), new Schedule(""), new Schedule(""),
                             new Schedule("11:59PM 08/04/2017"), new Description("do what"), new UniqueTagList(),
                             new IsDone(), false, new Recurrence()) };
             // CHECKSTYLE.ON: LineLength
