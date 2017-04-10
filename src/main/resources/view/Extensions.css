@@ -1,6 +1,10 @@
-
+/* @@author A0139177W */
 .error {
-    -fx-background-color: red;
+    -fx-background-color: pink;
+}
+
+.success {
+    -fx-background-color: lightgreen;
 }
 
 

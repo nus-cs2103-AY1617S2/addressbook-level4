@@ -1,54 +1,75 @@
 package guitests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import guitests.guihandles.TaskCardHandle;
+import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.logic.commands.AddCommand;
+import seedu.ezdo.testutil.TestTask;
+import seedu.ezdo.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends EzDoGuiTest {
 
     @Test
     public void add() {
-        //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        //add one task
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.hoon;
+        assertAddSuccess(false, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add another person
-        personToAdd = td.ida;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        //add another task
+        taskToAdd = td.ida;
+        assertAddSuccess(false, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        //add another task using the shortened version of the add command
+        taskToAdd = td.jack;
+        assertAddSuccess(true, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+        // recur status cannot have empty start and due dates
+        commandBox.runCommand("add Floating Task f/yearly");
+        assertResultMessage(Messages.MESSAGE_RECUR_FAILURE);
+
+        //add duplicate task
+        commandBox.runCommand(td.hoon.getAddCommand(false));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(false, td.alice);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        //invalid command
+        commandBox.runCommand("add s/12/12/2016 00:01 d/01/01/2017 12:36 r/weekly p/1");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        //command with invalid date
+        commandBox.runCommand("add Buy new computer s/12/12/2016 00:00 d/12/12/2015 00:00 r/monthly");
+        assertResultMessage(Messages.MESSAGE_TASK_DATES_INVALID);
+
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+    private void assertAddSuccess(boolean usesShortCommand, TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand(taskToAdd.getAddCommand(usesShortCommand));
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        assertMatching(taskToAdd, addedCard);
+        assertFalse(taskToAdd.getDone());
 
-        //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

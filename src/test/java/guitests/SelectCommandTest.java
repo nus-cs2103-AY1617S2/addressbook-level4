@@ -1,59 +1,167 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.logic.commands.SelectCommand;
+import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.testutil.TestTask;
+//@@author A0139177W
+/**
+ * Runs test cases for Select command.
+ */
+public class SelectCommandTest extends EzDoGuiTest {
 
-public class SelectCommandTest extends AddressBookGuiTest {
-
-
+    /** Tests for invalid commands **/
     @Test
-    public void selectPerson_nonEmptyList() {
+    public void select() {
+        // invalid command
+        commandBox.runCommand("selects");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        // invalid command
+        commandBox.runCommand("select");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+
+        // invalid command
+        commandBox.runCommand("select  ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+    }
+
+    /** Tests for select commands in non-empty list. **/
+    @Test
+    public void selectTask_nonEmptyList() {
 
         assertSelectionInvalid(10); // invalid index
-        assertNoPersonSelected();
+        assertNoTaskSelected();
 
-        assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalPersons().length;
-        assertSelectionSuccess(personCount); // last person in the list
-        int middleIndex = personCount / 2;
-        assertSelectionSuccess(middleIndex); // a person in the middle of the list
+        assertSelectionSuccess(1); // first task in the list
+        int taskCount = td.getTypicalTasks().length;
+        assertSelectionSuccess(taskCount); // last task in the list
+        int middleIndex = taskCount / 2;
+        assertSelectionSuccess(middleIndex); // a task in the middle of the list
 
-        assertSelectionInvalid(personCount + 1); // invalid index
-        assertPersonSelected(middleIndex); // assert previous selection remains
+        assertSelectionInvalid(0); // invalid index
+        assertSelectionInvalid(taskCount + 1);
+        assertTaskSelected(middleIndex); // assert previous selection remains
 
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
+        // select index smaller than the range in done list
+        assertSelectionInvalidInDoneList(0);
+
+        // select index larger than the range in done list
+        commandBox.runCommand("list");
+        commandBox.runCommand("done 1 3");
+        commandBox.runCommand("done");
+        commandBox.runCommand("select 987");
+        assertResultMessage("The task index provided is invalid.");
+
+        /*
+         * Testing other invalid indexes such as -1 should be done when testing
+         * the SelectCommand
+         */
     }
 
+    /** Tests for select commands with multiple tasks in non-empty list. **/
     @Test
-    public void selectPerson_emptyList() {
+    public void selectMultipleTasks_nonEmptyList() {
+
+        TestTask[] currentList = td.getTypicalTasks();
+        assertFalse((currentList[1]).getStarted());
+
+        assertMultipleSelectionSuccess(currentList);
+
+        // select index smaller than the range in done list
+        assertSelectionInvalidInDoneList(0);
+
+        // select any task in done list
+        assertDoneTaskSelectionInvalid(2);
+
+        // select index larger than the range in done list
+        commandBox.runCommand("list");
+        commandBox.runCommand("done 1 3");
+        commandBox.runCommand("done");
+        commandBox.runCommand("select 987");
+        assertResultMessage("The task index provided is invalid.");
+
+        /*
+         * Testing other invalid indexes such as -1 should be done when testing
+         * the SelectCommand
+         */
+    }
+
+    /** Asserts success for select commands with multiple tasks. **/
+    private void assertMultipleSelectionSuccess(TestTask[] currentList) {
+
+        ArrayList<Integer> listOfTasks = new ArrayList<>();
+        for (int i = 0; i < currentList.length; i++) {
+            listOfTasks.add(i);
+        }
+        assertSelectionSuccess(listOfTasks);
+    }
+
+    /** Tests for select commands in an empty list. **/
+    @Test
+    public void selectTask_emptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertSelectionInvalid(1); //invalid index
+        assertSelectionInvalid(1); // invalid index
     }
 
+    /** Tests for select commands with invalid indexes. **/
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The task index provided is invalid.");
+    }
+
+    private void assertSelectionInvalidInDoneList(int index) {
+        commandBox.runCommand("done 1 2 4");
+        commandBox.runCommand("done");
+        commandBox.runCommand("select " + index);
+        assertResultMessage("The task index provided is invalid.");
+    }
+
+    private void assertDoneTaskSelectionInvalid(int index) {
+        commandBox.runCommand("done 1 2 4");
+        commandBox.runCommand("done");
+        commandBox.runCommand("select " + index);
+        assertResultMessage("The task has a status marked as done.");
     }
 
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Person: " + index);
-        assertPersonSelected(index);
+        assertResultMessage("Selected Task: " + "[" + index + "]");
+        assertTaskSelected(index);
     }
 
-    private void assertPersonSelected(int index) {
-        assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyPerson selectedPerson = personListPanel.getSelectedPersons().get(0);
-        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
-        //TODO: confirm the correct page is loaded in the Browser Panel
+    private void assertSelectionSuccess(ArrayList<Integer> indexes) {
+        String listOfTasks = "";
+        for (int i = 1; i <= indexes.size(); i++) {
+            listOfTasks += " ";
+            listOfTasks += i;
+        }
+        commandBox.runCommand("select " + listOfTasks);
+
+        listOfTasks = listOfTasks.trim();
+        listOfTasks = listOfTasks.replace(" ", ", ");
+        assertResultMessage("Selected Task: " + "[" + listOfTasks + "]");
+        assertTaskSelected(indexes.size());
     }
 
-    private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+    private void assertTaskSelected(int index) {
+        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
+    }
+
+    private void assertNoTaskSelected() {
+        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
 
 }
+//@@author

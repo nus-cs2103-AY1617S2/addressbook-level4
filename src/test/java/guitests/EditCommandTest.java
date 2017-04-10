@@ -1,85 +1,131 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
+import guitests.guihandles.TaskCardHandle;
+import seedu.ezdo.commons.core.Messages;
+import seedu.ezdo.logic.commands.EditCommand;
+import seedu.ezdo.model.tag.Tag;
+import seedu.ezdo.model.todo.DueDate;
+import seedu.ezdo.model.todo.Name;
+import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.testutil.TaskBuilder;
+import seedu.ezdo.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends EzDoGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestPerson[] expectedPersonsList = td.getTypicalPersons();
+    private TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
-        int addressBookIndex = 1;
+        String detailsToEdit = "Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 f/yearly t/husband";
+        int ezDoIndex = 1;
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("1")
+                .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("yearly")
+                .withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
+
+    @Test
+    public void edit_shortCommand_success() throws Exception {
+        String detailsToEdit = "Alson p/3 s/02/02/2017 12:00 d/10/10/2019 12:00 f/monthly t/guy";
+        int ezDoIndex = 1;
+
+        TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("3")
+                .withStartDate("02/02/2017 12:00").withDueDate("10/10/2019 12:00").withRecur("monthly")
+                .withTags("guy").build();
+
+        assertEditSuccess(true, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+    }
+
+    //@@author A0138907W
+    @Test
+    public void edit_eachFieldSpecified_success() throws Exception {
+        int ezDoIndex = 1;
+        commandBox.runCommand("edit 1 Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 f/daily t/husband");
+        TestTask testTask = new TaskBuilder().withName("Alson").withPriority("3")
+            .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("daily")
+            .withTags("husband").build();
+
+
+        String detailsToEdit = "p/3";
+        testTask = new TaskBuilder(testTask).withPriority("3").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
+
+        detailsToEdit = "Alson s/11/11/2017 12:00";
+        testTask = new TaskBuilder(testTask).withStartDate("11/11/2017 12:00").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
+
+        detailsToEdit = "Alson d/01/01/2018 12:00";
+        testTask = new TaskBuilder(testTask).withDueDate("01/01/2018 12:00").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
+
+        detailsToEdit = "Alson f/";
+        testTask = new TaskBuilder(testTask).withRecur("").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
+
+        detailsToEdit = "Alson t/brother";
+        testTask = new TaskBuilder(testTask).withTags("brother").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
+    }
+
+    //@@author
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+        int ezDoIndex = 2;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int ezDoIndex = 2;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Elle");
 
-        String detailsToEdit = "Belle";
-        int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        String detailsToEdit = "Ellll";
+        int filteredTaskListIndex = 1;
+        int ezDoIndex = 5;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Ellll").build();
+
+        assertEditSuccess(false, filteredTaskListIndex, ezDoIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_missingPersonIndex_failure() {
+    public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_invalidPersonIndex_failure() {
+    public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -94,45 +140,62 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        commandBox.runCommand("edit 1 d/12due");
+        assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 s/01/01/2017 00:00 d/01/01/2016 00:00");
+        assertResultMessage(Messages.MESSAGE_TASK_DATES_INVALID);
     }
 
     @Test
-    public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+    public void edit_duplicateTask_failure() {
+        commandBox.runCommand("edit 3 Alice Pauline p/1 "
+                                + "s/12/12/2016 11:22 d/14/03/2017 22:33 f/daily"
+                                + " t/friends");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
+    //@@author A0139177W
     /**
-     * Checks whether the edited person has the correct updated details.
-     *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * Checks if a edit command can be successfully executed if both dates are empty
+     * with recur status present.
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestPerson editedPerson) {
-        commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
+    @Test
+    public void edit_EmptyDatesWithRecur_failure() {
+        commandBox.runCommand("edit 1 s/ d/");
+        assertResultMessage(Messages.MESSAGE_RECUR_FAILURE);
+    }
+    //@@author
+    /**
+     * Checks whether the edited task has the correct updated details.
+     *
+     * @param usesShortCommand whether to use the short or long version of the command
+     * @param filteredTaskListIndex index of task to edit in filtered list
+     * @param ezDoIndex index of task to edit in ezDo.
+     *      Must refer to the same task as {@code filteredTaskListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
+     */
+    private void assertEditSuccess(boolean usesShortCommand, int filteredTaskListIndex, int ezDoIndex,
+                                    String detailsToEdit, TestTask editedTask) {
+        if (usesShortCommand) {
+            commandBox.runCommand("e " + filteredTaskListIndex + " " + detailsToEdit);
+        } else {
+            commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        }
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
-        assertMatching(editedPerson, editedCard);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
+        assertMatching(editedTask, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
-        expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        // confirm the list now contains all previous tasks plus the task with updated details
+        expectedTasksList[ezDoIndex - 1] = editedTask;
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }

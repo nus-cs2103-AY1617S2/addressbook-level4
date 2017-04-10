@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0139177W -->
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+         <children>
+            <HBox spacing="5.0">
+               <children>
+                  <AnchorPane fx:id="priorityColor" minHeight="60.0" minWidth="10.0" prefWidth="10.0" styleClass="anchor-pane">
+
+                     <children>
+                        <Label fx:id="priority" alignment="CENTER" maxWidth="0.0" styleClass="priority_number" textAlignment="CENTER" wrapText="true" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets right="30.0" />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+                  <Label fx:id="id" alignment="TOP_RIGHT" minWidth="50.0" styleClass="task" text="\$id" textAlignment="RIGHT" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+
+                  <Label fx:id="name" alignment="TOP_LEFT" minWidth="250.0" prefWidth="250.0" styleClass="task" text="\\$name" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="status" accessibleRole="IMAGE_VIEW" alignment="TOP_LEFT" minWidth="50.0" prefWidth="50.0" styleClass="task" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="55.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="startDate" alignment="TOP_LEFT" minWidth="120.0" prefWidth="120.0" styleClass="task" text="\$startDate" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="recur" alignment="TOP_LEFT" minWidth="100.0" prefWidth="100.0" styleClass="task" text="\\$recur" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="dueDate" alignment="TOP_LEFT" minWidth="120.0" prefWidth="120.0" styleClass="task" text="\$dueDate" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <FlowPane fx:id="tags" prefWrapLength="800.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </FlowPane>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
+         </children>
+         <HBox.margin>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </HBox.margin>
+        </GridPane>
+    </children>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</HBox>

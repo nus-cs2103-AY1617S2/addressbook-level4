@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
-public class HelpWindowTest extends AddressBookGuiTest {
+public class HelpWindowTest extends EzDoGuiTest {
 
     @Test
     public void openHelpWindow() {
@@ -18,17 +18,17 @@ public class HelpWindowTest extends AddressBookGuiTest {
         resultDisplay.clickOnTextArea();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        personListPanel.clickOnListView();
+        taskListPanel.clickOnListView();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        browserPanel.clickOnWebView();
-        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         //use menu button
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 
         //use command
-        assertHelpWindowOpen(commandBox.runHelpCommand());
+        assertHelpWindowOpen(commandBox.runHelpCommand(false));
+
+        //shortened use command
+        assertHelpWindowOpen(commandBox.runHelpCommand(true));
     }
 
     private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {
