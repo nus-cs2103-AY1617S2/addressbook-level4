@@ -3,52 +3,58 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.teamstbf.yats.commons.core.Messages;
+import org.teamstbf.yats.testutil.TestEvent;
+import org.teamstbf.yats.testutil.TestUtil;
 
-import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import guitests.guihandles.EventCardHandle;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {
-        //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        // add one event
+        TestEvent[] currentList = td.getTypicalTasks();
+        TestEvent eventToAdd = td.cower;
+        assertAddSuccess(eventToAdd, currentList);
+        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
-        //add another person
-        personToAdd = td.ida;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        // add another event
+        eventToAdd = td.cower;
+        assertAddSuccess(eventToAdd, currentList);
+        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
-        //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        // add duplicate person
+        /*
+         * commandBox.runCommand(td.cower.getAddCommand());
+         * assertResultMessage(AddCommand.MESSAGE_DUPLICATE_EVENT);
+         * assertTrue(taskListPanel.isListMatching(currentList));
+         */
 
-        //add to empty list
-        commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        // add to empty list
+        commandBox.runCommand("reset");
+        assertAddSuccess(td.duck);
 
-        //invalid command
+        // invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+    private void assertAddSuccess(TestEvent eventToAdd, TestEvent... currentList) {
+        if (eventToAdd == td.cower) {
+            commandBox.runCommand("add Act like a craven -l The Wall -s 8 april 2017 11:59PM "
+                    + "-e 8 april 2017 11:59PM -d fighting the wildings, but extremely scared -T LordCommanderJonSnow");
+        }
+        if (eventToAdd == td.duck) {
+            commandBox.runCommand("add ahhhh -by 8 april 2017 11:59pm -l AHHH -d AHHHHHHHHH -T AHHHHHHHHHHHHHH");
+        }
+        // confirm the new card contains the right data
+        EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().fullName);
+        assertMatching(eventToAdd, addedCard);
 
-        //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
-
-        //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        // confirm the list now contains all previous persons plus the new
+        // person
+        TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
-
 }
