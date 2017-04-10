@@ -194,7 +194,7 @@ The `UiPart` component is an abstract class, represents a distinct part of the U
 
 The `TaskListPanel` component,`EventlistPanel`component and `FloatingTaskListPanel` component display `TaskCard` objects in listviews
 
-The `TaskCard` component associates with each task in observablelist, containing all attributes of the task, with images loaded on attributes like priority, exsitence of description
+The `TaskCard` component associates with each task in the observablelist, containing all attributes of the task, with images loaded on attributes like priority, existence  of description
 
 
 ### 3.4 Logic Component
