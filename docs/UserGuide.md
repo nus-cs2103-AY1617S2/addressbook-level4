@@ -86,7 +86,7 @@ TypeTask automatically assigns your tasks with certain colours to help you diffe
    Other example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` Attend Meeting by: 12 Feb 11am` :
-     adds the task `Attend Meeting` to the Task Manager.
+     adds the task `Attend Meeting` to the Task Manager
    * **`delete`**` 1` : deletes the task shown with index 1
    * **`exit`** : exits the app
 &nbsp;
@@ -479,9 +479,9 @@ Format:<br>
  the file that contains the data of your previous Task Manager folder.<br>
  
 **Q**: How do I transfer my data to another Computer through cloud service?<br>
- 1. On your main computer, use the `Setting` Command to change the default saving locaion to the local cloud service location. E.g. C:\Users\<Username of computer>\Google Drive<br>
- 2. On your other computer, use the `Use` Command to first import the data from the local cloud service location.<br>
- 3. Before you start using the TypeTask on your other computers, use the `Setting` Command to change the default saving location.<br>
+ 1. On one computer, use the `setting` Command to change the default saving locaion to the local cloud service location. E.g. C:\Users\<Username of computer>\Google Drive<br>
+ 2. On your other computer, use the `use` Command to first import the data from the local cloud service location.<br>
+ 3. Before you start using the TypeTask on your other computers, use the `setting` Command to change the default saving location.<br>
  4. Edit away! Both of your computers will be able to see the updated file everytime you open them.<br>
 
 ## 5. Command Summary
