@@ -253,31 +253,37 @@ logical errors in state transformation (the redo stack will contain old states).
 task manager, and if there are 20 saved states, 10 of the earliest saved states will be deleted.
 
 ### 3.4 Scheduling Command
-In YATS, we implement a schedule command to automatically schedule tasks based on available timeslots. Scheduling is made based on the following
+In YATS, we implement a schedule command to automatically schedule tasks based on available timeslots. Scheduling is made based on the following<br>
 constraints - i) the scheduled time must not overlap with any other event in the list ii) it must be between 8am and 6pm iii) must not be on a saturday or
-sunday The algorithm. These constraints were implemented as we wanted to ensure a very specific
+sunday The algorithm. These constraints were implemented as we wanted to ensure a very specific<br>
 use case for schedule - we wanted to allow the user to schedule tasks automatically into their workday. This allows them
 to quickly slot their ad-hoc events into their own timetable, without worrying about when to put each event. To accomplish scheduling,
-we first searches for open intervals in the list of events. Open intervals are intervals not taken up by any event, and thus can be used for scheduling.
-We then have to check if the open interval is appropriate for scheduling the event based on the constraints of 8am to 6pm, and that it is on a weekday.
+we first searches for open intervals in the list of events. Open intervals are intervals not taken up by any event, and thus can be used for scheduling.<br>
+We then have to check if the open interval is appropriate for scheduling the event based on the constraints of 8am to 6pm, and that it is on a weekday.<br>
 First, we describe the method of finding open intervals. The list is sorted by start time and then we iterate through this sorted list,
-keeping the max of its accompanying end time saved in a variable and checking if the maximum end time is smaller than the next events start time. 
-If current maximum end time at the current event is smaller than the start time of the next event, it is then provable that this is an open interval.
+keeping the max of its accompanying end time saved in a variable and checking if the maximum end time is smaller than the next events start time. <br>
+If current maximum end time at the current event is smaller than the start time of the next event, it is then provable that this is an open interval.<br>
 This is because there is no event with an end time after this interval (since we took the max of all preceding end times of the first start times), 
 and no event with a start time or end time before this interval (since the array is sorted by start time, and every events end time must be later 
-than its start time). Thus, this must be an open interval which we can then check whether it is appropriately sized and
-the correct day for scheduling. This problem is complex as because we are looking for valid timings between 8am and 6pm, and the boundaries of an open interval 
-span across multiple days. To solve this problem, we first break down the possible times of boundaries into 3 cases, i)
-Case 1 - Less than 10 Hours , ii) Case 2 - More than 34 Hours , iii) Case 3 - In between 10 Hours and 34 Hours. In case i), because of the time period from 6pm to 8am is 10 Hours, 
-any timing less than 10 hours must only have one valid day 
-for scheduling. The theoretical upper bound for a single day timeslot is actually 14 hours, but in this case we do not what to deal with wrapped timings and
-thus we pick a boundary of 10 hours. Thus, we can check just that day alone to see if there is a valid time slot there. Case ii - 34 hours)
-Next, if the timing is more than 34 hours, there must be a valid 10 hour block where no event exists. This is because 34 hours encompasses at
-least one complete time block, and because we know this is an open interval, then by pigeonhole principle there must be an empty 10 hour
-block in a 34 hour range. Finally, the most complex case is between 10 Hours and 34 Hours. Here, we must first check if there are one or two
-valid days to analyse. Then, we find the appropriate boundaries for one or two days, and check if either of these are valid times for scheduling.
-Lastly, our final check is that the scheduled day is not a saturday or a sunday. Thus, from these set of rules, we can find an appropriately sized open interval with the 
-constraints of being within 8am to 6pm, be on a saturday and sunday and not overlap with any other timeslot.
+than its start time).<br>
+Thus, this must be an open interval which we can then check whether it is appropriately sized and
+the correct day for scheduling. 
+This problem is complex as because we are looking for valid timings between 8am and 6pm, and the boundaries of an open interval span across multiple days.<br>
+To solve this problem, we first break down the possible times of boundaries into 3 cases,<br> i)
+Case 1 - Less than 10 Hours,<br>
+ii) Case 2 - More than 34 Hours, <br>
+iii) Case 3 - In between 10 Hours and 34 Hours. <br>
+In case i), because of the time period from 6pm to 8am is 10 Hours, any timing less than 10 hours must only have one valid day 
+for scheduling. The theoretical upper bound for a single day timeslot is actually 14 hours, but in this case we do not what to deal with wrapped timings and thus we pick a boundary of 10 hours. Thus, we can check just that day alone to see if there is a valid time slot there. <br>
+Case ii - 34 hours)
+Next, if the timing is more than 34 hours, there must be a valid 10 hour block where no event exists. This is because 34 hours encompasses at least one complete time block, and because we know this is an open interval, then by pigeonhole principle there must be an empty 10 hour block in a 34 hour range. Finally, the most complex case is between 10 Hours and 34 Hours. Here, we must first check if there are one or two valid days to analyse. Then, we find the appropriate boundaries for one or two days, and check if either of these are valid times for scheduling.<br>
+Lastly, our final check is that the scheduled day is not a saturday or a sunday. Thus, from these set of rules, we can find an appropriately sized open interval with the constraints of being within 8am to 6pm, be on a saturday and sunday and not overlap with any other timeslot.
+
+### 3.5 Change Save Location Command
+
+In YATS, We implement a change save location command to get the configurations of the current YATS and put it into a new config object. The filepath of the save location is updated here and the new config object is saved.<br>
+Following which, the filepath in storage (XmlTaskManagerStorage) is updated to the new filepath as well.<br>
+Once this is done, a force save is done to create the data file in the new specified file location.<br>
 
 ## 4. Testing
 
@@ -429,6 +435,14 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `TaskScheduler` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Use case: Add Non-Recurring Floating Task
+
+**MSS**
+
+1. User requests to add a task with a title, optional description, optional description, optional tags with no timings
+2. TaskManager creates a task
+3. TaskManager shows the added task's details and that the task was successfully added <br>
+Use case ends.
 
 #### Use case: Add Non-Recurring Task With Deadline
 
@@ -492,40 +506,44 @@ Use case ends.
 
 **MSS**
 
-1. User requests to mark task as done by providing specified title/tag/date
-2. TaskManager finds a unique task that is identified by that string using the Search method and marks it as done, and prints the task that was marked as done <br>
+1. User requests to find task by providing specified title/tag/date
+2. TaskManager finds a list of unique tasks that is identified by that string using the Search method
+3. User requests to mark specify task as done by index
+4. TaskManager prints the details of task that was marked as done <br>
 Use case ends.
 
 **Extensions**
 
 1a. User inputs a number
-> 1a1. Task Manager marks that as done, and prints the task out again <br>
+> 1a1. TaskManager marks that as done,
+> 1a2. TaskManager prints the details of the task out <br>
   Use case ends
 
-2a. A list of unique tasks was found
-> 2a1. TaskManager shows a lists of those tasks, and asks the user which task they would like to mark as done <br>
+2a. No tasks were found
+> 2a1. TaskManager shows an empty list <br>
+> 2a2. User have no further action to take<br>
 > Use case ends
 
-2b. No list of unique tasks was found
-> 2b1. TaskManager tells user that no tasks was found, and they can enter another string or use the list function to mark task as done. <br>
-> Use case resumes at step 1 <br>
+3a. Invalid index specified
+> 3a1. TaskManager shows an error message
+> Use case resumes at step 2<br>
 
 
 #### Use case: Mark Task As Done (by index)
 
 **MSS**
 
-1. User request to list task by providing specified title/tag/date
-2. TaskManager shows a list of all tasks added within specified title/tag/date in order of date & time from first to last
-3. User enters Mark Task as Done with index
-4. TaskManager finds the task that is identified by that index and marks it as done <br>
+
+1. User enters Mark Task as Done with index
+2. TaskManager finds the task that is identified by that index and marks it as done <br>
+3. TaskManager prints details of task to show to user<br>
 Use case ends.
 
 **Extensions**
 
-4a. Index is not found in the TaskManager List
-> 4a1. TaskManager reports that no task was found with that index.  <br>
-> Use case resumes at step 3 <br>
+1a. Index is not found in the TaskManager List
+> 1a1. TaskManager reports that no task was found with that index.  <br>
+> Use case ends
 
 
 #### Use case: Delete task
@@ -561,8 +579,8 @@ Use case ends.
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows List is empty message <br>
-> Use case ends <br>
+> 2a1. TaskManager shows '0 tasks listed' message <br>
+Use case ends <br>
 
 
 #### Use case: List Task (Everything)
@@ -570,16 +588,14 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks/events
-2. TaskManager shows a list of all tasks/events added in order of date from first to last
-3. TaskManager provides options for User to perform commands from there
-4. User chooses exit option <br>
+2. TaskManager shows a list of all tasks/events
 Use case ends.
 
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows List is empty message <br>
-> Use case ends <br>
+> 2a1. TaskManager shows empty list <br>
+Use case ends <br>
 
 
 #### Use case: Edit Task
@@ -589,26 +605,26 @@ Use case ends.
 1. User request to list tasks
 2. TaskManager shows list of existing tasks
 3. User requests to edit a task with a specified index in the list. With optional new title, either a start time or an end time or both, and optional description, optional location and optional tags
-12. TaskManager updates variables of the task <br>
+4. TaskManager updates variables of the task and prints it out for user to see <br>
 Use case ends.
 
 **Extensions**
 
 2a. The list is empty
-> 2a1. TaskManager shows 'List is empty' message <br>
-> Use case ends
+> 2a1. TaskManager shows empty list <br>
+Use case ends
 
 3a. The given index is invalid
 > 3a1. TaskManager shows an error message <br>
-> Use case resumes at step 3
+Use case resumes at step 2
 
 3b. The given parameters are invalid
 > 3a1. TaskManager shows an error message telling user the legal format<br>
-> Use case resumes at step 3
+Use case resumes at step 2
 
 3b. The given tag flag is present and empty
 > 3a1. TaskManager deletes all tags of that task<br>
-> Use case resumes at step 3
+Use case resumes at step 4
 
 
 #### Use case: Clear Done Tasks
@@ -618,14 +634,14 @@ Use case ends.
 1. User requests to clear done tasks
 2. TaskManager goes through list to find done tasks
 3. TaskManager deletes all done tasks
-4. TaskManager shows User the list of deleted done tasks <br>
+4. TaskManager shows User the number of deleted done tasks <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The done task list is empty
 > 2a1. TaskManager shows 'No done tasks' message <br>
-> Use case ends. <br>
+Use case ends. <br>
 
 
 #### Use case: Undo Last Command
@@ -639,7 +655,8 @@ Use case ends.
 **Extensions**
 
 2a. No last saved state
-> Use case ends. <br>
+> 2a1. TaskManager shows there is no undo to do message<br>
+Use case ends. <br>
 
 
 #### Use case: Redo Last Command
@@ -653,7 +670,8 @@ Use case ends.
 **Extensions**
 
 2a. No next saved state
-> Use case ends. <br>
+> 2a1. TaskManager shows there is no redo to do message<br>
+Use case ends. <br>
 
 
 #### Use case: Get Help
@@ -678,7 +696,10 @@ Use case ends.
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. All classes should follow the single responsibility guideline
+5. Codes should be properly commented on to maintain readability
+6. Should come with automated unit tests and open source code
 
 
 ## Appendix D : Glossary
