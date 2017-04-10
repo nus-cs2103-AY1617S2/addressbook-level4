@@ -1,9 +1,9 @@
 # Test Script for Manual Testing
 
-## Loading ProcrastiNomore with sample data	
+## Loading ProcrastiNomore with sample data
 
 Ensure that you have the file `SampleData.xml` inside the `/src/test/data/ManualTesting` folder.
-Open the SampleData.xml file and copy the contents into the taskmanager.xml file in the src/data folder. 
+Open the SampleData.xml file and copy the contents into the taskmanager.xml file in the src/data folder.
 
 If the taskmanager.xml file does not exist, create a new xml file with the file name "taskmanager" then
 copy the content from the SampleData.xml file over.
@@ -34,7 +34,7 @@ Type HELP for user guide with detailed explanations of all commands"
 ### 1. Add an event
 Input `ADD doing testing FROM today 1200 TO tmr 1400`
 
-Result: "New task added: doing testing Start Date: [today's date] Start Time: 1200 End Date: [tomorrow's date] End Time: 1300 <br>
+Result: "New task added: doing testing Start Date: [today's date] Start Time: 1200 End Date: [tomorrow's date] End Time: 1400 <br>
 Task added at index: [varies]"
 
 ### 2. Add a clash event
@@ -48,21 +48,28 @@ Task added at index: [varies]"
 Input `ADD deadline BY today`
 
 Result: "New task added: deadline End Date: [today's date] End Time: 2359 <br>
-Task added at index: [varies]" 
+Task added at index: [varies]"
 
 
 ### 4. Add a floating task
 Input `ADD floatingTask`
 
 Result: "New task added: floatingTask <br>
-Task added at index: [varies]"
+Task added at index: 55"
 
 
 ## Testing out the UPDATE function:
 
 ### 1. Update task name
-Find basic task name `Buy a dog` and remember the index number `[INDEX]`
-Input `UPDATE [INDEX] Buy 4 dogs`
+
+Input <br> 
+1. `SEARCH Buy`
+2. `UPDATE [INDEX] Buy 4 dogs`
+
+Result <br>
+1. Find basic task name `Buy a dog` and remember the index number [INDEX]
+2. 
+
 
 Result: "Updated Task: Buy 4 dogs Categories: [lepak] <br>
 Task updated to index: [varies]"
@@ -232,9 +239,9 @@ Task updated to index: 5"
 Notice the shift from Events to Deadlines column.
 
 ## Testing out the SAVE function:
-Input `SAVE C:\Users\<Computer User ID>\Desktop`
+Input `SAVE C:\Users\[Computer User ID]\Desktop`
 
-Result: "Save location changed to: C:\Users\<Computer User ID>\Desktop\taskmanager.xml"
+Result: "Save location changed to: C:\Users\[Computer User ID]\Desktop\taskmanager.xml"
 ProcrastiNomore changes the save location as specified.
 
 ## Testing out the EXIT function:

@@ -77,14 +77,14 @@ There are 3 forms of task that ProcrastiNomore supports:
 Events added into the task manager are sorted by their start time. Events with earlier start date and time will be located at the top and later start date and time at the bottom of the event tasks pane.
 
 #### 3.2.1.1. Same Day Events
-These are events that end within the same day(duration of a day or lesser).<br> 
+These are events that end within the same day(duration of a day or lesser). <br>
 
 There are two formats:
 
 Format: `ADD` task `ON` date/day <br />
 > In this format where only a date/day is provided, start and end time will be automatically assigned as:
 > * Start Time : 0000hrs
-> * End Time   : 2359 hrs 
+> * End Time   : 2359 hrs
 
 Format: `ADD` task `ON` date/day time `TO` time <br />
 > In this format, start or end time can be omitted and the fields will be automatically assigned. <br>
@@ -92,8 +92,8 @@ Format: `ADD` task `ON` date/day time `TO` time <br />
 > * Start Time : 0000hrs
 >
 > Without a specified end time, it will be automatically assigned as:
-> * End Time   : +1hr buffer from start time <br /> 
-> eg. Start time 1200hrs, end time will be 1300hrs 
+> * End Time   : +1hr buffer from start time <br />
+> eg. Start time 1200hrs, end time will be 1300hrs
 > If one hour buffer goes into the next day, End date will be changed to next day and time will be changed accordingly.
 
 
@@ -102,12 +102,12 @@ Format: `ADD` task `FROM` date/day time `TO` date/day time <br />
 > Same start and end date cannot be used for this format. If a same day event is required, use one day event format. <br>
 > Without specified start or end time, start and/or end time will be automatically assigned as:
 > * Start Time : 0000hrs
-> * End Time   : 2359 hrs 
+> * End Time   : 2359 hrs
 
 Sample Event:
 > Type the following command `ADD Stayover with Friends FROM 10/05/17 1400 TO 11/05/16 1800 CATEGORY Fun` into the command Box and press <kbd>Enter</kbd>
 > <img src="images/ProcrastiNomore_Before_Add_Event.PNG" width="1000">
-> The application will save the sample event in Events column 
+> The application will save the sample event in Events column
 > <img src="images/ProcrastiNomore_After_Add_Event.PNG" width="1000">
 
 #### 3.2.2. Deadlines
@@ -116,7 +116,7 @@ Deadlines added into the task manager are sorted by their due date. Events with 
 
 Format: `ADD` task `BY` date/date time
 > Without specified end time, end time will be automatically assigned as:
-> * End Time   : 2359 hrs 
+> * End Time   : 2359 hrs
 
 Sample Deadline:
 > Type the following command `ADD finish project BY 05/05/17 1400` into the command Box and press <kbd>Enter</kbd>
@@ -157,7 +157,7 @@ While adding/updating tasks it is possible to tag categories to the task to bett
 Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `CATEGORY` categoryName
 
->Categories added can be identified by the small grey box at the bottom of the task as seen in image below. 
+>Categories added can be identified by the small grey box at the bottom of the task as seen in image below.
 > <img src="images/ProcrastiNomore_Categories_Normal.png" width="600">
 
  If user wants more than one category tagged to the task, for example two categories:<br>
@@ -165,7 +165,7 @@ Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
 
  #### Special Categories : High, Medium, Low
 
- These categories are to show priority and will have a different colour box as compared to normal categories.<br> 
+ These categories are to show priority and will have a different colour box as compared to normal categories.<br>
  Priority(Colour): High(Red), Medium(Yellow), Low(Blue)
 
  >Image showing tasks with different special categories and their respective colours.<br>
@@ -194,9 +194,9 @@ Command words used work similarly as during adding (ON, FROM, TO, BY)
 Some general formats include the following:
 
 General Format: `UPDATE` `Task Index` `New Task Name` -> Changes existing task's name to new task name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time -> Changes existing task to event with<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time -> Changes existing task to event with<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified start and end date/time<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time -> Changes existing task to deadline with newly specified<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time -> Changes existing task to deadline with newly specified<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date/time
 
 Sample Update task name:
@@ -208,7 +208,7 @@ Sample Update task name:
 Some more specific cases include:
 
 #### Existing deadline
-Format: `UPDATE` `Task Index` `FROM` date /date time -> Changes existing deadline to event starting from specified date/time to<br> 
+Format: `UPDATE` `Task Index` `FROM` date /date time -> Changes existing deadline to event starting from specified date/time to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current due time<br>
 
 #### Existing event
@@ -217,7 +217,7 @@ Format: `UPDATE` `Task Index` `FROM` date / time / date time<br>
 > * When only a date is provided, automatically assign Start Time to be 0000hrs
 Format:`UPDATE` `Task Index` `TO` date / time / date time<br>
 > Changes existing event end date/time to specified date/time without changing other fields<br>
-> * When only a date is provided, automatically assign End Time to be 2359hrs 
+> * When only a date is provided, automatically assign End Time to be 2359hrs
 
 
 Sample Update event task time:
@@ -387,7 +387,7 @@ Format: `EXIT`
 
 * **View Help Window** : `HELP` <br>
 
-* **Add a new task**  
+* **Add a new task**
   `ADD (taskname) ...` <br>
   `ADD` task (Basic Task) <br>
   `ADD` task `ON` date `CATEGORY` categoryName (Same Day Event with category)<br>
@@ -401,7 +401,7 @@ Format: `EXIT`
   `UPDATE TASKINDEX TASKNAME` <br>
   `UPDATE` `Task Index` `FROM` date /date time `TO` date /date time<br>
   `UPDATE` `Task Index` `BY` date /date time<br>
-  
+
   &nbsp;e.g. `UPDATE 1 Email boss`
 
 * **Delete an existing task**  <br>
@@ -415,7 +415,7 @@ Format: `EXIT`
 
 * **Search for specified keywords** <br>
   `SEARCH KEYWORD [MORE_KEYWORDS]` <br>
-  
+
   e.g. `SEARCH find more food`
 
 * **Indicate incomplete task as completed**  <br>
@@ -434,7 +434,7 @@ Format: `EXIT`
 
   e.g. LIST thursday
 
-* **List all completed task** <br> 
+* **List all completed task** <br>
   `COMPLETED` <br>
 
 * **Recur an existing task** <br>
