@@ -57,15 +57,6 @@ public class StartDate {
         // check
     }
 
-    /*
-     * public boolean laterThan(StartDate other) { if
-     * ((this.value).compareTo(other.value) > 0) { return true; } return false;
-     * }
-     *
-     * public boolean laterThan(EndDate other) { if
-     * ((this.value).compareTo(other.value) > 0) { return true; } return false;
-     * }
-     */
     @Override
     public int hashCode() {
         return value.hashCode();

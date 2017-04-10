@@ -104,61 +104,31 @@ public class DateTimeUtil {
      */
     public static int getNewDay(String day) {
 
-        if (day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY2)
-                || day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY3)
-                || day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY4)) {
+        if (isSunday(day)) {
             return 1;
         } else {
-            if (day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY2)
-                    || day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY3)
-                    || day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY4)) {
+            if (isMonday(day)) {
                 return 2;
             } else {
-                if (day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY1)
-                        || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY2)
-                        || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY3)
-                        || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY4)) {
+                if (isTuesday(day)) {
                     return 3;
                 } else {
-                    if (day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY1)
-                            || day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY2)
-                            || day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY3)
-                            || day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY4)) {
+                    if (isWednesday(day)) {
                         return 4;
                     } else {
-                        if (day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY1)
-                                || day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY2)
-                                || day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY3)
-                                || day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY4)) {
+                        if (isThursday(day)) {
                             return 5;
                         } else {
-                            if (day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY1)
-                                    || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY2)
-                                    || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY3)
-                                    || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY4)) {
+                            if (isFriday(day)) {
                                 return 6;
                             } else {
-                                if (day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY1)
-                                        || day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY2)
-                                        || day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY3)
-                                        || day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY4)) {
+                                if (isSaturday(day)) {
                                     return 7;
                                 } else {
-                                    if (day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY1)
-                                            || day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY2)) {
-                                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-                                        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-                                        return dayOfWeek;
+                                    if (isToday(day)) {
+                                        return getCurrentDay();
                                     } else {
-                                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-                                        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-                                        if (dayOfWeek + 1 == 8) {
-                                            return dayOfWeek = 1;
-                                        } else {
-                                            return dayOfWeek + 1;
-                                        }
+                                        return getTomorrowDay();
                                     }
                                 }
                             }
@@ -182,10 +152,6 @@ public class DateTimeUtil {
      * @return Current Date with respect to the date on the computer
      */
     public static String getCurrentDate() {
-        String newdate = "";
-        String stringDay = "";
-        String stringMonth = "";
-        String stringYear = "";
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         // getTime() returns the current date in default time zone
@@ -194,26 +160,12 @@ public class DateTimeUtil {
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
 
-        if (day < 10) {
-            stringDay = "0" + Integer.toString(day);
-        } else {
-            stringDay = Integer.toString(day);
-        }
-        if (month < 10) {
-            stringMonth = "0" + Integer.toString(month);
-        } else {
-            stringMonth = Integer.toString(month);
-        }
-        stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
-
-        newdate = stringDay + "/" + stringMonth + "/" + stringYear;
-
-        return newdate;
+        return getFormattedDate(day, month, year);
     }
 
     /**
-     * If user inputs a day, function will changes the day given by user to the
-     * actual date relative to the current calender.
+     * If user inputs a day, function will change the day given by user to the
+     * actual date relative to the current date.
      *
      * @param givenDay
      * @return updatedDate in DD/MM/YY format
@@ -226,11 +178,6 @@ public class DateTimeUtil {
         }
 
         int inputDay = getNewDay(givenDay);
-
-        String updatedDate = "";
-        String stringDay = "";
-        String stringMonth = "";
-        String stringYear = "";
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         // getTime() returns the current date in default time zone
@@ -264,21 +211,7 @@ public class DateTimeUtil {
             year += 1;
         }
 
-        if (day < 10) {
-            stringDay = "0" + Integer.toString(day);
-        } else {
-            stringDay = Integer.toString(day);
-        }
-        if (month < 10) {
-            stringMonth = "0" + Integer.toString(month);
-        } else {
-            stringMonth = Integer.toString(month);
-        }
-        stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
-
-        updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
-
-        return updatedDate;
+        return getFormattedDate(day, month, year);
     }
 
     public static int isDateWithin(String date, String startDate, String endDate) {
@@ -384,17 +317,9 @@ public class DateTimeUtil {
             year = year + loops;
         }
 
-        if (day < 10) {
-            newDay = "0" + Integer.toString(day);
-        } else {
-            newDay = Integer.toString(day);
-        }
+        newDay = convertIntegerToTwoCharString(day);
 
-        if (month < 10) {
-            newMonth = "0" + Integer.toString(month);
-        } else {
-            newMonth = Integer.toString(month);
-        }
+        newMonth = convertIntegerToTwoCharString(month);
 
         newDate = newDay + "/" + newMonth + "/" + year;
 
@@ -468,4 +393,137 @@ public class DateTimeUtil {
         }
         return endTime;
     }
+
+    // @@author A0142418L
+    /**
+     * @param dayOfWeek
+     * @return Integer day value of tomorrow.
+     */
+    private static int getTomorrowDay() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        if (dayOfWeek + 1 == 8) {
+            return dayOfWeek = 1;
+        } else {
+            return dayOfWeek + 1;
+        }
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Today" regex.
+     */
+    private static boolean isToday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY1)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_TODAY2);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Saturday" regex.
+     */
+    private static boolean isSaturday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY1)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_SATURDAY4);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Friday" regex.
+     */
+    private static boolean isFriday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY1)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_FRIDAY4);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Thursday" regex.
+     */
+    private static boolean isThursday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY1)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_THURSDAY4);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Wednesday" regex.
+     */
+    private static boolean isWednesday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY1)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_WEDNESDAY4);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Tuesday" regex.
+     */
+    private static boolean isTuesday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY1)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_TUESDAY4);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Monday" regex.
+     */
+    private static boolean isMonday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_MONDAY4);
+    }
+
+    /**
+     * @param day
+     * @return true if input matches "Sunday" regex.
+     */
+    private static boolean isSunday(String day) {
+        return day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY1) || day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY2)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY3)
+                || day.matches(CURRENTDATE_VALIDATION_REGEX_SUNDAY4);
+    }
+
+    /**
+     * @param day
+     * @return Integer as a 2 character string
+     */
+    private static String convertIntegerToTwoCharString(int integer) {
+        String string;
+        if (integer < 10) {
+            string = "0" + Integer.toString(integer);
+        } else {
+            string = Integer.toString(integer);
+        }
+        return string;
+    }
+
+    /**
+     * @param day
+     * @param month
+     * @param year
+     * @return Date formatted in defined format for application
+     */
+    private static String getFormattedDate(int day, int month, int year) {
+        String updatedDate;
+        String stringDay;
+        String stringMonth;
+        String stringYear;
+        stringDay = convertIntegerToTwoCharString(day);
+        stringMonth = convertIntegerToTwoCharString(month);
+        stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
+
+        updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
+        return updatedDate;
+    }
+
 }
