@@ -41,15 +41,15 @@ For example, click on deadline, only incompleted tasks with deadline will be dis
 <img src="images/menubar.png" width="500">
 <br>
 
-#### Task Card : display all details about a task   
+#### Task Card : display all details about a task and the date will shown in different languages based on system languages  
 An incompleted task card is shown with a white color bar:
-<img src="images/incompleted_task.png" height="80" width="500"> 
+<img src="images/incompleted_task.png" height="80" width="600"> 
 <br>
 A completed task card is shown with a green color bar:
-<img src="images/completed_task.png" height="80" width="500"> 
+<img src="images/completed_task.png" height="80" width="600"> 
 <br>
-A overdued task card is shown with a red red bar:<br>
-<img src="images/overdued_task.png" height="80" width="500"> 
+A overdued task card is shown with a red color bar:<br>
+<img src="images/overdued_task.png" height="80" width="600"> 
 <br>
 There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:<br>
 <img src="images/pri_high.png" height="50" width="100"> <img src="images/pri_medium.png" height="50" width="100"><img src="images/pri_low.png" height="50" width="100"> 
