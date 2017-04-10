@@ -7,8 +7,16 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Amro Shohoud](https://github.com/AmroShohoud) <br>
 <img src="images/amroshohoud.png" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: In charge of logic, Scheduling and tracking
-
+Responsibilities: [Logic](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/DeveloperGuide.md#23-logic-component), Scheduling and tracking, Documentation <br>
+Component: Logic <br>
+Features implemented: <br>
+	* [Add task](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#32-adding-a-task-add)<br>
+	* Task priority <br>
+	* Task date <br>
+	* Sort tasks by priority and date <br>
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/main/A0163996J.md)][[test code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/test/A0163996J.md)]
+* Other major contributions: <br>
+	* Initial refractoring of AddressBook to TaskManager, creating initial structure for Tasks
 -----
 
 #### [FOO CHUAN WEN](https://github.com/fcw6323)
