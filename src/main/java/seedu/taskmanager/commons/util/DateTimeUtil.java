@@ -126,11 +126,9 @@ public class DateTimeUtil {
                                     return 7;
                                 } else {
                                     if (isToday(day)) {
-                                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-                                        return calendar.get(Calendar.DAY_OF_WEEK);
+                                        return getCurrentDay();
                                     } else {
-                                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-                                        return tomorrowDay(calendar.get(Calendar.DAY_OF_WEEK));
+                                        return getTomorrowDay();
                                     }
                                 }
                             }
@@ -154,10 +152,6 @@ public class DateTimeUtil {
      * @return Current Date with respect to the date on the computer
      */
     public static String getCurrentDate() {
-        String newdate = "";
-        String stringDay = "";
-        String stringMonth = "";
-        String stringYear = "";
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         // getTime() returns the current date in default time zone
@@ -166,13 +160,7 @@ public class DateTimeUtil {
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
 
-        stringDay = convertIntegerToTwoCharString(day);
-        stringMonth = convertIntegerToTwoCharString(month);
-        stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
-
-        newdate = stringDay + "/" + stringMonth + "/" + stringYear;
-
-        return newdate;
+        return getFormattedDate(day, month, year);
     }
 
     /**
@@ -190,11 +178,6 @@ public class DateTimeUtil {
         }
 
         int inputDay = getNewDay(givenDay);
-
-        String updatedDate = "";
-        String stringDay = "";
-        String stringMonth = "";
-        String stringYear = "";
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         // getTime() returns the current date in default time zone
@@ -228,13 +211,7 @@ public class DateTimeUtil {
             year += 1;
         }
 
-        stringDay = convertIntegerToTwoCharString(day);
-        stringMonth = convertIntegerToTwoCharString(month);
-        stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
-
-        updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
-
-        return updatedDate;
+        return getFormattedDate(day, month, year);
     }
 
     public static int isDateWithin(String date, String startDate, String endDate) {
@@ -422,7 +399,9 @@ public class DateTimeUtil {
      * @param dayOfWeek
      * @return Integer day value of tomorrow.
      */
-    private static int tomorrowDay(int dayOfWeek) {
+    private static int getTomorrowDay() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         if (dayOfWeek + 1 == 8) {
             return dayOfWeek = 1;
         } else {
@@ -527,4 +506,24 @@ public class DateTimeUtil {
         }
         return string;
     }
+
+    /**
+     * @param day
+     * @param month
+     * @param year
+     * @return Date formatted in defined format for application
+     */
+    private static String getFormattedDate(int day, int month, int year) {
+        String updatedDate;
+        String stringDay;
+        String stringMonth;
+        String stringYear;
+        stringDay = convertIntegerToTwoCharString(day);
+        stringMonth = convertIntegerToTwoCharString(month);
+        stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
+
+        updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
+        return updatedDate;
+    }
+
 }

@@ -68,8 +68,6 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        int numDeletedTasks = 0;
-
         if (targetIndex != DELETE_INDEX_NOT_PRESENT_TOKEN) {
 
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -83,13 +81,13 @@ public class DeleteCommand extends Command {
             if (!targetDate.equals(DELETE_DATE_KEYWORD_NOT_PRESENT_TOKEN)) {
 
                 UnmodifiableObservableList<ReadOnlyTask> lastShownList = findTasksToDeleteByDate();
-                numDeletedTasks = deleteTasksByDate(numDeletedTasks, lastShownList);
+                int numDeletedTasks = deleteTasksByDate(lastShownList);
 
                 return new CommandResult(MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 + targetDate
                         + MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 + Integer.toString(numDeletedTasks));
             } else {
                 UnmodifiableObservableList<ReadOnlyTask> lastShownList = findTasksToDeleteByName();
-                numDeletedTasks = deleteTasksByName(numDeletedTasks, lastShownList);
+                int numDeletedTasks = deleteTasksByName(lastShownList);
 
                 return new CommandResult(MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 + targetTaskName
                         + MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 + Integer.toString(numDeletedTasks));
@@ -155,7 +153,8 @@ public class DeleteCommand extends Command {
      * @param lastShownList
      * @return Number of tasks deleted based on task name provided by user
      */
-    private int deleteTasksByName(int numDeletedTasks, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+    private int deleteTasksByName(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        int numDeletedTasks = 0;
         try {
             numDeletedTasks = model.deleteTasksName(lastShownList, targetTaskName.trim());
         } catch (TaskNotFoundException e) {
@@ -169,7 +168,9 @@ public class DeleteCommand extends Command {
      * @param lastShownList
      * @return Number of tasks deleted based on date provided by user
      */
-    private int deleteTasksByDate(int numDeletedTasks, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+    private int deleteTasksByDate(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        int numDeletedTasks = 0;
+
         try {
             numDeletedTasks = model.deleteTasksDate(lastShownList);
         } catch (TaskNotFoundException e) {
