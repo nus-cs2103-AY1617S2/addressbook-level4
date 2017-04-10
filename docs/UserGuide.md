@@ -61,9 +61,9 @@ Here are some terminologies used in this user guide:
 
 * Download the latest `DoIt.jar` from the [releases](../../../releases) tab
 * Copy `DoIt.jar` to a folder as the home folder for *DoIt*
-* To launch the *DoIt* application, double-click on `DoIt.jar`
+* To launch the *DoIt* application, double-click on `DoIt.jar` 
 * The main interface should appear as shown in figure 1 in a few seconds
-<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/Final_DemoXml/docs/images/MainInterface.png" width="800" height = 400>
+<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/MainInterface.png" width="800" height = 400>
 _Figure 1 : Main GUI_
 <br>
 
@@ -72,7 +72,7 @@ _Figure 1 : Main GUI_
 ### Visual Walkthrough
 
 1. Figure 2 shows *DoIt* with a few tasks added
-<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/Final_DemoXml/docs/images/Ui.png" width="800" height = 400>
+<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/Ui.png" width="800" height = 400>
 _Figure 2 : Example of a GUI Instance_<br>
 
 2. *DoIt* has 3 columns "Deadline", "Event" and "Anytime"
@@ -114,7 +114,8 @@ _Figure 2 : Example of a GUI Instance_<br>
 ### 4.1 Getting Help : `help`
 
 Not sure where to start? Enter **`help`** to view the help window as shown in Figure 3 below:
-<insert a screenshot of help window here>
+
+<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/HELP.png" width="800" height = 400>
 _Figure 3: Help window popup_<br>
 
 Format: **`help`**
@@ -401,14 +402,13 @@ Format:  **`exit`**
 
 ### 4.18 Saving local data
 
-Program data are saved in the hard disk automatically after any command that changes the data
-There is no need to save manually<br>
+Program data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually<br>
 
 ### 4.19 Input stack for efficiency
 
 Keyboard Shortcuts:[Up] and [Down]
 
-Do you find typing again and again a similar command is tedious. Just press [Up] and [Down] on the keyboard to u can scroll through the inputs you have previously used. They are automatically filled into the command box for you so you do not have to retype them. This make it easier for you since you only have to make minor changes for similar command inputs<br>
+Do you find typing again and again a similar command tedious? Just press [Up] and [Down] on the keyboard to u can scroll through the inputs you have previously used. They are automatically filled into the command box for you so you do not have to retype them. This make it easier for you since you only have to make minor changes for similar command inputs<br>
 
 > * [Up] is used to scroll up the previous command inputs<br>
 > * [Down] is used to scroll down the previous command inputs<br>
