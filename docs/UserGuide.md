@@ -171,6 +171,7 @@ Format: ` find <[NAME]|[DATE]|[TAG]>`
 > * Substrings will be matched e.g. `HW` will match `HWs`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `HW` will match `do HW`
+> * For exact match, name/deadline/tag should be inside a quote	
 
 Examples:
 
@@ -178,6 +179,8 @@ Examples:
   Returns tasks with 'do' or 'HW' or both
 * `find monday`<br>
   Returns tasks with dates on monday
+* `find "home"`<br>
+  Returns tasks with title|deadline/tag being home
 
 
 ### 3.7. Deleting a task : `delete`
