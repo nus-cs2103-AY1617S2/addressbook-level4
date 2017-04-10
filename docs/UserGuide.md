@@ -75,7 +75,7 @@ TypeTask automatically assigns your tasks with certain colours to help you diffe
    `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
    `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
    `Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
-   `Black`: this task has been marked as completed.<br>
+   `Black`: this task has been marked as completed. Check [[Fig 3]](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#384-listing-completed-tasks--listdone) to view the format. <br>
    ```
    > Note that all tasks that fall outside of these categories will appear normally.
       i.e. no additional colours.
@@ -86,7 +86,7 @@ TypeTask automatically assigns your tasks with certain colours to help you diffe
    Other example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` Attend Meeting by: 12 Feb 11am` :
-     adds the task `Attend Meeting` to the Task Manager
+     adds the task `Attend Meeting` to the Task Manager.
    * **`delete`**` 1` : deletes the task shown with index 1
    * **`exit`** : exits the app
 &nbsp;
@@ -113,7 +113,7 @@ Things To Note:
 ```
 
 ### 3.2.1. Adding a Floating Task: `add`, `a`, `+`
-The first thing you would want to do is to add your first task! A floating is a task with no deadline and schedule.<br>
+The first thing you would want to do is to add your first task! A floating is a simple task with no deadline or schedule.<br>
 Let's make it simple by first adding a floating task. <br>
 
 
@@ -371,6 +371,8 @@ Things to note:
 Format:<br>
 `listdone`<br>
 
+<img src="images/DoneTaskFormat.png" width="800">
+<h5 align="left">Fig 3. Completed Task Format </h5>
 
 ### 3.9. Undoing the Latest Command : `undo`, `u`
 Entered a wrong command? Fret not! You can use the `undo` command to save the hassle of backtracking. <br>
@@ -476,13 +478,13 @@ Format:<br>
  Install the app in the other computer and overwrite the empty data file it creates with
  the file that contains the data of your previous Task Manager folder.<br>
  
-**Q**: How do I transfer my data to another Computer through cloud service?
- 1) On one computer, use the `setting` Command to change the default saving locaion to the local cloud service location. E.g. C:\Users\<Username of computer>\Google Drive
- 2) On your other computer, use the `use` Command to first import the data from the local cloud service location.
- 3) Before you start using the TypeTask on your other computers, use the `setting` Command to change the default saving location.
- 4) Edit away! Both of your computers will be able to see the updated file everytime you open them.
+**Q**: How do I transfer my data to another Computer through cloud service?<br>
+ 1. On your main computer, use the `Setting` Command to change the default saving locaion to the local cloud service location. E.g. C:\Users\<Username of computer>\Google Drive<br>
+ 2. On your other computer, use the `Use` Command to first import the data from the local cloud service location.<br>
+ 3. Before you start using the TypeTask on your other computers, use the `Setting` Command to change the default saving location.<br>
+ 4. Edit away! Both of your computers will be able to see the updated file everytime you open them.<br>
 
 ## 5. Command Summary
 
-<img src="images/commandShortcut.png" width="800">
-<h5 align="left">Fig 3. TypeTask's Command Summary </h5>
+<img src="images/CommandSummary.png" width="800">
+<h5 align="left">Fig 4. TypeTask's Command Summary </h5>
