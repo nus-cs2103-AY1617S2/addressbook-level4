@@ -16,6 +16,7 @@ Index 1 - 19 will be in the Events column. <br>
 Index 20 - 35 will be in the Deadlines column. <br>
 Index 36 - 51 will be in the Basic Task column.
 
+
 ## Testing the HELP function:
 
 ### 1. Help function
@@ -28,6 +29,7 @@ Input `Add`
 
 Result: "Unknown command <br>
 Type HELP for user guide with detailed explanations of all commands"
+
 
 ## Testing the ADD function:
 
@@ -50,7 +52,6 @@ Input `ADD deadline BY today`
 Result: "New task added: deadline End Date: [today's date] End Time: 2359 <br>
 Task added at index: [varies]"
 
-
 ### 4. Add a floating task
 Input `ADD floatingTask`
 
@@ -63,24 +64,25 @@ Task added at index: 55"
 ### 1. Update task name
 
 Input <br> 
-1. `SEARCH Buy`
+1. `SEARCH Buy` <br>
 2. `UPDATE [INDEX] Buy 4 dogs`
 
 Result <br>
 1. Find basic task name `Buy a dog` and remember the index number [INDEX]
-2. 
-
-
-Result: "Updated Task: Buy 4 dogs Categories: [lepak] <br>
-Task updated to index: [varies]"
+2. "Updated Task: Buy 4 dogs Categories: [lepak] <br>
+Task updated to index: 55"
 
 ### 2. Update task end time
-Find event name `Meet boss` and remember the index number `[INDEX]`
-Input `UPDATE [INDEX] TO 1400`
+Input <br>
+1. `SEARCH boss` <br>
+2. `UPDATE [INDEX] TO 1400`
 
-Result: "Updated Task: Meet boss Start Date: 07/05/17 Start Time: 0000
-End Date: 08/05/17 End Time: 1400 Categories: [work] <br>
-Task updated to index: 20"
+
+Result: 
+1. Find event name `Meet boss` and remember the index number `[INDEX]`
+2. "Updated Task: Meet boss Start Date: 07/05/17 Start Time: 0000 End Date: 08/05/17 End Time: 1400 Categories: [work] <br>
+Task updated to index: <varies>"
+
 
 ## Testing out the SEARCH function:
 
@@ -96,6 +98,7 @@ Input `SEARCH 03/03/17`
 Result: "2 tasks listed!' <br>
 The task whose start date or end date contain the date "03/03/17" will be shown.
 
+
 ## Testing out the CLEAR function:
 
 Input `CLEAR`
@@ -103,12 +106,16 @@ Input `CLEAR`
 Result: "Task Manager has been cleared!" <br>
 All the task from ProcrastiNomore has been removed.
 
+
 ## Testing out the UNDO function:
 
-Input `UNDO`
+Input <br>
+1. `UNDO` <br>
+2. `LIST`
 
 Result: "Previous action has been undone." <br>
 All the task has been brought back from the previous CLEAR function.
+
 
 ## Testing out the REDO function:
 
@@ -116,6 +123,7 @@ Input `REDO`
 
 Result: "Previous action has been redone." <br>
 All the task has been cleared once again.
+
 
 ## Testing out the RECUR function:
 
@@ -142,22 +150,26 @@ Task added at index: 5"
 2. "Task has successfully recurred" <br>
 The deadline recurring deadline has been recurred 4 more times, on the 5th of every month.
 
+
 ## Testing out the MARK function:
 Input `MARK 1`
 
 Result: "Task is marked as completed: recurring task Start Date: 03/03/17 
 Start Time: 1400 End Date: 03/03/17 End Time: 1500" <br>
 
+
 ## Testing out the COMPLETED function:
 Input `COMPLETED`
 
 Result: "Listed all completed tasks"
+
 
 ## Testing out the UNMARK function:
 Input `UNMARK 1`
 
 Result: "Task is marked as incomplete: recurring task Start Date: 03/03/17
 Start Time: 1400 End Date: 03/03/17 End Time: 1500" <br>
+
 
 ## Testing out the LIST function:
 
@@ -170,9 +182,11 @@ Input <br>
 5. `LIST`
 
 Result: <br>
-1. "Listed all completed tasks"
+1. "Listed all completed tasks" 
+Notice how there is no completed task at the moment
 2. "Listed all uncompleted tasks"
 3. Mark task at index 1 as completed
+Notice that the previously marked task is now in the completed list
 4. View previously marked task
 5. Show the rest of the uncompleted tasks
 
@@ -191,6 +205,7 @@ Result: <br>
 There will be 3 uncompleted tasks listed
 4. One of the deadline task is marked as completed.
 5. There will be 2 uncompleted tasks listed now.
+
 
 ## Testing out other features:
 
@@ -238,11 +253,13 @@ Result: "Updated Task: recurring task End Date: 04/04/17 End Time: 2300 <br>
 Task updated to index: 5" 
 Notice the shift from Events to Deadlines column.
 
+
 ## Testing out the SAVE function:
 Input `SAVE C:\Users\[Computer User ID]\Desktop`
 
 Result: "Save location changed to: C:\Users\[Computer User ID]\Desktop\taskmanager.xml"
 ProcrastiNomore changes the save location as specified.
+
 
 ## Testing out the EXIT function:
 Input `EXIT`
