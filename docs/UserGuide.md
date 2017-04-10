@@ -28,6 +28,7 @@
    * 4.16 [Loading of Existing data](#)
    * 4.17 [Exiting The Program](#)
    * 4.18 [Saving at Local file](#)
+   * 4.19 [Using Input Stack](#)
 5. [FAQ](#faq)
 6. [Command Summary](#command-summary)
 
@@ -114,10 +115,12 @@ _Figure 2 : Example of a GUI Instance_<br>
 
 Not sure where to start? Enter **`help`** to view the help window as shown in Figure 3 below:
 <insert a screenshot of help window here>
+_Figure 3: Help window popup_<br>
 
 Format: **`help`**
+Keyboard Shortcut: [F1]
 
-> * Help window is also shown if you enter an incorrect command e.g. `abcd`<br>
+> * Help window shows the command summary for all feature. This is so that you can easily pick up the tools you need to use DoIt<br>
 
 
 ### 4.2 Adding an task: `add`
@@ -127,7 +130,7 @@ If you have an task you want *DoIt* to track, add it! Enter **`add`** into the c
 Format: `add NAME [s/STARTTIME] [e/ENDTIME] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...`
 
 > * Only`NAME` that is not in *DoIt* can be added so you will not be confused with similar names<br>
-> * `NAME` is a compulsary parameter<br>
+> * `NAME` is a compulsory parameter<br>
 > * `[s/STARTTIME]`, `[e/ENDTIME]`, `[d/DESCRIPTION]`, `[p/PRIORITY]` and `[t/TAG]` are optional parameters<br>
 > * Tasks without both `STARTTIME` and `ENDTIME` specified are considered as floating tasks. They will be add under the "Anytime" list<br>
 > * Tasks with `ENDTIME` specified without specifying `STARTTIME` are considered tasks. They will be added under the "Deadline" list<br>
@@ -146,7 +149,7 @@ Examples:
   * **`add`**`Learn to speak a new language`<br>
 * If you wish to add a task that must be completed before a deadline such as submitting a progress report by tomorrow:
   * **`add`**`Submit progress report e/tomorrow`<br>
-* If you wish to add a task that starts and end at a specified time such as a complusory staff meeting on the 28 Feb from 1300 to 1500:
+* If you wish to add a task that starts and end at a specified time such as a compulsory staff meeting on the 28 Feb from 1300 to 1500:
   * **`add`**`Staff meeting s/28-Feb-2017 13:00 e/28-Feb-2017 15:00 `<br>
 
 
@@ -155,6 +158,7 @@ Examples:
 Made a mistake? No worries, you can undo your previous commands up to 10 times by typing **`undo`** into the command box<br>
 
 Format: **`undo`**
+Keyboard Shortcut: [Control-Z]
 
 > * You can undo a number of commands that is allowed (e.g. 3 commands) by typing **`undo`** that number of times (e.g. 3 times)<br>
 > * Commands that can be undone are **`add`**, **`delete`**, **`edit`**, **`clear`** and **`done`**
@@ -163,6 +167,7 @@ Format: **`undo`**
 
 Want to redo what you have undone? Fear not as you can redo what you have previously undone up multiple times by typing **`redo`** into the command box<br>
 Format: **`redo`**
+Keyboard Shortcut: [Control-Y]
 
 > * You can redo a number of commands that is undone (e.g. 3 commands) by typing **`redo`** that number of times (e.g. 3 times)<br>
 > * Commands that can be redone are only those undone previously without other commands<br>
@@ -181,7 +186,7 @@ Format: **`edit`**`INDEX [NAME] [s/STARTTIME] [e/ENDTIME] [d/DESCRIPTION] [p/PRI
 > * `[NAME]` might be optional but it must be the first parameter if it is present as it did not have any prefix<br>
 > * Existing values will be updated to the input values<br>
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative<br>
-> * You can delete the field of a parameter by specifing the parameter syntax  without anything behind it<br>
+> * You can delete the field of a parameter by specifying the parameter syntax  without anything behind it<br>
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it<br>
 
 Examples:
@@ -224,7 +229,7 @@ Examples:
 
 * If you wish to find all tasks with descriptions containing `Meeting`;
     * **`find`**`d/Meeting` <br>
-    * UI will display tasks having descriptions containing`Meeting`<br>
+    * UI will display tasks having descriptions containing `Meeting`<br>
 
 * If you wish to find all tasks with names containing `Staff Meeting`;
     * **`find`**`n/Staff Meeting`<br>
@@ -262,12 +267,12 @@ Examples:
     * The first task in the results of the `find` command will be marked as completed
 
 ### 4.9 Viewing completed tasks: `done`
-Sometimes it's good to look back on our past acheivements. This can be accomplished by typing **`done`** into the command box<br>
+Sometimes it's good to look back on our past achievements. This can be accomplished by typing **`done`** into the command box<br>
 
 Format: **`done`**
 
 ### 4.10 Marking tasks as uncompleted: `unmark`
-Want to mark a completed task as uncompleted? First display all completed task using `done` and type `unmark` followed by the task index dislayed into the command box<br>
+Want to mark a completed task as uncompleted? First display all completed task using `done` and type `unmark` followed by the task index displayed  into the command box<br>
 
 Format: **`unmark`**`INDEX`
 
@@ -399,6 +404,18 @@ Format:  **`exit`**
 Program data are saved in the hard disk automatically after any command that changes the data
 There is no need to save manually<br>
 
+### 4.19 Input stack for efficiency
+
+Keyboard Shortcuts:[Up] and [Down]
+
+Do you find typing again and again a similar command is tedious. Just press [Up] and [Down] on the keyboard to u can scroll through the inputs you have previously used. They are automatically filled into the command box for you so you do not have to retype them. This make it easier for you since you only have to make minor changes for similar command inputs<br>
+
+> * [Up] is used to scroll up the previous command inputs<br>
+> * [Down] is used to scroll down the previous command inputs<br>
+> * if you want to scroll multiple time (e.g. 3 times) to your previous input(e.g. 3rd last input) press [Up] that number of times (e.g. 3 times)
+> * if your scrolled too much press [Down] to scroll back down
+    e.g. You are at the 3rd last input `add` after you have pressed [Up] 3 times. However, you want to use the 2nd last input `done` instead. You just need to press [Down] 1 times to scroll to that input<br>
+
 ## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -419,15 +436,14 @@ There is no need to save manually<br>
 **edit** | INDEX [TASKNAME] [s/START TIME] [e/END TIME] [p/PRIORITY] [#TAG]... | Edits existing task with new details | `edit 1 Homework s/9pm e/11pm p/high t/CS1010`
 **exit** | | Exits DoIt | `exit`
 **find** | KEYWORD [MORE_KEYWORDS] | Display tasks that match the keywords | `find n/MA1101R assignment p/med`
-**help** | | Opens the help window | `help`
+**help** | | Opens the help window | `help` <br> Shortcut: [F1]
 **list** | | Lists all uncompleted tasks | `list`
 **mark** | INDEX | Marks task at specified index as completed | `mark 20`
-**redo** | | Redo previously undone command | `redo` <br> Keyboard Shortcut: `ctrl y`
+**redo** | | Redo previously undone command | `redo` <br> Keyboard Shortcut: [ctrl-y]
 **save** | FILE_PATH/FILE_NAME.xml | Saves DoIt's data at specified location and in specified file | `save folder1/savefile.xml`<br> `save C:/Users/USER/savefile.xml`<br>
 **select** | INDEX | Select a task and display its details | `select 4`<br>
 **sort** | SORT_CHOICE | Sort tasks by name, priority, end time , start time | `sort name`<br>`sort priority`<br>`sort end time`<br>`sort start time`
 **set** | OLD_COMMAND NEW_COMMAND | Customizes command words | `set delete del`<br>`set del -`<br>
 **load** | FILE_PATH/FILE_NAME.xml | Loads an existing DoIt's data at specified location and in specified file | `load folder1/savefile.xml`<br> `load C:/Users/USER/savefile.xml`<br>
-**undo** | | Undo previous command | `undo` <br> Keyboard Shortcut: `ctrl z`
+**undo** | | Undo previous command | `undo` <br> Keyboard Shortcut: [ctrl-z]
 **unmark** | INDEX | Marks task at specified index as uncompleted | `unmark 6`
-
