@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'onlythree.imanager.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -39,9 +39,12 @@ allprojects {
         jacksonVersion = '2.7.0'
         jacksonDataTypeVersion = '2.7.4'
         junitVersion = '4.12'
-        testFxVersion = '4.0.+'
+        testFxVersion = '4.0.5-alpha'
         monocleVersion = '1.8.0_20'
         checkstyleVersion = '7.1.2'
+
+        nattyVersion = '0.13'
+        log4j12Version = '1.7.10'
 
         libDir = 'lib'
     }
@@ -64,6 +67,9 @@ allprojects {
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
 
+        compile "com.joestelmach:natty:$nattyVersion"
+        compile "org.slf4j:slf4j-log4j12:$log4j12Version"
+
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
         testCompile "org.testfx:testfx-junit:$testFxVersion"
@@ -85,7 +91,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "iManager.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -120,8 +126,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
+class IManagerTest extends Test {
+    public IManagerTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -146,7 +152,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: IManagerTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,8 +161,8 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+task nonGuiTests(type: IManagerTest) {
+    include 'onlythree/imanager/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -164,7 +170,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: IManagerTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }

@@ -4,56 +4,83 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.person.ReadOnlyPerson;
+import onlythree.imanager.logic.commands.SelectCommand;
+import onlythree.imanager.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
-
+public class SelectCommandTest extends TaskListGuiTest {
 
     @Test
-    public void selectPerson_nonEmptyList() {
+    public void selectTask_nonEmptyList() {
+        int taskCount = td.getTypicalTasks().length;
 
-        assertSelectionInvalid(10); // invalid index
-        assertNoPersonSelected();
+        assertSelectionSuccess(10, taskCount); // invalid index
+        assertTaskSelected(taskCount); // assert last task selected
 
-        assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalPersons().length;
-        assertSelectionSuccess(personCount); // last person in the list
-        int middleIndex = personCount / 2;
-        assertSelectionSuccess(middleIndex); // a person in the middle of the list
+        assertSelectionSuccess(1); // first task in the list
+        assertSelectionSuccess(taskCount); // last task in the list
+        int middleIndex = taskCount / 2;
+        assertSelectionSuccess(middleIndex); // a task in the middle of the list
 
-        assertSelectionInvalid(personCount + 1); // invalid index
-        assertPersonSelected(middleIndex); // assert previous selection remains
+        assertSelectionSuccess(taskCount + 1, taskCount); // index bigger than the taskCount
+        assertTaskSelected(taskCount); // assert last task selected
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test
-    public void selectPerson_emptyList() {
+    public void selectTask_emptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
+        assertNoTaskSelected();
     }
 
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The task index provided is invalid");
     }
 
     private void assertSelectionSuccess(int index) {
+        assertSelectionSuccess(index, index);
+    }
+
+    private void assertSelectionSuccess(int index, int lastIndex) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Person: " + index);
-        assertPersonSelected(index);
+        int selectedIndex = index;
+
+        if (selectedIndex > lastIndex) {
+            selectedIndex = lastIndex;
+        }
+        ReadOnlyTask task = taskListPanel.getSelectedTasks().get(0);
+
+        assertResultMessage(String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, selectedIndex,
+                getCompactFormattedTask(task)));
+        assertTaskSelected(selectedIndex);
     }
 
-    private void assertPersonSelected(int index) {
-        assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyPerson selectedPerson = personListPanel.getSelectedPersons().get(0);
-        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
-        //TODO: confirm the correct page is loaded in the Browser Panel
+    private void assertTaskSelected(int index) {
+        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
     }
 
-    private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+    private void assertNoTaskSelected() {
+        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
+    }
+
+    /**
+     * Returns the task with only the task name and tags.
+     */
+    private String getCompactFormattedTask(ReadOnlyTask task) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(task.getName());
+        sb.append(System.lineSeparator());
+
+        sb.append("Tags: ");
+        task.getTags().forEach(sb::append);
+
+        return sb.toString();
     }
 
 }
