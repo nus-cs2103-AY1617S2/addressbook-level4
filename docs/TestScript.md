@@ -72,7 +72,7 @@ Remarks | No restriction related to current local time
 ### Test Case 08
 Detail | Summary
 -------- | :--------
-Test Case Summary | Add task with flexible input 
+Test Case Summary | Add task with flexible input
 Test Data | `add TEST8 end/02/02/2017 16:00 desc/ Flexible sequence start/01/02/2017 16:00`
 Expected Result | Task successfully added
 Actual Result | Task successfully added
@@ -82,7 +82,7 @@ Remarks | Input recognition follows keyword instead of sequence
 ### Test Case 09
 Detail | Summary
 -------- | :--------
-Test Case Summary | Add task with end time preceding start time 
+Test Case Summary | Add task with end time preceding start time
 Test Data | `add TEST9 start/02/04/2017 10:00 end/02/04/2017 08:00`
 Expected Result | Prompt: _Start time must precede end time_
 Actual Result | Prompt: _Start time must precede end time_
@@ -91,9 +91,9 @@ Status | **PASSED**
 ### Test Case 10
 Detail | Summary
 -------- | :--------
-Test Case Summary | Add exact task duplicate 
+Test Case Summary | Add exact task duplicate
 Test Data | `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
-`add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
+| `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
 Expected Result | Prompt: _This task already exists in JOBS_
 Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
@@ -103,7 +103,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Add task only differing in description
 Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00`
-`add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 desc/duplicating test`
+| `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 desc/duplicating test`
 Expected Result | Prompt: _This task already exists in JOBS_
 Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
@@ -212,7 +212,7 @@ Test Data | `edit 1 tag/`
 Expected Result | All tags are removed
 Actual Result | All tags are removed
 Status | **PASSED**
-Remarks | All tags will be removed 
+Remarks | All tags will be removed
 
 ### Test Case 21
 Detail | Summary
@@ -277,7 +277,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Reverse completed task to in-progress
 Test Data | `complete 2`
-`in-progress 2`
+| `in-progress 2`
 Expected Result | Prompt: _Unknown command_
 Actual Result | Prompt: _Unknown command_
 Status | **PASSED**
@@ -305,7 +305,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Edit from completed tasks list
 Test Data | `list complete`
-`edit 1 TEST12_complete tag/complete`
+| `edit 1 TEST12_complete tag/complete`
 Expected Result | Task successfully edited
 Actual Result | Task successfully edited
 Status | **PASSED**
@@ -315,7 +315,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Edit from in-progress tasks list
 Test Data | `list in-progress`
-`edit 1 tag/list`
+| `edit 1 tag/list`
 Expected Result | Task successfully edited
 Actual Result | Task successfully edited
 Status | **PASSED**
@@ -325,7 +325,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Complete task from in-progress tasks list
 Test Data | `list in-progress`
-`complete 1`
+| `complete 1`
 Expected Result | Task marked as completed
 Actual Result | Task marked as completed
 Status | **PASSED**
@@ -346,9 +346,9 @@ Detail | Summary
 Test Case Summary | List all tasks with substring "1" in name or description
 Test Data | `find 1`
 Expected Result | List all task with "1" in their, description or tag 
-Actual Result | List all task with "1" in their, description or tag 
+Actual Result | List all task with "1" in their, description or tag
 Status | **PASSED**
-Remarks | Find function accommodates substring of name, description or tag 
+Remarks | Find function accommodates substring of name, description or tag
 
 ### Test Case 35
 Detail | Summary
@@ -364,7 +364,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | List all tasks with substring "1" in tag and edit task
 Test Data | `find add`
-`edit 1 tag/retag tag/find`
+| `edit 1 tag/retag tag/find`
 Expected Result | Task with index 1 will have tag overridden
 Actual Result | Task with index 1 will have tag overridden
 Status | **PASSED**
@@ -403,7 +403,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Complete a recurring task
 Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00 recur/3`
-`complete 1`
+| `complete 1`
 Expected Result | Both dates will increase by 3 days
 Actual Result | Both dates will increase by 3 days
 Status | **PASSED**
@@ -414,7 +414,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Undo function to cancel an action
 Test Data | `delete 1`
-`undo`
+| `undo`
 Expected Result | Retrieve the previously deleted task
 Actual Result | Retrieve the previously deleted task
 Status | **PASSED**
@@ -424,8 +424,8 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Redo function to cancel an undo action
 Test Data | `delete 1`
-`undo`
-`redo`
+| `undo`
+| `redo`
 Expected Result | Task with index 1 is deleted
 Actual Result | Task with index 1 is deleted
 Status | **PASSED**
@@ -436,9 +436,9 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Redo function exceeding the number of undo call
 Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00`
-`undo`
-`redo`
-`redo`
+| `undo`
+| `redo`
+| `redo`
 Expected Result | Prompt: _No more commands to redo_
 Actual Result | Prompt: _No more commands to redo_
 Status | **PASSED**
@@ -448,8 +448,8 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Undo a previously completed task
 Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00`
-`complete`
-`undo`
+| `complete`
+| `undo`
 Expected Result | Status of task turns in-progress
 Actual Result | Status of task turns in-progress
 Status | **PASSED**
