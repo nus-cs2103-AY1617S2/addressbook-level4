@@ -1,6 +1,6 @@
 # TaskIt - User Guide
 
-By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T15-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -37,7 +37,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 
 #### Menu Bar : update the task list to display all relevant tasks based on the selection for fast search <br>
 Home will display all tasks inside, other buttons will only display incompleted tasks with the specified type.
-For example, click on deadline, only incompleted tasks with deadline will be displayed:<br>
+For example, click on overdue, only incompleted tasks which are overdued will be displayed:<br>
 <img src="images/menubar.png" width="500">
 <br>
 
@@ -57,6 +57,7 @@ There are three priorities associated with task: low, medium and high, and they 
 
 ## 3. Features
 
+<!-- @@author A0141872E -->
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
@@ -77,6 +78,7 @@ Add a new task to TaskIt<br>
 Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]`
 
 > * Title can add at the back using quote.<br>
+> * Tasks can have any number of tags (including 0)<br>
 
 Examples:
 
@@ -86,10 +88,6 @@ Examples:
 * `add tag school tag assignment by 11pm "CS2103 revision"`
 
 
-
-> Tasks can have any number of tags (including 0)
-
-<!-- @@author A0141872E -->
 ### 3.3. Listing all tasks: `list`
 
 Listing all relevant tasks based on given parameters<br>
@@ -156,11 +154,11 @@ Format: `m/mark <INDEX> <undone|done>`
 Examples:
 
 * `list all`<br>
-  `m/mark 2 done`<br>
+  `mark 2 done`<br>
   Marks the 2nd task in the task manager as done.
   
 * `find do HW` <br>
-  `m/mark 1 undone`<br>
+  `mark 1 undone`<br>
   Marks the 1st task in the results of the `find` command as undone.
 
 ### 3.6. Searching all tasks based on keywords or date: `find`
@@ -231,7 +229,8 @@ Format: `undo`
 
 ### 3.11. Redo previous undo: `redo`
 
-Redo the prevous undone action.<br>
+Redo the prevous undone action.
+Redo can only work after a successful undo command<br>
 Format: `redo`
 
 ### 3.12. Saving data: `save`
@@ -310,9 +309,10 @@ Format: `exit`
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
   
-* **Path** : `path FILEPATH` <br>
-  e.g.`path newFolder`
-
 * **Save** : `save FILEPATH` <br>
   e.g.`save taskIt.xml`
+  
+  * **Path** : `path FILEPATH` <br>
+  e.g.`path newFolder`
+
 
