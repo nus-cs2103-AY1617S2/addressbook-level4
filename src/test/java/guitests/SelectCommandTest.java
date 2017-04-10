@@ -12,6 +12,7 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestUtil;
 
+//@@author A0143029M
 public class SelectCommandTest extends ToDoListGuiTest {
 
 
@@ -24,7 +25,6 @@ public class SelectCommandTest extends ToDoListGuiTest {
         assertSelectionSuccess("d3"); // last deadline task in the list
 
         // invalid index
-        //assertSelectionInvalid("t100");
         assertSelectionInvalid("t4");
 
         commandBox.runCommand(SelectCommand.COMMAND_WORD + " t0");
@@ -60,7 +60,6 @@ public class SelectCommandTest extends ToDoListGuiTest {
         assertEquals(taskListPanel.getSelectedTasks(taskType).size(), 1);
         ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks(taskType).get(0);
         assertEquals(taskListPanel.getTask(taskType, index), selectedTask);
-        //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {

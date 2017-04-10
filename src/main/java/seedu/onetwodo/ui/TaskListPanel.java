@@ -2,12 +2,13 @@ package seedu.onetwodo.ui;
 
 import static seedu.onetwodo.model.ModelManager.AUTOSCROLL_LAG;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -83,14 +84,11 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent click) {
-                ReadOnlyTask selectedValue = taskListView.getSelectionModel().getSelectedItem();
-                if (selectedValue != null) {
-                    logger.fine("Selection in task list panel changed to : '" + selectedValue + "'");
-                    raise(new TaskPanelSelectionChangedEvent(selectedValue));
-                }
+        taskListView.setOnMouseClicked((MouseEvent click) -> {
+            ReadOnlyTask selectedValue = taskListView.getSelectionModel().getSelectedItem();
+            if (selectedValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + selectedValue + "'");
+                raise(new TaskPanelSelectionChangedEvent(selectedValue));
             }
         });
     }
@@ -104,13 +102,13 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void highlightTaskCard(int index) {
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        EventsCenter.getInstance().post(new SelectCardEvent(index, taskType));
-                    }
-                }, AUTOSCROLL_LAG);
+        TimerTask highlightTask = new TimerTask() {
+            @Override
+            public void run() {
+                EventsCenter.getInstance().post(new SelectCardEvent(index, taskType));
+            }
+        };
+        new Timer().schedule(highlightTask, AUTOSCROLL_LAG);
     }
 
     public void viewScrollTo(int index) {

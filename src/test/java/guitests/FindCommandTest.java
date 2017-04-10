@@ -21,6 +21,12 @@ public class FindCommandTest extends ToDoListGuiTest {
     }
 
     @Test
+    public void find_short_form_success() {
+        assertNoFindResults(FindCommand.SHORT_COMMAND_WORD + " Nemo", TaskType.DEADLINE);
+        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH.getTaskType(), td.taskH, td.taskI);
+    }
+
+    @Test
     public void find_afterDelete_foundItems() {
         //find after deleting one result taskH
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " t2");

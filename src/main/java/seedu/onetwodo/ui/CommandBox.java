@@ -63,13 +63,11 @@ public class CommandBox extends UiPart<Region> {
         try {
             CommandResult commandResult = logic.execute(command);
             setKeyListenerForMutators(command);
-            // process result of the command
             setErrorStyleForCommandResult(false);
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
         } catch (CommandException e) {
-            // handle command failure
             setErrorStyleForCommandResult(true);
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
@@ -103,12 +101,9 @@ public class CommandBox extends UiPart<Region> {
         switch (command) {
         case AddCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD:
-            commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent ke) {
-                    raise(new DeselectCardsEvent());
-                    resetKeyListener();
-                }
+            commandTextField.setOnKeyPressed((KeyEvent ke) -> {
+                raise(new DeselectCardsEvent());
+                resetKeyListener();
             });
             break;
         default:

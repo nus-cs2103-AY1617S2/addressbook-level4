@@ -14,6 +14,8 @@ public class HelpUGWindowTest extends ToDoListGuiTest {
         commandBox.clickOnTextField();
         assertHelpUGWindowOpen(commandBox.runHelpUGCommand());
 
+        assertHelpUGWindowOpen(commandBox.runHelpUGCommandWithShortForm());
+
         assertHelpUGWindowOpen(mainMenu.openHelpUGWindowUsingAccelerator());
 
         assertHelpUGWindowOpen(mainMenu.openHelpUGWindowUsingMenu());
