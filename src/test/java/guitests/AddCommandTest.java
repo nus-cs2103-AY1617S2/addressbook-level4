@@ -9,14 +9,25 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
 public class AddCommandTest extends ToDoListGuiTest {
 
+    TestTask[] currentList = td.getTypicalTasks();
+
+    @Test
+    public void add_short_form_success() {
+        commandBox.runCommand(AddCommand.SHORT_COMMAND_WORD + " reply boss email p/l");
+        TestTask taskToAdd = td.task3;
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(TaskType.TODO, currentList));
+        assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, taskToAdd.toString()));
+    }
+
     @Test
     public void add() {
-        TestTask[] currentList = td.getTypicalTasks();
 
         //add one task
         TestTask taskToAdd = td.task1;
@@ -45,6 +56,9 @@ public class AddCommandTest extends ToDoListGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
+    /**
+     * Runs the add command and confirms the result is correct.
+     */
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
 

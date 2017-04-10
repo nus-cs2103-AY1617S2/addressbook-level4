@@ -25,6 +25,10 @@ public class HelpWindowTest extends ToDoListGuiTest {
         //use command
         commandBox.clickOnTextField();
         assertHelpWindowOpen(commandBox.runHelpCommand());
+
+        //use command short form
+        commandBox.clickOnTextField();
+        assertHelpWindowOpen(commandBox.runHelpCommandWithShortForm());
     }
 
     private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {

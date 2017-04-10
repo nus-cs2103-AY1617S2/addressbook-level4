@@ -24,6 +24,12 @@ public class ListCommandTest extends ToDoListGuiTest {
     }
 
     @Test
+    public void parse_short_form_success() {
+        commandBox.runCommand(ListCommand.SHORT_COMMAND_WORD + " zzzz");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void list_noParameter_success() {
         assertListSuccess(TaskType.TODO, "t2", currentList, "", false, ListCommand.MESSAGE_LIST_UNDONE_SUCCESS);
     }

@@ -96,6 +96,12 @@ public class EditCommandTest extends ToDoListGuiTest {
     }
 
     @Test
+    public void parse_short_form_success() {
+        commandBox.runCommand(EditCommand.SHORT_COMMAND_WORD + " Bobby");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void edit_missingTaskIndex_failure() {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
