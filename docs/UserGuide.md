@@ -8,8 +8,8 @@
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
+   > Having any Java 8 version is not enough <br>
+   > This app will not work with earlier versions of Java 8
 
 1. Download the latest `fasttask.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
