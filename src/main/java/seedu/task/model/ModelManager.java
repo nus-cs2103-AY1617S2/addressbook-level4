@@ -116,9 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
         ReadOnlyTaskManager undone = history.undo();
         if (undone != null) {
             taskManager.resetData(undone);
-            //@@author A0164889E
+            raise(new TaskManagerChangedEvent(taskManager));
             indicateCompleteListToChange();
-            //@@author
             return true;
         }
         return false;
@@ -129,9 +128,8 @@ public class ModelManager extends ComponentManager implements Model {
         ReadOnlyTaskManager redone = history.redo();
         if (redone != null) {
             taskManager.resetData(redone);
-            //@@author A0164889E
+            raise(new TaskManagerChangedEvent(taskManager));
             indicateCompleteListToChange();
-            //@@author
             return true;
         }
         return false;
@@ -152,9 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
         indicateTaskManagerChanged();
-        //@@author A0164889E
         indicateCompleteListToChange();
-        //@@author
     }
     //@@author
 
@@ -170,10 +166,8 @@ public class ModelManager extends ComponentManager implements Model {
             tags = new UniqueTagList("complete");
             updateFilteredTaskListTag(tags);
         } catch (DuplicateTagException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
