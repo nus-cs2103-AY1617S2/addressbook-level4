@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todolist>
+    <persons>
+        <name>Hans Muster</name>
+        <startDate isPrivate="false">9482424</startDate>
+        <endDate isPrivate="false">hans@google.com</endDate>
+        <description isPrivate="false">4th street</description>
+    </persons>
+    <persons>
+        <name>Ruth Mueller</name>
+        <startDate isPrivate="false">87249245</startDate>
+        <endDate isPrivate="false">ruth@google.com</endDate>
+        <description isPrivate="false">81th street</description>
+    </persons>
+    <persons>
+        <name>Heinz Kurz</name>
+        <startDate isPrivate="false">95352563</startDate>
+        <endDate isPrivate="false">heinz@yahoo.com</endDate>
+        <description isPrivate="false">wall street</description>
+    </persons>
+    <persons>
+        <name>Cornelia Meier</name>
+        <startDate isPrivate="false">87652533</startDate>
+        <endDate isPrivate="false">cornelia@google.com</endDate>
+        <description isPrivate="false">10th street</description>
+    </persons>
+    <persons>
+        <name>Werner Meyer</name>
+        <startDate isPrivate="false">9482224</startDate>
+        <endDate isPrivate="false">werner@gmail.com</endDate>
+        <description isPrivate="false">michegan ave</description>
+    </persons>
+    <persons>
+        <name>Lydia Kunz</name>
+        <startDate isPrivate="false">9482427</startDate>
+        <endDate isPrivate="false">lydia@gmail.com</endDate>
+        <description isPrivate="false">little tokyo</description>
+    </persons>
+    <persons>
+        <name>Anna Best</name>
+        <startDate isPrivate="false">9482442</startDate>
+        <endDate isPrivate="false">anna@google.com</endDate>
+        <description isPrivate="false">4th street</description>
+    </persons>
+    <persons>
+        <name>Stefan Meier</name>
+        <startDate isPrivate="false">8482424</startDate>
+        <endDate isPrivate="false">stefan@mail.com</endDate>
+        <description isPrivate="false">little india</description>
+    </persons>
+    <persons>
+        <name>Martin Mueller</name>
+        <startDate isPrivate="false">8482131</startDate>
+        <endDate isPrivate="false">hans@google.com</endDate>
+        <description isPrivate="false">chicago ave</description>
+    </persons>
+</todolist>

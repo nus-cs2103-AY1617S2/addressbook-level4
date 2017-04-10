@@ -1,40 +1,24 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
-import java.util.ArrayList;
-
-import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import javafx.scene.input.KeyCode;
+import seedu.onetwodo.logic.commands.DoneCommand;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+//@@author A0143029M
+public class CommandBoxTest extends ToDoListGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    private static final String COMMAND_THAT_SUCCEEDS = "select t3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
-
-    private ArrayList<String> defaultStyleOfCommandBox;
-    private ArrayList<String> errorStyleOfCommandBox;
-
-    @Before
-    public void setUp() {
-        defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
-        assertFalse("CommandBox default style classes should not contain error style class.",
-                    defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
-
-        // build style class for error
-        errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
-        errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
-    }
 
     @Test
     public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(false, commandBox.isErrorStyleApplied());
     }
 
     @Test
@@ -42,18 +26,26 @@ public class CommandBoxTest extends AddressBookGuiTest {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
-        assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(true, commandBox.isErrorStyleApplied());
     }
 
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
-
+        commandBox.setErrorPseudoStyleClass();
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(false, commandBox.isErrorStyleApplied());
     }
 
+    @Test
+    public void commandBox_commandHistoryUndoRedo() {
+        String doneCommand = DoneCommand.COMMAND_WORD + " e1";
+        commandBox.runCommand(doneCommand);
+        mainGui.pressKey(KeyCode.UP);
+        assertEquals(commandBox.getCommandInput(), doneCommand);
+        mainGui.pressKey(KeyCode.DOWN);
+        assertEquals(commandBox.getCommandInput(), "");
+    }
 }

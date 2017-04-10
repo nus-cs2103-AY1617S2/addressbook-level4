@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="assets/style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="assets/hljs-solarized-light.min.css"/>
+  </head>
+<body id="wrapper"><h1 id="user-guide"><a class="header-link" href="#user-guide"></a>User Guide</h1>
+<p class="img-container"><img src="./UG_img/coverPage_user.png" width="600"></p>
+<ul class="list">
+<li><a href="#about">About</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#commands">Commands</a></li>
+<li><a href="#command-format">Command Format</a></li>
+<li><a href="#cheat-sheet">Cheat Sheet</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h2 id="about"><a class="header-link" href="#about"></a>About</h2>
+<p>Having trouble keeping track of the tasks you need to do? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you need!</p>
+<p>OneTwoDo helps you to manage your events, deadlines, and other to-do tasks so that you can spend more time completing tasks instead of managing them.</p>
+<p>OneTwoDo has a simple and clean interface, so that with one glance you can have a clear idea of your tasks at hand.</p>
+<p>OneTwoDo is designed to be keyboard-friendly. By simply typing commands in one line of text, OneTwoDo will faithfully execute your wish. You do not need to worry about clicking multiple buttons or links.</p>
+<p>OneTwoDo is also extremely flexible. It is smart enough to understand various command formats and shortcuts.</p>
+<p>Get started with OneTwoDo today!</p>
+<h2 id="getting-started"><a class="header-link" href="#getting-started"></a>Getting Started</h2>
+<p>Before using OneTwoDo, please ensure that you have installed <strong>Java version 1.8.0_60</strong> or later as the application does not work with earlier Java 8 versions.</p>
+<p>Start your OneTwoDo journey by downloading the latest <strong>OneTwoDo.jar</strong> from the releases tab. Download OneTwoDo directly into the home folder you want to use for the app.</p>
+<p>You can start OneTwoDo by simply double-clicking the icon!</p>
+<blockquote>
+<p class="img-container"><img src="./UG_img/onetwodo_icon.png" width="32"></p>
+</blockquote>
+<p><em>Figure 1: OneTwoDo User Icon</em></p>
+<p>Congratulations, you are all set up!</p>
+<h2 id="features"><a class="header-link" href="#features"></a>Features</h2>
+<p>After you have started OneTwoDo, you will see our welcome screen. With one glance, you can view all your tasks for the day.</p>
+<p class="img-container"><img src="./UG_img/welcomeScreen.png" width="800"></p>
+<p><em>Figure 2: Welcome Screen</em></p>
+<p>You can now proceed to add or modify your tasks in OneTwoDo&#39;s main User Interface.</p>
+<p class="img-container"><img src="./UG_img/MainWindow_blank.png" width="800"></p>
+<p><em>Figure 3: OneTwoDo User Interface</em></p>
+<p>You will see the following sections in our User Interface:</p>
+<ol class="list">
+<li><strong>Command box</strong><ul class="list">
+<li>Enter a command into this box and press enter to execute the command.</li>
+<li>You can press the <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> arrow keys to fill the command box with previously executed commands.</li>
+</ul>
+</li>
+<li><strong>Result summary and tips</strong><ul class="list">
+<li>A summary of the result of the executed command is shown to give feedback about the effects of the command.</li>
+</ul>
+</li>
+<li><strong>Task panels</strong><ul class="list">
+<li>Each panel displays your tasks depending on the category they belong to. </li>
+<li>You can press <kbd>SHIFT</kbd>+<kbd>&uarr;</kbd> or <kbd>SHIFT</kbd>+<kbd>&darr;</kbd> to scroll up or down the task panels respectively, without using your mouse!</li>
+</ul>
+</li>
+</ol>
+<p>Your tasks are separated into 3 categories:</p>
+<ol class="list">
+<li><code>Deadline</code> - This panel displays tasks with an end date but no start date.</li>
+<li><code>Event</code> - This panel displays tasks with a start date and an end date.</li>
+<li><code>To-do</code> - This panel displays tasks with neither a start date nor an end date.</li>
+</ol>
+<h2 id="commands"><a class="header-link" href="#commands"></a>Commands</h2>
+<p>Let us assume that you are a busy professional. The following scenarios illustrate how you could use the commands in OneTwoDo, although these  examples could very well be applied to anyone who wants to better manage their tasks with OneTwoDo. </p>
+<h3 id="viewing-command-summary-:-`help`"><a class="header-link" href="#viewing-command-summary-:-`help`"></a>Viewing command summary : <code>help</code></h3>
+<p>You want to start using OneTwoDo to organize your meetings and projects more efficiently. However, being new to this application, you may need some guidance. Do not worry, simply type <code>help</code> and a concise command summary window will pop up to clear your confusion.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  help</code></pre><p class="img-container"><img src="./UG_img/cheetsheet_ss.png" width="600"></p>
+<p><em>Figure 4: Command Summary Window</em></p>
+<p>After viewing the command summary, you may want to find out more about the special features and commands offered by OneTwoDo. Try entering the command <code>help ug</code> or <code>help userguide</code> and our informative user guide will open up for you to explore.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  help ug
+<span class="hljs-meta">&gt;&gt;</span>  help userguide</code></pre><blockquote>
+<ul class="list">
+<li>You can press the <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> arrow keys to scroll up or down the window without using your mouse!</li>
+<li>Simply type any other key to close the popup window.</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="adding-a-task:-`add`"><a class="header-link" href="#adding-a-task:-`add`"></a>Adding a task: <code>add</code></h3>
+<p>As a professional, you have an overwhelming number of emails to reply to whenever you are free. Add this to-do task into OneTwoDo so you will not forget!</p>
+<pre class="hljs"><code>&gt;&gt;  <span class="hljs-keyword">add</span><span class="bash"> Reply Emails </span></code></pre><p><img src="./UG_img/addReplyEmail.png" width="300">
+Figure 5: Add a to-do</p>
+<p>Sometimes, your manager issues you an important task with a strict deadline. Key it into OneTwoDo before you forget! This time, indicate the task&#39;s deadline as well.</p>
+<pre class="hljs"><code>&gt;&gt;  add Difficult Task  e/<span class="hljs-number">12</span>-May<span class="hljs-number">-2017</span> <span class="hljs-number">10</span>pm</code></pre><p>Your manager emails you that there will be an important lunch meeting from 1-3pm tomorrow. Key it into OneTwoDo, but this time, also indicating the duration. You can choose to input more detailed information related to any task as well.</p>
+<pre class="hljs"><code>&gt;&gt;  <span class="hljs-keyword">add</span><span class="bash"> Lunch Meeting  s/tmr 1pm  e/tmr 3pm
+</span>
+&gt;&gt;  <span class="hljs-keyword">add</span><span class="bash"> Lunch Meeting  s/tmr 1pm  e/tmr 3pm  r/weekly  d/bring laptop  p/high  t/work</span></code></pre><p class="img-container"><img src="./UG_img/addLunchMeeting.png" width="800"></p>
+<p><em>Figure 6: Add event task with detailed info</em></p>
+<h4 id="format"><a class="header-link" href="#format"></a>Format</h4>
+<p><code>add NAME [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...</code></p>
+<p>Refer to the <a href="#command-format">Command Format</a> section below if you do not understand the command format.</p>
+<blockquote>
+<ul class="list">
+<li><code>s/</code> refers to the starting date / time.
+</li>
+<li><code>e/</code> refers to the ending date / time.
+</li>
+<li><code>r/</code> refers to the recurring period of the task. It can be <code>daily</code>, <code>weekly</code>, <code>monthly</code> or <code>yearly</code>
+</li>
+<li><code>d/</code> refers to the description of the task.</li>
+<li><code>p/</code> refers to the priority level of the task. It can be <code>high</code> (<code>h</code>), <code>medium</code> (<code>m</code>) or <code>low</code> (<code>l</code>).</li>
+<li><code>t/</code> refers to the task&#39;s tag. A task can have any number of tags.</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="editing-a-task-:-`edit`"><a class="header-link" href="#editing-a-task-:-`edit`"></a>Editing a task : <code>edit</code></h3>
+<p>Your manager has just postponed the meeting to tomorrow, 2-4pm. Simply use the <code>edit</code> command to update your task!</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  edit  e1  s/tmr <span class="hljs-number">2</span>pm  e/tmr <span class="hljs-number">4</span>pm</code></pre><p>The command above will edit your task at the specified <code>PREFIX_INDEX</code> <code>e1</code>. The <code>edit</code> command allows you to edit any field of your task easily.</p>
+<p>When editing tags, all existing tags of the task that were set previously will be replaced. You can remove all the tags of a task by typing <code>t/</code> without specifying any tags after it.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  edit  e1  t/</code></pre><p class="img-container"><img src="./UG_img/tagRemove.png" width="400"></p>
+<p><em>Figure 7: Before and after tags removal</em></p>
+<h4 id="format-1"><a class="header-link" href="#format-1"></a>Format</h4>
+<p><code>edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...</code></p>
+<p>Refer to the <a href="#command-format">Command Format</a> section below if you do not understand the command format.</p>
+<hr>
+<h3 id="listing-tasks-:-`list`"><a class="header-link" href="#listing-tasks-:-`list`"></a>Listing tasks : <code>list</code></h3>
+<p>Having so many tasks you need a way to display only the tasks that you need to see. The <code>list</code> command lets you view tasks according to your specified criteria, allowing you to filter and sort them to your liking.</p>
+<pre class="hljs"><code>&gt;&gt;  list  s<span class="hljs-regexp">/today  e/</span><span class="hljs-keyword">next</span> week</code></pre><p>The above command will filter out all the tasks you need to do from today till next week. However, you might also want compare which tasks are more crucial and hence needs to be completed earlier. This is where changing the order using the option <code>o/</code> makes it convenient for you.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  list  o/priority</code></pre><p class="img-container"><img src="./UG_img/prioritySort.png" width="800"></p>
+<p><em>Figure 8: Sort by priority</em></p>
+<p>Sometimes you may be so busy that you have forgotten if you had replied an important email. In times like this when you need to review the tasks you have completed, simply type in:</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  list  done</code></pre><p>All your completed tasks are listed! You may feel a sense of satisfaction after seeing all the tasks you have accomplished, but it looks like you have not replied the email.</p>
+<p class="img-container"><img src="./UG_img/doneFilter.png" width="800"></p>
+<p><em>Figure 9: Filter all completed tasks</em></p>
+<h4 id="format-2"><a class="header-link" href="#format-2"></a>Format</h4>
+<p><code>list [DONE_STATUS] [s/START_DATE] [e/END_DATE] [o/ORDER] [p/PRIORITY] [t/TAG]...</code></p>
+<p>Refer to the <a href="#command-format">Command Format</a> section below if you do not understand the command format.</p>
+<blockquote>
+<ul class="list">
+<li><code>DONE_STATUS</code> can be <code>DONE</code>, <code>UNDONE</code>, or <code>ALL</code>.</li>
+<li><code>o/</code> refers to order that the tasks are sorted by. </li>
+<li>You can sort by <code>priority</code>, <code>alphanumeric</code> and <code>dateTime</code>.</li>
+<li>You can also filter and sort your tasks with multiple parameters. Only tasks that  satisfy the filtering criteria will be shown.<ul class="list">
+<li>E.g. <code>list  s/today  e/next week  o/dateTime  p/high  t/work</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="finding-all-tasks-containing-a-keyword-in-their-name-or-tag:-`find`"><a class="header-link" href="#finding-all-tasks-containing-a-keyword-in-their-name-or-tag:-`find`"></a>Finding all tasks containing a keyword in their name or tag: <code>find</code></h3>
+<p>Your manager assigns you to research about &quot;bags that people buy on birthdays&quot;. Perhaps you have trouble remembering the exact words you added in that task? If you had only remembered the keywords &quot;birthday&quot;, &quot;shopping&quot; or &quot;assignment&quot;, simply use the find command and any tasks matching those keywords will be listed out for you.</p>
+<pre class="hljs"><code> <span class="hljs-meta">&gt;&gt;  </span>find birthday shopping assignment</code></pre><h4 id="format-3"><a class="header-link" href="#format-3"></a>Format</h4>
+<p><code>find KEYWORD [MORE_KEYWORDS]...</code></p>
+<blockquote>
+<ul class="list">
+<li>Shows a task if any word in its name, description, or tags matches any of the keywords</li>
+</ul>
+</blockquote>
+<p class="img-container"><img src="./UG_img/findCommand.png" width="800"></p>
+<hr>
+<p><em>Figure 10: Find task</em></p>
+<h3 id="selecting-a-task-:-`select`"><a class="header-link" href="#selecting-a-task-:-`select`"></a>Selecting a task : <code>select</code></h3>
+<p>If you want to view a task&#39;s description that, use this command. A popup window containing the name and description of task selected will be shown. To view more details about a task with the <code>PREFIX_INDEX</code> <code>e2</code>, simply type:</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  select e2</code></pre><hr>
+<h3 id="marking-a-task-as-completed:-`done`"><a class="header-link" href="#marking-a-task-as-completed:-`done`"></a>Marking a task as completed: <code>done</code></h3>
+<p>Completed an assignment ahead of time? Give yourself a pat on the back, and type <code>done</code> to mark the task as completed. This command marks a task at the specified <code>PREFIX_INDEX</code> as completed. </p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  done t1</code></pre><hr>
+<h3 id="marking-a-task-as-uncompleted:-`undone`"><a class="header-link" href="#marking-a-task-as-uncompleted:-`undone`"></a>Marking a task as uncompleted: <code>undone</code></h3>
+<p>Somtimes requirements change and you may have realised that a completed task still has parts that are undone. Simply mark that task as undone with this command, which marks a task at the specified <code>PREFIX_INDEX</code> as uncompleted.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  undone t1</code></pre><hr>
+<h3 id="deleting-a-task-:-`delete`"><a class="header-link" href="#deleting-a-task-:-`delete`"></a>Deleting a task : <code>delete</code></h3>
+<p>Your manager had unfortunately assigned you to work overtime, and you cannot make it home in time for your birthday celebration. Type <code>delete</code> to remove your celebration plans from OneTwoDo. This command removes the task at the specified <code>PREFIX_INDEX</code>.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  delete e2</code></pre><hr>
+<h3 id="undoing-actions:-`undo`"><a class="header-link" href="#undoing-actions:-`undo`"></a>Undoing actions: <code>undo</code></h3>
+<p>Did you delete a high priority task by accident? Keep calm, type <code>undo</code>, and OneTwoDo will restore that important task! </p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  undo</code></pre><hr>
+<h3 id="redoing-actions:-`redo`"><a class="header-link" href="#redoing-actions:-`redo`"></a>Redoing actions: <code>redo</code></h3>
+<p>After reversing your actions using <code>undo</code>, you realize that it is actually safe to delete. Simply type <code>redo</code>, and that not-so-important task will disappear once again from OneTwoDo!</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  redo</code></pre><hr>
+<h3 id="saving-the-data:-`save`"><a class="header-link" href="#saving-the-data:-`save`"></a>Saving the data: <code>save</code></h3>
+<p>By default, your task data is saved in a file named <code>todolist.xml</code> in the <code>data</code> folder. However, you can change the location and name of the file with this command. Type <code>save</code> and the filepath after that. Remember to use the <code>.xml</code> file extension at the end of the file name. If a file with the same name already exists, type <code>overwrite</code> to replace the existing file.</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  save myStorage.xml
+
+<span class="hljs-meta">&gt;&gt;</span>  save overwrite myStorage.xml</code></pre><hr>
+<h3 id="exporting-the-data:-`export`"><a class="header-link" href="#exporting-the-data:-`export`"></a>Exporting the data: <code>export</code></h3>
+<p>If you want to export your current task data to an <code>.xml</code> file, type <code>export</code> and the filepath after that. Remember to use the <code>.xml</code> file extension at the end of the file name. If a file with the same name already exists, type <code>overwrite</code> to replace the existing file.</p>
+<pre class="hljs"><code>&gt;&gt;  <span class="hljs-keyword">export</span> storageName.xml
+
+&gt;&gt;` <span class="hljs-keyword">export</span> overwrite storageName.xml</code></pre><hr>
+<h3 id="importing-the-data:-`import`"><a class="header-link" href="#importing-the-data:-`import`"></a>Importing the data: <code>import</code></h3>
+<p>When you want to display data from a saved file, type <code>import</code> and filepath after that. Remember to use the <code>.xml</code> file extension.</p>
+<pre class="hljs"><code>&gt;&gt;  <span class="hljs-keyword">import</span> storageName.xml</code></pre><hr>
+<h3 id="deleting-all-tasks:-`clear`"><a class="header-link" href="#deleting-all-tasks:-`clear`"></a>Deleting all tasks: <code>clear</code></h3>
+<p>You have finally quit your job, but there are so many added task that needs to be deleted. No problem! Simply type <code>clear</code> and start your OneTwoDo journey again on a new note!</p>
+<pre class="hljs"><code><span class="hljs-meta">&gt;&gt;</span>  clear</code></pre><hr>
+<h3 id="exiting-the-program-:-`exit`"><a class="header-link" href="#exiting-the-program-:-`exit`"></a>Exiting the program : <code>exit</code></h3>
+<p>After adding all your tasks to OneTwoDo, you want to exit OneTwoDo to actually complete those tasks. Simply type <code>exit</code> to close the application.</p>
+<pre class="hljs"><code>&gt;&gt;  <span class="hljs-keyword">exit</span></code></pre><hr>
+<h2 id="command-format"><a class="header-link" href="#command-format"></a>Command Format</h2>
+<ul class="list">
+<li>Each command corresponds to a  <em>command word</em>, which may have <em>command options</em>, and both accept <em>command parameters</em> after it.</li>
+<li>A command word is the first word of the command. (e.g. <code>find</code>, or <code>help</code>).</li>
+<li><p>A command option specifies additional information needed by the command.</p>
+<ul class="list">
+<li>It consists of a character followed by a forward slash (e.g. <code>s/</code>, <code>t/</code>, etc), followed by data to be specified after the forward slash if there are any. (e.g. <code>s/tomorrow 0900</code>). </li>
+<li>The order of options is not fixed after the task name. (e.g. executing <code>add Go home p/high d/after class</code> is the same as executing <code>add Go home d/after class p/high</code>).</li>
+<li>Options surrounded by square brackets <code>[ ]</code> are optional.</li>
+<li>Options with <code>...</code> (ellipses) after them can be specified multiple times (e.g. <code>t/Schoolwork t/CS2103</code>).</li>
+<li>Options with <code>|</code> (the pipe symbol) means that either option on the left or right should be used.</li>
+</ul>
+</li>
+<li><p>A command parameter is an <code>UPPER_CASE</code> word representing required data for a command word or its options. Some common examples include:</p>
+<ul class="list">
+<li><code>NAME</code><ul class="list">
+<li>The name of the task.</li>
+</ul>
+</li>
+<li><code>PREFIX_INDEX</code><ul class="list">
+<li>The index number shown in the most recent listing.</li>
+<li>Comprises of a category prefix (<code>e</code>, <code>d</code>, or <code>t</code>, represents <code>Event</code>, <code>Deadline</code> and <code>To-Do</code> categories respectively) and category index (a positive integer, e.g. <code>1</code>, <code>2</code>, <code>3</code>..).</li>
+</ul>
+</li>
+<li><code>START_DATE</code><ul class="list">
+<li>Date and time when the task starts is entered</li>
+<li>If no time is indicated, the default time is taken as 0000 hrs.</li>
+<li>Must be before <code>END_DATE</code>.</li>
+<li>Please refer to the Date and Time Format Specification for the list of accepted formats.</li>
+</ul>
+</li>
+<li><code>END_DATE</code><ul class="list">
+<li>Date and time when the task ends is entered</li>
+<li>If no time is indicated, the default time is taken as 2359 hrs.</li>
+<li>Must be after <code>START_DATE</code>.</li>
+<li>Please refer to the Date and Time Format Specification for the list of accepted formats.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="date-and-time-format-specification"><a class="header-link" href="#date-and-time-format-specification"></a>Date and Time Format Specification</h3>
+<p>OneTwoDo accepts most date and time formats, including:</p>
+<ul class="list">
+<li>2016/12/31</li>
+<li>12/31/2016</li>
+<li>2016-12-31</li>
+<li>Dec 31st</li>
+<li>31st Dec 2016</li>
+<li>31st of December</li>
+<li>Next Tue 3pm</li>
+<li>Today 0800</li>
+<li>Tomorrow 5:30am</li>
+<li>Last Wednesday 0600h</li>
+<li>3 days from now</li>
+</ul>
+<p>Refer to <a href="http://natty.joestelmach.com/doc.jsp">http://natty.joestelmach.com/doc.jsp</a> for a full list of supported formats.
+<br></p>
+<hr>
+<h2 id="command-summary"><a class="header-link" href="#command-summary"></a>Command Summary</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Command</th>
+<th style="text-align:left">Format</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Alternatives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Help</td>
+<td style="text-align:left"><code>help</code></td>
+<td style="text-align:left">Open help window</td>
+<td style="text-align:left">F1</td>
+</tr>
+<tr>
+<td style="text-align:left">Help ug</td>
+<td style="text-align:left"><code>help ug</code></td>
+<td style="text-align:left">Open this userguide</td>
+<td style="text-align:left">help ug, help userguide</td>
+</tr>
+<tr>
+<td style="text-align:left">Add</td>
+<td style="text-align:left"><code>add NAME [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...</code></td>
+<td style="text-align:left">Add a task</td>
+<td style="text-align:left">a</td>
+</tr>
+<tr>
+<td style="text-align:left">Edit</td>
+<td style="text-align:left"><code>edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...</code></td>
+<td style="text-align:left">Edit any specified task&#39;s information</td>
+<td style="text-align:left">e</td>
+</tr>
+<tr>
+<td style="text-align:left">List</td>
+<td style="text-align:left"><code>list [DONE_STATUS] [s/START_DATE] [e/END_DATE] [o/ORDER] [p/PRIORITY] [t/TAG]...</code></td>
+<td style="text-align:left">List specified tasks in specified order</td>
+<td style="text-align:left">ls</td>
+</tr>
+<tr>
+<td style="text-align:left">Find</td>
+<td style="text-align:left"><code>find KEYWORD [MORE_KEYWORDS]...</code></td>
+<td style="text-align:left">f</td>
+</tr>
+<tr>
+<td style="text-align:left">Select</td>
+<td style="text-align:left"><code>select PREFIX_INDEX</code></td>
+<td style="text-align:left">s</td>
+</tr>
+<tr>
+<td style="text-align:left">Done</td>
+<td style="text-align:left"><code>done PREFIX_INDEX</code></td>
+<td style="text-align:left">Archive the specified task</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Undone</td>
+<td style="text-align:left"><code>undone PREFIX_INDEX</code></td>
+<td style="text-align:left">Unarchive the specified task</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Undo</td>
+<td style="text-align:left"><code>undo</code></td>
+<td style="text-align:left">Undo previous action</td>
+<td style="text-align:left">Ctrl+U</td>
+</tr>
+<tr>
+<td style="text-align:left">Redo</td>
+<td style="text-align:left"><code>redo</code></td>
+<td style="text-align:left">Redo previous action</td>
+<td style="text-align:left">Ctrl+R</td>
+</tr>
+<tr>
+<td style="text-align:left">Save</td>
+<td style="text-align:left"><code>save [overwrite] FILE_PATH</code></td>
+<td style="text-align:left">Save file to specified location</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Export</td>
+<td style="text-align:left"><code>export [overwrite] FILE_PATH</code></td>
+<td style="text-align:left">Export file to specified location</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Import</td>
+<td style="text-align:left"><code>import FILE_PATH</code></td>
+<td style="text-align:left">Import file to be used</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Delete</td>
+<td style="text-align:left"><code>delete PREFIX_INDEX</code></td>
+<td style="text-align:left">Delete specified task</td>
+<td style="text-align:left">d</td>
+</tr>
+<tr>
+<td style="text-align:left">Clear</td>
+<td style="text-align:left"><code>clear</code></td>
+<td style="text-align:left">Clear all data in OneTwoDo</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Exit</td>
+<td style="text-align:left"><code>exit</code></td>
+<td style="text-align:left">Quit the program</td>
+<td style="text-align:left">Ctrl+E</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="faq"><a class="header-link" href="#faq"></a>FAQ</h2>
+<p><strong>Q</strong>: How do I transfer my data to another computer? <br>
+<strong>A</strong>: Use the <code>export</code> command to export out the storage. Transfer the storage file via any means (thumb drive, email, etc) and use the <code>import</code> command on another computer to import the storage file.
+<br>
+<br></p>
+<p><strong>Q</strong>: What type of date and time format can I use? <br>
+<strong>A</strong>: OneTowDo support a variety of formats. You can checkout some of the more common formats above. For complete list of format, checkout the Natty website: <a href="http://natty.joestelmach.com/doc.jsp">http://natty.joestelmach.com/doc.jsp</a>.
+<br>
+<br></p>
+<p><strong>Q</strong>: How do I save my task data in OneTwoDo? <br>
+<strong>A</strong>: OneTwoDo will save your data automatically every time you execute a command.
+<br>
+<br></p>
+<p><strong>Q</strong>: What is the difference between <code>find</code> and <code>list</code> command? <br>
+<strong>A</strong>: The <code>find</code> command helps you search for a particular task based on the keywords you remember. The <code>list</code> command helps you to filter and sort the tasks in OneTwoDo.
+<br>
+<br></p>
+<p><strong>Q</strong>: Which commands will I be able to undo? <br>
+<strong>A</strong>: You can only undo the commands that modify the data of OneTwoDo. The 6 commands that you can undo are: <code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code>, <code>done</code>, and <code>undone</code>.
+<br>
+<br></p>
+<p><strong>Q</strong>: What is the difference between the <code>done</code> and <code>delete</code> command? <br>
+<strong>A</strong>: The <code>delete</code> command will remove the selected task from OneTwoDo. The <code>done</code> command will archive the selected task into the <code>done</code> category. In this way, you can still keep track of the tasks that have been done by using the command <code>list done</code>.</p>
+</body>
+</html>

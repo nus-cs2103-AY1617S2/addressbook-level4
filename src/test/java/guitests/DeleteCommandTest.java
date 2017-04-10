@@ -1,55 +1,68 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.onetwodo.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import seedu.onetwodo.logic.commands.ClearCommand;
+import seedu.onetwodo.logic.commands.DeleteCommand;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TestTask;
+import seedu.onetwodo.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+//@@author A0143029M
+public class DeleteCommandTest extends ToDoListGuiTest {
 
     @Test
     public void delete() {
+        TestTask[] currentList = td.getTypicalTasks();
 
-        //delete the first in the list
-        TestPerson[] currentList = td.getTypicalPersons();
-        int targetIndex = 1;
-        assertDeleteSuccess(targetIndex, currentList);
+        // invalid index
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e99999");
+        assertResultMessage("The task index provided is invalid");
 
-        //delete the last in the list
-        currentList = TestUtil.removePersonFromList(currentList, targetIndex);
-        targetIndex = currentList.length;
-        assertDeleteSuccess(targetIndex, currentList);
+        // invalid command
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e-1");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
 
-        //delete from the middle of the list
-        currentList = TestUtil.removePersonFromList(currentList, targetIndex);
-        targetIndex = currentList.length / 2;
-        assertDeleteSuccess(targetIndex, currentList);
+        // delete first event
+        assertDeleteSuccess(DeleteCommand.COMMAND_WORD, TaskType.EVENT, 3, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 3);
 
-        //invalid index
-        commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The person index provided is invalid");
+        assertDeleteSuccess(DeleteCommand.SHORT_COMMAND_WORD, TaskType.EVENT, 2, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 2);
 
+        assertDeleteSuccess(DeleteCommand.COMMAND_WORD, TaskType.EVENT, 1, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 1);
+
+        // empty list
+        commandBox.runCommand(ClearCommand.COMMAND_WORD);
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e1");
+        assertResultMessage("The task index provided is invalid");
     }
 
     /**
-     * Runs the delete command to delete the person at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
-     * @param currentList A copy of the current list of persons (before deletion).
+     * Runs the delete command to delete the task at specified index and confirms the result is correct.
+     * @param commandString The command to be executed, can be either "delete" or its short form "d"
+     * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
+     * @param currentList A copy of the current list of tasks (before deletion).
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
-        TestPerson personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestPerson[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
+    private void assertDeleteSuccess(String commandString, TaskType taskType, int targetIndexOneIndexed,
+            final TestTask[] currentList) {
+        TestTask[] filteredTasks = TestUtil.getTasksByTaskType(currentList, taskType);
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(filteredTasks, targetIndexOneIndexed);
 
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
+        commandBox.runCommand(commandString + " " + taskType.getPrefix() + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        //confirm the list now contains all previous tasks except the deleted task
+        assertTrue(taskListPanel.isListMatching(taskType, expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        ReadOnlyTask taskToDelete = filteredTasks[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
 }

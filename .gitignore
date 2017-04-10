@@ -3,13 +3,15 @@ build/
 .checkstyle
 .settings/
 .idea/
-lib/*
 *.iml
 *.log
 *.log.*
 *.csv
 config.json
 src/test/data/sandbox/
+src/test/data/savetotest.xml
+test/data/FileTransferToTest.xml
+test/data/("=^_^=".xml
 preferences.json
 .DS_Store
 ./screenshot*.png

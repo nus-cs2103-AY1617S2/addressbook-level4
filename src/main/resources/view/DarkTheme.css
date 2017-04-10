@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Avenir Light';
+    src: url('/fonts/avenir-light.ttf');
+}
+
+.root {
+    -fx-focus-color: transparent;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -25,7 +34,15 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Avenir Light";
+    -fx-border-color: #FFFFFF;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+}
+
+.label-priority {
+    -fx-font-size: 6pt;
+    -fx-font-family: "Avenir Light";
 }
 
 .tab-pane {
@@ -76,24 +93,14 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent #F4F3F3 transparent #F4F3F3;
+    -fx-background-color: transparent, derive(#FDFDFD, 10%);
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-.list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
-}
-
-.list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-background-color: derive(#FDFDFD, 20%);
 }
 
 .cell_big_label {
@@ -107,22 +114,54 @@
 }
 
 .anchor-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: derive(#FDFDFD, 20%);
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#FDFDFD, 20%);
+     -fx-border-color: derive(#FDFDFD, 10%);
      -fx-border-top-width: 1px;
 }
 
+.commandbox {
+    -fx-background-color: derive(#1D1D1D, 20%);
+}
+
+.commandbox-textfield {
+    -fx-background-color: derive(#1D1D1D, 20%);
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: "Avenir Light";
+    -fx-font-size: 18px;
+}
+
+.commandbox-textfield:error {
+    -fx-background-color: red;
+}
+
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-text-fill: black;
+    -fx-background-color: derive(#1D1D1D, 20%);
+}
+
+.status-bar-sync {
+    -fx-font-size: 12px;
+    -fx-opacity: 0.5;
+}
+
+.status-bar-location {
+    -fx-font-size: 12px;
+    -fx-opacity: 0.5;
+    -fx-text-align: right;
 }
 
 .result-display {
     -fx-background-color: #ffffff;
+    -fx-font-size: 18px;
+}
+
+.result-display *.text {
+    -fx-text-alignment: center;
+    -fx-font-family: "Avenir Light";
 }
 
 .result-display .label {
@@ -143,16 +182,6 @@
     -fx-text-fill: white;
 }
 
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
 .context-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
 }
@@ -166,7 +195,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -250,9 +279,19 @@
     -fx-text-fill: white;
 }
 
+.scroll-bar {
+    -fx-border-color: transparent;
+    -fx-background-color: #FFFFFF;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #FFFFFF;
+}
+
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
+    -fx-background-color: derive(gray, 33%);
+    -fx-background-insets: 6, 0, 0;
+    -fx-background-radius: 3em;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -276,6 +315,10 @@
     -fx-background-color: transparent;
     -fx-border-color: #d6d6d6;
     -fx-border-width: 1 1 1 1;
+}
+
+#cardPane:selected {
+    -fx-background-color: darkgray;
 }
 
 #commandTypeLabel {

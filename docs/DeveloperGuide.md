@@ -1,419 +1,1043 @@
-# AddressBook Level 4 - Developer Guide
+# Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+<img src="images/coverPage.png" width="600">
 
----
-
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
-
+* [Introduction](#setting-up)
+* [Setting Up](#setting-up)
+* [Design](#design)
+* [Testing](#testing)
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix D: Gloassary](#appendix-d--glossary)
 
+## Introduction
 
-## 1. Setting up
+We welcome all software engineers who would like to contribute to our task manager OneTwoDo.
 
-### 1.1. Prerequisites
+This guide is a comprehensive document that explains the development environment and internal structure of the application. This guide will help you to contribute to OneTwoDo. 
 
-1. **JDK `1.8.0_60`**  or later<br>
+OneTwoDo is a simple yet effective to-do list application. It helps users to remember their important tasks and to organise their schedules. It is easy to use due to its simple interface and intuitive commands. It is also designed to be extremely keyboard-friendly, so as to save time clicking on buttons and tabs. 
 
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
+### 1. Setting Up
 
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+You will have to ensure that the following settings are configured correctly to start contributing.
 
+### 1.1 Prerequisites
 
-### 1.2. Importing the project into Eclipse
+As prerequisites, make sure that your computer has the following software installed.
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+1. **JDK 1.8.0_60** or later. Having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.
 
-  > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+2. **Eclipse IDE**.
 
-### 1.3. Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
+3. **e(fx)clipse** plugin for Eclipse . You may refer to the tutorial by doing the steps 2 onwards given here: http://www.eclipse.org/efxclipse/install.html#for-the-ambitious
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+4. **Buildship Gradle** Integration plugin from the Eclipse Marketplace.
 
-### 1.4. Troubleshooting project setup
+5. **Checkstyle** Plug-in plugin from the Eclipse Marketplace.
 
-**Problem: Eclipse reports compile errors after new commits are pulled from Git**
+### 1.2 Importing the project into Eclipse
+
+We recommend developing this application using Eclipse. Simply follow these steps to import OneTwoDo into your Eclipse Workspace:
+
+1. Fork this repo, and clone the fork to your computer.
+
+2. Open Eclipse (Note: Ensure you have installed the e(fx)clipse and buildship plugins as given in the prerequisites above).
+
+3. Click *File* > *Import*.
+
+4. Click *Gradle* > Gradle *Project* > *Next* > *Next*.
+
+5. Click *Browse*, then locate the project’s directory.
+
+6. Click *Finish*.
+
+**Notes:**
+
+* If you are asked whether to ‘keep’ or ‘overwrite’ config files, choose ‘keep’.
+
+* Depending on your connection speed and server load, it may take up to 30 minutes for the set up to finish. This is because Gradle downloads library files from servers during the project set up process. 
+
+* If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+
+### 1.3 Configuring Checkstyle
+
+To adhere to the common coding style adopted for this project, you may want to import Checksyle into WorkSpace as well. 
+
+1. Click *Project* -> *Properties* -> *Checkstyle* -> *Local Check Configurations* -> *New*...
+
+2. Choose *External Configuration File* under *Type*.
+
+3. Enter an arbitrary configuration name e.g. onetwodo.
+
+4. Import checkstyle configuration file found at *config/checkstyle/checkstyle.xml*.
+
+5. Click *OK* once, go to the *Main tab*, use the newly imported check configuration.
+
+6. Tick and select files from packages, click *Change*..., and select the resources package.
+
+7. Click *OK* twice. Rebuild the project if prompted.
+
+**Notes**
+
+* Click on the files from packages text after ticking in order to enable the Change... button. 
+
+### 1.4 Troubleshooting project setup
+
+You may encounter some problems during the setup. Please refer to the solutions below to address some common problems.
+
+**Problem**: Eclipse reports compile errors after new commits are pulled from Git
 
 * Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-* Solution: Refresh the project in Eclipse:<br>
-  Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
 
-**Problem: Eclipse reports some required libraries missing**
+* Solution: Refresh the project in Eclipse. Right click on the project (in Eclipse package explorer), choose *Gradle* -> *Refresh Gradle Project*.
+
+**Problem**: Eclipse reports some required libraries missing
 
 * Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
+* Solution: Run tests using Gradle once (to refresh the libraries).
 
 ## 2. Design
 
-### 2.1. Architecture
+In this section, you will find out more about the internal parts of the application and how they work together. 
+
+### 2.1 Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+*Figure 2.1.1 : Architecture Diagram*
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+A high-level design of our OneTwoDo as shown in the Architecture Diagram in **_Figure 2.1.1_** above. 
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+> If you want to update the diagram, you can do so in the provided `.pptx` file. Simply select the objects of the diagram, and choose `Save as picture`. 
+ 
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/onetwodo/MainApp.java). Its responsible are:
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other at app launch.
+
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+`Commons` represents a collection of classes used by other components. Two of those classes play important roles at the architecture level.
 
-The rest of the App consists of four components.
+* `EventsCenter` : This class is used by components to communicate with other components using events (i.e. a form of **Event Driven** design).
 
-* [**`UI`**](#ui-component) : The UI of the App.
+* `LogsCenter`: This class is used by many classes to write log messages to the OneTwoDo's log file.
+
+The rest of OneTwoDo consists of these four components.
+
+* [**`UI`**](#ui-component): The UI of the App.
+
 * [**`Logic`**](#logic-component) : The command executor.
+
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
-Each of the four components
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-* Defines its _API_ in an `interface` with the same name as the Component.
-* Exposes its functionality using a `{Component Name}Manager` class.
+Each of the four components defines its **_API_** in an `interface` with the same name as the Component. They also exposes its functionality using a {Component Name}Manager class. For example, the `Logic` component defines its API in the [`Logic.java`](../src/main/java/seedu/onetwodo/logic/Logic.java) interface and exposes its functionality using the `LogicManager.java` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+<!-- @@author A0139343E -->
+**Singleton**
+The [`MainApp`](../src/main/java/seedu/onetwodo/MainApp.java) uses the common design pattern known as "Singleton". This ensures that at any point of time, there is only one instance of [`MainApp`](../src/main/java/seedu/onetwodo/MainApp.java). In this way, it allows the 4 major components to be encapsulated and still provides a global point of access for other classes.
+
+<!-- @@author A0141138N -->
+**Separation of concerns**
+OneTwoDo implements the Separation of concerns (SoC) design principle.
+* Our Application has been split into 4 distinct sections or components, represented by the color-coding in our Architecture Diagram: `UI`, `Model`, `Logic` and `Storage`. Each section addresses a separate feature or concern. For example, the `UI` component specifically handles the user's interactions with the application.
+
+* Applying such a design principle ensures _modularity_ by encapsulating information inside a section of the code which has a well-defined interface.
+
+* This ensures that changes to one componenet does not affect the usability of other components. Modifications can be made to one component without knowledge of the other components, and without having to make corresponding changes to those sections. 
+
+<!-- @@author -->
 
 #### Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command **`delete e1`**
 
 <img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+*Figure 2.1.2a : Component interactions for delete e1 command (part 1)*
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `OneTwoDoChangedEvent` when the OneTwoDo data is changed, instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the ‘Last Updated’ time. 
+
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+*Figure 2.1.2b : Component interactions for `delete e1` command (part 2)*
 
-> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
-  coupling between components.
+Did you realise? The event is propagated through the **EventsCenter** to the Storage and UI without Model having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
+
+<!-- @@author A0141138N -->
+**Model-View-Controller (MVC) pattern**
+
+Model: `Model` which stores and maintains the user data in `Storage`, as seen in _Figure 2.1.3a_.
+
+View: `UI` which interacts with the user and displays the data to the user.
+
+Controller: `Logic` which accepts user inputs and performs follow-up actions.
 The sections below give more details of each component.
 
+In the sections below we will provide more details about each component. As OneTwoDo is written in the Object-Oriented Paradigm, you may want to pay attention to how these components work and interact with each other. 
+
+<!-- @@author A0143029M -->
 ### 2.2. UI component
 
-Author: Alice Bee
-
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+*Figure 2.2.1 : Structure of the UI Component*
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+You can find the API for this component in [`Ui.java`](../src/main/java/seedu/onetwodo/ui/Ui.java).
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts such as `CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter`, and `WelcomeWindow`. These parts, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+The UI component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/ view` folder. For example, the layout of the `MainWindow` is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The [jfoenix](http://www.jfoenix.com/) library has also been used to provide the `JFXDialog` component, which is used to display UI elements such as the `WelcomeWindow` and `WebView` for the command summary and user guide.
+
+The `UI` component:
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+* Binds itself to some data in the `Model` so that the `UI` can auto-update when data in the `Model` change.
+* Responds to events (e.g. `CloseDialogEvent`) raised from various parts of OneTwoDo and updates the `UI` accordingly.
 
+**Observer Pattern**
+The `UI` component adopts the observer pattern as it observes the list of tasks to be shown in OneTwoDo through the `UnmodifiableObservableList` class and updates the tasks shown when it is notified of changes to the list.
+
+
+<!-- @@author A0135739W-->
 ### 2.3. Logic component
 
-Author: Bernard Choo
-
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+*Figure 2.3.1 : Structure of the Logic Component*
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+You can find the API for this component in [`Logic.java`](../src/main/java/seedu/onetwodo/logic/Logic.java).
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* `Logic` uses the `Parser` class to parse the user command.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
+* This results in a `Command` object which is executed by the `LogicManager`.
+
+* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+
+Given below is the _Sequence Diagram_ for interactions within the `Logic` component for the execute("delete e1") API call.
+
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+*Figure 2.3.1 : Interactions Inside the Logic Component for the delete d2 Command*
+
+
+**Open Closed Principle**
+The `Logic` component follows the _Open Closed  Principle_. Both the `Command` object and `CommandResult` object can be extended to other classes to implement different functions, without requiring themselves to be modified.
+
+**Command Pattern**
+The `Logic` component adopts the _Command Pattern_. This allows other components to execute the commands without having to know each of the command types. This also allows the command object to be passed around, stored and executed. 
+
+
+<!-- @@author A0141138N -->
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
-
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+*Figure 2.4.1 : Structure of the Model Component*
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+You can find the API for this component in [`Model.java`](../src/main/java/seedu/onetwodo/model/Model.java).
 
-The `Model`,
+The Model is capable of the following:
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* Stores a `UserPref` object that represents the user’s preferences.
 
+* Stores the OneTwoDo data.
+
+* Exposes an `UnmodifiableObservableList`. They that can be ‘observed’ so that the UI automatically updates when the data in the list change.
+
+* Does not depend on any of the other three components.
+
+**Observer Pattern**
+The `Model` component uses the _Observer Pattern_ to update the `UI` automatically when any changes are made to the data. This pattern is implemented by exposing the `UnmodifiableObservableList` which is 'observed' by the `UI`. Using the _Observer Pattern_ allows the `Model` and `UI` components to interact with each other while avoiding a direct coupling between both the components. 
+
+**Facade Pattern**
+The `Model` component also uses the _Facade Pattern_ to allow other components to access it without exposing its internal functionalities. All other components need to use the [`Model.java`](../src/main/java/seedu/onetwodo/model/Model.java) interface to read or make any changes to the user data.
+
+<img src="images/Task.png" width="800"><br>
+*Figure 2.4.2 : Structure of the Task Component*
+
+You can find the API for this component in [`Task.java`](../src/main/java/seedu/onetwodo/model/task/Task.java).
+
+It is compulsory for a task to have the following parameters: `Name` and `TaskType`. Other parameters such as `StartDate`, `EndDate`, `Priority`, `Recur`, `Description` and `Tag` are optional. A task can have multiple tags. `StartDate` and `EndDate` classes inherit from `Date` class.
+
+A task can be defined in the following ways:
+
+1. **To-do**: A task without a `StartDate` and `EndDate`.
+
+2. **Deadline**: A task with an `EndDate` but no `StartDate`.
+
+3. **Event**: A task with both a `StartDate` and an `EndDate`.
+
+<!-- @@author A0139343E -->
 ### 2.5. Storage component
 
-Author: Darius Foong
-
 <img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
+*Figure 2.5.1 : Structure of the Storage Component*
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+You can find the API for this component in [`Storage.java`](../src/main/java/seedu/onetwodo/storage/Storage.java).
 
-The `Storage` component,
+The Storage component has **2 functionalities**:
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+1. Saves the `UserPref` objects in `.json` format and read it back.
 
+2. Saves the OneTwoDo task data in `.xml` format and read it back.
+<!-- @@author -->
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+In the `seedu.onetwodo.commons` package, you can find classes that are commonly used by multiple components. They include exception classes, `EventsCenter` and `LogsCenter`. 
 
 ## 3. Implementation
 
 ### 3.1. Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
-and logging destinations.
+Debugging benefits greatly from logging. We are using the `java.util.logging` package for logging. You can use the `LogsCenter` class to manage the logging levels and logging destinations.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+**Notes:**
 
-**Logging Levels**
+* The logging level can be controlled using the `logLevel` setting in the configuration file (See [Configuration](#configuration)).
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
-  e.g. print the actual list instead of just its size
+* The Logger for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level.
+
+* Currently log messages are output through the console and to a `.log` file.
+
+There are 4 different logging levels: 
+
+* `SEVERE`: Used for indicating critical problems detected, which may cause OneTwoDo to terminate.
+
+* `WARNING`: Used for indicating minor problems detected. OneTwoDo can continue to run, but warnings to caution the developer are displayed.
+
+* `INFO`: Used for indicating typical noteworthy information and actions performed by OneTwoDo.
+
+* `FINE`: Used for indicating details that are not usually noteworthy but may be useful in debugging (e.g. print the actual list instead of just its size).
 
 ### 3.2. Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
-
+You can control various important properties of the application in the file named `config.json`. These properties include App name and logging level. Simply open the `config.json` file and change their values to suit your needs.
 
 ## 4. Testing
 
-Tests can be found in the `./src/test/java` folder.
+In this section, you will find out more about how testing is done when developing OneTwoDo.
 
-**In Eclipse**:
+### 4.1. Running tests
 
-* To run all tests, right-click on the `src/test/java` folder and choose
-  `Run as` > `JUnit Test`
-* To run a subset of tests, you can right-click on a test package, test class, or a test and choose
-  to run as a JUnit test.
+You can find all tests in the `./src/test/java` folder.
 
-**Using Gradle**:
+**Running tests in Eclipse:**
 
-* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
+* To run all tests, you can simply right-click on the `src/test/java` folder and choose `Run as > JUnit Test`
+
+* To run a subset of tests, you can right-click on a test package, test class, or even a test and choose to run as a `JUnit test`.
+
+**Running tests using Gradle:**
+
+* You may refer to [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
 
 We have two types of tests:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
-   These are in the `guitests` package.
+1. **GUI Tests** - These are _System Tests_ that test the entire application by simulating user actions on the GUI. You can find them in the guitests package.
 
-2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
-   1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
-   2. _Integration tests_ that are checking the integration of multiple code units
-     (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
-   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
-      how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+2. **Non-GUI Tests** - These are tests not involving the GUI. They include:
+
+    * _Unit tests_: This targets the lowest level methods/classes, e.g. `seedu.onetwodo.commons.UrlUtilTest`.
+
+    * _Integration tests_: This checks the integration of multiple code units, e.g. `seedu.onetwodo.storage.StorageManagerTest`.
+
+    * _Hybrids of unit and integration tests_.: These tests help to check multiple code units as well as how the are connected together. For example please see `seedu.onetwodo.logic.LogicManagerTest`.
 
 #### Headless GUI Testing
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode.
- In the headless mode, GUI tests do not show up on the screen.
- That means the developer can do other things on the Computer while the tests are running.<br>
- See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use, GUI tests can be run in the headless mode. In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the Computer while the tests are running. You may want to see [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run these tests.
 
- **Problem: Tests fail because NullPointException when AssertionError is expected**
+### 4.2. Troubleshooting tests
 
- * Reason: Assertions are not enabled for JUnit tests.
-   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
- * Solution: Enable assertions in JUnit tests as described
-   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
-   Delete run configurations created when you ran tests earlier.
+**Problem:** Tests fail because NullPointException when AssertionError is expected.
+
+This is caused by assertions not being enabled for JUnit tests. This usually occurs if you are not using a recent Eclipse version (i.e. *Neon* or later).  Try enabling assertions in JUnit tests as described here: stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option. Also, you can try to delete previous run configurations that were created when you ran the tests.
 
 ## 5. Dev Ops
 
+In this section, you will find out more about how to make builds, tests, and releases more rapidly, frequently, and reliably.
+
 ### 5.1. Build Automation
 
-See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
+We use Gradle for automation build. You can check [UsingGradle.md](UsingGradle.md#running-tests) to learn more about Gradle automation build.
 
 ### 5.2. Continuous Integration
 
-We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
-See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
+We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform Continuous Integration on our projects. 
+
+You can check [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
 ### 5.3. Publishing Documentation
 
-See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
-project site.
+You can visit [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the project site.
 
 ### 5.4. Making a Release
 
-Here are the steps to create a new release.
+Here are the steps to create a new release:
 
- 1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
- 2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
-    and upload the JAR file you created.
+1. Generate a JAR file using Gradle.
 
-### 5.5. Converting Documentation to PDF format
+2. Tag the repo with the version number. e.g. v0.1.
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
-as Chrome's PDF engine preserves hyperlinks used in webpages.
+3. Create a new release using GitHub.
 
-Here are the steps to convert the project documentation files to PDF format.
+4. and upload the JAR file you created.
 
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
-    documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
-    <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
+### 5.5. Managing Dependencies
 
-### 5.6. Managing Dependencies
+Projects often depends on third-party libraries. Likewise, OneTwoDo depends on the **Jackson** library for XML parsing. Do not worry about managing these dependencies. It can be automated using **Gradle**. Gradle can do amazing stuff such as downloading the dependencies automatically. This is better than the alternatives of: 
 
-A project often depends on third-party libraries. For example, Address Book depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
-can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
-is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+* Including those libraries in the repo (this bloats the repo size).
+
+* Requiring developers to download those libraries manually (this creates extra work for developers. 
 
 ## Appendix A : User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
+<table>
+  <tr>
+    <td>Priority</td>
+    <td>As a …</td>
+    <td>I want to …</td>
+    <td>So that I can…</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>new user</td>
+    <td>see usage instructions</td>
+    <td>refer to instructions when I forget how to use the App</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>add a new task</td>
+    <td>add task to manage all my to-do</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>delete a task</td>
+    <td>remove entries that I no longer need</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user with many tasks</td>
+    <td>find a task by keywords</td>
+    <td>search for specific task especially when the list is huge</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>edit a task</td>
+    <td>edit a task if there are any changes</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>clear all tasks</td>
+    <td>quickly start using the tool from scratch</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>close application</td>
+    <td>exit after use</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>organized user</td>
+    <td>add tags to a task</td>
+    <td>organize them by tags</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>add description to task</td>
+    <td>describe tasks in more detail</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>view task description</td>
+    <td>view the task in details</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>list tasks</td>
+    <td>view all uncompleted task</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>advanced user</td>
+    <td>sort task by importance</td>
+    <td>prioritise which task to do first</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>last minute user</td>
+    <td>sort tasks by most upcoming tasks</td>
+    <td>get myself prepared for more urgent tasks</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>advanced user</td>
+    <td>find tasks by tag</td>
+    <td>find tasks quickly that contains the specific tag</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>advanced user</td>
+    <td>set reminder to a task</td>
+    <td>be notified when tasks are approaching due date</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>select folder to save data storage</td>
+    <td>specify a specific folder and file for data storage</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>undo most recent action</td>
+    <td>undo action to rectify mistake</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>redo most recent action</td>
+    <td>redo action to rectify mistake</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>add task to nearest free slot automatically</td>
+    <td>add task easily without browsing for free time</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user with multiple recurring tasks</td>
+    <td>add recurring tasks</td>
+    <td>avoid adding similar task one by one</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user with multiple recurring tasks</td>
+    <td>edit all instances of a recurring task</td>
+    <td>be more efficient when editing recurring tasks</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>advanced user</td>
+    <td>filter tasks by multiple keywords</td>
+    <td>search tasks by more specific criteria</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>list all tags</td>
+    <td>quickly view all the tags in the to-do list</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>keep track of completed tasks</td>
+    <td>keep them in track for future references</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>busy user</td>
+    <td>postpone task</td>
+    <td>defer uncompleted task to near future where I am free</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>advanced user</td>
+    <td>select task and pin it at the top of display</td>
+    <td>quickly mark certain tasks as demanding of priority attention</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>existing google calendar user</td>
+    <td>sync google calendar on create, update and delete tasks</td>
+    <td>exploit google calendar and sync with this task manager</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user with heavy email usage</td>
+    <td>send email notification for upcoming tasks</td>
+    <td>remind me on tasks that are approaching due date</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user who prefers keyboard</td>
+    <td>open/close application via keyboard shortcut</td>
+    <td>quickly open or exit program easily without mouse click</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>advanced user</td>
+    <td>remove all tasks with certain tag</td>
+    <td>quickly remove all tasks with some similarity</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>advanced user</td>
+    <td>change all tag names in one go</td>
+    <td>quickly update all tasks with that tag name</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user with many tasks</td>
+    <td>assign priorities to tasks</td>
+    <td>distinguish and pinpoint importance task immediately just by looking</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user</td>
+    <td>list overdue tasks</td>
+    <td>filter out overdue tasks to decide for further actions</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user</td>
+    <td>remove tasks within certain range</td>
+    <td>easily specify date to remove tasks within that range.</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user</td>
+    <td>list near future free slot</td>
+    <td>choose suitable free slot to add task</td>
+  </tr>
+</table>
 
 
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+**Priorities:**
+- **High** (must have)
+- **Medium** (nice to have) 
+- **Low** (unlikely to have) 
 
-{More to be added}
-
+<!-- @@author A0139343E -->
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+"System" refers to OneTwoDo. "Actor" refers the user.
 
-#### Use case: Delete person
+### UC01 - Add a task
 
-**MSS**
+#### **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User input information to add task.
+
+2. System notifies user that the task has been successfully added.
+ 
+Use case ends.
+<br>
+
+#### Extensions
+
+2a. Task already exists.
+
+2a1. System informs user that the task already exists and doesn’t add repeated task.
+    
+Use case ends.
+<br>
+
+2b. Invalid command format.
+
+2b1. System informs user that the command format is invalid and outputs a sample format to user.
+
+Use case ends.
+<br>
+
+### UC02 - Delete task
+
+#### **MSS**
+
+1. System display a list of tasks.
+
+2. User input task index to specify which task to delete.
+
+3. System notifies user that task has been successfully deleted.
+
+Use case ends.
+<br>
+
+#### Extension
+
+1a. List is empty.
+
+1a1. System informs user that there is no task to delete.
+
+Use case ends.
+<br>
+
+2a. Invalid command format.
+
+2a1. System informs user that the input is invalid and outputs a sample format.
+
+Use case resume at 1.
+<br>
+
+2b. User input index is not valid.
+
+2b1. System informs user that the input index is invalid.
+
+Use case resume at 1.
+<br>
+
+### UC03 - Edit task
+
+#### **MSS**
+
+1. User requests list of tasks.
+
+2. System displays a list of tasks.
+
+3. User selects a task to edit.
+
+4. System shows user the task information.
+
+5. User edits and submits a new task information.
+
+6. System displays changes made to task.
+
+Use case ends.
+<br>
+
+#### Extension
+
+2a. The list is empty.
+
+2a1. System informs user that there is no task to edit.
+
+Use case ends.
+<br>
+
+
+3a. User task selection is invalid.
+
+3a1. System shows error message.
+
+Use case resumes from step 2.
+<br>
+
+
+3b. System detects an error in the data that user entered.
+
+3b1. System selects valid task.
+
+3b2. User enters new data.
+
+3b3. Repeat steps 3b1 and 3b2 until data has no errors.
+
+Use case resumes from step 4.
+<br>
+
+3c. User requests to tag a task with a category that is not currently in the system.
+
+3c1. System creates the category.
+
+Use case resumes from step 4.
+<br>
+
+### UC04 - Find task
+
+#### **MSS**
+
+1. User searches for task.
+
+2. System lists tasks which match the keywords entered by user.
+
 Use case ends.
 
-**Extensions**
+#### Extension
 
-2a. The list is empty
+2a. Task does not exist.
 
-> Use case ends
+2a1. System informs user that no tasks is found.
 
-3a. The given index is invalid
+Use case ends.
+<br>
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+### UC05 - List tasks
 
-{More to be added}
+#### **MSS**
 
-## Appendix C : Non Functional Requirements
+1. User requests list of tasks.
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. System displays list of tasks.
 
-{More to be added}
+Use case ends.
+<br>
+
+#### Extension
+
+1a. User requests to list task in a certain category.
+
+1a1. System displays list of tasks in that category.
+
+Use case ends.
+<br>
+
+
+2a. The list is empty.
+
+2a1. System displays empty list.
+
+Use case ends.
+<br>
+
+### UC06 - Done task
+
+#### **MSS**
+
+1. User requests to list the tasks.
+
+2. System displays a list of tasks.
+
+3. User selects the task to mark as done.
+
+4. System shows user remaining tasks that are uncompleted.
+
+Use case ends.
+<br>
+
+#### Extension
+
+3a. User task selection is invalid.
+
+3a1. System shows error message.
+
+Use case resumes from step 2.
+<br>
+
+
+### UC07 - Undo most recent action
+
+#### **MSS**
+
+1. User issues command undo.
+
+2. System reverts user’s previous command and displays feedback message to user.
+
+Use case ends.
+<br>
+
+
+#### Extension
+
+2a. There is no previous command yet.
+
+2a1. System feedbacks to user that no previous command has found.
+
+Use case ends.
+<br>
+
+
+2b. Previous command is not mutable.
+
+2b1. System feedbacks to user no action required.
+
+Use case ends.
+<br>
+
+## Appendix C : Non-Functional Requirements
+
+1. Should work on any mainstream OS.
+
+2. Should be able to store up to 500 tasks.
+
+3. Should work in online or offline mode.
+
+4. Should respond to commands within 2 seconds.
+
+5. Programme should startup within 3 seconds.
+
+6. Programme should be open source code and readily available.
+
+7. Should have an easy to use interface.
+
+8. Should be able to handle exceptions from user input.
+
+9. Should work as a standalone application.
+
+10. Should have an executable file that can be launched by double clicking or keyboard shortcut.
+
+11. Should not use relational databases to store data.
+
+12. Command line interface should be the main mode of input.
+
+13. Should not violate any copyrights.
+
+14. Should not contain obscene or inappropriate content.
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+<table>
+  <tr>
+    <td>Mainstream OS</td>
+    <td>Windows, Linux, Unix, OS-X.</td>
+  </tr>
+  <tr>
+    <td>Keyword</td>
+    <td>Words in task names, tag names, and task description.</td>
+  </tr>
+  <tr>
+    <td>Invalid Commands</td>
+    <td>Invalid commands includes invalid arguments.</td>
+  </tr>
+  <tr>
+    <td>Error message</td>
+    <td>Error message includes suggestion for correct command.</td>
+  </tr>
+  <tr>
+    <td>START_DATE</td>
+    <td>START_DATE refers to start date and time entered.
+Defaults to time of 0000 hrs if no time is indicated.</td>
+  </tr>
+  <tr>
+    <td>END_DATE</td>
+    <td>END_DATE refers to end of date and time entered.
+Defaults to time of 2359 hrs if no time is indicated.</td>
+  </tr>
+  <tr>
+    <td>Event task</td>
+    <td>Tasks that have a specific start and end date.</td>
+  </tr>
+  <tr>
+    <td>Deadline task</td>
+    <td>Tasks that only have a specific end date.</td>
+  </tr>
+  <tr>
+    <td>To-Do task</td>
+    <td>Tasks that have no start or end date.</td>
+  </tr>
+  <tr>
+    <td>Category</td>
+    <td>One of Event, Deadline or To-do.</td>
+  </tr>
+</table>
 
-> Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
 
-**Product Name**
+<!-- @@author A0141138N -->
+### Review for *Remember the Milk*
 
-Author: ...
+**Pros:**
 
-Pros:
+* Easy to use interface.
 
-* ...
-* ...
+* User can add recurring tasks.
 
-Cons:
+* User can set a start date and end date for the task.
 
-* ...
-* ...
+* User can add tag to the task.
 
+* User can view a list of all completed tasks.
+
+* User can set priority to task.
+
+* User can postpone a task.
+
+**Cons:**
+
+* No online support or video tutorials for beginners.
+
+* Pro version is very expensive and most features are only available in pro version.
+
+* No security for data in terms of encryption or HTTPS.
+
+<!-- @@author A0143029M -->
+### Review for *Google Calender*
+
+**Pros:**
+
+* Calendar user interface, click on events on the calendar to view more details.
+
+* Users can edit events by dragging.
+
+* Users are able to import calendars using .ical files.
+
+* Users can edit a single instance of event, or recurring events.
+
+* Users can be notified of approaching events.
+
+* Users have daily, weekly, monthly, and "4-days" types of view.
+
+* Users can sync and access on multiple platforms, like mobile, and desktop.
+
+**Cons:**
+
+* Have to be online to access calendar.
+
+* No command line interface.
+
+* Updates may take a while to sync due to network issues.
+
+<!-- @@author -->
+### Review for *Wunderlist*
+
+**Pros:**
+
+* Allows user to note down descriptions and more information for each task.
+
+* Allows user to create subtasks for each task.
+
+* Allows user to set "Reminder" and “Due Date” separately.
+
+* Allows user to highlight(star) a task.
+
+* Separates "Delete" and “Mark as complete”.
+
+* Parses the reminder time when user types in the task name.
+
+* Automatically creates "Today" and “Week” folder for user to see what needs to be done for today and this week (more urgent tasks).
+
+* Allows user to categorise tasks using folders, e.g. (work, family).
+
+**Cons:**
+
+* Just highlighting (starring) is not enough. User may just highlight all tasks and that defeats the purpose of starring.
+
+* Tasks are not sorted in chronological order in the main folder.
+
+<!-- @@author A0139343E -->
+### Review for *Habitica*
+
+**Pros:**
+
+* It has simulation game element which keep the work fun and motivating.
+
+* It has colourful and clean user interface that make important tasks stand out.
+
+* It supports multiple platforms such as mobile and desktop.
+
+* It supports recurring task adding.
+
+* It can set multiple and different reminders on any task.
+
+* It can easily be reordered/sorted using name or tags.
+
+**Cons:**
+
+* Unable to view the calendar when selecting tasks
+
+* Adding tasks require mouse/ touch screen instead of keyboard entering.
+
+* Has the potential of distraction due to the existence of game elements.
+
+* Deadline of the tasks are not shown unless clicked.
+
+* Unable to mark tasks as done without keeping them for future references.
+
+<!-- @@author -->
