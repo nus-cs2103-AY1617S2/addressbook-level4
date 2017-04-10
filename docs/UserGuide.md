@@ -23,7 +23,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 * [Command Summary](#command-summary)
 
 ## First-time user experience
-* For first-time configuration, make sure file named _calendar-java-quickstart_ in  `User/home/.credentials` does not exist or has been deleted. 
+* For first-time configuration, make sure file named _calendar-java-quickstart_ in `User/home/.credentials` does not exist or has been deleted.
 
 ## Start the program
 
@@ -56,17 +56,17 @@ Format: `add TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPT
 6. The recur specifies the recurrence period **in days**.
 
 Example :
-* `add tutorial start/13/01/2017 11:00 end/13/01/2017 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
+* `add tutorial start/13/01/2017 11:00 end/13/01/2017 12:00 recur/7 desc/Tutorial of CS2103 tag/CS2103`
 
-<img src="images/Event_JOBS.png" width="600"><br>
+<img src="images/Event_JOBS.png" width="800"><br>
 
-* `add v0.0 end/03/03/2017 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
+* `add v0.0 end/03/03/2017 11:00 desc/Project version 0.0 deadline tag/CS2103`
 
-<img src="images/TaskWithDeadline_JOBS.png" width="600"><br>
+<img src="images/TaskWithDeadline_JOBS.png" width="800"><br>
 
-* `add name/swim desc/"Remember to swim"`
+* `add swim desc/Remember to swim`
 
-<img src="images/FloatingTask_JOBS.png" width="600"><br>
+<img src="images/FloatingTask_JOBS.png" width="800"><br>
 
 ### Delete a task: `delete`
 Delete is the command word that can be used to delete a task.
@@ -107,15 +107,27 @@ Format : `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESC
 >User edits a specific task by specifying the new entry they wish to be reflected on the existing task list.
 
 Example:
-* `edit index/1 desc/"The venue has been changed"`
-* `edit index/2 start/02-04-17 17:20`
+* `edit index/1 desc/The venue has been changed`
+* `edit 3 start/10/04/2017 08:00 end/10/04/2017 12:00 tag/meeting`
+
+<img src="images/Edit1_JOBS.png" width="420">   <img src="images/Edit2_JOBS.png" width="420">
 
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
 Format : `undo`
 
 Example:
-* `delete 1` >> `undo` (to retrieve the previously deleted task)
+* _initial taskbook_
+
+<img src="images/Undo1_JOBS.png" width="450"><br>
+
+* _after_ `delete 1`
+
+<img src="images/Undo2_JOBS.png" width="450"><br>    
+
+* _after_ `undo` _it will reverse the change_
+
+<img src="images/Undo3_JOBS.png" width="450"><br>
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
@@ -129,12 +141,14 @@ Format : `set email/EMAIL pwd/PASSWORD`
 Example:
 * `set email/cs2103rocks@gmail.com pwd/abcdefgh123456`
 
+<img src="images/set_JOBS.png" width="800"><br>
+
 ### Display Google Calendar: `display`
 Display is the command to enable the Google Calendar function for JOBS.
 Format : `display`
 1. Command will redirect user to an internet browser (Google Chrome, Safari, etc.) to request for authorization for Google Calendar API, as shown below. Ensure that during authorization, user is logged into their intended Google account.
 
-<img src="images/Authorize_JOBS.png" width="400"><br>
+<img src="images/Authorize_JOBS.png" width="500"><br>
 
 ### Path of taskbook: `path`
 Path is the command to change the saving directory of the taskbook and automatically create the .xml file.
@@ -146,6 +160,11 @@ Format : `path PATH`
 Example:
 * for MAC `path /users/home/desktop/taskbook.xml`
 * for Windows `path users/home/desktop/taskbook.xml`
+
+<img src="images/Path1_JOBS.png" width="800"><br>
+
+_will update the directory display, as shown below_
+<img src="images/Path2_JOBS.png" width="800"><br>
 
 ### Exit the program: `exit`
 Exits the program.
@@ -159,13 +178,13 @@ Task data are saved in the hard disk automatically after any command that change
 Command | Format
 -------- | :--------
 help | `help`
-add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
+add | `add TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
 delete | `delete INDEX`
 clear | `clear`
 find | `find NAME`
 list | `list`
 edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-undo | `undo` 
+undo | `undo`
 redo | `redo`
 set | `set email/EMAIL pwd/PASSWORD`
 display | `display`

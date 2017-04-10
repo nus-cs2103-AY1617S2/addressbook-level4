@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/CS2103JAN2017-F11-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F11-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F11-B1/main/badge.svg)](https://coveralls.io/github/CS2103JAN2017-F11-B1/main)
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/DIsplay_JOBS.png" width="700"><br>
 
 * This is a desktop task manager application called JOBS. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is **written in OOP fashion** using **Java 8**.
