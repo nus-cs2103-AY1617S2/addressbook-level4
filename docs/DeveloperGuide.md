@@ -413,6 +413,7 @@ This section describes the find feature implementation.
 * Searches for date in the `startDate` and `endDate` fields of every task e.g. `"find Apr 4"` -> searches for any task with a `startDate` **or** `endDate` of `Apr 4 2017`(default the current year)
 * Able to handle complicated find commands reasonably well e.g. _"find prepare Christmas on Nov 31 2018"_ -> will search for a task that contains a date of _Nov 31 2018_ **or** a keyword of _Christmas_.
 
+
 **Implementation details**
 
 1. The string arguments passed in for a FindCommand is parsed first to identify for any possible date string: e.g._"find meeting next tuesday"_. _"next tuesday"_ is extracted to form a `Date` and searched for as a date.
