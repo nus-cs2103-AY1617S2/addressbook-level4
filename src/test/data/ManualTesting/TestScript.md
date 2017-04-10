@@ -5,7 +5,6 @@
 1. Ensure that you put `SampleData.xml` inside the `data\` folder (if the `data` directory does not exist inside the directory where the app is located, create it).
 2. Rename `SampleData.xml` to `tasklist.xml`.
 2. Start `iManager.jar` by double clicking it.
-3. Type `switchlist SampleData`.
 
 **Result:** The task list is loaded.
 
