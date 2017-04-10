@@ -1,6 +1,5 @@
 package org.teamstbf.yats.logic.commands;
 
-import org.junit.Assert;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 
 //@@author A0102778B
@@ -19,7 +18,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        Assert.assertNotEquals(null, model);
+        assert model != null;
         if (model.checkEmptyUndoStack()) {
             throw new CommandException(MESSAGE_EMPTY_UNDO_STACK);
         }
