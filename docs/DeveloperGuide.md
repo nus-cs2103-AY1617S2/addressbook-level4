@@ -381,6 +381,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | Add a task with a name and description and then schedule it myself | Know when I need to do this task
 `* * *` | user | Add a task with a title | Add tasks in quick succession and edit the deadlines at a later time
+`* * *` | user | Add a task with a deadline | Remember my deadlines easily
+`* * *` | user | Add a task with a start and end time | Remember the periods when I am busy with an event
 `* * *` | user | Search for information (using any string) about a current task which will display all the relevant info about the task | Find the task without looking through the whole list
 `* * *` | user | Edit the deadline, name and schedule of any task | Update any task as required, as well as marking it as done and deleting it
 `* * *` | user | Undo my actions | revert any changes done accidentally.
@@ -390,19 +392,13 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Change my save location | I can choose where my data file is saved
 `* * ` | user | Get a calendar view list of my current blocked out times and what I have to do | Know what else I can add
 `* * ` | user | Schedule my tasks within the constrains of a workday | Avoid scheduling tasks during my works time and leave break time in between tasks
-`* *` | user | Add subtasks into my main task | Have a more structured view of the main task
-`* *` | user | Star my tasks | Mark out the more urgent tasks to be done
 `* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
 `* *` | user | Add descriptions to my task | have additional details of my tasks
-`* *` | user | Mark the task as done/require follow-up | Have an up-to-date record of the my tasks
 `* *` | user | Group my tasks together with a common tag | Organized my tasks according to their groups in the scheduler
-`* *` | user | Have pop-up notifications of near deadlines | Be reminded of tasks with deadlines approaching
-`* *` | user | Have heads-up display of tasks that are about to due | Be reminded of tasks to be done
+`* *` | user | List all tasks by start or end date | See which Events are happening soon
 `* *` | advanced user| Sort my tasks according to deadlines, dates or title | Have a better overviews of tasks scheduled
-`* *` | advanced user | Use shorter versions of commands/Flexi-command | Type commands easier and faster
 `* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
 `* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
-`* *` | advanced user | Collapse my tasks into groups in the listed view | Have a clearer overview of all my task groups
 `* ` | user | Get suggestions when a task should be scheduled | Automatically click on which date and time I would like it scheduled
 `* ` | user | Specify locations that are linked to Google Maps | Know the best way to get there from my current location (Workplace)
 `* ` | user | Automatically reschedule a task I am supposed to do now | No worry about when to schedule the task
@@ -483,33 +479,20 @@ Use case ends.
 > 2a1. TaskManager assumes that the recurrence starts now<br>
 > Use case resumes at step 2
 
-
-#### Use case: Mark Task As Done (by finding)
+#### Use case: Schedule Task
 
 **MSS**
 
-1. User requests to find task by providing specified title/tag/date
-2. TaskManager finds a list of unique tasks that is identified by that string using the Search method
-3. User requests to mark specify task as done by index
-4. TaskManager prints the details of task that was marked as done <br>
+1. User requests to schedule a task with a title and an optional description, optional location, optional tags, optional hours and optional minutes
+2. TaskManager allocates a task with a start and end time that is a free slot in the user calendar, and is within a normal work day.
+3. TaskManager shows the added task's details and that the event was successfully added <br>
 Use case ends.
 
 **Extensions**
 
-1a. User inputs a number
-> 1a1. TaskManager marks that as done,
-> 1a2. TaskManager prints the details of the task out <br>
-  Use case ends
-
-2a. No tasks were found
-> 2a1. TaskManager shows an empty list <br>
-> 2a2. User have no further action to take<br>
-> Use case ends
-
-3a. Invalid index specified
-> 3a1. TaskManager shows an error message
-> Use case resumes at step 2<br>
-
+1a. User does not specify any hours or minutes to schedule
+> 2a1. TaskManager assumes that the default scheduling time will be 1 hour <br>
+> Use case resumes at step 2
 
 #### Use case: Mark Task As Done (by index)
 
