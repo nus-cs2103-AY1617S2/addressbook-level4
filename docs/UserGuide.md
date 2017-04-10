@@ -75,7 +75,7 @@ TypeTask automatically assigns your tasks with certain colours to help you diffe
    `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
    `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
    `Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
-   `Black`: this task has been marked as completed. Check [[Fig 3]](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#384-listing-completed-tasks--listdone) to view the format. <br>
+   `Black`: this task has been marked as completed. Check [[Fig 4]](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#384-listing-completed-tasks--listdone) to view the format. <br>
    ```
    > Note that all tasks that fall outside of these categories will appear normally.
       i.e. no additional colours.
@@ -358,6 +358,8 @@ Want to focus on your urgent tasks only? You can use the command `list*` to see 
 Format:<br>
 `list*`<br>
 
+<img src="images/HighPrioTaskFormat.png" width="800">
+<h5 align="left">Fig 3. Locating typetask.jar in the Releases Tab</h5>
 
 ### 3.8.4. Listing Completed Tasks : `listdone`
 To review all that you have done, you may want to look at all your completed tasks. You can do that by using the command `listdone` to show all of your completed tasks in TypeTask.<br>
@@ -372,7 +374,7 @@ Format:<br>
 `listdone`<br>
 
 <img src="images/DoneTaskFormat.png" width="800">
-<h5 align="left">Fig 3. Completed Task Format </h5>
+<h5 align="left">Fig 4. Completed Task Format </h5>
 
 ### 3.9. Undoing the Latest Command : `undo`, `u`
 Entered a wrong command? Fret not! You can use the `undo` command to save the hassle of backtracking. <br>
@@ -488,4 +490,4 @@ Format:<br>
 ## 5. Command Summary
 
 <img src="images/CommandSummary.png" width="800">
-<h5 align="left">Fig 4. TypeTask's Command Summary </h5>
+<h5 align="left">Fig 5. TypeTask's Command Summary </h5>
