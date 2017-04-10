@@ -852,7 +852,7 @@ Use case ends.
 
 ## Appendix C : Non-Functional Requirements
 
-1. Should work on any [mainstream OS](https://hackmd.io/EYBgHATAxgzGAmBaA7BAjEgLMNNEE4QBDZRIgVnQDN1Mj9NMg===?view#mainstream-os).
+1. Should work on any mainstream OS.
 
 2. Should be able to store up to 500 tasks.
 
