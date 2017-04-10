@@ -234,7 +234,7 @@ Result <br>
 Input `UPDATE 10 ON 10/04/17 1200`
 
 Result: "Updated Task: task Start Date: 10/04/17 Start Time: 1200 End Date: 10/04/17 End Time: 1300 Categories: [low] <br>
-Task updated to index: 5???????????????" <br>
+Task updated to index: 4" <br>
 Notice the shift from Basic Tasks to the Events column.
 
 ### Change event to floating task
@@ -242,7 +242,7 @@ Notice the shift from Basic Tasks to the Events column.
 Input `UPDATE 4`
 
 Result: "Updated Task: task Categories: [low] <br>
-Task updated to index: 12????????????" <br>
+Task updated to index: 10" <br>
 Notice the shift from Events to Basic Tasks column.
 
 ### Change event to deadline
@@ -250,7 +250,7 @@ Notice the shift from Events to Basic Tasks column.
 Input `UPDATE 1 BY 04/04/17 2300`
 
 Result: "Updated Task: recurring task End Date: 04/04/17 End Time: 2300 <br>
-Task updated to index: 5" 
+Task updated to index: 4" <br>
 Notice the shift from Events to Deadlines column.
 
 
