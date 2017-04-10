@@ -194,8 +194,8 @@ public class Task implements ReadOnlyTask {
             return false;
         }
     }
-    // @@author A0139520L
 
+    // @@author A0139520L
     @Override
     public boolean isCompletedTask() {
         return isMarkedAsComplete;
@@ -204,7 +204,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Checks if the duration of the readOnlyTask is between the start date/time
      * and end date/time of this task
-     * 
+     *
      * @return true if task is a Floating Task
      */
     @Override
