@@ -108,14 +108,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
     }
 
-    private void setTimeClashingTestEnvironment() {
-        commandBox.runCommand("CLEAR");
-        commandBox.runCommand(td.eventTestMon.getOneDayEventAddCommand());
-        commandBox.runCommand(td.eventTestTuesThurs.getAddCommand());
-        commandBox.runCommand(td.eventTestThurs.getOneDayEventAddCommand());
-        commandBox.runCommand(td.eventTestFriSat.getAddCommand());
-    }
-
     // @@author A0139520L
     @Test
     public void addFromToEventWithoutTime() {
@@ -280,6 +272,14 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertTrue(eventTaskListPanel.isListMatching(expectedList));
         assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
         assertTrue(floatingTaskListPanel.isListMatching(expectedList));
+    }
+
+    private void setTimeClashingTestEnvironment() {
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand(td.eventTestMon.getOneDayEventAddCommand());
+        commandBox.runCommand(td.eventTestTuesThurs.getAddCommand());
+        commandBox.runCommand(td.eventTestThurs.getOneDayEventAddCommand());
+        commandBox.runCommand(td.eventTestFriSat.getAddCommand());
     }
 
 }

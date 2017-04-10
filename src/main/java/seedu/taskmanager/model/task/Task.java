@@ -194,7 +194,6 @@ public class Task implements ReadOnlyTask {
             return false;
         }
     }
-
     // @@author A0139520L
 
     @Override
