@@ -247,7 +247,7 @@ All tasks with the specified tag are listed.
 
 #### Result
 
-All tasks which occurs in the specified time frame are listed. 
+All tasks which occurs in the specified time frame are listed.
 
 > 22 tasks listed!
 > GeeKeep is showing all the tasks which:

@@ -211,7 +211,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [a/AFTER_DATETIME] [b/BEFORE_DATETIME] [t/
 > * The search is case insensitive.
 > * The order of the keywords does not matter. e.g. `progress report` will match `report progress`
 > * Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `meeting` will match `team meeting`
-> * You can specify the time period using either the after and before prefixes, `a/` and `b/` respectively. If you specify both parameters, take note the time for `a/` must be before `b/`. 
+> * You can specify the time period using either the after and before prefixes, `a/` and `b/` respectively. If you specify both parameters, take note the time for `a/` must be before `b/`.
 
 Examples:
 

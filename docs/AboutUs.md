@@ -7,7 +7,7 @@ We are CS2103JAN2017-W15-B4 based in the [School of Computing, National Universi
 #### [Liu Ziyang](http://github.com/VeryLazyBoy)
 <img src="images/verylazyboy.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI, 
+Responsibilities: UI,
                   Managing Issues <br>
 Code Written: [[functional code](./collated/main/A0148037E.md)][[test code](./collated/test/A0148037E.md)]
 
@@ -16,7 +16,7 @@ Code Written: [[functional code](./collated/main/A0148037E.md)][[test code](./co
 #### [How Si Wei](http://github.com/howsiwei)
 <img src="images/howsiwei.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Storage, 
+Responsibilities: Storage,
                   Tests
 
 Code Written: [[functional code](./collated/main/A0147622H.md)][[test code](./collated/test/A0147622H.md)]
@@ -52,8 +52,8 @@ Code Written: [[functional code](./collated/main/A0139438W.md)][[test code](./co
 #### [Zhang Hanming](https://github.com/ZhangHanming)
 <img src="images/zhanghanming.png" width="150"><br>
  Role: Developer <br>
- Responsibilities: Model, 
-                   Team Leader, 
+ Responsibilities: Model,
+                   Team Leader,
                    Coordination of Team
 
 Code Written: [[functional code](./collated/main/A0121658E.md)][[test code](./collated/test/A0121658E.md)]
