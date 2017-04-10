@@ -221,14 +221,14 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  that are in the `src/main/resources/view` folder.<br>
  
  For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
-```
+
 Function of `UI`
 
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the
  `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
-```
+
 
 ### 3.3. Logic component
 **Author:** Francis Cheng
@@ -239,7 +239,6 @@ _Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/typetask/logic/Logic.java)
 
-```
 Function of `Logic`
 
 * The `Logic` component uses the `Parser` class to parse the user command.
@@ -247,7 +246,6 @@ Function of `Logic`
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object,
   which is passed back to the `Ui`.
-```
 
 **Purpose of `CliSyntax`**
 
@@ -349,7 +347,6 @@ Figure 3.4.2 : Component interactions for delete 1 command in Model
 In this interaction, the given task is removed from the task list. The `ModelManager` triggers a `TaskManagerChangedEvent` to save the current list in storage.
 
 
-
 ### 3.5. Storage component
 **Author:** Leong Wei Wen
 
@@ -359,13 +356,11 @@ _Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-```
 Function of `Storage`
 
 * The `Storage` component can save `UserPref` objects in json format and read it back.
 * The `Storage` component can save the Task Manager data in xml format and read it back.
 * The `Storage` component can s ave `config` objects in json format and read it back. 
-```
 
 ### 3.6. Common classes
 
