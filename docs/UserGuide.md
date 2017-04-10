@@ -63,7 +63,8 @@ Here are some terminologies used in this user guide:
 * Copy `DoIt.jar` to a folder as the home folder for *DoIt*
 * To launch the *DoIt* application, double-click on `DoIt.jar`
 * The main interface should appear as shown in figure 1 in a few seconds
-<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/MainInterface.png" width="800" height = 400>
+
+<img src="images/MainInterface.png" width="800" height = 400><br>
 _Figure 1 : Main GUI_
 <br>
 
@@ -72,7 +73,7 @@ _Figure 1 : Main GUI_
 ### Visual Walkthrough
 
 1. Figure 2 shows *DoIt* with a few tasks added
-<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/Ui.png" width="800" height = 400>
+<img src="images/Ui.png" width="800" height = 400><br>
 _Figure 2 : Example of a GUI Instance_<br>
 
 2. *DoIt* has 3 columns "Deadline", "Event" and "Anytime"
@@ -115,7 +116,7 @@ _Figure 2 : Example of a GUI Instance_<br>
 
 Not sure where to start? Enter **`help`** to view the help window as shown in Figure 3 below:
 
-<img src="https://raw.githubusercontent.com/CS2103JAN2017-W14-B3/main/master/docs/images/HELP.png" width="800" height = 400>
+<img src="images/HELP.png" width="800" height = 400><br>
 _Figure 3: Help window popup_<br>
 
 Format: **`help`**
