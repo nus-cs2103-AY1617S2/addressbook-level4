@@ -28,11 +28,14 @@
 ### List
 `list`
 1. YATS will show all the tasks in the primary list
+> Result in the result display
+> Listed all tasks
+> ** Detailed list is not shown in the TestScript.md**
 
 `list by start 03:45PM`
 1. YATS will show one result
 > Result (if task is unmarked)
-> Benzoic Aptitude Test
+> 1. Benzoic Aptitude Test
 > Organic revision
 > Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
 > School
@@ -41,7 +44,7 @@
 `list by end 12/12/2017`
 1. YATS will show one result
 > Result (if task is unmarked)
-> Benzoic Aptitude Test
+> 1. Benzoic Aptitude Test
 > Organic revision
 > Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
 > School
@@ -50,7 +53,7 @@
 `list by deadline 10/01/2019`
 1. YATS will show one result
 > Result (if task is unmarked)
-> Inductive Reasoning Based Philosophy
+> 1. Inductive Reasoning Based Philosophy
 > books armaggedon reading home
 > Have to finish reading this book by 10th January in preparation for Armaggedon
 > Home
@@ -59,6 +62,16 @@
 `list by location NUS`
 1. YATS will show four results
 > Search is not case-sensitive
+> Result
+> 1. Seeing is believeing
+> wild gone
+> NUS Wifi is kind of a finicky subject, you don't want to touch it, but you have to use it to survive. Do what you will with it, but I'm leaving.
+> NUS
+> 2. Remove mine documentation
+> techies WOAW
+> Did we put the right fuse on that one?
+> NUS
+> 08:05AM
 
 `list by tag tag1`
 1. YATS will show one result, with the task title "Test event 2"
