@@ -1062,8 +1062,13 @@ Description Box response:
 
 <br>
 
+1. Close the help window by clicking on the X button.
+
+<br>
+
 Input:
 ****select 1****
+
 Description Box response:
 ****Selected Task: [1]****
 
@@ -1073,6 +1078,7 @@ Description Box response:
 
 Input:
 ****select 5 3 4****
+
 Description Box response:
 ****Selected Task: [5, 3, 4]****
 
@@ -1082,6 +1088,7 @@ Description Box response:
 
 Input:
 ****select 1****
+
 Description Box response:
 ****Selected Task: [1]****
 
@@ -1091,6 +1098,7 @@ Description Box response:
 
 Input:
 ****select 3 4 5****
+
 Description Box response:
 ****Selected Task: [3, 4, 5]****
 
@@ -1102,7 +1110,7 @@ Input:
 ****done 1****
 
 Description Box response:
-****Done task: [buy capsicums | Priority: 2 | StartDate: 07/04/2017 23:25 | Tags: [shopping]]****
+****Done task: [master m249 | DueDate: 04/04/2019 12:00]****
 
 - The done list is now empty because the task is moved back to undone list.
 
