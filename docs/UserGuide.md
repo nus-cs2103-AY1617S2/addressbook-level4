@@ -12,7 +12,7 @@
     * [Listing tasks](#331-listing-of-task-list)
     * [Marking a task as done](#34-marking-a-task-as-done-done)
     * [Marking a task as undone](#35-marking-a-task-as-undone-undone)
-    * [Deleting a task](#36-deleting-a-task-delete)
+    * [Deleting a task](#36deleting-a-task-delete)
     * [Undoing/Redoing a command](#371-undoing-a-command-undo)
     * [Editing a task](#38-editing-a-task-edit)
     * [Finding a task](#391-finding-a-task-find)
