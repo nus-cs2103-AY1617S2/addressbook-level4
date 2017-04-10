@@ -17,6 +17,7 @@ import seedu.jobs.commons.core.Version;
 import seedu.jobs.commons.events.storage.SaveLoginInfoEvent;
 import seedu.jobs.commons.events.ui.CalendarDisplayEvent;
 import seedu.jobs.commons.events.ui.ExitAppRequestEvent;
+import seedu.jobs.commons.events.ui.TaskBookReloadEvent;
 import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.commons.util.ConfigUtil;
 import seedu.jobs.commons.util.StringUtil;
@@ -237,6 +238,12 @@ public class MainApp extends Application {
     public void handleSaveLoginInfoEvent(SaveLoginInfoEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         storage.saveLoginInfo(loginInfo);
+    }
+
+    @Subscribe
+    public void handleTaskBookReloadEvent(TaskBookReloadEvent event) throws IOException, IllegalTimeException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        model = initModelManager(storage, userPrefs);
     }
 
     public static void main(String[] args) {

@@ -15,7 +15,9 @@ import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.events.storage.DeleteCredentialEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEventException;
+import seedu.jobs.commons.events.ui.TaskBookReloadEvent;
 import seedu.jobs.commons.exceptions.DataConversionException;
+import seedu.jobs.commons.util.FileUtil;
 import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.UserPrefs;
@@ -99,12 +101,21 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleSavePathChangedEvent(SavePathChangedEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        try {
-            saveTaskBook(event.getData(), event.getPath());
-            setFilePath(event.getPath());
+        String path = event.getPath();
+        File file = new File(path).getAbsoluteFile();
+        if (FileUtil.isFileExists(file)) {
+            taskBookStorage.saveTaskBook(event.getData());
             raise(new ConfigChangeSavePathEvent(event.getPath()));
-        } catch (IOException e) {
-            raise(new SavePathChangedEventException());
+            raise(new TaskBookReloadEvent());
+
+        } else {
+            try {
+                saveTaskBook(event.getData(), event.getPath());
+                setFilePath(event.getPath());
+                raise(new ConfigChangeSavePathEvent(event.getPath()));
+            } catch (IOException e) {
+                raise(new SavePathChangedEventException());
+            }
         }
     }
  // ================ LoginInfo methods ==============================

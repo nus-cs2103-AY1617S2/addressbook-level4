@@ -146,9 +146,14 @@ public class Task implements ReadOnlyTask {
      * Mark this task as completed
      */
     public void markComplete() {
+        if (!this.startTime.equals(Time.DEFAULT_TIME)) {
+            this.startTime.addDays(period.value);
+        }
+        if (!this.endTime.equals(Time.DEFAULT_TIME)) {
+            this.endTime.addDays(period.value);
+        }
         this.isCompleted = (period.value == 0);
-        this.startTime.addDays(period.value);
-        this.endTime.addDays(period.value);
+
     }
 
     public void resetData(ReadOnlyTask replacement) {
