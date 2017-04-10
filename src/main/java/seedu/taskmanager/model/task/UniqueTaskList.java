@@ -311,15 +311,15 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     private int findSortedPositionToAdd(Task toAdd) {
         int numMarkedTasks = findNumMarkedTasks();
-
         int addIndex = 0;
+
         if (!internalList.isEmpty()) {
             if (toAdd.isEventTask()) {
-                addIndex = findSortedPositionToAddEvents(toAdd, addIndex);
+                addIndex = findSortedPositionToAddEvents(toAdd);
             }
 
             if (toAdd.isDeadlineTask()) {
-                addIndex = findSortedPositionToAddDeadlines(toAdd, addIndex);
+                addIndex = findSortedPositionToAddDeadlines(toAdd);
             }
 
             if (toAdd.isFloatingTask()) {
@@ -335,7 +335,9 @@ public class UniqueTaskList implements Iterable<Task> {
      * @return index deadline should be added in internalList according to
      *         chronological order
      */
-    private int findSortedPositionToAddDeadlines(Task toAdd, int addIndex) {
+    private int findSortedPositionToAddDeadlines(Task toAdd) {
+        int addIndex = 0;
+
         while (internalList.get(addIndex).isEventTask()) {
             addIndex++;
             if (addIndex == internalList.size()) {
@@ -360,7 +362,9 @@ public class UniqueTaskList implements Iterable<Task> {
      * @return index event should be added in internalList according to
      *         chronological order
      */
-    private int findSortedPositionToAddEvents(Task toAdd, int addIndex) {
+    private int findSortedPositionToAddEvents(Task toAdd) {
+        int addIndex = 0;
+
         while (internalList.get(addIndex).isEventTask()) {
             if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
                 break;
