@@ -36,9 +36,9 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author A0148037E
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel floatingTaskListPanel;
-    private TaskListPanel eventListPanel;
-    private TaskListPanel deadlineListPanel;
+    private FloatingTaskListPanel floatingTaskListPanel;
+    private EventListPanel eventListPanel;
+    private DeadlineListPanel deadlineListPanel;
     private Config config;
 
     @FXML
@@ -226,15 +226,15 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getFloatingTaskListPanel() {
+    public FloatingTaskListPanel getFloatingTaskListPanel() {
         return this.floatingTaskListPanel;
     }
 
-    public TaskListPanel getEventListPanel() {
+    public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
 
-    public TaskListPanel getDeadlineListPanel() {
+    public DeadlineListPanel getDeadlineListPanel() {
         return this.deadlineListPanel;
     }
 
