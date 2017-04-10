@@ -40,7 +40,7 @@ Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking
   * In charge of code cleanup (i.e. deleting trailing whitespace, converting \r\n\ to \n) [[#118](https://github.com/CS2103JAN2017-F11-B3/main/pull/118)]
   * Install necessary JARs (JUnit, JSon, Google Guava, JavaFX, etc.) to build path [[#92, #110](https://github.com/CS2103JAN2017-F11-B3/main/pull/110)]
   * Testing and dogfooding on Windows and macOS
-  
+
 -----
 
 #### [Muhammad Ali Rizvi](https://github.com/EntitySK)
