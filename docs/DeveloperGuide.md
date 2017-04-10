@@ -194,7 +194,7 @@ The `UiPart` component is an abstract class, represents a distinct part of the U
 
 The `TaskListPanel` component,`EventlistPanel`component and `FloatingTaskListPanel` component display `TaskCard` objects in listviews
 
-The `TaskCard` component associates with each task in observablelist, containing all attributes of the task, with images loaded on attributes like priority, exsitence of description
+The `TaskCard` component associates with each task in the observablelist, containing all attributes of the task, with images loaded on attributes like priority, existence  of description
 
 
 ### 3.4 Logic Component
@@ -417,7 +417,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | User | Add a task with a deadline | Keep track of a task which has to be done by a specific date and time
 `* * *` | User | Add a task with start and end time | Keep track of a task which occurs during a time frame
 `* * *` | User | Delete a task | Remove a task that is no longer needed
-`* * *` | User | Edit a task | Update task infomation
+`* * *` | User | Edit a task | Update task information
 `* * *` | User | Search a task by its details | Locate task easily
 `* * *` | User | Set task as completed | Keep track of completed tasks
 `* * *` | User | Undo the most recent action | Revert changes made
@@ -426,7 +426,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | User | Tag/Categorise a task | Know what to do when I am in the current context
 `* *` | User | Sort tasks by date, priority, deadline, recurrence, tags | View important tasks first
 `* *` | User | Select a task by index | Reduce typing needed
-`*` | User | Color scheme to represent priority | Visually differentiate between priority levels easily
+`*` | User | Colour scheme to represent priority | Visually differentiate between priority levels easily
 
 
 
@@ -452,7 +452,7 @@ Priority | As a ... | I want to ... | So that I can...
 > System prompt him to reschedule
 > Use case ends
 
-3a. User undos add task command
+3a. User undoes add task command
 > System deletes newly added task and show feedback to user
 > Use case ends
 
@@ -473,7 +473,7 @@ Priority | As a ... | I want to ... | So that I can...
 > System shows example of correct syntax
 > Resume from 1
 
-3a. User undos task edit command
+3a. User undoes task edit command
 > System adds the edited task back and shows feedback to user
 > Use case ends
 
@@ -500,7 +500,7 @@ Use case ends
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
   
-4a. User undos task delete command
+4a. User undoes task delete command
 
 > System adds the deleted task back and shows feedback to user
 > Use case ends
@@ -508,7 +508,7 @@ Use case ends
 ### 8.4 User Case : Undoing a Command<br>
 
 **MSS**
-1. User enters command to undo prev undoable command
+1. User enters command to undo previously undoable command
 2. System undo previous undoable command shows feedback to user
 Use case ends
 
@@ -562,7 +562,7 @@ Use case ends
 > System shows an error message
 > Use case ends
 
-3a. User undos mark task done command
+3a. User undoes mark task done command
 > System marks the task back as undone and shows feedback to user
 > Use case ends
 
@@ -632,7 +632,7 @@ Use case ends
 
 **MSS**
 1. User enters command to update priority of task
-2. System updates priority to user specified priority
+2. System updates priority to user specified priority 
 Use case ends
 
 **Extensions**
@@ -665,12 +665,12 @@ Use case ends
 
 ## 9. Appendix C : Non-Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed
+1. Should work on any [mainstream OS](#mainstream-os) if has Java `1.8.0_60` or higher installed
 
 2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage
 
-3. Should be able to accomplish most of the tasks faster using commands than using the mouse for a user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-
+3. Should be able to accomplish most of the tasks faster using commands than using the mouse for a user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+   
 4. Should be able to enter a task in one command instead of multiple clicks
 
 5. Should be able to access the program offline access tasks in areas without internet
@@ -679,7 +679,7 @@ Use case ends
 
 7. Should delete all past tasks automatically without user doing it manually
 
-8. Should should take no more than 5 minutes for a first time user to learn how to use program
+8. Should take no more than 5 minutes for a first-time user to learn how to use program
 
 {More to be added}
 
@@ -695,12 +695,12 @@ Use case ends
 **Mainstream OS**: Windows, Linux, Unix, OS-X Operating Systems
 
 **MSS**: Main Success Scenario of a use case
-
+    
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
 **Task**: A to-do without a date range, and optionally has a deadline
 
-**UI**: User interface is the means by which the user and the system interact with each other
+**UI**: User interface is how the user and the system interact with each other
 
 
 
@@ -715,8 +715,8 @@ Use case ends
 * Tells you what to do
 * Provides default settings so minimal adjustment is needed
 * Allows input commands using a keyboard<br>
-
-### Disadvantages:
+ 
+### Disadvantages: 
 * Requires too many clicks for settings and other features other than task
 * Requires clicking to delete and update
 * Requires internet for desktop version to use
@@ -732,34 +732,34 @@ Use case ends
 
 ### Disadvantages:
 * Unable to sync with email
-* Lack of functionality(No reminders, calendar view, etc)
+* Lack of functionality(No reminders, calendar view, etc) 
 * Requires Windows Operating System to be installed
 
 ### Author: Jin Shun
-### Product: Momentum
+### Product: Momentum 
 ### Advantages:
-* Simple to use
-* Nice background
+* Simple to use 
+* Nice background 
 * Helpful way of reminding users of pending tasks, every time user opens new tab in chrome
 * Has integration with full fledged task managers like trello<br>
 
-### Disadvantages:
-* Only works with chrome browser
-* Requires internet connection
-* Unable to set deadline for tasks
-* Minimal features
+### Disadvantages: 
+* Only works with chrome browser 
+* Requires internet connection 
+* Unable to set deadline for tasks 
+* Minimal features 
  
 ### Author: Huanhui
-### Product: Wunderlist
+### Product: Wunderlist 
 ### Advantages:
-* Some shortcut keys available, good user flexibility
-* CRUD can function offline
-* Many features such as the ability to set reminders, due dates, recurring tasks
-* Tasks are automatically sorted by due date
-* Able to display completed tasks
+* Some shortcut keys available, good user flexibility 
+* CRUD can function offline 
+* Many features such as the ability to set reminders, due dates, recurring tasks 
+* Tasks are automatically sorted by due date 
+* Able to display completed tasks 
 * Well designed UI<br>
 
 ### Disadvantages:
-* Not fully functional on keyboard, still need to use mouse to do operations such as select task
-* Do not have an undo function
+* Not fully functional on keyboard, still need to use mouse to do operations such as select task 
+* Do not have an undo function 
 * Requires installation
