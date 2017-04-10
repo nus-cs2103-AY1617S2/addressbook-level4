@@ -187,7 +187,7 @@ Examples:
 
 
 ### 3.2.4. Adding a Priority Task/Event :  `add`, `a`, `+`
-What if you have tasks that are more important than others? You can add this task with a <img src="images/yellow_exclamation_mark.png" width="60"> label to indicate that it has a high priority.
+What if you have tasks that are more important than others? You can add this task with a <img src="images/yellow_exclamation_mark.png" width="15"> label to indicate that the task has a high priority.
 
 Format:<br>
 `add <TASK NAME> p/<PRIORITY>`<br>
@@ -486,4 +486,4 @@ Format:<br>
 
 ## 5. Command Summary
 
-<img src="images/commandShortcut.png" width="600">
+<img src="images/commandShortcut.png" width="800">
