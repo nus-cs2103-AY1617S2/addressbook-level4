@@ -26,7 +26,7 @@ public class XmlAddressBookStorage implements TaskManagerStorage {
     }
 
     @Override
-    public String getAddressBookFilePath() {
+    public String getTaskManagerFilePath() {
         return filePath;
     }
 
@@ -58,16 +58,16 @@ public class XmlAddressBookStorage implements TaskManagerStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException {
+        saveTaskManager(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyTaskManager)}
+     * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
      * @param filePath location of the data. Cannot be null
      */
     @Override
-    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         assert addressBook != null;
         assert filePath != null;
 
@@ -78,7 +78,7 @@ public class XmlAddressBookStorage implements TaskManagerStorage {
 
     //@@author A0163848R
     @Override
-    public void setAddressBookFilePath(String path) {
+    public void setTaskManagerFilePath(String path) {
         this.filePath = path;
     }
     //@@author

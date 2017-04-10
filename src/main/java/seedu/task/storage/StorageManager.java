@@ -56,13 +56,13 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public String getTaskManagerFilePath() {
+        return addressBookStorage.getTaskManagerFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(addressBookStorage.getAddressBookFilePath());
+        return readTaskManager(addressBookStorage.getTaskManagerFilePath());
     }
 
     @Override
@@ -72,14 +72,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException {
+        saveTaskManager(addressBook, addressBookStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        addressBookStorage.saveTaskManager(addressBook, filePath);
     }
 
 
@@ -88,7 +88,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleAddressBookChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveTaskManager(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
@@ -99,7 +99,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleExportRequestEvent(ExportRequestEvent ere) {
         try {
-            saveAddressBook(ere.getYTomorrowToExport(), ere.getTargetFile().getPath());
+            saveTaskManager(ere.getYTomorrowToExport(), ere.getTargetFile().getPath());
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
@@ -134,13 +134,13 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTargetFileRequestEvent(TargetFileRequestEvent tfre) {
-        addressBookStorage.setAddressBookFilePath(tfre.getTargetFile().getPath());
+        addressBookStorage.setTaskManagerFilePath(tfre.getTargetFile().getPath());
         tfre.getUserPrefs().getGuiSettings().setLastLoadedYTomorrow(tfre.getTargetFile().getPath());
     }
 
     @Override
-    public void setAddressBookFilePath(String path) {
-        addressBookStorage.setAddressBookFilePath(path);
+    public void setTaskManagerFilePath(String path) {
+        addressBookStorage.setTaskManagerFilePath(path);
     }
     //@@author
 }
