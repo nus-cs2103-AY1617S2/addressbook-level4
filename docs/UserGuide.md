@@ -127,7 +127,10 @@ Format: `list`
 Shows the tasks that are linked to a specific string or a specific date.<br>
 Format: `list by ATTRIBUTE KEYWORD [MORE_KEYWORDS]...`
 
-Where ATTRIBUTE can be location, start, end, deadline, tag
+Where ATTRIBUTE can be location, start, end, deadline, tag<br>
+Only can specify one attribute time to list by<br>
+For each attribute, only can specify one to list by<br>
+Done tasks will be listed too, but in a different format(Without Description)<br>
 Where KEYWORD can be the following:
 1. LOCATION and TAG can be any string
 2. START, END and DEADLINE can only be of the following format: 
@@ -368,8 +371,14 @@ can be recognized. However, when you want to specify 2 dates in TIME for a event
 Besides, formatted input with ambiguity of month and day can cause an error in time stored, so input such as "02/06/2017" or "08.06.1997"
 should not be used. It will be safe to always use name of the month, e.g. "January" instead of "01".
 
+## 4. Known Bugs in Application
 
-## 4. Command Summary
+### Adding tasks with same title 
+> When marking one of the tasks as done then deleting the undone one, <br>
+> the done task gets deleted instead<br>
+> Tasks of the same title will have indexing problems
+
+## 5. Command Summary
 
 * **Add Floating Task** : `add task NAME ` <br>
    e.g. `add task math homework`
