@@ -5,6 +5,8 @@
 
 1. [Introduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#1-introduction) <br>
 2. [Quick Start](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#2-quick-start) <br>
+   2.1.  [Download](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#21-download) <br>
+   2.2.  [Visual Introduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#22-visual-introduction)  <br>
 3. [Features](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#3-features) <br>
    3.1.  [Viewing Help](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#31-viewing-help--help) <br>
    3.2.  [Adding a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add-a-)  <br>
