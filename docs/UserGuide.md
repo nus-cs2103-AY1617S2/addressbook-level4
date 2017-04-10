@@ -86,7 +86,7 @@ TypeTask automatically assigns your tasks with certain colours to help you diffe
    Other example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` Attend Meeting by: 12 Feb 11am` :
-     adds the task `Attend Meeting` to the Task Manager.
+     adds the task `Attend Meeting` to the Task Manager
    * **`delete`**` 1` : deletes the task shown with index 1
    * **`exit`** : exits the app
 &nbsp;
