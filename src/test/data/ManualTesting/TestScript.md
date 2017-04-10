@@ -16,70 +16,109 @@
 > ** Detailed list is not shown in the TestScript.md**
 
 `list by start 03:45PM`
-1. YATS will show one result
-> Result (if task is unmarked)
-> 1. Benzoic Aptitude Test
-> Organic revision
-> Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
-> School
-> 03:45PM 12/12/2017 - 07:00PM 12/12/2017
+1. YATS will show one result<br>
+> Result (if task is unmarked)<br>
+> 1. Benzoic Aptitude Test<br>
+> Organic revision<br>
+> Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.<br>
+> School<br>
+> 03:45PM 12/12/2017 - 07:00PM 12/12/2017<br>
 
 `list by end 12/12/2017`
-1. YATS will show one result
-> Result (if task is unmarked)
-> 1. Benzoic Aptitude Test
-> Organic revision
-> Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
-> School
-> 03:45PM 12/12/2017 - 07:00PM 12/12/2017
+1. YATS will show one result<br>
+> Result (if task is unmarked)<br>
+> 1. Benzoic Aptitude Test<br>
+> Organic revision<br>
+> Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.<br>
+> School<br>
+> 03:45PM 12/12/2017 - 07:00PM 12/12/2017<br>
 
 `list by deadline 10/01/2019`
-1. YATS will show one result
-> Result (if task is unmarked)
-> 1. Inductive Reasoning Based Philosophy
-> books armaggedon reading home
-> Have to finish reading this book by 10th January in preparation for Armaggedon
-> Home
-> by 10:20AM 10/01/2019
+1. YATS will show one result<br>
+> Result (if task is unmarked)<br>
+> 1. Inductive Reasoning Based Philosophy<br>
+> books armaggedon reading home<br><br>
+> Have to finish reading this book by 10th January in preparation for Armaggedon<br>
+> Home<br>
+> by 10:20AM 10/01/2019<br>
 
 `list by location NUS`
-1. YATS will show four results
-> Search is not case-sensitive
-> Result
-> 1. Seeing is believeing
-> wild gone
-> NUS Wifi is kind of a finicky subject, you don't want to touch it, but you have to use it to survive. Do what you will with it, but I'm leaving.
-> NUS
-> 2. Remove mine documentation
+1. YATS will show four results<br>
+> Search is not case-sensitive<br>
+> Result<br>
+> 1. Seeing is believeing<br>
+> wild gone<br>
+> NUS Wifi is kind of a finicky subject, you don't want to touch it, but you have to use it to survive. Do what you will with it, but I'm leaving.<br>
+> NUS<br>
+
+> 2. Remove mine documentation<br>
 > techies WOAW
-> Did we put the right fuse on that one?
-> NUS
-> 08:05AM
-> 3. Sallen pointer
-> never give up you
-> Sallen key low pass filtering seems to have failed.
-> NUS
-> 02:11PM 22/04/2017 - 02:45PM 22/04/2017
-> 4. Test configuration file of reverberating system
-> recovering system
-> System harmonics project failing test cases
-> NUS
->  by 11:59PM 15/03/2017
+> Did we put the right fuse on that one?<br>
+> NUS<br>
+> 08:05AM<br>
+
+> 3. Sallen pointer<br>
+> never give up you<br>
+> Sallen key low pass filtering seems to have failed.<br>
+> NUS<br>
+> 02:11PM 22/04/2017 - 02:45PM 22/04/2017<br>
+
+> 4. Test configuration file of reverberating system<br>
+> recovering system<br>
+> System harmonics project failing test cases<br>
+> NUS<br>
+> by 11:59PM 15/03/2017<br>
 
 `list by tag tag1`
-1. YATS will show one result, with the task title "Test event 2"
+1. YATS will show one result<br>
+> Result<br>
+> Test event 2<br>
+> tag1 tag6 tag7 tag4 tag5 tag2 tag3<br>
+> Loating title within application's database.<br>
+> TestDrive<br>
+> 09:00AM 09/04/2017 - 05:00PM 09/04/2017<br>
 
 `list by start`
+1. YATS will organize the list by start date
+ 
+`list by end`
+1. YATS will organize the list by end date
+ 		 
+`list by deadline`
+1. YATS will organize the list by deadline
+ 		 
+`list by done`
+1. YATS will list all done task in the primary list
+
+`list by start`
+1. YATS will organize the list by start date
 
 `list by end`
+1. YATS will organize the list by end date
 
 `list by deadline`
+1. YATS will organize the list by deadline
 
-`list by done`
+`list done`
+1. YATS will list all done tasks in the primary list
 
 ### Find
-`find TASK_TITLE`
-`find TASK_DESCRIPTION`
+`find minecraft`
+1. YATS will find one item<br>
+> Result<br>
+> 1. Minecraft Lets Play 100<br>
+> RT comedy<br>
+> Catch up on Minecraft Let's Plays by Rooster Teeth! Comedy as its best!<br>
+> RoosterTeeth<br>
+
+`find war`
+1. YATS will find one item<br>
+> Result<br>
+> Red vs Blue<br>
+> crusade holy<br>
+> The great war between the 2 colours have begun. The crusade is upon us!<br>
+> Dutch<br>
+> 08:05PM 12/03/2020 - 09:00PM 30/03/2025<br>
 
 ### Add
 `add test floating task`<br>
