@@ -1,11 +1,7 @@
 # User Guide
-
 This product is a tool to accept natural language commands via keyboards to manage the user's schedule and todo tasks.
-
 * [First-time user experience](#first-time-user-experience)
-
 * [Start the program](#start-the-program)
-
 * [Feature details](#feature-details)
     * [help](#view-help-help)
     * [add](#add-a-task-add)
