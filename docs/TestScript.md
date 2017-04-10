@@ -3,7 +3,7 @@
 This is the script for Manual Scripted Testing and a short review of the results.
 
 ### Test Case 01
-Command | Format
+ | 
 -------- | :--------
 Test Case Summary | Add task without any details
 Test Data | `add TEST1`
