@@ -30,7 +30,7 @@ Responsibilities:
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/main/A0141872E.md)][[test code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/test/A0141872E.md)]
 * Other major contributions: <br>
     * Designed the main GUI
-	* Wrote majority of the User Guide
+	* Wrote majority of the User Guide and ReadMe
 	
 
 -----
