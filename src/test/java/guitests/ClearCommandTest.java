@@ -1,31 +1,35 @@
+//@@author A0146809W
 package guitests;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+import seedu.doit.logic.commands.ClearCommand;
+import seedu.doit.logic.commands.DeleteCommand;
+
+public class ClearCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void clear() {
 
-        //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
+        // verify a non-empty list can be cleared
+        assertAllPanelsMatch(this.td.getTypicalTasks());
         assertClearCommandSuccess();
 
-        //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
-        commandBox.runCommand("delete 1");
+        // verify other commands can work after a clear command
+        this.commandBox.runCommand(this.td.hoon.getAddCommand());
+        assertTrue(this.taskListPanel.isListMatching(this.td.hoon));
+        this.commandBox.runCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertListSize(0);
 
-        //verify clear command works when the list is empty
+        // verify clear command works when the list is empty
         assertClearCommandSuccess();
     }
 
-    private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+    public void assertClearCommandSuccess() {
+        this.commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertResultMessage("All tasks has been cleared!");
     }
 }

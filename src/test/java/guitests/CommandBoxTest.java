@@ -8,52 +8,147 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.doit.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TaskManagerGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    public static final String EMPTY_STRING = "";
+    private static final String COMMAND_THAT_SUCCEEDS = "select 1";
     private static final String COMMAND_THAT_FAILS = "invalid command";
+
 
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
+    private ArrayList<String> successStyleOfCommandBox;
 
     @Before
     public void setUp() {
-        defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
+        this.defaultStyleOfCommandBox = new ArrayList<>(this.commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
-                    defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+                this.defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+        assertFalse("CommandBox default style classes should not contain success style class.",
+                this.defaultStyleOfCommandBox.contains(CommandBox.SUCCESS_STYLE_CLASS));
 
         // build style class for error
-        errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
-        errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+        this.errorStyleOfCommandBox = new ArrayList<>(this.defaultStyleOfCommandBox);
+        this.errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+
+        //build style class for success
+        this.successStyleOfCommandBox = new ArrayList<>(this.defaultStyleOfCommandBox);
+        this.successStyleOfCommandBox.add(CommandBox.SUCCESS_STYLE_CLASS);
     }
 
     @Test
     public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
-        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-
-        assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+        assertEquals(this.successStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
     @Test
     public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
-        commandBox.runCommand(COMMAND_THAT_FAILS);
-
-        assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
-        assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+        assertEquals(this.errorStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
+        this.commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
 
-        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
-        assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+        assertEquals(this.successStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
+    // @@author A0138909R
+    @Test
+    public void commandBox_pressUp() {
+        this.commandBox.clickUpInTextField();
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDowntoEmpty() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown_excessDown() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickDownInTextField();
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressUp_excessUp() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        //assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressUp_emptyString() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(EMPTY_STRING);
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown_emptyString() {
+        this.commandBox.runCommand(EMPTY_STRING);
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressUp_afterUsingOlderCommand() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.pressEnter();
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_FAILS, this.commandBox.getCommandInput());
+        this.commandBox.clickUpInTextField();
+        assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBox_pressDown_afterUsingOlderCommand() {
+        this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.runCommand(COMMAND_THAT_FAILS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
+        this.commandBox.pressEnter();
+        this.commandBox.clickDownInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+    // @@author
 }

@@ -7,28 +7,25 @@ import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
-public class HelpWindowTest extends AddressBookGuiTest {
+public class HelpWindowTest extends TaskManagerGuiTest {
 
     @Test
     public void openHelpWindow() {
-        //use accelerator
-        commandBox.clickOnTextField();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
+        // use accelerator
+        this.commandBox.clickOnTextField();
+        assertHelpWindowOpen(this.mainMenu.openHelpWindowUsingAccelerator());
 
-        resultDisplay.clickOnTextArea();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
+        this.resultDisplay.clickOnTextArea();
+        assertHelpWindowOpen(this.mainMenu.openHelpWindowUsingAccelerator());
 
-        personListPanel.clickOnListView();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
+        this.taskListPanel.clickOnListView();
+        assertHelpWindowOpen(this.mainMenu.openHelpWindowUsingAccelerator());
 
-        browserPanel.clickOnWebView();
-        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
+        // use menu button
+        assertHelpWindowOpen(this.mainMenu.openHelpWindowUsingMenu());
 
-        //use menu button
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
-
-        //use command
-        assertHelpWindowOpen(commandBox.runHelpCommand());
+        // use command
+        assertHelpWindowOpen(this.commandBox.runHelpCommand());
     }
 
     private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {

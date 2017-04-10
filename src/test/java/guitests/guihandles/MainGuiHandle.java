@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import seedu.doit.TestApp;
 
 /**
  * Provides a handle for the main GUI.
@@ -13,28 +13,32 @@ public class MainGuiHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return new PersonListPanelHandle(guiRobot, primaryStage);
+    public TaskListPanelHandle getTaskListPanel() {
+        return new TaskListPanelHandle(this.guiRobot, this.primaryStage);
+    }
+
+    public FloatingTaskListPanelHandle getFloatingTaskListPanel() {
+        return new FloatingTaskListPanelHandle(this.guiRobot, this.primaryStage);
+    }
+
+    public EventListPanelHandle getEventListPanel() {
+        return new EventListPanelHandle(this.guiRobot, this.primaryStage);
     }
 
     public ResultDisplayHandle getResultDisplay() {
-        return new ResultDisplayHandle(guiRobot, primaryStage);
+        return new ResultDisplayHandle(this.guiRobot, this.primaryStage);
     }
 
     public CommandBoxHandle getCommandBox() {
-        return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
+        return new CommandBoxHandle(this.guiRobot, this.primaryStage, TestApp.APP_TITLE);
     }
 
     public MainMenuHandle getMainMenu() {
-        return new MainMenuHandle(guiRobot, primaryStage);
-    }
-
-    public BrowserPanelHandle getBrowserPanel() {
-        return new BrowserPanelHandle(guiRobot, primaryStage);
+        return new MainMenuHandle(this.guiRobot, this.primaryStage);
     }
 
     public AlertDialogHandle getAlertDialog(String title) {
-        guiRobot.sleep(1000);
-        return new AlertDialogHandle(guiRobot, primaryStage, title);
+        this.guiRobot.sleep(1000);
+        return new AlertDialogHandle(this.guiRobot, this.primaryStage, title);
     }
 }
