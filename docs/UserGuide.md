@@ -78,6 +78,7 @@ Add a new task to TaskIt<br>
 Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]`
 
 > * Title can add at the back using quote.<br>
+> * Quotes can be used to add title with keywords. <br>
 > * Tasks can have any number of tags (including 0)<br>
 
 Examples:
@@ -86,6 +87,7 @@ Examples:
 * `add Interview tag work priority high`
 * `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
 * `add tag school tag assignment by 11pm "CS2103 revision"`
+* `add "tag friends on facebook" priority high tag friends tag facebook` 
 
 
 ### 3.3. Listing all tasks: `list`
