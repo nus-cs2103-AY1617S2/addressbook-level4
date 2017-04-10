@@ -225,7 +225,8 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 Function of `UI`
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to some data in the `Model` so that the UI can auto-update when data in the
+ `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 ```
 
@@ -244,7 +245,8 @@ Function of `Logic`
 * The `Logic` component uses the `Parser` class to parse the user command.
 * The `Command` object created from the 'Parser' class is executed by the `LogicManager`.
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* The result of the command execution is encapsulated as a `CommandResult` object,
+  which is passed back to the `Ui`.
 ```
 
 **Purpose of `CliSyntax`**
@@ -419,15 +421,15 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.TypeTask.commons.UrlUtilTest`
+      e.g. `typetask.commons.UrlUtilTest`
       
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.TypeTask.storage.StorageManagerTest`
+      e.g. `typetask.storage.StorageManagerTest`
       
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.TypeTask.logic.LogicManagerTest`
+      e.g. `typetask.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
