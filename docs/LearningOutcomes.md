@@ -2,7 +2,7 @@
 After studying this code and completing the corresponding exercises, you should be able to,
 
 1. [Use High-Level Designs `[LO-HighLevelDesign]`](#use-high-level-designs-lo-highleveldesign)
-1. [Use Event-Driven Programming `[LO-EventDriven]`](#use-event-driven-programming-lo-eventdriven`)
+1. [Use Event-Driven Programming `[LO-EventDriven]`](#use-event-driven-programming-lo-eventdriven)
 1. [Use API Design `[LO-ApiDesign]`](#use-api-design-lo-apidesign)
 1. [Use Assertions `[LO-Assertions]`](#use-assertions-lo-assertions)
 1. [Use Logging `[LO-Logging]`](#use-logging-lo-logging)

@@ -1,186 +1,480 @@
-# AddressBook Level 4 - User Guide
+# Tache - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+## Contents
 
-## 1. Quick Start
-
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
-
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
-
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
-
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+1. [Introduction](#1-introduction)
+2. [Getting Started](#2-getting-started)
+3. [Features](#3-features) <br>
+	3.1. [Terminology](#31-terminology) <br>
+	3.2. [Adding Tasks](#32-add-a-task--add) <br>
+	3.3. [Listing Tasks](#33-list-all-tasks--list) <br>
+	3.4. [Finding Tasks](#34-find-a-task--find) <br>
+	3.5. [Editing Tasks](#35-edit-a-task--edit) <br>
+    3.6. [Deleting Tasks](#36-delete-a-task--delete) <br>
+    3.7. [Selecting Tasks](#37-select-a-task--select) <br>
+    3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
+	3.9. [Undoing a Change](#39-undo-a-change--undo) <br>
+	3.10. [Navigating the Calendar](#310-navigate-the-calendar) <br>
+	3.11. [Getting Help](#311-get-help--help) <br>
+	3.12. [Changing Data File Location](#312-change-data-file-location) <br>
+	3.13. [Loading Data File From Location](#313-load-data-file-from-location) <br>
+	3.14. [Hotkey Toggling](#314-hotkey-toggling) <br>
+	3.15. [System Tray Notification](#315-system-tray-notification) <br>
+	3.16. [Exiting](#316-exit-the-program--exit)
+4. [Command Summary](#4-command-summary)
+5. [FAQ](#5-faq-frequently-asked-questions)
 
 
-## 2. Features
+## 1. Introduction
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+Hi there, and nice to meet you!
 
-### 2.1. Viewing help : `help`
+My name is Tache, and I am a **task manager application** designed to serve busy people like you.
+Have you ever felt stressed having to deal with a hectic schedule and numerous to-do tasks?
+I am here to be your _virtual assistant_ and help you to manage all your deadlines and events. <br>
 
-Format: `help`
+You are currently reading my user guide, which has been written to help you with:
+* `Installing` me
+* `Using` me
+* `Troubleshooting` me
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+## 2. Getting Started
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+0. Ensure that you have Java version `1.8.0_60` or later installed in your computer.<br>
 
-> Persons can have any number of tags (including 0)
+   > Unfortunately, having any Java 8 version is not enough because I cannot work with earlier versions of Java 8.
 
-Examples:
+1. Download the latest `tache.jar` file from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as my home folder.
+3. Double-click the file to start me! <br>
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+   > My Graphical User Interface (GUI) should appear in a few seconds:
 
-### 2.3. Listing all persons : `list`
+   <img src="images/UiComponents.png" width="600"><br>
+   _Figure 2.1. My GUI_
 
-Shows a list of all persons in the address book.<br>
-Format: `list`
+4. Type your desired command in my command box and press <kbd>Enter</kbd> to execute it. <br>
 
-### 2.4. Editing a person : `edit`
+   **Let's Try it Out!** <br>
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+   (Do the following steps in order)
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+   * **`add`** `Finish Progress Report by 13 apr 2pm` <br>
 
-Examples:
+     > Adds a task with the following task details into your task list: <br>
+     > Name: `Finish Progress Report` <br>
+     > Due Date: `13 Apr` <br>
+     > Due Time: `2 p.m.`
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+   * **`list`** <br>
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+     > Lists all your tasks. <br>
+     Your task list should only contain 1 task, which is the task you added in the previous step (i.e. `Finish Progress Report`).
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+   * **`delete`** `1` <br>
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+     > Deletes your task `Finish Progress Report` with the task index `1`.
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+   * **`list`** <br>
 
-Examples:
+     > Your task list should be empty now.
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+   * **`exit`**
 
-### 2.6. Deleting a person : `delete`
+     > Time for me to rest!
 
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+6. Want more? Refer to the [Features](#3-features) section below to find out more about each command I can perform. <br>
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
 
-Examples:
+## 3. Features
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+### 3.1. Terminology
 
-### 2.7. Select a person : `select`
+#### Task Details:
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+  > * Name <br>
+  `Name must only contain alphanumeric characters.`
+  > * Start Date <br>
+  `MM/DD/YYYY, MM-DD-YYY format`<br>
+  `or english natural language e.g. 6 april 2017`
+  > * Start Time <br>
+  `All time formats are supported.`
+  > * End Date <br>
+  `MM/DD/YYYY, MM-DD-YYY format`<br>
+  `or english natural language e.g. 6 april 2017`
+  > * End Time <br>
+  `All time formats are supported.`
+  > * Tag <br>
+  `Tag must only contain alphanumeric characters.`
+  > * Recur Interval <br>
+  `Only 4 accepted values: None, Day, Week, Month`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+#### Task Filters:
 
-Examples:
+  > * All
+  > * Completed
+  > * Uncompleted
+  > * Floating
+  > * Timed
+  > * Overdue
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+### 3.2. Add a task : `add`
 
-### 2.8. Clearing all entries : `clear`
+Adds a task to your task list. <br>
 
-Clears all entries from the address book.<br>
-Format: `clear`
+#### To add a _floating_ task:
 
-### 2.9. Exiting the program : `exit`
+A floating task is a task that _does not have any specific times_. <br>
+You are probably not sure when you are going to do it, nor are you sure when exactly it is due. <br>
 
-Exits the program.<br>
-Format: `exit`
+An example of a floating task: <br>
 
-### 2.10. Saving the data
+* **A hobby-related activity or long-term goal**
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+  > You just want to record this task somewhere so that you can get to it when you are free someday. <br>
 
-## 3. FAQ
+  **_E.g. Learn baking_**
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+Format: **`add`** `<task_name>` <br>
+
+#### To add a _timed_ task:
+
+A timed task is a task that _is associated with specific dates and times_. <br>
+It can be a task with a deadline or an event. <br>
+
+Format: **`add`** `<task_name> by <due date and time>` <br>
+E.g. **`add`** `project proposal by 13 apr 2pm`<br>
+
+Format: **`add`** `<task_name> from <start date and time> to <end date and time>` <br>
+E.g. **`add`** `sushi restaurant promotion from 25 apr 10am to 28 apr 9pm`<br>
+
+#### To add a _recurring_ task:
+
+A recurring task is a task that has both start date and end date and has a specified recur interval<br>
+Recurring tasks are _auto populated based on the specified recur interval_. <br>
+
+Format: **`add`** `<task_name> from <start date and time> to <end date and time> <interval>` <br>
+E.g. **`add`** `go to school from 9am to 5pm everyday`<br>
+
+<img src="images/UiAddCommand.png" width="600"><br>
+_Figure 3.2.1. Add Command_
+
+For advanced users: **`a`** `<task_name>` <br>
+
+### 3.3. List all tasks : `list`
+
+Displays tasks in your task list.<br>
+With this command, you will be able to list tasks of specific statuses in a _chronological order_.<br>
+
+Some reasons why you might want to _list_ your tasks:
+
+* **You want to prioritize your tasks based on the order of their specific dates / times** <br>
+
+  > You want to have an overview of all your tasks based on how urgent they are, then
+  manually select some of these tasks to focus on.
+
+* **You want to track the tasks that you have already completed** <br>
+
+* **You want to plan your time to get your remaining tasks done** <br>
+
+* **You want to schedule some of your uncompleted [floating tasks](#to-add-a-floating-task)** <br>
+
+  > Converting your floating tasks into [timed tasks](#to-add-a-timed-task) will allow me to keep track of
+  them more effectively (e.g. by alerting you when they are overdue).
+  > Fun fact: you can know the _no. of floating and timed tasks_ you have instantly through my GUI!
+
+	<img src="images/TaskCount.png" width="100"><br>
+	_Figure 3.3.1. Task Count_
+
+Format: **`list`** <br>
+This lists all your uncompleted tasks. <br>
+
+Format: **`list`** `<filter>`<br>
+E.g. **`list`** `completed`, **`list`** `all`, **`list`** `floating`, **`list`** `timed`, **`list`** `overdue`, **`list`** `today`, **`list`** `this week`<br>
+
+<img src="images/UiListCommand.png" width="600"><br>
+_Figure 3.3.2. List Command_
+
+For advanced users: **`l`** `<filter>` <br>
+
+### 3.4. Find a task : `find`
+
+Finds uncompleted and overdue task(s) whose details(s) contain `<keyword>` with one margin of error. <br>
+
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.
+Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
+
+> **`find`** can also be used to look for dates, time and tags<br>
+
+A reason why you might want to _find_ a task:
+
+* **You want to know the [task details](#task-details) of a task** <br>
+
+  > Such task details include the duration of a task, the deadline of a task etc.
+
+  E.g. **Finding out when your _project proposal_ is due** <br>
+  You want to plan your schedule for the week, taking into account the proposal deadline.
+
+Format: **`find`** `<keyword>` <br>
+
+<img src="images/UiFindCommand.png" width="600"><br>
+_Figure 3.4.1. Find Command_
+
+For advanced users: **`f`** `<keyword>` <br>
+
+### 3.5. Edit a task : `edit`
+
+Edits 1 or more [task details](#task-details) of a task. <br>
+
+An example of a task you might want to _edit_: <br>
+
+* **A task that has already exceeded its deadline**
+
+  > You still want to complete a certain task, but you intend to postpone its deadline. <br>
+
+  **_E.g. Buy aunt's birthday present_** <br>
+  You have unfortunately already missed her birthday, but you still want to give her a
+  belated birthday present the next time you meet her.
+
+Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
+This command will direct me to make the specified update to a task with `<task_index>`. <br><br>
+Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
+E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
+You can edit more task details for your task concurrently using the above format.<br>
+
+**Special Notes**<br>
+>`<task_detail>` can be used interchangeably with no special characters or initials for better convenience <br>
+>E.g. `start_date` can be replaced with `startdate` or `sd`<br>
+>`recur_interval` can be replaced with `recurinterval` or `ri`<br>
+
+>Tasks are non editable if they are part of a recurring task, however the<br>master recurring task (denoted with an R in the task list panel) can be edited.<br>
+><img src="images/MasterRecur.png" width="200"><br>
+
+
+<img src="images/UiEditCommand.png" width="600"><br>
+_Figure 3.5.1. Edit Command_
+
+For advanced users:<br>**`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br><br>
+For advanced users:<br>**`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
+
+### 3.6. Delete a task : `delete`
+
+Removes a specified task from your task list.<br>
+
+An example of a task that you might want to _delete_:
+
+* **A tasks that no longer needs to be done** <br>
+
+  E.g. **_Do financial report_** <br>
+  Your supervisor had delegated the wrong task to you and has just corrected his mistake.
+
+Format: **`delete`** `<task_index>` <br>
+To delete all your tasks, you can type in **`clear`** instead. <br>
+
+**Special Note**<br>
+>Tasks can not be deleted if they are part of a recurring task, however the<br>master recurring task (denoted with an R in the task list panel) can be deleted.<br>
+><img src="images/MasterRecur.png" width="200"><br>
+
+For advanced users: **`d`** `<task_index>` <br>
+
+### 3.7. Select a task : `select`
+
+Selects a task for you to see it at the calendar view. <br>
+
+A reason why you might want to _select_ a task:
+
+* **You want to view your task in relation to the other tasks you have for the month** <br>
+
+  > This will guide you in planning your schedule for the next few weeks. <br>
+
+Format: **`select`** `<task_index>` <br>
+
+<img src="images/UiSelectCommand.png" width="600"><br>
+_Figure 3.7.1. Select Command_
+
+For advanced users: **`s`** `<task_index>` <br>
+
+### 3.8. Complete a task : `complete`
+
+Marks a task as done. <br>
+
+A reason why you might want to _complete_ a task:
+
+* **You want to declutter your task list** <br>
+
+  > I will keep your completed tasks hidden from your default list view until you need to refer to them again. <br>
+
+Format: **`complete`** `<task_index>`<br>
+E.g. **`complete`** `1` <br><br>
+Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
+E.g. **`complete`** `1,2,3,4` <br>
+You can complete multiple tasks simultaneously using the above format.<br>
+
+<img src="images/UiCompleteCommand.png" width="600"><br>
+_Figure 3.8.1. Complete Command_
+
+For advanced users: **`c`** `<task_index>` <br>
+
+### 3.9. Undo a change : `undo`
+
+Undoes the last change made to my data. <br>
+
+A reason why you might want to _undo_ a previous command:
+
+* **You edited the wrong details of a task by mistake** <br>
+
+  > It is too much of a hassle for you to manually correct your error by editing the task again.
+
+Format: **`undo`** <br>
+
+<img src="images/UiUndoCommand.png" width="600"><br>
+_Figure 3.9.1. Undo Command_
+
+For advanced users: **`u`** <br>
+
+### 3.10. Navigate the calendar:
+
+Replaces navigation buttons on the calendar with user commands. <br>
+
+<img src="images/UiCalendar.png" width="600"><br>
+_Figure 3.10.1. Calendar_
+
+* _< button_ : **`prev`** <br>
+* _> button_ : **`next`** <br>
+* _day button_: **`show day`** <br>
+* _week button_: **`show week`** <br>
+* _month button_: **`show month`** <br>
+
+For advanced users: **`p`**, **`n`**, **`s`** `<view>` <br>
+
+### 3.11. Get help : `help`
+
+Shows a list of all commands I can execute and their usage instructions. <br>
+
+Format: **`help`** <br>
+This command will help to direct you back to this user guide.
+
+Format: **`help`** `<command>` <br>
+This command will instruct me to provide you specific information on how to use `<command>`.
+
+<img src="images/UiHelpCommand.png" width="600"><br>
+_Figure 3.12.1. Help Command_
+
+For advanced users: **`h`** `<command>` <br>
+
+### 3.12. Change data file location
+
+Modifies the file path of my data file. <br>
+Future modifications of my task list will be saved at this new location. <br>
+
+A reason why you might want to _change my data file location_:
+
+* **You want to [sync](#sync) my task list and access it from other devices** <br>
+
+  > You can choose to store my data file in a local folder controlled by a cloud
+  syncing device (e.g. Dropbox) so that you can access my data from multiple computers.
+
+Format: **`save`** `<new_save_location_directory>` <br>
+This command directs me to set my new data file in a `<new_save_location_directory>`,
+then save all my data in that file.
+
+<img src="images/UiSaveCommand.png" width="600"><br>
+_Figure 3.13.1. Save Command_
+
+### 3.13. Load data file from location
+
+Loads the specified data file. <br>
+
+Here is a reason why you might want to _load a data file_:
+
+* **Your current data file is corrupted** <br>
+
+  > Luckily, you've made a backup copy previously. Now you'll need me to load from that backup copy instead. <br>
+
+Format: **`load`** `<file_path>` <br>
+This command loads the data from the specified file in the `<file_path>`.
+
+<img src="images/UiLoadCommand.png" width="600"><br>
+_Figure 3.14.1. Load Command_
+
+### 3.14. Hotkey toggling
+
+Toggles my window into / out of view using a hotkey. <br>
+
+Here is a reason why you might want to _toggle my window_:
+
+* **You are reading your email and want to quickly add a new task lest you forget** <br>
+
+  > Instead of moving the mouse to the small icon on the taskbar, simple press the hotkey.  <br>
+
+Hotkey: **`CTRL + ALT + D`** <br>
+
+### 3.15. System tray notification
+
+Automatically triggers a system tray notification should you have a task starting or due in 2 hours time. <br>
+
+Here is a reason why you might need a  _system tray notification_:
+
+* **While focusing on your current task on hand, you have forgotten that a meeting is scheduled to begin in 2 hours time** <br>
+
+  > Luckily, I will trigger the system tray notification and inform you of the meeting so that you won't be late for it! <br>
+
+### 3.16. Exit the program : `exit`
+
+Saves all data and exits the program. <br>
+Time for you to actually perform your tasks!
+
+Format: **`exit`** <br>
+
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+Here is a cheat sheet of what I can do. <br>
+Your wish is my command!
 
-* **Clear** : `clear`
+| **Command** | **Usage**                                                     | **Example**                                         |
+|:-----------:|:-------------------------------------------------------------:|:---------------------------------------------------:|
+|Add          |**`add`** `<task_name> by <due date and time>`                 |**`add`** `project proposal by 13 apr 2pm`           |
+|List         |**`list`** `<optional filter>`                                 |**`list`** `uncompleted`                             |
+|Find         |**`find`** `<keyword>`                                         |**`find`** `project`                                  |
+|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1 change name to buy white bread`      |
+|Delete       |**`delete`** `<task_index>`                                    |**`delete`** `1`                                     |
+|Select       |**`select`** `<task_index>`                                    |**`select`** `2`                                     |
+|Complete     |**`complete`** `<task_index>`                                  |**`complete`** `1`                                   |
+|Undo         |**`undo`**                                                     |                                                     |
+|Prev         |**`prev`**                                                     |                                                     |
+|Next         |**`next`**                                                     |                                                     |
+|View         |**`view`**                                                     |**`view`** `day`                                     |
+|Help         |**`help`**                                                     |**`help`** `find`                                    |
+|Save         |**`save`** `<directory>`                                       |**`save`** `C:\Users\Jim\Desktop`                    |
+|Load         |**`load`** `<file_path>`                                       |**`load`** `C:\Users\Jim\Desktop\taskmanager.xml`    |
+|Exit         |**`exit`**                                                     |                                                     |
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+## 5. FAQ (Frequently Asked Questions)
 
-* **List** : `list` <br>
-  e.g.
+Here are some questions that you might want to ask me:
 
-* **Help** : `help` <br>
-  e.g.
+**Q**: How do I _transfer my data_ to another computer? <br>
+**A**: Install me in the other computer and _overwrite the empty data file_ I create with
+       the file that contains the data of your previous Task Manager folder. Alternatively,
+       you can type in **`load`** `<file_path>`, to load your data file.
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+**Q**: How do I add an _event_? <br>
+**A**: Type in **`add`** `<task> from <start date and time> to <end date and time>` as mentioned
+[here](#32-add-a-task--add).
 
+**Q**: How do I retrieve my _previous commands_? <br>
+**A**: Use the arrow keys <kbd>Up</kbd> and <kbd>Down</kbd> to get your previous commands.
 
+**Q**: Is there any way I can _type my commands faster_? <br>
+**A**: Yes, I _autocomplete_ all commands. Every command can also be replaced with the first letter of
+its name. For example, you can replace "add" with just "a".
+
+**Q**: How do I get reminded of the tasks I have to do? <br>
+**A**: I will automatically trigger a system tray notification whenever one of your tasks is starting or due in 2 hours, as mentioned [here](#315-system-tray-notification).

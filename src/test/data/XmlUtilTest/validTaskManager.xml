@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>jj</name>
+        <startDateTime>04/08/2017 19:00:00</startDateTime>
+        <endDateTime>04/08/2017 19:00:00</endDateTime>
+        <isActive>true</isActive>
+        <isTimed>true</isTimed>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+            <recurringStatus>false</recurringStatus>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>kk</name>
+        <startDateTime>04/09/2017 00:00:00</startDateTime>
+        <endDateTime>04/09/2017 00:00:00</endDateTime>
+        <isActive>true</isActive>
+        <isTimed>true</isTimed>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+            <recurringStatus>false</recurringStatus>
+        </recurState>
+    </tasks>
+    <tasks>
+        <name>jjj</name>
+        <startDateTime>04/08/2017 19:00:00</startDateTime>
+        <endDateTime>04/09/2017 19:00:00</endDateTime>
+        <isActive>true</isActive>
+        <isTimed>true</isTimed>
+        <recurState>
+            <recurDisplayDate></recurDisplayDate>
+            <recurInterval>NONE</recurInterval>
+            <recurringStatus>false</recurringStatus>
+        </recurState>
+    </tasks>
+</taskmanager>
