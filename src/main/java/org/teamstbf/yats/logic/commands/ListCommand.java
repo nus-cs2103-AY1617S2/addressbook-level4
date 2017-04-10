@@ -15,6 +15,11 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD_SUFFIX_DONE = "done";
     public static final String COMMAND_WORD_SUFFIX_TAG = "tag";;
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all undone tasks. However, "
+            + "should you want to search for specific attributes, please use: " + COMMAND_WORD + " "
+            + COMMAND_WORD_EXTENTION + "start / end / deadline/ location / tag followed by"
+            + " the string that you want to search for.";
+
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
     @Override
