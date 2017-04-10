@@ -270,7 +270,7 @@ Examples:
 Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
-> Supported commands to undo: `add` `clear` `delete` `edit` <br>
+> Supported commands to undo: `add` `clear` `delete` `edit` `undo` `redo` <br>
 > Undoing 'delete' will replace the deleted task at the bottom of the list <br>
 
 ### 2.10. Redoing previous step : `redo`
@@ -278,7 +278,7 @@ Format: `undo`
 Redo the previous command and restore the data to one step before. <br>
 Fromat: `redo`
 
-> Supported commands to redo: `add` `clear` `delete` `edit` <br>
+> Supported commands to redo: `add` `clear` `delete` `edit` `undo` `redo` <br>
 > Redoing an add undo will add back the task to the bottom of the list <br>
 
 ### 2.11. Clearing all entries : `clear`
