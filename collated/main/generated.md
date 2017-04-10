@@ -1,5 +1,5 @@
 # generated
-###### /java/seedu/taskit/logic/LogicManager.java
+###### \java\seedu\taskit\logic\LogicManager.java
 ``` java
 
     @Override
@@ -8,7 +8,7 @@
     }
 }
 ```
-###### /java/seedu/taskit/logic/parser/ParserUtil.java
+###### \java\seedu\taskit\logic\parser\ParserUtil.java
 ``` java
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
@@ -24,7 +24,7 @@
 
 }
 ```
-###### /java/seedu/taskit/model/ModelManager.java
+###### \java\seedu\taskit\model\ModelManager.java
 ``` java
 
     /**
@@ -74,7 +74,7 @@
     }
 
 ```
-###### /java/seedu/taskit/model/ModelManager.java
+###### \java\seedu\taskit\model\ModelManager.java
 ``` java
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -109,7 +109,7 @@
     }
 
 ```
-###### /java/seedu/taskit/model/task/UniqueTaskList.java
+###### \java\seedu\taskit\model\task\UniqueTaskList.java
 ``` java
 
     /**
@@ -136,7 +136,7 @@
     }
 
 ```
-###### /java/seedu/taskit/ui/MainWindow.java
+###### \java\seedu\taskit\ui\MainWindow.java
 ``` java
 
     private AnchorPane getCommandBoxPlaceholder() {

@@ -1,5 +1,5 @@
 # generated
-###### /java/seedu/taskit/logic/LogicManagerTest.java
+###### \java\seedu\taskit\logic\LogicManagerTest.java
 ``` java
 
     @Test

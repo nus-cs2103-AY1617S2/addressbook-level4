@@ -1,5 +1,5 @@
 # A0141011J-unused
-###### /java/seedu/taskit/logic/LogicManager.java
+###### \java\seedu\taskit\logic\LogicManager.java
 ``` java
     @Override
     public CommandResult execute(String commandText) throws CommandException {
