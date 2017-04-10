@@ -110,12 +110,12 @@ More information about using Gradle can be found [here](https://github.com/CS210
 ### 1.5. Troubleshooting project setup
 
 #### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
-    This is because Eclipse failed to recognize the new files that are pulled from Git.
-<br>1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
+> This is because Eclipse failed to recognize the new files that are pulled from Git.<br>
+1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
 
 #### 1.5.2.  Eclipse reports missing libraries.
-    Eclipse has failed to retrieve all required dependencies during the project import.
-<br>1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
+> Eclipse has failed to retrieve all required dependencies during the project import.<br>
+1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
 
 ## 2. Design
 
