@@ -19,7 +19,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 
 1. Download the latest `TaskIt.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
-3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [User Interface](#2-user-interface) for a more detailed explanations of various UI components. 
+3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [User Interface](#2-user-interface) section for a more detailed explanations of various UI components. 
    > <img src="images/Ui_demo.gif" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
@@ -76,11 +76,15 @@ Format: `help`
 Add a new task to TaskIt<br>
 Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]`
 
+> * Title can add at the back using quote.<br>
+
 Examples:
 
 * `add finish hw tag study tag school by April 5th`
 * `add Interview tag work priority high`
 * `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
+* `add tag school tag assignment by 11pm "CS2103 revision"`
+
 
 
 > Tasks can have any number of tags (including 0)
@@ -90,6 +94,8 @@ Examples:
 
 Listing all relevant tasks based on given parameters<br>
 Format: `list <all|undone|done|today|overdue|floating|event|deadline|high|medium|low>`
+
+> * All parameters are case insensitive.<br>
 
 List all the existing tasks in TaskIt.<br>
 Format: `list all`
@@ -115,6 +121,7 @@ Format: `e/edit <INDEX>  <[title]|[from]|[to]|[priority]|[tag]> <NEW>`
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * Existing values will be updated to the input values.
+> * When new title contains keywords such as from, to, please quote the new value to avoid error.
 > * Can remove start or end dates by typing `null` or `none`
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `null`.
@@ -130,17 +137,21 @@ Examples:
 * `e/edit 2 title attend meeting from Apr 7 at 2pm to 4pm priority high`<br>
   Edit the second task title to attend meeting, start time to Apr 7th 2pm, end time to 4pm and prioirty to high.
 
+* `e/edit 5 title "today top priority is to do homework"`<br>
+  Edit the fifth task title to today top priority is to do homework.
+  
 * `e/edit 1 tag null`<br>
   Remove all the tags of first task.
 
-### 3.5. Marks a task as done or undone: `mark` `m`
+### 3.5. Marks a task as done or undone: `mark` 
 
 Mark an existing task as done or undone based on a given valid index.<br>
 Format: `m/mark <INDEX> <undone|done>`
 
-> Marks the task at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * The undone|done parameters are case insensitive.<br>
+> * Marks the task at the specified `INDEX`.<br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -176,9 +187,9 @@ Examples:
 Deletes the specified task from the TaskIt.
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -194,9 +205,9 @@ Examples:
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
 
-> Selects the task at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Selects the task at the specified `INDEX`.<br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -259,6 +270,7 @@ Format: `exit`
 * **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]` <br>
   e.g. `add Lunch with Bob tag friend priority low tag leisure`
   e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
+  e.g. `add tag school tag assignment by 11pm "CS2103 revision"`
 
 * **Clear** : `clear`
 
@@ -272,6 +284,7 @@ Format: `exit`
   e.g. `edit 2 end null`
   e.g. `edit 1 tag School`
   e.g. `edit 1 tag null`
+  e.g. `edit 1 title "today"`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`

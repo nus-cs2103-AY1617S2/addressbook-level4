@@ -169,6 +169,7 @@ The `UI` component,
 * Other Events such as clicking the menubar trigger the listener to select a menubar item, filtering the tasklists accordingly.
 * Filtering - Logic creates a filtered list of ReadOnlyTasks, which is used by TaskListPanel to create TaskCards that populate the panel.
 
+<!-- @@author  -->
 
 ### 2.3. Logic component
 

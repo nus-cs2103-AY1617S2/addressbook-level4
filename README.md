@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T15-B4/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T15-B4/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a71bb34f16148cfbae7c43bf8067b78)](https://www.codacy.com/app/fanyiii/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T15-B4/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/Ui_demo.gif" width="600"><br>
+<img src="docs/images/Ui.jpeg" width="600"><br>
 
 * TaskIt is a useful and effective task manager app developed by us with the hope to help students and 
   working adults to better manage their hectic schedule.
