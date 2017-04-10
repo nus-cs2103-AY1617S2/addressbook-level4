@@ -45,8 +45,7 @@ Year 2 Computer Science Major<br>
 * Components in charge of: Model, Storage
 * Features implemented:
   * Save Command
-  * Undo Command
-  * Redo Command
+  * Undo and Redo Command
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B3/main/blob/master/collated/main/A0148052L.md)]
 * Other Major Contributions:
   * Wrote Developer Guide
