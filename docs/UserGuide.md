@@ -47,13 +47,17 @@ TypeTask is especially good for you if you want to: <br>
 
 2. Download the latest version of TypeTask (click on `TypeTask.jar` under the [releases](../../../releases) tab).
 
+<img src="images/releasesExample.png" width="400">
+
+<h5 align="left">Fig 1. Locating typetask.jar in the Releases Tab</h5>
+
 3. Copy the file to the folder you want to use as the home folder for your Task Manager.
 
 4. Double-click the file to start the app. The application should appear on your screen in a few seconds.
 
-<img src="images/ss.PNG" width="600">
+<img src="images/TypeTaskUi.png" width="800">
 
-Fig 1. TypeTask’s User Interface <br>
+<h5 align="left">Fig 2. TypeTask’s User Interface </h5>
 
 5. TypeTask automatically assigns your tasks certain colours to help you differentiate them easily. <br>
    `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
