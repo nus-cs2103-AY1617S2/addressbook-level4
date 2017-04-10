@@ -32,15 +32,12 @@ public class TypicalTestTasks {
                     .withStartDateTime("01-04-17 1630").withDescription("little tokyo").build();
             song = new TaskBuilder().withTitle("Compose Songs").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withDescription("4th street").build();
-
-            // Manually added
             meeting = new TaskBuilder().withTitle("Group Meeting").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withDescription("little india").build();
             spend = new TaskBuilder().withTitle("Spend 30 Days").withEndDateTime("01-05-17 1630")
                     .withStartDateTime("01-04-17 1630").withDescription("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
-            assert false : "not possible";
         }
     }
 

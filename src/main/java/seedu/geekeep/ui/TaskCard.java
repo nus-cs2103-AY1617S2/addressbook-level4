@@ -1,4 +1,3 @@
-//@@author A0148037E
 package seedu.geekeep.ui;
 
 import com.jfoenix.controls.JFXCheckBox;
