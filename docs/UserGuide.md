@@ -51,7 +51,6 @@ TypeTask is especially good for you if you want to: <br>
 2. Download the latest version of TypeTask (click on `TypeTask.jar` under the [releases](../../../releases) tab).
 
 <img src="images/releasesExample0.5.png" width="600">
-
 <h5 align="left">Fig 1. Locating typetask.jar in the Releases Tab</h5>
 
 3. Copy the file to the folder you want to use as the home folder for your Task Manager.
@@ -60,7 +59,6 @@ TypeTask is especially good for you if you want to: <br>
 
 ### 2.2. Visual Introduction
 <img src="images/TypeTaskUiDescription.png" width="1000">
-
 <h5 align="left">Fig 2. TypeTask’s User Interface </h5>
 
 1. **Command Box**<br>
@@ -487,3 +485,4 @@ Format:<br>
 ## 5. Command Summary
 
 <img src="images/commandShortcut.png" width="800">
+<h5 align="left">Fig 3. TypeTask's Command Summary </h5>
