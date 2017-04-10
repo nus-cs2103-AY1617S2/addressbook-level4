@@ -11,9 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import onlythree.imanager.commons.core.Messages;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
-import onlythree.imanager.logic.commands.AddCommand;
 import onlythree.imanager.logic.commands.Command;
 import onlythree.imanager.logic.commands.exceptions.CommandException;
 import onlythree.imanager.model.ModelManager;
@@ -81,12 +79,16 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_withDeadlineAndStartEndDateTime_expectsException()
+    public void parse_withDeadlineAndStartEndDateTime_expectsCorrectTask()
             throws PastDateTimeException, IllegalValueException, CommandException, InvalidDurationException {
-        exception.expect(CommandException.class);
-        exception.expectMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        Name name = new Name("by tmr");
+        StartEndDateTime startEndDateTime =
+                new StartEndDateTime(ZonedDateTime.now().plusDays(3), ZonedDateTime.now().plusDays(7));
+        Task expectedTask = new Task(name, Optional.empty(), Optional.of(startEndDateTime), new UniqueTagList());
 
         parseAndExecute(" by tmr from 3 days after to 7 days after");
+
+        assertEqualsTaskIgnoreStartEndDateTimeSeconds(expectedTask, actualTask);
     }
 
     private void parseAndExecute(String args) throws CommandException {

@@ -137,7 +137,6 @@ public class DateTimeUtil {
 
         final boolean hasOnlyTimeSpecified = dateGroup.isDateInferred();
         if (hasOnlyTimeSpecified) {
-            // TODO do timezones properly
             // note Natty does not support some timezones so we use offset but this means timezone info
             // such as daylight saving time adjustments may be lost
             // milliseconds are also also ignored as Natty does not parse them

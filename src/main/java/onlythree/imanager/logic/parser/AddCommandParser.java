@@ -31,7 +31,6 @@ public class AddCommandParser {
             return new IncorrectCommand(e.getMessage());
         }
 
-        // TODO ArgumentTokenizer became very irrelevant in this class but is it still relevant for other classes?
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
         argsTokenizer.tokenize(dateTimeExtractor.getProcessedArgs());
         try {

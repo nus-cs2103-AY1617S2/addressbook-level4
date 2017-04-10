@@ -72,7 +72,6 @@ public class TestUtil {
     //@@author A0140023E
     private static Task[] getSampleTaskData() {
         try {
-            // TODO maybe they should not be empty optionals
             return new Task[]{
                 new Task(new Name("Allocate Work"), Optional.empty(), Optional.empty(), new UniqueTagList()),
                 new Task(new Name("Buy Groceries"), Optional.empty(), Optional.empty(), new UniqueTagList()),
@@ -330,7 +329,7 @@ public class TestUtil {
     }
 
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
-        return card.isSameTask(task); // TODO UI stuff
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

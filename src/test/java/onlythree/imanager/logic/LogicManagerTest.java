@@ -187,7 +187,6 @@ public class LogicManagerTest {
     }
 
     //@@author A0140023E
-    // TODO maybe to take out these tests and put elsewhere
     @Test
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add invalid name with slash/ from tmr to 2 days after",
@@ -368,7 +367,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()), // TODO
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -431,7 +430,6 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
         //@@author A0140023E
-        // TODO should this be done in another way?
         // Starting Test Date Time is set to one day after today so that dates in the past is not
         // generated to prevent a PastDateTimeException from occuring. Furthermore the precision
         // is truncated to seconds as Natty does not parse milliseconds
@@ -555,7 +553,7 @@ public class LogicManagerTest {
          * Generates a list of Tasks based on the flags.
          */
         private List<Task> generateTasks(int numGenerated) throws Exception {
-            List<Task> tasks = new ArrayList<>(); // TODO TaskList not a good name for AddressBook replacement
+            List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTaskWithStartEndDateTime(i));
             }

@@ -112,7 +112,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
         assert editedTask != null;
 
-        // TODO originally addressBookIndex, probably should have been personIndex
         int taskIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
 
         taskList.updateTask(taskIndex, editedTask);

@@ -111,7 +111,6 @@ public class EditCommandTest extends TaskListGuiTest {
     //@@author A0140023E
     @Test
     public void edit_invalidValues_failure() {
-        // TODO constraints for date-time fields are also checked in other tests as they are constrained differently
         commandBox.runCommand("edit 1 //comments");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
@@ -135,7 +134,7 @@ public class EditCommandTest extends TaskListGuiTest {
     /**
      * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredTaskListIndex index of task to edit in filtered list // TODO note again due to bad naming
+     * @param filteredTaskListIndex index of task to edit in filtered list
      * @param taskListIndex index of task to edit in the task list.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command

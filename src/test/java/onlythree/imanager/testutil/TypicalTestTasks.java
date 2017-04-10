@@ -14,9 +14,9 @@ import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 public class TypicalTestTasks {
 
     //@@author A0140023E
-    // TODO naming of tasks as names does not seem to be a good idea, and not descriptive enough
-    // for example helpMe and iAmCode are to be manually added in test cases but it is not clear
-    // conversely the name shows what the task contains, so it can be helpful
+    // Naming of tasks as names does not seem to be a good idea, and not descriptive enough
+    // for example helpMe and iAmCode are to be manually added in test cases but it is not clear.
+    // Conversely the name shows what the task contains, so it might be helpful
     public TestTask amuseFriend, bet, count, dog, elephant, flipTable, goondu, helpMe, iAmCode;
 
     public TypicalTestTasks() {
@@ -46,7 +46,6 @@ public class TypicalTestTasks {
             goondu = new TaskBuilder().withName("Goondu goon").build();
 
             // Manually added
-            // TODO maybe to use non-floating tasks here
             helpMe = new TaskBuilder().withName("Help me").build();
             iAmCode = new TaskBuilder().withName("I am code").build();
         } catch (PastDateTimeException e) {

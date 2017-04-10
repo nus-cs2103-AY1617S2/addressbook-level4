@@ -28,7 +28,6 @@ public class EditCommandParser {
     public Command parse(String args) {
         DateTimeExtractor dateTimeExtractor = extractDateTimes(args);
 
-        // TODO ArgumentTokenizer became very irrelevant in this class but is it still relevant for other classes?
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_TAG);
         argsTokenizer.tokenize(dateTimeExtractor.getProcessedArgs());

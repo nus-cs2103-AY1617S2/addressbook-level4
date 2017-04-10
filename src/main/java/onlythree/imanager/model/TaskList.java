@@ -160,7 +160,7 @@ public class TaskList implements ReadOnlyTaskList {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        return new UnmodifiableObservableList<>(tasks.asObservableList()); // TODO TaskList not a good name
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override

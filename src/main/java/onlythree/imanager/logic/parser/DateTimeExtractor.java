@@ -16,9 +16,14 @@ import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
 //@@author A0140023E
 /**
- * Specialized class that can extract Deadline and StartEndDateTime from a command's arguments.
+ * Specialized class that can extract Deadline and StartEndDateTime from a command's arguments. Only
+ * a single date-time field can be extracted, which means once a Deadline or StartEndDateTime has
+ * been extracted, further attempts on extraction would fail.
  */
 public class DateTimeExtractor {
+
+    private static final String SINGLE_DATE_TIME_PROCESSED =
+            "A single date-time field has already been processed. Processing is skipped";
 
     private static final String MESSAGE_ALREADY_PROCESSED =
             "Processing stopped to prevent overriding of %1$s. %1$s is already processed.";
@@ -83,9 +88,6 @@ public class DateTimeExtractor {
 
     // match a white space character and a tag with zero or more times
     private static final String ARG_ALL_TAGS_REGEX = "(?<tagArguments>(\\st/[^/]+)*)";
-    // TODO consider changing the following format
-    // match a white space character with zero or one tag;
-    // "(?<tagArguments>(\\stags\\s[^/]+)?)");
 
     /**
      * Pattern that checks if a string contains a start and end date-time.
@@ -216,8 +218,15 @@ public class DateTimeExtractor {
         return isProcessed(argValue) && argValue.isPresent();
     }
 
+    /**
+     * Checks if any of the date-time field is processed. Raw date-time fields are not checked.
+     */
+    private boolean hasDateTimeFieldProcessed() {
+        return isProcessedAndPresent(deadline) || isProcessedAndPresent(startEndDateTime);
+    }
+
     public void processDeadline() throws PastDateTimeException {
-        if (isProcessedAndPresent(rawDeadline)) {
+        if (isProcessedAndPresent(deadline)) {
             logger.warning(String.format(MESSAGE_ALREADY_PROCESSED, "deadline"));
             return;
         }
@@ -236,13 +245,17 @@ public class DateTimeExtractor {
             // i.e. once in processRawDeadline and once in processDeadline
             deadline = Optional.of(new Deadline(DateTimeUtil.parseDateTimeString(rawDeadline.get())));
         } catch (IllegalValueException e) {
-            // TODO copy to other functions
             logger.severe("processDeadline() failed with invalid date when processRawDeadline"
                     + "should have ensured a valid date is provided if the raw are present.");
         }
     }
 
     public void processRawDeadline() {
+        if (hasDateTimeFieldProcessed()) {
+            logger.info(SINGLE_DATE_TIME_PROCESSED);
+            return;
+        }
+
         if (isProcessedAndPresent(rawDeadline)) {
             logger.warning(String.format(MESSAGE_ALREADY_PROCESSED, "rawDeadline"));
             return;
@@ -285,10 +298,6 @@ public class DateTimeExtractor {
         processRawStartEndDateTime();
 
         if (!isProcessedAndPresent(rawStartDateTime) || !isProcessedAndPresent(rawEndDateTime)) {
-            // TODO
-            // This means that information between from and to are not dates. Thus we stop here
-            // as no StartEndDateTime is found.
-            // e.g. add Travel from Singapore to Malaysia
             return;
         }
 
@@ -306,6 +315,11 @@ public class DateTimeExtractor {
     }
 
     public void processRawStartEndDateTime() {
+        if (hasDateTimeFieldProcessed()) {
+            logger.info(SINGLE_DATE_TIME_PROCESSED);
+            return;
+        }
+
         if (isProcessedAndPresent(rawStartDateTime) || isProcessedAndPresent(rawEndDateTime)) {
             logger.warning(String.format(MESSAGE_ALREADY_PROCESSED_MULTI, "rawStartDateTime", "rawEndDateTime"));
             return;
@@ -346,6 +360,11 @@ public class DateTimeExtractor {
     }
 
     public void processRawStartDateTime() {
+        if (hasDateTimeFieldProcessed()) {
+            logger.info(SINGLE_DATE_TIME_PROCESSED);
+            return;
+        }
+
         if (isProcessedAndPresent(rawStartDateTime)) {
             logger.warning(String.format(MESSAGE_ALREADY_PROCESSED, "rawStartDateTime"));
             return;
@@ -380,6 +399,11 @@ public class DateTimeExtractor {
     }
 
     public void processRawEndDateTime() {
+        if (hasDateTimeFieldProcessed()) {
+            logger.info(SINGLE_DATE_TIME_PROCESSED);
+            return;
+        }
+
         if (isProcessedAndPresent(rawEndDateTime)) {
             logger.warning(String.format(MESSAGE_ALREADY_PROCESSED, "rawEndDateTime"));
             return;

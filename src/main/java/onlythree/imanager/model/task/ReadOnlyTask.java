@@ -14,19 +14,16 @@ public abstract class ReadOnlyTask {
     /**
      * Gets the name of the task.
      */
-    // TODO implementations must ensure this gets a deep copy or Name have no setter so it is not mutable.
     public abstract Name getName();
 
     /**
      * Gets the {@link Optional} deadline of the task.
      */
-    // TODO implementations must ensure this gets a deep copy or Deadline have no setter so it is not mutable.
     public abstract Optional<Deadline> getDeadline();
 
     /**
      * Gets the {@link Optional} start and end date time of the task.
      */
-    // TODO implementations must ensure this gets a deep copy or StartEndDateTime have no setter so it is not mutable.
     public abstract Optional<StartEndDateTime> getStartEndDateTime();
 
     /**
@@ -83,7 +80,6 @@ public abstract class ReadOnlyTask {
 
     private void buildNameString(final StringBuilder builder) {
         builder.append(getName());
-        // TODO to remove all the line separators and rebuild toString(), create a getCLIOutput instead
         builder.append(System.lineSeparator());
     }
 
