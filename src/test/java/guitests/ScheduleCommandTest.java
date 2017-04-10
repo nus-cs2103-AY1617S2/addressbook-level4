@@ -44,28 +44,32 @@ public class ScheduleCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("scheduled you");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
-
+    
+    /* 
+     * This test checks that schedule is able to add tasls into the list
+     */
     private void assertScheduleSuccess(TestEvent eventToAdd, TestEvent... currentList) {
         commandBox.runCommand(eventToAdd.getScheduleCommand());
 
         // confirm the new card contains the right data
         EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().fullName);
         assertMatching(eventToAdd, addedCard);
-        // confirm the list now contains all previous persons plus the new
-        // person
+        // confirm the list now contains all previous tasks plus the new
+        // task
         TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
         assertTrue(taskListPanel.isListMatchingWithoutOrder(expectedList));
     }
 
+    /* 
+     * This test checks that the timing scheduled by the scheduling command is correct
+     */
     private void assertScheduleTimingSuccess(TestEvent eventToAdd, TestEvent... currentList) {
         commandBox.runCommand(eventToAdd.getScheduleCommand());
-        eventToAdd.setHours("");
-        eventToAdd.setMinutes("");
         // confirm the new card contains the right data
         EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().toString());
         assertMatching(eventToAdd, addedCard);
-        // confirm the list now contains all previous persons plus the new
-        // person
+        // confirm the list now contains all previous tasks plus the new
+        // task with the correct timing
         TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
         assertTrue(taskListPanel.isListMatchingWithoutOrder(expectedList));
     }
