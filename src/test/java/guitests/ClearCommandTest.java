@@ -4,18 +4,23 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+import edu.emory.mathcs.backport.java.util.Arrays;
+import seedu.taskit.testutil.TestTask;
 
+public class ClearCommandTest extends TaskManagerGuiTest {
+    //@@author A0141011J
     @Test
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
+        TestTask[] expectedTasks = td.getTypicalTasks();
+        Arrays.sort(expectedTasks);
+        assertTrue(taskListPanel.isListMatching(expectedTasks));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.lunch.getAddCommand());
+        assertTrue(taskListPanel.isListMatching(td.lunch));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
@@ -26,6 +31,6 @@ public class ClearCommandTest extends AddressBookGuiTest {
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertResultMessage("Tasks have been cleared!");
     }
 }

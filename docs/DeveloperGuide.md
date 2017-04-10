@@ -1,14 +1,12 @@
-# AddressBook Level 4 - Developer Guide
-
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+# TaskIt - Developer Guide
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -51,7 +49,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. TaskIt
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -120,15 +118,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskItChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -139,19 +137,19 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Peng Chong
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/taskit/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,`MenuBarPanel`,
+`MenuCard`,`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/taskit/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -160,59 +158,96 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+
+`UI` design
+
+* Priority - Prority will be highlighted in circle with letter L for low, M for medium and H for High.
+* The circle will also be coloured in red, orange and green to differentiate low, medium and high priority respectively.
+* Status of task will be marked using different colour bar in task list:
+* white for incompleted task, green for completed task and red for overdued task.
+* Events - Events such as clicking trigger the listener to select a TaskCard, highlighting the background to show selection.
+* Other Events such as clicking the menubar trigger the listener to select a menubar item, filtering the tasklists accordingly.
+* Filtering - Logic creates a filtered list of ReadOnlyTasks, which is used by TaskListPanel to create TaskCards that populate the panel.
+
+<!-- @@author  -->
+
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Amro Shohoud
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/taskit/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+<!-- @@author A0141011J -->
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Zhou Fanyi
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/taskit/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnly>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+#### Task
+<img src="images/Task.png" width="800"><br>
+
+**API** : [`Task.java`](../src/main/java/seedu/taskit/model/Task/Task.java)
+
+A `Task` must have a title and isDone status, but may not have a `start`, `end`, `priority` or `tag`. To represent a `Task` without a `start`, `end`, the fields are set to null by default.
+
+A `Task` is defined as one of the following:
+* floating task: a `task` which do not have `start` and `end`
+* deadline task: a `task` whose `end` is valid, and whose `start` is null
+* event task: a `task` whose `start` and `end` are both valid
+
+#### Model State
+**API** : [`Model.java`](../src/main/java/seedu/taskit/model/ModelManager.java)
+
+A state consists of a `ReadOnlyTaskManager`, as well as the predicate of the current filtered task list. Every time a mutating command (as specified by the `isUndoable()`) is called, the data of the previous model is stored in a ModelState as a stack.
+
+Model then exposes indirect access to these states through the `undo` and `redo` API.
+Upon executing `undo`, the most recent previous state will be restored by popping out a state from the stack keeping track of previous states. At the same time, the current state is stored in another stack keeping track of 'future states' for reverting back to the current state.
+Similarly, upon executing `redo`, the the most recent state before undone will be restored by popping out a state from the stack keeping track of 'future states'.
+
+<!-- @@author  -->
+
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Foo Chuan Wen
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/taskit/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## 3. Implementation
 
@@ -332,7 +367,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -341,55 +376,290 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ## Appendix A : User Stories
 
+Author: Amro Shohoud
+
+
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new floating task | save tasks without specified deadlines
+`* * *` | user | add a new deadline task | know when some tasks need to be completed by
+`* * *` | user | add a new event | know when my events are
+`* * *` | user | mark a task as done or undone | know what tasks still need to be completed
+`* * *` | user | delete an existing task | get rid of tasks that no longer matter to me
+`* * *` | user | search tasks based on keywords in title or tag | find all similar tasks
+`* * *` | user | search tasks based on date | find all tasks near a certain time
+`* * *` | user | modify an existing task's title | change the name of the task
+`* * *` | user | modify an existing task's start and end date | keep up with changing deadlines
+`* * *` | user | undo an action | undo any mistakes I make
+`* * *` | user | view all tasks | see all the tasks I've ever added
+`* * *` | user | view all undone or done tasks | see what tasks I still need to work on
+`* * *` | user | view all tasks due today | see what tasks I will need to finish by today
+`* * *` | user | view all overdue tasks | see what tasks I can delete
+`* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
+`* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
+`* *` | user | view all floating tasks | see which tasks do not have a deadline
+`* *` | user | view all events | see what my events are
+`* *` | user | sort tasks by date | see which tasks will be coming up soon
+`* *` | user | Assign priority to each task | rank my tasks depending on what has to get done first
+`* *` | user | list tasks by priority | see which tasks will need my attention the most
+`*` | user | See today’s most important task when opening the app | so that I immediately know what I need to work on
+`*` | user | Link one task to another  | so that I can see when tasks are connected to each other
+`*` | user | view tasks with the same day as a deadline  | so that I can see tasks that are all due on the same day
+`*` | user | view tasks with the same week as a deadline  | so that I can see tasks that are all due in the same week
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+Author: Amro Shohoud
 
-#### Use case: Delete person
+(For all use cases below, the **System** is the `TaskIt` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use case 1: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add a task
+2. TaskIt adds the task <br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. The given format is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
 
-> Use case ends
+1b. The end date or time of an event is before the start date or time
+> 1b1. TaskIt notifies the user of this error
+> Use case resumes at step 1 <br>
+Use case ends.
 
-3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+#### Use case 2: Search for an existing task based on keywords, tags and dates
 
-{More to be added}
+**MSS**
+
+1. User requests to search for tasks based on given keywords, tags and dates
+2. TaskIt searches for the tasks and returns all the matched tasks to the user <br>
+Use case ends.
+
+**Extensions**
+
+1a. The given command is invalid
+> 2a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends
+
+1b. User gives empty keywords
+> 2b1. TaskIt requests user to input keywords
+> Use case resumes at step 1 <br>
+Use case ends
+
+1c. No matched tasks found
+> TaskIt returns a message letting the user know there were no matches <br>
+Use case ends.
+
+#### Use case 3: Delete a task
+
+**MSS**
+
+1. User requests to delete a specific task based on keywords
+2. TaskIt deletes the task <br>
+Use case ends.
+
+**Extensions**
+
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+1b. User did not specify a valid task
+> 1b1. TaskIt notifies the user and lists all tasks and indices (UC7)
+> 1b2. User specifies task to delete based on index <br>
+Use case ends.
+
+1c. Multiple tasks are found based on the keywords
+> 1c1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 1c2. User specifies task to delete based on index <br>
+Use case ends.
+
+#### Use case 4: Modify an existing task
+
+**MSS**
+
+1. User searches a task
+2. TaskIt returns the requested list of tasks (UC2)
+3. User specifies the task to modify and the new task details (name, dates etc.)
+4. TaskIt changes the task specifications and notifies user <br>
+Use case ends.
+
+**Extensions**
+
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+2a. No tasks were found
+> 2a1. TaskIt notifies the user and lists all tasks and indices (UC7)
+> 2a2. User specifies task to modify based on index <br>
+Use case ends.
+
+2b. Multiple tasks are found based on the keywords
+> 2b1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 2b2. User specifies task to modify based on index <br>
+Use case ends.
+
+#### Use case 5: Undo an action
+
+**MSS**
+
+1. User requests to undo last action
+2. TaskIt asks for confirmation
+3. User confirms
+4. TaskIt undoes last action <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+2a. No previous action found
+> 2a1. TaskIt notifies the user <br>
+Use case ends.
+
+1b. Multiple tasks are found based on the keywords
+> 1b1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 1b2. User specifies task to delete based on index <br>
+Use case ends.
+
+#### Use case 6: Mark a task as done or undone
+
+**MSS**
+
+1. User requests to mark a specific task based on keywords
+2. TaskIt marks the task <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+1b. User did not specify a valid task
+> 1b1. TaskIt notifies the user and lists all tasks and indices (UC7)
+> 1b2. User specifies task to mark based on index <br>
+Use case ends.
+
+1c. Multiple tasks are found based on the keywords
+> 1c1. TaskIt notifies the user and lists all tasks and indices that were found (UC2)
+> 1c2. User specifies task to mark based on index <br>
+Use case ends.
+
+Author: Peng Chong
+#### Use case 7: View all tasks
+
+**MSS**
+
+1. User requests to view all tasks
+2. TaskIt lists all tasks <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+1b. User requests to view all tasks with keywords & tags
+> 1b1. TaskIt lists all aforementioned tasks <br>
+Use case ends
+
+#### Use case 8: View all undone or done tasks
+
+**MSS**
+
+1. User requests to view all undone or done tasks
+2. TaskIt lists all undone or done tasks <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+#### Use case 9: View all overdue tasks
+
+**MSS**
+
+1. User requests to view all overdued tasks
+2. TaskIt lists all overdued tasks <br>
+Use case ends.
+
+**Extensions**
+1a. The given command is invalid
+> 1a1. TaskIt requests a valid command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
+#### Use case 10: Save all the tasks in specified local folder/file
+
+**MSS**
+
+1. User requests to save all the tasks in specified local folder/file
+2. TaskIt saves all the tasks in the specified local folder/file <br>
+Use case ends.
+
+**Extensions**
+1a. The given local folder/file is invalid
+> 1a1. TaskIt requests a valid local folder/file
+> Use case resumes at step 1 <br>
+Use case ends.
+
+#### Use case 11: Search tasks by a given date
+
+**MSS**
+
+1. User requests to search all the tasks by a given deadline
+2. TaskIt sort all the tasks which deadline matches the given deadline and show the result to the user <br>
+Use case ends.
+
+**Extensions**
+1a. All tasks are floating task without deadline
+> 1a1. TaskIt returns all the existing tasks<br>
+
+1b. The given date command is invalid
+> 1b1. TaskIt requests a valid date command and suggests valid format to users
+> Use case resumes at step 1 <br>
+Use case ends.
+
 
 ## Appendix C : Non Functional Requirements
 
+Author: Peng Chong
+
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should come with automated unit tests and open source code.
+5. Should return to a functioning state when system restarts
+6. Should function well offline
+7. Shuld have no unhandled exceptions from incorrect user input
+8. Should work well stand-alone and should not be a plug-in to another software
+9. Should use text files for data storage and not [relational databases](#relational-databases)
+10. Should store the data locally in a human editable text file
+11. Should work without requiring an installer, just download jar and run
+12. Should follow the Object-Oriented paradigm<br>
 
-{More to be added}
 
 ## Appendix D : Glossary
 
@@ -397,23 +667,69 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Relational databases
 
-> A contact detail that is not meant to be shared with others
+> Collection of data items organized as a set of formally-described tables from which data can be accessed, such as SQL
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
+Author: Zhou Fanyi
 
-Author: ...
+**Google Calendar**
+
+Author: Google
 
 Pros:
 
-* ...
-* ...
+* Can sync with other users
+* Multi-platform
+* Send reminders
+* Calendar view
+* Can put tasks in categories
 
 Cons:
 
-* ...
-* ...
+* Unappealing UI
+* Cannot sync with other calendars
 
+**Todoist**
+
+Author: Doist
+
+Pros:
+
+* Text-based interface makes it easy to input and modify tasks
+* Nice UI
+* Very simple to use
+* Can put tasks in categories
+* Can create recurring tasks in an intuitive way
+
+Cons:
+
+* Lists everything out rather with no option for a calendar view
+* Tasks split into categories with no option of just view ALL tasks
+
+**Wunderlist**
+
+Author: 6Wunderkinder
+
+Pros:
+
+* broad platform support
+
+Cons:
+
+* lacking recurring feature
+
+**Trello**
+
+Author: Fog Creek Software
+
+Pros:
+
+* Agile board layout
+
+Cons:
+
+* No calendar view
