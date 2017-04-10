@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new TaskManagerChangedEvent(new YTomorrow()));
+        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new YTomorrow()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
