@@ -249,7 +249,7 @@ Function of `Logic`
 
 **Purpose of `CliSyntax`**
 
-The `CliSyntax` class stores the prefixs that are used to detect input and differentiate it from different details. The prefixes used are
+The `CliSyntax` class stores the prefixes that are used to detect input and differentiate it from different details. The prefixes used are
 "by:", "from:", "to:", "@", "p/". They represent deadline, start date, end date, time and priority respectively and are used in `add`
 and `edit` commands.
 
