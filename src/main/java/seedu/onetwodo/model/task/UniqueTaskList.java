@@ -71,8 +71,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Marks the equivalent task as completed.
-     *
-     *
      */
     public void done(ReadOnlyTask taskToComplete) {
         int index = internalList.indexOf(taskToComplete);
@@ -84,8 +82,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Marks the equivalent task as uncompleted.
-     *
-     *
      */
     public void undone(ReadOnlyTask taskToUncomplete) {
         int index = internalList.indexOf(taskToUncomplete);
@@ -123,9 +119,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     //@@author A0135739W
     /**
-     * clears completed tasks.
-     *
-     *
+     * Clears completed tasks.
      */
     public boolean clearDone() {
         boolean hasDoneTask = false;
@@ -141,9 +135,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     //@@author A0135739W
     /**
-     * clears completed tasks.
-     *
-     *
+     * Clears uncompleted tasks.
      */
     public boolean clearUndone() {
         boolean hasUndone = false;
@@ -160,8 +152,6 @@ public class UniqueTaskList implements Iterable<Task> {
     //@@author A0141138N
     /**
      * Marks the equivalent task as task for today.
-     *
-     *
      */
     public void today(ReadOnlyTask taskForToday) {
         int index = internalList.indexOf(taskForToday);
@@ -172,6 +162,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0143029M
+    /**
+     * Sorts the internalList according to the given sort order.
+     */
     public void sortTasks(SortOrder sortOrder, boolean isReversed) {
         switch (sortOrder) {
         case ALPHANUMERIC:

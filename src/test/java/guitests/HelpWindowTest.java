@@ -5,6 +5,7 @@ import org.junit.Test;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.onetwodo.logic.commands.HelpCommand;
 
+//@@author A0143029M
 public class HelpWindowTest extends ToDoListGuiTest {
 
     @Test

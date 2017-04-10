@@ -2,6 +2,8 @@ package seedu.onetwodo.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -351,17 +353,20 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(p -> p.getTaskType() == taskType));
     }
 
-    //@@author
+    //@@author A0143029M
     @Override
+    /**
+     * Filters task list according to the dates, priority and tags given.
+     */
     public void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags) {
         boolean hasBefore = before.hasDate();
         boolean hasAfter = after.hasDate();
-        updateFilteredTaskList(new PredicateExpression(task -> isTaskSameDoneStatus(task, doneStatus)
+        PredicateExpression predicate = new PredicateExpression(task -> isTaskSameDoneStatus(task, doneStatus)
                 && (hasBefore ? isTaskBefore(task, before) : true)
                 && (hasAfter ? isTaskAfter(task, after) : true)
                 && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
-                && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
-                ));
+                && (!tags.isEmpty() ? containsAnyTag(task, tags) : true));
+        updateFilteredTaskList(predicate);
     }
 
     private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {
@@ -375,7 +380,7 @@ public class ModelManager extends ComponentManager implements Model {
         return task.getPriority().value.equals(p.value);
     }
 
-    //@@author
+    //@@author A0143029M
     private boolean isTaskSameDoneStatus(ReadOnlyTask task, DoneStatus doneStatus) {
         switch (doneStatus) {
         case DONE:
@@ -435,13 +440,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType type) {
-        // update by find before getting
         updateBySearchStrings();
 
-        // filter by type
         FilteredList<ReadOnlyTask> filtered = getFilteredTaskList().filtered(t -> t.getTaskType() == type);
 
-        // filter by done and return
         switch (doneStatus) {
         case DONE:
             return filtered.filtered(t -> t.getDoneStatus() == true);
@@ -460,22 +462,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Scroll to task provided
-     *
+     * Scroll to task provided.
      * @param task to jump to
      */
     @Override
     public void jumpToNewTask(ReadOnlyTask task) {
         int filteredIndex = getTaskIndex(task);
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
-                    }
-                }, AUTOSCROLL_LAG);
+        TimerTask postJumpToEvent = new TimerTask() {
+            @Override
+            public void run() {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
+            }
+        };
+        new Timer().schedule(postJumpToEvent, AUTOSCROLL_LAG);
     }
 
+    //@@author
     // ========== Inner classes/interfaces used for filtering
     @Override
     public DoneStatus getDoneStatus() {

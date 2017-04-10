@@ -21,6 +21,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_LIST_DONE = COMMAND_WORD + " done";
     public static final String COMMAND_LIST_UNDONE = COMMAND_WORD + " undone";
+    public static final String COMMAND_LIST_ALL = COMMAND_WORD + " all";
     public static final String SHORT_COMMAND_WORD = "ls";
     public static final String MESSAGE_LIST_DONE_SUCCESS = "Listed completed tasks";
     public static final String MESSAGE_LIST_UNDONE_SUCCESS = "Listed uncompleted tasks";
