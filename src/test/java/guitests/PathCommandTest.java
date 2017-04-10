@@ -17,7 +17,6 @@ public class PathCommandTest extends TaskBookGuiTest {
 
     @Test
     public void saveToInvalidPath() {
-        assertWrongPathResult("path", "data/C:");
 
         commandBox.runCommand("path");
         assertResultMessage("Invalid command format! \npath: Change save path. "
