@@ -175,6 +175,13 @@ _Figure 2.2.1 : Class Diagram of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/doit/ui/Ui.java)
 
+The `UI` component:
+
+* Executes user commands using the `Logic` component
+* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change
+* Responds to events raised from various parts of DoIt and updates the UI accordingly
+
+
 The UI consists of a `MainWindow` that is made up of parts (e.g.`CommandBox`, `ResultDisplay`,`TaskListPanel`, `EventListPanel`,`FloatingTaskListPanel`,`StatusBarFooter` etc). All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files found in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](../src/main/java/seedu/doit/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)<br>
@@ -189,15 +196,6 @@ The `TaskListPanel` component,`EventlistPanel`component and `FloatingTaskListPan
 
 The `TaskCard` component associates with each task in observablelist, containing all attributes of the task, with images loaded on attributes like priority, exsitence of description
 
-
-
-
-
-The `UI` component:
-
-* Executes user commands using the `Logic` component
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change
-* Responds to events raised from various parts of DoIt and updates the UI accordingly
 
 ### 3.4 Logic Component
 
@@ -214,6 +212,21 @@ The `Logic` component:
 * Creates a `Command` object which is executed by the `LogicManager`
 * Invokes changes to the `Model` (e.g. adding a task) and/or raises events
 * Encapsulates a `CommandResult` object which is passed back to the `Ui`
+
+The Logic consists of a `Parser` class which parses the user command coming from the `UI` Component.
+
+The `Parser` class then calls the corresponding parser for the specific ommand, for e.g. `DeleteCommandParser`.
+
+The command parser, for this case `DeleteCommandParser` will now create an instance of `DeleteCommand`.
+
+This `Command` object is then executed by the `LogicManager` which can invoke changes in the `Model` class.
+
+This can be done through various actions such as adding or editing a task.
+
+Finally, the result of the command execution is encapsulated in a `CommandResult` object and passed back to the `UI`.
+
+The `Command` pattern is evident in this component, as you can see a request encapsulated as a object allowing you to parametrize clients with different requests.
+
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
