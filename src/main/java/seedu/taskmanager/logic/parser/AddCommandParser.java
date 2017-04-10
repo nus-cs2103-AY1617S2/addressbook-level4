@@ -44,11 +44,6 @@ public class AddCommandParser {
             String endDate = EMPTY_FIELD;
             String endTime = EMPTY_FIELD;
 
-            /*
-             * Checks to ensure correct combinations of arguments are added by
-             * user when adding tasks to the task manager
-             */
-
             addTaskInputValidation(onPrefixInput, byPrefixInput, fromPrefixInput, toPrefixInput);
 
             if (isFromToEvent(fromPrefixInput, toPrefixInput)) {
@@ -88,9 +83,7 @@ public class AddCommandParser {
             else if (isOnEvent(onPrefixInput)) {
                 String[] splited = onPrefixInput.split("\\s+");
                 startDate = processInputToDateForm(splited);
-
                 endDate = startDate;
-
                 try {
                     startTime = splited[1];
 
@@ -119,8 +112,8 @@ public class AddCommandParser {
             }
 
             /*
-             * To parse deadline input if required and throws exceptions if
-             * incorrect arguments of deadline are included
+             * To parse Input before byPrefix and incorrect arguments of
+             * deadline are included
              */
 
             else if (!isEmptyField(byPrefixInput)) {
@@ -219,6 +212,12 @@ public class AddCommandParser {
     private boolean isValidEvent(String startDate, String startTime, String endDate, String endTime) {
         return !isEmptyField(startTime) && !isEmptyField(endTime) && !isEmptyField(startDate) && !isEmptyField(endDate);
     }
+
+    /**
+     * Validation check of given {@code String} arguments passed in by user
+     * Invalid combinations of arguments added by the user will cause
+     * NoSuchElementException to be thrown
+     */
 
     private void addTaskInputValidation(String date, String deadline, String startTime, String endTime) {
         boolean isValidCombination = true;

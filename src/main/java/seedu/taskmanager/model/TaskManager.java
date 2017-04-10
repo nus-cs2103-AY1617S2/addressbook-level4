@@ -164,7 +164,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     // @@author A0139520L
     /**
-     * Marks the task in the list at position {@code index} as complete.
+     * Marks the task in the list at position {@code index} as isCompleted.
      *
      * @see #syncMasterCategoryListWith(Task)
      *
@@ -182,23 +182,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         // in the task list.
         tasks.markTask(index, isCompleted);
     }
-
-    /**
-     * Marks the task in the list at position {@code index} as complete.
-     *
-     * @see #syncMasterCategoryListWith(Task)
-     *
-     * @throws DuplicateTaskException
-     *             if marking task as complete causes the task to be equivalent
-     *             to another completed task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    /*
-     * public int isBlockedOutTime(Task t) throws
-     * UniqueTaskList.DuplicateTaskException { return tasks.isBlockedOutTime(t);
-     * }
-     */
 
     // @@author
     //// tag-level operations

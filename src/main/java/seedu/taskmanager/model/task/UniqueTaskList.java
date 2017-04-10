@@ -92,14 +92,16 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0139520L
     /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedTask}.
+     * Marks the task in the list at position {@code index} as
+     * {@code isComplete}.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
      *             equivalent to another existing task in the list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
+     * @throws NoSuchElementException
+     *             if {@code isComplete} equals to task isMarkedAsComplete
      */
     public void markTask(int index, boolean isComplete) throws DuplicateTaskException {
         if (isComplete != internalList.get(index).getIsMarkedAsComplete()) {
