@@ -12,7 +12,7 @@ Features implemented:
 [Find tasks by title, time or tags](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/UserGuide.md#310-finding-all-tasks-containing-any-keyword-in-their-title-specified-tags-or-in-a-specified-time-period-find)<br>
 Responsibilities: UI,
                   Managing Issues <br>
-Code Written: [[functional code](./collated/main/A0148037E.md)][[test code](./collated/test/A0148037E.md)]<br>
+Code Written: [[functional code](../collated/main/A0148037E.md)][[test code](../collated/test/A0148037E.md)]<br>
 Other Main Contributions:
 + Help with implementation of list, listdone, listundone
 + Do certain code review for some PRs
@@ -32,7 +32,7 @@ Features:
 * Retrieve command history
 * Change storage location
 
-Code Written: [[functional code](./collated/main/A0147622H.md)][[test code](./collated/test/A0147622H.md)]
+Code Written: [[functional code](../collated/main/A0147622H.md)][[test code](../collated/test/A0147622H.md)]
 
 -----
 
@@ -58,7 +58,7 @@ Features:
 * TaskCard Display
 * Autoscrolling
 
-Code Written: [[functional code](./collated/main/A0139438W.md)][[test code](./collated/test/A0139438W.md)]
+Code Written: [[functional code](../collated/main/A0139438W.md)][[test code](../collated/test/A0139438W.md)]
 
 -----
 
@@ -73,7 +73,7 @@ Code Written: [[functional code](./collated/main/A0139438W.md)][[test code](./co
  * List Filters
  * Code Review
 
-Code Written: [[functional code](./collated/main/A0121658E.md)][[test code](./collated/test/A0121658E.md)]
+Code Written: [[functional code](../collated/main/A0121658E.md)][[test code](../collated/test/A0121658E.md)]
 
  -----
 
