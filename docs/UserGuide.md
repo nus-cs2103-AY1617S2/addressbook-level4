@@ -228,8 +228,8 @@ Things To Note:
 > This function prioritises dates/time.
    e.g. "find tmr" will give a list of tasks with tomorrow's date 
          but will not return tasks with "tmr" in their names     
-> Avoid using digits to find task names, TypeTask will return results based on time.
-        e.g. "find 4" will give a list of tasks due today at 0400h 
+> This function will return time. Avoid using digits to find task name.
+   e.g. "find 4" will give a list of tasks due today at 0400h 
         instead of a list of tasks with "4" in their names.       
 > This function does not support searching by months.
 > This function will return the closest day from your current time.
