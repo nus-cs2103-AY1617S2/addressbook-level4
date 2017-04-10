@@ -21,7 +21,7 @@ import seedu.task.model.YTomorrow;
 import seedu.task.storage.JsonUserPrefsStorage;
 import seedu.task.storage.Storage;
 import seedu.task.storage.StorageManager;
-import seedu.task.storage.XmlAddressBookStorage;
+import seedu.task.storage.XmlTaskManagerStorage;
 import seedu.task.ui.Theme;
 
 public class StorageManagerTest {
@@ -61,7 +61,7 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
+         * {@link XmlTaskManagerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
         YTomorrow original = new TypicalTestPersons().getTypicalAddressBook();
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new TaskManagerChangedEvent(new YTomorrow()));
+        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new YTomorrow()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -89,7 +89,7 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
