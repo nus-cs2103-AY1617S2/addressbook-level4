@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<YATS>
+    <tasks>
+        <title>Project Milestone Documentation</title>
+        <location>School</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>11:59PM 08/04/2017</deadline>
+        <description>prepare project doucments</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>school</tagged>
+        <tagged>learn</tagged>
+    </tasks>
+    <tasks>
+        <title>Benzoic Aptitude Test</title>
+        <location>School</location>
+        <startTime>03:45PM 12/12/2017</startTime>
+        <endTime>07:00PM 12/12/2017</endTime>
+        <deadline></deadline>
+        <description>Benzoic acid is a very acidic compound that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>Organic</tagged>
+        <tagged>revision</tagged>
+    </tasks>
+    <tasks>
+        <title>Inductive Reasoning Based Phillosophy</title>
+        <location>Home</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>10:20AM 10/01/2019</deadline>
+        <description>Have to finish reading this book by 10th January in preparation for Armaggedon.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>books</tagged>
+        <tagged>armaggedon</tagged>
+        <tagged>reading</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>Minecraft Lets Play 100</title>
+        <location>RoosterTeeth</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>Catch up on Minecraft Let's Plays by Rooster Teeth! Comedy as its best!</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>RT</tagged>
+        <tagged>comedy</tagged>
+    </tasks>
+    <tasks>
+        <title>Red vs Blue</title>
+        <location>Dutch</location>
+        <startTime>08:05PM 12/03/2020</startTime>
+        <endTime>09:00PM 30/03/2025</endTime>
+        <deadline></deadline>
+        <description>The great war between the 2 colours have begun. The crusade is upon us!</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>crusade</tagged>
+        <tagged>holy</tagged>
+    </tasks>
+    <tasks>
+        <title>Oxygen not Included</title>
+        <location>KleiEntertainment</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>New game released!</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>school</tagged>
+        <tagged>learn</tagged>
+    </tasks>
+    <tasks>
+        <title>Suicide watch</title>
+        <location>r/SuicideWatch</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>Why cut yourself when you can have access to this subreddit!</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>reddit</tagged>
+    </tasks>
+    <tasks>
+        <title>Virtual Youtuber</title>
+        <location>WhiteSpace</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>Straight man, funny man.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>Kizuna</tagged>
+        <tagged>Ai</tagged>
+    </tasks>
+    <tasks>
+        <title>Machine Vision Algorithm on Raspberry Pi</title>
+        <location>Home</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>06:00PM 30/08/2017</deadline>
+        <description>Because placing black masking tape on the ground is too old school, vision processing via camera controls would make a better and more efficient choice.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>vision</tagged>
+        <tagged>raspberry</tagged>
+        <tagged>pi</tagged>
+        <tagged>tasty</tagged>
+        <tagged>Machine</tagged>
+    </tasks>
+    <tasks>
+        <title>Learning Python</title>
+        <location>Home</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>03:33AM 21/11/2018</deadline>
+        <description>Raspberry pi makes entry to learning real time operating system easy.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>raspberry</tagged>
+        <tagged>pi</tagged>
+    </tasks>
+    <tasks>
+        <title>Dont starve together</title>
+        <location>KleiEntertainment</location>
+        <startTime>03:00PM 15/06/2018</startTime>
+        <endTime>05:00PM 17/06/2018</endTime>
+        <deadline></deadline>
+        <description>Obtaining food for one person is hard already, why do you have to make things harder than usual?</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>DST</tagged>
+        <tagged>starve</tagged>
+        <tagged>dont</tagged>
+    </tasks>
+    <tasks>
+        <title>Uninstall DOTA2</title>
+        <location>Steam</location>
+        <startTime>03:33PM 28/02/2019</startTime>
+        <endTime>05:55PM 01/03/2019</endTime>
+        <deadline></deadline>
+        <description>DOTA2 is getting too hard and too toxic, it's time to uninstall, see you at the next game.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>DOTA2</tagged>
+    </tasks>
+    <tasks>
+        <title>Steel beams cannot melt dank memes</title>
+        <location>4chan</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>4chan amirite</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+    </tasks>
+    <tasks>
+        <title>Title not found</title>
+        <location></location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>Locating title within application's database.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>recovering</tagged>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>Replication based on computer dynamic memory</title>
+        <location>RyzenArchitecture</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description></description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>Ryzen</tagged>
+        <tagged>Vega</tagged>
+    </tasks>
+    <tasks>
+        <title>Seeing is believeing</title>
+        <location>NUS</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>NUS Wifi is kind of a finicky subject, you don't want to touch it, but you have to use it to survive. Do what you will with it, but I'm leaving.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>wild</tagged>
+        <tagged>gone</tagged>
+    </tasks>
+    <tasks>
+        <title>Secrets of the hidden temple</title>
+        <location>MadMoon</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>09:52PM 23/09/2019</deadline>
+        <description>The mad moon seems to be a legend or a myth, something that should not be uncovered..</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>mad</tagged>
+        <tagged>moon</tagged>
+    </tasks>
+    <tasks>
+        <title>The spirit moves me</title>
+        <location></location>
+        <startTime>01:00AM 15/05/2017</startTime>
+        <endTime>05:30AM 15/05/2017</endTime>
+        <deadline></deadline>
+        <description>I am a storm chaser.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>storm</tagged>
+        <tagged>spirit</tagged>
+    </tasks>
+    <tasks>
+        <title>The first of many a blooded enemy I will draw thine blade</title>
+        <location>KentRidge</location>
+        <startTime>02:45PM 17/04/2017</startTime>
+        <endTime>02:00AM 19/04/2017</endTime>
+        <deadline></deadline>
+        <description>Now you walk between the planes.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>breaker</tagged>
+        <tagged>spirit</tagged>
+    </tasks>
+    <tasks>
+        <title>To move swiftly as the wolves of IceWrack</title>
+        <location>IceWrack</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>11:59PM 16/07/2025</deadline>
+        <description>Moving in the cold, dark, icy region is like taking a bullet train to Greenland.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>Bullet</tagged>
+        <tagged>train</tagged>
+    </tasks>
+    <tasks>
+        <title>Returning the Arsenal Magus</title>
+        <location></location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>Invoking the many spells in your arsenal is too much to handle.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>Quas</tagged>
+        <tagged>Exort</tagged>
+        <tagged>Wex</tagged>
+    </tasks>
+    <tasks>
+        <title>To move out of the detonation region</title>
+        <location>SnipersShrapnel</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>06:00PM 30/03/2017</deadline>
+        <description>The slow is too strong! We must hurry.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>HO</tagged>
+        <tagged>HA</tagged>
+    </tasks>
+    <tasks>
+        <title>Setting up proximity sensors</title>
+        <location>Radiant</location>
+        <startTime>12:00AM 01/05/2017</startTime>
+        <endTime>11:59PM 03/04/2017</endTime>
+        <deadline></deadline>
+        <description>The mine is set.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>set</tagged>
+        <tagged>planted</tagged>
+    </tasks>
+    <tasks>
+        <title>Remove mine documentation</title>
+        <location>NUS</location>
+        <startTime>08:05AM 02/02/2017</startTime>
+        <endTime>09:05PM 10/02/2017</endTime>
+        <deadline></deadline>
+        <description>Did we put the right fuse on that one?</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>techies</tagged>
+        <tagged>WOAW</tagged>
+    </tasks>
+    <tasks>
+        <title>Attend the Sirens funeral</title>
+        <location>SlithreenGuardsPalace</location>
+        <startTime>05:15AM 15/03/2017</startTime>
+        <endTime>12:00PM 15/03/2017</endTime>
+        <deadline></deadline>
+        <description>No Slithreen may fail, but are put to eternal rest.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>song</tagged>
+        <tagged>rhasta</tagged>
+    </tasks>
+    <tasks>
+        <title>Venturing into the dark abyss</title>
+        <location>DarkAbyss</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>07:00PM 27/03/2017</deadline>
+        <description>I have to return before he finds me.. Only darkness await..</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>lord</tagged>
+        <tagged>under</tagged>
+    </tasks>
+    <tasks>
+        <title>Document on the reversing polarity of Magnus</title>
+        <location>Magnus</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>04:00PM 05/05/2017</deadline>
+        <description>The master-smiths of Mt. Joerlak agree on only a single point: that the horn of a magnoceros is more precious than any alloy. And of all such horns, the largest and sharpest belongs to the beast they call Magnus. For half a generation, Magnus took easy sport goring hunters come to claim the treasures of his kin.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>bradwarden</tagged>
+        <tagged>enchantress</tagged>
+    </tasks>
+    <tasks>
+        <title>Submit a report on the Nothl Realm</title>
+        <location>Huskar</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>12:00PM 11/04/2017</deadline>
+        <description>The harrowing experience increases the wrath of the dazzling one.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>recovering</tagged>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>The milk shall not be forgotten</title>
+        <location>Internet</location>
+        <startTime>12:00PM 31/03/2017</startTime>
+        <endTime>12:00PM 19/04/2017</endTime>
+        <deadline></deadline>
+        <description>Never forget.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>recovering</tagged>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>Wings of Piano</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>06:00PM 01/04/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Evolution Era</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>06:00PM 02/04/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Reflection Mirror Night</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>06:00PM 03/04/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Saika</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>09:00AM 04/04/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Magnolia</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>10:15AM 05/04/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Yubikiri Genman</title>
+        <location>Deemo</location>
+        <startTime>11:00AM 06/04/2017</startTime>
+        <endTime>12:00PM 07/04/2017</endTime>
+        <deadline></deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Nine Point Eight</title>
+        <location>Deemo</location>
+        <startTime>01:00PM 08/04/2017</startTime>
+        <endTime>03:00PM 08/04/2017</endTime>
+        <deadline></deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Sallen pointer</title>
+        <location>NUS</location>
+        <startTime>02:11PM 22/04/2017</startTime>
+        <endTime>02:45PM 22/04/2017</endTime>
+        <deadline></deadline>
+        <description>Sallen key low pass filtering seems to have failed.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>never</tagged>
+        <tagged>give</tagged>
+        <tagged>up</tagged>
+        <tagged>you</tagged>
+    </tasks>
+    <tasks>
+        <title>Friction</title>
+        <location>Deemo</location>
+        <startTime>03:00PM 16/04/2017</startTime>
+        <endTime>04:00PM 16/04/2017</endTime>
+        <deadline></deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Final Destination</title>
+        <location>Death</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>In death will you do us part.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>recovering</tagged>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>Resurrection</title>
+        <location>Life</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline></deadline>
+        <description>Til life squeeze you dry.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>recovering</tagged>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>Reverse Parallel Universe</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>04:30PM 15/05/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Anima</title>
+        <location>Deemo</location>
+        <startTime>03:54PM 13/02/2017</startTime>
+        <endTime>04:00PM 13/02/2017</endTime>
+        <deadline></deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Test configuration file of reverberating system</title>
+        <location>NUS</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>11:59PM 15/03/2017</deadline>
+        <description>System harmonics project failing test cases.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>recovering</tagged>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>Dream</title>
+        <location>Deemo</location>
+        <startTime></startTime>
+        <endTime></endTime>
+        <deadline>04:15PM 16/03/2017</deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Entrance</title>
+        <location>Deemo</location>
+        <startTime>08:23PM 15/05/2017</startTime>
+        <endTime>09:00PM 16/05/2017</endTime>
+        <deadline></deadline>
+        <description>Never left without saying Goodbye</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>deemo</tagged>
+        <tagged>girl</tagged>
+        <tagged>little</tagged>
+    </tasks>
+    <tasks>
+        <title>Test event 1</title>
+        <location>TestDrive</location>
+        <startTime>03:23PM 23/03/2017</startTime>
+        <endTime>04:23PM 23/03/2017</endTime>
+        <deadline></deadline>
+        <description>Test drive initiating..</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>system</tagged>
+    </tasks>
+    <tasks>
+        <title>Test event 2</title>
+        <location>TestDrive</location>
+        <startTime>09:00AM 09/04/2017</startTime>
+        <endTime>05:00PM 09/04/2017</endTime>
+        <deadline></deadline>
+        <description>Locating title within application's database.</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+        <tagged>tag1</tagged>
+        <tagged>tag6</tagged>
+        <tagged>tag7</tagged>
+        <tagged>tag4</tagged>
+        <tagged>tag5</tagged>
+        <tagged>tag2</tagged>
+        <tagged>tag3</tagged>
+    </tasks>
+    <tags>research</tags>
+    <tags>necessitires</tags>
+    <tags>school</tags>
+    <tags>learn</tags>
+    <tags>Organic</tags>
+    <tags>revision</tags>
+    <tags>home</tags>
+    <tags>books</tags>
+    <tags>reading</tags>
+    <tags>armaggedon</tags>
+    <tags>RT</tags>
+    <tags>comedy</tags>
+    <tags>holy</tags>
+    <tags>crusade</tags>
+    <tags>reddit</tags>
+    <tags>Kizuna</tags>
+    <tags>Ai</tags>
+    <tags>Machine</tags>
+    <tags>vision</tags>
+    <tags>raspberry</tags>
+    <tags>pi</tags>
+    <tags>tasty</tags>
+    <tags>dont</tags>
+    <tags>starve</tags>
+    <tags>DST</tags>
+    <tags>DOTA2</tags>
+    <tags>recovering</tags>
+    <tags>system</tags>
+    <tags>Ryzen</tags>
+    <tags>Vega</tags>
+    <tags>gone</tags>
+    <tags>wild</tags>
+    <tags>mad</tags>
+    <tags>moon</tags>
+    <tags>storm</tags>
+    <tags>spirit</tags>
+    <tags>breaker</tags>
+    <tags>Bullet</tags>
+    <tags>train</tags>
+    <tags>Wex</tags>
+    <tags>Quas</tags>
+    <tags>Exort</tags>
+    <tags>HO</tags>
+    <tags>HA</tags>
+    <tags>planted</tags>
+    <tags>set</tags>
+    <tags>techies</tags>
+    <tags>WOAW</tags>
+    <tags>song</tags>
+    <tags>rhasta</tags>
+    <tags>under</tags>
+    <tags>lord</tags>
+    <tags>bradwarden</tags>
+    <tags>enchantress</tags>
+    <tags>deemo</tags>
+    <tags>little</tags>
+    <tags>girl</tags>
+    <tags>never</tags>
+    <tags>give</tags>
+    <tags>you</tags>
+    <tags>up</tags>
+    <tags>tag1</tags>
+    <tags>tag2</tags>
+    <tags>tag3</tags>
+    <tags>tag4</tags>
+    <tags>tag5</tags>
+    <tags>tag6</tags>
+    <tags>tag7</tags>
+</YATS>
