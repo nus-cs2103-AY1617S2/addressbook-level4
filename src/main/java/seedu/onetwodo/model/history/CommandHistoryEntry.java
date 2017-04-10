@@ -68,6 +68,11 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
         }
     }
 
+    /**
+     * returns the reverse command word for a command
+     * @param the command word to be reversed
+     * @return the reverse command word for a command
+     */
     private String getReverseCommand(String commandWord) {
         switch (commandWord) {
 
