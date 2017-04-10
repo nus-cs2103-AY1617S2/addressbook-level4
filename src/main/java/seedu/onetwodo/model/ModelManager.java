@@ -38,6 +38,8 @@ import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+    public static final int AUTOSCROLL_LAG = 300;
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     // toDoList is data, not observable
@@ -469,7 +471,7 @@ public class ModelManager extends ComponentManager implements Model {
                     public void run() {
                         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
                     }
-                }, 300);
+                }, AUTOSCROLL_LAG);
     }
 
     // ========== Inner classes/interfaces used for filtering

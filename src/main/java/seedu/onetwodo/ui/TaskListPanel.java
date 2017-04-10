@@ -1,5 +1,7 @@
 package seedu.onetwodo.ui;
 
+import static seedu.onetwodo.model.ModelManager.AUTOSCROLL_LAG;
+
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -13,7 +15,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.LogsCenter;
+import seedu.onetwodo.commons.events.ui.SelectCardEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -91,11 +95,22 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    public void scrollTo(int index) {
+    public void scrollToAndHighlight(int index) {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
         });
+        highlightTaskCard(index);
+    }
+
+    private void highlightTaskCard(int index) {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        EventsCenter.getInstance().post(new SelectCardEvent(index, taskType));
+                    }
+                }, AUTOSCROLL_LAG);
     }
 
     public void viewScrollTo(int index) {

@@ -25,17 +25,21 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/fishwind.jpg" width="150"><br>
 
 - Components in charge of: [Storage]
-- Aspects/tools in charge of: CommandParser, Documentation, Natty
+- Aspects/tools in charge of: Storage, Documentation, Natty
 * Features implemented:
-	* [Natty DateTime parsing]
-	* [Save, import & export commands]
-	* [Find command]
-	* [Recurring task]
+	* [Natty parsing](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#date-and-time-format-specification)
+	* [Save command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#saving-the-data--save)
+	* [Import command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#importing-the-data--import)
+	* [Export command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#exporting-the-data--export)
+	* [Find command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#finding-all-tasks--find)
+	* [Recurring task](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#format)
 * Code written: [[functional code](../collated/main/A0139343E.md)][[test code](../collated/main/A0139343E.md)]
 * Other major contributions:
 	* Did initial refactoring from AddressBook to OneTwoDo
-	* Did initial junit tests refactoring to pass tests for OneTwoDo
+	* Did initial junit tests refactoring for future testings
 	* Improved user guide based on feedback
+	* Make/edit diagrams, screenshots, and logo
+	* Wrote 50+ tests and manual test script.
 
 -----
 

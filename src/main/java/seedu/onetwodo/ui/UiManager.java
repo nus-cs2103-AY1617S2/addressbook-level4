@@ -137,13 +137,13 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switch (event.taskType) {
         case DEADLINE:
-            mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
+            mainWindow.getDeadlineTaskListPanel().scrollToAndHighlight(event.targetIndex);
             break;
         case EVENT:
-            mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
+            mainWindow.getEventTaskListPanel().scrollToAndHighlight(event.targetIndex);
             break;
         case TODO:
-            mainWindow.getTodoTaskListPanel().scrollTo(event.targetIndex);
+            mainWindow.getTodoTaskListPanel().scrollToAndHighlight(event.targetIndex);
             break;
         }
     }
