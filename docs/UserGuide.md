@@ -268,9 +268,9 @@ Format: `exit`
 ## 5. Command Summary
 
 * **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]` <br>
-  e.g. `add Lunch with Bob tag friend priority low tag leisure`
-  e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
-  e.g. `add tag school tag assignment by 11pm "CS2103 revision"`
+  e.g. `add Lunch with Bob tag friend priority low tag leisure`<br>
+  e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`<br>
+  e.g. `add tag school tag assignment by 11pm "CS2103 revision"`<br>
 
 * **Clear** : `clear`
 
@@ -278,24 +278,24 @@ Format: `exit`
    e.g. `delete 3`
 
 * **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
-  e.g. `edit 1 title Movie`
-  e.g. `edit 2 from this Friday 3 pm`
-  e.g. `edit 2 end none`
-  e.g. `edit 2 end null`
-  e.g. `edit 1 tag School`
-  e.g. `edit 1 tag null`
-  e.g. `edit 1 title "today"`
+  e.g. `edit 1 title Movie`<br>
+  e.g. `edit 2 from this Friday 3 pm`<br>
+  e.g. `edit 2 end none`<br>
+  e.g. `edit 2 end null`<br>
+  e.g. `edit 1 tag School`<br>
+  e.g. `edit 1 tag null`<br>
+  e.g. `edit 1 title "today"`<br>
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`
 
 * **List** : `list` <br>
-  e.g. `list all`
-  e.g. `list done|undone`
-  e.g. `list low|medium|high`
-  e.g. `list overdue`
-  e.g. `list today`
-  e.g. `list floating|event|deadline`
+  e.g. `list all`<br>
+  e.g. `list done|undone`<br>
+  e.g. `list low|medium|high`<br>
+  e.g. `list overdue`<br>
+  e.g. `list today`<br>
+  e.g. `list floating|event|deadline`<br>
 
 * **Mark** : `mark` <br>
   e.g. `mark 1 undone`
