@@ -4,56 +4,96 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TaskManagerGuiTest {
 
-
+    // @@author A0141102H
     @Test
-    public void selectPerson_nonEmptyList() {
+    public void selectTask_nonEmptyList() {
 
-        assertSelectionInvalid(10); // invalid index
-        assertNoPersonSelected();
+        assertSelectionInvalid(20); // invalid index
+        assertNoTaskSelected();
 
-        assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalPersons().length;
-        assertSelectionSuccess(personCount); // last person in the list
-        int middleIndex = personCount / 2;
-        assertSelectionSuccess(middleIndex); // a person in the middle of the list
+        assertSelectionSuccess(1); // first task in the list
+        int taskCount = td.getTypicalTasks().length;
+        assertSelectionSuccess(taskCount); // last task in the list
+        int middleIndex = taskCount / 2;
+        assertSelectionSuccess(middleIndex); // a task in the middle of the list
 
-        assertSelectionInvalid(personCount + 1); // invalid index
-        assertPersonSelected(middleIndex); // assert previous selection remains
+        assertSelectionInvalid(taskCount + 1); // invalid index
+        assertTaskSelected(middleIndex); // assert previous selection remains
 
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
+        /*
+         * Testing other invalid indexes such as -1 should be done when testing
+         * the SelectCommand
+         */
     }
 
     @Test
-    public void selectPerson_emptyList() {
-        commandBox.runCommand("clear");
+    public void selectTask_emptyList() {
+        commandBox.runCommand("CLEAR");
         assertListSize(0);
-        assertSelectionInvalid(1); //invalid index
+        assertSelectionInvalid(1); // invalid index
     }
 
     private void assertSelectionInvalid(int index) {
-        commandBox.runCommand("select " + index);
-        assertResultMessage("The person index provided is invalid");
+        commandBox.runCommand("SELECT " + index);
+        assertResultMessage("The task index provided is invalid");
     }
 
     private void assertSelectionSuccess(int index) {
-        commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Person: " + index);
-        assertPersonSelected(index);
+        commandBox.runCommand("SELECT " + index);
+        assertResultMessage("Selected Task: " + index);
+        assertTaskSelected(index);
     }
 
-    private void assertPersonSelected(int index) {
-        assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyPerson selectedPerson = personListPanel.getSelectedPersons().get(0);
-        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
-        //TODO: confirm the correct page is loaded in the Browser Panel
+    // @@author A0142418L
+    private void assertTaskSelected(int index) {
+        if (eventTaskListPanel.getNumberOfTask() > index) {
+            assertEquals(eventTaskListPanel.getSelectedTasks().size(), 1);
+            assertNoDeadlineTaskSelected();
+            assertNoFloatingTaskSelected();
+            ReadOnlyTask selectedTask = eventTaskListPanel.getSelectedTasks().get(0);
+            assertEquals(eventTaskListPanel.getEventTask(index - 1), selectedTask);
+        } else {
+            if ((eventTaskListPanel.getNumberOfTask() + deadlineTaskListPanel.getNumberOfTask()) > index) {
+                assertEquals(deadlineTaskListPanel.getSelectedTasks().size(), 1);
+                assertNoEventTaskSelected();
+                assertNoFloatingTaskSelected();
+                ReadOnlyTask selectedTask = deadlineTaskListPanel.getSelectedTasks().get(0).getKey();
+                assertEquals(deadlineTaskListPanel.getDeadlineTask(index - eventTaskListPanel.getNumberOfTask()
+                        - 1), selectedTask);
+
+            } else {
+                assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 1);
+                assertNoDeadlineTaskSelected();
+                assertNoEventTaskSelected();
+                ReadOnlyTask selectedTask = floatingTaskListPanel.getSelectedTasks().get(0).getKey();
+                assertEquals(floatingTaskListPanel.getFloatingTask(
+                        index - eventTaskListPanel.getNumberOfTask() - deadlineTaskListPanel.getNumberOfTask()
+                        - 1), selectedTask);
+            }
+        }
     }
 
-    private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+    // @@author A0142418L
+    private void assertNoTaskSelected() {
+        assertNoEventTaskSelected();
+        assertNoDeadlineTaskSelected();
+        assertNoFloatingTaskSelected();
+    }
+
+    private void assertNoEventTaskSelected() {
+        assertEquals(eventTaskListPanel.getSelectedTasks().size(), 0);
+    }
+
+    private void assertNoDeadlineTaskSelected() {
+        assertEquals(deadlineTaskListPanel.getSelectedTasks().size(), 0);
+    }
+
+    private void assertNoFloatingTaskSelected() {
+        assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 0);
     }
 
 }

@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.taskmanager.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TaskManagerGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    private static final String COMMAND_THAT_SUCCEEDS = "SELECT 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
 
+    // @@author A0141102H
     @Before
     public void setUp() {
         defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());

@@ -2,7 +2,7 @@
 After studying this code and completing the corresponding exercises, you should be able to,
 
 1. [Use High-Level Designs `[LO-HighLevelDesign]`](#use-high-level-designs-lo-highleveldesign)
-1. [Use Event-Driven Programming `[LO-EventDriven]`](#use-event-driven-programming-lo-eventdriven`)
+1. [Use Event-Driven Programming `[LO-EventDriven]`](#use-event-driven-programming-lo-eventdriven)
 1. [Use API Design `[LO-ApiDesign]`](#use-api-design-lo-apidesign)
 1. [Use Assertions `[LO-Assertions]`](#use-assertions-lo-assertions)
 1. [Use Logging `[LO-Logging]`](#use-logging-lo-logging)
@@ -37,7 +37,7 @@ facilitate communication between event creators and event consumers.
 
 ## Use API Design `[LO-ApiDesign]`
 
-Note how components of AddressBook have well-defined APIs. For example, the API of the `Logic` component
+Note how components of ProcrastiNomore have well-defined APIs. For example, the API of the `Logic` component
 is given in the [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -50,7 +50,7 @@ is given in the [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 ## Use Assertions `[LO-Assertions]`
 
-Note how the AddressBook app uses Java `assert`s to verify assumptions.
+Note how the ProcrastiNomore app uses Java `assert`s to verify assumptions.
 
 **Resources**
 
@@ -63,13 +63,13 @@ Note how the AddressBook app uses Java `assert`s to verify assumptions.
  * Make sure assertions are enabled in Eclipse by forcing an assertion failure (e.g. add `assert false;` somewhere in
  the code and run the code to ensure the runtime reports an assertion failure).
 
- * Add more assertions to AddressBook as you see fit.
+ * Add more assertions to ProcrastiNomore as you see fit.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Logging `[LO-Logging]`
 
-Note [how the AddressBook app uses Java's `java.util.log` package to do logging](DeveloperGuide.md#31-logging).
+Note [how the ProcrastiNomore app uses Java's `java.util.log` package to do logging](DeveloperGuide.md#31-logging).
 
 **Resources**
 
@@ -84,18 +84,18 @@ Note [how the AddressBook app uses Java's `java.util.log` package to do logging]
 
 #### Exercise: Add more logging
 
- Add more logging to AddressBook as you see fit.
+ Add more logging to ProcrastiNomore as you see fit.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Defensive Coding `[LO-DefensiveCoding]`
 
- Note how AddressBook uses the `ReadOnly*` interfaces to prevent objects being modified by clients who are not
+ Note how ProcrastiNomore uses the `ReadOnly*` interfaces to prevent objects being modified by clients who are not
  supposed to modify them.
 
 #### Exercise: identify more places for defensive coding
 
-Analyze the AddressBook code/design to identify,
+Analyze the ProcrastiNomore code/design to identify,
 
 * where defensive coding is used
 * where the code can be more defensive
@@ -104,7 +104,7 @@ Analyze the AddressBook code/design to identify,
 
 ## Use Build Automation `[LO-BuildAutomation]`
 
-Note [how the AddressBook app uses Gradle to automate build tasks](UsingGradle.md).
+Note [how the ProcrastiNomore app uses Gradle to automate build tasks](UsingGradle.md).
 
 **Resources**
 
@@ -126,8 +126,8 @@ Note [how the AddressBook app uses Gradle to automate build tasks](UsingGradle.m
 
 ## Use Continuous Integration `[LO-ContinuousIntegration]`
 
-Note [how the AddressBook app uses Travis to perform Continuous Integration](UsingTravis.md).
-([![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4))
+Note [how the ProcrastiNomore app uses Travis to perform Continuous Integration](UsingTravis.md).
+([![Build Status](https://api.travis-ci.org/CS2103JAN2017-T11-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T11-B1/main))
 
 **Resources**
 
