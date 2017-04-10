@@ -118,7 +118,7 @@ public interface Model {
      */
     void updateFilteredListToFindAll(Set<String> keywords);
 
-    // @@author A0102778B
+    //@@author A0102778B
     /**
      * Method to get the previous state (undo command) of the task manager
      */
@@ -153,13 +153,21 @@ public interface Model {
      * check - if there are currently too many task manager states, it will
      * remove half of the earlier saved states and only keep the later half.
      */
-
     void saveImageOfCurrentTaskManager();
-
+    
+    /**
+     * This method sorts the filtered list by start time, and then shows it on the GUI
+     */
     void updateFilteredListToShowSortedStart();
-
+    
+    /**
+     * This method sorts the filtered list by end time, and then shows it on the GUI
+     */
     void updateFilteredListToShowSortedEnd();
-
+    
+    /**
+     * This method sorts the filtered list by deadline, and then shows it on the GUI
+     */
     void updateFilteredListToShowDeadline();
 
 }

@@ -17,7 +17,6 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 
 import javafx.collections.ObservableList;
 
-//@@author A0102778B
 
 /**
  * Wraps all data at the task manager level Duplicates are not allowed (by

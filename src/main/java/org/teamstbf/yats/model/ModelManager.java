@@ -20,7 +20,7 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByDeadline;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByEndDate;
-import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByStartDate;
+import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByStartTime;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorIsDeadline;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorIsEvent;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
@@ -38,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String TASK_UNDONE_IDENTIFIER = "No";
     private static final String TASK_DONE_IDENTIFIER = "Yes";
 
-    private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 10;
+    private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 20;
     private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 10;
 
     private final TaskManager taskManager;
@@ -48,6 +48,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
     private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
+    // @@author 
+    
     private final FilteredList<ReadOnlyEvent> filteredEvents;
     private final FilteredList<ReadOnlyEvent> calendarList;
     private final FilteredList<ReadOnlyEvent> taskList;
@@ -79,8 +81,16 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEvents.size() - 1));
+    }    
+    
+    @Override
+    public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+        taskManager.removeEvent(target);
+        indicateTaskManagerChanged();
     }
-
+    
+    // @@author A0102778B
+    
     @Override
     public void saveImageOfCurrentTaskManager() {
         removeUndoEntriesIfUndoStackSizeTooLarge();
@@ -109,8 +119,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * This method removes half of a stack of TaskManagers given to it. TODO-
-     * test this method
+     * This method removes half of a stack of TaskManagers given to it (20 task managers save states to 10)
      */
     private void removeHalfOfUndoStack(Stack<TaskManager> currStack) {
         Stack<TaskManager> tempUndoTaskManager = new Stack<TaskManager>();
@@ -126,14 +135,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-        taskManager.removeEvent(target);
-        indicateTaskManagerChanged();
-    }
-
-    // @@author A0102778B
-
-    @Override
     public boolean checkEmptyUndoStack() {
         return undoTaskManager.isEmpty();
     }
@@ -144,7 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void getPreviousState() {
+    public void getPreviousState() {
         TaskManager tempManager = new TaskManager();
         tempManager.resetData(taskManager);
         redoTaskManager.push(tempManager);
@@ -153,7 +154,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void getNextState() {
+    public void getNextState() {
         TaskManager tempManager = new TaskManager();
         tempManager.resetData(taskManager);
         undoTaskManager.push(tempManager);
@@ -346,7 +347,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private FilteredList<ReadOnlyEvent> getSortedEventListByStart() {
         filteredEvents.setPredicate(null);
-        SortedList<ReadOnlyEvent> reverseSortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartDate());
+        SortedList<ReadOnlyEvent> reverseSortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartTime());
         SortedList<ReadOnlyEvent> sortedEvents = reverseSortedEvents.sorted(new ReadOnlyEventComparatorIsEvent());
         FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
         taskManager.setPersons(tempEvents);
