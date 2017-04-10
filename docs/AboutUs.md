@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [List tasks](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#23-listing-tasks-by-type--list-list_type)<br>
    * [Edit tags](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)<br>
 * **Code written**: [[functional code](../collated/main/A0139872R.md)][[test code](../collated/test/A0139872R.md)]<br>
-* **Other major contributions:** <br>
+* **Other major contributions:** Sample test data <br>
 
 
 -----
@@ -30,7 +30,8 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Customize alternative commands](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#215-customize-alternative-commands-shortcut)<br>
    * [View shortcuts](CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#216-viewing-all-the-shortcut-keys-viewshortcuts)<br>
 * **Code written**: [[functional code](../collated/main/A0143076J.md)][[test code](../collated/test/A0143076J.md)]<br>
-* **Other major contributions:** <br>
+* **Other major contributions:** Testing, setting up coveralls and codacy badges <br>
+
 
 
 -----
@@ -39,7 +40,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/megan-quek.png" width="150"><br>
 
 * **Components in charge of:** [Storage](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/DeveloperGuide.md#25-storage-component)<br>
-* **Aspects/tools in charge of:** Documentation <br>
+* **Aspects/tools in charge of:** Documentation, Testing <br>
 * **Features implemented:** <br>
    * [Delete task(s)](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#26-deleting-a-task--delete)<br>
    * [Mark task(s)](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#27-mark-a-task--mark)<br>
@@ -62,7 +63,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Redo](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#210-redoing-previous-step--redo)<br>
    * [Add special tags](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#22-adding-a-task--add)<br>
 * **Code written**: [[functional code](../collated/main/A0139845R.md)][[test code](../collated/test/A0139845R.md)]<br>
-* **Other major contributions:** <br>
+* **Other major contributions:** setting up Travis build, Testing, Test script <br>
 
 
 -----

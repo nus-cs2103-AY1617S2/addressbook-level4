@@ -164,7 +164,7 @@ The `UI` component,
 
 Author: Ching Hui Qi
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/LogicComponentUpdated.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/watodo/logic/Logic.java)
@@ -174,10 +174,25 @@ _Figure 2.3.1 : Structure of the Logic Component_
 3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
+The structure of `Logic` component follows the design pattern of Command Pattern, as shown in the diagram below. In this case, the `Parser` classes play the role of the `<<Client>>`, creating `Command` objects for the LogicManager (`<<Invoker>>`) to execute. <br>
+<img src="images/commandpattern.png" width="500"><br>
+This design also follows the Open-Closed Principle as creating new commands would only require the creation of a `Parser` class and `Command` class for that particular command, and other parts of the code need not be modified.
+
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+
+The Sequence Diagram for the `execute("add task desc by/fri #tag")` API call is similar to above, with more interactions within the Parser to Command class. This interaction is captured in the diagram below. <br>
+<img src="images/SDforAddTaskParsing.png" width="600"><br>
+_Figure 2.3.2 : Interactions Inside the Logic Component for the `add task desc by/fri #tag` Command_ <br>
+
+The `DateTimeParser` and `TagsParser` classes are created to allow for flexible ordering of the command format and applies the Single Responsibility Principle, hence while this design decision may result in more coupling, there is greater cohesion.
+
+**Support for commands `undo` and `redo`** <br>
+`undo` and `redo` of commands is implemented through the use of two Stacks, one for storing command histories and the other for storing undone commands when `undo` is called. <br>
+`undo` and `redo` is only supported for certain commands for example `add`, `edit`, `delete`, `clear` etc, and when such Command objects are created they are pushed into the commandHistory stack. When `undo` is called by the user, the most recent Command is popped from the commandHistory stack and pushed into the undoneHistory stack. The reverse happens when `redo` is called. <br>
+Each method that supports `undo` and `redo` will then have their own unexecute() and redo() methods for undo and redo respectively. <br>
 
 ### 2.4. Model component
 

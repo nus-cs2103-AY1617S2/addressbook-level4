@@ -205,8 +205,8 @@ public class UnmarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
-        updateTaskListAtIndex(currIndex, this.unmarkedTask);
-        storeTasksForUndo(this.taskToUnmark, this.unmarkedTask);
+        updateTaskListAtIndex(currIndex, unmarkedTask);
+        storeTasksForUndo(taskToUnmark, unmarkedTask);
     }
 
     private ReadOnlyTask getTaskToUnmark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
