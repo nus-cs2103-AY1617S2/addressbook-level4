@@ -24,7 +24,7 @@ This guide will help you get started with the commands and features of GeeKeep.
     * [List](#37-listing-all-tasks-list)
     * [List Done](#38-listing-all-completed-tasks-listdone)
     * [List Undone](#39-listing-all-uncompleted-tasks-listundone)
-    * [Find](#310-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find)
+    * [Find](#310-finding-all-tasks-containing-any-keyword-in-their-title-specified-tags-or-in-a-specified-time-period-find)
     * [Undo](#311-undo-most-recent-command-undo)
     * [Redo](#312-redo-most-recent-undo)
     * [Save](#313-saving-the-data)
