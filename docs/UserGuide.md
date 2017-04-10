@@ -38,6 +38,7 @@ TypeTask is especially good for you if you want to: <br>
 
 ## 2. Quick Start
 
+### 2.1. Download
 1. Ensure that you have Java version [1.8.0_60](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html) or later installed in your Computer.<br>
 
    ```
@@ -47,7 +48,7 @@ TypeTask is especially good for you if you want to: <br>
 
 2. Download the latest version of TypeTask (click on `TypeTask.jar` under the [releases](../../../releases) tab).
 
-<img src="images/releasesExample.png" width="400">
+<img src="images/releasesExample.png" width="600">
 
 <h5 align="left">Fig 1. Locating typetask.jar in the Releases Tab</h5>
 
@@ -55,11 +56,22 @@ TypeTask is especially good for you if you want to: <br>
 
 4. Double-click the file to start the app. The application should appear on your screen in a few seconds.
 
-<img src="images/TypeTaskUi.png" width="800">
+### 2.2. Visual Introduction
+<img src="images/TypeTaskUiDescription.png" width="1000">
 
 <h5 align="left">Fig 2. TypeTask’s User Interface </h5>
 
-5. TypeTask automatically assigns your tasks certain colours to help you differentiate them easily. <br>
+1. **Command Box**<br>
+Provides a box where user commands are entered.
+
+2. **Result Display**<br>
+Displays a message detailing the results of the most recent command and the changes that occured as a result. 
+The Result Display also shows a feedback message to the user if a wrong command or parameter was entered, along with an explanation of the error if relevant.
+
+3. **Task List Panel**<br>
+Displays a list of tasks under a particular list, if specified. Otherwise, it displays all tasks that exist in TypeTask.<br>
+TypeTask automatically assigns your tasks with certain colours to help you differentiate them easily. <br>
+   
    `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
    `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
    `Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
@@ -68,18 +80,15 @@ TypeTask is especially good for you if you want to: <br>
    > Note that all tasks that fall outside of these categories will appear normally.
       i.e. no additional colours.
    ```
-
-5. Type any command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   Type any command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
-6. Some example commands you can try:
+   Other example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` Attend Meeting by: 12 Feb 11am` :
      adds the task `Attend Meeting` to the Task Manager.
    * **`delete`**` 1` : deletes the task shown with index 1
    * **`exit`** : exits the app
-
-7. Refer to the [Features](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#3-features) section below for details about each command.<br>
 &nbsp;
 
 ## 3. Features
@@ -176,7 +185,7 @@ Examples:
 
 
 ### 3.2.4. Adding a Priority Task/Event :  `add`, `a`, `+`
-What if you have tasks that are more important than others? You can add this task with a "high priority" marker.
+What if you have tasks that are more important than others? You can add this task with a <img src="images/yellow_exclamation_mark.png" width="60"> label to indicate that it has a high priority.
 
 Format:<br>
 `add <TASK NAME> p/<PRIORITY>`<br>
