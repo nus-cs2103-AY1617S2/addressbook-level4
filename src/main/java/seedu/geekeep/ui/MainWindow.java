@@ -36,9 +36,9 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author A0148037E
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel floatingTaskListPanel;
-    private TaskListPanel eventListPanel;
-    private TaskListPanel deadlineListPanel;
+    private FloatingTaskListPanel floatingTaskListPanel;
+    private EventListPanel eventListPanel;
+    private DeadlineListPanel deadlineListPanel;
     private Config config;
 
     @FXML
@@ -122,27 +122,20 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author A0148037E
     void fillInnerParts() {
-        eventListPanel = new TaskListPanel("event",
-                getEventListPlaceholder(), logic.getFilteredEventList());
+        eventListPanel = new EventListPanel(getEventListPlaceholder(),
+                logic.getFilteredEventList());
 
-        floatingTaskListPanel = new TaskListPanel("floatingTask",
-                getFloatingTaskListPlaceholder(), logic.getFilteredFloatingTaskList());
+        floatingTaskListPanel = new FloatingTaskListPanel(getFloatingTaskListPlaceholder(),
+                logic.getFilteredFloatingTaskList());
 
-        deadlineListPanel = new TaskListPanel("deadline",
-                getDeadlineListPlaceholder(), logic.getFilteredDeadlineList());
+        deadlineListPanel = new DeadlineListPanel(getDeadlineListPlaceholder(),
+                logic.getFilteredDeadlineList());
 
         new ResultDisplay(getResultDisplayPlaceholder());
 
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
 
         new CommandBox(getCommandBoxPlaceholder(), logic);
-    }
-
-    /**
-     * Sets the default view of main window to show the undone tasks.
-     */
-    public void setDefaultView() {
-        logic.setFilteredTaskListToShowUndone();
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -233,16 +226,22 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getFloatingTaskListPanel() {
+    public FloatingTaskListPanel getFloatingTaskListPanel() {
         return this.floatingTaskListPanel;
     }
 
-    public TaskListPanel getEventListPanel() {
+    public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
 
-    public TaskListPanel getDeadlineListPanel() {
+    public DeadlineListPanel getDeadlineListPanel() {
         return this.deadlineListPanel;
+    }
+
+    public void clearSelectionInAllPanels() {
+        floatingTaskListPanel.clearSelection();
+        eventListPanel.clearSelection();
+        deadlineListPanel.clearSelection();
     }
 
     @Subscribe

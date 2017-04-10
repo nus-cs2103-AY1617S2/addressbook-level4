@@ -4,6 +4,5 @@ package seedu.geekeep.commons.core;
 public enum TaskCategory {
     ALL,
     FINISHED,
-    UPCOMING,
-    NOCHANGE;
+    UPCOMING;
 }

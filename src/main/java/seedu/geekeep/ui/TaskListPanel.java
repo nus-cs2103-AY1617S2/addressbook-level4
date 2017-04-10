@@ -13,7 +13,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
@@ -23,10 +22,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String EVENT_FXML = "EventListPanel.fxml";
-    private static final String FLOATING_TASK_FXML = "FloatingTaskListPanel.fxml";
-    private static final String DEADLINE_FXML = "DeadlineListPanel.fxml";
+    //private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     //Corresponding tab indices in the TabPane for different tabs.
     private static final int ALL_TAB = 0;
@@ -34,7 +30,9 @@ public class TaskListPanel extends UiPart<Region> {
     private static final int FINISHED_TAB = 2;
 
     private ListView<ReadOnlyTask> currentListView;
-    private String type;
+
+    protected String type;
+    protected Logger logger = null;
 
     @FXML
     private TabPane tabPanePlaceHolder;
@@ -48,27 +46,15 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> finishedListView;
 
-    public TaskListPanel(String type, AnchorPane taskListPlaceholder,
+    public TaskListPanel(String fxml, AnchorPane taskListPlaceholder,
             ObservableList<ReadOnlyTask> filteredList) {
-        super(getFxmlFromType(type));
-        this.type = type;
+        super(fxml);
         currentListView = allListView;
         setConnections(filteredList, allListView);
         setConnections(filteredList, finishedListView);
         setConnections(filteredList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
-        selectTab(UPCOMING_TAB);
-    }
-
-    private static String getFxmlFromType(String type) {
-        if ("deadline".equals(type)) {
-            return DEADLINE_FXML;
-        } else if ("floatingTask".equals(type)) {
-            return FLOATING_TASK_FXML;
-        } else {
-            assert "event".equals(type);
-            return EVENT_FXML;
-        }
+        selectTab(ALL_TAB);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList,
@@ -101,25 +87,27 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    public void clearSelection() {
+        currentListView.getSelectionModel().clearSelection();
+    }
 
     public void switchListView(TaskCategory category) {
         switch (category) {
-        case NOCHANGE:
-            break;
         case ALL:
             selectTab(ALL_TAB);
+            currentListView = allListView;
             break;
         case FINISHED:
             selectTab(FINISHED_TAB);
+            currentListView = finishedListView;
             break;
         default:
             assert category == TaskCategory.UPCOMING;
             selectTab(UPCOMING_TAB);
+            currentListView = upcomingListView;
             break;
         }
-        if (category != TaskCategory.NOCHANGE) {
-            logger.info("Switched to " + category + " in " + type);
-        }
+        logger.info("Switched to " + category + " in " + type);
     }
 
     public void selectTab(int tab) {

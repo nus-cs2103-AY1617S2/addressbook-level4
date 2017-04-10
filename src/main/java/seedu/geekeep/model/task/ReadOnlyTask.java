@@ -18,17 +18,17 @@ public interface ReadOnlyTask {
         builder.append(getTitle());
 
         if (getEndDateTime() != null && getStartDateTime() != null) {
-            builder.append(" Starting from: " + getStartDateTime() + " until " + getEndDateTime());
+            builder.append(" , starting from: " + getStartDateTime() + " until " + getEndDateTime());
         } else if (getEndDateTime() != null && getStartDateTime() == null) {
-            builder.append(" Due by: " + getEndDateTime().value);
+            builder.append(" , due by: " + getEndDateTime().value);
         }
 
         if (getDescriptoin() != null) {
-            builder.append(" Details: " + getDescriptoin().value);
+            builder.append(" , details: " + getDescriptoin().value);
         }
 
         if (!getTags().isEmpty()) {
-            builder.append(" Tags: ");
+            builder.append(" , tags: ");
             getTags().forEach(builder::append);
         }
         return builder.toString();
