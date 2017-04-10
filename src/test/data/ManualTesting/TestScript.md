@@ -141,7 +141,7 @@ The event recurring task has been recurred 3 more times, everyday for 3 days.
 
 ### 2. Recur Deadlines
 Input <br>
-1. 'ADD recurring deadline BY 05/05/17 1400` <br>
+1. `ADD recurring deadline BY 05/05/17 1400` <br>
 2. `RECUR 5 4 months` <br>
 
 Result: <br>
@@ -182,10 +182,10 @@ Input <br>
 5. `LIST`
 
 Result: <br>
-1. "Listed all completed tasks" 
+1. "Listed all completed tasks" <br>
 Notice how there is no completed task at the moment
-2. "Listed all uncompleted tasks"
-3. Mark task at index 1 as completed
+2. "Listed all uncompleted tasks" <br>
+3. Mark task at index 1 as completed <br>
 Notice that the previously marked task is now in the completed list
 4. View previously marked task
 5. Show the rest of the uncompleted tasks
