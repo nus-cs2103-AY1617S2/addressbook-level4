@@ -169,7 +169,7 @@ Examples:
   Returns `My Task` but not `task`
 * `find date1 tag2 Task3`<br>
   Returns any task having any of the keywords `date1` , `tag2`  or `Task3`
-
+  
 ### 2.9. Editing a task : `edit`
 
 Edits an existing task in the task scheduler.<br>
@@ -211,7 +211,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the undone list of the task scheduler.
-* `list Task2`<br>
+* `list by tag Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
 * `list`<br>
