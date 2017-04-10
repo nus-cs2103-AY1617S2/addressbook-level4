@@ -236,6 +236,9 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 Author: Hon Kean Wai
 
+<img src="images/ModelClassDiagram.png" width="800"><br>
+_Figure 2.4.1 : Class Diagram of the Model Component_
+
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 The `Model` component:
@@ -248,9 +251,6 @@ The `Model` component:
 * Interacts with the other components by raising events
 
 The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1  
-
-<img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Class Diagram of the Model Component_
 
 The `ModelManager` implements the `Model` interface. It contains a `UserPrefs` object that represents the user's preferences. It also contains a `TaskManager` along with a `TaskManagerStack` which represents a stack of `TaskManager` objects which are necessary from redo and undo commands. `TaskManagerStack` is implemented as a Singleton Pattern as there should exist only one instance of it the app is running.
 
