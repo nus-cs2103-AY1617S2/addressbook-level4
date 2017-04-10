@@ -1112,7 +1112,7 @@ Input:
 Description Box response:
 ****Done task: [master m249 | DueDate: 04/04/2019 12:00]****
 
-- The done list is now empty because the task is moved back to undone list.
+- Task 1 is marked as done and moved to the done list (done list not shown).
 
 <br>
 
