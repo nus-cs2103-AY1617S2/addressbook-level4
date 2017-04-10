@@ -91,20 +91,20 @@ public class DeleteCommand extends Command {
     private void deleteTaskAtIndex(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
             throws UniqueTaskList.TaskNotFoundException {
         this.taskToDelete = getTaskToDelete(currIndex, lastShownList);
-        deleteTask(taskToDelete);
         storeTasksForUndo(taskToDelete);
+        deleteTask(taskToDelete);
     }
 
     private ReadOnlyTask getTaskToDelete(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return lastShownList.get(currIndex);
     }
 
-    private void deleteTask(ReadOnlyTask taskToDelete) throws UniqueTaskList.TaskNotFoundException {
-        model.deleteTask(taskToDelete);
-    }
-
     private void storeTasksForUndo(ReadOnlyTask taskToDelete) {
         this.deletedTaskList.push(new Task(taskToDelete));
+    }
+
+    private void deleteTask(ReadOnlyTask taskToDelete) throws UniqueTaskList.TaskNotFoundException {
+        model.deleteTask(taskToDelete);
     }
 
 ```
@@ -205,8 +205,8 @@ public class UnmarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
-        updateTaskListAtIndex(currIndex, unmarkedTask);
         storeTasksForUndo(taskToUnmark, unmarkedTask);
+        updateTaskListAtIndex(currIndex, unmarkedTask);
     }
 
     private ReadOnlyTask getTaskToUnmark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
@@ -237,13 +237,13 @@ public class UnmarkCommand extends Command {
         return unmarkedTask;
     }
 
-    private void updateTaskListAtIndex(int currIndex, Task unmarkedTask) throws UniqueTaskList.DuplicateTaskException {
-        model.updateTask(currIndex, unmarkedTask);
-    }
-
     private void storeTasksForUndo(ReadOnlyTask taskToUnmark, Task unmarkedTask) {
         this.taskToUnmarkList.push(new Task(taskToUnmark));
         this.unmarkedTaskList.push(unmarkedTask);
+    }
+
+    private void updateTaskListAtIndex(int currIndex, Task unmarkedTask) throws UniqueTaskList.DuplicateTaskException {
+        model.updateTask(currIndex, unmarkedTask);
     }
 
 ```
