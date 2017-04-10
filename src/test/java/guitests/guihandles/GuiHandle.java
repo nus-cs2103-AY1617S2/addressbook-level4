@@ -63,6 +63,7 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
+        textField.end();
         guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
     }
 

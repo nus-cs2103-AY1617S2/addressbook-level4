@@ -19,6 +19,12 @@ Role: Developer <br>
 Responsibilities: Storage,
                   Tests
 
+Features:
+
+* Undo/Redo command
+* Retrieve command history
+* Change storage location
+
 Code Written: [[functional code](./collated/main/A0147622H.md)][[test code](./collated/test/A0147622H.md)]
 
 -----
