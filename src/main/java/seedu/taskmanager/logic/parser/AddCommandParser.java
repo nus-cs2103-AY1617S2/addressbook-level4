@@ -184,6 +184,9 @@ public class AddCommandParser {
         return !isEmptyField(onPrefixInput);
     }
 
+    /**
+     * Process input after To Prefix into the appropriate End Date form
+     */
     private String processInputToDateForm(String[] splitedToPrefixInput) throws IllegalValueException {
         String endDate;
         if (isMatchedInput(splitedToPrefixInput[0].trim(), STARTDATE_VALIDATION_REGEX2)) {
@@ -195,6 +198,9 @@ public class AddCommandParser {
         return endDate;
     }
 
+    /**
+     * Check that Input after TO prefix is not in only time format
+     */
     private void validToPrefixInputCheck(String toPrefixInput) {
         if (isMatchedInput(toPrefixInput.trim(), "\\d+")) {
             throw new NoSuchElementException("");

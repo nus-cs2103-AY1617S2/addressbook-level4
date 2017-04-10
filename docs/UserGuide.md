@@ -176,14 +176,13 @@ Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
 You can use this command to update existing task in ProcrastiNomore. <br>
 There are 2 types of updates that ProcrastiNomore supports:
 
-#### 3.3.1. Update existing task to a floating task
+#### 3.3.1. Update existing task to a basic task
+
 
 Format: `UPDATE` `Task Index`
-Sample Update task name:
-> Type the following command `UPDATE 36 Buy a horse` into the command Box and press <kbd>Enter</kbd>
-> <img src="images/ProcrastiNomore_Before_Update_Task_Name.PNG" width="1000">
-> The application will update the existing task with task index 36 and change the task name from "Buy a cat" to "Buy a horse"
-> <img src="images/ProcrastiNomore_After_Update_Task_Name.PNG" width="1000">
+
+Changes the existing task to a basic task with the same name.<br>
+If it was already a basic task, it will remain a basic task.
 
 #### 3.3.2. Update specific fields of an existing task
 
@@ -215,10 +214,14 @@ Format: `UPDATE` `Task Index` `FROM` date /date time -> Changes existing deadlin
 Format: `UPDATE` `Task Index` `FROM` date / time / date time<br>
 > Changes existing event start date/time to specified date/time without changing other fields<br>
 > * When only a date is provided, automatically assign Start Time to be 0000hrs
+
 Format:`UPDATE` `Task Index` `TO` date / time / date time<br>
 > Changes existing event end date/time to specified date/time without changing other fields<br>
 > * When only a date is provided, automatically assign End Time to be 2359hrs 
 
+Format:`UPDATE` `Task Index` `FROM` time `TO` time<br>
+> Changes existing event start time and end time, with the time specified.
+> If date is also included, dates will also change accordingly
 
 Sample Update event task time:
 > Type the following command `UPDATE 1 TO 0230` into the command Box and press <kbd>Enter</kbd>
@@ -370,6 +373,9 @@ Examples:
 >In the event that a month does not contain the date, it will skip the month and there will be one less instance of the event.
 >eg. Recurring an event on 31/01/17 for next 2 months will skip Feburary and only add the event in March.
 
+### 3.16. Select by entering keywords/dates: `SELECT` `TaskIndex`
+
+Scrolls to the task with the selected task index in the relevant task pane
 
 ### 3.15. Exiting the program : `EXIT`
 

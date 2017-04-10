@@ -99,8 +99,20 @@ public interface ReadOnlyTask {
      */
     boolean isFloatingTask();
 
+    // @@author A0139520L
+
+    /**
+     * Checks the fields populated within the task
+     *
+     * @return true if task is a Floating Task
+     */
     boolean isWithinStartEndDuration(ReadOnlyTask t);
 
+    /**
+     * Checks the isMarkedAsCompleted within the task
+     *
+     * @return true if task is a Completed Task
+     */
     boolean isCompletedTask();
 
 }
