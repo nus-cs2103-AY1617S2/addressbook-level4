@@ -391,14 +391,16 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
 `* * *` | user | Change my save location | I can choose where my data file is saved
 `* * ` | user | Get a calendar view list of my current blocked out times and what I have to do | Know what else I can add
+`* * ` | user | Batch Delete my tasks | To easily clear a few days worth of tasks
+`* * ` | user | Batch mark my tasks as done | When I am too busy to clear it during the day and only do it at one shot at night
 `* * ` | user | Schedule my tasks within the constrains of a workday | Avoid scheduling tasks during my works time and leave break time in between tasks
 `* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
 `* *` | user | Add descriptions to my task | have additional details of my tasks
 `* *` | user | Group my tasks together with a common tag | Organized my tasks according to their groups in the scheduler
-`* *` | user | List all tasks by start or end date | See which Events are happening soon
-`* *` | advanced user| Sort my tasks according to deadlines, dates or title | Have a better overviews of tasks scheduled
+`* *` | user | List all tasks with specific titles, descriptions, tags, start dates or end dates| Identify specific tasks with certain identifiers
+`* *` | advanced user| Sort my tasks according to deadlines, start dates or end dates | Have a better overviews of tasks scheduled
 `* *` | advanced user | Keep a list of done task, marked as done(strike-out) | Keep track of what I have already done
-`* *` | advance user | Clear all my done tasks | Clear done tasks from scheduler
+`* *` | advance user | Clear all my done tasks in one shot | Clear done tasks from scheduler
 `* ` | user | Get suggestions when a task should be scheduled | Automatically click on which date and time I would like it scheduled
 `* ` | user | Specify locations that are linked to Google Maps | Know the best way to get there from my current location (Workplace)
 `* ` | user | Automatically reschedule a task I am supposed to do now | No worry about when to schedule the task
@@ -531,7 +533,7 @@ Use case ends.
 > Use case resumes at step 2 <br>
 
 
-#### Use case: List Task (by finding)
+#### Use case: Find Task
 
 **MSS**
 
