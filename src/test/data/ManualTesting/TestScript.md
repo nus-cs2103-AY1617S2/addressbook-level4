@@ -343,17 +343,17 @@
 1. YATS will clear all done task in the task list, both primary and secondary
 > All done tasks have been cleared!<br>
 
-### Reset
-`reset`
-1. YATS will clear all tasks in the task list, both primary and secondary
-> Task Manager has been reset!<br>
-
 ### Save
 `save default`
 1. YATS will change the save location to the default save location
 
 `save FILE_LOCATION`
 1. YATS will change the save location to the specified save location on user's computer
+
+### Reset
+`reset`
+1. YATS will clear all tasks in the task list, both primary and secondary
+> Task Manager has been reset!<br>
 
 ### Help
 `help`
