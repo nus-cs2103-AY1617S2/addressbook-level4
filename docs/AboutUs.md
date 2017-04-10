@@ -20,7 +20,8 @@ Responsibilities:
    * [Edit](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Sort](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0146809W.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0146809W.md)]
-* Other major contributions: Did most of the initial refactoring as well as code integration
+* Other major contributions:
+  * Did most of the initial refactoring as well as code integration
 
 -----
 
@@ -35,8 +36,11 @@ Role: Developer <br>
    * [Undo](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Redo](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Set](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Input Stack](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0138909R.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0138909R.md)]
 * Other major contributions:
+  * Creates issues and assign them to teammates.
+  * Dogfooding DoIT application to find bugs
 
 
 -----
@@ -55,6 +59,8 @@ Responsibilities:
    * [Sort](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0139399J.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0139399J.md)]
 * Other major contributions:
+   * Help teammates to understand and fix bugs
+   * Dogfooding DoIT application to find bugs
 
 -----
 
@@ -69,6 +75,8 @@ Responsibilities:
    * [Overdue Highlighting](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0160076L.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0160076L.md)]
 * Other major contributions:
+   * Implemented shortcuts
+   * Designed the User Interface
 
 -----
 
