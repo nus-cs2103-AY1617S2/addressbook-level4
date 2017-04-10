@@ -51,7 +51,7 @@ A completed task card is shown with a green color bar:
 A overdued task card is shown with a red color bar:<br>
 <img src="images/overdued_task.png" height="80" width="600"> 
 <br>
-There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:<br>
+There are three priorities associated with task: low, medium and high, and they are highlighted using red, orange and yellow circles at the end of the task card:<br>
 <img src="images/pri_high.png" height="50" width="100"> <img src="images/pri_medium.png" height="50" width="100"><img src="images/pri_low.png" height="50" width="100"> 
 <br>
 
