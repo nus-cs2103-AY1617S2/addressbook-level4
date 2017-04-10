@@ -53,7 +53,9 @@
 
 
 ### Schedule
-`schedule`
+`schedule TASK`
+`schedule TASK -h HOUR -m MINUTE`
+`schedule TASK -l LOCATION -d DESCRIPTION -h HOUR -m MINUTE`
 
 ### Find
 `find TASK_TITLE`
@@ -68,7 +70,7 @@
 
 ### Undo
 `undo`
-1. Application will restore the previous state if the previous command mutates the list
+1. Application will restore the previous state if the previous command mutates the list 
 
 ### Redo
 `redo`
