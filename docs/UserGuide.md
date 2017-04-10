@@ -72,6 +72,7 @@ Format: `add  EVENT_NAME -t TIME [-l LOCATION -d DESCRIPTION -T TAGS]`
 > - Events can have any number of tags (including 0)
 > - If only start or end time is specified, the other will be automatically filled with a duration of 2 hours
 > - Any time parameter(START_TIME/END_TIME/TIME) allows input of natural language, but it has certain limitations regarding format of input, ssee [Q&A](#timeInput) for more information.
+> - Note that add does not check if the end time is earlier than the start time, and it will be an allowed input. You can edit the start time later using the edit function.
 
 Examples:
 
