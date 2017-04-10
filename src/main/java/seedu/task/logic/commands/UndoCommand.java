@@ -29,6 +29,7 @@ public class UndoCommand extends Command {
         assert model != null;
         assert storage != null;
 
+        //Check that undo call is valid.
         int undoCount = history.getUndoCount();
         if (undoCount <= 0) {
             return new CommandResult(MESSAGE_FAIL);
@@ -36,10 +37,12 @@ public class UndoCommand extends Command {
 
         try {
             ReadOnlyTaskManager backupData = readTaskManager(history.getUndoFilePath());
-            model.loadData(backupData);
+            model.undoData(backupData);
         } catch (IOException io) {
+            history.resetUndoCount();
             return new CommandResult(MESSAGE_FAIL_NOT_FOUND);
         } catch (IllegalValueException ive) {
+            history.resetUndoCount();
             return new CommandResult(Task.MESSAGE_TASK_CONSTRAINTS);
         }
 

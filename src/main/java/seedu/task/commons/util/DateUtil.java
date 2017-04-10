@@ -1,16 +1,21 @@
 package seedu.task.commons.util;
 
+import java.util.logging.Logger;
+
 import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.Date;
 
 //@@author A0142487Y
 public class DateUtil {
 
+    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
+
     /**
-     * Extracts valid information by parsing a sentence to formulate a Date object. If no valid date can be inferred, an
-     * empty Date object will be returned.
+     * Extracts valid information by parsing a{@code sentence} to formulate a Date object. If no valid date can be
+     * inferred, an empty Date object will be returned.
      *
      * @param sentence
      * @return
@@ -21,10 +26,10 @@ public class DateUtil {
     }
 
     /**
-     * Extracts valid information by parsing a sentence to formulate a Date object. If no valid date can be inferred, an
-     * empty Date object will be returned.
+     * Extracts valid information by parsing a {@code sentence} to formulate a Date object. If no valid date can be
+     * inferred, an empty Date object will be returned.
      *
-     * If a valid Date is succefully extracted, the given String[] will be modified E.g. sentence is : Do work Thursday
+     * If a valid date is succefully extracted, the given String[] will be modified E.g. sentence is : Do work Thursday
      * -> Do work after the extraction of Thursday.
      *
      * @param sentence
@@ -56,8 +61,8 @@ public class DateUtil {
     }
 
     /**
-     * Extracts valid information by parsing a given number of words to formulate a Date object. If no valid date can be
-     * inferred, null will be returned.
+     * Extracts valid information by parsing a given {@code number} of {@code words} to formulate a Date object. If no
+     * valid date can be inferred, null will be returned.
      *
      * @param words
      * @param number
@@ -70,20 +75,17 @@ public class DateUtil {
         assert words.length == number;
 
         String testDate = StringUtil.arrayToString(words);
-        if (Date.isValidDate(testDate)) {
-            try {
-                return new Date(testDate);
-            } catch (IllegalValueException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return null;
-            }
+        try {
+            return new Date(testDate);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            logger.info(e.getMessage());
+            return null;
         }
-        return null;
     }
 
     /**
-     * Takes in two arrays of Strings and removes all matches of the second array from the first array
+     * A helper function that removes existing {@code words} from the {@code sentence}
      *
      * @param sentence
      * @param words

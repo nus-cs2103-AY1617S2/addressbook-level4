@@ -24,6 +24,7 @@ public class SaveCommand extends Command {
 
     /**
      * Creates a Save command
+     * @param pathName the designated path to save to
      */
     public SaveCommand(String pathName) {
         this.pathName = pathName;

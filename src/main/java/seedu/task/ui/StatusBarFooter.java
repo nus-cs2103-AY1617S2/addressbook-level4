@@ -62,12 +62,17 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     //@@author A0140063X
+    /**
+     * Displays last updated timing.
+     *
+     * @param tmce  TaskManagerChangedEvent that occurred.
+     */
     @Subscribe
-    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
+    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent tmce) {
         PrettyTime pretty = new PrettyTime();
         Date now = new Date();
         String lastUpdated = (new Date()).toString() + ", " + pretty.format(now);
-        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        logger.info(LogsCenter.getEventHandlingLogMessage(tmce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
 }

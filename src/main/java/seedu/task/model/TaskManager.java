@@ -85,9 +85,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTaskToFront(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.addToFront(p);
+    public void addTaskToFront(Task task) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.addToFront(task);
     }
 
     /**
@@ -97,9 +97,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.add(p);
+    public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.add(task);
     }
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
@@ -197,20 +197,35 @@ public class TaskManager implements ReadOnlyTaskManager {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
-
     //@@author A0139975J
+    /**
+     *
+     * @param index Target task to update to done.
+     */
     public void updateDone(int index) {
         tasks.done(index);
     }
 
     //@@author A0139975J
+    /**
+     *
+     * @param index Target task to update to undone.
+     */
     public void updateUnDone(int index) {
         tasks.undone(index);
     }
 
     //@@author A0140063X
-    public void setTaskEventId(int index, String eventId) {
-        tasks.setTaskEventId(index, eventId);
+    /**
+     *
+     * @param target    Target task to change.
+     * @param eventId   Event id to change into.
+     * @throws UniqueTaskList.TaskNotFoundException     If Task is not found.
+     * @throws IllegalValueException                    If eventId is invalid.
+     */
+    public void setTaskEventId(ReadOnlyTask target, String eventId)
+            throws UniqueTaskList.TaskNotFoundException, IllegalValueException {
+        tasks.setTaskEventId(target, eventId);
     }
 
     //@@author

@@ -411,18 +411,19 @@ This section describes the find feature implementation.
 * Searches for the given keywords as string objects, in all string fields of every task, including `Name`,`Remark`,`Location` and `Tags`
 * Searches for both full match and substring match for the string objects
 * Searches for date in the `startDate` and `endDate` fields of every task e.g. `"find Apr 4"` -> searches for any task with a `startDate` **or** `endDate` of `Apr 4 2017`(default the current year)
-* Able to handle complicated find commands reasonably well e.g. _"find prepare Christmas on Nov 31 2018"_ -> will search for a task that has a date of _Nov 31 2018_ **and** a keyword of _Christmas_.
+* Able to handle complicated find commands reasonably well e.g. _"find prepare Christmas on Nov 31 2018"_ -> will search for a task that contains a date of _Nov 31 2018_ **or** a keyword of _Christmas_.
+
 
 **Implementation details**
 
 1. The string arguments passed in for a FindCommand is parsed first to identify for any possible date string: e.g._"find meeting next tuesday"_. _"next tuesday"_ is extracted to form a `Date` and searched for as a date.
 2. Upon extracting the possible string to form a date, it still searches these strings as keywords, so in the above example, `"next"` and `"tuesday"` will be searched as keywords as well.
-3. The search for _"next tuesday"_ is successful is either a date _next tuesday_ is found or both _"next"_ **and** _"tuesday"_ as strings are found.
+3. The search for _"next tuesday"_ is successful if either a date _next tuesday_ is found or both _"next"_ **and** _"tuesday"_ as strings are found.
 4. The search result for a possible date string is then combined with the result for other keywords strings to return correctly matching tasks.
 
 **Future Improvement**
 
-Because the extraction of strings to form possible dates depends on the implementation of _Natural Language Processing_ ([Natty Date Parser](http://natty.joestelmach.com/), an external API), which is not perfect and often susceptible different interpretations, it means `FindCommand` may give inaccurate search results to complicated arguments. Improvements to achieve better _Natural Language Processing_ are planned. Meanwhile, we welcome any feedback on incorrect behaviour of `FindCommand`.([Conntact us](docs/ContactUs.md))
+Because the extraction of strings to form possible dates depends on the implementation of _Natural Language Processing_ ([Natty Date Parser](http://natty.joestelmach.com/), an external API), which is not perfect and often susceptible different interpretations, it means `FindCommand` may give inaccurate search results to complicated arguments or some keywords that the system fais to capture as an invalid date. Improvements to achieve better _Natural Language Processing_ are planned. Meanwhile, we welcome any feedback on incorrect behaviour of `FindCommand`.([Conntact us](docs/ContactUs.md))
 
 ### 3.6 Implementation of UI - TitlePane and Colored done task
 

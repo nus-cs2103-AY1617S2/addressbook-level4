@@ -23,14 +23,15 @@ public class Remark {
      *             if given remark string is invalid.
      */
     public Remark(String remark) throws IllegalValueException {
-        if (remark == null || remark.equals("")) {
+        if (remark == null || remark.trim().equals("")) {
             this.value = "";
         } else {
-            String trimmedRemark = remark.trim();
-            if (!isValidRemark(trimmedRemark)) {
-                throw new IllegalValueException(MESSAGE_REMARK_CONSTRAINTS);
-            }
-            this.value = trimmedRemark;
+            this.value = remark.trim();
+//            String trimmedRemark = remark.trim();
+//            if (!isValidRemark(trimmedRemark)) {
+//                throw new IllegalValueException(MESSAGE_REMARK_CONSTRAINTS);
+//            }
+//            this.value = trimmedRemark;
         }
     }
 

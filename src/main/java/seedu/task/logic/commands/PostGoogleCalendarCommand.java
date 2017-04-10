@@ -30,13 +30,16 @@ public class PostGoogleCalendarCommand extends Command {
     public static final String MESSAGE_ALREADY_POSTED = "Task already posted to Google Calendar";
     public static final String MESSAGE_USAGE = COMMAND_WORD_2 + ": Posts events to your Google Calendar.\n"
             + "Post the task identified by INDEX, if no index specified then posts all task in current listing.\n"
+            + "If task have been posted before, it will update the event in Google Calendar.\n"
             + "Parameters: [INDEX]\n"
             + "Example: " + COMMAND_WORD_2;
 
     private final int filteredTaskListIndex;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
+     * Check if index was given and store the information.
+     *
+     * @param filteredTaskListIndex the index of the task in the filtered task list to post
      */
     public PostGoogleCalendarCommand(int filteredTaskListIndex) {
         if (filteredTaskListIndex == NO_INDEX) {
@@ -53,6 +56,7 @@ public class PostGoogleCalendarCommand extends Command {
                 postMultipleEvents();
             } catch (IOException ioe) {
                 return new CommandResult(ioe.getMessage());
+                //connection error will stop the command, otherwise tries to post all tasks.
             }
 
             return new CommandResult(MESSAGE_SUCCESS_MULTIPLE);
@@ -60,7 +64,6 @@ public class PostGoogleCalendarCommand extends Command {
             ReadOnlyTask taskToPost;
             try {
                 taskToPost = postEvent(filteredTaskListIndex);
-                //CommandException is thrown if wrong index
             } catch (IllegalValueException ive) {
                 return new CommandResult(ive.getMessage());
             } catch (IOException ioe) {
@@ -73,6 +76,11 @@ public class PostGoogleCalendarCommand extends Command {
         }
     }
 
+    /**
+     * This method checks the number of event in the current listing and calls postEvent to post every event.
+     *
+     * @throws IOException  If connection failed.
+     */
     private void postMultipleEvents() throws IOException {
         assert model != null;
         int max = model.getFilteredTaskList().size();
@@ -90,6 +98,20 @@ public class PostGoogleCalendarCommand extends Command {
         }
     }
 
+    /**
+     * This method will post the task specified by index to Google Calendar as an event.
+     * Any event posted to Google Calendar must have start and end dates.
+     * Throw IllegalValueException if task do not have them.
+     * If task is new, inserts a new event. Else update the corresponding event in Google Calendar.
+     * Returns the posted task if operation successful.
+     *
+     * @param index         Index of task to post.
+     * @return              Task that was posted.
+     * @throws CommandException         If index is invalid.
+     * @throws IllegalValueException    If either date is missing.
+     * @throws IOException              If connection fails.
+     * @throws TaskNotFoundException    If task is not found when updating eventId.
+     */
     private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException,
                                                     IOException, TaskNotFoundException {
         ReadOnlyTask taskToPost = getTaskFromIndex(index);
@@ -103,9 +125,10 @@ public class PostGoogleCalendarCommand extends Command {
         try {
             com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
 
+            //determine if insert or update by checking eventId.
             if (taskToPost.getEventId().trim().isEmpty()) {
                 event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
-                setTaskEventId(index, event.getId());
+                setTaskEventId(taskToPost, event.getId());
 
                 logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
             } else {
@@ -121,9 +144,18 @@ public class PostGoogleCalendarCommand extends Command {
         return taskToPost;
     }
 
-    private void setTaskEventId(int index, String eventId) {
+    /**
+     * This method sets the eventId of given task
+     *
+     * @param task      Task to edit.
+     * @param eventId   EventId to change into.
+     * @throws TaskNotFoundException    If task is not found in model.
+     * @throws IllegalValueException    If eventId is not valid.
+     */
+    private void setTaskEventId(ReadOnlyTask task, String eventId)
+            throws TaskNotFoundException, IllegalValueException {
         assert model != null;
-        model.setTaskEventId(index, eventId);
+        model.setTaskEventId(task, eventId);
     }
 
 }

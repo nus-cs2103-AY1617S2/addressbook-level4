@@ -80,6 +80,11 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0139975J
+    /**
+     * Set Target Task to done.
+     *
+     * @param index  Target task to be set to done
+     */
     public void done(int index) {
         Task taskDone = internalList.get(index);
         taskDone.setIsDone(true);
@@ -87,6 +92,11 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0139975J
+    /**
+     * Set Target Task to undone.
+     *
+     * @param index  Target task to be set to undone
+     */
     public void undone(int index) {
         Task taskUnDone = internalList.get(index);
         taskUnDone.setIsDone(false);
@@ -94,7 +104,24 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0140063X
-    public void setTaskEventId(int index, String eventId) {
+    /**
+     * Set target task's eventId.
+     *
+     * @param target    Target task to set.
+     * @param eventId   Event Id to set.
+     * @throws TaskNotFoundException    If Task is not found.
+     * @throws IllegalValueException    If eventId is invalid.
+     */
+    public void setTaskEventId(ReadOnlyTask target, String eventId)
+            throws TaskNotFoundException, IllegalValueException {
+        assert target != null;
+
+        if (!contains(target)) {
+            throw new TaskNotFoundException();
+        }
+
+        int index = internalList.indexOf(target);
+
         Task task = internalList.get(index);
         task.setEventId(eventId);
         internalList.set(index, task);
@@ -136,7 +163,6 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.iterator();
     }
 
-    //@@author A0140063X
     @Override
     public boolean equals(Object other) {
         ObservableList<Task> list1 = this.internalList;
@@ -149,7 +175,6 @@ public class UniqueTaskList implements Iterable<Task> {
                 ((UniqueTaskList) other).internalList));
     }
 
-    //@@author
     @Override
     public int hashCode() {
         return internalList.hashCode();

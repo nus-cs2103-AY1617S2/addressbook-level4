@@ -9,7 +9,7 @@ import seedu.task.testutil.TestTask;
 //@@author A0142487Y
 public class ListByTagCommandTest extends TaskManagerGuiTest {
     @Test
-    public void find_nonEmptyList_success() {
+    public void listByTag_nonEmptyList_success() {
         assertListByTagResult("list tag friends", "friends"); // no results
         assertListByTagResult("l tag personal", "personal", td.apply); // single result
         assertListByTagResult("l tag school", "school", td.buy); // single result
@@ -27,13 +27,13 @@ public class ListByTagCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_emptyList_success() {
+    public void listByTag_emptyList_success() {
         commandBox.runCommand("clear");
         assertListByTagResult("list tag shopping", "shopping"); // no results
     }
 
     @Test
-    public void find_invalidCommand_fail() {
+    public void listByTag_invalidCommand_fail() {
         commandBox.runCommand("listtttag");
         commandBox.runCommand("ltagggg");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);

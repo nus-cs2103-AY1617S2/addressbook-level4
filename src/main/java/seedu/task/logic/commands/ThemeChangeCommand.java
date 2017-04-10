@@ -1,6 +1,5 @@
 package seedu.task.logic.commands;
 
-//@@author A0142939W
 //@@author A0142487Y
 /**
  * Saves task manager in a different directory.

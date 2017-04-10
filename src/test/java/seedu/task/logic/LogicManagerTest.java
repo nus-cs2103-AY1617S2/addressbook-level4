@@ -8,7 +8,6 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_IN
 import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
@@ -40,15 +40,11 @@ import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.TaskManager;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
-import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
 import seedu.task.storage.StorageManager;
-
+import seedu.task.testutil.TestDataHelper;
 
 public class LogicManagerTest {
 
@@ -58,8 +54,12 @@ public class LogicManagerTest {
     @Rule
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
     private Model model;
     private Logic logic;
+    private TestDataHelper helper = new TestDataHelper();
 
     //These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -91,7 +91,7 @@ public class LogicManagerTest {
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
-        targetedJumpIndex = -1; // non yet
+        targetedJumpIndex = -1; // not yet
     }
 
     @After
@@ -177,7 +177,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_clear() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         model.addTask(helper.generateTask(1));
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
@@ -215,7 +214,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.allocate();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTaskToFront(toBeAdded);
@@ -231,7 +229,6 @@ public class LogicManagerTest {
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.allocate();
 
         // setup starting state
@@ -246,7 +243,6 @@ public class LogicManagerTest {
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
-        TestDataHelper helper = new TestDataHelper();
         TaskManager expectedTM = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedTM.getTaskList();
 
@@ -283,7 +279,6 @@ public class LogicManagerTest {
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-        TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
         // set AB state to 2 tasks
@@ -308,7 +303,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_select_jumpsToCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedTM = helper.generateTaskManager(threeTasks);
@@ -336,7 +330,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedTM = helper.generateTaskManager(threeTasks);
@@ -356,10 +349,8 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
-    //@@author A0140063X
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task shouldBeFoundTask1 = helper.generateTaskWithName("bla bla KEY bla");
         Task shouldBeFoundTask2 = helper.generateTaskWithName("bla KEY bla bceofeia");
         Task shouldBeFoundTask3 = helper.generateTaskWithName("KEYKEYKEY sduauo");
@@ -377,10 +368,8 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-    //@@author
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task t1 = helper.generateTaskWithName("bla bla KEY bla");
         Task t2 = helper.generateTaskWithName("bla KEY bla bceofeia");
         Task t3 = helper.generateTaskWithName("key key");
@@ -399,7 +388,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla random");
         Task tTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia key");
         Task tTarget3 = helper.generateTaskWithName("key key");
@@ -416,143 +404,4 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-
-    /**
-     * A utility class to generate test data.
-     */
-    class TestDataHelper {
-
-        protected Task allocate() throws Exception {
-            Name name = new Name("Allocate time for exercise");
-            Date startDate = new Date("9-03-2017 2300");
-            Date endDate = new Date("10-03-2017 2300");
-            Remark remark = new Remark("Just do it");
-            Location privateLocation = new Location("111, alpha street");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, startDate, endDate, remark, privateLocation, tags, false, "");
-        }
-
-        /**
-         * Generates a valid task using the given seed.
-         * Running this function with the same parameter values guarantees the returned task will have the same state.
-         * Each unique seed will generate a unique Task object.
-         *
-         * @param seed used to generate the task data field values
-         */
-        protected Task generateTask(int seed) throws Exception {
-            return new Task(
-                    new Name("Task " + seed),
-                    new Date(seed + "-05-15 2000"),
-                    new Date(seed + "-05-15 2001"),
-                    new Remark(seed + "@email"),
-                    new Location("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
-                    false, ""
-            );
-        }
-
-        /** Generates the correct add command based on the task given */
-        protected String generateAddCommand(Task p) {
-            StringBuffer cmd = new StringBuffer();
-
-            cmd.append("add ");
-            cmd.append(p.getName().toString());
-            cmd.append(" s/").append(p.getStartDate());
-            cmd.append(" e/").append(p.getEndDate());
-            cmd.append(" r/").append(p.getRemark());
-            cmd.append(" l/").append(p.getLocation());
-
-            UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
-            }
-
-            return cmd.toString();
-        }
-
-        /**
-         * Generates an TaskManager with auto-generated tasks.
-         */
-        protected TaskManager generateTaskManager(int numGenerated) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, numGenerated);
-            taskManager.sortTaskList();
-            return taskManager;
-        }
-
-        /**
-         * Generates an TaskManager based on the list of Tasks given.
-         */
-        protected TaskManager generateTaskManager(List<Task> tasks) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, tasks);
-            return taskManager;
-        }
-
-        /**
-         * Adds auto-generated Task objects to the given TaskManager
-         * @param taskManager The TaskManager to which the Tasks will be added
-         */
-        protected void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToTaskManager(taskManager, generateTaskList(numGenerated));
-        }
-
-        /**
-         * Adds the given list of Tasks to the given TaskManager
-         */
-        protected void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
-            for (Task p: tasksToAdd) {
-                taskManager.addTaskToFront(p);
-            }
-        }
-
-        /**
-         * Adds auto-generated Task objects to the given model
-         * @param model The model to which the Tasks will be added
-         */
-        protected void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generateTaskList(numGenerated));
-        }
-
-        /**
-         * Adds the given list of Tasks to the given model
-         */
-        protected void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
-            for (Task p: tasksToAdd) {
-                model.addTask(p);
-            }
-        }
-
-        /**
-         * Generates a list of Tasks based on the flags.
-         */
-        protected List<Task> generateTaskList(int numGenerated) throws Exception {
-            List<Task> tasks = new ArrayList<>();
-            for (int i = 1; i <= numGenerated; i++) {
-                tasks.add(generateTask(i));
-            }
-            return tasks;
-        }
-
-        protected List<Task> generateTaskList(Task... tasks) {
-            List<Task> toReturn = Arrays.asList(tasks);
-            Collections.sort(toReturn);
-            return toReturn;
-        }
-
-        /**
-         * Generates a Task object with given name. Other fields will have some dummy values.
-         */
-        Task generateTaskWithName(String name) throws Exception {
-            return new Task(
-                    new Name(name),
-                    new Date("4-05-2015"),
-                    new Date("05-05-2015"),
-                    new Remark("1@email"),
-                    new Location("House of 1"), new UniqueTagList(new Tag("tag")), false, ""
-            );
-        }
-    }
 }

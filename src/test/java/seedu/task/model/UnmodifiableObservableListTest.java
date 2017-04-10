@@ -1,6 +1,8 @@
 package seedu.task.model;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static seedu.task.testutil.TestUtil.assertThrows;
 
 import java.util.ArrayList;
@@ -24,12 +26,95 @@ public class UnmodifiableObservableListTest {
 
     private List<Integer> backing;
     private UnmodifiableObservableList<Integer> list;
+    private UnmodifiableObservableList<Integer> listCopy;
+    private UnmodifiableObservableList<Integer> listMoreElements;
 
     @Before
     public void setUp() {
         backing = new ArrayList<>();
         backing.add(10);
         list = new UnmodifiableObservableList<>(FXCollections.observableList(backing));
+        listCopy = new UnmodifiableObservableList<>(FXCollections.observableList(backing));
+        backing.add(1);
+        backing.add(4);
+        backing.add(3);
+        backing.add(4);
+        listMoreElements = new UnmodifiableObservableList<>(FXCollections.observableList(backing));
+    }
+
+    @Test
+    public void equal_symmentric() {
+        assertTrue(list.equals(listCopy));
+        assertTrue(list.hashCode() == listCopy.hashCode());
+    }
+
+    @Test
+    public void indexOf_success() {
+        assertTrue(list.indexOf(10) == 0);
+        assertTrue(listMoreElements.indexOf(4) == 2);
+    }
+
+    @Test
+    public void lastIndexOf_success() {
+        assertTrue(list.lastIndexOf(10) == 0);
+        assertTrue(listMoreElements.lastIndexOf(4) == 4);
+    }
+
+    @Test
+    public void sublist_success() {
+        UnmodifiableObservableList<Integer> expectedList = new UnmodifiableObservableList<>(
+                FXCollections.observableList(backing.subList(1, 3)));
+        assertTrue(listMoreElements.subList(1, 3).equals(expectedList));
+    }
+
+    @Test
+    public void toArray_success() {
+        Object[] array = list.toArray();
+        for (Object o : array) {
+            assertTrue(list.contains((Integer) o));
+        }
+    }
+
+    @Test
+    public void setAll_fail() {
+        thrown.expect(UnsupportedOperationException.class);
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(10);
+        al.add(11);
+        list.setAll(al);
+    }
+
+    @Test
+    public void contains_success() {
+        assertTrue(list.contains(10));
+    }
+
+    @Test
+    public void contains_fail() {
+        assertFalse(list.contains(11));
+    }
+
+    @Test
+    public void containsAll_success() {
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(10);
+        assertTrue(list.containsAll(al));
+    }
+
+    @Test
+    public void containsAll_fail() {
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(10);
+        al.add(11);
+        assertFalse(list.containsAll(al));
+
+    }
+
+    @Test
+    public void listIterator_previous_and_next_success() {
+        ListIterator<Integer> iterator = listMoreElements.listIterator(1);
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasPrevious());
     }
 
     @Test

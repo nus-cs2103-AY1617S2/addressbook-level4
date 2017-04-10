@@ -2,7 +2,7 @@ package seedu.task.logic.commands;
 
 //@@author A0139975J
 /**
- * Lists all task in KIT to the user.
+ * Lists all task in KIT to the user. Able to either list all task, all done task,all undone task or list by tag.
  */
 public class ListCommand extends Command {
 

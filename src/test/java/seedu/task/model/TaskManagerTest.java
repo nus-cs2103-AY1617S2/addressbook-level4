@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,8 +17,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Date;
+import seedu.task.model.task.Location;
+import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.task.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -26,11 +34,19 @@ public class TaskManagerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final TaskManager taskManager = new TaskManager();
+    private final TaskManager expectedTaskManager = new TaskManager();
 
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), taskManager.getTaskList());
         assertEquals(Collections.emptyList(), taskManager.getTagList());
+    }
+
+    @Test
+    public void removeTask_null_throwsException() throws TaskNotFoundException, IllegalValueException {
+        thrown.expect(UniqueTaskList.TaskNotFoundException.class);
+        taskManager.removeTask(new Task(new Name("test"), new Date(), new Date(), new Remark(), new Location(),
+                new UniqueTagList(), false, new String()));
     }
 
     @Test
@@ -43,7 +59,14 @@ public class TaskManagerTest {
     public void resetData_withValidReadOnlyTaskManager_replacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
+        expectedTaskManager.resetData(newData);
         assertEquals(newData, taskManager);
+    }
+
+    @Test
+    public void equal_symmetric() {
+        assertTrue(taskManager.equals(expectedTaskManager));
+        assertTrue(taskManager.hashCode() == expectedTaskManager.hashCode());
     }
 
     @Test

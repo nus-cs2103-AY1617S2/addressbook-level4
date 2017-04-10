@@ -20,6 +20,7 @@ import seedu.task.testutil.TestTask;
 
 //@@author A0140063X
 public class LogicHelperTest {
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
@@ -31,7 +32,7 @@ public class LogicHelperTest {
     private Event testEvent = createEvent(name, start, end, remark, location);
 
     @Test
-    public void createTaskFromEvent() throws IllegalValueException {
+    public void createTaskFromEvent_validEvent_success() throws IllegalValueException {
         //event with full details
         TestTask testTask = new TaskBuilder().withName(name)
                 .withStartDate(start).withEndDate(end)
@@ -46,7 +47,12 @@ public class LogicHelperTest {
         testTask.setLocation(new Location(""));
         assertCreateTaskFromEvent(testTask, testEvent);
 
-        //event with no summary should throw exception
+
+    }
+
+    //event with no summary should throw exception
+    @Test
+    public void createTaskFromEvent_noSummary_exceptionThrown() throws IllegalValueException {
         testEvent.setSummary(null);
         exception.expect(IllegalValueException.class);
         LogicHelper.createTaskFromEvent(testEvent);
@@ -54,7 +60,7 @@ public class LogicHelperTest {
     }
 
     @Test
-    public void createEventFromTask() throws IllegalValueException {
+    public void createEventFromTask_validTask_success() throws IllegalValueException {
         //task with full details
         TestTask testTask = new TaskBuilder().withName(name)
                 .withStartDate(start).withEndDate(end)
@@ -69,16 +75,39 @@ public class LogicHelperTest {
         assertCreateEventFromTask(testTask, testEvent);
     }
 
+    /**
+     * Check if task created from testEvent matches expectedTask.
+     *
+     * @param expectedTask      Task that is expected.
+     * @param testEvent         Event that is being tested.
+     * @throws IllegalValueException    If event does not have summary.
+     */
     private void assertCreateTaskFromEvent(TestTask expectedTask, Event testEvent) throws IllegalValueException {
         Task actualTask = LogicHelper.createTaskFromEvent(testEvent);
         assertTrue(expectedTask.isSameStateAs(actualTask));
     }
 
-    private void assertCreateEventFromTask(TestTask testTask, Event expectedEvent) throws IllegalValueException {
+    /**
+     * Check if event created from testTask matches expectedEvent.
+     *
+     * @param testTask          Task that is being tested.
+     * @param expectedEvent     Event that is expected.
+     */
+    private void assertCreateEventFromTask(TestTask testTask, Event expectedEvent) {
         Event actualEvent = LogicHelper.createEventFromTask(testTask);
         assertTrue(expectedEvent.equals(actualEvent));
     }
 
+    /**
+     * Helper method to create event from given details.
+     *
+     * @param summary       Summary of event.
+     * @param start         Start DateTime of event.
+     * @param end           End DateTime of event.
+     * @param description   Description of event.
+     * @param location      Location of event.
+     * @return              Event created from given details.
+     */
     private Event createEvent(String summary, String start, String end, String description, String location) {
         Event testEvent = new Event();
         testEvent.setSummary(summary);

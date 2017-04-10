@@ -10,10 +10,8 @@ public enum Theme {
     }
 
     /**
-     * Returns a Theme enum for the input themeName if there is match,
+     * Returns a {@code Theme enum} for the input {@code themeName} if there is match,
      * Returns a null if there is not a match.
-     * @param themeName
-     * @return
      */
     public static Theme getTheme(String themeName) {
         // TODO Auto-generated method stub
@@ -31,5 +29,4 @@ public enum Theme {
         sb.append("Theme is : ").append(themeDescription).append(".");
         return sb.toString();
     }
-
 }

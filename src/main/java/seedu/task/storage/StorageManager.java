@@ -11,8 +11,6 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.FilePathChangedEvent;
-import seedu.task.commons.events.model.LoadNewFileEvent;
-import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.storage.UpdateUserPrefsEvent;
@@ -59,7 +57,6 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-    // @@author A0142487Y
     @Override
     public void setThemeTo(String themeName) {
         Optional<UserPrefs> optionalUserPrefs = null;
@@ -70,6 +67,7 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Theme of KIT will not be changed");
         }
+        // @@author A0142487Y
         UserPrefs userPrefs = optionalUserPrefs.get();
         userPrefs.setTheme(themeName);
         try {
@@ -80,7 +78,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
 
     }
-  //@@author
+    // @@author
 
     // ================ TaskManager methods ==============================
 
@@ -118,14 +116,24 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
+    /**
+     * Saves backup into given backupFilePath.
+     *
+     * @param backupFilePath
+     *            File path to back up into.
+     * @throws IOException
+     *             If input/output error.
+     * @throws FileNotFoundException
+     *             If file is not found.
+     */
     @Override
     public void saveBackup(String backupFilePath) throws IOException, FileNotFoundException {
         logger.fine("Attempting to backup data from " + backupFilePath);
         taskManagerStorage.saveBackup(backupFilePath);
     }
 
-    //@@author A0142939W
+    // @@author A0142939W
     @Override
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {
@@ -139,7 +147,12 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
+    /**
+     * Triggers whenever a command that modifies data is executed. Backup if required. Save data into file either way.
+     *
+     * @param event     The event that represents taskmanager is changed.
+     */
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
@@ -154,24 +167,6 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    //@@author
-    @Override
-    @Subscribe
-    public void handleLoadNewFileEvent(LoadNewFileEvent event) {
-        taskManagerStorage.setTaskManagerFilePath(event.path);
-        Optional<ReadOnlyTaskManager> newTaskManager;
-        try {
-            newTaskManager = taskManagerStorage.readTaskManager(event.path);
-            ReadOnlyTaskManager newData = newTaskManager.get();
-            logger.info("Loading data from " + event.path);
-            raise(new LoadNewFileSuccessEvent(newData));
-        } catch (DataConversionException e) {
-            logger.warning("File is not in the correct format");
-            e.printStackTrace();
-        } catch (IOException e) {
-            logger.warning("Failed to load from file");
-            e.printStackTrace();
-        }
-    }
+    // @@author
 
 }

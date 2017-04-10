@@ -1,6 +1,9 @@
 package seedu.task.commons.core;
 
-// @@author A0140063X
+//@@author A0140063X
+/**
+ * Maintains undo/redo status and provide filepaths to support undo/redo.
+ */
 public class History {
 
     public static final int MAX_NUM_UNDO = 10;
@@ -66,33 +69,51 @@ public class History {
         }
     }
 
-    public String getBackupFilePath() {
-        return backupDirectory + backupFilePaths[currentFileIndex];
-    }
-
     private void increaseCurrentFileIndex() {
         currentFileIndex = (currentFileIndex + 1) % (MAX_NUM_UNDO + 1);
     }
 
     private void decreaseCurrentFileIndex() {
-        if (currentFileIndex <= 0) {
+        assert currentFileIndex >= 0;
+        if (currentFileIndex == 0) {
             currentFileIndex = MAX_NUM_UNDO;
         } else {
             currentFileIndex--;
         }
     }
 
-    //returns path to load from for undo
+    /**
+     * This method returns the filePath to save back up into. This is based on currentFileIndex.
+     *
+     * @return File path to back up into.
+     */
+    public String getBackupFilePath() {
+        return backupDirectory + backupFilePaths[currentFileIndex];
+    }
+
+    /**
+     * This method returns the filePath for undo to load from.
+     * This method is only used when undo command is executing, therefore undoCount must not be 0.
+     * currentFileIndex must never be negative since it corresponds to a file.
+     *
+     * @return File path for undo to load from.
+     */
     public String getUndoFilePath() {
         assert undoCount != 0;
-        if (currentFileIndex <= 0) {
+        assert currentFileIndex >= 0;
+        if (currentFileIndex == 0) {
             return backupDirectory + backupFilePaths[MAX_NUM_UNDO];
         } else {
             return backupDirectory + backupFilePaths[currentFileIndex - 1];
         }
     }
 
-    //returns path to load from for redo
+    /**
+     * This method returns the filePath for redo to load from.
+     * This method is only used when redo command is executing, therefore redoCount must not be 0.
+     *
+     * @return File path for redo to load from.
+     */
     public String getRedoFilePath() {
         assert redoCount != 0;
         if (currentFileIndex < MAX_NUM_UNDO) {
@@ -102,7 +123,12 @@ public class History {
         }
     }
 
-    //this method means a command that modifies taskmanager have been executed
+    /**
+     * This method is called when a command that modifies taskmanager have been executed.
+     * If backupFilePath is not empty, it means backup was successfully done. Updates values to maintain proper status.
+     *
+     * @param backupFilePath    File path that backup was saved into.
+     */
     public void handleTaskManagerChanged(String backupFilePath) {
         if (!backupFilePath.trim().equals("")) {
             increaseUndoCount();
@@ -111,7 +137,10 @@ public class History {
         }
     }
 
-    //This methods is called by undo after it changed the data
+    /**
+     * This method is called by UndoCommand and indicates that undo was successfully executed.
+     * Updates the necessary values. undoCount must not be 0 since UndoCommand was successfully executed.
+     */
     public void handleUndo() {
         assert undoCount != 0;
         decreaseUndoCount();
@@ -119,7 +148,10 @@ public class History {
         decreaseCurrentFileIndex();
     }
 
-    //This methods is called by redo after it changed the data
+    /**
+     * This method is called by RedoCommand and indicates that redo was successfully executed.
+     * Updates the necessary values. redoCount must not be 0 since RedoCommand was successfully executed.
+     */
     public void handleRedo() {
         assert redoCount != 0;
         decreaseRedoCount();
@@ -127,12 +159,33 @@ public class History {
         increaseCurrentFileIndex();
     }
 
-    //used for Junit test
+    /**
+     * This resets undoCount to 0. Used when an I/O error occurs.
+     */
+    public void resetUndoCount() {
+        this.undoCount = 0;
+    }
+
+    /**
+     * This resets redoCount to 0. Used when an I/O error occurs.
+     */
+    public void resetRedoCount() {
+        this.redoCount = 0;
+    }
+
+    /**
+     * This method is used for Junit testing only. Set up another directory for testing.
+     *
+     * @param backupDirectory   Directory for history to use.
+     */
     public void test_setBackupDirectory(String backupDirectory) {
         this.backupDirectory = backupDirectory;
     }
 
-    //used for Junit test
+    /**
+     * This method is used for Junit testing only.
+     * It resets the values of history class for separate tests.
+     */
     public static History test_resetInstance() {
         instance = new History();
         return instance;

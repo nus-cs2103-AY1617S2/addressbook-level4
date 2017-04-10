@@ -165,7 +165,6 @@ public class TaskListPanelHandle extends GuiHandle {
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
-            System.out.println("error is here");
             return null;
         }
     }

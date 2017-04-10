@@ -1,6 +1,6 @@
 package seedu.task.logic.parser;
 
-//@@author A0142487Y
+//@@author A0142487Y-generated
 import seedu.task.logic.commands.Command;
 /**
  * An abstract CommandParser super class

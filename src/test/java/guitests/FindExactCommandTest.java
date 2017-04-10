@@ -1,17 +1,19 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import seedu.task.commons.core.Messages;
+import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.testutil.TestTask;
 
 //@@author A0142487Y
 public class FindExactCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
+    public void findexact_nonEmptyList() {
 
         assertFindExactResult("fe buy pENcil", td.buy); // single result
         assertFindExactResult("findexact Give present", td.give); // single result
@@ -24,15 +26,21 @@ public class FindExactCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_emptyList() {
+    public void findexact_emptyList() {
         commandBox.runCommand("clear");
         assertFindExactResult("findexact Jean"); // no results
     }
 
     @Test
-    public void find_invalidCommand_fail() {
+    public void findexact_invalidCommand_fail() {
         commandBox.runCommand("findexactgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void findexact_emptyKeywords_fail() {
+        commandBox.runCommand("fe  ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindExactCommand.MESSAGE_USAGE));
     }
 
     private void assertFindExactResult(String command, TestTask... expectedHits) {

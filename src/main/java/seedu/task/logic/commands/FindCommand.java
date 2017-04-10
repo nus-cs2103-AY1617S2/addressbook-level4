@@ -35,7 +35,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.sortTaskList();
-        if (date == null) {
+        if (date.isNull()) {
             model.updateFilteredTaskList(keywords, isExact);
         } else {
             model.updateFilteredTaskList(keywords, date, isExact);

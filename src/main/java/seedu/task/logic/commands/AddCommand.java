@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Adds a task to the task manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Adds a task to the task manager.\n"
             + "Parameters: NAME s/START e/END r/REMARK l/LOCATION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD_1
             + " John owes money s/02-03-2017 e/03-03-2017 r/john owes me $100 l/john's house t/friends t/owesMoney";
@@ -51,8 +51,7 @@ public class AddCommand extends Command {
                 new Date(endDate),
                 new Remark(remark),
                 new Location(location), new UniqueTagList(tagSet),
-                false, ""
-        );
+                false, "");
     }
 
     // @@author

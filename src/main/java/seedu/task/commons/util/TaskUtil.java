@@ -8,9 +8,8 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TaskUtil {
 
     /**
-     * Checks if the given task contains the searched keyword (case insensitive), in any field, both a fullword and a
-     * substring
-     *
+     * Returns true if the given {@code task} contains the searched {@code keyword} (case insensitive), in any field,
+     * either a fullword or a substring match is found.
      * @param task
      * @param keyword
      * @return
@@ -26,8 +25,8 @@ public class TaskUtil {
     }
 
     /**
-     * Checks if the given task contains an exact full match of the searched keywords, in any of the fields
-     *
+     * Returns true if the given {@code task} contains the searched {@code keywords} (case insensitive), in any field,
+     * all in fullword matches. Return false otherwise.
      * @param task
      * @param keywords
      * @return
@@ -42,8 +41,8 @@ public class TaskUtil {
     }
 
     /**
-     * Checks if the given task contains a full match of any of the given keywords. One successful full match in any of
-     * the fields will return true.
+     * Returns true if the given {@code task} contains the searched {@code keywords} (case insensitive), in any field,
+     * any fullword match. Returns false otherwise.
      *
      * @param task
      * @param keywords
@@ -62,9 +61,4 @@ public class TaskUtil {
         }
         return false;
     }
-//    public static boolean doesTaskContainPossibleDateAsString(){
-//    //if one string is not valid date, then it is a keyword
-//    // if one string is a valid date, then it might be a keyword or a date, or a part of a date
-//        return true;
-//    }
 }

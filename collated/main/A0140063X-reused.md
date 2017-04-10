@@ -1,6 +1,10 @@
 # A0140063X-reused
 ###### \java\seedu\task\commons\core\GoogleCalendar.java
 ``` java
+/**
+ * Checks and obtains credentials to connects to Google Calendar service.
+ * Provides communication to Google Calendar.
+ */
 public class GoogleCalendar {
     public static final String CALENDAR_ID = "primary";
     public static final String CONNECTION_FAIL_MESSAGE = "Unable to connect to Google.";
@@ -10,7 +14,7 @@ public class GoogleCalendar {
         "Keep It Tidy";
 
     /** Directory to store user credentials for this application. */
-    private static java.io.File dataStoreDir = new java.io.File(
+    private static final java.io.File DATA_STORE_FILE = new java.io.File(
         System.getProperty("user.home"), ".credentials/keep-it-tidy");
 
     /** Global instance of the {@link FileDataStoreFactory}. */
@@ -31,10 +35,12 @@ public class GoogleCalendar {
     private static final List<String> SCOPES =
         Arrays.asList(CalendarScopes.CALENDAR);
 
+    private static boolean testNoInternet = false;
+
     static {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-            dataStoreFactory = new FileDataStoreFactory(dataStoreDir);
+            dataStoreFactory = new FileDataStoreFactory(DATA_STORE_FILE);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);
@@ -60,9 +66,13 @@ public class GoogleCalendar {
                 .setDataStoreFactory(dataStoreFactory)
                 .setAccessType("offline")
                 .build();
+
+        if (testNoInternet) {
+            throw new IOException("Connection fail!");
+        }
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
-        logger.info("Credentials saved to " + dataStoreDir.getAbsolutePath());
+        logger.info("Credentials saved to " + DATA_STORE_FILE.getAbsolutePath());
         return credential;
     }
 
@@ -80,6 +90,15 @@ public class GoogleCalendar {
                 .build();
     }
 
+    /**
+     * This is used for JUnit testing only.
+     * It simulates the situation where KIT does not have internet and thus is unable to get user's credentials.
+     */
+    public static void test_setNoInternetTrue() {
+        testNoInternet = true;
+    }
+
+}
 ```
 ###### \java\seedu\task\logic\commands\SmartAddCommand.java
 ``` java
@@ -91,9 +110,24 @@ public class GoogleCalendar {
             EventsCenter.getInstance().post(new JumpToListRequestEvent(0));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            try {
+                deleteGoogleEvent();
+            } catch (IOException ioe) {
+                logger.warning("Unable to delete possible duplicate in google calendar.");
+            }
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+    }
+
+    /**
+     * This deletes the event that failed to add to KIT in Google Calendar.
+     *
+     * @throws IOException  If connection failed.
+     */
+    private void deleteGoogleEvent() throws IOException {
+        com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
+        service.events().delete(GoogleCalendar.CALENDAR_ID, toAdd.getEventId()).execute();
     }
 
 }
