@@ -474,12 +474,12 @@ Format:<br>
 
 ## 4. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q: How do I transfer my data to another Computer?**<br>
 
  Install the app in the other computer and overwrite the empty data file it creates with
  the file that contains the data of your previous Task Manager folder.<br>
  
-**Q**: How do I transfer my data to another Computer through cloud service?<br>
+**Q: How do I transfer my data to another Computer through cloud service?**<br>
  1. On one computer, use the `setting` Command to change the default saving locaion to the local cloud service location. E.g. C:\Users\<Username of computer>\Google Drive<br>
  2. On your other computer, use the `use` Command to first import the data from the local cloud service location.<br>
  3. Before you start using the TypeTask on your other computers, use the `setting` Command to change the default saving location.<br>
