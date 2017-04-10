@@ -18,11 +18,11 @@ Responsibilities:
    * [Natty Time](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Add](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Edit](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
-   * [Sort](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Delete](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0146809W.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0146809W.md)]
 * Other major contributions:
   * Did most of the initial refactoring as well as code integration
-  * Set up Travis CI, Coveralls and Appveyor CI
+  * Set up Travis, Appveyor CI and Coveralls
   * In charge of integration: Merge and pull request reviews
   * In charge of administrative task: milestones, issues and tagging
   * Implemented Natty Parser for dates
@@ -65,11 +65,15 @@ Responsibilities:
    * [Mark](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Unmark](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Sort](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Done](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [List](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0139399J.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0139399J.md)]
 * Other major contributions:
    * Help team mates to understand and fix bugs
    * Implemented smart search to better find tasks
    * Implemented ability to sort task by attributes
+   * Implemented ability to mark task as completed/uncompleted by mark/unmark command
+   * Implemented ability to view completed/uncompleted tasks by done/list command
    * Created SampleData.xml file for demo
    * Added description and priority to tasks
    * Code coverage and test code
@@ -85,13 +89,15 @@ Responsibilities:
 * Features implemented:
    * [UI](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
    * [Overdue Highlighting](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Priority Colors](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
+   * [Help Popup](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0160076L.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0160076L.md)]
 * Other major contributions:
    * Implemented shortcuts
    * Implemented 3 List for task, events and floating tasks
    * Designed the User Interface
    * Scroll to task after dates
-   * Created Help
+   * Created help popup with command summary
    * Added keyboard shortcuts for some commands
    * Added colors to indicate task priority
    * Added visual indication of wrong command
