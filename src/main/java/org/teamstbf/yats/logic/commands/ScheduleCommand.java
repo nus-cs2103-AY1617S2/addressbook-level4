@@ -43,7 +43,8 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New event scheduled: %1$s";
     public static final String MESSAGE_HOURS_INVALID = "The format of hours is invalid - must be a valid long";
-    public static final String MESSAGE_TIME_TOO_LONG = "Schedule can only take a timing of at most 10 hours, and it should not be negative - use add for long events";
+    public static final String MESSAGE_TIME_TOO_LONG = "Schedule can only take a timing of at most 10 hours, "
+            + "and it should not be negative - use add for long events";
     private static final long MAXIMUM_EVENT_LENGTH = 36000000L;
     private static final long MINIMUM_EVENT_LENGTH = 0L;
     private static final int INITIALISE_AS_NEXT_DAY = 1;
