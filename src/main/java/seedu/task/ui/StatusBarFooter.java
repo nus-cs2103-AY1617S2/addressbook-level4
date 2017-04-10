@@ -48,7 +48,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleAddressBookChangedEvent(TaskManagerChangedEvent abce) {
+    public void handleTaskChangedEvent(TaskManagerChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         LOGGER.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
