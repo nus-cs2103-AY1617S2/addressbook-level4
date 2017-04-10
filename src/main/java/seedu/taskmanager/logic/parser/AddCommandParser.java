@@ -44,11 +44,6 @@ public class AddCommandParser {
             String endDate = EMPTY_FIELD;
             String endTime = EMPTY_FIELD;
 
-            /*
-             * Checks to ensure correct combinations of arguments are added by
-             * user when adding tasks to the task manager
-             */
-
             addTaskInputValidation(onPrefixInput, byPrefixInput, fromPrefixInput, toPrefixInput);
 
             if (isFromToEvent(fromPrefixInput, toPrefixInput)) {
@@ -56,7 +51,6 @@ public class AddCommandParser {
                     String[] splitedFromPrefixInput = fromPrefixInput.split("\\s+");
                     try {
                         startDate = processInputToDateForm(splitedFromPrefixInput);
-
                         startTime = splitedFromPrefixInput[1];
 
                     } catch (ArrayIndexOutOfBoundsException aioobe) {
@@ -87,10 +81,8 @@ public class AddCommandParser {
 
             else if (isOnEvent(onPrefixInput)) {
                 String[] splited = onPrefixInput.split("\\s+");
-                startDate = splited[0];
-                startDate = DateTimeUtil.getNewDate(startDate);
+                startDate = processInputToDateForm(splited);
                 endDate = startDate;
-
                 try {
                     startTime = splited[1];
 
@@ -119,14 +111,17 @@ public class AddCommandParser {
             }
 
             /*
-             * To parse deadline input if required and throws exceptions if
-             * incorrect arguments of deadline are included
+             * To parse Input before byPrefix and incorrect arguments of
+             * deadline are included
              */
 
             else if (!isEmptyField(byPrefixInput)) {
                 String[] splited = byPrefixInput.split("\\s+");
                 endDate = splited[0];
-                endDate = DateTimeUtil.getNewDate(endDate);
+                endDate = processInputToDateForm(splited);
+                if (endDate.trim().matches("STARTDATE_VALIDATION_REGEX2")) {
+                    endDate = DateTimeUtil.getNewDate(endDate);
+                }
                 try {
                     endTime = splited[1];
 
@@ -158,8 +153,7 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             return new IncorrectCommand(
-                    "Invalid command input!\nExample of Allowed Format: ADD e-mail John BY thursday 1400\n"
-                            + "Type HELP for user guide with detailed explanations of all commands");
+                    "Invalid command input!\n" + "Type HELP for user guide with detailed explanations of all commands");
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -189,6 +183,9 @@ public class AddCommandParser {
         return !isEmptyField(onPrefixInput);
     }
 
+    /**
+     * Process input after To Prefix into the appropriate End Date form
+     */
     private String processInputToDateForm(String[] splitedToPrefixInput) throws IllegalValueException {
         String endDate;
         if (isMatchedInput(splitedToPrefixInput[0].trim(), STARTDATE_VALIDATION_REGEX2)) {
@@ -200,6 +197,9 @@ public class AddCommandParser {
         return endDate;
     }
 
+    /**
+     * Check that Input after TO prefix is not in only time format
+     */
     private void validToPrefixInputCheck(String toPrefixInput) {
         if (isMatchedInput(toPrefixInput.trim(), "\\d+")) {
             throw new NoSuchElementException("");
@@ -217,6 +217,12 @@ public class AddCommandParser {
     private boolean isValidEvent(String startDate, String startTime, String endDate, String endTime) {
         return !isEmptyField(startTime) && !isEmptyField(endTime) && !isEmptyField(startDate) && !isEmptyField(endDate);
     }
+
+    /**
+     * Validation check of given {@code String} arguments passed in by user
+     * Invalid combinations of arguments added by the user will cause
+     * NoSuchElementException to be thrown
+     */
 
     private void addTaskInputValidation(String date, String deadline, String startTime, String endTime) {
         boolean isValidCombination = true;

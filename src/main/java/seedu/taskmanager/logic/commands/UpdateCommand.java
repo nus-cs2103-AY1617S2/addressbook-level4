@@ -3,7 +3,9 @@ package seedu.taskmanager.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.DateTimeUtil;
@@ -32,11 +34,14 @@ public class UpdateCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [TASK] ON [DATE] FROM [STARTTIME] TO [ENDTIME]\n"
             + "Example: " + COMMAND_WORD + " 1 ON 04/03/17 FROM 1630 TO 1830";
 
+    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with "
+            + "another event";
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to be earlier"
-            + " than end time.";
+    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, event start time has to"
+            + " be earlier than end time.";
+
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
 
     private final int filteredTaskListIndex;
@@ -64,8 +69,6 @@ public class UpdateCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        // UpdateTaskDescriptor newUpdateTaskDescriptor = new
-        // UpdateTaskDescriptor();
 
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
@@ -89,7 +92,7 @@ public class UpdateCommand extends Command {
                     }
                 }
             }
-            if ((isOnlyStartTimeUpdated() || isOnlyEndTimeUpdated())
+            if ((isOnlyStartTimeUpdated() || isOnlyEndTimeUpdated() || isOnlyTimeUpdated())
                     && (taskToUpdate.isFloatingTask() || taskToUpdate.isDeadlineTask())) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             } else {
@@ -102,6 +105,11 @@ public class UpdateCommand extends Command {
                         updateTaskDescriptor.setEndTime(Optional.of(taskToUpdate.getEndTime()));
                         updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
                         updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                    } else {
+                        if (isOnlyTimeUpdated()) {
+                            updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+                            updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                        }
                     }
                 }
             }
@@ -126,13 +134,25 @@ public class UpdateCommand extends Command {
         }
 
         try {
-            model.updateTask(filteredTaskListIndex, updatedTask);
+            if (updatedTask.isEventTask()) {
+                int clashedTaskIndex = model.isBlockedOutTime(updatedTask, filteredTaskListIndex);
+                if (clashedTaskIndex != -1) {
+                    String clashFeedback = "Clash with task: Index " + Integer.toString(clashedTaskIndex) + "\n";
+                    int updateIndex = model.updateTask(filteredTaskListIndex, updatedTask) + 1;
+                    model.updateFilteredListToShowAll();
+                    EventsCenter.getInstance().post(new JumpToListRequestEvent(updateIndex - 1));
+                    return new CommandResult(clashFeedback + String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate)
+                            + "\n" + "Task updated to index: " + Integer.toString(updateIndex));
+                }
+            }
+            int updateIndex = model.updateTask(filteredTaskListIndex, updatedTask) + 1;
+            model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(updateIndex - 1));
+            return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate) + "\n"
+                    + "Task updated to index: " + Integer.toString(updateIndex));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
 
     /**
@@ -143,15 +163,28 @@ public class UpdateCommand extends Command {
      * @return true if only task name has been identified by user to be updated
      */
     private boolean isOnlyTaskNameUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getTaskName().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getTaskName().isPresent());
+    }
+
+    /**
+     * Checks if only the time field has been identified by user to be updated
+     * To ensure that user provides all the information that is required to
+     * update a task.
+     *
+     * For instance, user is only allowed to update only startTime and endTime
+     * if the task is an event and not a deadline or floating task.
+     *
+     * @return true if only task name has been identified by user to be updated
+     */
+    private boolean isOnlyTimeUpdated() {
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -162,15 +195,11 @@ public class UpdateCommand extends Command {
      * @return true if only categories are identified by user to be updated
      */
     private boolean isOnlyCategoriesUpdate() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getCategories().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getCategories().isPresent());
     }
 
     /**
@@ -182,14 +211,10 @@ public class UpdateCommand extends Command {
      *         be updated
      */
     private boolean isOnlyStartTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -201,14 +226,10 @@ public class UpdateCommand extends Command {
      *         be updated
      */
     private boolean isOnlyEndTimeUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -220,14 +241,10 @@ public class UpdateCommand extends Command {
      *         identified by user to be updated
      */
     private boolean isOnlyStartUpdated() {
-        if (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**
@@ -239,14 +256,10 @@ public class UpdateCommand extends Command {
      *         by user to be updated
      */
     private boolean isOnlyEndUpdated() {
-        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+        return (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
-                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD));
     }
 
     /**

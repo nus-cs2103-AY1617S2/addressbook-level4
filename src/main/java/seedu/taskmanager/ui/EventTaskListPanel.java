@@ -32,15 +32,9 @@ public class EventTaskListPanel extends UiPart<Region> {
         addToPlaceholder(eventTaskListPlaceholder);
     }
 
+    //@@author A0142418L
     public void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        ObservableList<ReadOnlyTask> eventTaskList = FXCollections.<ReadOnlyTask>observableArrayList(taskList);
-        for (int index = 0; eventTaskList.size() != index; index++) {
-            ReadOnlyTask taskToDelete = eventTaskList.get(index);
-            if (!taskToDelete.isEventTask()) {
-                eventTaskList.remove(index, index + 1);
-                index--;
-            }
-        }
+        ObservableList<ReadOnlyTask> eventTaskList = extractEventTasks(taskList);
         eventTaskListView.setItems(eventTaskList);
         eventTaskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -68,6 +62,10 @@ public class EventTaskListPanel extends UiPart<Region> {
         });
     }
 
+    public ListView<ReadOnlyTask> getEventTaskListView() {
+        return this.eventTaskListView;
+    }
+
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
@@ -81,5 +79,22 @@ public class EventTaskListPanel extends UiPart<Region> {
                 setGraphic(new EventTaskCard(task, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    //@@author A0142418L
+    /**
+     * @param taskList
+     * @return ObserableList containing only event tasks
+     */
+    private ObservableList<ReadOnlyTask> extractEventTasks(ObservableList<ReadOnlyTask> taskList) {
+        ObservableList<ReadOnlyTask> eventTaskList = FXCollections.<ReadOnlyTask>observableArrayList(taskList);
+        for (int index = 0; eventTaskList.size() != index; index++) {
+            ReadOnlyTask taskToDelete = eventTaskList.get(index);
+            if (!taskToDelete.isEventTask()) {
+                eventTaskList.remove(index, index + 1);
+                index--;
+            }
+        }
+        return eventTaskList;
     }
 }

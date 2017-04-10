@@ -24,7 +24,7 @@ public interface Model {
     void saveTaskManager();
 
     /** Redo previous action of task manager. */
-    public void redoTaskManager();
+    void redoTaskManager();
 
     /** Undo previous action of task manager. */
     void undoTaskManager();
@@ -46,7 +46,7 @@ public interface Model {
 
     // @@author
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    int addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
@@ -59,7 +59,7 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
+    int updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
     // @@author A0139520L
     void markTask(int filteredTaskListIndex) throws DuplicateTaskException;
@@ -80,6 +80,11 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
+    // @@author A0141102H
+    /**
+     * Updates the filter of the filtered task list to filter by the given
+     * keywords and uncompleted tasks
+     */
     void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete);
 
     // @@author A0139520L
@@ -98,4 +103,5 @@ public interface Model {
 
     int isBlockedOutTime(Task task) throws DuplicateTaskException;
 
+    int isBlockedOutTime(Task t, int UpdateTaskIndex) throws DuplicateTaskException;
 }

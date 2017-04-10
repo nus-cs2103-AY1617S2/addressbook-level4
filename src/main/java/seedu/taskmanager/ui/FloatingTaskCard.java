@@ -33,31 +33,48 @@ public class FloatingTaskCard extends UiPart<Region> {
         taskname.setText(task.getTaskName().fullTaskName);
         id.setText(displayedIndex + ". ");
 
+        setMarkedCompletedLabel(task);
+        initCategory(task);
+    }
+
+    /**
+     * @param task
+     */
+    private void setMarkedCompletedLabel(ReadOnlyTask task) {
         if (task.getIsMarkedAsComplete()) {
             markedCompleted.textProperty().bind(completed);
         } else {
             markedCompleted.textProperty().bind(empty);
         }
-        initCategory(task);
     }
 
     private void initCategory(ReadOnlyTask task) {
         if (!task.getCategories().asObservableList().isEmpty()) {
             for (int index = 0; task.getCategories().asObservableList().size() != index; index++) {
-                String category = task.getCategories().asObservableList().get(index).categoryName;
-                Label label = new Label(category);
-                if (category.equalsIgnoreCase("High")) {
-                    label.setStyle("-fx-background-color: red");
-                }
-                if (category.equalsIgnoreCase("Medium")) {
-                    label.setStyle("-fx-background-color: orange");
-                }
-                if (category.equalsIgnoreCase("Low")) {
-                    label.setStyle("-fx-background-color: lightblue");
-                }
+                Label label = stylePriorityCategories(task, index);
 
                 categories.getChildren().add(label);
             }
         }
+    }
+
+    /**
+     * @param task
+     * @param index
+     * @return
+     */
+    private Label stylePriorityCategories(ReadOnlyTask task, int index) {
+        String category = task.getCategories().asObservableList().get(index).categoryName;
+        Label label = new Label(category);
+        if (category.equalsIgnoreCase("High")) {
+            label.setStyle("-fx-background-color: red");
+        }
+        if (category.equalsIgnoreCase("Medium")) {
+            label.setStyle("-fx-background-color: orange");
+        }
+        if (category.equalsIgnoreCase("Low")) {
+            label.setStyle("-fx-background-color: lightblue");
+        }
+        return label;
     }
 }

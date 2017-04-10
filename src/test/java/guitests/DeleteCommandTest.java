@@ -5,6 +5,7 @@ import static seedu.taskmanager.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK
 
 import org.junit.Test;
 
+import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.testutil.TestTask;
 import seedu.taskmanager.testutil.TestUtil;
 
@@ -12,7 +13,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
     // @@author A0141102H
     @Test
-    public void delete() {
+    public void deleteByIndex() {
 
         // delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
@@ -35,6 +36,35 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
     }
 
+    @Test
+    public void deleteByWord() {
+        TestTask[] expectedList = td.getTypicalTasks();
+        commandBox.runCommand("DELETE Eat breakfast with mom");
+        expectedList = TestUtil.removeTaskFromList(expectedList, 1);
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedList));
+
+        // No task name exists
+        commandBox.runCommand("DELETE aosfasoif");
+        assertResultMessage(DeleteCommand.MESSAGE_INVALID_TASK_NAME);
+    }
+
+    @Test
+    public void deleteByDate() {
+        TestTask[] expectedList = td.getTypicalTasks();
+        commandBox.runCommand("DELETE 04/04/17");
+        expectedList = TestUtil.removeTaskFromList(expectedList, 4);
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedList));
+
+        // No task date exists
+        commandBox.runCommand("DELETE 09/09/99");
+        assertResultMessage(DeleteCommand.MESSAGE_INVALID_TASK_DATE);
+    }
+
+     // @@author A0142418L
     /**
      * Runs the delete command to delete the task at specified index and
      * confirms the result is correct.
@@ -56,7 +86,9 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks except the deleted
         // task
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(eventTaskListPanel.isListMatching(expectedRemainder));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedRemainder));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedRemainder));
 
         // confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));

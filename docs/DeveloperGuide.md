@@ -127,7 +127,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+being saved to the hard disk and the status bar together with the 3 task panels of the UI being updated to reflect the 'Last Updated' time and the latest list of tasks respectively. <br>
 <img src="images\ComponentInteractionforDeleteTask_p2.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
@@ -146,8 +146,8 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/taskmanager/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventTaskListPanel`,
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -179,6 +179,11 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskLogicComponent.png" width="800"><br>
 _Figure 2.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+The Command section of the Logic component utilises the Open-Closed principle where by it is very open for extension as one can create another type of command easily via Parent Abstract class [`Command`](../src/main/java/seedu/taskmanager/logic/commands/Command.java). Thus one can easily add in another new command without the need to modify current codes and hence achieves "Open for extensions and closed for modification".
+
+<img src="images/Open-Close.png" width="800"><br>
+_Figure 2.3.3 : Open-Close Principle within the Logic Component for under commands section_
+
 ### 2.4. Model component
 
 Author: Alvin Loh
@@ -195,6 +200,16 @@ The `Model`,
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* holds history of all data changes done within run-time.
+
+#### Undo and Redo changes in task manager
+`undoTaskManager` is a stack that stores instances of `TaskManager` whenever changes are made to the data of the application.
+These changes can be undone if programme is still running within the same session. Instances of `TaskManager` is only stored in runtime and Undo actions can only be called for actions done within the same session.
+This supports multiple undos.
+`redoTaskManager` is a stack that stores instances of `TaskManager` whenever the undo function is called. This allows for undone actions to be reloaded again, allowing for data to be reloaded again multiple times if no new changes are made after actions has been undone.
+
+A new `TaskManager` is created based on the instance saved within these stacks and replaces the current `TaskManager` to load previous versions of data.
+Actions that changes `TaskManager` includes e.g. `Add`, `Delete`, `Update`, `Clear` etc. Changing the view of the application for instance `Search` or `List` does not constitute to changing the data of the `TaskManager`.
 
 ### 2.5. Storage component
 
@@ -213,6 +228,15 @@ The `Storage` component,
 ### 2.6. Common classes
 
 Classes used by multiple components are in the `seedu.taskmanager.commons` package.
+
+These classes keeps commonly used methods by the various methods together to facilitate code maintenance and promote code
+reuse. One such class is the [DateTimeUtil](../src/main/java/seedu/taskmanager/commons/util/DateTimeUtil.java) class.
+
+<img src="images/DateTimeUtil_TaskManager.png" width="400"><br>
+_Figure 2.6.1 : Dependency of the DateTimeUtil Class_
+
+This design structure allows for easy maintenance of codes that are related to Date and Time and reduces duplicate codes in the
+logic component.
 
 ## 3. Implementation
 

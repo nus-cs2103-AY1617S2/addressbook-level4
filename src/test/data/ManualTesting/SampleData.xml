@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskname>Eat breakfast with mom</taskname>
+        <startdate>03/03/17</startdate>
+        <starttime>1000</starttime>
+        <enddate>03/03/17</enddate>
+        <endtime>1100</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>family</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Start on the CS2103 project</taskname>
+        <startdate>03/03/17</startdate>
+        <starttime>1400</starttime>
+        <enddate>03/04/17</enddate>
+        <endtime>1800</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>NUS</categorised>
+        <categorised>CS2103</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Eat dinner with friends</taskname>
+        <startdate>09/03/17</startdate>
+        <starttime>1800</starttime>
+        <enddate>09/03/17</enddate>
+        <endtime>2000</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>low</categorised>
+        <categorised>just</categorised>
+        <categorised>friends</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Finish assignment 5</taskname>
+        <startdate>25/03/17</startdate>
+        <starttime>0659</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>2341</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>IE2100</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Revise for midterms</taskname>
+        <startdate>26/03/17</startdate>
+        <starttime>1200</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>IE2130</categorised>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Meet prof</taskname>
+        <startdate>30/03/17</startdate>
+        <starttime>0800</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>1000</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>IE2150</categorised>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Make sense of topic 3</taskname>
+        <startdate>30/03/17</startdate>
+        <starttime>1400</starttime>
+        <enddate>31/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>IE2100</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Buy a cat</taskname>
+        <startdate>30/03/17</startdate>
+        <starttime>1800</starttime>
+        <enddate>01/04/17</enddate>
+        <endtime>2359</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>family</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Rest for the day</taskname>
+        <startdate>01/04/17</startdate>
+        <starttime>0030</starttime>
+        <enddate>02/04/17</enddate>
+        <endtime>2359</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>lepak</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Eat breakfast</taskname>
+        <startdate>02/04/17</startdate>
+        <starttime>0800</starttime>
+        <enddate>02/04/17</enddate>
+        <endtime>0830</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>family</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Hand in assignment</taskname>
+        <startdate>02/04/17</startdate>
+        <starttime>0930</starttime>
+        <enddate>02/04/17</enddate>
+        <endtime>1000</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>IE2100</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Do up minutes</taskname>
+        <startdate>02/04/17</startdate>
+        <starttime>1030</starttime>
+        <enddate>02/04/17</enddate>
+        <endtime>1100</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>IE2150</categorised>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Try hard for CS2103 project</taskname>
+        <startdate>04/04/17</startdate>
+        <starttime>1400</starttime>
+        <enddate>05/04/17</enddate>
+        <endtime>1500</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>CS2103</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Try very hard for CS2103</taskname>
+        <startdate>05/04/17</startdate>
+        <starttime>1500</starttime>
+        <enddate>05/05/17</enddate>
+        <endtime>1600</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>CS2103</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Meet @ Hv</taskname>
+        <startdate>05/05/17</startdate>
+        <starttime>0000</starttime>
+        <enddate>06/05/17</enddate>
+        <endtime>2359</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>lepak</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Take a quick nap</taskname>
+        <startdate>06/05/17</startdate>
+        <starttime>1400</starttime>
+        <enddate>06/05/17</enddate>
+        <endtime>1800</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>lepak</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Meet boss</taskname>
+        <startdate>07/05/17</startdate>
+        <starttime>0000</starttime>
+        <enddate>08/05/17</enddate>
+        <endtime>2359</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>work</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Regret taking this job</taskname>
+        <startdate>09/05/17</startdate>
+        <starttime>0000</starttime>
+        <enddate>10/05/17</enddate>
+        <endtime>2359</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>work</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Eat lunch at techno</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>04/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>no</categorised>
+        <categorised>NUS</categorised>
+        <categorised>friends</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Assignment 2</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>27/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>IE2150</categorised>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Assignment 4</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>28/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>IE2130</categorised>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Assignment 3</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>29/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>NUS</categorised>
+        <categorised>IE2100</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Finish v0.4</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>1100</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>NUS</categorised>
+        <categorised>CS2103</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Hand in proposal to Dr Soh</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>1200</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>IE2150</categorised>
+        <categorised>Medium</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Sign up for energy conference</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>1300</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>Low</categorised>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Email prof for answers</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>30/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+        <categorised>IE2130</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Assignment 5</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>31/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>IE2100</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Prank the world</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>01/04/17</enddate>
+        <endtime>2359</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>fun</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Finish Bryson Science Challenge</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>02/04/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+        <categorised>GEH1033</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Find AA personnel</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>03/04/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Ready for work</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>06/05/17</enddate>
+        <endtime>1700</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>work</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Hand in report</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>07/06/17</enddate>
+        <endtime>2358</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>High</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Sell myself</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>07/07/17</enddate>
+        <endtime>2357</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>work</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Get ready for school</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>07/08/20</enddate>
+        <endtime>2356</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>NUS</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Buy a dog</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>lepak</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Unnecessary Floating Task Name to show how long this task name can actuallyget and as you can see it can go really long like seriouslyit goes on and on and on</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>test</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Find a boyfriend/girlfriend</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Get serious</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Propose</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>BTO</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Fail to find BTO</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Try again for BTO</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Get married</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Think about having kids</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Argue about kids</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Argue about married life</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Had enough of married life</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Divorce</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Netflix</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>story</categorised>
+    </tasks>
+    <categories>family</categories>
+    <categories>High</categories>
+    <categories>NUS</categories>
+    <categories>CS2103</categories>
+    <categories>low</categories>
+    <categories>just</categories>
+    <categories>friends</categories>
+    <categories>IE2100</categories>
+    <categories>IE2130</categories>
+    <categories>IE2150</categories>
+    <categories>lepak</categories>
+    <categories>work</categories>
+    <categories>no</categories>
+    <categories>Medium</categories>
+    <categories>Low</categories>
+    <categories>fun</categories>
+    <categories>GEH1033</categories>
+    <categories>test</categories>
+    <categories>story</categories>
+</taskmanager>

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -46,54 +47,58 @@
              </AnchorPane>
          </children>
       </VBox>
-      <VBox fx:id="eventTaskList" minWidth="340" prefWidth="340" styleClass="anchor-pane-with-border">
-          <padding>
-              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-          </padding>
+      <HBox VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane fx:id="eventTaskListHeader" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" styleClass="anchor-pane">
+            <VBox fx:id="eventTaskList" prefWidth="460" styleClass="anchor-pane-with-border">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+               <children>
+                  <AnchorPane fx:id="eventTaskListHeader" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" styleClass="anchor-pane">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                     <children>
+                        <Label layoutX="10.0" layoutY="-5.0" styleClass="cell_small_label_header" text="Events" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="eventTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox fx:id="deadlineTaskList" prefWidth="460" styleClass="anchor-pane-with-border">
                <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label layoutX="10.0" layoutY="-5.0" styleClass="cell_small_label_header" text="Events" />
+                  <AnchorPane fx:id="deadlineTaskListHeader" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" styleClass="anchor-pane">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                     <children>
+                        <Label layoutX="10.0" layoutY="-5.0" styleClass="cell_small_label_header" text="Deadlines" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="deadlineTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
-            </AnchorPane>
-            <AnchorPane fx:id="eventTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
-      <VBox fx:id="deadlineTaskList" minWidth="340" prefWidth="340" styleClass="anchor-pane-with-border">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <AnchorPane fx:id="deadlineTaskListHeader" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" styleClass="anchor-pane">
+            </VBox>
+            <VBox fx:id="FloatingTaskList" prefWidth="460" styleClass="anchor-pane-with-border">
                <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label layoutX="10.0" layoutY="-5.0" styleClass="cell_small_label_header" text="Deadlines" />
+                  <AnchorPane fx:id="floatingTaskListHeader" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" styleClass="anchor-pane">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                     <children>
+                        <Label layoutX="10.0" layoutY="-5.0" styleClass="cell_small_label_header" text="Basic Tasks" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="floatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
-            </AnchorPane>
-            <AnchorPane fx:id="deadlineTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
          </children>
-      </VBox>
-      <VBox fx:id="FloatingTaskList" layoutX="10.0" layoutY="179.0" minWidth="340" prefWidth="340" styleClass="anchor-pane-with-border">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <AnchorPane fx:id="floatingTaskListHeader" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" styleClass="anchor-pane">
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <children>
-                  <Label layoutX="10.0" layoutY="-5.0" styleClass="cell_small_label_header" text="Basic Tasks" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="floatingTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
+      </HBox>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
    </children>
 </VBox>

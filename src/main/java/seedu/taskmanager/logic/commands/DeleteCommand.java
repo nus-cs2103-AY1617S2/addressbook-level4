@@ -68,74 +68,125 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        int numDeletedTasks = 0;
-
         if (targetIndex != DELETE_INDEX_NOT_PRESENT_TOKEN) {
 
             UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-            if (lastShownList.size() < targetIndex) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
-            ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-
-            try {
-                model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
+            ReadOnlyTask taskToDelete = findTaskToDeleteByIndex(lastShownList);
+            deleteTask(taskToDelete);
 
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
 
         } else {
             if (!targetDate.equals(DELETE_DATE_KEYWORD_NOT_PRESENT_TOKEN)) {
 
-                final String[] keywords = targetDate.split("\\s+");
-                final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+                UnmodifiableObservableList<ReadOnlyTask> lastShownList = findTasksToDeleteByDate();
+                int numDeletedTasks = deleteTasksByDate(lastShownList);
 
-                model.updateFilteredTaskList(keywordSet);
-
-                UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-                if (lastShownList.size() == 0) {
-                    model.updateFilteredListToShowAll();
-                    throw new CommandException(MESSAGE_INVALID_TASK_DATE);
-                }
-
-                try {
-                    numDeletedTasks = model.deleteTasksDate(lastShownList);
-                } catch (TaskNotFoundException e) {
-                    assert false : "The target tasks cannot be missing";
-                }
-
-                return new CommandResult(MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 + targetDate +
-                        MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 + Integer.toString(numDeletedTasks));
+                return new CommandResult(MESSAGE_DELETE_TASKS_DATE_SUCCESS_1 + targetDate
+                        + MESSAGE_DELETE_TASKS_DATE_SUCCESS_2 + Integer.toString(numDeletedTasks));
             } else {
+                UnmodifiableObservableList<ReadOnlyTask> lastShownList = findTasksToDeleteByName();
+                int numDeletedTasks = deleteTasksByName(lastShownList);
 
-                final String[] keywords = { "" };
-                keywords[0] = targetTaskName.trim();
-
-                final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-
-                model.updateFilteredTaskList(keywordSet);
-
-                UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-                if (lastShownList.size() == 0) {
-                    model.updateFilteredListToShowAll();
-                    throw new CommandException(MESSAGE_INVALID_TASK_NAME);
-                }
-
-                try {
-                    numDeletedTasks = model.deleteTasksName(lastShownList, targetTaskName);
-                } catch (TaskNotFoundException e) {
-                    assert false : "The target tasks cannot be missing";
-                }
-
-                return new CommandResult(MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 + targetTaskName +
-                        MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 + Integer.toString(numDeletedTasks));
+                return new CommandResult(MESSAGE_DELETE_TASKS_NAME_SUCCESS_1 + targetTaskName
+                        + MESSAGE_DELETE_TASKS_NAME_SUCCESS_2 + Integer.toString(numDeletedTasks));
             }
+        }
+    }
+
+    /**
+     * @param lastShownList
+     * @return
+     * @throws CommandException
+     */
+    private ReadOnlyTask findTaskToDeleteByIndex(UnmodifiableObservableList<ReadOnlyTask> lastShownList)
+            throws CommandException {
+        if (lastShownList.size() < targetIndex) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        return taskToDelete;
+    }
+
+    /**
+     * @return List of tasks to search for exact task name to be deleted
+     * @throws CommandException
+     */
+    private UnmodifiableObservableList<ReadOnlyTask> findTasksToDeleteByName() throws CommandException {
+        final String[] keywords = targetTaskName.split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+
+        model.updateFilteredTaskList(keywordSet);
+
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (lastShownList.size() == 0) {
+            model.updateFilteredListToShowAll();
+            throw new CommandException(MESSAGE_INVALID_TASK_NAME);
+        }
+        return lastShownList;
+    }
+
+    /**
+     * @return List of tasks with same dates to be deleted
+     * @throws CommandException
+     */
+    private UnmodifiableObservableList<ReadOnlyTask> findTasksToDeleteByDate() throws CommandException {
+        final String[] keywords = targetDate.split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+
+        model.updateFilteredTaskList(keywordSet);
+
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (lastShownList.size() == 0) {
+            model.updateFilteredListToShowAll();
+            throw new CommandException(MESSAGE_INVALID_TASK_DATE);
+        }
+        return lastShownList;
+    }
+
+    /**
+     * @param numDeletedTasks
+     * @param lastShownList
+     * @return Number of tasks deleted based on task name provided by user
+     */
+    private int deleteTasksByName(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        int numDeletedTasks = 0;
+        try {
+            numDeletedTasks = model.deleteTasksName(lastShownList, targetTaskName.trim());
+        } catch (TaskNotFoundException e) {
+            assert false : MESSAGE_INVALID_TASK_NAME;
+        }
+        return numDeletedTasks;
+    }
+
+    /**
+     * @param numDeletedTasks
+     * @param lastShownList
+     * @return Number of tasks deleted based on date provided by user
+     */
+    private int deleteTasksByDate(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        int numDeletedTasks = 0;
+
+        try {
+            numDeletedTasks = model.deleteTasksDate(lastShownList);
+        } catch (TaskNotFoundException e) {
+            assert false : MESSAGE_INVALID_TASK_DATE;
+        }
+        return numDeletedTasks;
+    }
+
+    /**
+     * @param taskToDelete
+     */
+    private void deleteTask(ReadOnlyTask taskToDelete) {
+        try {
+            model.deleteTask(taskToDelete);
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target task cannot be missing";
         }
     }
 }

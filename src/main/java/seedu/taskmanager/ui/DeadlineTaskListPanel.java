@@ -34,20 +34,15 @@ public class DeadlineTaskListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author A0142418L
     public void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        ObservableList<Pair<ReadOnlyTask, Integer>> deadlineTaskList = FXCollections.observableArrayList();
-        for (int index = 0; taskList.size() != index; index++) {
-            ReadOnlyTask taskToDelete = taskList.get(index);
-            if (taskToDelete.isDeadlineTask()) {
-                Pair<ReadOnlyTask, Integer> deadlineTask = new Pair<ReadOnlyTask, Integer>(taskToDelete, index);
-                deadlineTaskList.add(deadlineTask);
-            }
-        }
+        ObservableList<Pair<ReadOnlyTask, Integer>> deadlineTaskList = extractDeadlineTasks(taskList);
         deadlineTaskListView.setItems(deadlineTaskList);
         deadlineTaskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
+    //@@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
@@ -71,6 +66,10 @@ public class DeadlineTaskListPanel extends UiPart<Region> {
         });
     }
 
+    public ListView<Pair<ReadOnlyTask, Integer>> getDeadlineTaskListView() {
+        return this.deadlineTaskListView;
+    }
+
     class TaskListViewCell extends ListCell<Pair<ReadOnlyTask, Integer>> {
 
         @Override
@@ -84,5 +83,22 @@ public class DeadlineTaskListPanel extends UiPart<Region> {
                 setGraphic(new DeadlineTaskCard(task.getKey(), task.getValue() + 1).getRoot());
             }
         }
+    }
+
+    //@@author A0142418L
+    /**
+     * @param taskList
+     * @return ObserableList containing only deadline tasks with their respective index from original list
+     */
+    private ObservableList<Pair<ReadOnlyTask, Integer>> extractDeadlineTasks(ObservableList<ReadOnlyTask> taskList) {
+        ObservableList<Pair<ReadOnlyTask, Integer>> deadlineTaskList = FXCollections.observableArrayList();
+        for (int index = 0; taskList.size() != index; index++) {
+            ReadOnlyTask taskToDelete = taskList.get(index);
+            if (taskToDelete.isDeadlineTask()) {
+                Pair<ReadOnlyTask, Integer> deadlineTask = new Pair<ReadOnlyTask, Integer>(taskToDelete, index);
+                deadlineTaskList.add(deadlineTask);
+            }
+        }
+        return deadlineTaskList;
     }
 }

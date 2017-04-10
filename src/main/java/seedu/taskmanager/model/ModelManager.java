@@ -137,7 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (int index = 0; targets.size() != index; index++) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(index);
-                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
+                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName.trim())) {
                     taskManager.removeTask(taskToDelete);
                     index--;
                     numDeletedTasks++;
@@ -151,21 +151,34 @@ public class ModelManager extends ComponentManager implements Model {
         return numDeletedTasks;
     }
 
-    // @@author
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
-        taskManager.addTask(task);
+        int addIndex = taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return addIndex;
     }
 
+    // @@author A0139520L
+
+    /**
+     * Checks if added task clashes with another existing task in the task
+     * manager and returns an integer.
+     *
+     * @return index of clashing task in filteredTaskList if clashing task
+     *         exisits
+     * @return -1 if otherwise
+     */
     @Override
-    public synchronized int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
+    public int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
         int index = 0;
         while (index < (filteredTasks.size())) {
             if (filteredTasks.get(index).isEventTask() && !filteredTasks.get(index).getIsMarkedAsComplete()
                     && t.isWithinStartEndDuration(filteredTasks.get(index))) {
+                if (isAddEventEarlierAddListIndex(t, filteredTasks.get(index))) {
+                    return index + 2;
+                }
                 return index + 1;
             }
             index++;
@@ -173,17 +186,55 @@ public class ModelManager extends ComponentManager implements Model {
         return -1;
     }
 
+    /**
+     * Checks if updated task clashes with another existing task in the task
+     * manager and returns an integer.
+     *
+     * @return index of clashing task in filteredTaskList if clashing task
+     *         exisits
+     * @return -1 if otherwise
+     */
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public int isBlockedOutTime(Task t, int UpdateTaskIndex) throws UniqueTaskList.DuplicateTaskException {
+        int index = 0;
+        while (index < (filteredTasks.size())) {
+            if ((index != (UpdateTaskIndex)) && filteredTasks.get(index).isEventTask()
+                    && !filteredTasks.get(index).getIsMarkedAsComplete()
+                    && t.isWithinStartEndDuration(filteredTasks.get(index))) {
+                if (isAddEventEarlierAddListIndex(t, filteredTasks.get(index))) {
+                    if (UpdateTaskIndex > index) {
+                        return index + 2;
+                    } else {
+                        return index + 1;
+                    }
+                } else {
+                    if (UpdateTaskIndex > index) {
+                        return index + 1;
+                    } else {
+                        return index;
+                    }
+                }
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    @Override
+    public int updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskManagerIndex, editedTask);
+        int updateIndex = taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+        return updateIndex;
     }
 
     // @@author A0139520L
+    /**
+     * Marks task with the given index in the filteredTaskList.
+     */
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
@@ -193,6 +244,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0139520L
+    /**
+     * Unmarks task with the given index in the filteredTaskList.
+     */
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
@@ -216,7 +270,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    // @@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -281,6 +334,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    // @@author A0141102H
     private class TaskQualifier implements Qualifier {
         private Set<String> taskKeyWords;
 
@@ -344,18 +398,69 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            return (task.getIsMarkedAsComplete().equals(isComplete))
-                    && (taskKeyWords.stream()
-                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
-                            .findAny().isPresent())
-                    || (taskKeyWords.stream()
+            return (task.getIsMarkedAsComplete().equals(isComplete) && (taskKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword)).findAny()
+                    .isPresent()))
+                    || (task.getIsMarkedAsComplete().equals(isComplete) && (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
-                            .findAny().isPresent());
+                            .findAny().isPresent()));
         }
 
         @Override
         public String toString() {
             return "task name=" + String.join(", ", taskKeyWords);
+        }
+    }
+
+    // @@author A0142418L
+    /**
+     * Compares the starting date and time of 2 event tasks.
+     *
+     * @return true if 1st event task is earlier than the 2nd event task based
+     *         on the startDate and startTime
+     * @return false, if otherwise.
+     */
+    private boolean isAddEventEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
+        if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) < 0) {
+            return true;
+        } else {
+            if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                    readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) == 0) {
+                if (toAdd.getStartDate().value
+                        .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                        .compareTo(readOnlyTask.getStartDate().value.substring(
+                                readOnlyTask.getStartDate().value.length()
+                                        - 5,
+                                readOnlyTask.getStartDate().value.length() - 3)) < 0) {
+                    return true;
+                } else {
+                    if (toAdd.getStartDate().value
+                            .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                            .compareTo(readOnlyTask.getStartDate().value.substring(
+                                    readOnlyTask.getStartDate().value.length()
+                                            - 5,
+                                    readOnlyTask.getStartDate().value.length() - 3)) == 0) {
+                        if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                        readOnlyTask.getStartDate().value.length() - 6)) < 0) {
+                            return true;
+                        } else {
+                            if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                    .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                            readOnlyTask.getStartDate().value.length() - 6)) == 0) {
+                                return (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0);
+                            } else {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
         }
     }
 }

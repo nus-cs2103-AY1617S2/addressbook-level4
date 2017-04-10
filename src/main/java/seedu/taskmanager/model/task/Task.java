@@ -7,7 +7,7 @@ import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
- * Represents a Task in the address book. Guarantees: details are present and
+ * Represents a Task in the task manager. Guarantees: details are present and
  * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
@@ -160,11 +160,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isEventTask() {
-        if (!startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD);
     }
 
     /**
@@ -174,11 +170,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isDeadlineTask() {
-        if (startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+        return startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD);
     }
 
     /**
@@ -188,48 +180,65 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isFloatingTask() {
-        if (startDate.value.equals(EMPTY_FIELD) && endDate.value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
+        return startDate.value.equals(EMPTY_FIELD) && endDate.value.equals(EMPTY_FIELD);
     }
 
+    // @@author A0139520L
+    @Override
+    public boolean isCompletedTask() {
+        return isMarkedAsComplete;
+    }
+
+    /**
+     * Checks if the duration of the readOnlyTask is between the start date/time
+     * and end date/time of this task
+     *
+     * @return true if task is a Floating Task
+     */
     @Override
     public boolean isWithinStartEndDuration(ReadOnlyTask t) {
 
         if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
-            if (this.getStartDate().equals(t.getEndDate())) {
-                if ((this.getStartTime().laterThan(t.getStartTime()) && t.getEndTime().laterThan(this.getStartTime()))
-                        || (this.getEndTime().laterThan(t.getStartTime())
-                                && t.getEndTime().laterThan(this.getEndTime()))) {
-                    return true;
+            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                    t.getEndDate().value) == 2)) {
+                if ((this.getStartTime().laterThanOrEqual(t.getEndTime()))
+                        || (t.getStartTime().laterThanOrEqual(this.getEndTime()))) {
+
+                    return false;
                 }
-            } else if (this.getStartDate().equals(t.getEndDate())) {
-                if (t.getEndTime().laterThan(this.getStartTime())) {
-                    return true;
-                }
-            } else if (this.getEndDate().equals(t.getStartDate())) {
-                if (this.getEndTime().laterThan(t.getStartTime())) {
-                    return true;
-                }
+                return true;
             } else {
                 return true;
             }
-        }
-
-        else {
-            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
-                    t.getEndDate().value) == 1)
-                    || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
-                            t.getEndDate().value) == 1)
-                    || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
-                            this.getEndDate().value) == 1)
-                    || (DateTimeUtil.isDateWithin(t.getEndDate().value, this.getStartDate().value,
-                            this.getEndDate().value) == 1)) {
+        } else if ((this.getEndDate().value).equals(t.getStartDate().value)) {
+            if (t.getStartTime().laterThanOrEqual(this.getEndTime())) {
+                return false;
+            } else {
                 return true;
             }
+        } else if ((this.getStartDate().value).equals(t.getEndDate().value)) {
+            if (this.getStartTime().laterThanOrEqual(t.getEndTime())) {
+                return false;
+            } else {
+                return true;
+            }
+        } else if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                t.getEndDate().value) == 1)
+                || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+                        t.getEndDate().value) == 1)
+                || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
+                        this.getEndDate().value) == 1)
+                || (DateTimeUtil.isDateWithin(t.getEndDate().value, this.getStartDate().value,
+                        this.getEndDate().value) == 1)) {
+            return true;
+        } else if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                t.getEndDate().value) == 2) && t.getEndTime().laterThanOrEqual(this.getStartTime())) {
+            return true;
+        } else if ((DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+                t.getEndDate().value) == 2) && this.getEndTime().laterThanOrEqual(t.getStartTime())) {
+            return true;
         }
+
         return false;
     }
 }

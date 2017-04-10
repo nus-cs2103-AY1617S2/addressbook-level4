@@ -1,36 +1,73 @@
 package guitests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
+import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.logic.commands.RecurringCommand;
 import seedu.taskmanager.testutil.TestTask;
 
 public class RecurringCommandTest extends TaskManagerGuiTest {
 
     // @@author A0141102H
     @Test
-    public void recurFloatingTaskFailure() {
+    public void recurTaskFailure() {
+        TestTask[] currentList = td.getTypicalTasks();
+        int targetIndex = currentList.length;
+        commandBox.runCommand("RECUR " + targetIndex + " 3 days");
+        assertResultMessage(RecurringCommand.MESSAGE_RECURRING_FLOATING_TASK_FAILURE);
 
+        commandBox.runCommand("RECUR 1000 4 days");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("RECUR");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, RecurringCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("RECUR 4 DAYS 1000");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, RecurringCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void recurEventTaskSuccess() {
+    public void recurEventTask() {
         // for days
-        // TestTask[] currentList
+        int targetIndex = 1;
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand(td.recurTestDay.getAddCommand());
+        commandBox.runCommand("RECUR " + targetIndex + " 3 days");
+        assertTrue(eventTaskListPanel.isListMatching(td.getTypicalRecurringEventTasksForDays()));
 
         // for weeks
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand(td.recurTestWeek.getAddCommand());
+        commandBox.runCommand("RECUR " + targetIndex + " 3 weeks");
+        assertTrue(eventTaskListPanel.isListMatching(td.getTypicalRecurringEventTasksForWeeks()));
 
-        // for months
-
-        // for years
+        // duplicate task
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand(td.recurTestWeek.getAddCommand());
+        commandBox.runCommand("RECUR " + targetIndex + " 3 days");
+        commandBox.runCommand("RECUR 1 1 days");
+        assertResultMessage(RecurringCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
-    public void recurDeadlineTaskSuccess() {
-        TestTask taskToAdd = td.sampleDeadline;
+    public void recurDeadlineTask() {
+        // for months
+        int targetIndex = 1;
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand(td.recurTestMonth.getAddCommand());
+        commandBox.runCommand("RECUR " + targetIndex + " 3 months");
+        assertTrue(deadlineTaskListPanel.isListMatching(td.getTypicalRecurringDeadlineTasksForMonths()));
 
-    }
+        // for years
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand(td.recurTestYear.getAddCommand());
+        commandBox.runCommand("RECUR " + targetIndex + " 3 years");
+        assertTrue(deadlineTaskListPanel.isListMatching(td.getTypicalRecurringDeadlineTasksForYears()));
 
-    private void AssertRecurSuccess() {
-
+        // duplicate task
+        commandBox.runCommand("RECUR 1 1 years");
+        assertResultMessage(RecurringCommand.MESSAGE_DUPLICATE_TASK);
     }
 }

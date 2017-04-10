@@ -88,23 +88,10 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public void addTask(int addIndex, Task t) throws UniqueTaskList.DuplicateTaskException {
+    public int addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(t);
-        tasks.add(t);
-    }
-
-    /**
-     * Adds a task to ProcrastiNomore. Also checks the new task's categories and
-     * updates {@link #categories} with any new categories found, and updates
-     * the Category objects in the task to point to those in
-     * {@link #categories}.
-     *
-     * @throws UniqueTaskList.DuplicateTaskException
-     *             if an equivalent task already exists.
-     */
-    public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterCategoryListWith(t);
-        tasks.add(t);
+        int addIndex = tasks.add(t);
+        return addIndex;
     }
 
     /**
@@ -120,7 +107,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask updatedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public int updateTask(int index, ReadOnlyTask updatedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert updatedReadOnlyTask != null;
 
         Task updatedTask = new Task(updatedReadOnlyTask);
@@ -130,7 +117,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the categories master list to have additional
         // categories that are not categorized to any task
         // in the task list.
-        tasks.updateTask(index, updatedTask);
+        int updateIndex = tasks.updateTask(index, updatedTask);
+        return updateIndex;
     }
 
     /**
@@ -176,7 +164,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     // @@author A0139520L
     /**
-     * Marks the task in the list at position {@code index} as complete.
+     * Marks the task in the list at position {@code index} as isCompleted.
      *
      * @see #syncMasterCategoryListWith(Task)
      *
@@ -194,23 +182,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         // in the task list.
         tasks.markTask(index, isCompleted);
     }
-
-    /**
-     * Marks the task in the list at position {@code index} as complete.
-     *
-     * @see #syncMasterCategoryListWith(Task)
-     *
-     * @throws DuplicateTaskException
-     *             if marking task as complete causes the task to be equivalent
-     *             to another completed task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    /*
-     * public int isBlockedOutTime(Task t) throws
-     * UniqueTaskList.DuplicateTaskException { return tasks.isBlockedOutTime(t);
-     * }
-     */
 
     // @@author
     //// tag-level operations

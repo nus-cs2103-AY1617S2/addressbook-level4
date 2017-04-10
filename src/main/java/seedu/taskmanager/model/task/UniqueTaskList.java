@@ -40,13 +40,18 @@ public class UniqueTaskList implements Iterable<Task> {
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public int add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
 
-        internalList.add(findSortedPositionToAdd(toAdd), toAdd);
+        int addIndex = findSortedPositionToAdd(toAdd);
+        int numMarkedTasks = findNumMarkedTasksBeforeUpdateIndex(addIndex);
+
+        internalList.add(addIndex, toAdd);
+
+        return addIndex - numMarkedTasks;
     }
 
     /**
@@ -59,7 +64,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public int updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
@@ -68,29 +73,29 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the
-        // updated task.
-        // The right way is to implement observable properties in the Task
-        // class.
-        // Then, PersonCard should then bind its text labels to those observable
-        // properties.
-
-        // internalList.set(index, taskToUpdate);
 
         internalList.remove(index);
-        internalList.add(findSortedPositionToAdd(taskToUpdate), taskToUpdate);
+
+        int updateIndex = findSortedPositionToAdd(taskToUpdate);
+        int numMarkedTasks = findNumMarkedTasksBeforeUpdateIndex(updateIndex);
+
+        internalList.add(updateIndex, taskToUpdate);
+
+        return updateIndex - numMarkedTasks;
     }
 
     // @@author A0139520L
     /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedTask}.
+     * Marks the task in the list at position {@code index} as
+     * {@code isComplete}.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
      *             equivalent to another existing task in the list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
+     * @throws NoSuchElementException
+     *             if {@code isComplete} equals to task isMarkedAsComplete
      */
     public void markTask(int index, boolean isComplete) throws DuplicateTaskException {
         if (isComplete != internalList.get(index).getIsMarkedAsComplete()) {
@@ -106,26 +111,21 @@ public class UniqueTaskList implements Iterable<Task> {
                 throw new DuplicateTaskException();
             }
 
-            // TODO: The code below is just a workaround to notify observers of
-            // the
-            // updated task.
-            // The right way is to implement observable properties in the Task
-            // class.
-            // Then, PersonCard should then bind its text labels to those
-            // observable
-            // properties.
             internalList.set(index, taskToMark);
         } else {
             throw new NoSuchElementException();
         }
     }
+    // @@author
 
+    // @@author
     /**
      * Removes the equivalent task from the list.
      *
      * @throws TaskNotFoundException
      *             if no such task could be found in the list.
      */
+
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
@@ -185,19 +185,12 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
-    /*
-     * public int isBlockedOutTime(Task t) { int index = 0; while (index <
-     * (internalList.size())) { if (internalList.get(index).isEventTask() &&
-     * !internalList.get(index).getIsMarkedAsComplete() &&
-     * t.isWithinStartEndDuration(internalList.get(index))) { return index; }
-     * index++; } return -1; }
-     */
-
     // @@author A0142418L
     /**
      * Compares the starting date and time of 2 event tasks.
      *
-     * @return true if 1st event task is earlier than the 2nd event task based on the startDate and startTime
+     * @return true if 1st event task is earlier than the 2nd event task based
+     *         on the startDate and startTime
      * @return false, if otherwise.
      */
     private boolean isAddEventEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
@@ -229,11 +222,7 @@ public class UniqueTaskList implements Iterable<Task> {
                             if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getStartDate().value.substring(0,
                                             readOnlyTask.getStartDate().value.length() - 6)) == 0) {
-                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0);
                             } else {
                                 return false;
                             }
@@ -251,7 +240,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Compares the due date of 2 deadline tasks.
      *
-     * @return true if 1st deadline task is earlier than the 2nd deadline task based on the endDate and endTime
+     * @return true if 1st deadline task is earlier than the 2nd deadline task
+     *         based on the endDate and endTime
      * @return false, if otherwise.
      */
     private boolean isAddDeadlineEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
@@ -282,11 +272,7 @@ public class UniqueTaskList implements Iterable<Task> {
                             if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getEndDate().value.substring(0,
                                             readOnlyTask.getEndDate().value.length() - 6)) == 0) {
-                                if (toAdd.getEndTime().value.compareTo(readOnlyTask.getEndTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getEndTime().value.compareTo(readOnlyTask.getEndTime().value) < 0);
                             } else {
                                 return false;
                             }
@@ -303,45 +289,26 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Finds the sorted position to add new task to the existing list of task.
-     * List of tasks is sorted firstly based on type of task and then by chronological order of the task
+     * List of tasks is sorted firstly based on type of task and then by
+     * chronological order of the task
      *
-     * Event tasks sorted by startDate startTime.
-     * Deadline tasks sorted by endDate endTime.
-     * Floating tasks are just added to the bottom of the list as there is no time element within a floating task.
+     * Event tasks sorted by startDate startTime. Deadline tasks sorted by
+     * endDate endTime. Floating tasks are just added to the bottom of the list
+     * as there is no time element within a floating task.
      *
-     * @return The sorted position index to add the new task in the sorted list of tasks.
+     * @return The sorted position index to add the new task in the sorted list
+     *         of tasks.
      */
     private int findSortedPositionToAdd(Task toAdd) {
         int addIndex = 0;
+
         if (!internalList.isEmpty()) {
             if (toAdd.isEventTask()) {
-                while (internalList.get(addIndex).isEventTask()) {
-                    if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
-                        break;
-                    }
-                    addIndex++;
-                    if (addIndex == internalList.size()) {
-                        break;
-                    }
-                }
+                addIndex = findSortedPositionToAddEvents(toAdd);
             }
 
             if (toAdd.isDeadlineTask()) {
-                while (internalList.get(addIndex).isEventTask()) {
-                    addIndex++;
-                    if (addIndex == internalList.size()) {
-                        break;
-                    }
-                }
-                while ((addIndex != internalList.size()) && internalList.get(addIndex).isDeadlineTask()) {
-                    if (isAddDeadlineEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
-                        break;
-                    }
-                    addIndex++;
-                    if (addIndex == internalList.size()) {
-                        break;
-                    }
-                }
+                addIndex = findSortedPositionToAddDeadlines(toAdd);
             }
 
             if (toAdd.isFloatingTask()) {
@@ -349,5 +316,69 @@ public class UniqueTaskList implements Iterable<Task> {
             }
         }
         return addIndex;
+    }
+
+    /**
+     * @param toAdd
+     * @param addIndex
+     * @return index deadline should be added in internalList according to
+     *         chronological order
+     */
+    private int findSortedPositionToAddDeadlines(Task toAdd) {
+        int addIndex = 0;
+
+        while (internalList.get(addIndex).isEventTask()) {
+            addIndex++;
+            if (addIndex == internalList.size()) {
+                break;
+            }
+        }
+        while ((addIndex != internalList.size()) && internalList.get(addIndex).isDeadlineTask()) {
+            if (isAddDeadlineEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                break;
+            }
+            addIndex++;
+            if (addIndex == internalList.size()) {
+                break;
+            }
+        }
+        return addIndex;
+    }
+
+    /**
+     * @param toAdd
+     * @param addIndex
+     * @return index event should be added in internalList according to
+     *         chronological order
+     */
+    private int findSortedPositionToAddEvents(Task toAdd) {
+        int addIndex = 0;
+
+        while (internalList.get(addIndex).isEventTask()) {
+            if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                break;
+            }
+            addIndex++;
+            if (addIndex == internalList.size()) {
+                break;
+            }
+        }
+        return addIndex;
+    }
+
+    /**
+     * Finds the number of tasks marked as completed within internalList.
+     *
+     * @return The number of tasks marked as completed
+     */
+    private int findNumMarkedTasksBeforeUpdateIndex(int index) {
+        int numMarkedTasks = 0;
+        for (int checkIndex = 0; checkIndex < index; checkIndex++) {
+            Task task = internalList.get(checkIndex);
+            if (task.getIsMarkedAsComplete()) {
+                numMarkedTasks++;
+            }
+        }
+        return numMarkedTasks;
     }
 }

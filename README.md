@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T11-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T11-B1/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3e520ac54aac416e9bf7f5026e4c2f74)](https://www.codacy.com/app/alvinlyj/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T11-B1/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/ProcrastiNomore_Covershot.PNG" width="800"><br>
+<img src="docs/images/ProcrastiNomore_Covershot.PNG" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).

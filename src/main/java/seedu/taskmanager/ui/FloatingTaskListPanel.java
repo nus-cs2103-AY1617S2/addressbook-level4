@@ -33,15 +33,9 @@ public class FloatingTaskListPanel extends UiPart<Region> {
         addToPlaceholder(floatingTaskListPlaceholder);
     }
 
+    //@@author A0142418L
     public void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        ObservableList<Pair<ReadOnlyTask, Integer>> floatingTaskList = FXCollections.observableArrayList();
-        for (int index = 0; taskList.size() != index; index++) {
-            ReadOnlyTask taskToDelete = taskList.get(index);
-            if (taskToDelete.isFloatingTask()) {
-                Pair<ReadOnlyTask, Integer> floatingTask = new Pair<ReadOnlyTask, Integer>(taskToDelete, index);
-                floatingTaskList.add(floatingTask);
-            }
-        }
+        ObservableList<Pair<ReadOnlyTask, Integer>> floatingTaskList = extractFloatingTasks(taskList);
         floatingTaskListView.setItems(floatingTaskList);
         floatingTaskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -84,5 +78,26 @@ public class FloatingTaskListPanel extends UiPart<Region> {
                 setGraphic(new FloatingTaskCard(task.getKey(), task.getValue() + 1).getRoot());
             }
         }
+    }
+
+    public ListView<Pair<ReadOnlyTask, Integer>> getFloatingTaskListView() {
+        return this.floatingTaskListView;
+    }
+
+    //@@author A0142418L
+    /**
+     * @param taskList
+     * @return ObserableList containing only floating tasks with their respective index from original list
+     */
+    private ObservableList<Pair<ReadOnlyTask, Integer>> extractFloatingTasks(ObservableList<ReadOnlyTask> taskList) {
+        ObservableList<Pair<ReadOnlyTask, Integer>> floatingTaskList = FXCollections.observableArrayList();
+        for (int index = 0; taskList.size() != index; index++) {
+            ReadOnlyTask taskToDelete = taskList.get(index);
+            if (taskToDelete.isFloatingTask()) {
+                Pair<ReadOnlyTask, Integer> floatingTask = new Pair<ReadOnlyTask, Integer>(taskToDelete, index);
+                floatingTaskList.add(floatingTask);
+            }
+        }
+        return floatingTaskList;
     }
 }
