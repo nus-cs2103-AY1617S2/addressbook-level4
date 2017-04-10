@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'onlythree.imanager.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -162,7 +162,7 @@ task guiTests(type: IManagerTest) {
 
 
 task nonGuiTests(type: IManagerTest) {
-    include 'seedu/address/**'
+    include 'onlythree/imanager/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
