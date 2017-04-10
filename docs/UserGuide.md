@@ -76,7 +76,7 @@ Displays a list of tasks under a particular list, if specified. Otherwise, it di
    `Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
    `Black`: this task has been marked as completed. Check [[Fig 4]](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#384-listing-completed-tasks--listdone) to view the format. <br>
    ```
-   > Note that all tasks that fall outside of these categories will appear normally.
+   > All tasks that fall outside of these categories will appear normally.
       i.e. no additional colours.
    ```
    Type any command in the command box and press <kbd>Enter</kbd> to execute it. <br>
@@ -228,12 +228,12 @@ Things To Note:
 > This function prioritises dates/time.
    e.g. "find tmr" will give a list of tasks with tomorrow's date 
          but will not return tasks with "tmr" in their names     
-> Thus, avoid using digits to find task names, TypeTask will return results based on time.
+> Avoid using digits to find task names, TypeTask will return results based on time.
         e.g. "find 4" will give a list of tasks due today at 0400h 
         instead of a list of tasks with "4" in their names.       
 > This function does not support searching by months.
 > This function will return the closest day from your current time.
-   e.g. "find monday" will give you a list of tasks that have this coming monday date
+   e.g. "find monday" will give you a list of tasks coming this Monday
 ```
 
 Examples:
