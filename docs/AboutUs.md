@@ -64,11 +64,17 @@ Role: Developer
 - Components in charge of: [Logic]
 - Aspects/tools in charge of: Testing, Documentation, Eclipse expert
 * Features implemented:
-	* [Done task]
-	* [Undo, redo]
+	* [Done task](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#marking-a-task-as-completed-done)
+	* [Undo](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#undoing-actions-undo)
+	* [Redo](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#redoing-actions-redo)
+	* [Clear](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#deleting-selected-tasks-clear)
+	* [Tags](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#listing-all-tags-tags)
 	* [Task attribute checker]
 * Code written: [[functional code](../collated/main/A0135739W.md)][[test code](../collated/main/A0135739W.md)]
 * Other major contributions:
+	* Did initial functions of [done], [undone] and [list]
+	* Implement keyboard short cuts for selected commands
+	* Implement short form for selected commands
 
 -----
 
