@@ -177,6 +177,7 @@ public class ParserUtil {
         return dates.get(0);
     }
 
+    // @@author A0138952W
     /**
      * Parses a {@code String} and splits it to its tokens
      *
