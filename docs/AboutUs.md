@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 	* Recurring task
 * Code written: [[functional code](../collated/main/A0139343E.md)][[test code](../collated/main/A0139343E.md)]
 * Other major contributions:
-	* [Did initial refactoring from AddressBook to OneTwoDo](https://github.com/CS2103JAN2017-F14-B1/main/pull/1)
+	* Did initial refactoring from AddressBook to OneTwoDo [#1](https://github.com/CS2103JAN2017-F14-B1/main/pull/1)
 	* Did initial junit tests refactoring for future testings
 	* Improved user guide based on feedback
 	* Make/edit diagrams, screenshots, and logo
