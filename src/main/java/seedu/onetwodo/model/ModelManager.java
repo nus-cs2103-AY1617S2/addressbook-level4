@@ -148,23 +148,25 @@ public class ModelManager extends ComponentManager implements Model {
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         Task copiedTask = new Task(taskToUncomplete);
-        copiedTask.updateTaskRecurDate(true);
-        copiedTask.setUndone();
-        ReadOnlyTask taskToCheck = copiedTask;
 
         if (!taskToUncomplete.hasRecur()) {
             undoneNonRecur(taskToUncomplete);
 
-        } else if (toDoList.contains(taskToCheck)) {
-            int index = toDoList.getTaskList().indexOf(taskToCheck);
-            if (toDoList.getTaskList().get(index).getDoneStatus() == false) {
-                undoneLatestRecur(taskToUncomplete, taskToCheck);
-            } else {
-                undoneNonLatestRecur(taskToUncomplete);
-            }
+        }  else {
+            copiedTask.updateTaskRecurDate(true);
+            copiedTask.setUndone();
+            ReadOnlyTask taskToCheck = copiedTask;
 
-        } else {
-            undoneNonParentRecur(taskToUncomplete);
+            if (toDoList.contains(taskToCheck)) {
+                int index = toDoList.getTaskList().indexOf(taskToCheck);
+                if (toDoList.getTaskList().get(index).getDoneStatus() == false) {
+                    undoneLatestRecur(taskToUncomplete, taskToCheck);
+                } else {
+                    undoneNonLatestRecur(taskToUncomplete);
+                }
+            } else {
+                undoneNonParentRecur(taskToUncomplete);
+            }
         }
 
         history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD,
