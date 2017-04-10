@@ -406,9 +406,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | sort tasks by date | see which tasks will be coming up soon
 `* *` | user | Assign priority to each task | rank my tasks depending on what has to get done first
 `* *` | user | list tasks by priority | see which tasks will need my attention the most
-`*` | user | Add recurring tasks | so that I can easily add a task that occurs regularly
 `*` | user | See today’s most important task when opening the app | so that I immediately know what I need to work on
-`*` | user | See encouraging words for completing priority tasks  | so that I feel good about myself and motivated to keep finishing tasks
 `*` | user | Link one task to another  | so that I can see when tasks are connected to each other
 `*` | user | view tasks with the same day as a deadline  | so that I can see tasks that are all due on the same day
 `*` | user | view tasks with the same week as a deadline  | so that I can see tasks that are all due in the same week
@@ -643,7 +641,6 @@ Use case ends.
 > Use case resumes at step 1 <br>
 Use case ends.
 
-{More to be added}
 
 ## Appendix C : Non Functional Requirements
 

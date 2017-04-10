@@ -143,7 +143,7 @@ Examples:
 * `e/edit 1 tag null`<br>
   Remove all the tags of first task.
 
-### 3.5. Marks a task as done or undone: `mark` 
+### 3.5. Marking a task: `mark` 
 
 Mark an existing task as done or undone based on a given valid index.<br>
 Format: `m/mark <INDEX> <undone|done>`
@@ -272,26 +272,28 @@ Format: `exit`
 ## 5. Command Summary
 
 * **Add**  `add <TITLE> [tag TAG|by DATE|from DATE to DATE|priority <high|medium|low>]` <br>
-  e.g. `add Lunch with Bob tag friend priority low tag leisure`<br>
-  e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`<br>
-  e.g. `add tag school tag assignment by 11pm "CS2103 revision"`<br>
+  e.g. `add Lunch with Bob tag friend priority low tag leisure` <br>
+  e.g. `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm` <br>
+  e.g. `add tag school tag assignment by 11pm "CS2103 revision"` <br>
+  e.g. `add "tag friends on facebook" priority high tag friends tag facebook` <br>
 
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
-  e.g. `edit 1 title Movie`<br>
-  e.g. `edit 2 from this Friday 3 pm`<br>
-  e.g. `edit 2 end none`<br>
-  e.g. `edit 2 end null`<br>
-  e.g. `edit 1 tag School`<br>
+* **Edit**  `edit <INDEX>  <[title]|[from]|[to]|[priority]|[tag]> <NEW>` <br>
+  e.g. `edit 1 title movie priority highh`<br>
+  e.g. `edit 2 from 3 pm to 4pm`<br>
+  e.g. `edit 2 to none`<br>
+  e.g. `edit 2 to null`<br>
+  e.g. `edit 1 tag school tag Assignment`<br>
   e.g. `edit 1 tag null`<br>
   e.g. `edit 1 title "today"`<br>
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`
+  e.g. `find "home"`
 
 * **List** : `list` <br>
   e.g. `list all`<br>
