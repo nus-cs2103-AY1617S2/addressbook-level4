@@ -37,16 +37,16 @@ public abstract class Date {
         return inputValue;
     }
 
-    //@@author A0164466X
     public java.util.Date getValue() {
         return value;
     }
-    //@@author
 
+    //@@author A0164466X
     @Override
     public String toString() {
         return getValue().toString();
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
