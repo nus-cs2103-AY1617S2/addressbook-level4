@@ -308,7 +308,7 @@ public class ScheduleCommand extends Command {
             int hoursMin, int startTime, int endTime, Calendar timeToCheck) {
         long returnMils = INITIAL_START_VALUE;
         if (endDateMils - startDateMils <= CONSTANT_FOR_LOWER_BOUND_CASE) {
-            returnMils = checkLessThan14HoursCase(startBound, endBound, hoursMin, startTime, endTime, timeToCheck,
+            returnMils = checkLessThan10HoursCase(startBound, endBound, hoursMin, startTime, endTime, timeToCheck,
                     returnMils);
         } else if (endDateMils - startDateMils >= CONSTANT_FOR_UPPERBOUND_CASE) {
             returnMils = checkMoreThan34HoursCase(startBound, endBound, hoursMin, startTime, timeToCheck);
@@ -325,10 +325,11 @@ public class ScheduleCommand extends Command {
      * timing. Then depending on whether it was wrapped or not, we can check the
      * appropriate boundary conditions by getting the appropriate end time.
      */
-    private long checkLessThan14HoursCase(int startBound, int endBound, int hoursMin, int startTime, int endTime,
+    private long checkLessThan10HoursCase(int startBound, int endBound, int hoursMin, int startTime, int endTime,
             Calendar timeToCheck, long returnMils) {
         startTime = Math.max(startTime, startBound);
         endTime = getAppropriateEndTime(endBound, startTime, endTime);
+        System.out.println(startTime + "||" + endTime);
         if ((endTime - startTime) >= hoursMin) {
             returnMils = scheduleEventAtEndTime(timeToCheck, startTime);
         }
@@ -364,7 +365,7 @@ public class ScheduleCommand extends Command {
     private long checkBetween14Hours34HoursCase(long startDateMils, long endDateMils, int startBound, int endBound,
             int hoursMin, int startTime, int endTime, Calendar timeToCheck, long returnMils) {
         if (startTime < endBound) {
-            if (((int) (endDateMils - startDateMils / MINUTES_PER_HOUR)) > (endBound - startTime)) {
+            if (((int) (endDateMils - startDateMils / MILLISECONDS_PER_MINUTE)) > (endBound - startTime)) {
                 if ((endBound - startTime) >= hoursMin) {
                     returnMils = scheduleEventAtEndTime(timeToCheck, startTime);
                 }
