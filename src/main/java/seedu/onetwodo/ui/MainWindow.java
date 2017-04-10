@@ -5,15 +5,17 @@ import java.net.URL;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -45,6 +47,7 @@ import seedu.onetwodo.model.task.TaskType;
  */
 public class MainWindow extends UiPart<Region> {
 
+    private static final int SCROLL_AMT = 5;
     private static final String LIST_DONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " done";
     private static final String LIST_UNDONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " undone";
     private static final String LIST_ALL_COMMAND_INPUT = ListCommand.COMMAND_WORD + " all";
@@ -53,12 +56,15 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final String HELPWINDOW_URL = "/view/help.html";
-    private static final String USERGUIDE_URL = "https://cs2103jan2017-f14-b1.github.io/main/UserGuide.html";
+    private static final String USERGUIDE_URL = "/view/UserGuide.html";
     private static final String ICON_IMG = "/images/onetwodo_icon2.png";
 
 
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
+    private int deadlineScrollIndex = 0;
+    private int eventScrollIndex = 0;
+    private int todoScrollIndex = 0;
 
     private Stage primaryStage;
     private Logic logic;
@@ -84,6 +90,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem helpUGMenuItem;
 
     @FXML
     private MenuItem undoMenuItem;
@@ -117,6 +126,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private StackPane dialogStackPane;
+    private WebView browser;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -158,6 +168,7 @@ public class MainWindow extends UiPart<Region> {
     private void setAccelerators() {
         setAccelerator(exitMenuItem, KeyCombination.valueOf("Shortcut + E"));
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpUGMenuItem, KeyCombination.valueOf("F2"));
         setAccelerator(undoMenuItem, KeyCombination.valueOf("Shortcut + Z"));
         setAccelerator(redoMenuItem, KeyCombination.valueOf("Shortcut + R"));
         setAccelerator(listDoneMenuItem, KeyCombination.valueOf("Shortcut + Shift + D"));
@@ -207,6 +218,7 @@ public class MainWindow extends UiPart<Region> {
 
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         commandBox.focus();
+        setScrollOnUpDown();
     }
 
     private ObservableList<ReadOnlyTask> getDoneTaskList() {
@@ -270,38 +282,36 @@ public class MainWindow extends UiPart<Region> {
                 (int) primaryStage.getY());
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @FXML
     public void handleHelp() {
-        JFXDialogLayout content = new JFXDialogLayout();
-        WebView browser = new WebView();
-        URL help = MainApp.class.getResource(HELPWINDOW_URL);
-        browser.getEngine().load(help.toString());
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-        content.setBody(browser);
-        closeDialog();
-        EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE));
-        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        dialog.show();
-        closeDialogOnNextKeyPress();
+        showHTML(HELPWINDOW_URL);
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @FXML
     public void handleHelpUG() {
+        showHTML(USERGUIDE_URL);
+    }
+
+    public void showWelcomeDialog() {
+        welcomeWindow = new WelcomeWindow(logic);
         JFXDialogLayout content = new JFXDialogLayout();
-        WebView browser = new WebView();
-        browser.getEngine().load(USERGUIDE_URL);
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-        content.setBody(browser);
-        closeDialog();
-        EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE_USERGUIDE));
+        Region root = welcomeWindow.todayTaskListPanel.getRoot();
+        Label header = new Label();
+        if (!welcomeWindow.todayTaskListPanel.isEmpty) {
+            header.setText(WelcomeWindow.WELCOME);
+        } else {
+            header.setText(WelcomeWindow.DEFAULT);
+        }
+        content.setHeading(header);
+        content.setBody(root);
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
         closeDialogOnNextKeyPress();
     }
 
-  //@@author A0135739W
+    //@@author A0135739W
     public void handleTags(String tagsString) {
         JFXDialogLayout content = new JFXDialogLayout();
         Text headerText = new Text("List of All Tags:");
@@ -313,17 +323,10 @@ public class MainWindow extends UiPart<Region> {
         closeDialog();
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
-        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                ke.consume();
-                closeDialog();
-                commandBox.resetKeyListener();
-            }
-        });
+        closeDialogOnNextKeyPress();
     }
 
-    // @@author
+    //@@author
     @FXML
     public void handleUndo() {
         commandBox.handleCommands(UndoCommand.COMMAND_WORD);
@@ -361,6 +364,7 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    // @@author A0143029M
     public TaskListPanel getDeadlineTaskListPanel() {
         return this.deadlineTaskListPanel;
     }
@@ -385,7 +389,6 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-
     public void openDialog(ReadOnlyTask task) {
         JFXDialogLayout content = new JFXDialogLayout();
         Text nameText = new Text(task.getName().fullName);
@@ -397,14 +400,7 @@ public class MainWindow extends UiPart<Region> {
         closeDialog();
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
-        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                ke.consume();
-                closeDialog();
-                commandBox.resetKeyListener();
-            }
-        });
+        closeDialogOnNextKeyPress();
     }
 
     void closeDialog() {
@@ -412,36 +408,120 @@ public class MainWindow extends UiPart<Region> {
             return;
         }
         dialog.close();
+        dialog = null;
         commandBox.focus();
     }
 
-    public void showWelcomeDialog() {
-        welcomeWindow = new WelcomeWindow(logic);
-        JFXDialogLayout content = new JFXDialogLayout();
-        Region root = welcomeWindow.todayTaskListPanel.getRoot();
-        Label header = new Label();
-        if (!welcomeWindow.todayTaskListPanel.isEmpty) {
-            header.setText(WelcomeWindow.WELCOME);
-        } else {
-            header.setText(WelcomeWindow.DEFAULT);
-        }
-        content.setHeading(header);
-        content.setBody(root);
-        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        dialog.show();
-        closeDialogOnNextKeyPress();
+    private void closeDialogOnNextKeyPress() {
+        commandBox.setKeyListener((KeyEvent ke) -> {
+            KeyCode code = ke.getCode();
+            if (code == KeyCode.UP || code == KeyCode.DOWN) {
+                return;
+            }
+            ke.consume();
+            closeDialog();
+            commandBox.resetKeyListener();
+            commandBox.focus();
+        });
     }
 
-    private void closeDialogOnNextKeyPress() {
-        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                ke.consume();
-                closeDialog();
-                commandBox.resetKeyListener();
-                commandBox.focus();
+    /**
+     * Handle scrolling KeyEvents for browser WebView and TaskListPanels
+     */
+    private void setScrollOnUpDown() {
+        commandBox.setScrollKeyListener((KeyEvent ke) -> {
+            KeyCode code = ke.getCode();
+            if (!(code == KeyCode.UP || code == KeyCode.DOWN)) {
+                return;
+            }
+            if (dialog == null && ke.isShiftDown()) {
+                int maxDeadlineIndex = deadlineTaskListPanel.getNumberOfItems() - 1;
+                int maxEventIndex = eventTaskListPanel.getNumberOfItems() - 1;
+                int maxTodoIndex = todoTaskListPanel.getNumberOfItems() - 1;
+                deadlineScrollIndex = getScrollIndex(ke.getCode(), maxDeadlineIndex, deadlineScrollIndex, SCROLL_AMT);
+                eventScrollIndex = getScrollIndex(ke.getCode(), maxEventIndex, eventScrollIndex, SCROLL_AMT);
+                todoScrollIndex = getScrollIndex(ke.getCode(), maxTodoIndex, todoScrollIndex, SCROLL_AMT);
+                deadlineTaskListPanel.viewScrollTo(deadlineScrollIndex);
+                eventTaskListPanel.viewScrollTo(eventScrollIndex);
+                todoTaskListPanel.viewScrollTo(todoScrollIndex);
+            } else {
+                scrollBrowser(ke);
             }
         });
+    }
+
+    private void scrollBrowser(KeyEvent ke) {
+        if (browser == null) {
+            return;
+        }
+        switch (ke.getCode()) {
+        case UP:
+            browser.fireEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "", "",
+                    KeyCode.UP, true, true, true, true));
+            break;
+        case DOWN:
+            browser.fireEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "", "",
+                    KeyCode.DOWN, true, true, true, true));
+            break;
+        default:
+            break;
+        }
+        browser.fireEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "", "",
+                KeyCode.ESCAPE, true, true, true, true));
+        browser.requestFocus();
+    }
+
+    private int getScrollIndex(KeyCode code, int maxIndex, int originalIndex, int scrollAmount) {
+        int index = originalIndex;
+        if (code == KeyCode.UP) {
+            index -= scrollAmount;
+        } else if (code == KeyCode.DOWN) {
+            index += scrollAmount;
+        }
+        index = index < 0 ? 0 : index > maxIndex ? maxIndex : index;
+        return index;
+    }
+
+    /**
+     * Displays HTML file in JFXDialogLayout
+     */
+    private void showHTML(String urlString) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        browser = new WebView();
+        URL help = MainApp.class.getResource(urlString);
+        browser.getEngine().load(help.toString());
+        hideScrollBar(browser);
+        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        content.setBody(browser);
+        closeDialog();
+        if (urlString.equals(HELPWINDOW_URL)) {
+            EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE));
+        } else if (urlString.equals(USERGUIDE_URL)) {
+            EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE_USERGUIDE));
+        }
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        setBrowserCloseListener();
+    }
+
+    private void setBrowserCloseListener() {
+        closeDialogOnNextKeyPress();
+        browser.setOnKeyReleased((KeyEvent ke) -> {
+            KeyCode code = ke.getCode();
+            if (code == KeyCode.UP || code == KeyCode.DOWN) {
+                return;
+            }
+            ke.consume();
+            closeDialog();
+            commandBox.resetKeyListener();
+            commandBox.focus();
+        });
+    }
+
+    private void hideScrollBar(WebView browser) {
+        browser.getChildrenUnmodifiable().addListener((ListChangeListener<Node>) c -> browser
+                .lookupAll(".scroll-bar")
+                .forEach((node) -> node.setVisible(false)));
     }
 
 }

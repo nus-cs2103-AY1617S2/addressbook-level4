@@ -1,11 +1,14 @@
 package seedu.onetwodo.ui;
 
+import static seedu.onetwodo.model.ModelManager.AUTOSCROLL_LAG;
+
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -13,7 +16,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.LogsCenter;
+import seedu.onetwodo.commons.events.ui.SelectCardEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -58,6 +63,10 @@ public class TaskListPanel extends UiPart<Region> {
         }
     }
 
+    public int getNumberOfItems() {
+        return taskListView.getItems().size();
+    }
+
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(getFilteredTasks(taskList));
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -75,22 +84,36 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent click) {
-                ReadOnlyTask selectedValue = taskListView.getSelectionModel().getSelectedItem();
-                if (selectedValue != null) {
-                    logger.fine("Selection in task list panel changed to : '" + selectedValue + "'");
-                    raise(new TaskPanelSelectionChangedEvent(selectedValue));
-                }
+        taskListView.setOnMouseClicked((MouseEvent click) -> {
+            ReadOnlyTask selectedValue = taskListView.getSelectionModel().getSelectedItem();
+            if (selectedValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + selectedValue + "'");
+                raise(new TaskPanelSelectionChangedEvent(selectedValue));
             }
         });
     }
 
-    public void scrollTo(int index) {
+    public void scrollToAndHighlight(int index) {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+        });
+        highlightTaskCard(index);
+    }
+
+    private void highlightTaskCard(int index) {
+        TimerTask highlightTask = new TimerTask() {
+            @Override
+            public void run() {
+                EventsCenter.getInstance().post(new SelectCardEvent(index, taskType));
+            }
+        };
+        new Timer().schedule(highlightTask, AUTOSCROLL_LAG);
+    }
+
+    public void viewScrollTo(int index) {
+        Platform.runLater(() -> {
+            taskListView.scrollTo(index);
         });
     }
 

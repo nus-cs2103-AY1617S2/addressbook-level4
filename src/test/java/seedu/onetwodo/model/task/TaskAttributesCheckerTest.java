@@ -1,4 +1,3 @@
-//@@author A0141138N
 package seedu.onetwodo.model.task;
 
 import java.time.LocalDateTime;
@@ -11,6 +10,7 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
+//@@author A0141138N
 public class TaskAttributesCheckerTest {
 
     @Rule

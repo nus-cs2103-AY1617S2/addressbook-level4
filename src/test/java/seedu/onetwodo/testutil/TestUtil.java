@@ -306,6 +306,22 @@ public class TestUtil {
         listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
+    public static TestTask[] backwardRecurTaskFromList(final TestTask[] tasks, TestTask tasksToRevert) {
+        int taskIndex = TestUtil.getTaskIndex(tasks, tasksToRevert);
+        tasksToRevert.updateTaskRecurDate(false);
+        TestTask[] testTasks = TestUtil.replaceTaskFromList(tasks, tasksToRevert, taskIndex);
+        return testTasks;
+    }
+
+    public static int getTaskIndex(final TestTask[] tasks, TestTask task) {
+        int result = -1;
+        for (int n = 0; n < tasks.length; n++) {
+            if (tasks[n].isSameStateAs(task)) {
+                return result = n;
+            }
+        }
+        return result;
+    }
 
     /**
      * Returns a copy of the list with the task at specified index removed.
@@ -336,6 +352,17 @@ public class TestUtil {
         return tasks;
     }
 
+    //@@author A0139343E
+    public static boolean containsTask(TestTask[] list, TestTask target) {
+        for (int n = 0; n < list.length; n++) {
+            if (list[n].isSameStateAs(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //@@author
     /**
      * @param tasks
      * @param type

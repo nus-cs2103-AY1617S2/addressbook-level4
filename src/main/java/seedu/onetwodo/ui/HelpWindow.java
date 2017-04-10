@@ -1,4 +1,3 @@
-//@@author A0141138N
 package seedu.onetwodo.ui;
 
 import java.net.URL;
@@ -13,6 +12,7 @@ import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.util.FxViewUtil;
 
+//@@author A0141138N
 /**
  * Controller for a help page
  */

@@ -5,6 +5,7 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
+import seedu.onetwodo.model.DoneStatus;
 
 //@@author A0135739W
 /**
@@ -19,14 +20,14 @@ public class ClearCommandParser {
         String argsTrimmed = args.trim();
         switch (argsTrimmed.toLowerCase()) {
         case "":
-        case "all":
-            return new ClearCommand("all");
+        case DoneStatus.ALL_STRING:
+            return new ClearCommand(DoneStatus.ALL_STRING);
 
-        case "done":
-            return new ClearCommand("done");
+        case DoneStatus.DONE_STRING:
+            return new ClearCommand(DoneStatus.DONE_STRING);
 
-        case "undone":
-            return new ClearCommand("undone");
+        case DoneStatus.UNDONE_STRING:
+            return new ClearCommand(DoneStatus.UNDONE_STRING);
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));

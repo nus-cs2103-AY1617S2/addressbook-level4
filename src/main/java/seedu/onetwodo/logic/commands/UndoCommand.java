@@ -10,6 +10,7 @@ import seedu.onetwodo.logic.commands.exceptions.CommandException;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
+    public static final String RESULT_SUCCESS = "Undo was successful.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undo the most recent command that modifies any of the 3 lists.\n"
@@ -19,7 +20,7 @@ public class UndoCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             String feedbackMessage = model.undo();
-            return new CommandResult(COMMAND_WORD + " successfully.\n" + feedbackMessage);
+            return new CommandResult(RESULT_SUCCESS + feedbackMessage);
         } catch (EmptyHistoryException ehe) {
             throw new CommandException(ehe.getMessage());
         }

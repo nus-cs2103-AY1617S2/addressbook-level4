@@ -13,8 +13,11 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [Task priority]
 	* [Task types]
 	* [Welcome window]
-* Code written: [[functional code](../collated/main/A0141138N.md)][[test code](../collated/main/A0141138N.md)]
+	* [Command Summary Window]
+	* [Help window for User Guide]
+* Code written: [[functional code](../collated/main/A0141138N.md)][[test code](../collated/test/A0141138N.md)]
 * Other major contributions:
+	* Worked on improving user guide with Yu Feng
 
 -----
 
@@ -22,17 +25,21 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/fishwind.jpg" width="150"><br>
 
 - Components in charge of: [Storage]
-- Aspects/tools in charge of: CommandParser, Documentation, Natty
+- Aspects/tools in charge of: Storage, Documentation, Natty
 * Features implemented:
-	* [Natty DateTime parsing]
-	* [Save, import & export commands]
-	* [Find command]
-	* [Recurring task]
+	* [Natty parsing](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#date-and-time-format-specification)
+	* [Save command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#saving-the-data-save)
+	* [Import command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#importing-the-data-import)
+	* [Export command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#exporting-the-data-export)
+	* [Find command](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.md#finding-certain-tasks-find)
+	* Recurring task
 * Code written: [[functional code](../collated/main/A0139343E.md)][[test code](../collated/main/A0139343E.md)]
 * Other major contributions:
-	* Did initial refactoring from AddressBook to OneTwoDo
-	* Did initial junit tests refactoring to pass tests for OneTwoDo
+	* Did initial refactoring from AddressBook to OneTwoDo [#1](https://github.com/CS2103JAN2017-F14-B1/main/pull/1)
+	* Did initial junit tests refactoring for future testings
 	* Improved user guide based on feedback
+	* Make/edit diagrams, screenshots, and logo
+	* Wrote 50+ tests and manual test script.
 
 -----
 
@@ -57,11 +64,17 @@ Role: Developer
 - Components in charge of: [Logic]
 - Aspects/tools in charge of: Testing, Documentation, Eclipse expert
 * Features implemented:
-	* [Done task]
-	* [Undo, redo]
+	* [Done task](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#marking-a-task-as-completed-done)
+	* [Undo](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#undoing-actions-undo)
+	* [Redo](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#redoing-actions-redo)
+	* [Clear](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#deleting-selected-tasks-clear)
+	* [Tags](https://github.com/CS2103JAN2017-F14-B1/main/blob/master/docs/UserGuide.#listing-all-tags-tags)
 	* [Task attribute checker]
 * Code written: [[functional code](../collated/main/A0135739W.md)][[test code](../collated/main/A0135739W.md)]
 * Other major contributions:
+	* Did initial functions of [done], [undone] and [list]
+	* Implement keyboard short cuts for selected commands
+	* Implement short form for selected commands
 
 -----
 

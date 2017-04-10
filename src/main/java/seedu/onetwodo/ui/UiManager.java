@@ -109,7 +109,7 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -123,27 +123,27 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleTags(event.getTagsString());
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @Subscribe
     private void handleShowHelpUGEvent(ShowHelpUGRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelpUG();
     }
 
-    // @@author A0143029M
+    //@@author A0143029M
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         // Scroll when testing
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switch (event.taskType) {
         case DEADLINE:
-            mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
+            mainWindow.getDeadlineTaskListPanel().scrollToAndHighlight(event.targetIndex);
             break;
         case EVENT:
-            mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
+            mainWindow.getEventTaskListPanel().scrollToAndHighlight(event.targetIndex);
             break;
         case TODO:
-            mainWindow.getTodoTaskListPanel().scrollTo(event.targetIndex);
+            mainWindow.getTodoTaskListPanel().scrollToAndHighlight(event.targetIndex);
             break;
         }
     }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
@@ -24,12 +25,12 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private boolean isDone;
     private boolean isToday;
 
-    // @@author A0141138N
+    //@@author A0141138N
     /**
      * Every field must be present and not null. Event
      */
-    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur,
-            Priority priority, Description description, UniqueTagList tags) {
+    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur, Priority priority,
+            Description description, UniqueTagList tags) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,7 +44,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         isToday(startDate, endDate);
     }
 
-    // @@ author A0141138N
+    //@@ author A0141138N
     private void checkTaskType(StartDate startDate, EndDate endDate) {
         if (!startDate.hasDate() && !endDate.hasDate()) {
             this.type = TaskType.TODO;
@@ -56,7 +57,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     private void isToday(StartDate startDate, EndDate endDate) {
         LocalDate dateEnd = LocalDate.MIN;
         LocalDate dateStart = LocalDate.MAX;
@@ -85,12 +86,12 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRecur(),
-                source.getPriority(), source.getDescription(), source.getTags(), source.getDoneStatus());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRecur(), source.getPriority(),
+                source.getDescription(), source.getTags(), source.getDoneStatus());
     }
 
-    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur,
-            Priority priority, Description description, UniqueTagList tags, boolean isDone) {
+    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur, Priority priority,
+            Description description, UniqueTagList tags, boolean isDone) {
         this(name, startDate, endDate, recur, priority, description, tags);
         this.isDone = isDone;
     }
@@ -134,25 +135,22 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return isDone;
     }
 
+    //@@author A0141138N
     @Override
     public boolean getTodayStatus() {
         return isToday;
     }
 
+    //@@author A0141138N
     @Override
     public TaskType getTaskType() {
         return type;
     }
 
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
-    }
-
-    // Setters
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
     }
 
     public void setStartDate(StartDate startDate) {
@@ -165,31 +163,18 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.endDate = endDate;
     }
 
-    //@@author A0139343E
-    public void setRecur(Recurring recur) {
-        assert recur != null;
-        this.recur = recur;
-    }
-
-    //@@author A0141138N
-    public void setPriority(Priority priority) {
-        assert priority != null;
-        this.priority = priority;
-    }
-
-    //@@author
-    public void setDescription(Description description) {
-        assert description != null;
-        this.description = description;
+    public Task removeRecur() {
+        try {
+            this.recur = new Recurring("");
+        } catch (IllegalValueException e) {
+            System.err.println("Illegal value when creating Recurring");
+            e.printStackTrace();
+        }
+        return this;
     }
 
     public void setDone() {
         assert isDone == false;
-        /*        if (!this.hasRecur()) {
-            isDone = true;
-        } else {
-            forwardTaskRecurDate();
-        }*/
         isDone = true;
     }
 
@@ -198,11 +183,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         isDone = false;
     }
 
+    //@@author A0141138N
     public void setToday() {
         assert isToday == false;
         isToday = true;
     }
 
+    //@@author A0141138N
     public void setTaskType(TaskType type) {
         this.type = type;
     }
@@ -214,53 +201,39 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         tags.setTags(replacement);
     }
 
-    /**
-     * Updates this task with the details of {@code replacement}.
-     */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setName(replacement.getName());
-        this.setStartDate(replacement.getStartDate());
-        this.setEndDate(replacement.getEndDate());
-        this.setRecur(replacement.getRecur());
-        this.setPriority(replacement.getPriority());
-        this.setDescription(replacement.getDescription());
-        this.setTags(replacement.getTags());
-    }
-
     //@@author A0139343E
-    public void forwardTaskRecurDate() {
+    public void updateTaskRecurDate(boolean isForward) {
         assert this.getTaskType() != TaskType.TODO;
+        int valueToAdd = isForward ? 1 : -1;
         StartDate tempStartDate;
         EndDate tempEndDate = getEndDate();
-        switch(this.recur.getRecur()) {
+        switch (this.recur.getRecur()) {
         case DAILY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(valueToAdd)));
             }
             break;
         case WEEKLY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(valueToAdd)));
             }
             break;
         case MONTHLY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(valueToAdd)));
             }
             break;
         case YEARLY:
-            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(1)));
+            this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(valueToAdd)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
-                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusYears(1)));
+                this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusYears(valueToAdd)));
             }
             break;
         default:
@@ -310,7 +283,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         case DEADLINE:
         case EVENT:
             return endDate.getLocalDateTime().compareTo(taskB.endDate.getLocalDateTime());
-        default: return 0;
+        default:
+            return 0;
         }
     }
 

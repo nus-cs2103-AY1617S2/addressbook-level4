@@ -1,4 +1,3 @@
-//@@author A0141138N
 package seedu.onetwodo.ui;
 
 import java.util.logging.Logger;
@@ -12,6 +11,7 @@ import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.util.FxViewUtil;
 
+//@@author A0141138N
 public class HelpUGWindow extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String ICON = "/images/help_icon.png";

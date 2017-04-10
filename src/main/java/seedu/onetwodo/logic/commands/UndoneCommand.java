@@ -6,6 +6,7 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0135739W
 public class UndoneCommand extends Command {
@@ -16,7 +17,7 @@ public class UndoneCommand extends Command {
             + ": Marks the task identified by the index number as uncompleted.\n"
             + "Parameters: PREFIX_INDEX (must be a prefix positive integer)\n"
             + "Example: " + COMMAND_WORD + " e1";
-
+    public static final String MESSAGE_UNDONE_UNDONE_TASK = "This task has not been done";
     public static final String MESSAGE_UNDONE_TASK_SUCCESS = "Uncomplete %1$s.";
 
     public final TaskType taskType;
@@ -40,6 +41,8 @@ public class UndoneCommand extends Command {
             model.undoneTask(taskToUncomplete);
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
+        } catch (TaskNotFoundException tnfe) {
+            throw new CommandException(tnfe.getMessage());
         }
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, taskToUncomplete));
     }

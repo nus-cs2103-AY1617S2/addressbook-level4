@@ -2,6 +2,8 @@ package seedu.onetwodo.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -38,6 +40,8 @@ import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+    public static final int AUTOSCROLL_LAG = 300;
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     // toDoList is data, not observable
@@ -98,6 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.shrinkTagList(target);
         toDoList.removeTask(target);
         history.saveUndoInformationAndClearRedoHistory(DeleteCommand.COMMAND_WORD, target, copiedCurrentToDoList);
         indicateToDoListChanged();
@@ -113,7 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
             toDoList.doneTask(taskToComplete);
         } else {
             Task newTask = new Task(taskToComplete);
-            newTask.forwardTaskRecurDate();
+            newTask.updateTaskRecurDate(true);
             toDoList.doneTask(taskToComplete);
             toDoList.addTask(newTask);
             jumpToNewTask(newTask);
@@ -123,19 +128,72 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    //@@author A0139343E
+    /**
+     * Undone a completed task. If it does not recur, undone it normally.
+     *
+     * If undone a recurring task with its original task being edited, it will have no parent.
+     * It will be added back as an individual non-recurring task (to keep all tasks info).
+     *
+     * If undone a non-latest completed recurring task, it will also be added back as an
+     * individual non-recurring task.
+     *
+     * If undone a latest completed recurring task, it will replace
+     * the original task with its date reverted back by the correct amount.
+     */
     @Override
-    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete) throws IllegalValueException {
+    public synchronized void undoneTask(ReadOnlyTask taskToUncomplete)
+            throws IllegalValueException, TaskNotFoundException {
+
         if (taskToUncomplete.getDoneStatus() == false) {
-            throw new IllegalValueException("This task has not been done");
-        }
-        if (taskToUncomplete.hasRecur()) {
-            throw new IllegalValueException("Recurring tasks cannot be undone");
+            throw new IllegalValueException(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
         }
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.undoneTask(taskToUncomplete);
-        history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD, taskToUncomplete,
-                copiedCurrentToDoList);
+        Task copiedTask = new Task(taskToUncomplete);
+
+        if (!taskToUncomplete.hasRecur()) {
+            undoneNonRecur(taskToUncomplete);
+
+        }  else {
+            copiedTask.updateTaskRecurDate(true);
+            copiedTask.setUndone();
+            ReadOnlyTask taskToCheck = copiedTask;
+
+            if (toDoList.contains(taskToCheck)) {
+                int index = toDoList.getTaskList().indexOf(taskToCheck);
+                if (toDoList.getTaskList().get(index).getDoneStatus() == false) {
+                    undoneLatestRecur(taskToUncomplete, taskToCheck);
+                } else {
+                    undoneNonLatestRecur(taskToUncomplete);
+                }
+            } else {
+                undoneNonParentRecur(taskToUncomplete);
+            }
+        }
+
+        history.saveUndoInformationAndClearRedoHistory(UndoneCommand.COMMAND_WORD,
+                taskToUncomplete, copiedCurrentToDoList);
         indicateToDoListChanged();
+    }
+
+    private void undoneNonRecur(ReadOnlyTask taskToUncomplete) {
+        toDoList.undoneTask(taskToUncomplete);
+    }
+
+    private void undoneLatestRecur(ReadOnlyTask taskToUncomplete, ReadOnlyTask taskToRevertBackward)
+            throws TaskNotFoundException {
+
+        toDoList.removeTask(taskToUncomplete);
+        toDoList.backwardRecur(taskToRevertBackward);
+    }
+
+    private void undoneNonLatestRecur(ReadOnlyTask taskToUncomplete) {
+        undoneNonParentRecur(taskToUncomplete);
+    }
+
+    private void undoneNonParentRecur(ReadOnlyTask taskToUncomplete) {
+        ReadOnlyTask recurRemovedTask = toDoList.removeRecur(taskToUncomplete);
+        toDoList.undoneTask(recurRemovedTask);
     }
 
     //@@author
@@ -204,24 +262,36 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0135739W
     @Override
-    public void clear() {
+    public void clear() throws IllegalValueException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_WORD, copiedCurrentToDoList);
+        if (this.toDoList.isEmpty()) {
+            throw new IllegalValueException (ClearCommand.MESSAGE_NO_MORE_TASK);
+        }
         resetData(new ToDoList());
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_ALL, copiedCurrentToDoList);
     }
 
     //@@author A0135739W
     @Override
-    public void clearDone() {
-        toDoList.clearDone();
+    public void clearDone() throws IllegalValueException {
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        if (!toDoList.clearDone()) {
+            throw new IllegalValueException (ClearCommand.MESSAGE_NO_MORE_DONE_TASK);
+        }
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_DONE, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
     //@@author A0135739W
     @Override
-    public void clearUndone() {
-        toDoList.clearUndone();
+    public void clearUndone() throws IllegalValueException {
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        if (!toDoList.clearUndone()) {
+            throw new IllegalValueException (ClearCommand.MESSAGE_NO_MORE_UNDONE_TASK);
+        }
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_UNDONE, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -272,26 +342,32 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
     }
 
+    //@@author A0141138N
     @Override
     public void updateFilteredTodayTaskList() {
         updateFilteredTaskList(new PredicateExpression(p -> p.getTodayStatus() == true));
     }
 
+    //@@author A0141138N
     @Override
     public void updateByTaskType(TaskType taskType) {
         updateFilteredTaskList(new PredicateExpression(p -> p.getTaskType() == taskType));
     }
 
+    //@@author A0143029M
     @Override
+    /**
+     * Filters task list according to the dates, priority and tags given.
+     */
     public void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags) {
         boolean hasBefore = before.hasDate();
         boolean hasAfter = after.hasDate();
-        updateFilteredTaskList(new PredicateExpression(task -> isTaskSameDoneStatus(task, doneStatus)
+        PredicateExpression predicate = new PredicateExpression(task -> isTaskSameDoneStatus(task, doneStatus)
                 && (hasBefore ? isTaskBefore(task, before) : true)
                 && (hasAfter ? isTaskAfter(task, after) : true)
                 && (priority.hasPriority() ? isPrioritySame(task, priority) : true)
-                && (!tags.isEmpty() ? containsAnyTag(task, tags) : true)
-                ));
+                && (!tags.isEmpty() ? containsAnyTag(task, tags) : true));
+        updateFilteredTaskList(predicate);
     }
 
     private boolean containsAnyTag(ReadOnlyTask task, Set<Tag> tags) {
@@ -300,10 +376,12 @@ public class ModelManager extends ComponentManager implements Model {
         return tagsRemoved.size() != task.getTags().toSet().size();
     }
 
+    //@@author A0141138N
     private boolean isPrioritySame(ReadOnlyTask task, Priority p) {
         return task.getPriority().value.equals(p.value);
     }
 
+    //@@author A0143029M
     private boolean isTaskSameDoneStatus(ReadOnlyTask task, DoneStatus doneStatus) {
         switch (doneStatus) {
         case DONE:
@@ -363,13 +441,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType type) {
-        // update by find before getting
         updateBySearchStrings();
 
-        // filter by type
         FilteredList<ReadOnlyTask> filtered = getFilteredTaskList().filtered(t -> t.getTaskType() == type);
 
-        // filter by done and return
         switch (doneStatus) {
         case DONE:
             return filtered.filtered(t -> t.getDoneStatus() == true);
@@ -388,22 +463,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Scroll to task provided
-     *
+     * Scroll to task provided.
      * @param task to jump to
      */
     @Override
     public void jumpToNewTask(ReadOnlyTask task) {
         int filteredIndex = getTaskIndex(task);
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
-                    }
-                }, 300);
+        TimerTask postJumpToEvent = new TimerTask() {
+            @Override
+            public void run() {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
+            }
+        };
+        new Timer().schedule(postJumpToEvent, AUTOSCROLL_LAG);
     }
 
+    //@@author
     // ========== Inner classes/interfaces used for filtering
     @Override
     public DoneStatus getDoneStatus() {

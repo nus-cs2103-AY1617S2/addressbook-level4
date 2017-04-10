@@ -11,8 +11,9 @@ import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
+import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
-
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestTask;
 
@@ -22,7 +23,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
     TestTask[] currentList = td.getTypicalTasks();
 
     @Test
-    public void undo_noCommand_failure () {
+    public void undo_noCommandHistory_failure () {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e2");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
@@ -37,7 +38,18 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), currentList));
 
         String feedbackMessage = String.format(DeleteCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), taskToAdd);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
+    }
+
+    @Test
+    public void undo_with_menu_success() {
+        TestTask taskToAdd = td.task1;
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        mainMenu.executeUndoWithMenu();
+
+        assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), currentList));
+        String feedbackMessage = String.format(DeleteCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), taskToAdd);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -54,7 +66,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, currentList));
 
         String feedbackMessage = String.format(AddCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), td.taskB);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -72,7 +84,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, currentList));
 
         String feedbackMessage = String.format("Restore Task".concat(COMMAND_FORMATTER), td.taskA);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -95,8 +107,8 @@ public class UndoCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, currentList));
 
-        String feedbackMessage = String.format("Undone".concat(COMMAND_FORMATTER), td.taskD);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        String feedbackMessage = String.format(UndoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), td.taskD);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -107,12 +119,49 @@ public class UndoCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void undo_clear_success() {
+    public void undo_undone_sucess() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ListCommand.COMMAND_LIST_DONE);
+        commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+
+        TestTask[] expectedRemainder = {td.taskG};
+        assertTrue(taskListPanel.isListMatching(TaskType.TODO, expectedRemainder));
+        String feedbackMessage = String.format(DoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), td.taskG);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
+    }
+
+    @Test
+    public void undo_clear_done_success() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ClearCommand.COMMAND_CLEAR_DONE);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+
+        TestTask[] expectedRemainder = {td.taskI};
+        assertTrue(taskListPanel.isListMatching(TaskType.TODO, expectedRemainder));
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + ClearCommand.MESSAGE_UNDO_CLEAR_DONE_SUCCESS);
+    }
+
+    @Test
+    public void undo_clear_undone_success() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ClearCommand.COMMAND_CLEAR_UNDONE);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+
+        TestTask[] expectedRemainder = {td.taskI};
+        assertTrue(taskListPanel.isListMatching(TaskType.TODO, expectedRemainder));
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + ClearCommand.MESSAGE_UNDO_CLEAR_UNDONE_SUCCESS);
+    }
+
+    @Test
+    public void undo_clear_all_success() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, currentList));
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, currentList));
         assertTrue(taskListPanel.isListMatching(TaskType.TODO, currentList));
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + "Restore OneTwoDo");
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + ClearCommand.MESSAGE_UNDO_CLEAR_ALL_SUCCESS);
     }
 }

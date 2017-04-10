@@ -15,7 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+
 <!--  @@author A0143029M  -->
+
 <VBox minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar VBox.vgrow="NEVER">
@@ -41,6 +43,7 @@
             <Menu mnemonicParsing="false" text="Help">
                <items>
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Show Command Help" />
+                  <MenuItem fx:id="helpUGMenuItem" mnemonicParsing="false" onAction="#handleHelpUG" text="Show User Guide" />
                </items>
             </Menu>
          </menus>

@@ -11,8 +11,10 @@ import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
+import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.RedoCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
@@ -55,6 +57,20 @@ public class RedoCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         commandBox.runCommand(RedoCommand.COMMAND_WORD);
+
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), expectedList));
+
+        String feedbackMessage = String.format(AddCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), taskToAdd);
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+    }
+
+    @Test
+    public void redo_undo_add_with_menu_success() {
+        TestTask taskToAdd = td.task1;
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        mainMenu.executeRedoWithMenu();
 
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), expectedList));
@@ -107,7 +123,7 @@ public class RedoCommandTest extends ToDoListGuiTest {
             targetTask.setIsDone(true);
         } else {
             TestTask newTestTask = new TaskBuilder(targetTask).build();
-            newTestTask.forwardTaskRecurDate();
+            newTestTask.updateTaskRecurDate(true);
             targetTask.setIsDone(true);
             filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
         }
@@ -120,7 +136,43 @@ public class RedoCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void redo_undo_clear_success() {
+    public void redo_undo_undone_success() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ListCommand.COMMAND_LIST_DONE);
+        commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ListCommand.COMMAND_WORD);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        commandBox.runCommand(RedoCommand.COMMAND_WORD);
+        assertTrue(taskListPanel.isListMatching(TaskType.TODO, currentList));
+
+        String feedbackMessage = String.format(UndoneCommand.COMMAND_WORD.concat(COMMAND_FORMATTER),
+                td.taskG);
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+    }
+
+    @Test
+    public void redo_undo_clear_done_success() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ListCommand.COMMAND_LIST_DONE);
+        commandBox.runCommand(ClearCommand.COMMAND_CLEAR_DONE);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        commandBox.runCommand(RedoCommand.COMMAND_WORD);
+        assertListSize(0);
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + ClearCommand.MESSAGE_CLEAR_DONE_SUCCESS);
+    }
+
+    @Test
+    public void redo_undo_clear_undone_success() {
+        commandBox.runCommand(DoneCommand.COMMAND_WORD + " t1");
+        commandBox.runCommand(ClearCommand.COMMAND_CLEAR_UNDONE);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        commandBox.runCommand(RedoCommand.COMMAND_WORD);
+        assertListSize(0);
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + ClearCommand.MESSAGE_CLEAR_UNDONE_SUCCESS);
+    }
+
+    @Test
+    public void redo_undo_clear_all_success() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         commandBox.runCommand(RedoCommand.COMMAND_WORD);

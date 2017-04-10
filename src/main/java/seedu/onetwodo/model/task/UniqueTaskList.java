@@ -1,6 +1,5 @@
 package seedu.onetwodo.model.task;
 
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,33 +53,6 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(idx, toAdd);
     }
 
-    /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedTask}.
-     *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
-        assert editedTask != null;
-
-        Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
-        }
-
-        taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the
-        // updated task.
-        // The right way is to implement observable properties in the Task
-        // class.
-        // Then, TaskCard should then bind its text labels to those observable
-        // properties.
-        internalList.set(index, taskToUpdate);
-    }
 
     /**
      * Removes the equivalent task from the list.
@@ -99,8 +71,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Marks the equivalent task as completed.
-     *
-     *
      */
     public void done(ReadOnlyTask taskToComplete) {
         int index = internalList.indexOf(taskToComplete);
@@ -112,8 +82,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Marks the equivalent task as uncompleted.
-     *
-     *
      */
     public void undone(ReadOnlyTask taskToUncomplete) {
         int index = internalList.indexOf(taskToUncomplete);
@@ -123,41 +91,67 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, targetTask);
     }
 
+    /**
+     * Make a specified task non-recurring.
+     * @param task The chosen task to be made non-recurring.
+     */
+    public Task removeRecur(ReadOnlyTask task) {
+        int index = internalList.indexOf(task);
+        assert index >= 0;
+        Task targetTask = (Task) task;
+        Task returnTask;
+        returnTask = targetTask.removeRecur();
+        internalList.set(index,  returnTask);
+        return returnTask;
+    }
+
+    /**
+     * Increase the date time of a specified task by its recurring amount.
+     * @param task chosen to be modified.
+     */
+    public void updateRecur(ReadOnlyTask task, boolean isForward) {
+        int index = internalList.indexOf(task);
+        assert index >= 0;
+        Task targetTask = (Task) task;
+        targetTask.updateTaskRecurDate(isForward);
+        internalList.set(index, targetTask);
+    }
+
     //@@author A0135739W
     /**
-     * clears completed tasks.
-     *
-     *
+     * Clears completed tasks.
      */
-    public void clearDone() {
+    public boolean clearDone() {
+        boolean hasDoneTask = false;
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getDoneStatus() == true) {
+                hasDoneTask = true;
                 internalList.remove(internalList.get(i));
                 i--;
             }
         }
+        return hasDoneTask;
     }
 
     //@@author A0135739W
     /**
-     * clears completed tasks.
-     *
-     *
+     * Clears uncompleted tasks.
      */
-    public void clearUndone() {
+    public boolean clearUndone() {
+        boolean hasUndone = false;
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getDoneStatus() == false) {
+                hasUndone = true;
                 internalList.remove(internalList.get(i));
                 i--;
             }
         }
+        return hasUndone;
     }
 
-    //@@author
+    //@@author A0141138N
     /**
      * Marks the equivalent task as task for today.
-     *
-     *
      */
     public void today(ReadOnlyTask taskForToday) {
         int index = internalList.indexOf(taskForToday);
@@ -167,6 +161,10 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, targetTask);
     }
 
+    //@@author A0143029M
+    /**
+     * Sorts the internalList according to the given sort order.
+     */
     public void sortTasks(SortOrder sortOrder, boolean isReversed) {
         switch (sortOrder) {
         case ALPHANUMERIC:
@@ -213,6 +211,10 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
+    }
+
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 
     @Override

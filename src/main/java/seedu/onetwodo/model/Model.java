@@ -43,8 +43,9 @@ public interface Model {
      * Mark the given tasks uncompleted.
      *
      * @throws IllegalValueException
+     * @throws TaskNotFoundException
      */
-    void undoneTask(ReadOnlyTask taskToComplete) throws IllegalValueException;
+    void undoneTask(ReadOnlyTask taskToComplete) throws IllegalValueException, TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -91,12 +92,14 @@ public interface Model {
      */
     void updateFilteredDoneTaskList();
 
+    //@@author A0141138N
     /**
      * Updates the filter of the filtered task list to display all tasks for
      * today
      */
     void updateFilteredTodayTaskList();
 
+    //@@author
     /** Return the done status of particular task */
     DoneStatus getDoneStatus();
 
@@ -119,11 +122,11 @@ public interface Model {
 
     String redo() throws EmptyHistoryException;
 
-    void clear();
+    void clear() throws IllegalValueException;
 
-    void clearDone();
+    void clearDone() throws IllegalValueException;
 
-    void clearUndone();
+    void clearUndone() throws IllegalValueException;
 
     void displayTags();
 

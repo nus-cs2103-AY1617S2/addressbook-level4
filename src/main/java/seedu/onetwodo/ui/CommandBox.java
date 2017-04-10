@@ -31,6 +31,7 @@ public class CommandBox extends UiPart<Region> {
     public static final PseudoClass ERROR_PSEUDOCLASS = PseudoClass.getPseudoClass(ERROR_STYLE_CLASS);
 
     private final Logic logic;
+    private EventHandler<KeyEvent> scrollHandler;
 
     @FXML
     private TextField commandTextField;
@@ -62,13 +63,11 @@ public class CommandBox extends UiPart<Region> {
         try {
             CommandResult commandResult = logic.execute(command);
             setKeyListenerForMutators(command);
-            // process result of the command
             setErrorStyleForCommandResult(false);
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
         } catch (CommandException e) {
-            // handle command failure
             setErrorStyleForCommandResult(true);
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
@@ -94,16 +93,17 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(ke);
     }
 
+    public void setKeyListenerReleased(EventHandler<KeyEvent> ke) {
+        commandTextField.setOnKeyReleased(ke);
+    }
+
     private void setKeyListenerForMutators(String command) {
         switch (command) {
         case AddCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD:
-            commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent ke) {
-                    raise(new DeselectCardsEvent());
-                    resetKeyListener();
-                }
+            commandTextField.setOnKeyPressed((KeyEvent ke) -> {
+                raise(new DeselectCardsEvent());
+                resetKeyListener();
             });
             break;
         default:
@@ -120,9 +120,14 @@ public class CommandBox extends UiPart<Region> {
                 resetIfUpDownKey(ke);
             }
         });
+        commandTextField.setOnKeyReleased(null);
+        commandTextField.setOnKeyReleased(scrollHandler);
     }
 
     private void resetIfUpDownKey(KeyEvent ke) {
+        if (ke.isShiftDown()) {
+            return;
+        }
         KeyCode keyCode = ke.getCode();
         switch (keyCode) {
         case UP:
@@ -159,6 +164,11 @@ public class CommandBox extends UiPart<Region> {
         } else {
             commandTextField.setText(refilledCommands.peek());
         }
+    }
+
+    public void setScrollKeyListener(EventHandler<KeyEvent> scrollHandler) {
+        this.scrollHandler = scrollHandler;
+        commandTextField.setOnKeyReleased(scrollHandler);
     }
 
 }

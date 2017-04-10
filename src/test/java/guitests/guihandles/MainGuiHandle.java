@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.onetwodo.TestApp;
 
@@ -36,5 +37,9 @@ public class MainGuiHandle extends GuiHandle {
     public AlertDialogHandle getAlertDialog(String title) {
         guiRobot.sleep(1000);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
+    }
+
+    public void pressKey(KeyCode code) {
+        guiRobot.press(code).sleep(500);
     }
 }

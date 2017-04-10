@@ -1,4 +1,3 @@
-//@@author A0141138N
 package seedu.onetwodo.ui;
 
 import javafx.fxml.FXML;
@@ -7,6 +6,7 @@ import javafx.scene.layout.Region;
 
 import seedu.onetwodo.logic.Logic;
 
+//@@author A0141138N
 public class WelcomeWindow extends UiPart<Region> {
 
     private static final String FXML = "WelcomeWindow.fxml";

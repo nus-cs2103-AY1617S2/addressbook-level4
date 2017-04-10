@@ -15,7 +15,6 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
-import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the ToDoList level Duplicates are not allowed (by .equals
@@ -75,6 +74,11 @@ public class ToDoList implements ReadOnlyToDoList {
         syncMasterTagListWith(tasks);
     }
 
+    //@@author A0135739W
+    public boolean isEmpty() {
+        return tasks.isEmpty() && tags.isEmpty();
+    }
+
     //// task-level operations
 
     /**
@@ -93,32 +97,6 @@ public class ToDoList implements ReadOnlyToDoList {
     public void addTask(int internalIdx, Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         tasks.add(internalIdx, p);
-    }
-
-    /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedReadOnlyTask}. {@code ToDoList}'s tag list will be updated
-     * with the tags of {@code editedReadOnlyTask}.
-     *
-     * @see #syncMasterTagListWith(Task)
-     *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
-        assert editedReadOnlyTask != null;
-
-        Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line
-        // fails.
-        // This can cause the tags master list to have additional tags that are
-        // not tagged to any task
-        // in the task list.
-        tasks.updateTask(index, editedTask);
     }
 
     /**
@@ -171,17 +149,30 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.undone(taskToUncomplete);
     }
 
-    //@@author A0135739W
-    public void clearDone() {
-        tasks.clearDone();
+    //@@author A0139343E
+    public Task removeRecur(ReadOnlyTask task) {
+        return tasks.removeRecur(task);
+    }
+
+    public boolean contains(ReadOnlyTask task) {
+        return tasks.contains(task);
+    }
+
+    public void backwardRecur(ReadOnlyTask task) {
+        tasks.updateRecur(task, false);
     }
 
     //@@author A0135739W
-    public void clearUndone() {
-        tasks.clearUndone();
+    public boolean  clearDone() {
+        return tasks.clearDone();
     }
 
-    //@@author
+    //@@author A0135739W
+    public boolean clearUndone() {
+        return tasks.clearUndone();
+    }
+
+    //@@author A0141138N
     public void todayTask(ReadOnlyTask taskForToday) {
         tasks.today(taskForToday);
     }
@@ -190,6 +181,37 @@ public class ToDoList implements ReadOnlyToDoList {
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
+    }
+
+    //@@author A0135739W
+    /**
+     * clears tags that are not used by any other tasks when a task is removed
+     */
+    void shrinkTagList(ReadOnlyTask target) {
+        for (Tag tag : target.getTags()) {
+            if (isUniqueTag(tag)) {
+                tags.remove(tag);
+            }
+        }
+    }
+
+    //@@author A0135739W
+    /**
+     * checks if a tag is only used in one task only
+     */
+    private boolean isUniqueTag(Tag tagToCheck) {
+        int occurrenceCount = 0;
+        for (Task task : this.tasks) {
+            for (Tag tagInTask : task.getTags()) {
+                if (tagToCheck.equals(tagInTask)) {
+                    occurrenceCount++;
+                    if (occurrenceCount > 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     //// util methods
