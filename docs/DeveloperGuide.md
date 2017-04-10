@@ -156,20 +156,21 @@ _Figure 2.3b : Component interactions for `delete 1` command (part 2)_
 The sections below give more details of each component.
 
 <h3 id="user-content-ui">UI Component</h3>
+Author: Liu Ziyang<br><br>
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.4 : Class Diagram of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/geekeep/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventListPanel`, `FloatingTaskListPanel`, `DeadlineListPanel`,
+`StatusBarFooter` etc. All these, including the `MainWindow`, directly or indirectly inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/geekeep/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
+ [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml). Some UI parts, for example, `EventListPanel` are using JFoenix Library to realize material design.
 
 The `UI` component:
 * Executes user commands using the `Logic` component.
@@ -177,7 +178,7 @@ The `UI` component:
 * Responds to events raised from various parts of the app and updates the UI accordingly.
 
 <h3 id="user-content-logic">Logic Component</h3>
-
+Author: Goh Yi Rui<br><br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.5 : Class Diagram of the Logic Component_
 
@@ -204,7 +205,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 _Figure 2.6 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 <h3 id="user-content-model">Model Component</h3>
-
+Author: Zhang Hanming<br>
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.7 : Class Diagram of the Model Component_
 
@@ -218,7 +219,7 @@ The `Model` component:
 * Does not depend on any of the other three components.
 
 <h3 id="user-content-storage">Storage Component</h3>
-
+Author: How Siwei<br><br>
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.8 : Class Diagram of the Storage Component_
 
