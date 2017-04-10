@@ -13,19 +13,11 @@ import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
+//@@author A0143029M
 public class DeleteCommandTest extends ToDoListGuiTest {
 
     @Test
     public void delete() {
-/*
-
-        TODO: write delete tests here. Use td.getTypicalTasks for testing.
-        TODO: command back import if needed.
-        Suggestion: 1) Delete first item from any TaskType
-                    2) Delete last item same TaskType
-                    3) Delete the item that was just deleted
-*/
-
         TestTask[] currentList = td.getTypicalTasks();
 
         // invalid index

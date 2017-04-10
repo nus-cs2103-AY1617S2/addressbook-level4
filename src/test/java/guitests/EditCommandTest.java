@@ -20,10 +20,7 @@ import seedu.onetwodo.testutil.TestUtil;
 //@@author A0143029M
 public class EditCommandTest extends ToDoListGuiTest {
 
-    // The list of tasks in the task list panel is expected to match this list.
-    // This list is updated with every successful call to assertEditSuccess().
     TestTask[] tasksList = td.getTypicalTasks();
-
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
