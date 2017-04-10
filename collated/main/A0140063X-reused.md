@@ -1,5 +1,5 @@
 # A0140063X-reused
-###### /java/seedu/task/commons/core/GoogleCalendar.java
+###### \java\seedu\task\commons\core\GoogleCalendar.java
 ``` java
 /**
  * Checks and obtains credentials to connects to Google Calendar service.
@@ -94,13 +94,13 @@ public class GoogleCalendar {
      * This is used for JUnit testing only.
      * It simulates the situation where KIT does not have internet and thus is unable to get user's credentials.
      */
-    public static void setNoInternetTrue() {
+    public static void test_setNoInternetTrue() {
         testNoInternet = true;
     }
 
 }
 ```
-###### /java/seedu/task/logic/commands/SmartAddCommand.java
+###### \java\seedu\task\logic\commands\SmartAddCommand.java
 ``` java
     @Override
     public CommandResult execute() throws CommandException {
@@ -132,7 +132,7 @@ public class GoogleCalendar {
 
 }
 ```
-###### /java/seedu/task/logic/parser/GetGoogleCalendarCommandParser.java
+###### \java\seedu\task\logic\parser\GetGoogleCalendarCommandParser.java
 ``` java
 public class GetGoogleCalendarCommandParser extends CommandParser {
 
@@ -143,7 +143,7 @@ public class GetGoogleCalendarCommandParser extends CommandParser {
 
 }
 ```
-###### /java/seedu/task/logic/parser/PostGoogleCalendarCommandParser.java
+###### \java\seedu\task\logic\parser\PostGoogleCalendarCommandParser.java
 ``` java
 public class PostGoogleCalendarCommandParser extends CommandParser {
 
@@ -158,7 +158,7 @@ public class PostGoogleCalendarCommandParser extends CommandParser {
     }
 }
 ```
-###### /java/seedu/task/logic/parser/RedoCommandParser.java
+###### \java\seedu\task\logic\parser\RedoCommandParser.java
 ``` java
 public class RedoCommandParser extends CommandParser {
 
@@ -169,7 +169,7 @@ public class RedoCommandParser extends CommandParser {
 
 }
 ```
-###### /java/seedu/task/logic/parser/SmartAddCommandParser.java
+###### \java\seedu\task\logic\parser\SmartAddCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new QuickAddCommand object
@@ -203,7 +203,7 @@ public class SmartAddCommandParser extends CommandParser {
 
 }
 ```
-###### /java/seedu/task/logic/parser/UndoCommandParser.java
+###### \java\seedu\task\logic\parser\UndoCommandParser.java
 ``` java
 public class UndoCommandParser extends CommandParser {
 

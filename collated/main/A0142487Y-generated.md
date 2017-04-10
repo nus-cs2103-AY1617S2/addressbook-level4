@@ -1,5 +1,5 @@
 # A0142487Y-generated
-###### /java/seedu/task/logic/parser/CommandParser.java
+###### \java\seedu\task\logic\parser\CommandParser.java
 ``` java
 import seedu.task.logic.commands.Command;
 /**
@@ -14,7 +14,7 @@ public abstract class CommandParser {
 
 }
 ```
-###### /java/seedu/task/logic/parser/ThemeChangeCommandParser.java
+###### \java\seedu\task\logic\parser\ThemeChangeCommandParser.java
 ``` java
 public class ThemeChangeCommandParser extends CommandParser {
 

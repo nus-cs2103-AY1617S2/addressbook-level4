@@ -1,5 +1,5 @@
 # A0139975J-reused
-###### /java/seedu/task/logic/parser/ListCommandParser.java
+###### \java\seedu\task\logic\parser\ListCommandParser.java
 ``` java
 public class ListCommandParser extends CommandParser {
 
@@ -13,14 +13,14 @@ public class ListCommandParser extends CommandParser {
 
 }
 ```
-###### /java/seedu/task/model/ModelManager.java
+###### \java\seedu\task\model\ModelManager.java
 ``` java
     @Override
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
 ```
-###### /java/seedu/task/ui/TaskListPanel.java
+###### \java\seedu\task\ui\TaskListPanel.java
 ``` java
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
@@ -49,7 +49,7 @@ public class ListCommandParser extends CommandParser {
     }
 
 ```
-###### /resources/view/DefaultTheme.css
+###### \resources\view\DefaultTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
@@ -360,7 +360,7 @@ public class ListCommandParser extends CommandParser {
     -fx-font-size: 16;
 }
 ```
-###### /resources/view/TaskListCardDefault.fxml
+###### \resources\view\TaskListCardDefault.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
