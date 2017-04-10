@@ -32,7 +32,8 @@ public interface Logic {
     /** Returns the filtered list of floating tasks */
     ObservableList<ReadOnlyTask> getFilteredDeadlineList();
 
-    /** Retruns command history */
+    //@@author A0147622H
+    /** Returns command history */
     List<String> getCommandHistory();
 
 }

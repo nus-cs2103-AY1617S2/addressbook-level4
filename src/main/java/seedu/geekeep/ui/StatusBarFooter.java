@@ -32,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
 
@@ -58,7 +58,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     private void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) {
-        setSaveLocation("./" + event.config.getGeekeepFilePath());
+        setSaveLocation(event.config.getGeekeepFilePath());
         String lastUpdated = (new Date()).toString();
         setSyncStatus("Last Updated: " + lastUpdated);
     }

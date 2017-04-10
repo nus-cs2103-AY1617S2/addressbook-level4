@@ -1,5 +1,6 @@
 package seedu.geekeep.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,6 +16,7 @@ import seedu.geekeep.commons.events.model.GeeKeepChangedEvent;
 import seedu.geekeep.commons.events.model.GeekeepFilePathChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.exceptions.DataConversionException;
+import seedu.geekeep.commons.util.FileUtil;
 import seedu.geekeep.model.Config;
 import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.UserPrefs;
@@ -43,6 +45,7 @@ public class StorageManager extends ComponentManager implements Storage {
                 new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
+    //@@author A0147622H
     // ================ Config methods ==============================
 
     @Override
@@ -56,6 +59,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
+    //@@author
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -76,11 +80,13 @@ public class StorageManager extends ComponentManager implements Storage {
         return geeKeepStorage.getGeeKeepFilePath();
     }
 
+    //@@author A0147622H
     @Override
     public void setGeeKeepFilePath(String filePath) {
         geeKeepStorage.setGeeKeepFilePath(filePath);
     }
 
+    //@@author
     @Override
     public Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException {
         return readGeeKeep(geeKeepStorage.getGeeKeepFilePath());
@@ -115,6 +121,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    //@@author A0147622H
     @Override
     @Subscribe
     public void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) throws IOException {
@@ -122,6 +129,7 @@ public class StorageManager extends ComponentManager implements Storage {
         Config config = event.config;
         String filePath = config.getGeekeepFilePath();
         try {
+            FileUtil.createParentDirsOfFile(new File(filePath));
             Files.move(Paths.get(getGeeKeepFilePath()), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             saveConfig(config);
             setGeeKeepFilePath(filePath);
