@@ -1,8 +1,9 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import seedu.jobs.TestApp;
 
 /**
  * Provides a handle for the main GUI.
@@ -13,15 +14,15 @@ public class MainGuiHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return new PersonListPanelHandle(guiRobot, primaryStage);
+    public TaskListPanelHandle getTaskListPanel() {
+        return new TaskListPanelHandle(guiRobot, primaryStage);
     }
 
     public ResultDisplayHandle getResultDisplay() {
         return new ResultDisplayHandle(guiRobot, primaryStage);
     }
 
-    public CommandBoxHandle getCommandBox() {
+    public CommandBoxHandle getCommandBox() throws InterruptedException {
         return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
@@ -29,12 +30,8 @@ public class MainGuiHandle extends GuiHandle {
         return new MainMenuHandle(guiRobot, primaryStage);
     }
 
-    public BrowserPanelHandle getBrowserPanel() {
-        return new BrowserPanelHandle(guiRobot, primaryStage);
-    }
-
     public AlertDialogHandle getAlertDialog(String title) {
-        guiRobot.sleep(1000);
+        guiRobot.sleep(10 * TaskBookGuiTest.SLEEP);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
 }

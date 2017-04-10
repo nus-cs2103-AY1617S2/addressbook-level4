@@ -1,0 +1,504 @@
+# Test Script
+
+This is the script for Manual Scripted Testing and a short review of the results.
+
+### Test Case 01
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task without any details
+Test Data | `add TEST1`
+Expected Result | Floating task added
+Actual Result | Floating task added
+Status | *PASSED*
+
+### Test Case 02
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with only end/
+Test Data | `add TEST2 end/01/04/2017 12:00`
+Expected Result | Task with deadline added
+Actual Result | Task with deadline added
+Status | *PASSED*
+
+### Test Case 03
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with invalid time
+Test Data | `add TEST3 start/010/04/2017 10:00`
+Expected Result | Prompt: Time should always follow the dd/mm/yyyy hh:mm format
+Actual Result | Prompt: Time should always follow the dd/mm/yyyy hh:mm format
+Status | *PASSED*
+Remarks | Time parameter follows a rigid requirements
+
+### Test Case 04
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with desc/
+Test Data | `add TEST4 start/02/04/2017 10:00 end/02/04/2017 12:00 desc/adding with start and end`
+Expected Result | Task with description added
+Actual Result | Task with description added
+Status | *PASSED*
+
+### Test Case 05
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with multiple tags
+Test Data | `add TEST5 start/04/04/2017 12:00 end/04/04/2017 16:00 desc/adding with multiple tags tag/start tag/end tag/desc`
+Expected Result | Task with multiple tags added
+Actual Result | Task with multiple tags added
+Status | *PASSED*
+Remarks | Allow single and multiple tagging
+
+### Test Case 06
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with multiple tags
+Test Data | `add TEST6 start/04/04/2017 12:00 end/04/04/2017 16:00 desc/adding with multiple tags tag/start tag/end, desc`
+Expected Result | Prompt: Tags names should be alphanumeric
+Actual Result | Prompt: Tags names should be alphanumeric
+Status | *PASSED*
+Remarks | Multiple tagging follows format *tag/tag1 tag/tag2*
+
+### Test Case 07
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with time before current local time
+Test Data | `add TEST7 start/02/02/2017 16:00 end/03/02/2017 18:00 desc/this is for passed time period tag/add`
+Expected Result | Task successfully added
+Actual Result | Task successfully added
+Status | *PASSED*
+Remarks | No restriction related to current local time
+
+### Test Case 08
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with flexible input
+Test Data | `add TEST8 end/02/02/2017 16:00 desc/ Flexible sequence start/01/02/2017 16:00`
+Expected Result | Task successfully added
+Actual Result | Task successfully added
+Status | *PASSED*
+Remarks | Input recognition follows keyword instead of sequence
+
+### Test Case 09
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with end time preceding start time
+Test Data | `add TEST9 start/02/04/2017 10:00 end/02/04/2017 08:00`
+Expected Result | Prompt: Start time must precede end time
+Actual Result | Prompt: Start time must precede end time
+Status | *PASSED*
+
+### Test Case 10
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add exact task duplicate
+Test Data | `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
+Test Data | `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
+Expected Result | Prompt: This task already exists in JOBS
+Actual Result | Prompt: This task already exists in JOBS
+Status | *PASSED*
+
+### Test Case 11
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task only differing in description
+Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00`
+Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 desc/duplicating test`
+Expected Result | Prompt: This task already exists in JOBS
+Actual Result | Prompt: This task already exists in JOBS
+Status | *PASSED*
+Remarks | Duplicate strictly follows name, startTime and endTime comparison
+
+### Test Case 12
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task only differing in tags
+Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 tag/duplicate`
+Expected Result | Prompt: This task already exists in JOBS
+Actual Result | Prompt: This task already exists in JOBS
+Status | *PASSED*
+Remarks | Duplicate strictly follows name, startTime and endTime comparison
+
+### Test Case 13
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task only differing in recur
+Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 recur/2`
+Expected Result | Prompt: This task already exists in JOBS
+Actual Result | Prompt: This task already exists in JOBS
+Status | *PASSED*
+Remarks | Duplicate strictly follows name, startTime and endTime comparison
+
+### Test Case 14
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with exactly the same name and start time
+Test Data | `add TEST11 start/06/04/2017 13:00`
+Expected Result | Task successfully added
+Actual Result | Task successfully added
+Status | *PASSED*
+
+### Test Case 15
+Detail | Summary
+-------- | :--------
+Test Case Summary | Add task with exactly the same name and start time
+Test Data | `add TEST11 end/06/04/2017 14:00`
+Expected Result | Task successfully added
+Actual Result | Task successfully added
+Status | *PASSED*
+
+### Test Case 16
+Detail | Summary
+-------- | :--------
+Test Case Summary | Delete task from list
+Test Data | `delete 1`
+Expected Result | Task with index 1 is deleted
+Actual Result | Task with index 1 is deleted
+Status | *PASSED*
+
+### Test Case 17
+Detail | Summary
+-------- | :--------
+Test Case Summary | Delete task with out of bound index
+Test Data | `delete 40`
+Expected Result | Prompt: The task index provided is invalid
+Actual Result | Prompt: The task index provided is invalid
+Status | *PASSED*
+
+### Test Case 16
+Detail | Summary
+-------- | :--------
+Test Case Summary | Delete task with name reference
+Test Data | `delete TEST11`
+Expected Result | Prompt: Invalid command format
+Actual Result | Prompt: Invalid command format
+Status | *PASSED*
+Remarks | Delete function only use index for task identification
+
+### Test Case 17
+Detail | Summary
+-------- | :--------
+Test Case Summary | Edit a task
+Test Data | `edit 1 start/07/04/2017 09:00`
+Expected Result | Edit start time without affecting other details
+Actual Result | Edit start time without affecting other details
+Status | *PASSED*
+
+### Test Case 18
+Detail | Summary
+-------- | :--------
+Test Case Summary | Removing start time
+Test Data | `edit 1 start/`
+Expected Result | Remove start time, become task with deadline
+Actual Result | Remove start time, become task with deadline
+Status | *PASSED*
+Remarks | To remove details, use / followed by empty details
+
+### Test Case 19
+Detail | Summary
+-------- | :--------
+Test Case Summary | Removing end time
+Test Data | `edit 1 end/`
+Expected Result | End time removed
+Actual Result | End time removed
+Status | *PASSED*
+Remarks | To remove details, use / followed by empty details
+
+### Test Case 20
+Detail | Summary
+-------- | :--------
+Test Case Summary | Remove tags
+Test Data | `edit 1 tag/`
+Expected Result | All tags are removed
+Actual Result | All tags are removed
+Status | *PASSED*
+Remarks | All tags will be removed
+
+### Test Case 21
+Detail | Summary
+-------- | :--------
+Test Case Summary | Edit the recursion period of task
+Test Data | `edit 1 recur/2`
+Expected Result | Recursion period will be edited
+Actual Result | Prompt: At least one field to edit must be provided
+Status | *FAILED*
+Remarks | Unable to change recursion detail
+
+### Test Case 22
+Detail | Summary
+-------- | :--------
+Test Case Summary | Remove recursion function
+Test Data | `edit 1 recur/`
+Expected Result | Remove the recurring function of task
+Actual Result | Prompt: At least one field to edit must be provided
+Status | *PASSED*
+Remarks | Unable to change recursion detail
+
+### Test Case 23
+Detail | Summary
+-------- | :--------
+Test Case Summary | Edit tags attached to the task
+Test Data | `edit 1 tag/edit tag/multiple`
+Expected Result | Override all previous tags with new tags input
+Actual Result | Override all previous tags with new tags input
+Status | *PASSED*
+
+### Test Case 24
+Detail | Summary
+-------- | :--------
+Test Case Summary | Adding tag with multiple words
+Test Data | `edit 1 tag/single word`
+Expected Result | Prompt: Tags names should be alphanumeric
+Actual Result | Prompt: Tags names should be alphanumeric
+Status | *PASSED*
+Remarks | Tag only accept one word input
+
+### Test Case 25
+Detail | Summary
+-------- | :--------
+Test Case Summary | Edit using details other than index
+Test Data | `edit NAME`
+Expected Result | Prompt: Invalid command format
+Actual Result | Prompt: Invalid command format
+Status | *PASSED*
+
+### Test Case 26
+Detail | Summary
+-------- | :--------
+Test Case Summary | To marks a task as complete
+Test Data | `complete 1`
+Expected Result | Status of task will change to complete
+Actual Result | Status of task will change to complete
+Status | *PASSED*
+Remarks |
+
+### Test Case 27
+Detail | Summary
+-------- | :--------
+Test Case Summary | Reverse completed task to in-progress
+Test Data | `complete 2`
+Test Data | `in-progress 2`
+Expected Result | Prompt: Unknown command
+Actual Result | Prompt: Unknown command
+Status | *PASSED*
+Remarks | Unable to reverse status unless using undo command
+
+### Test Case 28
+Detail | Summary
+-------- | :--------
+Test Case Summary | List down all tasks
+Test Data | `list`
+Expected Result | All tasks will be listed
+Actual Result | All tasks will be listed
+Status | *PASSED*
+
+###Test Case 29
+-------- | :--------
+Test Case Summary | List down all completed tasks
+Test Data | `list complete`
+Expected Result | All completed tasks listed
+Actual Result | All completed tasks listed
+Status | *PASSED*
+
+### Test Case 30
+Detail | Summary
+-------- | :--------
+Test Case Summary | Edit from completed tasks list
+Test Data | `list complete`
+Test Data | `edit 1 TEST12_complete tag/complete`
+Expected Result | Task successfully edited
+Actual Result | Task successfully edited
+Status | *PASSED*
+
+### Test Case 31
+Detail | Summary
+-------- | :--------
+Test Case Summary | Edit from in-progress tasks list
+Test Data | `list in-progress`
+Test Data | `edit 1 tag/list`
+Expected Result | Task successfully edited
+Actual Result | Task successfully edited
+Status | *PASSED*
+
+### Test Case 32
+Detail | Summary
+-------- | :--------
+Test Case Summary | Complete task from in-progress tasks list
+Test Data | `list in-progress`
+Test Data | `complete 1`
+Expected Result | Task marked as completed
+Actual Result | Task marked as completed
+Status | *PASSED*
+
+### Test Case 33
+Detail | Summary
+-------- | :--------
+Test Case Summary | Listing using parameter aside from status
+Test Data | `list TEST`
+Expected Result | Display 0 task
+Actual Result | Display 0 task
+Status | *PASSED*
+Remarks | List only compares with status
+
+### Test Case 34
+Detail | Summary
+-------- | :--------
+Test Case Summary | List all tasks with substring "1" in name or description
+Test Data | `find 1`
+Expected Result | List all task with "1" in their, description or tag
+Actual Result | List all task with "1" in their, description or tag
+Status | *PASSED*
+Remarks | Find function accommodates substring of name, description or tag
+
+### Test Case 35
+Detail | Summary
+-------- | :--------
+Test Case Summary | List task based on time
+Test Data | `find 2017`
+Expected Result | Display 0 task
+Actual Result | Display 0 task
+Status | *PASSED*
+
+### Test Case 36
+Detail | Summary
+-------- | :--------
+Test Case Summary | List all tasks with substring "1" in tag and edit task
+Test Data | `find add`
+Test Data | `edit 1 tag/retag tag/find`
+Expected Result | Task with index 1 will have tag overridden
+Actual Result | Task with index 1 will have tag overridden
+Status | *PASSED*
+
+### Test Case 37
+Detail | Summary
+-------- | :--------
+Test Case Summary | Find all tasks with status complete
+Test Data | `find complete`
+Expected Result | Only display tasks with "complete" in name or description
+Actual Result | Only display tasks with "complete" in name or description
+Status | *PASSED*
+Remarks | Find does not support comparison with status
+
+### Test Case 38
+Detail | Summary
+-------- | :--------
+Test Case Summary | Find all tasks with status in-progress
+Test Data | `find in-progress`
+Expected Result | Only display tasks with "in-progress" in name or description
+Actual Result | Only display tasks with "in-progress" in name or description
+Status | *PASSED*
+Remarks | Find does not support comparison with status
+
+### Test Case 39
+Detail | Summary
+-------- | :--------
+Test Case Summary | Clear the whole taskbook
+Test Data | `clear`
+Expected Result | Removes all tasks on taskbook
+Actual Result | Removes all tasks on taskbook
+Status | *PASSED*
+
+### Test Case 40
+Detail | Summary
+-------- | :--------
+Test Case Summary | Complete a recurring task
+Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00 recur/3`
+Test Data | `complete 1`
+Expected Result | Both dates will increase by 3 days
+Actual Result | Both dates will increase by 3 days
+Status | *PASSED*
+Remarks | Complete command will continue to increase dates by specified period
+
+### Test Case 41
+Detail | Summary
+-------- | :--------
+Test Case Summary | Undo function to cancel an action
+Test Data | `delete 1`
+Test Data | `undo`
+Expected Result | Retrieve the previously deleted task
+Actual Result | Retrieve the previously deleted task
+Status | *PASSED*
+
+### Test Case 42
+Detail | Summary
+-------- | :--------
+Test Case Summary | Redo function to cancel an undo action
+Test Data | `delete 1`
+Test Data | `undo`
+Test Data | `redo`
+Expected Result | Task with index 1 is deleted
+Actual Result | Task with index 1 is deleted
+Status | *PASSED*
+Remarks | Undo/redo supports up to 10 consecutive times
+
+### Test Case 43
+Detail | Summary
+-------- | :--------
+Test Case Summary | Redo function exceeding the number of undo call
+Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00`
+Test Data | `undo`
+Test Data | `redo`
+Test Data | `redo`
+Expected Result | Prompt: No more commands to redo
+Actual Result | Prompt: No more commands to redo
+Status | *PASSED*
+
+### Test Case 44
+Detail | Summary
+-------- | :--------
+Test Case Summary | Undo a previously completed task
+Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00`
+Test Data | `complete`
+Test Data | `undo`
+Expected Result | Status of task turns in-progress
+Actual Result | Status of task turns in-progress
+Status | *PASSED*
+Remarks | The only method to reverse the status of a previously completed task
+
+### Test Case 48
+Detail | Summary
+-------- | :--------
+Test Case Summary | Set function with email/ and pwd/
+Test Data | `set email/cs2103cks@gmail.com pwd/abcdefgh123456`
+Expected Result | Account saved
+Actual Result | Account saved
+Status | *PASSED*
+
+### Test Case 49
+Detail | Summary
+-------- | :--------
+Test Case Summary | Set function with only email/
+Test Data | `set email/cs2103cks@gmail.com`
+Expected Result | Invalid command format
+Actual Result | Invalid command format
+Status | *PASSED*
+Remarks | Input requires both email and password at the same time
+
+### Test Case 50
+Detail | Summary
+-------- | :--------
+Test Case Summary | Set function with only pwd/
+Test Data | `set pwd/abcdefgh123456`
+Expected Result | Invalid command format
+Actual Result | Invalid command format
+Status | *PASSED*
+Remarks | Input requires both email and password at the same time
+
+### Test Case 51
+Detail | Summary
+-------- | :--------
+Test Case Summary | Load Google Calendar feature
+Test Data | `display`
+Expected Result | Browser panel loading Google Calendar
+Actual Result | Browser panel loading Google Calendar
+Status | *PASSED*
+Remarks | Logging in with different account will prompt authorization
+
+### Test Case 52
+Detail | Summary
+-------- | :--------
+Test Case Summary | Test for generating help browser
+Test Data | `help`
+Expected Result | Redirect to help page
+Actual Result | Redirect to help page
+Status | *PASSED*

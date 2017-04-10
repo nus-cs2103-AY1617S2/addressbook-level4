@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskbook>
+    <tasks>
+        <name>chiong cs2103</name>
+        <startTime>07/04/2017 17:00</startTime>
+        <endTime>10/04/2017 11:59</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>study for upcoming cs2010 exam</name>
+        <startTime>04/04/2017 17:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>do ma3111 homework</name>
+        <startTime>02/04/2017 12:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+        <tagged>urgent</tagged>
+    </tasks>
+    <tasks>
+        <name>rewatch forest gump</name>
+        <startTime>01/04/2017 00:00</startTime>
+        <endTime></endTime>
+        <description>such a good movie</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>meet prof singh</name>
+        <startTime>29/03/2017 13:00</startTime>
+        <endTime></endTime>
+        <description>regarding usp module mapping</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>call for group meeting cs2103</name>
+        <startTime>27/03/2017 19:00</startTime>
+        <endTime></endTime>
+        <description>deadline is coming</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+        <tagged>urgent</tagged>
+    </tasks>
+    <tasks>
+        <name>write more test cases for cs2103</name>
+        <startTime>27/03/2017 17:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>read CP book</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description>summer goal</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>cs2010 assignment</name>
+        <startTime>25/03/2017 12:00</startTime>
+        <endTime></endTime>
+        <description>don't stop until you can finish it</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CG meeting</name>
+        <startTime>24/03/2017 17:00</startTime>
+        <endTime>24/03/2017 23:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>do stochastic 2 hw</name>
+        <startTime></startTime>
+        <endTime>23/03/2017 23:59</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+        <tagged>homework</tagged>
+        <tagged>urgent</tagged>
+    </tasks>
+    <tasks>
+        <name>study stochastic process 2</name>
+        <startTime>20/03/2017 12:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>midterms</tagged>
+    </tasks>
+    <tasks>
+        <name>learn about the stock market</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>finance</tagged>
+    </tasks>
+    <tasks>
+        <name>deal with path function</name>
+        <startTime>19/03/2017 13:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+        <tagged>cs2103</tagged>
+    </tasks>
+    <tasks>
+        <name>talk to Elmo regarding NUANSA</name>
+        <startTime>18/03/2017 22:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>meet rika over PINUS election</name>
+        <startTime>18/03/2017 18:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>get enough sleep for the day</name>
+        <startTime>17/03/2017 22:00</startTime>
+        <endTime></endTime>
+        <description>no overwatch this time!</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>surprise my sister over the phone</name>
+        <startTime>17/03/2017 </startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>plan my sister's birthday</name>
+        <startTime></startTime>
+        <endTime>17/03/2017 </endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>plan my summer's trip</name>
+        <startTime>13/03/2017 </startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>revise ma4270</name>
+        <startTime></startTime>
+        <endTime>11/03/2017 03:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>book flight ticket back</name>
+        <startTime></startTime>
+        <endTime>10/03/2017 23:59</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>send thank you email to prof tan</name>
+        <startTime></startTime>
+        <endTime>07/03/2017 23:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>consult prof regarding phd decision</name>
+        <startTime>07/03/2017 17:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>do cs2103 v0.3</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>urgent</tagged>
+    </tasks>
+    <tasks>
+        <name>sell my kendo stuff</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>learn karate</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>rewatch game of thrones</name>
+        <startTime>03/05/2017 18:00</startTime>
+        <endTime>03/05/2017 20:00</endTime>
+        <description>can't wait for season 7</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>go to my sis' piano recital</name>
+        <startTime>03/03/2017 17:00</startTime>
+        <endTime>03/03/2017 20:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>morning run</name>
+        <startTime>01/03/2017 08:00</startTime>
+        <endTime>01/03/2017 09:00</endTime>
+        <description>must maintain my health</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+        <tagged>sports</tagged>
+    </tasks>
+    <tasks>
+        <name>do my ma3111 homework</name>
+        <startTime>28/02/2017 12:00</startTime>
+        <endTime>01/03/2017 15:00</endTime>
+        <description>deadline is coming</description>
+        <period>3</period>
+        <isCompleted>false</isCompleted>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <name>do my ma4270 project</name>
+        <startTime>03/03/2017 12:00</startTime>
+        <endTime>03/03/2017 15:00</endTime>
+        <description>deadline is coming</description>
+        <period>3</period>
+        <isCompleted>false</isCompleted>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <name>talk to my dad</name>
+        <startTime>27/02/2017 20:00</startTime>
+        <endTime>27/02/2017 21:00</endTime>
+        <description>,must be fair to him</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>talk to my mom</name>
+        <startTime>27/02/2017 19:00</startTime>
+        <endTime>27/02/2017 20:00</endTime>
+        <description>show her some love</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>study cs2010</name>
+        <startTime>27/02/2017 12:00</startTime>
+        <endTime>27/02/2017 14:00</endTime>
+        <description>must practice everyday</description>
+        <period>2</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>practice overwatch</name>
+        <startTime>25/02/2017 20:00</startTime>
+        <endTime>25/02/2017 21:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>watch les miserables</name>
+        <startTime>24/02/2017 18:00</startTime>
+        <endTime>24/02/2017 21:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>go bowling</name>
+        <startTime>21/02/2017 17:00</startTime>
+        <endTime>21/02/2017 19:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>watch shaw shank redemption again</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>watch the man who knew infinity</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>walk my dog more frequently</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>practice sky diving</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>go for choir concert</name>
+        <startTime>20/02/2017 19:00</startTime>
+        <endTime>20/02/2017 21:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>go to barber</name>
+        <startTime>19/02/2017 13:00</startTime>
+        <endTime>19/02/2017 15:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>karaoke with friends</name>
+        <startTime>17/02/2017 20:00</startTime>
+        <endTime>17/02/2017 23:59</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>practice driving start 17/02/2017 12:00</name>
+        <startTime></startTime>
+        <endTime>17/02/2017 14:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>study for ma4270 midterm</name>
+        <startTime>17/02/2017 12:00</startTime>
+        <endTime>17/02/2017 13:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>Do Stochastic homework</name>
+        <startTime>18/03/2017 17:00</startTime>
+        <endTime></endTime>
+        <description>because it's damn hard</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Hang out with gf</name>
+        <startTime>18/03/2017 09:00</startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>Study MA3111</name>
+        <startTime>17/03/2017 23:00</startTime>
+        <endTime>17/03/2017 23:59</endTime>
+        <description>because complex analysis is lyfe</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>MA4270 project meeting</name>
+        <startTime>17/03/2017 19:00</startTime>
+        <endTime>17/03/2017 21:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CS2103 v0.1 meeting</name>
+        <startTime>17/03/2017 15:00</startTime>
+        <endTime>17/03/2017 17:00</endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>Meeting</name>
+        <startTime>16/03/2017 12:00</startTime>
+        <endTime>18/03/2017 17:00</endTime>
+        <description>Meet with group members at UTown</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>meetings</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103</name>
+        <startTime>01/02/2017 11:00</startTime>
+        <endTime>01/02/2017 12:00</endTime>
+        <description>Software Engineering</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>tutorials</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2102</name>
+        <startTime>17/03/2017 08:00</startTime>
+        <endTime>17/03/2017 09:00</endTime>
+        <description>Database</description>
+        <period>0</period>
+        <isCompleted>true</isCompleted>
+        <tagged>tutorials</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2101</name>
+        <startTime>16/03/2017 15:00</startTime>
+        <endTime>16/03/2017 16:00</endTime>
+        <description>Effetive Communication For Computing Professionlas</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>lectures</tagged>
+    </tasks>
+    <tags>lectures</tags>
+    <tags>tutorials</tags>
+    <tags>meetings</tags>
+    <tags>homework</tags>
+    <tags>assignment</tags>
+    <tags>sports</tags>
+    <tags>urgent</tags>
+    <tags>cs2103</tags>
+    <tags>finance</tags>
+    <tags>midterms</tags>
+</taskbook>

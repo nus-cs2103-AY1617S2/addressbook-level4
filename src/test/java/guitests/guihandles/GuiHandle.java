@@ -4,14 +4,15 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.jobs.TestApp;
+import seedu.jobs.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -20,7 +21,8 @@ public class GuiHandle {
     protected final GuiRobot guiRobot;
     protected final Stage primaryStage;
     /**
-     * An optional stage that exists in the App other than the primaryStage, could be a alert dialog, popup window, etc.
+     * An optional stage that exists in the App other than the primaryStage,
+    could be a alert dialog, popup window, etc.
      */
     protected Optional<Stage> intermediateStage = Optional.empty();
     protected final String stageTitle;
@@ -63,11 +65,11 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        guiRobot.sleep(5 * TaskBookGuiTest.SLEEP); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {
-        guiRobot.type(KeyCode.ENTER).sleep(500);
+        guiRobot.type(KeyCode.ENTER).sleep(5 * TaskBookGuiTest.SLEEP);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {

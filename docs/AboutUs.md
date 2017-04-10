@@ -1,52 +1,45 @@
 # About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team from CS2103.
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
+#### [tutor]
 <img src="images/DamithRajapakse.jpg" width="150"><br>
 **Role**: Project Advisor
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
+#### [Christopher Hendra](http://github.com/chrishendra93)
+<img src="images/ChristopherHendra.jpg" width="150"><br>
+Role: Team Lead, Testing Developer<br>
+Responsibilities: Model
+
+-----
+
+#### [Deng Yue](http://github.com/spenceryue97)
+<img src="images/DengYue.jpg" width="150"><br>
+Role: Developer, Integration, Documentation Scheduling and tracking <br>
+Responsibilities: Logic
+
+-----
+
+#### [Cindra](http://github.com/cindratan)
+<img src="images/Cindra.jpg" width="150"><br>
+Role: Developer, Code quality, Scheduling and tracking <br>
 Responsibilities: UI
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
------
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
+#### [Zhuang Lei](https://github.com/zl1993)
+<img src="images/ZhuangLei.jpg" width="150"><br>
+ Role: Developer, Deliverables and deadlines, Testing <br>
+ Responsibilities: Storage
 
  -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+ | Name  | Matriculation No |
+ | ----- | ----- |
+ | Christopher Hendra | [A0130979U](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0130979U.md) |
+ | Cindra | [A0164039E](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0164039E.md) |
+ | Deng Yue | [A0164440M](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0164440M.md) |
+ | Zhuang Lei | [A0140055W](https://github.com/CS2103JAN2017-F11-B1/main/blob/master/collated/main/A0140055W.md) |

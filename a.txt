@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskbook>
+    <tasks>
+        <name>CS3101</name>
+        <startTime>10/03/2017 15:00</startTime>
+        <endTime>10/03/2017 17:00</endTime>
+        <description>chapter 1 to chapter 6</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>test206</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3102</name>
+        <startTime>17/03/2017 08:00</startTime>
+        <endTime>17/03/2017 10:00</endTime>
+        <description>Data Structure</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+        <tagged>lectures206</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3103</name>
+        <startTime>17/03/2017 14:00</startTime>
+        <endTime>17/03/2017 16:00</endTime>
+        <description>group project meeting 06</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CS3104</name>
+        <startTime>17/03/2017 09:00</startTime>
+        <endTime>19/03/2017 23:59</endTime>
+        <description>assignment 3 deadline</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CS3105</name>
+        <startTime>14/03/2017 09:00</startTime>
+        <endTime>14/03/2017 23:59</endTime>
+        <description>feedback deadline</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CS3106</name>
+        <startTime>14/03/2017 12:00</startTime>
+        <endTime>14/03/2017 16:00</endTime>
+        <description>group poeject meeting</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CS3107</name>
+        <startTime>01/04/2017 08:00</startTime>
+        <endTime>01/04/2017 10:00</endTime>
+        <description>consultation with tutor</description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>CS5101</name>
+        <startTime>01/01/2017 08:00</startTime>
+        <endTime>01/01/2017 10:00</endTime>
+        <description>weekly tutorial</description>
+        <period>7</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tags>test206</tags>
+    <tags>lectures206</tags>
+</taskbook>

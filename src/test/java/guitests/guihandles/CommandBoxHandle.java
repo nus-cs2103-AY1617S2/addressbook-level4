@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
@@ -11,8 +12,9 @@ public class CommandBoxHandle extends GuiHandle {
 
     private static final String COMMAND_INPUT_FIELD_ID = "#commandTextField";
 
-    public CommandBoxHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) {
+    public CommandBoxHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) throws InterruptedException {
         super(guiRobot, primaryStage, stageTitle);
+        Thread.sleep(20 * TaskBookGuiTest.SLEEP);
     }
 
     /**
@@ -36,7 +38,7 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
-        guiRobot.sleep(200); //Give time for the command to take effect
+        guiRobot.sleep(2 * TaskBookGuiTest.SLEEP); //Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {

@@ -14,11 +14,13 @@ plugins {
 // Specifies the entry point of the application
 mainClassName = 'seedu.address.MainApp'
 
+
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'java'
     apply plugin: 'jacoco'
     apply plugin: 'checkstyle'
+    apply plugin: 'application'
 
 
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -39,7 +41,7 @@ allprojects {
         jacksonVersion = '2.7.0'
         jacksonDataTypeVersion = '2.7.4'
         junitVersion = '4.12'
-        testFxVersion = '4.0.+'
+        testFxVersion = '4.0.5-alpha'
         monocleVersion = '1.8.0_20'
         checkstyleVersion = '7.1.2'
 
@@ -59,6 +61,10 @@ allprojects {
     }
 
     dependencies {
+        compile "com.google.guava:guava:$guavaVersion"
+        compile 'com.google.api-client:google-api-client:1.22.0'
+        compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+        compile 'com.google.apis:google-api-services-calendar:v3-rev240-1.22.0'
         compile "org.controlsfx:controlsfx:$controlsFxVersion"
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
@@ -85,7 +91,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "JOBS.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -122,7 +128,7 @@ tasks.coveralls {
 
 class AddressBookTest extends Test {
     public AddressBookTest() {
-    	  forkEvery = 1
+    forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
         /*
