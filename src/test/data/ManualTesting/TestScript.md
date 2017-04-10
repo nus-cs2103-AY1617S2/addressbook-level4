@@ -84,15 +84,25 @@
 >  by 11:59PM 15/03/2017
 
 `list by tag tag1`
-1. YATS will show one result, with the task title "Test event 2"
+1. YATS will show one result
+> Result
+> Test event 2
+> tag1 tag6 tag7 tag4 tag5 tag2 tag3
+> Loating title within application's database.
+> TestDrive
+> 09:00AM 09/04/2017 - 05:00PM 09/04/2017
 
 `list by start`
+1. YATS will organize the list by start date
 
 `list by end`
+1. YATS will organize the list by end date
 
 `list by deadline`
+1. YATS will organize the list by deadline
 
 `list by done`
+1. YATS will list all done task in the primary list
 
 
 ### Schedule
@@ -101,15 +111,51 @@
 `schedule TASK -l LOCATION -d DESCRIPTION -h HOUR -m MINUTE`
 
 ### Find
-`find TASK_TITLE`
-`find TASK_DESCRIPTION`
+`find minecraft`
+1. YATS will find one item
+> Result
+> 1. Minecraft Lets Play 100
+> RT comedy
+> Catch up on Minecraft Let's Plays by Rooster Teeth! Comedy as its best!
+> RoosterTeeth
+
+`find war`
+1. YATS will find one item
+> Result
+> Red vs Blue
+> crusade holy
+> The great war between the 2 colours have begun. The crusade is upon us!
+> Dutch
+> 08:05PM 12/03/2020 - 09:00PM 30/03/2025
 
 ### Mark
-`mark INDEX`
-`mark INDEX1 INDEX2 INDEX3`
+`mark 1`
+1. YATS will mark the first task
+> Result in secondary list
+> 1. Project Milestone Documentation
+> school learn
+>  by 11:59PM 08/04/2017
+
+`mark 1 2 3`
+1. YATS will mark the first, second and third task
+> Result in secondary list
+> 1. Project Milestone Documentation
+> school learn
+>  by 11:59PM 08/04/2017
+> 2. Benzoic Aptitude Test
+> Organic revision
+> 03:45PM 12/12/2017 - 07:00PM 12/12/2017
+> 3. Inductive Reasoning Based Phillosophy
+> books armaggedon reading home
+>  by 10:20AM 10/01/2019
+
+### Unmark
+`unmark 1`
+1. YATS will unmark the first task in the secondary list
 
 ### Select
-`select INDEX`
+`select 1`
+1. YATS will select the first task by highlight the task in grey
 
 ### Undo
 `undo`
@@ -120,12 +166,16 @@
 1. YATS will restore the last `undo` command executed
 
 ### Clear
-`ckear`
+`clear`
 1. YATS will clear all done task in the task list, both primary and secondary
+> Result
+> Secondary list will be empty, the primary list will be unaffected
 
 ### Reset
 `reset`
 1. YATS will clear all tasks in the task list, both primary and secondary
+> Result
+> No tasks will be listed in both the primary and secondary list
 
 ### Save
 `save default`
