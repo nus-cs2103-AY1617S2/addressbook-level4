@@ -338,7 +338,7 @@ Format: `schedule  EVENT_NAME [-l LOCATION -d  DESCRIPTION -T TAGS -h HOURS -m M
 
 Examples:
 
-* `schedule buy milk -l FairPrice -by 7pm tomorrow  -h 2 -m 30'
+* `schedule buy milk -l FairPrice -d hilow  -h 2 -m 30'
 
 
 ### GUI
@@ -380,6 +380,9 @@ should not be used. It will be safe to always use name of the month, e.g. "Janua
    
 * **Add Recurring Task** : `add  EVENT_NAME -r PERIODICITY [-l LOCATION -t TIME-d DESCRIPTION -T TAGS]` <br>
    e.g. `add meeting with boss -l office -r daily -s 7:00pm  -e 9:00pm  -d prepare progress report -T work`
+   
+* **Schedule Task** : `schedule  EVENT_NAME [-l LOCATION -d  DESCRIPTION -T TAGS -h HOURS -m MINUTES]` <br>
+   e.g. `schedule buy milk -l FairPrice -d hilow  -h 2 -m 30`
 
 * **Mark as Done** : `mark INDEX` <br>
    e.g. `mark 1`
