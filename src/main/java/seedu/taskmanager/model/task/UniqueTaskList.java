@@ -299,18 +299,19 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Finds the sorted position to add new task to the existing list of task.
-     * List of tasks is sorted firstly based on type of task and then by chronological order of the task
+     * List of tasks is sorted firstly based on type of task and then by
+     * chronological order of the task
      *
-     * Event tasks sorted by startDate startTime.
-     * Deadline tasks sorted by endDate endTime.
-     * Floating tasks are just added to the bottom of the list as there is no time element within a floating task.
+     * Event tasks sorted by startDate startTime. Deadline tasks sorted by
+     * endDate endTime. Floating tasks are just added to the bottom of the list
+     * as there is no time element within a floating task.
      *
      * @return The sorted position index to add the new task in the sorted list
      *         of tasks.
      */
     private int findSortedPositionToAdd(Task toAdd) {
         int numMarkedTasks = findNumMarkedTasks();
-        
+
         int addIndex = 0;
         if (!internalList.isEmpty()) {
             if (toAdd.isEventTask()) {
@@ -331,7 +332,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * @param toAdd
      * @param addIndex
-     * @return index deadline should be added in internalList according to chronological order
+     * @return index deadline should be added in internalList according to
+     *         chronological order
      */
     private int findSortedPositionToAddDeadlines(Task toAdd, int addIndex) {
         while (internalList.get(addIndex).isEventTask()) {
@@ -355,7 +357,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * @param toAdd
      * @param addIndex
-     * @return index event should be added in internalList according to chronological order
+     * @return index event should be added in internalList according to
+     *         chronological order
      */
     private int findSortedPositionToAddEvents(Task toAdd, int addIndex) {
         while (internalList.get(addIndex).isEventTask()) {
