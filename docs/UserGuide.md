@@ -195,7 +195,7 @@ EDIT DATETIME FORMAT
 >    * b. `on/` DATETIME
 >    * c. `from/` DATETIME `to/` DATETIME
 >    * d. `on/` DATETIME `to/` DATETIME
->    * e. `"REMOVEDATES"`
+>    * e. `REMOVEDATES`
 > * All existing DATETIME of the task to be edited will be removed.
 > * "REMOVEDATES" removes all existing dates of a task and changes it to a floating task.
 > * No other field is allowed
@@ -270,7 +270,7 @@ Examples:
 Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
-> Supported commands to undo: `add` `clear` `delete` `edit` `mark` `unmark` <br>
+> Supported commands to undo: `add` `clear` `delete` `edit` <br>
 > Undoing 'delete' will replace the deleted task at the bottom of the list <br>
 
 ### 2.10. Redoing previous step : `redo`
@@ -278,7 +278,7 @@ Format: `undo`
 Redo the previous command and restore the data to one step before. <br>
 Fromat: `redo`
 
-> Supported commands to redo: `add` `clear` `delete` `edit` `mark` `unmark` <br>
+> Supported commands to redo: `add` `clear` `delete` `edit` <br>
 > Redoing an add undo will add back the task to the bottom of the list <br>
 
 ### 2.11. Clearing all entries : `clear`
