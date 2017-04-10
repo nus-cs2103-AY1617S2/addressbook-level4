@@ -198,7 +198,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Checks if added task clashes with another existing task in the task
      * manager and returns an integer.
-     * 
+     *
      * @return index of clashing task in filteredTaskList if clashing task
      *         exisits
      * @return -1 if otherwise
@@ -222,7 +222,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Checks if updated task clashes with another existing task in the task
      * manager and returns an integer.
-     * 
+     *
      * @return index of clashing task in filteredTaskList if clashing task
      *         exisits
      * @return -1 if otherwise
