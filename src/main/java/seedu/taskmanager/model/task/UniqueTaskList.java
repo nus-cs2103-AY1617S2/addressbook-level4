@@ -109,19 +109,12 @@ public class UniqueTaskList implements Iterable<Task> {
                 throw new DuplicateTaskException();
             }
 
-            // TODO: The code below is just a workaround to notify observers of
-            // the
-            // updated task.
-            // The right way is to implement observable properties in the Task
-            // class.
-            // Then, PersonCard should then bind its text labels to those
-            // observable
-            // properties.
             internalList.set(index, taskToMark);
         } else {
             throw new NoSuchElementException();
         }
     }
+    // @@author
 
     // @@author
     /**
@@ -130,6 +123,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws TaskNotFoundException
      *             if no such task could be found in the list.
      */
+
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);

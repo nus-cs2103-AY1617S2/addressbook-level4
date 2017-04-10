@@ -183,11 +183,18 @@ public class Task implements ReadOnlyTask {
         return startDate.value.equals(EMPTY_FIELD) && endDate.value.equals(EMPTY_FIELD);
     }
 
+    // @@author A0139520L
     @Override
     public boolean isCompletedTask() {
         return isMarkedAsComplete;
     }
 
+    /**
+     * Checks if the duration of the readOnlyTask is between the start date/time
+     * and end date/time of this task
+     *
+     * @return true if task is a Floating Task
+     */
     @Override
     public boolean isWithinStartEndDuration(ReadOnlyTask t) {
 
