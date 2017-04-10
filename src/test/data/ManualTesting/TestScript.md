@@ -1,8 +1,8 @@
 1. Unzip the folder.
 2. Locate the directory that contains [W14-B4][ezDo].jar, SampleData.xml and TestScript.md.
 3. Create a folder named 'data' in this directory.
-4. Move sampleTask.xml into the 'data' folder.
-5. Rename sampleTask.xml to ezDo.xml.
+4. Move sampleData.xml into the 'data' folder.
+5. Rename sampleData.xml to ezDo.xml.
 6. Return back to the directory that contains [W14-B4][ezDo].jar and TestScript.md.
 7. Rename [W14-B4][ezDo].jar to ezDo.jar.
 8. Run ezDo.jar.
