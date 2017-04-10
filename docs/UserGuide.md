@@ -227,14 +227,13 @@ Things To Note:
 > If no date is specified, this function take the current day as reference.
 > This function prioritises dates/time.
    e.g. "find tmr" will give a list of tasks with tomorrow's date 
-         but will not return tasks with "tmr" in their names.      
-> Therefore, avoid using digits to search for task names, 
-        since TypeTask will return results based on time
+         but will not return tasks with "tmr" in their names     
+> Thus, avoid using digits to find task names, TypeTask will return results based on time.
         e.g. "find 4" will give a list of tasks due today at 0400h 
         instead of a list of tasks with "4" in their names.       
 > This function does not support searching by months.
 > This function will return the closest day from your current time.
-   e.g. "find monday" will give you a list of tasks that have this coming monday date.
+   e.g. "find monday" will give you a list of tasks that have this coming monday date
 ```
 
 Examples:
@@ -291,7 +290,6 @@ Things To Note:
 > The task at the specified INDEX will have its deadline/schedule removed.
 > The index refers to the index number shown in the most recent listing.
 ```
-
 
 
 ### 3.6. Deleting a Task : `delete`, `d`, `-`
