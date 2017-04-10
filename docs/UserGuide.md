@@ -294,7 +294,7 @@ A task's deadline has passed when the task's background is red.
 
 * **Clear All**: `clear all` <br>
   e.g. `clear all`
-  
+
 * **Clear Complete**: `clear complete` <br>
   e.g. `clear complete`
 
