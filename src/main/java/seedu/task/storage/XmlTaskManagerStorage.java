@@ -15,13 +15,13 @@ import seedu.task.model.ReadOnlyTaskManager;
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements TaskManagerStorage {
+public class XmlTaskManagerStorage implements TaskManagerStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
 
     private String filePath;
 
-    public XmlAddressBookStorage(String filePath) {
+    public XmlTaskManagerStorage(String filePath) {
         this.filePath = filePath;
     }
 
