@@ -1,14 +1,14 @@
 package seedu.taskit.model;
 
-import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.DEADLINE;
 import static seedu.taskit.logic.parser.CliSyntax.DONE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.PRIORITY_HIGH;
+import static seedu.taskit.logic.parser.CliSyntax.PRIORITY_LOW;
+import static seedu.taskit.logic.parser.CliSyntax.PRIORITY_MEDIUM;
+import static seedu.taskit.logic.parser.CliSyntax.TODAY;
 import static seedu.taskit.logic.parser.CliSyntax.UNDONE;
 
 import java.util.ArrayList;
@@ -251,24 +251,24 @@ public class ModelManager extends ComponentManager implements Model {
             case UNDONE:
                 return !task.isDone();
 
-            case LIST_OVERDUE:
+            case OVERDUE:
                 return task.isOverdue() && !task.isDone();
 
-            case LIST_PRIORITY_LOW:
-            case LIST_PRIORITY_MEDIUM:
-            case LIST_PRIORITY_HIGH:
+            case PRIORITY_LOW:
+            case PRIORITY_MEDIUM:
+            case PRIORITY_HIGH:
                 return task.getPriority().toString().equals(parameter);
 
-            case LIST_TODAY:
+            case TODAY:
                 return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
 
-            case LIST_FLOATING:
+            case FLOATING:
                 return !task.isDone() && task.isFloating();
 
-            case LIST_EVENT:
+            case EVENT:
                 return !task.isDone() && task.isEvent();
 
-            case LIST_DEADLINE:
+            case DEADLINE:
                 return !task.isDone() && task.isDeadline();
 
             default:

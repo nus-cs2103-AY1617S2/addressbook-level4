@@ -17,15 +17,15 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRIORITY = new Prefix(" priority ");
     public static final Prefix PREFIX_TITLE = new Prefix(" title ");
 
-    public static final String LIST_ALL = "all";
-    public static final String LIST_DEADLINE = "deadline";
-    public static final String LIST_FLOATING = "floating";
-    public static final String LIST_EVENT = "event";
-    public static final String LIST_TODAY = "today";
-    public static final String LIST_OVERDUE = "overdue";
-    public static final String LIST_PRIORITY_LOW = "low";
-    public static final String LIST_PRIORITY_MEDIUM = "medium";
-    public static final String LIST_PRIORITY_HIGH = "high";
+    public static final String ALL = "all";
+    public static final String DEADLINE = "deadline";
+    public static final String FLOATING = "floating";
+    public static final String EVENT = "event";
+    public static final String TODAY = "today";
+    public static final String OVERDUE = "overdue";
+    public static final String PRIORITY_LOW = "low";
+    public static final String PRIORITY_MEDIUM = "medium";
+    public static final String PRIORITY_HIGH = "high";
     public static final String DONE = "done";
     public static final String UNDONE = "undone";
 

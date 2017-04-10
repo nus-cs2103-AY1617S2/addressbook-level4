@@ -1,7 +1,7 @@
 package seedu.taskit.logic.commands;
 
-import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.ALL;
+import static seedu.taskit.logic.parser.CliSyntax.TODAY;
 
 //@@author A0141872E
 /**
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
     /**
      * List all relevant tasks in TaskIt.
      *
-     * @param args the requested parameter
+     * @param parameter the requested parameter
      */
     public ListCommand (String parameter) {
         this.parameter = parameter;
@@ -35,11 +35,11 @@ public class ListCommand extends Command {
 
         int taskListSize;
         switch (parameter) {
-        case LIST_ALL:
+        case ALL:
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS_ALL);
 
-        case LIST_TODAY:
+        case TODAY:
             taskListSize = model.updateFilteredTaskList(parameter);
             if(taskListSize == 0){
                 return new CommandResult(MESSAGE_NO_TASK_TODAY);
@@ -47,7 +47,7 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
 
         default:
-            model.updateFilteredTaskList(parameter);
+            model.updateFilteredTaskList(parameter);// for all other valid parameters
             return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
         }
     }

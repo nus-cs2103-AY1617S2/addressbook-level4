@@ -18,6 +18,11 @@ import static seedu.taskit.logic.parser.CliSyntax.UNDONE;
  */
 public class MarkCommandParser {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the MarkCommand
+     * check for validity of parameter parsed
+     * and returns a MarkCommand object for execution.
+     */
     public Command parse(String args) {
         List<Optional<String>> markInformation = ParserUtil.splitPreamble(args.trim().toLowerCase(),2);
 
@@ -31,7 +36,7 @@ public class MarkCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_NOT_MARKED));
         }
 
-        if(parameter.get().equals(DONE)||parameter.get().equals(UNDONE)){
+        if(parameter.get().equals(DONE)||parameter.get().equals(UNDONE)){//only allow done or undone as parameter
             return new MarkCommand (index.get(), parameter.get());
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));

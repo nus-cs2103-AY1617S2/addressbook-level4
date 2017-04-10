@@ -60,7 +60,7 @@ public class EditCommandParser {
 
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * If {@code tags} contain null, it will be parsed into a
      * {@code Optional<UniqueTagList>} containing zero tags.
      */
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {

@@ -15,12 +15,12 @@ import seedu.taskit.logic.commands.CommandResult;
 import seedu.taskit.logic.commands.ListCommand;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 
-import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.ALL;
+import static seedu.taskit.logic.parser.CliSyntax.DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.TODAY;
 import static seedu.taskit.ui.MenuBarPanel.MENU_DEADLINE_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_EVENT_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_FLOATING_TASK;
@@ -109,22 +109,22 @@ public class CommandBox extends UiPart<Region> {
         switch (parameter) {
 
         case MENU_FLOATING_TASK:
-            return ListCommand.COMMAND_WORD + " " + LIST_FLOATING;
+            return ListCommand.COMMAND_WORD + " " + FLOATING;
 
         case MENU_EVENT_TASK:
-            return ListCommand.COMMAND_WORD + " " + LIST_EVENT;
+            return ListCommand.COMMAND_WORD + " " + EVENT;
 
         case MENU_DEADLINE_TASK:
-            return ListCommand.COMMAND_WORD + " " + LIST_DEADLINE;
+            return ListCommand.COMMAND_WORD + " " + DEADLINE;
 
         case MENU_TODAY_TASK:
-            return ListCommand.COMMAND_WORD + " " + LIST_TODAY;
+            return ListCommand.COMMAND_WORD + " " + TODAY;
 
         case MENU_OVERDUE_TASK:
-            return ListCommand.COMMAND_WORD + " " + LIST_OVERDUE;
+            return ListCommand.COMMAND_WORD + " " + OVERDUE;
 
         default:
-            return ListCommand.COMMAND_WORD + " " + LIST_ALL;
+            return ListCommand.COMMAND_WORD + " " + ALL;
         }
     }
 
