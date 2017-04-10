@@ -50,7 +50,7 @@ TypeTask is especially good for you if you want to: <br>
 
 2. Download the latest version of TypeTask (click on `TypeTask.jar` under the [releases](../../../releases) tab).
 
-<img src="images/releasesExample.png" width="600">
+<img src="images/releasesExample0.5.png" width="600">
 
 <h5 align="left">Fig 1. Locating typetask.jar in the Releases Tab</h5>
 
