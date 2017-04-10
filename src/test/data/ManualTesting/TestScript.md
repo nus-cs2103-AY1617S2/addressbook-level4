@@ -1128,6 +1128,7 @@ Description Box response:
 
 Input:
 ****select 1****
+
 Description Box response:
 ****The task has a status marked as done.****
 
@@ -1137,6 +1138,7 @@ Description Box response:
 
 Input:
 ****quit****
+
 Description Box response:
 
 - ezDo exits.
