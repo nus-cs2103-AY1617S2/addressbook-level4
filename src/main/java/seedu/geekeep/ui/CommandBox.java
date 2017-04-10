@@ -1,5 +1,6 @@
 package seedu.geekeep.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -29,8 +30,10 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
-    private String userInput = "";
-    private Optional<Integer> commandHistoryIndex = Optional.empty();
+    private Optional<String> currentPrefix = Optional.empty();
+    private int commandHistoryIndex;
+    private List<String> matchingCommands = new ArrayList<>();
+    private int matchingCommandIndex;
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
@@ -39,69 +42,78 @@ public class CommandBox extends UiPart<Region> {
         addHistoryEventHandler();
     }
 
+    //@@author A0147622H
     private void addHistoryEventHandler() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode().equals(KeyCode.UP)) {
-                String currentText = commandTextField.getText();
-                int caretPosition = commandTextField.getCaretPosition();
-                String prefix = currentText.substring(0, caretPosition);
-                Optional<String> matchingCommand = previousMatchingCommand(prefix, currentText);
-                matchingCommand.ifPresent(text -> commandTextField.setText(text));
-                commandTextField.positionCaret(caretPosition);
-                event.consume();
-            } else if (event.getCode().equals(KeyCode.DOWN)) {
-                String currentText = commandTextField.getText();
-                int caretPosition = commandTextField.getCaretPosition();
-                String prefix = currentText.substring(0, caretPosition);
-                Optional<String> matchingCommand = nextMatchingCommand(prefix, currentText);
-                commandTextField.setText(matchingCommand.orElse(userInput));
-                commandTextField.positionCaret(caretPosition);
-                event.consume();
-            }
-        });
-        commandTextField.setOnKeyReleased(event -> {
-            if (event.getCode().equals(KeyCode.UP) || event.getCode().equals(KeyCode.DOWN)) {
+            KeyCode keyCode = event.getCode();
+            if (!(keyCode.equals(KeyCode.UP) || keyCode.equals(KeyCode.DOWN))) {
+                if (keyCode.equals(KeyCode.ENTER)) {
+                    currentPrefix = Optional.empty();
+                }
                 return;
             }
-            userInput = commandTextField.getText();
-            commandHistoryIndex = Optional.empty();
+            String commandText = commandTextField.getText();
+            int caretPosition = commandTextField.getCaretPosition();
+            String prefix = commandText.substring(0, caretPosition);
+            if (!(currentPrefix.equals(Optional.of(prefix))
+                    && matchingCommands.get(matchingCommandIndex).equals(commandText))) {
+                resetMatchingCommands(prefix, commandText);
+            }
+            Optional<String> matchingCommand;
+            if (keyCode.equals(KeyCode.UP)) {
+                matchingCommand = findPreviousMatchingCommand(prefix, commandText);
+            } else {
+                matchingCommand = findNextMatchingCommand(prefix);
+            }
+            if (matchingCommand.isPresent()) {
+                commandTextField.setText(matchingCommand.get());
+                commandTextField.positionCaret(caretPosition);
+            }
+            event.consume();
         });
     }
 
-    private Optional<String> previousMatchingCommand(String prefix, String currentText) {
+    private void resetMatchingCommands(String prefix, String commandText) {
+        currentPrefix = Optional.of(prefix);
+        commandHistoryIndex = getCommandHistory().size() - 1;
+        matchingCommands.clear();
+        matchingCommands.add(commandText);
+        matchingCommandIndex = 0;
+    }
+
+    private Optional<String> findPreviousMatchingCommand(String prefix, String commandText) {
         logger.fine("Finding previous command that starts with \"" + prefix + "\"");
-        List<String> commandHistory = logic.getCommandHistory();
-        int index = commandHistoryIndex.orElse(commandHistory.size()) - 1;
-        while (index >= 0) {
-            String command = commandHistory.get(index);
-            if (command.startsWith(prefix) && !command.equals(currentText)) {
-                commandHistoryIndex = Optional.of(index);
+        if (matchingCommandIndex + 1 < matchingCommands.size()) {
+            matchingCommandIndex++;
+            return Optional.of(matchingCommands.get(matchingCommandIndex));
+        }
+        List<String> commandHistory = getCommandHistory();
+        while (commandHistoryIndex >= 0) {
+            String command = commandHistory.get(commandHistoryIndex);
+            commandHistoryIndex--;
+            if (command.startsWith(prefix) && !command.equals(commandText)) {
+                matchingCommands.add(command);
+                matchingCommandIndex++;
                 return Optional.of(command);
             }
-            index--;
         }
         return Optional.empty();
     }
 
-    private Optional<String> nextMatchingCommand(String prefix, String currentText) {
+    private Optional<String> findNextMatchingCommand(String prefix) {
         logger.fine("Finding next command that starts with \"" + prefix + "\"");
-        List<String> commandHistory = logic.getCommandHistory();
-        if (!commandHistoryIndex.isPresent()) {
+        if (matchingCommandIndex == 0) {
             return Optional.empty();
         }
-        int index = commandHistoryIndex.get() + 1;
-        while (index < commandHistory.size()) {
-            String command = commandHistory.get(index);
-            if (command.startsWith(prefix) && !command.equals(currentText)) {
-                commandHistoryIndex = Optional.of(index);
-                return Optional.of(command);
-            }
-            index++;
-        }
-        commandHistoryIndex = Optional.empty();
-        return Optional.empty();
+        matchingCommandIndex--;
+        return Optional.of(matchingCommands.get(matchingCommandIndex));
     }
 
+    private List<String> getCommandHistory() {
+        return logic.getCommandHistory();
+    }
+
+    //@@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         placeHolderPane.getChildren().add(commandTextField);

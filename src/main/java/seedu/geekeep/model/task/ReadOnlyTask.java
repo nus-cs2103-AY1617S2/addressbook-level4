@@ -86,23 +86,23 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null
-                        && other.isEvent()
-                        && this.isEvent() // this is first to avoid NPE below
-                        && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getStartDateTime().equals(this.getStartDateTime())
-                        && other.getEndDateTime().equals(this.getEndDateTime())
-                        && this.isDone() == other.isDone())
+                    && other.isEvent()
+                    && this.isEvent() // this is first to avoid NPE below
+                    && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                    && other.getStartDateTime().equals(this.getStartDateTime())
+                    && other.getEndDateTime().equals(this.getEndDateTime())
+                    && this.isDone() == other.isDone())
                 || (other != null
-                        && other.isDeadline()
-                        && this.isDeadline()
-                        && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && other.getEndDateTime().equals(this.getEndDateTime())
-                        && this.isDone() == other.isDone())
+                    && other.isDeadline()
+                    && this.isDeadline()
+                    && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                    && other.getEndDateTime().equals(this.getEndDateTime())
+                    && this.isDone() == other.isDone())
                 || (other != null
-                        && other.isFloatingTask()
-                        && this.isFloatingTask()
-                        && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                        && this.isDone() == other.isDone());
+                    && other.isFloatingTask()
+                    && this.isFloatingTask()
+                    && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                    && this.isDone() == other.isDone());
     }
 
     //@@author A0148037E
@@ -146,8 +146,8 @@ public interface ReadOnlyTask {
      * @return a comparator value, negative if less, positive if greater
      */
     public int compareTitle(ReadOnlyTask otherTask);
-    //@@author
 
+    //@@author A0121658E
     /**
      * Returns true if the task does not have a start datetime or end datetime
      * @return floating task identity
@@ -155,7 +155,7 @@ public interface ReadOnlyTask {
     boolean isFloatingTask();
 
     /**
-     * Returns true if the task has a start datetime nad an end datetime
+     * Returns true if the task has a start datetime and an end datetime
      * @return event identity
      */
     boolean isEvent();

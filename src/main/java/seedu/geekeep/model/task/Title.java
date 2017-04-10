@@ -23,8 +23,8 @@ public class Title {
     /**
      * Returns true if a given string is a valid task title.
      */
-    public static boolean isValidTitle(String test) {
-        return test.matches(TITLE_VALIDATION_REGEX);
+    public static boolean isValidTitle(String testTitle) {
+        return testTitle.matches(TITLE_VALIDATION_REGEX);
     }
 
     /**

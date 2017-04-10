@@ -23,8 +23,8 @@ public class Description {
     /**
      * Returns true if a given string is a valid task description.
      */
-    public static boolean isValidDescription(String test) {
-        return test.matches(DESCRIPTION_VALIDATION_REGEX);
+    public static boolean isValidDescription(String testDescription) {
+        return testDescription.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
     /**

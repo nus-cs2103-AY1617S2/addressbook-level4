@@ -35,7 +35,7 @@ public interface Logic {
     /** Sets the filtered list of tasks to only show undone tasks**/
     void setFilteredTaskListToShowUndone();
 
-    /** Retruns command history */
+    //@@author A0147622H
+    /** Returns command history */
     List<String> getCommandHistory();
-
 }
