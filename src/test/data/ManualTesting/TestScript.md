@@ -28,28 +28,28 @@
 
 ## Add new event
 
-1. Type `add meeting from 2 days after 1pm to 2 days after 3pm`.
+1. Type `add meeting from 1pm 2 days after to 3pm 2 days after`.
 
 **Result:** A new task "meeting" with start and end date of 2 days later from 1pm to 3pm is added to the bottom of the list.
 
 
 ## Add tags to task
 
-1. Type `add "Random" t/tag1 t/tag2`.
+1. Type `add Random t/tag1 t/tag2`.
 
-**Result:** A new task "Random" with tags "tag1" and "tag2" is added to the bottom of the task list.
+**Result:** A new task with name "Random" with tags "tag1" and "tag2" is added to the bottom of the task list.
 
 ## Select a task in task list
 
 1. Type `select 1`.
 
-**Result:** TODO
+**Result:** The first task with task name "CS2103t v0.4" is selected.
 
 ## Select the last task in task list
 
-1. Type `select 1000`.
+1. Type `select 99`.
 
-**Result:** Task list will scroll to last task and select it, showing the task name and tags in result display.
+**Result:** Task list will jump to last task and select it, showing the task name and tags in result display.
 
 ## View all tasks
 
@@ -87,46 +87,46 @@
 
 ## Edit the task name
 
-1. Type `update 1 new name"
+1. Type `edit 1 new name"
 
 **Result:** The first task is renamed to "new name".
 
-## Update the task deadline
+## Edit the task deadline
 
-1. Type `edit 1 by 5pm`
+1. Type `edit 6 by 6pm`
 
-**Result:** The first task's deadline time is changed to 5pm.
+**Result:** The task with name "class gathering" deadline time is changed to 5pm.
 
-## Update the task period
+## Edit the task start and end date
 
-1. Type `update 3 from 17 Dec 12 pm to 3pm`
+1. Type `edit 21 from 17 Dec 12 pm to 17 Dec 3pm`
 
-**Result:** The third task's start and end date is changed to 17 Dec, 12pm to 3pm.
+**Result:** The task with name "a mega long very very..." start and end date is changed to 17 Dec, 12pm to 3pm.
 
-## Update the task by adding new tags
+## Edit the task by adding new tags
 
-1. Type `edit 1 t/ tagged`.
+1. Type `edit 2 t/homework`.
 
-**Result:** The first task gets a new tag called "tagged".
+**Result:** The task with name "ma1101 Assignment 2" gets a new tag called "homework".
 
 ## Remove the tag in a task
 
-1. Ensure that the first task has a tag "tagged".
-2. Type `edit 1 t/`.
+1. Ensure that the second task has a tag "homework".
+2. Type `edit 2 t/`.
 
-**Result:** The tag "tagged" is removed for the first task.
+**Result:** The tag "homework" is removed for the second task.
 
 ## Find tasks by name
 
-1. Type `find go`.
+1. Type `find assignment`.
 
-**Result:** Tasks that contains the word "go" will be shown. (TODO)
+**Result:** Tasks that contains the word "assignment" will be shown. (3 tasks will be shown)
 
 ## Mark a task as completed
 
 2. Type `done 7`.
 
-**Result:** The tab switches to the done tab and shows the task in the tab.
+**Result:** The tab switches to the done tab and shows the task with name "CS2103T v0.5" in the tab.
 
 ## Undo a previous action
 
