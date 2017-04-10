@@ -57,15 +57,15 @@ Hotkey: `CTRL+T`
 Adds a task to the task list<br>
 Format: `add TASK_NAME [from START TIME] [to END TIME] [in GROUP]`
 
-> Persons can add a task without defining either start time or end time.
-> local time will be set as default if start time and end time parameters do not specify time .
+> Users can add a task without defining either start time or end time.
+> An end time must be specified if a start time is specified.
+> local time will be set as default if start time and end time parameters do not specify time.
 > TASK_NAME should only contain alphanumeric characters and spaces, and it should not be blank.
 
 Examples:
 
 * **Normal task**: `add CS2103 assignment from Feb 3 to Apr 6 in study`
 * **Task with deadline**: `add CS2013 assignment to tomorrow in study`
-* **Task with deadline**: `add CS2013 assignment from Monday in study`
 * **Floating task**: `add CS2013 assignment in study`
 
 ### 2.4. Listing all tasks : `list`
@@ -281,7 +281,6 @@ A task's deadline has passed when the task's background is red.
 * **Add**  `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
   e.g. `add CS2103 assignment from Feb 3 to Apr 6 in study` <br>
        `add CS2013 assignment to tomorrow in study` <br>
-       `add CS2013 assignment from Monday in study` <br>
        `add CS2013 assignment in study` <br>
 
 * **List All**: `list` <br>
