@@ -32,7 +32,7 @@
 TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply <br>
 with a single line of command! With the efficacy of a calendar without its shortcomings, <br>
 TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. <br>
-TypeTask is especially good for you if you want to: <br>
+TypeTask is especially good if you want to: <br>
 
 > Do everything through a single line of command <br>
 > Work offline <br>
