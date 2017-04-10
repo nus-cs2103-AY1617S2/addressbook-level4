@@ -285,12 +285,12 @@ public class LogicManagerTest {
 
     //@@author A0164466X
     @Test
-    public void executeListIncompletePersonMessageTest() throws Exception {
+    public void execute_listIncomplete_messageTest() throws Exception {
         assertCommandMessageSuccess("li", ListIncompleteCommand.MESSAGE_SUCCESS);
     }
 
     @Test
-    public void executeListCompletePersonMessageTest() throws Exception {
+    public void execute_listComplete_messageTest() throws Exception {
         assertCommandMessageSuccess("lc", ListCompleteCommand.MESSAGE_SUCCESS);
     }
     //@@author
