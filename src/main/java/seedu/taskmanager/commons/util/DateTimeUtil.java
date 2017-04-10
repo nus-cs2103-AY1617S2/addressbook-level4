@@ -252,6 +252,8 @@ public class DateTimeUtil {
         return 0;
     }
 
+    // @@author A0141102H
+
     public static boolean isValidDate(String date) {
         String[] dmy = date.trim().split("/");
         int day = Integer.parseInt(dmy[0]);
@@ -321,6 +323,8 @@ public class DateTimeUtil {
 
         return newDate;
     }
+
+    // @@author
 
     public static boolean isValidEventTimePeriod(String startDate, String startTime, String endDate, String endTime)
             throws IllegalValueException {
