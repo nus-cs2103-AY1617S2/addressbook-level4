@@ -46,7 +46,7 @@ Year 2 Computer Science Major<br>
 * Features implemented:
   * Save Command
   * Undo and Redo Command
-* Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B3/main/blob/master/collated/main/A0148052L.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B3/main/blob/master/collated/main/A0148052L.md)] [[test code](https://github.com/CS2103JAN2017-F14-B3/main/blob/master/collated/test/A0148052L.md)]
 * Other Major Contributions:
   * Wrote Developer Guide
   * Updated model component
