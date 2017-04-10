@@ -35,6 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
             * Increase Coverall [[#148](https://github.com/CS2103JAN2017-T09-B2/main/pull/148)] <br>
             * Edit Priority of a Task [[#170](https://github.com/CS2103JAN2017-T09-B2/main/pull/170)] <br>
             * Rename Person to Task in Tests [[#190](https://github.com/CS2103JAN2017-T09-B2/main/pull/190), [#191](https://github.com/CS2103JAN2017-T09-B2/main/pull/191)] <br>
+            * Add More Test Cases [[#215](https://github.com/CS2103JAN2017-T09-B2/main/pull/215)]<br>
 
 -----
 
