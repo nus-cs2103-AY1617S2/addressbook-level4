@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>read Harry Potter first book</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>watch fast and furious 8</name>
+        <date></date>
+        <endDate>Fri Apr 07 17:00:00 2017</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>CS3230 midterm 2</name>
+        <date></date>
+        <endDate>Wed Apr 05 2017 13:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>internship talk</name>
+        <date>Sat Apr 01 2017 17:00:00</date>
+        <endDate>Sat Apr 01 2017 18:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>dinner with friends</name>
+        <date></date>
+        <endDate>Sat Apr 01 2017 19:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>research on latest technology</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>NUS open house</name>
+        <date>Thu Jun 08 2017 23:59:59</date>
+        <endDate>Sat Jun 10 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>CS2101 presentation</name>
+        <date></date>
+        <endDate>Mon Apr 03 2017 12:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Read CS2103T handout</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>return library book</name>
+        <date></date>
+        <endDate>Thu Apr 06 2017 15:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>orientation camp</name>
+        <date>Fri Aug 11 2017 23:59:59</date>
+        <endDate>Tue Aug 15 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>buy files from popular</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>demo 5rc</name>
+        <date>Thu Mar 30 2017 23:59:59</date>
+        <endDate>Thu Apr 06 2017 09:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>visit dentist</name>
+        <date></date>
+        <endDate>Mon Apr 03 2017 18:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>reply internship email</name>
+        <date></date>
+        <endDate>Sun Apr 02 2017 17:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>plan summer vacation</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>ST2334 quiz</name>
+        <date></date>
+        <endDate>Mon Apr 03 2017 23:59:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>plan next meeting with friends</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>wild card test</name>
+        <date></date>
+        <endDate>Mon Apr 10 2017 14:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>CS2103 final exam</name>
+        <date></date>
+        <endDate>Tue Apr 25 2017 13:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>CS3230 final exam</name>
+        <date></date>
+        <endDate>Wed Apr 26 2017 13:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>revise for cs3230</name>
+        <date>Fri Apr 14 2017 23:59:59</date>
+        <endDate>Tue Apr 25 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>revise for CS2103 exam</name>
+        <date>Fri Apr 14 2017 23:59:59</date>
+        <endDate>Mon Apr 24 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>ST2334 final exam</name>
+        <date></date>
+        <endDate>Fri Apr 28 2017 09:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>submit CS3230 assignment 2</name>
+        <date></date>
+        <endDate>Sat Apr 15 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>submit CS2103T proj</name>
+        <date></date>
+        <endDate>Sun Apr 09 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>visit friend in hospital</name>
+        <date></date>
+        <endDate>Wed Apr 12 2017 15:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Collect phone that is sent for repair</name>
+        <date></date>
+        <endDate>Thu Mar 30 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Collect welfare pack</name>
+        <date>Mon Apr 03 2017 12:00:00</date>
+        <endDate>Fri Apr 07 2017 16:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Outsource for internship</name>
+        <date></date>
+        <endDate>Sun Apr 09 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>CS2101 critical reflection test</name>
+        <date></date>
+        <endDate>Mon Apr 10 2017 12:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>CS2101 discussion test</name>
+        <date></date>
+        <endDate>Thu Apr 13 2017 12:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Plan what module to take</name>
+        <date></date>
+        <endDate>Wed Jun 28 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Update specialisation for CS</name>
+        <date></date>
+        <endDate>Thu Apr 20 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Do CS3230 tutorial</name>
+        <date></date>
+        <endDate>Fri Apr 07 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>interview at govtech</name>
+        <date></date>
+        <endDate>Wed Mar 29 2017 15:50:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>interview 2 at murex</name>
+        <date>Tue Mar 21 2017 15:00:00</date>
+        <endDate>Tue Mar 21 2017 16:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>interview test from Murex</name>
+        <date>Tue Feb 28 2017 12:00:00</date>
+        <endDate>Tue Feb 28 2017 14:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>buy pen refill</name>
+        <date></date>
+        <endDate>Tue Mar 28 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>plan for ippt training</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Learn javascript</name>
+        <date></date>
+        <endDate>Tue Apr 11 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Research on how chatbot is created</name>
+        <date></date>
+        <endDate>Tue Apr 11 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Plan a friend gathering after exam</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>take ippt</name>
+        <date></date>
+        <endDate>Fri Apr 06 2018 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>demo 4</name>
+        <date>Thu Mar 23 2017 23:59:59</date>
+        <endDate>Thu Mar 30 2017 09:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>demo 3</name>
+        <date>Thu Mar 16 2017 23:59:59</date>
+        <endDate>Thu Mar 23 2017 09:00:00</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>print ST2334 notes</name>
+        <date></date>
+        <endDate>Fri Apr 14 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>go see dentist</name>
+        <date></date>
+        <endDate>Sat Jul 01 2017 23:59:59</endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Torrent movies to watch after exam</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+    <tasks>
+        <name>Learn to create mobile apps</name>
+        <date></date>
+        <endDate></endDate>
+        <isCompleted>false</isCompleted>
+        <priority>Low</priority>
+    </tasks>
+</taskmanager>

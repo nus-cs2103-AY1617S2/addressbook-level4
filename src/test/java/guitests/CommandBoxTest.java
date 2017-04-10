@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import typetask.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TypeTaskGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    private static final String COMMAND_THAT_SUCCEEDS = "list";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
@@ -30,7 +30,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
+    public void commandBoxCommandSucceedsTextClearedAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals("", commandBox.getCommandInput());
@@ -38,7 +38,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBoxCommandFailsTextStaysAndErrorStyleClassAdded() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
@@ -46,7 +46,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
+    public void commandBoxCommandSucceedsAfterFailedCommandTextClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
         commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
 

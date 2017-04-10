@@ -2,8 +2,19 @@
 .error {
     -fx-background-color: red;
 }
+/* @@author A0139154E */
+.overdue {
+	-fx-background-color: red;
+}
 
+.pending {
+	-fx-background-color: #17ef22;
+}
 
+.completed {
+	-fx-background-color: black;
+}
+/* @@author */
 .tag-selector {
     -fx-border-width: 1;
     -fx-border-color: white;

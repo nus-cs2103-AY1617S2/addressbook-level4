@@ -4,37 +4,45 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import typetask.commons.core.Messages;
+import typetask.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TypeTaskGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
+    public void findNonEmptyList() {
         assertFindResult("find Mark"); // no results
         assertFindResult("find Meier", td.benson, td.daniel); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("f Meier", td.daniel);
     }
 
     @Test
-    public void find_emptyList() {
+    public void findEmptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("search Jean"); // no results
     }
-
+    //@@author A0139926R
     @Test
-    public void find_invalidCommand_fail() {
+    public void find_validDate_success() {
+        int expectedListSize = 1;
+        commandBox.runCommand("find Oct 10 1993");
+        assertListSize(expectedListSize);
+        assertResultMessage(expectedListSize + " task(s) listed!");
+    }
+    //@@author
+    @Test
+    public void findInvalidCommandFail() {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " task(s) listed!");
+        assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }
