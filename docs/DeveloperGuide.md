@@ -253,22 +253,9 @@ logical errors in state transformation (the redo stack will contain old states).
 task manager, and if there are 20 saved states, 10 of the earliest saved states will be deleted.
 
 ### 3.4 Scheduling Command
-In YATS, we implement a schedule command to automatically schedule tasks based on available timeslots. Scheduling is made based on the following<br>
-constraints - i) the scheduled time must not overlap with any other event in the list ii) it must be between 8am and 6pm iii) must not be on a saturday or
-sunday The algorithm. These constraints were implemented as we wanted to ensure a very specific<br>
-use case for schedule - we wanted to allow the user to schedule tasks automatically into their workday. This allows them
-to quickly slot their ad-hoc events into their own timetable, without worrying about when to put each event. To accomplish scheduling,
-we first searches for open intervals in the list of events. Open intervals are intervals not taken up by any event, and thus can be used for scheduling.<br>
-We then have to check if the open interval is appropriate for scheduling the event based on the constraints of 8am to 6pm, and that it is on a weekday.<br>
+In YATS, we implement a schedule command to automatically schedule tasks based on available timeslots. Scheduling is made based on the following constraints - i) the scheduled time must not overlap with any other event in the list ii) it must be between 8am and 6pm iii) must not be on a saturday or sunday The algorithm. These constraints were implemented as we wanted to ensure a very specific use case for schedule - we wanted to allow the user to schedule tasks automatically into their workday. This allows them to quickly slot their ad-hoc events into their own timetable, without worrying about when to put each event. To accomplish scheduling, we first searches for open intervals in the list of events. Open intervals are intervals not taken up by any event, and thus can be used for scheduling. We then have to check if the open interval is appropriate for scheduling the event based on the constraints of 8am to 6pm, and that it is on a weekday.<br>
 First, we describe the method of finding open intervals. The list is sorted by start time and then we iterate through this sorted list,
-keeping the max of its accompanying end time saved in a variable and checking if the maximum end time is smaller than the next events start time. <br>
-If current maximum end time at the current event is smaller than the start time of the next event, it is then provable that this is an open interval.<br>
-This is because there is no event with an end time after this interval (since we took the max of all preceding end times of the first start times), 
-and no event with a start time or end time before this interval (since the array is sorted by start time, and every events end time must be later 
-than its start time).<br>
-Thus, this must be an open interval which we can then check whether it is appropriately sized and
-the correct day for scheduling. 
-This problem is complex as because we are looking for valid timings between 8am and 6pm, and the boundaries of an open interval span across multiple days.<br>
+keeping the max of its accompanying end time saved in a variable and checking if the maximum end time is smaller than the next events start time. If current maximum end time at the current event is smaller than the start time of the next event, it is then provable that this is an open interval. This is because there is no event with an end time after this interval (since we took the max of all preceding end times of the first start times), and no event with a start time or end time before this interval (since the array is sorted by start time, and every events end time must be later than its start time). Thus, this must be an open interval which we can then check whether it is appropriately sized and the correct day for scheduling. However, checking that this is a appropriate and suitable timing to schedule at is complex as because we are looking for valid timings between 8am and 6pm, and the boundaries of an open interval could span across multiple days.<br>
 To solve this problem, we first break down the possible times of boundaries into 3 cases,<br> i)
 Case 1 - Less than 10 Hours,<br>
 ii) Case 2 - More than 34 Hours, <br>
@@ -392,9 +379,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | Add a task with a name and deadline and then schedule it myself | Know when I need to do this task
-`* * *` | user | Add a task with just a title | Add tasks in quick succession and edit the deadlines at a later time
-`* * *` | user | Search for the task that I would want to schedule | Find out whether the task has already been scheduled
+`* * *` | user | Add a task with a name and description and then schedule it myself | Know when I need to do this task
+`* * *` | user | Add a task with a title | Add tasks in quick succession and edit the deadlines at a later time
 `* * *` | user | Search for information (using any string) about a current task which will display all the relevant info about the task | Find the task without looking through the whole list
 `* * *` | user | Edit the deadline, name and schedule of any task | Update any task as required, as well as marking it as done and deleting it
 `* * *` | user | Undo my actions | revert any changes done accidentally.
@@ -402,12 +388,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Mark task as done based on index | Clear done tasks if needed
 `* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
 `* * *` | user | Change my save location | I can choose where my data file is saved
-`* * ` | user | Mark task as done based name, or any unique identifying string for that task | Clear done tasks if needed
-`* * ` | user | List all tasks based on importance | View which tasks have higher priorities
-`* * ` | user | Schedule a recurring (daily/weekly/monthly..) | Not add the recurring tasks manually
 `* * ` | user | Get a calendar view list of my current blocked out times and what I have to do | Know what else I can add
-`* * ` | user | Set alarms for certain schedules | Be reminded of deadlines of my tasks
-`* * ` | user | Schedule my tasks with constraints | Avoid scheduling tasks during my works time and leave break time in between tasks
+`* * ` | user | Schedule my tasks within the constrains of a workday | Avoid scheduling tasks during my works time and leave break time in between tasks
 `* *` | user | Add subtasks into my main task | Have a more structured view of the main task
 `* *` | user | Star my tasks | Mark out the more urgent tasks to be done
 `* *` | user | Ask the task manager to schedule my tasks | Just enter the tasks with a deadline and decide the scheduling later
