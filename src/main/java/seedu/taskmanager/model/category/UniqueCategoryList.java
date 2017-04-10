@@ -179,11 +179,10 @@ public class UniqueCategoryList implements Iterable<Category> {
     // @@author A0142418L
     /**
      * Checks if task is assigned any category
-     * 
+     *
      * @return true if category list is empty.
      */
     public boolean isEmptyCategoryList() {
         return (internalList.isEmpty());
     }
-
 }
