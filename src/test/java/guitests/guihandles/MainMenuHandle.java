@@ -44,4 +44,12 @@ public class MainMenuHandle extends GuiHandle {
         guiRobot.push(code);
         guiRobot.sleep(500);
     }
+
+    public void executeUndoWithMenu() {
+        clickOn("Edit", "Undo");
+    }
+
+    public void executeRedoWithMenu() {
+        clickOn("Edit", "Redo");
+    }
 }
