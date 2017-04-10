@@ -219,22 +219,22 @@ Format:<br>
 ```
 Things To Note:
 > The order of the keywords does not matter.
-   e.g. 'Meeting Tutor' will match 'Tutor Meeting'
+   e.g. 'Meeting Tutor' will match 'Tutor Meeting'  
 > The tasks that match at least one keyword will be returned (i.e. OR search).
-   e.g. 'Meeting' will match 'Meeting Tutor'
+   e.g. 'Meeting' will match 'Meeting Tutor'  
 > The keyword is not case-sensitive.
-   e.g. Meeting Tutor will match meeting tutor
+   e.g. Meeting Tutor will match meeting tutor  
 > If no date is specified, this function take the current day as reference.
 > This function prioritises dates/time.
    e.g. "find tmr" will give a list of tasks with tomorrow's date 
-         but will not return tasks with "tmr" in their names.
-      > Therefore, avoid using digits to search for task names, 
+         but will not return tasks with "tmr" in their names.      
+> Therefore, avoid using digits to search for task names, 
         since TypeTask will return results based on time
         e.g. "find 4" will give a list of tasks due today at 0400h 
-        instead of a list of tasks with "4" in their names
+        instead of a list of tasks with "4" in their names.       
 > This function does not support searching by months.
 > This function will return the closest day from your current time.
-   e.g. "find monday" will give you a list of tasks that have this coming monday date
+   e.g. "find monday" will give you a list of tasks that have this coming monday date.
 ```
 
 Examples:
