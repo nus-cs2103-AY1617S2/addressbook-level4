@@ -7,9 +7,16 @@ We are CS2103JAN2017-W15-B4 based in the [School of Computing, National Universi
 #### [Liu Ziyang](http://github.com/VeryLazyBoy)
 <img src="images/verylazyboy.png" width="150"><br>
 Role: Developer <br>
+Components in charge of: UI<br>
+Features implemented:
+[Find tasks by title, time or tags](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/UserGuide.md#310-finding-all-tasks-containing-any-keyword-in-their-title-specified-tags-or-in-a-specified-time-period-find)<br>
 Responsibilities: UI,
                   Managing Issues <br>
-Code Written: [[functional code](./collated/main/A0148037E.md)][[test code](./collated/test/A0148037E.md)]
+Code Written: [[functional code](./collated/main/A0148037E.md)][[test code](./collated/test/A0148037E.md)]<br>
+Other Main Contributions:
++ Help with implementation of list, listdone, listundone
++ Do certain code review for some PRs
++ Regularly update the DeveloperGuide.md
 
 -----
 
