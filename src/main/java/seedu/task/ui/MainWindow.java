@@ -223,7 +223,7 @@ public class MainWindow extends Window {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getPersonListPanel() {
+    public TaskListPanel getTaskListPanel() {
         return this.personListPanel;
     }
 }
