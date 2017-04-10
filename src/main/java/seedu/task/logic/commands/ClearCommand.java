@@ -21,6 +21,7 @@ public class ClearCommand extends Command {
     //@@author A0164466X
     public static final String KEYWORD_ALL = "all";
     public static final String KEYWORD_COMPLETE = Tag.TAG_COMPLETE;
+    public static final String KEYWORD_INCOMPLETE = Tag.TAG_INCOMPLETE;
     public static final String KEYWORD_PASSED = "passed";
     //@@author
 
@@ -40,6 +41,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS_ALL = "All tasks have been cleared!";
     //@@author A0164466X
     public static final String MESSAGE_SUCCESS_COMPLETE = "All completed tasks have been cleared!";
+    public static final String MESSAGE_SUCCESS_INCOMPLETE = "All incomplete tasks have been cleared!";
     public static final String MESSAGE_SUCCESS_PASSED = "All passed tasks have been cleared!";
     //@@author
     //@@author A0163848R
@@ -83,6 +85,29 @@ public class ClearCommand extends Command {
             model.resetData(filteredYTomorrow);
 
             return new CommandResult(MESSAGE_SUCCESS_COMPLETE);
+        }
+
+        if (keywords.contains(KEYWORD_INCOMPLETE)) {
+
+            List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
+            for (ReadOnlyTask task : model.getTaskManager().getTaskList()) {
+                try {
+                    if (!task.getTags().contains(new Tag(Tag.TAG_INCOMPLETE))) {
+                        filtered.add(task);
+                    }
+                } catch (IllegalValueException e) {
+                    e.printStackTrace();
+                }
+            }
+            YTomorrow filteredYTomorrow = new YTomorrow();
+            try {
+                filteredYTomorrow.setTasks(filtered);
+            } catch (DuplicateTaskException e) {
+                e.printStackTrace();
+            }
+            model.resetData(filteredYTomorrow);
+
+            return new CommandResult(MESSAGE_SUCCESS_INCOMPLETE);
         }
 
         if (keywords.contains(KEYWORD_PASSED)) {
