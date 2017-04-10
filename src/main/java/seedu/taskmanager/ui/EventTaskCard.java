@@ -65,8 +65,8 @@ public class EventTaskCard extends UiPart<Region> {
      */
     private void setSameDateEventTaskDetails(ReadOnlyTask task) {
         startDateTime.setText("Date: " + task.getStartDate().value);
-        endDateTime.setText(
-                "Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
+        endDateTime
+                .setText("Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
     }
 
     /**
@@ -75,26 +75,18 @@ public class EventTaskCard extends UiPart<Region> {
     private void setMultipleDateEventTaskDetails(ReadOnlyTask task) {
         startDateTime.setText(
                 "Start Date: " + task.getStartDate().value + "   " + "Start Time: " + task.getStartTime().value);
-        endDateTime.setText("End Date: " + "  " + task.getEndDate().value + "   " + "End Time: " + "  "
-                + task.getEndTime().value);
+        endDateTime.setText(
+                "End Date: " + "  " + task.getEndDate().value + "   " + "End Time: " + "  " + task.getEndTime().value);
     }
 
     private boolean isMultipleDateEvent(ReadOnlyTask task) {
-        if (!task.getStartDate().value.equals(task.getEndDate().value)
-                && !task.getStartDate().value.equals("EMPTY_FIELD")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (!task.getStartDate().value.equals(task.getEndDate().value)
+                && !task.getStartDate().value.equals("EMPTY_FIELD"));
     }
 
     private boolean isSameDateEvent(ReadOnlyTask task) {
-        if ((task.getStartDate().value).equals(task.getEndDate().value)
-                && (!task.getStartDate().value.equals("EMPTY_FIELD"))) {
-            return true;
-        } else {
-            return false;
-        }
+        return ((task.getStartDate().value).equals(task.getEndDate().value)
+                && (!task.getStartDate().value.equals("EMPTY_FIELD")));
     }
 
     private void initCategory(ReadOnlyTask task) {

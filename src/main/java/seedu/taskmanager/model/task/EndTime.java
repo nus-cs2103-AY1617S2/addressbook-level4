@@ -55,17 +55,11 @@ public class EndTime {
     }
 
     public boolean laterThanOrEqual(StartTime other) {
-        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
-            return true;
-        }
-        return false;
+        return (Integer.parseInt(value) >= Integer.parseInt(other.value));
     }
 
     public boolean laterThanOrEqual(EndTime other) {
-        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
-            return true;
-        }
-        return false;
+        return (Integer.parseInt(value) >= Integer.parseInt(other.value));
     }
 
     @Override

@@ -92,8 +92,8 @@ public class TestUtil {
                 new Task(new TaskName("Try harder for CS2103 project"), new StartDate("04/04/17"),
                         new StartTime("1400"), new EndDate("05/04/17"), new EndTime("1500"), Boolean.FALSE,
                         new UniqueCategoryList("lepak")),
-                new Task(new TaskName("Try even harder for CS2103"), new StartDate("05/04/17"), new StartTime("1500"),
-                        new EndDate("05/05/17"), new EndTime("1600"), Boolean.FALSE,
+                new Task(new TaskName("Try even harder for CS2103"), new StartDate("05/04/17"),
+                        new StartTime("1500"), new EndDate("05/05/17"), new EndTime("1600"), Boolean.FALSE,
                         new UniqueCategoryList("work")),
                 new Task(new TaskName("Eat lunch at techno"), new StartDate("EMPTY_FIELD"),
                         new StartTime("EMPTY_FIELD"), new EndDate("04/03/17"), new EndTime("1400"), Boolean.FALSE,
@@ -435,11 +435,7 @@ public class TestUtil {
                             if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
                                     .compareTo(task.getStartDate().value.substring(0,
                                             task.getStartDate().value.length() - 6)) == 0) {
-                                if (toAdd.getStartTime().value.compareTo(task.getStartTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getStartTime().value.compareTo(task.getStartTime().value) < 0);
                             } else {
                                 return false;
                             }
@@ -484,11 +480,7 @@ public class TestUtil {
                         } else {
                             if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6).compareTo(
                                     task.getEndDate().value.substring(0, task.getEndDate().value.length() - 6)) == 0) {
-                                if (toAdd.getEndTime().value.compareTo(task.getEndTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getEndTime().value.compareTo(task.getEndTime().value) < 0);
                             } else {
                                 return false;
                             }

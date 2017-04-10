@@ -160,39 +160,6 @@ public class ModelManager extends ComponentManager implements Model {
         return addIndex;
     }
 
-    //
-    // @Override
-    // public synchronized int addRecurringDeadlineTask(ReadOnlyTask
-    // taskToRecur, int recurring, String type) throws
-    // UniqueTaskList.DuplicateTaskException {
-    // saveInstance();
-    // for (int loop = 1; loop <= recurring; loop++) {
-    //
-    // try {
-    // recurringTask = new Task(taskToRecur.getTaskName(),
-    // taskToRecur.getStartDate(),
-    // taskToRecur.getStartTime(),
-    // new EndDate(DateTimeUtil.getFutureDate(loop, type,
-    // taskToRecur.getEndDate().toString())),
-    // taskToRecur.getEndTime(), false, taskToRecur.getCategories());
-    // } catch (IllegalValueException ive) {
-    // throw new CommandException("Wrong format for deadline!");
-    // }
-    //
-    // if (DateTimeUtil.isValidDate(recurringTask.getEndDate().toString())) {
-    // try {
-    // addTask(recurringTask);
-    // } catch (DuplicateTaskException dte) {
-    // throw new CommandException(MESSAGE_DUPLICATE_TASK);
-    // }
-    // }
-    // }
-    //
-    // @Override
-    // public synchronized int addRecurringEventTask(ReadOnlyTask taskToRecur,
-    // int recurring, String type) throws UniqueTaskList.DuplicateTaskException
-    // {
-    //
     // @@author A0139520L
     @Override
     public int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
@@ -458,11 +425,7 @@ public class ModelManager extends ComponentManager implements Model {
                             if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
                                     .compareTo(readOnlyTask.getStartDate().value.substring(0,
                                             readOnlyTask.getStartDate().value.length() - 6)) == 0) {
-                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
+                                return (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0);
                             } else {
                                 return false;
                             }
