@@ -12,7 +12,7 @@ Any Google Calendar related commands require proper credentials. This will open 
 You can use the google calander account we created for testing. There are some events already in the calendar.
 
  Username: **`jimkeepsittidy@gmail.com`**
- Password: ****
+ Password: **** (password is in testscript.md uploaded to ivle)
 
 ### Brief Introduction:
 In the sample data, there are 50 pre-loaded tasks. 30 task are `undone` and 20 task are `done`.
