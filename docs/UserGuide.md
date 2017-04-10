@@ -347,11 +347,11 @@ Examples:
 
 ### GUI
 
-## 2.20 Done List View
+#### 2.20 Done List View
 
 The Done List View displays all the done tasks the user has marked done
 
-## 2.21 Calendar View
+#### 2.21 Calendar View
 
 The Calendar List View displays all undone tasks on the selected day and does not display
 deadline tasks. 
