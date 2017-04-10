@@ -93,7 +93,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Add exact task duplicate
 Test Data | `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
-| `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
+Test Data | `add TEST10 start/05/04/2017 14:00 end/05/04/2017 15:00`
 Expected Result | Prompt: _This task already exists in JOBS_
 Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
@@ -103,7 +103,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Add task only differing in description
 Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00`
-| `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 desc/duplicating test`
+Test Data | `add TEST11 start/06/04/2017 13:00 end/06/04/2017 14:00 desc/duplicating test`
 Expected Result | Prompt: _This task already exists in JOBS_
 Actual Result | Prompt: _This task already exists in JOBS_
 Status | **PASSED**
@@ -277,7 +277,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Reverse completed task to in-progress
 Test Data | `complete 2`
-| `in-progress 2`
+Test Data | `in-progress 2`
 Expected Result | Prompt: _Unknown command_
 Actual Result | Prompt: _Unknown command_
 Status | **PASSED**
@@ -305,7 +305,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Edit from completed tasks list
 Test Data | `list complete`
-| `edit 1 TEST12_complete tag/complete`
+Test Data | `edit 1 TEST12_complete tag/complete`
 Expected Result | Task successfully edited
 Actual Result | Task successfully edited
 Status | **PASSED**
@@ -315,7 +315,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Edit from in-progress tasks list
 Test Data | `list in-progress`
-| `edit 1 tag/list`
+Test Data | `edit 1 tag/list`
 Expected Result | Task successfully edited
 Actual Result | Task successfully edited
 Status | **PASSED**
@@ -325,7 +325,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Complete task from in-progress tasks list
 Test Data | `list in-progress`
-| `complete 1`
+Test Data | `complete 1`
 Expected Result | Task marked as completed
 Actual Result | Task marked as completed
 Status | **PASSED**
@@ -364,7 +364,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | List all tasks with substring "1" in tag and edit task
 Test Data | `find add`
-| `edit 1 tag/retag tag/find`
+Test Data | `edit 1 tag/retag tag/find`
 Expected Result | Task with index 1 will have tag overridden
 Actual Result | Task with index 1 will have tag overridden
 Status | **PASSED**
@@ -403,7 +403,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Complete a recurring task
 Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00 recur/3`
-| `complete 1`
+Test Data | `complete 1`
 Expected Result | Both dates will increase by 3 days
 Actual Result | Both dates will increase by 3 days
 Status | **PASSED**
@@ -414,7 +414,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Undo function to cancel an action
 Test Data | `delete 1`
-| `undo`
+Test Data | `undo`
 Expected Result | Retrieve the previously deleted task
 Actual Result | Retrieve the previously deleted task
 Status | **PASSED**
@@ -424,8 +424,8 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Redo function to cancel an undo action
 Test Data | `delete 1`
-| `undo`
-| `redo`
+Test Data | `undo`
+Test Data | `redo`
 Expected Result | Task with index 1 is deleted
 Actual Result | Task with index 1 is deleted
 Status | **PASSED**
@@ -436,9 +436,9 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Redo function exceeding the number of undo call
 Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00`
-| `undo`
-| `redo`
-| `redo`
+Test Data | `undo`
+Test Data | `redo`
+Test Data | `redo`
 Expected Result | Prompt: _No more commands to redo_
 Actual Result | Prompt: _No more commands to redo_
 Status | **PASSED**
@@ -448,8 +448,8 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | Undo a previously completed task
 Test Data | `add TEST14 start/07/04/2017 10:00 end/07/04/2017 12:00`
-| `complete`
-| `undo`
+Test Data | `complete`
+Test Data | `undo`
 Expected Result | Status of task turns in-progress
 Actual Result | Status of task turns in-progress
 Status | **PASSED**
