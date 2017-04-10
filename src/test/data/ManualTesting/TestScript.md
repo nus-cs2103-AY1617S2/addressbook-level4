@@ -27,16 +27,34 @@
 
 ### List
 `list`
-1. 
+1. YATS will show all the tasks in the primary list
 
 `list by start 03:45PM`
-1. YATS will show one result, with the task title "Benzoic Aptitude Test"
+1. YATS will show one result
+> Result 
+> Benzoic Aptitude Test
+> Organic revision
+> Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
+> School
+> 03:45PM 12/12/2017 - 07:00PM 12/12/2017
 
 `list by end 12/12/2017`
-1. YATS will show one result, with the task title "Benzoic Aptitude Test:
+1. YATS will show one result
+> Result
+> Benzoic Aptitude Test
+> Organic revision
+> Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
+> School
+> 03:45PM 12/12/2017 - 07:00PM 12/12/2017
 
 `list by deadline 10/01/2019`
-1. YATS will show one result, with the task title "Inductive Reasoning Based Philosophy"
+1. YATS will show one result
+> Result
+> Inductive Reasoning Based Philosophy
+> [books] [armaggedon] [reading] [home]
+> Have to finish reading this book by 10th January in preparation for Armaggedon
+> Home
+> by 10:20AM 10/01/2019
 
 `list by location NUS`
 1. YATS will show four results
