@@ -31,7 +31,7 @@
 
 `list by start 03:45PM`
 1. YATS will show one result
-> Result 
+> Result (if task is unmarked)
 > Benzoic Aptitude Test
 > Organic revision
 > Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
@@ -40,7 +40,7 @@
 
 `list by end 12/12/2017`
 1. YATS will show one result
-> Result
+> Result (if task is unmarked)
 > Benzoic Aptitude Test
 > Organic revision
 > Benzoic acid is a very acidic compount that requires intense alcoholic exchange. Revision has to be based on ethanol and focus on malloc.
@@ -49,9 +49,9 @@
 
 `list by deadline 10/01/2019`
 1. YATS will show one result
-> Result
+> Result (if task is unmarked)
 > Inductive Reasoning Based Philosophy
-> [books] [armaggedon] [reading] [home]
+> books armaggedon reading home
 > Have to finish reading this book by 10th January in preparation for Armaggedon
 > Home
 > by 10:20AM 10/01/2019
