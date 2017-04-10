@@ -250,7 +250,7 @@ The `Model` component:
 * Remains unaffected by changes in the other three components due to application of the Observer Pattern
 * Interacts with the other components by raising events
 
-The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1 
+The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1
 
 The `ModelManager` implements the `Model` interface. It contains a `UserPrefs` object that represents the user's preferences. It also contains a `TaskManager` along with a `TaskManagerStack` which represents a stack of `TaskManager` objects which are necessary from redo and undo commands. `TaskManagerStack` is implemented as a Singleton Pattern as there should exist only one instance of it the app is running.
 
@@ -695,7 +695,7 @@ Use case ends
 **Mainstream OS**: Windows, Linux, Unix, OS-X Operating Systems
 
 **MSS**: Main Success Scenario of a use case
- 
+
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
 **Task**: A to-do without a date range, and optionally has a deadline
