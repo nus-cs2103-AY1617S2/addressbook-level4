@@ -22,6 +22,11 @@ Responsibilities:
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0146809W.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0146809W.md)]
 * Other major contributions:
   * Did most of the initial refactoring as well as code integration
+  * Set up Travis CI, Coveralls and Appveyor CI
+  * In charge of integration: Merge and pull request reviews
+  * In charge of administrative task: milestones, issues and tagging
+  * Implemented Natty Parser for dates
+  * Implemented multiple index for delete
 
 -----
 
@@ -39,9 +44,12 @@ Role: Developer <br>
    * [Input Stack](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0138909R.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0138909R.md)]
 * Other major contributions:
-  * Creates issues and assign them to teammates.
-  * Dogfooding DoIT application to find bugs
-
+  * Creates issues and assign them to team mates
+  * Using DoIT application to find bugs
+  * Allowed user to execute previous command by InputStack
+  * Allowed user to undo/redo previous command using TaskManagerStack
+  * Helped with Documentation
+  * Implemented import/export with save/load command
 
 -----
 
@@ -59,8 +67,12 @@ Responsibilities:
    * [Sort](https://cs2103jan2017-w14-b3.github.io/main/docs/UserGuide.html#4-features)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0139399J.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0139399J.md)]
 * Other major contributions:
-   * Help teammates to understand and fix bugs
-   * Dogfooding DoIT application to find bugs
+   * Help team mates to understand and fix bugs
+   * Implemented smart search to better find tasks
+   * Implemented ability to sort task by attributes
+   * Created SampleData.xml file for demo
+   * Added description and priority to tasks
+   * Code coverage and test code
 
 -----
 
@@ -76,7 +88,14 @@ Responsibilities:
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/main/A0160076L.md)][[test code](https://github.com/CS2103JAN2017-W14-B3/main/blob/master/collated/test/A0160076L.md)]
 * Other major contributions:
    * Implemented shortcuts
+   * Implemented 3 List for task, events and floating tasks
    * Designed the User Interface
+   * Scroll to task after dates
+   * Created Help
+   * Added keyboard shortcuts for some commands
+   * Added colors to indicate task priority
+   * Added visual indication of wrong command
+   * Added visual indication of overdue tasks
 
 -----
 
