@@ -301,8 +301,8 @@ Description Box response:
 
 Input:
 ****edit 1 s/06/04/2018 13:37****
-Description Box response:
 
+Description Box response:
 ****Edited Task: buy headphones | StartDate: 06/04/2018 13:37****
 
 - Scrolls to the task's index at 38.
