@@ -345,7 +345,7 @@ Detail | Summary
 -------- | :--------
 Test Case Summary | List all tasks with substring "1" in name or description
 Test Data | `find 1`
-Expected Result | List all task with "1" in their, description or tag 
+Expected Result | List all task with "1" in their, description or tag
 Actual Result | List all task with "1" in their, description or tag
 Status | **PASSED**
 Remarks | Find function accommodates substring of name, description or tag
