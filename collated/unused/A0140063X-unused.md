@@ -1,5 +1,5 @@
 # A0140063X-unused
-###### /Date.java
+###### \Date.java
 ``` java
 //this code uses multiple SimpleDateFormat to validate date input.
 //this code is Working but decided to use pretty time parser instead which allows natural language parsing.
@@ -126,7 +126,7 @@ public class Date {
 
 }
 ```
-###### /SmartAddTest.java
+###### \SmartAddTest.java
 ``` java
 //This test works on local machine, but is unable to pass on travis.
 //This is due to the required credentials for Google Calendar is not held by travis.
