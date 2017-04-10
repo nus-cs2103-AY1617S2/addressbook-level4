@@ -91,7 +91,7 @@ Given below is a quick overview of each component.
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -100,10 +100,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#22-ui-component) : The UI of the App.
+* [**`Logic`**](#23-logic-component) : The command executor.
+* [**`Model`**](#24-model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](#25-storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -358,19 +358,19 @@ Priority | As a ... | I want to ... | So that I can...
 `* * * *` | user with many tasks | search keyword(s) | find all the tasks that are similar or relevant to the keyword
 `* * * *` | user | undo my most recent action | reverse any mistake made in the previous step
 `* * * *` | user | redo my most recent action | revert back to the previous state before an undo
+`* * * *` | user | assign tags to the tasks | organise them properly
 `* * * *` | advanced user | use shorter versions of a command | type a command faster
 `* * * *` | advanced user | specify which folder I want to save the files in | have easy access to the tasks just by sharing the files
 `* * * *` | new user | see usage instructions | refer to instructions when I forget how to use the programme
 `* * * *` | new user | view more information about a particular command | so that I can learn how to use various commands
-`* * *` | user | set tasks to repeat over a specified interval | manage recurring tasks
-`* * *` | user | add additional details or subtasks to a task | record tasks in detail
-`* * *` | user | assign tags to the tasks | organise them properly
 `* * *` | user | indicate the priority of a task | see which tasks are more urgent or important
+`* * *` | user | list tasks by priority | know which are the most urgent tasks.
 `* * *` | user | list the deadline tasks by date | know which are the most urgent.
 `* * *` | user | list tasks by tags | see what are the tasks under a specific category.
-`* * *` | user | list tasks by priority | know which are the most urgent tasks.
 `* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
 `* * *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
+`* * *` | user | set tasks to repeat over a specified interval | manage recurring tasks
+`* * *` | user | add additional details or subtasks to a task | record tasks in detail
 `* *` | user | colour code my tasks | I can differentiate tasks better
 `* *` | user | add icons to my tasks | quickly tell what kind of tasks I have
 `* *` | user | reorder my tasks | reorder floating tasks.
@@ -384,7 +384,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
 `*` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
 `*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
-`*` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±  | give myself more motivation to complete my tasks.
+`*` | user | receive flavour text when I mark a task as complete such as "Good job!" and "Another one off the list!"  | give myself more motivation to complete my tasks.
 `*` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
 
 ## Appendix B : Use Cases
@@ -437,6 +437,15 @@ Use case ends.
 2. TaskList moves task from task list to list of completed tasks and shows updated task list <br>
 Use case ends.
 
+**Extensions**
+
+1a. User marks a task that is already marked
+
+> 1a1. TaskList shows an error message and prompts user to edit the task selected
+> 1a2. User inputs task details <br>
+Steps 1a1-1a2 are repeated until the task selected is valid
+  Use case resumes at step 2
+
 #### Use case: Unmark task
 
 **MSS**
@@ -444,6 +453,15 @@ Use case ends.
 1. User unmarks a task
 2. TaskList moves task from list of completed tasks back to current task list and shows updated task list <br>
 Use case ends.
+
+**Extensions**
+
+1a. User unmarks a task that is already unmarked
+
+> 1a1. TaskList shows an error message and prompts user to edit the task selected
+> 1a2. User inputs task details <br>
+Steps 1a1-1a2 are repeated until the task selected is valid
+  Use case resumes at step 2
 
 #### Use case: Edit task details (includes deadline)
 
@@ -512,7 +530,7 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be portable and not require any installer to work
-3. Should be desktop app that does not require any Internet connection to use
+3. Should be a desktop app that does not require any Internet connection to use
 4. Should not require a login username and password but can be launched conveniently
 5. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 6. Should be able to reliably store the list of tasks data and not have cases of corrupted data files
@@ -610,11 +628,13 @@ Cons:
 **Remember the Milk**
 
 Pros:
+
 * Able to filter tasks according to their deadline.
 * Able to most of the commands with mouse clicks.
 * Able to sync with other apps such as iCalendar and Feed.
 * Simple UI that is easy on the eyes.
 * Most of the essential features are not locked behind the paywall.
+
 Cons:
 
 * Requires internet connection to use.
@@ -640,6 +660,7 @@ Pros:
 * Able to print list
 
 Cons:
+
 * Priority is based on due dates only, tasks cannot be sorted into broad priority categories
 * Lacks colour coding of tasks
 
