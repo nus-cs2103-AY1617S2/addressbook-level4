@@ -37,8 +37,11 @@ Or KIT.
 KIT is a desktop app that helps users manage their tasks and it is the one and only taskmanager you will ever need. With a simplistic design of UI and powerful functionalies embedded, KIT is capable of executing your instructions swiftly. On top of that, KIT is keyboard friendly, thereby saving you the trouble of ever moving the mouse and clicking.
 
 Now, let's get you started!
+
 ## 2. Quick start
+
 ### Downloading KIT
+
 1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
    > Having any Java 8 version is not enough. <br>
@@ -49,13 +52,15 @@ Now, let's get you started!
 3. Copy the file to the folder you want to use as the home folder for KIT.
 
 ### Starting KIT
+
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
 5. (Optional) You can choose to login to your Google Calendar.
 
     After you have logged in, it looks something like this.
      > <img src="images/googleLoggedIn.png" width="600">
-    ##### Or you can explore KIT without using Google Calendar at all, just read on!
+
+	##### Or you can explore KIT without using Google Calendar at all, just read on!
 
 #### Looks a little empty, no? Let's try adding some tasks!
 
@@ -128,7 +133,8 @@ Here are some examples:
 * `add buy presents s/two week before christmas e/christmas eve l/town t/shopping`
 * `add buy groceries r/cabbage and broccoli s/this weekend t/personal`
 * `add feed the cat\/dog t/personal t/family e/tomorrow 8am`
-    ##### Notice how `cat/dog` is correctly captured and displayed.
+
+	##### Notice how `cat/dog` is correctly captured and displayed.
     > <img src="images/addCommand.png" width="600">
 
 #### Supported Date/Time formats:
@@ -206,6 +212,7 @@ Format: `done INDEX`, `d INDEX`
 > <img src="images/doneAfter.png" width="600">
 
 >Tip : You can use the `list done` or `list` command to see the tasks you have marked as done. Task with green names and a tick are done tasks.
+
 ### 3.5	Marking a task as undone: `undone`
 
 #### More follow ups for your task? Need to resume a completed task?
