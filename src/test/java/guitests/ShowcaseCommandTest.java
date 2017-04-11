@@ -25,7 +25,7 @@ public class ShowcaseCommandTest extends TaskManagerGuiTest {
             System.out.println(number + " " + taskListPanel.getNumberOfTasks());
             assertTrue(number == taskListPanel.getNumberOfTasks());
             commandBox.runCommand("clear");
-            
+
         }
     }
 
