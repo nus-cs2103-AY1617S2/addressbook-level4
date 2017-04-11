@@ -3,13 +3,12 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
-import seedu.address.ui.UiManager;
+import seedu.task.ui.UiManager;
 
 /**
  * A handle for the AlertDialog of the UI
  */
 public class AlertDialogHandle extends GuiHandle {
-
 
     public AlertDialogHandle(GuiRobot guiRobot, Stage primaryStage, String dialogTitle) {
         super(guiRobot, primaryStage, dialogTitle);

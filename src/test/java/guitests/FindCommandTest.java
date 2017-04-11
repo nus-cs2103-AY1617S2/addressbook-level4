@@ -1,22 +1,28 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import seedu.task.commons.core.Messages;
+import seedu.task.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
 
-        //find after deleting one result
+        commandBox.runCommand("clear");
+        commandBox.runCommand(td.police.getAddCommand());
+        commandBox.runCommand(td.jog.getAddCommand());
+
+        assertFindResult("find whatever"); // no results
+        assertFindResult("find address", td.police); // multiple results
+        assertFindResult("find change", td.jog, td.police); // multiple results
+
+        // find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find jog", td.jog);
+        assertFindResult("find address");
+
     }
 
     @Test
@@ -31,10 +37,9 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " tasks listed!");
     }
 }

@@ -7,17 +7,18 @@ import java.io.IOException;
 import org.junit.Test;
 
 import guitests.guihandles.AlertDialogHandle;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 
-public class ErrorDialogGuiTest extends AddressBookGuiTest {
+import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+
+public class ErrorDialogGuiTest extends TaskManagerGuiTest {
 
     @Test
     public void showErrorDialogs() throws InterruptedException {
-        //Test DataSavingExceptionEvent dialog
+        // Test DataSavingExceptionEvent dialog
         raise(new DataSavingExceptionEvent(new IOException("Stub")));
         AlertDialogHandle alertDialog = mainGui.getAlertDialog("File Op Error");
-        assertTrue(alertDialog.isMatching("Could not save data", "Could not save data to file" + ":\n"
-                                                                         + "java.io.IOException: Stub"));
+        assertTrue(alertDialog.isMatching("Could not save data",
+                "Could not save data to file" + ":\n" + "java.io.IOException: Stub"));
 
     }
 
