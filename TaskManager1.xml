@@ -1,182 +1,185 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <taskName>Go to class</taskName>
-        <taskDate>050217</taskDate>
-        <taskStartTime>1300</taskStartTime>
-        <taskEndTime>2115</taskEndTime>
-        <taskDescription>NETWORKING 2809 at Knight324</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to gym</taskName>
-        <taskStartTime>1815</taskStartTime>
-        <taskEndTime>2100</taskEndTime>
-        <taskDescription>Leg day</taskDescription>
+        <taskName>Go to store</taskName>
+        <taskStartTime>1045</taskStartTime>
+        <taskEndTime>1500</taskEndTime>
+        <taskDescription>Remember to pickup soy milk, fruit</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to class</taskName>
-        <taskDate>220317</taskDate>
-        <taskStartTime>1015</taskStartTime>
-        <taskEndTime>1530</taskEndTime>
-        <taskDescription>HEAT TRANSFER 2688 at Knight279</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskStartTime>1015</taskStartTime>
-        <taskDescription>Remember to pickup milk, soy milk, century eggs, isotonic</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskDate>061117</taskDate>
-        <taskStartTime>1930</taskStartTime>
-        <taskEndTime>2015</taskEndTime>
-        <taskDescription>Remember to pickup peanut butter, milk, bananas</taskDescription>
+        <taskDate>230217</taskDate>
+        <taskStartTime>2230</taskStartTime>
+        <taskDescription>NETWORKING 2716 at CRC570</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to class</taskName>
-        <taskDate>060717</taskDate>
-        <taskStartTime>2315</taskStartTime>
-        <taskDescription>PHILOSOPHY 2597 at Knight412</taskDescription>
+        <taskDate>300617</taskDate>
+        <taskStartTime>830</taskStartTime>
+        <taskEndTime>2000</taskEndTime>
+        <taskDescription>CRYPTOGRAPHY 3871 at CRC211</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to store</taskName>
+        <taskStartTime>1800</taskStartTime>
+        <taskEndTime>1830</taskEndTime>
+        <taskDescription>Remember to pickup peanut butter, milk, snacks, fruit, isotonic</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to class</taskName>
-        <taskDate>090217</taskDate>
-        <taskStartTime>930</taskStartTime>
-        <taskEndTime>945</taskEndTime>
-        <taskDescription>HEAT TRANSFER 3265 at MRDC121</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to class</taskName>
-        <taskDate>010217</taskDate>
-        <taskStartTime>915</taskStartTime>
-        <taskDescription>CRYPTOGRAPHY 2730 at Klaus380</taskDescription>
+        <taskDescription>CRYPTOGRAPHY 1454 at Klaus242</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to store</taskName>
-        <taskDate>241117</taskDate>
-        <taskDescription>Remember to pickup soy milk, snacks, fruit, century eggs, isotonic</taskDescription>
+        <taskDate>200117</taskDate>
+        <taskDescription>Remember to pickup soy milk, bananas</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to store</taskName>
-        <taskDate>251017</taskDate>
-        <taskStartTime>2145</taskStartTime>
-        <taskDescription>Remember to pickup soy milk, snacks, fruit, bananas</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to gym</taskName>
-        <taskDate>020417</taskDate>
-        <taskDescription>Back day</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskDate>211117</taskDate>
-        <taskDescription>Remember to pickup peanut butter, fruit, century eggs, isotonic</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskDate>270717</taskDate>
-        <taskStartTime>1130</taskStartTime>
-        <taskEndTime>1615</taskEndTime>
-        <taskDescription>Remember to pickup peanut butter, milk, fruit, bananas, isotonic</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to class</taskName>
-        <taskDate>250117</taskDate>
-        <taskStartTime>2215</taskStartTime>
-        <taskDescription>FAT STUDIES 3359 at Love289</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to class</taskName>
-        <taskDate>230617</taskDate>
-        <taskStartTime>1245</taskStartTime>
-        <taskEndTime>1700</taskEndTime>
-        <taskDescription>PSYCHOLOGY 3602 at Howey495</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskDate>060617</taskDate>
-        <taskStartTime>915</taskStartTime>
-        <taskDescription>Remember to pickup peanut butter, milk, soy milk, snacks, bananas, century eggs</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to class</taskName>
-        <taskDate>280517</taskDate>
-        <taskStartTime>1845</taskStartTime>
-        <taskEndTime>1915</taskEndTime>
-        <taskDescription>FAT STUDIES 2253 at Love294</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to class</taskName>
-        <taskDate>231017</taskDate>
-        <taskStartTime>1400</taskStartTime>
-        <taskDescription>FAT STUDIES 3369 at Klaus304</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to gym</taskName>
-        <taskDate>250217</taskDate>
-        <taskStartTime>930</taskStartTime>
-        <taskEndTime>1515</taskEndTime>
-        <taskDescription>Secondary chest day</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskStartTime>1730</taskStartTime>
-        <taskEndTime>2245</taskEndTime>
-        <taskDescription>Remember to pickup soy milk, fruit, bananas</taskDescription>
-        <taskStatus>Ongoing</taskStatus>
-    </tasks>
-    <tasks>
-        <taskName>Go to store</taskName>
-        <taskStartTime>1530</taskStartTime>
+        <taskDate>010117</taskDate>
+        <taskStartTime>1230</taskStartTime>
+        <taskEndTime>1330</taskEndTime>
         <taskDescription>Remember to pickup soy milk, fruit, bananas, century eggs, isotonic</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to class</taskName>
-        <taskDate>240217</taskDate>
-        <taskStartTime>1115</taskStartTime>
-        <taskEndTime>2130</taskEndTime>
-        <taskDescription>CHINESE 1710 at CRC598</taskDescription>
+        <taskDate>161217</taskDate>
+        <taskStartTime>815</taskStartTime>
+        <taskEndTime>2000</taskEndTime>
+        <taskDescription>MATH 3544 at Klaus254</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to store</taskName>
-        <taskDate>300417</taskDate>
-        <taskStartTime>1815</taskStartTime>
-        <taskDescription>Remember to pickup soy milk, snacks, fruit, bananas, century eggs</taskDescription>
+        <taskDate>290417</taskDate>
+        <taskStartTime>1115</taskStartTime>
+        <taskEndTime>1815</taskEndTime>
+        <taskDescription>Remember to pickup peanut butter, milk, soy milk, snacks, fruit, isotonic</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to gym</taskName>
-        <taskDate>020317</taskDate>
-        <taskStartTime>1700</taskStartTime>
-        <taskEndTime>2345</taskEndTime>
+        <taskDate>100217</taskDate>
+        <taskStartTime>1000</taskStartTime>
+        <taskDescription>Secondary chest day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskDate>130617</taskDate>
+        <taskStartTime>800</taskStartTime>
+        <taskEndTime>1945</taskEndTime>
         <taskDescription>arm day</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
     <tasks>
         <taskName>Go to store</taskName>
+        <taskDate>020917</taskDate>
+        <taskStartTime>1945</taskStartTime>
+        <taskDescription>Remember to pickup soy milk, fruit, bananas</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to store</taskName>
+        <taskStartTime>1515</taskStartTime>
+        <taskEndTime>2245</taskEndTime>
+        <taskDescription>Remember to pickup peanut butter, snacks, bananas, century eggs, isotonic</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to store</taskName>
+        <taskDate>230717</taskDate>
+        <taskStartTime>1300</taskStartTime>
+        <taskEndTime>1645</taskEndTime>
+        <taskDescription>Remember to pickup peanut butter, milk, soy milk, snacks, century eggs, isotonic</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to store</taskName>
+        <taskDate>120417</taskDate>
+        <taskDescription>Remember to pickup soy milk, snacks, fruit, bananas, century eggs</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskDate>130617</taskDate>
+        <taskStartTime>1000</taskStartTime>
+        <taskEndTime>2100</taskEndTime>
+        <taskDescription>Chest day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
         <taskDate>020517</taskDate>
-        <taskStartTime>1845</taskStartTime>
+        <taskStartTime>915</taskStartTime>
+        <taskEndTime>1700</taskEndTime>
+        <taskDescription>Chest day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to class</taskName>
+        <taskDate>131217</taskDate>
+        <taskStartTime>1515</taskStartTime>
+        <taskEndTime>1615</taskEndTime>
+        <taskDescription>FAT STUDIES 3918 at CRC243</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskDate>020217</taskDate>
+        <taskStartTime>1430</taskStartTime>
+        <taskDescription>Secondary chest day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to store</taskName>
+        <taskDate>090817</taskDate>
+        <taskStartTime>1715</taskStartTime>
+        <taskDescription>Remember to pickup peanut butter, milk, soy milk, fruit, bananas, century eggs</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskDate>140817</taskDate>
+        <taskStartTime>1300</taskStartTime>
+        <taskDescription>Chest day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskDate>010817</taskDate>
+        <taskStartTime>945</taskStartTime>
+        <taskEndTime>1715</taskEndTime>
+        <taskDescription>Leg day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskDate>131217</taskDate>
+        <taskStartTime>2145</taskStartTime>
+        <taskDescription>Chest day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to class</taskName>
+        <taskDate>090317</taskDate>
+        <taskStartTime>1400</taskStartTime>
+        <taskEndTime>1915</taskEndTime>
+        <taskDescription>FAT STUDIES 3464 at Knight583</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to gym</taskName>
+        <taskStartTime>1800</taskStartTime>
+        <taskEndTime>2315</taskEndTime>
+        <taskDescription>Secondary chest day</taskDescription>
         <taskStatus>Ongoing</taskStatus>
     </tasks>
 </taskmanager>
