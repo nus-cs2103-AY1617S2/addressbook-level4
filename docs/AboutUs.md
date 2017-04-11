@@ -4,49 +4,62 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Xu Bili](http://github.com/xbili)
+<img src="images/xbili.png" width="150"><br>
+**Role**: Team Lead<br>
+**Responsibilities**: UI
+* Scheduling & deadlines
+* Assign tasks
+* Faciliate feature discussions<br>
+* Features implemented:
+   * [Mark tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#26-mark-task--mark)
+   * [Autocomplete](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#216-autocomplete)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0124368A.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0124368A.md)]
+* Other major contributions:
+  * Did the initial refactoring from AddressBook to TaskManager
+  * Set up Travis, Appveyor, and Coveralls 
 
------
+#### [Shi Yanzhang](http://github.com/mynameisyz)
+<img src="images/mynameisyz.png" width="150"><br>
+**Role**: Testing & QA<br>
+**Responsibilities**: Storage
+* Ensure test cases covers all edge cases
+* Review test cases for each PR<br>
+* Features implemented:
+   * [Undo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#211-undo--undo)
+   * [Redo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#212-redo--redo)
+   * [Browse user inputs](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#217-browse-previously-entered-commands)
+   * [Google Task integration](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#214-sync-data-to-google-task--sync)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148087W.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148087W.md)]
+* Other major contributions:
+  * Did the initial refactoring from AddressBook to TaskManager
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
 
------
+#### [Lam Guang Jun](http://github.com/gjlam95)
+<img src="images/gjlam95.png" width="150"><br>
+**Role**: Code quality<br>
+**Responsibilities**: Logic
+* Ensures project's code quality
+* Only person who can merge PRs after code review<br>
+* Features implemented:
+   * [Sort tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#24-sort-tasks--sort)
+   * [Save directory](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#215-specify-data-file-directory--save)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148081H.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148081H.md)]
+* Other major contributions:
+  * Did the initial refactoring from AddressBook to TaskManager
+  * Correct most grammatical errors in docs
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
 
------
+#### [Han Lynn](http://github.com/hlynn93)
+<img src="images/hlynn93.png" width="150"><br>
+**Role**: Integration & architecture<br>
+**Responsibilities**: Model
+* Coordinate inter-component APIs
+* Make architecture decisions<br>
+* Features implemented:
+   * [Find tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#213-find--find)
+   * [Schedule tasks](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#28-schedule-work-in-progress--schedule)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0126345J.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0126345J.md)]
+* Other major contributions:
+  * Did the initial refactoring from AddressBook to TaskManager
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)

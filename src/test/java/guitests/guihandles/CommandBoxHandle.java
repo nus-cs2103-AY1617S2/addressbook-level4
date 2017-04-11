@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -37,6 +38,32 @@ public class CommandBoxHandle extends GuiHandle {
         enterCommand(command);
         pressEnter();
         guiRobot.sleep(200); //Give time for the command to take effect
+    }
+
+    public void pressUpKey() {
+        guiRobot.push(KeyCode.UP).sleep(500);
+    }
+
+    public void pressDownKey() {
+        guiRobot.push(KeyCode.DOWN).sleep(500);
+    }
+
+    /**
+     * Enters the given input, and autocompletes it by pressing tab for multiple times.
+     *
+     * @param input: input to autocomplete
+     * @param times: to press the tab key
+     */
+    public void autocompleteInput(String input, int times) {
+        // This clears the previous autocomplete suggestions. This mocks an actual user typing out the commands rather
+        // than just setting the text field to be a certain value.
+        pressBackspace();
+
+        enterCommand(input);
+        for (int i = 0; i < times; i++) {
+            pressTab();
+        }
+        guiRobot.sleep(200);
     }
 
     public HelpWindowHandle runHelpCommand() {

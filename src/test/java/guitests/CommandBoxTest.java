@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.opus.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TaskManagerGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    private static final String COMMAND_THAT_SUCCEEDS = "select 1";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
@@ -38,11 +38,10 @@ public class CommandBoxTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
+    public void commandBox_commandFails_textClearsAndStyleClassRemainsTheSame() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
-        assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
-        assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
+        assertEquals("", commandBox.getCommandInput());
     }
 
     @Test
@@ -56,4 +55,81 @@ public class CommandBoxTest extends AddressBookGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    @Test
+    public void commandBoxBrowsePreviousUserInputWithoutHistory() {
+        //no commands in hisotry
+        commandBox.pressUpKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePreviousUserInputWithValidCommands() {
+        //valid commands
+        commandBox.runCommand("add task1");
+        commandBox.runCommand("add task2");
+        commandBox.pressUpKey();
+        assertEquals("add task2", commandBox.getCommandInput());
+        commandBox.pressUpKey();
+        assertEquals("add task1", commandBox.getCommandInput());
+        commandBox.pressUpKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePreviousUserInputWithInvalidCommands() {
+        //invalid commands
+        commandBox.runCommand("command 1");
+        commandBox.runCommand("command 2");
+        commandBox.pressUpKey();
+        assertEquals("command 2", commandBox.getCommandInput());
+        commandBox.pressUpKey();
+        assertEquals("command 1", commandBox.getCommandInput());
+        commandBox.pressUpKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePrecedingUserInputWithoutHistory() {
+        //no commands in hisotry
+        commandBox.pressDownKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePrecedingUserInputWithValidCommands() {
+        //valid commands
+        commandBox.runCommand("add task1");
+        commandBox.runCommand("add task2");
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+
+        //move down the history
+        assertEquals("", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("add task1", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("add task2", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
+
+    @Test
+    public void commandBoxBrowsePrecedingUserInputWithInvalidCommands() {
+      //valid commands
+        commandBox.runCommand("command1");
+        commandBox.runCommand("command2");
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+        commandBox.pressUpKey();
+
+        //move down the history
+        assertEquals("", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("command1", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("command2", commandBox.getCommandInput());
+        commandBox.pressDownKey();
+        assertEquals("", commandBox.getCommandInput());
+    }
 }
