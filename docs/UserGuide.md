@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# Awesome Todo - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,18 +16,21 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `awesometodo.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for AwesomeTodo.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
-
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list`** : lists all Todos
+   * **`add`**` Take the dog for a walk s/5:00PM 11/11/11 e/6:00PM 11/11/11` :
+   * **`delete`**` 3` : deletes the 3rd Todo shown in the current list
+   * **`edit`**` 3 take the cat for a walk e/6:00am 11/11/17` : edits the 3rd Todo's title and end time shown in the current list.
+   * **`complete`**` 3`: marks the 3rd Todo shown in the current list as complete
+   * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
+   * **`undo`** : undoes last command that modified the todo list
+   * **`redo`** : redoes the last undo command
+   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml. If it does not exist, it will create the file and the appropriate directories.
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -47,69 +50,105 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a todo: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a floating task<br>
+Format: `add TASK [t/TAG]`
 
-> Persons can have any number of tags (including 0)
+Adds an event<br>
+Format: `add EVENT s/STARTTIME e/ENDTIME [t/tag]`
+
+Adds a deadline<br>
+Format: `add DEADLINE e/DEADLINE [t/tag]`
+
+Adds a deadline with default date of tomorrow at 12:00am<br>
+Format: `add DEADLINE e/ [t/tag]`
+
+Adds a event with default start date of today at 12:00am and end date of tomorrow at 12:00am<br>
+Format: `add EVENT s/ e/ [t/tag]`
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add Finish math homework t/school`
+* `add Take the dog for a walk s/5:00PM 11/11/11 e/6:00PM 11/11/11`
+* `add Finish programming project d/5:00PM 11/11/11`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing all todos : `list`
 
-Shows a list of all persons in the address book.<br>
+Shows a list of all todos.<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+### 2.4. Editing a todo : `edit`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits a Todo's title, start time, endtime, and tags.<br>
+Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
+Converts a floating todo or a event todo to a deadline todo with endtime as tomorrow as the default.<br>
+Format: `edit INDEX [e/]`
+
+Converts a floating todo or a deadline todo to an event todo with starttime and endtime as today and tomorrow as the default.<br>
+Format: `edit INDEX [s/] [e/]`
+
+Edits a todo title.<br>
+Format: `edit INDEX [TASK]`
+
+Adds a new tag to a todo.<br>
+Format: `edit INDEX [ta/TAG]`
+
+> * Edits the todo at the specified `INDEX`.
+    The index refers to the index number shown in the last todo listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
+> * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * Edit with `t/` may replace all the previous tags with new assigned tags.
+> * You can't change a deadine todo or a event todo to a floating todo.
+> * Default edit time is set to 12:00AM today for start time and 1200:AM tomorrow for end time.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit 1 Play with dog e/5:00PM 11/11/11`<br>
+  Edits the task description and deadline of the 1st todo to be listed
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### 2.5. Finding all todos by multiple search parameters: `find`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+Finds todos whose descriptions contain any of the given keywords.<br>
+Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * The search is case insensitive.
+> * The order of the keywords does not matter.
+> * Only the task description is searched using the keywords.
+> * Only full words will be matched e.g. "grocer" will not match "groceries"
+> * Todos matching at least one keyword will be returned (i.e. `OR` search).
+> * You can search by type of todo: floating, deadline, event.
+> * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
+> * You may enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
+> * You may enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
+> * You may enter "yesterday" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before today.
+* You may enter nothing for complete time to find all completed tasks (i.e. `find c/`)
+* You may enter "not" for complete time to find all uncompleted tasks (i.e. `find c/not`);
+> * Todos that do not have the specified parameters will not be included. e.g. if you specify start time, no floating todos will be included in the search results.
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find Dog`<br>
+* `find dog math`<br>
+  Returns Any todo containing words `dog` or `math`<br>
+* `find ty/floating`<br>
+* `find ty/deadline`<br>
+* `find ty/event`<br>
+* `find s/9:00am 11/11/17`<br>
+* `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
+* `find s/today e/tomorrow`<br>
+* `find s/yesterday e/today`<br>
+* `find c/`<br>
+* `find c/not`<br>
 
-### 2.6. Deleting a person : `delete`
+### 2.6. Deleting a todo : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the specified todo. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the todo at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -117,70 +156,156 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the 2nd todo in the most recent listing.
+* `find Dog`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st todo in the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.7. Mark todo as completed : `complete`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+Marks the specified todo as completed.<br>
+Format: `complete INDEX [COMPLETETIME]`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * If COMPLETETIME is not specified, COMPLETETIME will be automatically set to the current time
 
 Examples:
 
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `complete 1`<br>
+* `complete 2 17-03-17T8:00`<br>
 
-### 2.8. Clearing all entries : `clear`
+### 2.8. Mark todo as uncompleted : `uncomplete`
 
-Clears all entries from the address book.<br>
+Marks the specified todo as uncompleted.<br>
+Format: `uncomplete INDEX`
+
+Example:
+
+* `uncomplete 1`<br>
+
+### 2.9. Undo last command : `undo`
+
+Undoes last command if it involves changing a todo.<br>
+Format: `undo`
+
+> * You may undo as many commands as you wish up to and including the first modifying command
+
+### 2.10. Redo last undo : `redo`
+
+Redoes last undo command<br>
+Format: `redo`
+
+> * You may redo as many undos as you wish, however if you undo a command and then run a new modifying command such as 'add', you will not be able to redo the undone command
+
+### 2.11. Clearing all entries : `clear`
+
+Clears all todos. Irreversible.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.13. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Todo data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.14 Setting the data save location : `savefile`
+
+Sets the save file location containing todo data.<br>
+If the file does not exist, the application will create the file and the directories in the file path automatically.<br>
+Format: `savefile PATH_TO_FILE`
+
+> Changes the file save location to specified `PATH_TO_FILE`. <br>
+
+Examples:
+
+* `savefile Documents\savefiles\todofile.xml`
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Awesome Todo folder.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add Task** : `add TASK` <br>
+  e.g. `add Finish math homework`
 
-* **Clear** : `clear`
+* **Add Task With Tag** : `add TASK [t/TAG]` <br>
+  e.g. `add Finish math homework_2 t/school`
+
+* **Add Task With Multiple Tags** : `add TASK [t/TAG]` <br>
+  e.g. `add Finish math homework_3 t/school t/boring`
+
+* **Add Event** : `add TODO s/STARTTIME e/ENDTIME [t/TAG]` <br>
+  e.g. `add Take the dog for a walk s/6:00PM 11/11/17 e/7:00PM 11/11/17`
+
+* **Add Deadline** : `add TODO e/DEADLINE [t/TAG]` <br>
+  e.g. `add Finish programming project e/17-03-17T8:00`
+
+* **Edit Event** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk s/11:11am 11/11/11 e/12:12pm 11/11/11 t/cat`
+
+* **Edit Event With Default Date And Time** : `edit INDEX [TASK] s/ e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk with default date and time s/ e/ t/cat`
+
+* **Edit Event With Default Time** : `edit INDEX [TASK] s/ e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk with default date s/11/11/17 e/12/11/17 t/cat`
+
+* **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
+
+* **Edit Deadline With Default Date And Time** : `edit INDEX [TASK] e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk e/ t/cat`
+
+* **Edit Deadline With Default Time** : `edit INDEX [TASK] e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk e/11/11/17 t/cat`
+
+* **Append New Tags** : `edit INDEX [ta/TAG]` <br>
+  e.g. `edit 1 ta/cat ta/pet ta/cute`
+
+* **Clear** : `clear` <br>
+  e.g. `clear`
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+  e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+* **Find** : `find KEYWORD [MORE_KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]` <br>
+  e.g. `find Dog`
+  e.g. `find c/tomorrow`
+  e.g. `find s/today`
+  e.g. `find e/yesterday`
+  e.g. `find c/`
+  e.g. `find c/not`
+  e.g. `find ty/floating`
+  e.g. `find ty/deadline`
+  e.g. `find ty/event`
+
+* **Complete** : `complete INDEX [COMPLETETIME]` <br>
+  e.g. `complete 1 17-03-17T8:00`
+  e.g. `complete 2`
+
+* **Uncomplete** : `uncomplete INDEX` <br>
+  e.g. `uncomplete 1`
+
+* **Undo** : `undo` <br>
+  e.g. `undo`
+
+* **Redo** : `redo` <br>
+  e.g. `redo`
 
 * **List** : `list` <br>
-  e.g.
+  e.g. `list`
+
+* **Set Save File Location** : `savefile FILE_PATH` <br>
+  e.g. `savefile todolist.xml`
 
 * **Help** : `help` <br>
-  e.g.
+  e.g. `help`
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
+* **Exit** : `exit` <br>
+  e.g. `exit`
 
